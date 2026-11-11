@@ -1,0 +1,13 @@
+{
+  "name": "crud-gastos",
+  "version": "1.0.0",
+  "description": "CRUD de gastos en Node.js para aprender",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
