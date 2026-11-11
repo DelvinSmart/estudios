@@ -106,6 +106,12 @@ Reglas:
    exacto**. Así la próxima IA (o tú mismo otro día) sabe dónde seguir.
 2. Si terminó un tema (pasó la simulación de entrevista), márcalo con `[x]`
    en la lista "Mi avance" de [00-EMPIEZA-AQUI.md](00-EMPIEZA-AQUI.md).
+3. **Guarda en la nube.** Esta carpeta es un repositorio privado
+   (`github.com/DelvinSmart/aprender`). Dentro de **esta** carpeta, y solo
+   aquí, sube el avance sin preguntar:
+   `git add -A && git commit -m "Progreso: Tema NN" && git push`.
+   La carpeta de la app (`copiloto-driver`) tiene sus propias reglas y no se
+   toca.
 
 ## 8. Prohibido
 
