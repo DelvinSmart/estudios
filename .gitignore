@@ -1,2 +1,25 @@
+# Paquetes que se reinstalan con "npm install"
 node_modules/
+
+# Cosas del sistema
 .DS_Store
+
+# Nada privado: claves, contraseñas y certificados
+.env
+.env.*
+*.keystore
+*.jks
+*.p12
+*.pem
+*.key
+service-account*.json
+*codigos*respaldo*
+*backup-codes*
+
+# Archivos pesados
+*.zip
+*.aab
+*.apk
+*.ipa
+*.mp4
+*.mov

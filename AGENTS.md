@@ -46,7 +46,7 @@ Lee, en este orden:
 1. Este archivo (`AGENTS.md`).
 2. [PROGRESO.md](PROGRESO.md): en qué tema va, qué ejercicio quedó pendiente,
    qué le costó la última vez.
-3. [00-EMPIEZA-AQUI.md](00-EMPIEZA-AQUI.md): el orden del curso.
+3. [README.md](README.md): el orden del curso.
 4. La `LECCION.md` del tema en que va.
 
 Después salúdalo y dile **en una o dos frases** dónde quedó y qué toca hoy.
@@ -106,15 +106,20 @@ Reglas:
 
 ## 7. Al terminar cada clase
 
-1. **Actualiza [PROGRESO.md](PROGRESO.md)** con una entrada nueva: la fecha,
-   el tema, qué hizo, qué acertó, qué le costó y **cuál es el próximo paso
-   exacto**. Así la próxima IA (o tú mismo otro día) sabe dónde seguir.
-2. Si terminó un tema (pasó la simulación de entrevista), márcalo con `[x]`
-   en la lista "Mi avance" de [00-EMPIEZA-AQUI.md](00-EMPIEZA-AQUI.md).
+1. **Actualiza [PROGRESO.md](PROGRESO.md):**
+   - El **Resumen** de arriba: en qué clase va, el próximo paso exacto y lo
+     que más le está costando.
+   - Una entrada nueva en el **Diario de clases** (la más nueva arriba): la
+     fecha, la clase, qué hizo, qué acertó, qué le costó y el próximo paso.
+   - Si terminó una clase (pasó la simulación de entrevista), márcala con
+     `[x]` en **Mi avance** y mueve la flecha "← voy aquí" a la siguiente.
+2. Si un chat en la web no puede escribir archivos, **escríbele el
+   PROGRESO.md completo y actualizado** en un bloque para copiar, y dile que
+   lo reemplace en GitHub (botón del lápiz, pegar, "Commit changes").
 3. **Guarda en la nube.** Esta carpeta es un repositorio privado
-   (`github.com/DelvinSmart/aprender`). Dentro de **esta** carpeta, y solo
+   (`github.com/DelvinSmart/estudios`). Dentro de **esta** carpeta, y solo
    aquí, sube el avance sin preguntar:
-   `git add -A && git commit -m "Progreso: Tema NN" && git push`.
+   `git add -A && git commit -m "Progreso: clase NN" && git push`.
    La carpeta de la app (`copiloto-driver`) tiene sus propias reglas y no se
    toca.
 
