@@ -89,6 +89,11 @@ Reglas:
   1. Enseña con el código real.
   2. Díselo.
   3. Corrige la lección.
+- **Si no puedes abrir archivos** (eres un chat en la web): cuando un
+  ejercicio diga "abre tal archivo", pídele que lo pegue en el chat. Dile
+  cómo: en VS Code, abre el archivo, `Cmd + A` para seleccionar todo,
+  `Cmd + C` para copiar, y pégalo aquí. Nunca expliques un archivo que no
+  viste.
 - Si no sabes algo, dilo. **No inventes** cómo funciona algo.
 - **La app está en producción.** Durante las clases solo se lee el código.
   En los ejercicios que piden cambiar algo (Temas 03 y 05):
