@@ -24,6 +24,7 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 09 CRUD en Node.js
 - [ ] 10 Arquitectura
 - [ ] 11 Cómo arreglé Copiloto
+- [ ] 12 Cómo hice Estudios Bíblicos
 
 Una clase se marca con `[x]` solo cuando puedo explicarla en voz alta, como
 en una entrevista.
