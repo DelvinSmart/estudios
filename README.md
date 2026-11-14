@@ -31,6 +31,7 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 | 10 | [Arquitectura](10-arquitectura/LECCION.md) | Explicar Clean Architecture, hexagonal, MVC y MVVM, y cómo está armada mi app |
 | 11 | [Cómo arreglé Copiloto](11-como-arregle-copiloto/README.md) | Temas avanzados: velocidad, ciclos, motores de diseño |
 | 12 | [Cómo hice Estudios Bíblicos](12-como-hice-estudios-biblicos/README.md) | Explicar un sitio en HTML, CSS y JavaScript: arquitectura, colores, publicación y panel con GitHub |
+| 13 | [Cómo hice la web de Copiloto](13-como-hice-la-web/README.md) | Explicar la web: React, TypeScript, Vite, Tailwind y Firebase, y cómo usa el código del app sin copiarlo |
 
 ## Cómo estudiar cada clase
 
