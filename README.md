@@ -11,6 +11,7 @@ en una entrevista.
 | [PROGRESO.md](PROGRESO.md) | **En qué clase voy**, qué terminé, qué me falta y qué me costó. Se lee siempre primero. |
 | [AGENTS.md](AGENTS.md) | Las reglas para la IA que me enseña: cómo tiene que dar las clases. |
 | [COMO-ESTUDIAR-CON-OTRA-IA.md](COMO-ESTUDIAR-CON-OTRA-IA.md) | Cómo seguir estudiando con ChatGPT o Gemini, con un prompt listo para pegar. |
+| [COMO-ESTUDIAR-DESDE-EL-IPAD.md](COMO-ESTUDIAR-DESDE-EL-IPAD.md) | Cómo estudiar desde el iPad o el celular con Claude en la nube, sin la Mac, con el mensaje listo para empezar cada clase. |
 
 ## Las clases, en orden
 
