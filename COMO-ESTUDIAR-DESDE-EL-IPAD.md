@@ -5,7 +5,7 @@ Las clases y el código no viven solo en la Mac: están en GitHub.
 | Qué | Dónde |
 |---|---|
 | Este curso (lecciones y progreso) | `github.com/DelvinSmart/estudios` (privado) |
-| El código de Copiloto Driver (app y web) | `github.com/DelvinSmart/copiloto-driver` |
+| El código de Copiloto Driver (app y web) | `github.com/DelvinSmart/copiloto-driver`, rama **`feature/smart-camera`** (la de `main` es vieja, de agosto, y no tiene la web) |
 
 Con **Claude en la nube** (claude.ai → Code), Claude abre esos repositorios en una computadora de la nube: lee las lecciones, abre el código del app y guarda el progreso en GitHub. La Mac puede estar apagada.
 
@@ -23,11 +23,11 @@ Con **Claude en la nube** (claude.ai → Code), Claude abre esos repositorios en
 
 ## Empezar una clase
 
-1. En **Code**, abre una sesión nueva con el repositorio **`estudios`**.
+1. En **Code**, toca **Nueva sesión**. Abajo del cuadro de texto, en el botón de los repositorios, revisa que estén `estudios` y `copiloto-driver`, y que **`copiloto-driver` use la rama `feature/smart-camera`**, no `main`.
 2. Pega este mensaje:
 
 ```text
-Soy Delvin. Vamos a estudiar. Lee AGENTS.md completo, después PROGRESO.md y README.md, y la LECCION.md del tema en que voy. Sígueme las reglas de AGENTS.md: una parte por vez, yo respondo y tú me corriges. Cuando necesites ver código del app, ábrelo del repositorio copiloto-driver (solo leer). Al terminar, actualiza PROGRESO.md y guárdalo en GitHub.
+Soy Delvin. Vamos a estudiar. Lee AGENTS.md completo, después PROGRESO.md y README.md, y la LECCION.md del tema en que voy. Sígueme las reglas de AGENTS.md: una parte por vez, yo respondo y tú me corriges. Cuando necesites ver código del app, ábrelo del repositorio copiloto-driver, rama feature/smart-camera (solo leer). Al terminar, actualiza PROGRESO.md y guárdalo en GitHub.
 ```
 
 3. Claude te saluda, te dice dónde quedaste y empieza la clase.
