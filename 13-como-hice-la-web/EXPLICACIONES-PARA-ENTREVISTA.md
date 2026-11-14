@@ -23,6 +23,10 @@
 - **Candado de diseño** y revisión de tipos antes de cada compilación.
 - Todas las páginas caben en una pantalla de laptop; lo que es largo se baja dentro de su recuadro.
 
+## Si preguntan por un error que encontraste
+
+- Un ingeniero me sugirió en LinkedIn **pruebas de contrato** entre la web y el app. Las hice: los mismos datos pasan por los dos caminos y tienen que dar el mismo número. **La primera vez falló:** la web contaba dos veces un día que tenía el balance del día y registros sueltos (decía 400 donde el app decía 100). Saqué esa regla a un archivo compartido y ahora las dos usan la misma; la prueba queda para que no vuelva a pasar.
+
 ## Si preguntan qué fue lo más difícil
 
 - **Dos copias de React:** una librería de íconos trajo su propia versión y la página fallaba. La solución fue obligar a usar una sola, la del app.

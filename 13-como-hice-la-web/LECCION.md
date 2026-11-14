@@ -349,6 +349,35 @@ Lee así: "el total del mes tiene que ser la suma de las barras". Si alguien rom
 26. ¿Qué pasó con las dos copias de React y cómo se arregló?
 27. Nombra una decisión que se tomó para no tener código repetido.
 
+## Parte 13. Las pruebas de contrato (el consejo de LinkedIn)
+
+Cuando publiqué la web en LinkedIn, un ingeniero (Principal Engineer) comentó: *"yo pondría pruebas de contrato en los cálculos de ganancias y gastos, para detectar cualquier diferencia entre la web y el móvil"*.
+
+**El problema que vio:** el app y la web usan la misma calculadora, pero cada uno **juntaba los registros a su manera** antes de calcular. Si uno los junta distinto, el resultado sale distinto aunque la calculadora sea la misma.
+
+**Qué es una prueba de contrato:** le das **los mismos datos** al camino del app y al camino de la web, y exiges que digan **exactamente el mismo número**: cada barra, el total y el promedio.
+
+El archivo es `webapp/src/__tests__/appWebContract.test.ts`. Los datos de prueba tienen los casos difíciles:
+
+| Caso | Por qué es difícil |
+|---|---|
+| Uber a las 02:30 | Para Uber todavía es el día anterior (su día cambia a las 04:00) |
+| Balance del día **y** registros sueltos el mismo día | El app no los cuenta dos veces |
+| Un ajuste | No es ganancia nueva |
+| Un gasto a las 23:59 del domingo | Está en el borde de la semana |
+| Registros en el cambio de mes | Están en el borde del mes |
+
+**Lo que pasó:** la primera vez que corrió, **la prueba falló**. El miércoles, el app decía **100** y la web **400**. La web contaba dos veces el día que tenía el balance del día y también registros sueltos. Era un error real, y ningún usuario lo había visto todavía.
+
+**El arreglo:** saqué la forma de juntar los registros a un solo archivo del app, `src/utils/financeBarEntries.ts`, y ahora lo usan las tres pantallas del app (Ganancias, Gastos y Ganancia neta) y la web. Una regla, un lugar. La prueba de contrato quedó para avisar si algún día vuelven a separarse.
+
+**La lección:** que los dos usen la misma calculadora no basta. Hay que probar el camino completo, desde los datos hasta el número que ve la persona.
+
+**Preguntas**
+28. ¿Qué es una prueba de contrato?
+29. ¿Por qué la web y el app daban números distintos si usaban la misma calculadora?
+30. ¿Qué se hizo para que no vuelva a pasar?
+
 ---
 
 ## Respuestas
@@ -380,3 +409,6 @@ Lee así: "el total del mes tiene que ser la suma de las barras". Si alguien rom
 25. Porque la página la está sirviendo la Mac; si se apaga, no hay quién la sirva.
 26. `lucide-react` trajo otra versión de React y con dos copias la página fallaba. Se obligó a usar una sola, la del app, en `vite.config.ts`.
 27. Por ejemplo: `splitProfitBars`, `fuelRegisterPlan`, `periodPillOptions` y `tanksInPeriod` compartidos entre app y web; el motor de animación `animatePopoverOpen`; la clase `tile-inset`.
+28. Una prueba que pasa los mismos datos por dos caminos (el del app y el de la web) y exige que den exactamente el mismo resultado.
+29. Porque cada uno juntaba los registros a su manera antes de calcular: la web contaba dos veces el día con balance del día y registros sueltos.
+30. Se sacó la forma de juntar los registros a un solo archivo (`financeBarEntries.ts`) que usan el app y la web, y la prueba de contrato avisa si vuelven a separarse.
