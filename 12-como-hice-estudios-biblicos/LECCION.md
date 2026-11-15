@@ -1,6 +1,6 @@
 # Lección 12: Cómo hice Estudios Bíblicos
 
-Este es el **Tema 12** del curso. Estudia una parte por día. Abre el archivo del que habla cada parte (en `SSD_Desarrollo/Developer/estudios-biblicos`) y míralo mientras lees. Primero intenta responder las preguntas sin mirar. Las respuestas están al final.
+Este es el **Tema 12** del curso. Estudia una parte por día. Abre el archivo del que habla cada parte (en `SSD_Desarrollo/Developer/que-dice-la-biblia`) y míralo mientras lees. Primero intenta responder las preguntas sin mirar. Las respuestas están al final.
 
 Los ejemplos están simplificados para aprender. El código real puede verse un poco distinto.
 
@@ -47,7 +47,7 @@ Este proyecto **no usa frameworks** (ni React, ni Vue). Solo las tres piezas bá
 Cada archivo tiene **una sola tarea**. Eso es lo contrario del "código espagueti", donde todo está mezclado.
 
 ```
-estudios-biblicos/
+que-dice-la-biblia/
 ├── estudios/              ← EL CONTENIDO (un archivo JSON por estudio)
 ├── imagenes/  videos/     ← fotos y videos que se suben desde el panel
 │
@@ -280,7 +280,7 @@ En 1 o 2 minutos, la página y los PDF están actualizados
 
 El panel (`panel.html`) **es una página pública**, pero sin la llave no puede guardar nada.
 
-- La **llave** es un *token* de GitHub (una contraseña especial) que solo permite **editar archivos de `estudios-biblicos`**. Nada más de la cuenta.
+- La **llave** es un *token* de GitHub (una contraseña especial) que solo permite **editar archivos de `que-dice-la-biblia`**. Nada más de la cuenta.
 - La llave se guarda **solo en el aparato** (`localStorage`). No se sube a ningún lado.
 - `github.js` manda cada cambio a la **API de GitHub** con la llave. **GitHub decide:** si la llave es válida, guarda; si no, rechaza.
 

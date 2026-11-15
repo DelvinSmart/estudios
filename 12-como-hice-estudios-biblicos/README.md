@@ -2,9 +2,11 @@
 
 Cómo se construyó, el 12 y 13 de noviembre de 2026, la página **Estudios Bíblicos**: un sitio donde cada estudio de la Biblia se ve como un mapa, se descarga en PDF y se edita desde un panel propio.
 
-- Página: https://delvinsmart.github.io/estudios-biblicos/
-- Panel: https://delvinsmart.github.io/estudios-biblicos/panel.html
-- Código: `SSD_Desarrollo/Developer/estudios-biblicos` (y en GitHub: `DelvinSmart/estudios-biblicos`)
+> Desde el 15 de noviembre de 2026 la página se llama **¿Qué dice la Biblia?** (en portugués, **O que diz a Bíblia?**), y el repositorio y la dirección cambiaron a `que-dice-la-biblia`.
+
+- Página: https://delvinsmart.github.io/que-dice-la-biblia/
+- Panel: https://delvinsmart.github.io/que-dice-la-biblia/panel.html
+- Código: `SSD_Desarrollo/Developer/que-dice-la-biblia` (y en GitHub: `DelvinSmart/que-dice-la-biblia`)
 
 | Archivo | Para qué sirve |
 |---|---|
