@@ -33,6 +33,7 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 | 11 | [Cómo arreglé Copiloto](11-como-arregle-copiloto/README.md) | Temas avanzados: velocidad, ciclos, motores de diseño |
 | 12 | [Cómo hice Estudios Bíblicos](12-como-hice-estudios-biblicos/README.md) | Explicar un sitio en HTML, CSS y JavaScript: arquitectura, colores, publicación y panel con GitHub |
 | 13 | [Cómo hice la web de Copiloto](13-como-hice-la-web/README.md) | Explicar la web: React, TypeScript, Vite, Tailwind y Firebase, y cómo usa el código del app sin copiarlo |
+| 14 | [¿Qué dice la Biblia? por dentro](14-que-dice-la-biblia-por-dentro/README.md) | Explicar cómo se muestran versículos de Logos y Lockman sin copiarlos, el medidor de citas, las fuentes, el griego y el motor de diseño con su candado, y todo lo que no funcionó |
 
 ## Cómo estudiar cada clase
 
