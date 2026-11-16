@@ -126,6 +126,8 @@ escribe :: ¿Por qué esta clase trae los ejemplos en Python además de JavaScri
 
 ## Parte 1. Fundamentos
 
+> 🎙️ **El profesor:** Delvin, llegaste a la última etapa. Todo lo que aprendiste (funciones, pruebas, CI, errores, Firebase, arquitectura) se usa aquí. Un agente es un programa como cualquier otro, con una pieza nueva en el centro: un modelo que decide. Empecemos por definir bien qué es, porque la mitad de la confusión del mundo viene de palabras vagas.
+
 Antes de elegir un patrón hay que saber exactamente qué estás construyendo. Casi toda la confusión sobre agentes viene de usar palabras vagas.
 
 ### 1.1 Qué es un agente, de verdad
@@ -158,6 +160,15 @@ una respuesta  controles           el caso, en        herramientas trabajadores,
 ```
 
 > 💡 **Idea:** la regla de la guía: **empieza lo más a la izquierda que el problema te permita.**
+
+> ✋ **Para y piensa:** tu app tiene un Copiloto que responde preguntas. Si solo recibe la pregunta y devuelve una respuesta, una vez, ¿es un agente o una llamada al modelo?
+
+<details>
+<summary>Ver la respuesta</summary>
+
+Es una **llamada al modelo**. Sería un **agente** si el modelo pudiera decidir usar herramientas (por ejemplo, buscar tus ingresos del mes), mirar el resultado y seguir, en un ciclo, hasta terminar.
+
+</details>
 
 ### 1.2 Las siete piezas de un agente
 
@@ -289,7 +300,23 @@ Si alguna respuesta es "no", **construye primero un flujo de trabajo**.
 
 > 📌 **Nota:** un *token* es un pedacito de texto (más o menos tres cuartos de una palabra). Los modelos cobran y se limitan por *tokens*.
 
+```practica
+escribe :: Con tus palabras: ¿qué diferencia hay entre una llamada al modelo y un agente? :: Una llamada recibe texto y devuelve texto una vez; un agente decide qué hacer, usa herramientas, observa el resultado y repite en un ciclo hasta terminar o hasta un límite.
+elige :: Según Anthropic, un flujo de trabajo (workflow) es… :: Un modelo que decide su propio camino :: Modelo y herramientas siguiendo caminos escritos de antemano en el código :: Un tipo de base de datos
+elige :: ¿Dónde conviene empezar en el espectro de autonomía? :: Lo más a la derecha (multiagente) :: Lo más a la izquierda que el problema permita :: En el medio siempre
+elige :: ¿Cuál es la pieza que la guía dice que está peor diseñada en la mayoría de los agentes? :: El modelo :: La memoria y el estado :: Las instrucciones
+elige :: En el ciclo del agente, ¿cuándo termina normalmente? :: Cuando se acaba la memoria :: Cuando el modelo responde sin pedir ninguna herramienta (o se llega al máximo de pasos) :: Nunca
+vf :: La mayoría de los sistemas reales son agentes totalmente libres
+vf :: Antes de construir un agente hay que poder definir cómo se ve "terminado"
+vf :: Las instrucciones (system prompt) se tratan como código: con versiones y probadas
+elige :: ¿Qué es una trayectoria? :: Un tipo de modelo :: La secuencia completa de decisiones, llamadas y observaciones de una ejecución :: Un gráfico
+elige :: ¿Qué es un rastro (trace)? :: Un error :: El registro de las llamadas al modelo y a herramientas de una ejecución, con tiempos, tokens y costo :: Una contraseña
+escribe :: Di las tres preguntas antes de construir un agente. :: ¿Puedo definir cómo se ve terminado? ¿El agente puede verificar su propio avance? ¿Puedo pagar la peor ejecución posible, en dinero y en daño?
+```
+
 ## Parte 2. Los cinco patrones principales
+
+> 🎙️ **El profesor:** estos cinco patrones son el corazón de la clase. Si en una entrevista solo puedes explicar una parte, que sea esta. Léelos de a uno por día: ReAct, planificación, reflexión, enrutamiento y multiagente.
 
 Estos cinco patrones cubren **la mayoría** de los sistemas de agentes en producción. Apréndelos a fondo. Para cada uno: cómo funciona, un esqueleto de código, dónde se rompe, cómo hablar de él en una entrevista y un ejercicio.
 
@@ -402,6 +429,15 @@ def ejecutar(llamada):
 > 🎤 **Entrevista:** prepárate para explicar **por qué ReAct le gana a solo "pensar en voz alta"** (*chain-of-thought*): razonar sin observar acumula alucinaciones, porque el modelo nunca recibe un dato real de vuelta. ReAct **apoya cada paso de razonamiento en el resultado real** de una herramienta.
 
 **Ejercicio para construir:** un agente ReAct con tres herramientas: búsqueda web, calculadora y "fecha de hoy". Pregúntale cuántos días faltan para el próximo feriado nacional y cuál es. Registra cada paso. Después **quita** la herramienta de la fecha y mira qué hace el modelo. **Esa falla es la lección.**
+
+> ✋ **Para y piensa:** un agente ReAct llama 15 veces seguidas a `buscar_web` con la misma consulta. ¿Qué falla es y cómo se arregla?
+
+<details>
+<summary>Ver la respuesta</summary>
+
+Es un **ciclo infinito**. Se arregla con un **máximo de pasos**, **detectando llamadas repetidas** con los mismos datos y diciéndole al modelo que cambie de estrategia.
+
+</details>
 
 ### 2.2 Planificación
 
@@ -778,7 +814,26 @@ async def correr_supervisor(tarea):
 
 **Ejercicio para construir:** un supervisor con tres trabajadores: investigador (búsqueda web), analista (corre código para los números) y redactor. Pide un informe de una página sobre un tema con tres conjuntos de números. Corre los trabajadores en paralelo (`Promise.all`). Rastrea toda la ejecución y encuentra **el tramo más caro**.
 
+```practica
+escribe :: Explica el ciclo ReAct en tus palabras. :: El modelo razona qué hacer, actúa llamando una herramienta, observa el resultado, actualiza el contexto y repite, hasta responder sin pedir herramientas.
+elige :: ¿Por qué ReAct le gana a solo "pensar en voz alta" (chain-of-thought)? :: Porque es más corto :: Porque apoya cada paso en un resultado real de una herramienta, en vez de acumular alucinaciones :: Porque no usa modelo
+elige :: Una herramienta revienta con un error. ¿Qué es mejor? :: Que se corte todo el ciclo :: Que devuelva un error ordenado al modelo para que se recupere :: Ocultar el error
+elige :: En planificación, ¿qué es el plan? :: Un párrafo :: Una estructura de datos con pasos y su estado :: Un dibujo
+elige :: ¿Qué es lo que se usa en producción entre planificar y ReAct? :: Solo ReAct :: Solo planificar :: Un híbrido: planificar, ejecutar cada paso con un ReAct corto y replanificar en puntos de control
+elige :: En reflexión, ¿cuál es el crítico más confiable? :: El mismo modelo con el mismo prompt :: Uno determinístico, como pruebas automáticas o un validador :: Ninguno
+elige :: ¿Cómo se llama el ciclo de reflexión en las discusiones de arquitectura? :: Supervisor-trabajador :: Evaluador-optimizador :: ReWOO
+elige :: En enrutamiento, con poca confianza, ¿qué se hace? :: Se manda a cualquier especialista :: Se hace una pregunta para aclarar :: Se cancela
+elige :: ¿Por qué el enrutamiento ayuda con el costo? :: Porque no usa modelos :: Porque manda lo simple a un modelo chico y deja el caro para lo difícil :: Porque es gratis
+elige :: En multiagente, ¿con quién hablan los trabajadores? :: Entre ellos :: Solo con el supervisor :: Con el usuario
+elige :: Según Anthropic, ¿cuántos tokens usa más o menos un sistema multiagente comparado con un chat? :: El doble :: 4 veces :: Unas 15 veces
+vf :: En multiagente, los trabajadores deben devolver pruebas (fuentes, resultados), no solo conclusiones
+vf :: Un crítico que aprueba todo es un buen crítico
+elige :: En Python, ¿qué es el equivalente de `Promise.all`? :: `asyncio.run` :: `asyncio.gather` :: `await all`
+```
+
 ## Parte 3. Veinte patrones más
+
+> 🎙️ **El profesor:** no te asustes por el número. No hace falta memorizar veinte: hace falta **reconocer el problema** y saber que existe un patrón para él. Al final está la tabla para elegir.
 
 Los cinco principales son los ladrillos. Estos veinte son **con qué los combinas**. Están agrupados por el problema que resuelven, para que encuentres el correcto cuando te topes con el problema.
 
@@ -969,7 +1024,27 @@ Los veinticinco patrones en una tabla:
 | RAG agéntico | Las respuestas deben apoyarse en tus datos | Medio |
 | Compactar el contexto | Las ejecuciones son largas y la ventana se llena | Bajo |
 
+```practica
+elige :: ¿Qué patrón usarías para traducir 500 descripciones con un formato fijo? :: Multiagente :: Cadena de prompts o flujo de trabajo :: Árbol de pensamientos
+elige :: Revisar un contrato buscando 6 tipos de cláusulas a la vez es… :: Debate :: Paralelización por secciones :: Reflexion
+elige :: Correr la misma clasificación 3 veces y quedarse con la mayoría es… :: Por secciones :: Por votación :: ReWOO
+elige :: ¿Qué patrón escribe todo el plan con las llamadas a herramientas de antemano y no vuelve al modelo? :: ReAct :: ReWOO :: Reflexion
+elige :: ¿Qué patrón guarda una reflexión escrita de cada intento fallido para el próximo? :: ReWOO :: Reflexion :: Debate
+elige :: Un agente que escribe un programa que llama muchas herramientas y lo corre en una caja aislada es… :: Self-ask :: Código como acción (CodeAct) :: Pizarra
+elige :: Agentes que no se hablan y leen y escriben en un estado común es… :: Traspasos :: Pizarra (blackboard) :: Jerárquico
+elige :: ¿Cuántos niveles de jerarquía necesitan casi todos los sistemas? :: Cinco :: No más de dos :: Diez
+elige :: ¿Qué patrones de control dice la guía que van "siempre, en producción"? :: Debate y árbol :: Controles (guardrails) y terminación/presupuestos :: Pizarra y enjambre
+elige :: ¿Qué tipo de memoria es la ventana de contexto? :: Semántica :: De trabajo :: De procedimientos
+elige :: Los hechos y preferencias guardados en una base de vectores son memoria… :: De episodios :: Semántica :: De trabajo
+vf :: La mayoría de los errores de memoria son errores al escribir (guardar todo o nada útil)
+vf :: El RAG agéntico busca una sola vez y responde
+escribe :: ¿Qué debe conservar una buena compactación del contexto? :: El objetivo, las decisiones tomadas, las preguntas abiertas, los datos e identificadores clave y la lista de archivos o recursos tocados.
+escribe :: ¿Qué es una persona en el ciclo (human-in-the-loop) y cuándo se usa? :: El agente se pausa en puntos definidos y espera a una persona (guardando el estado); se usa en toda acción irreversible o cara, como pagos, borrados o envíos.
+```
+
 ## Parte 4. Diseñar agentes
+
+> 🎙️ **El profesor:** aquí está lo que separa un agente de demo de uno que funciona con gente real: el contexto, las herramientas, el estado, las salidas ordenadas, el modelo y los protocolos.
 
 Los patrones son **la forma**. Esta parte es **el contenido**: las decisiones que determinan si tu agente funciona con entradas reales, y no solo en la demo.
 
@@ -1192,7 +1267,26 @@ El panorama cuando se escribió la guía:
 
 > 🎤 **Entrevista:** **nadie te contrata por conocer un *framework*.** Te contratan por saber **por qué** el *framework* toma las decisiones que toma. Tienes que poder explicar puntos de guardado, flechas condicionales e interrupciones **sin nombrar ninguna librería**.
 
+```practica
+escribe :: ¿Qué diferencia hay entre ingeniería de prompts e ingeniería de contexto? :: La de prompts es escribir buenas instrucciones; la de contexto es decidir todo lo que entra en la ventana del modelo en cada paso (instrucciones, herramientas, documentos, memoria, historial, resultados).
+vf :: Más contexto siempre es mejor contexto
+elige :: ¿Dónde conviene poner las instrucciones más importantes? :: Solo en el medio :: Cerca del principio, y repetir las críticas cerca del final :: Solo al final
+elige :: ¿Qué hay que dejar idéntico en cada llamada para aprovechar el caché de prompts? :: El mensaje del usuario :: La parte fija: system prompt y definiciones de herramientas :: Los resultados de herramientas
+elige :: Según la guía, muchas fallas que parecen de razonamiento son en verdad fallas de… :: Internet :: Diseño de herramientas :: Memoria RAM
+elige :: ¿Cuál es un error que enseña? :: "Error 500" :: "No encontré la cuenta. Revisa el formato: debe tener 8 dígitos" :: "Algo salió mal"
+elige :: ¿Qué es poka-yoke en el diseño de herramientas? :: Un framework :: Hacer que la llamada equivocada sea difícil de escribir :: Una base de datos
+vf :: El estado en memoria sobrevive a una nueva versión (deploy)
+elige :: Cuando la salida del modelo la va a leer código, ¿qué hay que hacer? :: Pedir prosa :: Forzar un esquema (salida estructurada) y validarlo :: Nada
+elige :: ¿Qué modelo usas para enrutar o dar formato? :: El más caro :: Uno chico y rápido :: Ninguno
+elige :: ¿Qué es MCP? :: Un modelo de IA :: Un estándar abierto para conectar agentes con herramientas, recursos y prompts :: Un lenguaje
+elige :: ¿Cuándo conviene construir tus herramientas como servidores MCP? :: Siempre :: Cuando más de un agente o producto las necesita :: Nunca
+elige :: Si tu proyecto es en TypeScript, ¿qué frameworks de agentes son la puerta natural? :: CrewAI y LangGraph :: Vercel AI SDK o Mastra :: Google ADK
+vf :: Nadie te contrata por conocer un framework, sino por saber por qué toma sus decisiones
+```
+
 ## Parte 5. Evaluar agentes
+
+> 🎙️ **El profesor:** ¿te acuerdas de las pruebas del Tema 02? Con agentes es lo mismo, pero más difícil: el agente no responde siempre igual y el camino importa. Aquí ves cómo se mide.
 
 No puedes mejorar lo que no puedes medir, y los agentes son más difíciles de medir que cualquier cosa que hayas publicado antes: **no son determinísticos**, tienen **muchos pasos**, y **el camino importa tanto como la respuesta**.
 
@@ -1310,7 +1404,23 @@ En ese rastro se ve de un vistazo **el tramo más caro** (el investigador) y **l
 - **Con qué:** **OpenTelemetry** con sus convenciones para IA generativa como base neutral, más una capa especializada como **Langfuse**, **LangSmith**, **Arize Phoenix**, **Braintrust** o **Weights and Biases Weave** para ver rastros, correr evaluaciones y administrar prompts.
 - **El hábito:** revisa rastros **cada semana**. Toma cinco éxitos y cinco fallas. **Cada revisión debe producir al menos un caso de evaluación nuevo o una mejora de herramienta.**
 
+```practica
+escribe :: ¿Por qué evaluar agentes es distinto a evaluar un programa normal? :: Porque no son determinísticos, tienen muchos pasos y el camino importa tanto como el resultado; dos ejecuciones pueden tomar caminos distintos, así que hay que correr cada caso varias veces.
+elige :: Revisar que el agente buscó antes de responder y confirmó antes de borrar es una evaluación de… :: Unidad :: Trayectoria :: En línea
+elige :: ¿En qué nivel una prueba "aprueba" si el agente se negó o escaló? :: Unidad :: Resultado :: Seguridad
+elige :: ¿Cómo se calibra un modelo-juez? :: No se calibra :: Midiendo cuánto coincide con calificaciones humanas en 50 a 100 ejemplos :: Usando el mismo prompt del agente
+elige :: ¿Cuál de estos es un sesgo de un modelo-juez? :: La velocidad :: Preferir la respuesta más larga :: El idioma
+elige :: Un agente acierta el 90 % de las veces. ¿Cuánto es pass^3 (acertar 3 veces seguidas)? :: 90 % :: Unos 73 % :: 30 %
+elige :: ¿Qué mide mejor el costo real? :: Costo por llamada :: Costo por tarea exitosa :: Costo por día
+elige :: ¿Qué demora sienten los usuarios? :: La p50 :: La p95 :: La mínima
+vf :: Cada falla que llega a un usuario se convierte en un caso de evaluación
+vf :: Conviene que quien escribe el prompt vea todo el set de evaluación
+escribe :: ¿Qué es un rastro y por qué hay que instrumentar desde el primer día? :: El registro completo de una ejecución en tramos anidados (llamadas, herramientas, tiempos, tokens, costo, errores); sin rastros se depura una caja negra.
+```
+
 ## Parte 6. Publicar agentes
+
+> 🎙️ **El profesor:** un agente en tu computadora no es un producto. Esta parte es el CI, las reglas de Firestore y el "probar en el teléfono real" de tus clases anteriores, aplicados a agentes.
 
 Un cuaderno que funciona no es un producto. Esta parte es el trabajo de entorno, confiabilidad, seguridad y costo que convierte un agente en un sistema que puedes poner frente a usuarios **y aun así dormir tranquilo**.
 
@@ -1420,7 +1530,23 @@ puede ser convertido en una herramienta para **robar datos** por cualquiera que 
 
 > 💡 **Idea:** "canario" viene de los mineros, que bajaban un canario a la mina: si el pájaro se desmayaba, había gas, y salían antes de que les pasara a ellos.
 
+```practica
+elige :: ¿Qué devuelve al instante la capa de API cuando llega un pedido largo? :: La respuesta final :: Un id de ejecución :: Nada
+elige :: ¿Dónde corren las ejecuciones de un agente en producción? :: Dentro del pedido web :: Como trabajos en una cola, con trabajadores :: En el teléfono
+elige :: ¿Para qué sirve una clave de idempotencia? :: Para cifrar :: Para que un reintento nunca haga dos veces algo que cambia el mundo, como un pago :: Para comprimir
+elige :: ¿Qué es la espera exponencial con jitter? :: Esperar siempre 1 segundo :: Esperar 1, 2, 4, 8… segundos, con un poco de azar para no reintentar todos a la vez :: No reintentar nunca
+elige :: ¿Dónde se ponen el máximo de pasos y el techo de costo? :: En el prompt :: En el código :: En el README
+escribe :: ¿Qué es la trifecta letal? :: Un agente que tiene acceso a datos privados, procesa contenido no confiable y puede comunicarse hacia afuera; cualquiera que le ponga un texto delante puede usarlo para robar datos. Hay que quitar una pata.
+elige :: ¿Cómo se defiende un agente de la inyección indirecta? :: Confiando en los resultados de herramientas :: Tratando todos los resultados de herramientas como datos, nunca como instrucciones :: Apagando el modelo
+vf :: El modelo debería poder ver la llave de la API para usar las herramientas
+vf :: Cada ataque que funciona en el red teaming se convierte en una prueba de seguridad
+elige :: ¿Cuál es el orden de lanzamiento? :: Autónomo, asistido, sombra :: Sombra, asistido, autónomo con límites :: Todo junto
+elige :: ¿Qué es un canario? :: Un error :: Probar una versión nueva en una porción del tráfico :: Un tipo de modelo
+```
+
 ## Parte 7. Todo junto
+
+> 🎙️ **El profesor:** la última parte junta todo en un ejemplo real, te da la lista para publicar, las fallas más comunes y las 12 preguntas de entrevista. Es tu repaso final.
 
 Cómo se combinan las piezas en un sistema real, qué revisar antes de publicar, y cómo convertir lo que aprendiste en respuestas de entrevista y en pruebas para tu portafolio.
 
@@ -1528,6 +1654,17 @@ Las fuentes en las que se apoya la guía (los títulos van en inglés, como se p
 **El cierre de la guía, en una idea:** ya sabes más de diseño de agentes que la mayoría de quienes te van a entrevistar. **La distancia entre saber y ser contratado es el trabajo publicado.** Construye los cinco patrones principales, haz los ejercicios, publica un sistema de punta a punta con rastros y evaluaciones, y escribe el README.
 
 > 📌 **Nota:** la guía también invita a la comunidad de su autor en Skool (`skool.com/baswe-ai`), donde ingenieros que se pasan a IA comparten lo que construyen y reciben opiniones. Es opcional; lo menciono porque está en el documento.
+
+```practica
+elige :: En el agente de soporte de referencia, ¿qué pasa con un reembolso de más de US$ 200? :: Se hace solo :: Se pausa para que lo apruebe una persona, y se retoma desde el punto de guardado :: Se rechaza
+elige :: Síntoma: respuestas seguras pero equivocadas. ¿Arreglo? :: Más modelos :: RAG agéntico con citas y evaluación de apoyo :: Más pasos
+elige :: Síntoma: los costos se dispararon tras el lanzamiento. ¿Arreglo? :: Apagar el agente :: Presupuestos de tokens, compactar, caché de prompts y modelos por niveles :: Más reflexión
+elige :: Síntoma: no se sabe qué agente causó el error. ¿Arreglo? :: Adivinar :: Rastrear cada agente y herramienta como tramos anidados :: Borrar agentes
+vf :: Según la guía, la pregunta 12 ("cuéntame de un agente que construiste y qué se rompió") es la pregunta de verdad
+escribe :: ¿Qué debe decir el README de un proyecto de portafolio de agentes? :: El patrón, el diagrama de arquitectura, los resultados de evaluación, el costo por ejecución y qué harías distinto.
+escribe :: Responde: ¿cuál es la diferencia entre un flujo de trabajo y un agente? :: Un flujo de trabajo sigue caminos escritos de antemano en el código; en un agente el modelo dirige su propio proceso. La mayoría de los sistemas reales son flujos con partes de agente.
+escribe :: Responde: ¿qué es MCP y por qué importa? :: Un estándar abierto para ofrecer herramientas, recursos y prompts a los agentes; construyes el servidor una vez y lo usa cualquier cliente.
+```
 
 ## Ejercicios
 

@@ -43,6 +43,10 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 
 ## Cómo estudiar cada clase
 
+**Sin IA:** cada clase tiene su **`CLASE-GUIADA.md`**: la clase completa, como si un profesor la diera, con pausas de "✋ Para y piensa", prácticas de verdadero o falso, elegir y escribir (hay que acertar todas para prender el bombillo 💡 de la parte) y la simulación de entrevista. En el mapa (`index.html`) es la primera pestaña de cada clase. La `LECCION.md` queda como resumen. En la clase 19 (agentes) la lección misma es la clase completa, con los ejemplos en JavaScript y en Python.
+
+**Con una IA:** sigue los pasos de abajo y [AGENTS.md](AGENTS.md).
+
 1. **Leer la lección por partes**, con la IA, sin adelantarse.
 2. **Hacer los ejercicios sin mirar las respuestas.** Equivocarse es parte de aprender.
 3. **Mandarle las respuestas a la IA** para que las corrija.
