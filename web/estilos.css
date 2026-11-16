@@ -300,6 +300,9 @@ code, pre, .mono, .titulo-grande, .titulo-medio, .titulo-parte, .nodo-titulo { f
 .aviso.cuidado { --color: var(--rojo); }
 .aviso.entrevista { --color: var(--morado); }
 .aviso.nota { --color: var(--acento-2); }
+.aviso.profesor { --color: var(--acento-2); font-size: 1.02rem; }
+.aviso.pausa { --color: var(--morado); }
+.aviso.repaso { --color: var(--acento); border-style: dashed !important; }
 .aviso > p:first-child strong:first-of-type { color: var(--color); font-family: var(--mono); font-size: 0.9em; }
 
 .tabla { overflow-x: auto; margin: 1.3em 0; border: 1px solid var(--borde); border-radius: 12px; }
@@ -367,3 +370,107 @@ code, pre, .mono, .titulo-grande, .titulo-medio, .titulo-parte, .nodo-titulo { f
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ---------- 10. Mi progreso: los bombillos ---------- */
+a.boton-icono { display: grid; place-items: center; text-decoration: none; font-family: system-ui; font-size: 1rem; }
+.insignia.empezada { color: var(--acento-2); border-color: color-mix(in srgb, var(--acento-2) 45%, transparent); }
+.punto.empezada { background: var(--acento-2); }
+.contador-bombillos { color: var(--tenue); }
+.contador-bombillos:hover { text-decoration: none; color: var(--amarillo); }
+.contador-bombillos b { color: var(--amarillo); }
+.bombillo-chico { font-family: system-ui; margin-right: 4px; filter: grayscale(1); opacity: 0.5; }
+.bombillo-chico.prendido { filter: none; opacity: 1; text-shadow: 0 0 12px var(--amarillo); }
+
+.gran-cuenta { font-size: 1.05rem; color: var(--tenue); margin: 6px 0 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.gran-cuenta b { font-size: 2.2rem; color: var(--amarillo); line-height: 1; }
+.barra-progreso.ancha { max-width: none; height: 8px; }
+.barra-progreso.ancha span { background: linear-gradient(90deg, var(--amarillo), var(--acento)); }
+
+.etapa-progreso { margin: 0 0 26px; padding: 18px 20px; border: 1px solid var(--borde); border-radius: 16px; background: var(--tarjeta); animation: entrar 0.45s ease both; }
+.etapa-progreso h2 { font-size: 1rem; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.etapa-progreso h2 .tenue { margin-left: auto; font-weight: 400; font-size: 0.85rem; }
+.fila-bombillos { display: grid; grid-template-columns: minmax(170px, 260px) 1fr auto; align-items: center; gap: 8px 16px; padding: 8px 0; border-top: 1px dashed var(--borde); }
+.fila-clase { color: var(--texto); font-size: 0.92rem; line-height: 1.35; }
+.fila-bombillos.hecha .fila-clase { color: var(--acento); }
+.bombillos { display: flex; flex-wrap: wrap; gap: 4px; }
+.cuenta { font-size: 0.8rem; }
+
+.bombillo {
+  width: 30px; height: 30px; border-radius: 9px;
+  display: grid; place-items: center;
+  font: 1rem system-ui; text-decoration: none !important;
+  background: var(--fondo-2); border: 1px solid var(--borde);
+  filter: grayscale(1); opacity: 0.38;
+  transition: transform 0.15s, opacity 0.2s;
+}
+.bombillo:hover { opacity: 0.75; transform: translateY(-2px); }
+.bombillo.prendido {
+  filter: none; opacity: 1;
+  background: color-mix(in srgb, var(--amarillo) 18%, var(--tarjeta));
+  border-color: color-mix(in srgb, var(--amarillo) 60%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--amarillo) 45%, transparent);
+}
+/* El que se prendió desde la última visita: parpadea y se enciende. */
+.bombillo.nuevo { animation: prender 1.4s ease both; animation-delay: calc(400ms + var(--espera, 0ms)); }
+@keyframes prender {
+  0%   { filter: grayscale(1); opacity: 0.38; box-shadow: none; transform: scale(1); }
+  20%  { filter: none; opacity: 1; }
+  30%  { filter: grayscale(1); opacity: 0.45; }
+  45%  { filter: none; opacity: 1; transform: scale(1.35); box-shadow: 0 0 34px var(--amarillo); }
+  100% { filter: none; opacity: 1; transform: scale(1); box-shadow: 0 0 14px color-mix(in srgb, var(--amarillo) 45%, transparent); }
+}
+
+.llevar .fila-codigo { display: flex; gap: 8px; margin: 10px 0; }
+.llevar input { flex: 1; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--borde); background: var(--fondo-2); color: var(--texto); font-size: 0.8rem; }
+.llevar .boton { margin-top: 0; }
+
+.tostada {
+  position: fixed; left: 16px; right: 16px; bottom: 24px; z-index: 60; margin: 0 auto; width: max-content; max-width: calc(100% - 32px);
+  padding: 12px 18px; border-radius: 12px; font-size: 0.88rem;
+  background: var(--tarjeta); color: var(--texto) !important; text-decoration: none !important;
+  border: 1px solid color-mix(in srgb, var(--amarillo) 60%, transparent);
+  box-shadow: var(--sombra), 0 0 24px color-mix(in srgb, var(--amarillo) 30%, transparent);
+  animation: entrar 0.3s ease both; transition: opacity 0.5s;
+}
+.tostada.saliendo { opacity: 0; }
+
+@media (max-width: 600px) {
+  .fila-bombillos { grid-template-columns: 1fr auto; }
+  .bombillos { grid-column: 1 / -1; grid-row: 2; }
+  .etapa-progreso { padding: 14px; }
+  .bombillo { width: 28px; height: 28px; }
+}
+
+/* ---------- 11. Las prácticas interactivas ---------- */
+.practica { margin: 1.8em 0; padding: 16px 18px 6px; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--morado) 45%, var(--borde)); background: color-mix(in srgb, var(--morado) 6%, var(--tarjeta)); }
+.practica.aprobada { border-color: color-mix(in srgb, var(--acento) 55%, var(--borde)); background: color-mix(in srgb, var(--acento) 5%, var(--tarjeta)); }
+.practica-cabeza { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--morado); }
+.practica.aprobada .practica-cabeza { color: var(--acento); }
+.practica-regla { font-size: 0.88rem; margin: 6px 0 10px; }
+.practica-lista { list-style: none; counter-reset: preg; padding: 0; margin: 0; }
+.pregunta { counter-increment: preg; position: relative; padding: 12px 0 12px 34px; border-top: 1px dashed var(--borde); }
+.pregunta::before { content: counter(preg); position: absolute; left: 0; top: 13px; width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; font: 700 0.75rem var(--mono); background: var(--fondo-2); border: 1px solid var(--borde); color: var(--tenue); }
+.pregunta.bien::before { content: '✓'; background: var(--acento); color: #06210f; border-color: var(--acento); }
+.pregunta.mal::before { content: '✗'; background: var(--rojo); color: #fff; border-color: var(--rojo); }
+.enunciado { margin: 0 0 8px; }
+.pregunta .opciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.pregunta .opciones button { padding: 8px 14px; border-radius: 10px; border: 1px solid var(--borde-fuerte); background: var(--tarjeta); color: var(--texto); font: 600 0.88rem var(--mono); cursor: pointer; }
+.pregunta .opciones button:hover:not(:disabled) { border-color: var(--morado); color: var(--morado); }
+.pregunta .opciones button:disabled { cursor: default; opacity: 0.55; }
+.pregunta.bien .elegida { opacity: 1 !important; border-color: var(--acento); color: var(--acento); background: color-mix(in srgb, var(--acento) 12%, var(--tarjeta)); }
+.pregunta.mal .elegida { opacity: 1 !important; border-color: var(--rojo); color: var(--rojo); background: color-mix(in srgb, var(--rojo) 10%, var(--tarjeta)); }
+.pregunta .opciones button code { background: none; padding: 0; }
+.pregunta textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--borde-fuerte); background: var(--fondo-2); color: var(--texto); font: 0.95rem/1.5 var(--sans); resize: vertical; }
+.pregunta .comparar { margin-top: 8px; }
+.pregunta .comparar:disabled { opacity: 0.5; cursor: default; }
+.modelo { margin: 10px 0 8px; padding: 10px 14px; border-radius: 10px; border-left: 3px solid var(--acento-2); background: var(--fondo-2); font-size: 0.95rem; }
+.autoevaluacion { font-size: 0.88rem; margin: 6px 0; }
+.veredicto { margin: 8px 0 0; font-size: 0.92rem; }
+.pregunta.bien .veredicto { color: var(--acento); }
+.pregunta.mal .veredicto { color: var(--rojo); }
+.pregunta .veredicto code { color: inherit; }
+.practica-final { margin: 12px 0; font-weight: 600; }
+.practica-final.bien { color: var(--acento); }
+.practica-final.mal { color: var(--rojo); }
+.practica-pie .boton { margin: 0 0 12px; }
+#boton-entendido:disabled { opacity: 0.5; cursor: not-allowed; border-color: var(--borde); color: var(--tenue); }

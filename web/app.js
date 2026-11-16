@@ -4,17 +4,21 @@
 //   #/clase/15              → el mapa de una clase (sus partes)
 //   #/clase/15/0/3          → leer la parte 3 del documento 0
 //   #/clase/15/0/todo       → leer la clase entera de corrido
+//   #/progreso              → mi progreso: un bombillo por cada parte
 
 import { CLASES, ETAPAS } from './cursos.js';
-import { leerArchivo, partir, leerProgreso, textoPlano } from './lector.js';
-import { idParte, estaEntendida, marcarEntendida, leerTema, guardarTema } from './guardado.js';
+import { leerArchivo, partir, textoPlano } from './lector.js';
+import { idParte, estaEntendida, marcarEntendida, recienPrendidos, olvidarRecien, exportarProgreso, importarProgreso, leerTema, guardarTema } from './guardado.js';
 import { prepararBuscador } from './buscar.js';
+import { crearPractica } from './practica.js';
 
 const app = document.getElementById('app');
 const migas = document.getElementById('migas');
 const rutaTerminal = document.getElementById('ruta-terminal');
 
-let progreso = {};
+// Cuántas partes (bombillos) tiene cada clase: se cuenta al arrancar.
+const conteo = {};
+const ORDEN = ETAPAS.flatMap((e) => e.clases);
 
 // ---------- utilidades ----------
 
@@ -31,11 +35,36 @@ function etapaDe(num) {
   return ETAPAS.find((e) => e.clases.includes(num));
 }
 
-function estadoClase(num) {
-  return progreso[num] || 'pendiente';
+// Los bombillos prendidos de una clase (en su documento principal).
+function prendidos(num) {
+  let n = 0;
+  for (let i = 1; i <= (conteo[num] || 0); i++) if (estaEntendida(idParte(num, 0, i))) n++;
+  return n;
 }
 
-const ETIQUETA_ESTADO = { hecha: '✓ hecha', actual: '▶ voy aquí', pendiente: '○ pendiente' };
+// El progreso sale SOLO de los bombillos de este navegador: cada persona ve el suyo.
+// "Voy aquí" es la primera clase del mapa que todavía no tiene todos sus bombillos prendidos.
+function claseActual() {
+  return ORDEN.find((n) => !conteo[n] || prendidos(n) < conteo[n]);
+}
+
+function estadoClase(num) {
+  if (conteo[num] && prendidos(num) === conteo[num]) return 'hecha';
+  if (num === claseActual()) return 'actual';
+  return prendidos(num) > 0 ? 'empezada' : 'pendiente';
+}
+
+const ETIQUETA_ESTADO = { hecha: '✓ hecha', actual: '▶ voy aquí', empezada: '◐ empezada', pendiente: '○ pendiente' };
+
+function avisar(texto) {
+  const aviso = document.createElement('a');
+  aviso.className = 'tostada mono';
+  aviso.href = '#/progreso';
+  aviso.innerHTML = texto;
+  document.body.appendChild(aviso);
+  setTimeout(() => aviso.classList.add('saliendo'), 2600);
+  setTimeout(() => aviso.remove(), 3200);
+}
 
 function ponerMigas(lista) {
   migas.innerHTML = lista
@@ -55,7 +84,7 @@ function mostrarError(err) {
 
 // ---------- el Markdown convertido en página ----------
 
-const AVISOS = { '🌎': 'vida-real', '💡': 'idea', '⚠️': 'cuidado', '🎤': 'entrevista', '📌': 'nota' };
+const AVISOS = { '🌎': 'vida-real', '💡': 'idea', '⚠️': 'cuidado', '🎤': 'entrevista', '📌': 'nota', '🎙️': 'profesor', '✋': 'pausa', '🔁': 'repaso' };
 
 function resolver(href, carpeta) {
   const url = new URL(href, `http://x/${carpeta}/`);
@@ -71,7 +100,7 @@ function enlaceInterno(ruta) {
   return null;
 }
 
-function pintarMarkdown(md, carpeta) {
+function pintarMarkdown(md, carpeta, idBase = carpeta) {
   const caja = document.createElement('div');
   caja.className = 'texto';
   caja.innerHTML = window.marked.parse(md);
@@ -84,9 +113,15 @@ function pintarMarkdown(md, carpeta) {
   });
 
   // Los bloques de código: colores, etiqueta del lenguaje y botón de copiar.
+  let practicas = 0;
   caja.querySelectorAll('pre > code').forEach((code) => {
     const pre = code.parentElement;
     const lenguaje = (code.className.match(/language-(\S+)/) || [])[1] || 'texto';
+    // Un bloque ```practica no es código: es un ejercicio interactivo.
+    if (lenguaje === 'practica') {
+      pre.replaceWith(crearPractica(code.textContent, `${idBase}:practica${++practicas}`));
+      return;
+    }
     if (window.hljs && lenguaje !== 'texto') {
       try { window.hljs.highlightElement(code); } catch (e) { /* lenguaje desconocido */ }
     }
@@ -138,7 +173,9 @@ function vistaInicio() {
   ponerMigas([{ texto: 'mapa', href: '#/' }]);
   const total = Object.keys(CLASES).length;
   const hechas = Object.keys(CLASES).filter((n) => estadoClase(n) === 'hecha').length;
-  const actual = Object.keys(CLASES).find((n) => estadoClase(n) === 'actual');
+  const actual = claseActual();
+  const totalBombillos = ORDEN.reduce((s, n) => s + (conteo[n] || 0), 0);
+  const prendidosTodos = ORDEN.reduce((s, n) => s + prendidos(n), 0);
 
   const etapas = ETAPAS.map((e, i) => {
     const listas = e.clases.filter((n) => estadoClase(n) === 'hecha').length;
@@ -170,9 +207,13 @@ function vistaInicio() {
         <span><b>${ETAPAS.length}</b> etapas</span>
         <span><b>${total}</b> clases</span>
         <span><b>${hechas}</b> terminadas</span>
+        <a class="contador-bombillos" href="#/progreso"><span class="bombillo-chico ${prendidosTodos ? 'prendido' : ''}">💡</span><b>${prendidosTodos}</b>/${totalBombillos} bombillos</a>
       </div>
       <div class="barra-progreso" role="progressbar" aria-valuenow="${hechas}" aria-valuemax="${total}"><span style="width:${(hechas / total) * 100}%"></span></div>
-      ${actual ? `<a class="boton-principal" href="#/clase/${actual}">▶ seguir donde quedé: clase ${actual}, ${escapar(CLASES[actual].titulo)}</a>` : ''}
+      <div class="acciones">
+        ${actual ? `<a class="boton-principal" href="#/clase/${actual}">▶ ${prendidosTodos ? 'seguir donde quedé' : 'empezar'}: clase ${actual}, ${escapar(CLASES[actual].titulo)}</a>` : ''}
+        <a class="boton" href="#/progreso">💡 mi progreso</a>
+      </div>
     </section>
     <ol class="camino">${etapas}</ol>
     <p class="mono tenue centro final-camino">// fin del camino: ya puedes explicar todo en una entrevista</p>`;
@@ -371,7 +412,7 @@ async function vistaParte(num, doc, cual) {
     if (intro) hoja.appendChild(pintarMarkdown(intro, c.carpeta));
     partes.forEach((p, k) => {
       hoja.insertAdjacentHTML('beforeend', `<h2 class="titulo-parte"><span class="mono acento">${dos(k + 1)}</span> ${enLinea(p.titulo)}</h2>`);
-      hoja.appendChild(pintarMarkdown(p.md, c.carpeta));
+      hoja.appendChild(pintarMarkdown(p.md, c.carpeta, idParte(num, doc, k + 1)));
     });
     hoja.insertAdjacentHTML('beforeend', `<nav class="pasos"><a class="paso" href="#/clase/${num}/${doc}">← volver al mapa de la clase</a><span></span></nav>`);
   } else if (parte) {
@@ -383,7 +424,7 @@ async function vistaParte(num, doc, cual) {
       hoja.insertAdjacentHTML('beforeend', `<div class="mini-mapa">${parte.sub.map((s, k) =>
         `<a href="#" data-sub="${k}">${/^\d/.test(s) ? '' : `<span class="mono acento">${dos(i)}.${k + 1}</span> `}${enLinea(s)}</a>`).join('')}</div>`);
     }
-    hoja.appendChild(pintarMarkdown(parte.md, c.carpeta));
+    hoja.appendChild(pintarMarkdown(parte.md, c.carpeta, idParte(num, doc, i)));
 
     // El mini mapa salta a cada subtítulo de la parte.
     const subtitulos = hoja.querySelectorAll('.texto h3');
@@ -402,14 +443,110 @@ async function vistaParte(num, doc, cual) {
         ${i > 1 ? `<a class="paso" href="#/clase/${num}/${doc}/${i - 1}">← ${enLinea(partes[i - 2].titulo)}</a>` : `<a class="paso" href="#/clase/${num}/${doc}">← mapa de la clase</a>`}
         ${i < partes.length ? `<a class="paso derecha" href="#/clase/${num}/${doc}/${i + 1}">${enLinea(partes[i].titulo)} →</a>` : `<a class="paso derecha" href="#/clase/${num}/${doc}">terminé: volver al mapa ✓</a>`}
       </nav>`);
-    hoja.querySelector('#boton-entendido').addEventListener('click', (ev) => {
+    // Si la parte tiene prácticas, el bombillo no se prende hasta aprobarlas todas.
+    const botonEntendido = hoja.querySelector('#boton-entendido');
+    const ayuda = botonEntendido.nextElementSibling;
+    const revisarPracticas = () => {
+      const faltan = [...hoja.querySelectorAll('.practica')].filter((x) => !x.classList.contains('aprobada')).length;
+      const bloquear = faltan > 0 && !estaEntendida(id);
+      botonEntendido.disabled = bloquear;
+      ayuda.textContent = bloquear
+        ? `🔒 Primero aprueba ${faltan === 1 ? 'la práctica' : `las ${faltan} prácticas`} de esta parte.`
+        : 'Márcalo solo si lo puedes explicar en voz alta.';
+    };
+    revisarPracticas();
+    hoja.addEventListener('practica-aprobada', revisarPracticas);
+
+    botonEntendido.addEventListener('click', (ev) => {
       const ahora = !estaEntendida(id);
       marcarEntendida(id, ahora);
       ev.currentTarget.classList.toggle('activo', ahora);
       ev.currentTarget.textContent = ahora ? '✓ ya lo entendí' : '¿lo entendiste? márcalo';
       app.querySelector('.indice nav a.activa span').textContent = ahora ? '✓' : dos(i);
+      if (ahora) avisar('💡 se prendió un bombillo <span class="tenue">· ver mi progreso →</span>');
     });
   }
+}
+
+// ---------- pantalla 5: mi progreso (los bombillos) ----------
+
+async function vistaProgreso() {
+  ponerMigas([{ texto: 'mapa', href: '#/' }, { texto: 'mi progreso', corto: 'progreso' }]);
+  const recien = recienPrendidos();
+  const total = ORDEN.reduce((s, n) => s + (conteo[n] || 0), 0);
+  const prendidosTodos = ORDEN.reduce((s, n) => s + prendidos(n), 0);
+  const titulos = {};
+  await Promise.all(ORDEN.map(async (num) => {
+    try { titulos[num] = partir(await leerArchivo(rutaDoc(num))).partes.map((p) => textoPlano(p.titulo)); } catch (e) { titulos[num] = []; }
+  }));
+
+  let orden = 0;
+  const etapas = ETAPAS.map((e, k) => {
+    const filas = e.clases.map((num) => {
+      const bombillos = (titulos[num] || []).map((t, i) => {
+        const id = idParte(num, 0, i + 1);
+        const prendido = estaEntendida(id);
+        const nuevo = prendido && recien.has(id);
+        const espera = nuevo ? `style="--espera:${(orden++) * 220}ms"` : '';
+        return `<a class="bombillo ${prendido ? 'prendido' : ''} ${nuevo ? 'nuevo' : ''}" ${espera}
+          href="#/clase/${num}/0/${i + 1}" title="${escapar(`${dos(i + 1)}. ${t}`)}" aria-label="${escapar(`Parte ${i + 1}: ${t}, ${prendido ? 'entendida' : 'pendiente'}`)}">💡</a>`;
+      }).join('');
+      const est = estadoClase(num);
+      return `<div class="fila-bombillos ${est}">
+        <a class="fila-clase" href="#/clase/${num}"><span class="mono acento">${num}</span> ${escapar(CLASES[num].titulo)}</a>
+        <span class="bombillos">${bombillos}</span>
+        <span class="mono tenue cuenta">${prendidos(num)}/${conteo[num] || 0}</span>
+      </div>`;
+    }).join('');
+    const pe = e.clases.reduce((s, n) => s + prendidos(n), 0);
+    const te = e.clases.reduce((s, n) => s + (conteo[n] || 0), 0);
+    return `<section class="etapa-progreso">
+      <h2 class="mono"><span class="emoji">${e.icono}</span> ${dos(k + 1)} · ${escapar(e.titulo)} <span class="tenue">${pe}/${te}</span></h2>
+      ${filas}
+    </section>`;
+  }).join('');
+
+  app.innerHTML = `
+    <section class="cabeza">
+      <p class="mono comentario">// mi progreso · se guarda solo en este navegador</p>
+      <h1 class="titulo-medio">💡 Mi progreso</h1>
+      <p class="bajada">Cada bombillo es una parte de una clase. Se prende cuando, al terminar de leerla,
+        tocas <b>"¿lo entendiste? márcalo"</b>. Toca un bombillo para ir a esa parte.</p>
+      <div class="gran-cuenta mono"><b>${prendidosTodos}</b> de ${total} bombillos prendidos
+        ${recien.size ? `<span class="insignia actual">+${recien.size} desde la última vez</span>` : ''}</div>
+      <div class="barra-progreso ancha"><span style="width:${total ? (prendidosTodos / total) * 100 : 0}%"></span></div>
+    </section>
+    ${etapas}
+    <details class="intro llevar">
+      <summary class="mono">// llevar mi progreso a otro aparato (de la Mac al iPad, por ejemplo)</summary>
+      <div class="texto">
+        <p>Tu progreso vive en este navegador. Nadie más lo ve ni lo puede cambiar, y si otra persona estudia aquí,
+          ve el suyo. Para pasarlo a otro aparato: copia este código, abre el mapa en el otro aparato,
+          y pégalo abajo.</p>
+        <div class="fila-codigo"><input class="mono" id="codigo-progreso" readonly value="${exportarProgreso()}">
+          <button class="boton" id="copiar-progreso" type="button">copiar</button></div>
+        <div class="fila-codigo"><input class="mono" id="pegar-progreso" placeholder="pega aquí el código del otro aparato">
+          <button class="boton" id="cargar-progreso" type="button">cargar</button></div>
+        <p class="tenue" id="mensaje-progreso"></p>
+      </div>
+    </details>`;
+
+  app.querySelector('#copiar-progreso').addEventListener('click', async (ev) => {
+    try { await navigator.clipboard.writeText(app.querySelector('#codigo-progreso').value); ev.currentTarget.textContent = '✓ copiado'; }
+    catch (e) { app.querySelector('#codigo-progreso').select(); }
+  });
+  app.querySelector('#cargar-progreso').addEventListener('click', () => {
+    const msg = app.querySelector('#mensaje-progreso');
+    try {
+      const n = importarProgreso(app.querySelector('#pegar-progreso').value);
+      msg.textContent = `✓ listo: se cargaron ${n} bombillos.`;
+      setTimeout(dibujar, 900);
+    } catch (e) {
+      msg.textContent = '✗ ese código no sirve. Cópialo completo otra vez.';
+    }
+  });
+  // Ya los viste prenderse: la próxima vez no se animan de nuevo.
+  olvidarRecien();
 }
 
 // ---------- el que decide qué pantalla mostrar ----------
@@ -417,7 +554,8 @@ async function vistaParte(num, doc, cual) {
 async function dibujar() {
   const partesRuta = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
   try {
-    if (partesRuta[0] === 'etapa') await vistaEtapa(partesRuta[1]);
+    if (partesRuta[0] === 'progreso') await vistaProgreso();
+    else if (partesRuta[0] === 'etapa') await vistaEtapa(partesRuta[1]);
     else if (partesRuta[0] === 'clase' && partesRuta[3]) await vistaParte(partesRuta[1], +partesRuta[2] || 0, partesRuta[3]);
     else if (partesRuta[0] === 'clase') await vistaClase(partesRuta[1], +partesRuta[2] || 0);
     else vistaInicio();
@@ -442,7 +580,9 @@ if (!leerTema()) document.documentElement.dataset.theme = 'dark';
 // ---------- arranque ----------
 
 async function empezar() {
-  try { progreso = leerProgreso(await leerArchivo('PROGRESO.md')); } catch (e) { progreso = {}; }
+  await Promise.all(ORDEN.map(async (num) => {
+    try { conteo[num] = partir(await leerArchivo(rutaDoc(num))).partes.length; } catch (e) { conteo[num] = 0; }
+  }));
   prepararBuscador();
   window.addEventListener('hashchange', dibujar);
   dibujar();

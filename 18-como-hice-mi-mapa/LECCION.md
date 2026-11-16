@@ -16,7 +16,7 @@ Las clases ya existían como archivos `LECCION.md`. La página **no copia** ese 
 - Las clases se pueden seguir leyendo en GitHub, en VS Code o con cualquier IA, como antes.
 - La página es solo **una forma de mirar** los mismos archivos: como mapa.
 
-A esto se le llama **una sola fuente de verdad** (*single source of truth*). El progreso funciona igual: la página lee `PROGRESO.md` para saber qué clases terminaste y en cuál vas.
+A esto se le llama **una sola fuente de verdad** (*single source of truth*).
 
 **Preguntas**
 1. Si cambias un ejemplo en `06-git/LECCION.md`, ¿qué tienes que hacer para que se vea en la página?
@@ -30,7 +30,7 @@ A esto se le llama **una sola fuente de verdad** (*single source of truth*). El 
 Aprender/
 ├── index.html          la única página: la barra, el buscador y la caja donde se dibuja todo
 ├── .nojekyll           un archivo vacío para GitHub Pages (ver parte 9)
-├── PROGRESO.md         de aquí sale qué clases están hechas
+├── PROGRESO.md         el diario para la IA que enseña (la página no lo lee)
 ├── 01-leer-codigo/LECCION.md
 ├── …                   las clases, como siempre
 └── web/
@@ -61,6 +61,7 @@ La página tiene cuatro pantallas, pero es **un solo archivo HTML**. Lo que camb
 | `#/clase/15` | El mapa de una clase: sus partes (cada `##` del `.md`) |
 | `#/clase/15/0/3` | Leer la parte 3 del documento 0 de la clase 15 |
 | `#/clase/15/0/todo` | Leer la clase entera de corrido |
+| `#/progreso` | Mi progreso: los bombillos |
 
 Cuando cambia lo de después del `#`, el navegador **no recarga la página**: solo avisa con el evento `hashchange`. `app.js` escucha ese evento, mira la dirección y dibuja la pantalla que toca:
 
@@ -151,6 +152,19 @@ app.innerHTML = `<ol class="camino">${paradas}</ol>`;
 | Un bloque de código | Lo colorea con **highlight.js**, le pone la barra de "editor" con los tres puntitos, el lenguaje y el botón **copiar** |
 | Una tabla | La envuelve para que en el celular se deslice de lado |
 | Un enlace a otra lección (`../06-git/LECCION.md`) | Lo cambia para que abra **dentro del mapa** |
+| Un bloque de código con el lenguaje `practica` | **No** lo muestra como código: lo convierte en una **práctica interactiva** (`web/practica.js`) |
+
+**Las prácticas.** Dentro de un bloque ` ```practica `, cada línea es una pregunta, con los campos separados por ` :: `:
+
+```text
+vf :: `'Uber'` es un `string` :: V :: Tiene comillas: es texto.
+elige :: ¿De qué tipo es `45`? :: string :: *number :: boolean :: → Sin comillas es un número.
+escribe :: ¿Qué es un `boolean`? :: Un dato que solo puede ser true o false.
+```
+
+- `vf` es verdadero o falso; `elige` tiene varias opciones y la correcta lleva `*`; `escribe` te deja responder con tus palabras y después comparar con la respuesta modelo.
+- **Para aprobar hay que acertar todas en el mismo intento.** Si fallas una, ves la explicación y repites el bloque entero, en otro orden (para que no lo hagas de memoria).
+- Mientras la práctica de una parte no esté aprobada, el botón del bombillo de esa parte queda **bloqueado** 🔒.
 
 > 💡 **Idea:** gracias a esto, en tus `.md` puedes escribir `> 💡 **Idea:** ...` o `> ⚠️ **Cuidado:** ...` y en la página aparecen como tarjetas amarillas o rojas, sin tocar código.
 
@@ -218,28 +232,37 @@ En internet, el servidor es **GitHub Pages** (parte 9).
 13. ¿Qué tienes que cambiar para que el acento sea morado en el tema oscuro?
 14. ¿Por qué el código usa una letra distinta a los párrafos?
 
-## 8. El progreso: de dos fuentes
+## 8. El progreso: los bombillos de cada persona
 
-> 🌎 **En la vida real:** tienes **la libreta oficial** de la escuela (con las materias aprobadas) y **tu cuaderno** con tus marcas de "esto ya lo entendí". La libreta la ve todo el mundo; el cuaderno, solo tú.
+> 🌎 **En la vida real:** en una biblioteca, el libro es de todos, pero **tu marcapáginas es tuyo**. Si otra persona lee el mismo libro, usa su propio marcapáginas: no mueve el tuyo. Cada parte que entiendes prende **un bombillo** en tu marcapáginas.
 
-| Qué | De dónde sale | Quién lo ve |
-|---|---|---|
-| Clases **hechas** y **en cuál voy** | `PROGRESO.md` (las líneas `- [x] 01` y la flecha "← voy aquí") | Todos, en todos los aparatos, porque está en GitHub |
-| Partes que **marqué como entendidas** | `localStorage` del navegador (`guardado.js`) | Solo en ese navegador |
+Cada parte de cada clase es **un bombillo**. Se prende cuando, al terminar de leer la parte, tocas **"¿lo entendiste? márcalo"**. La pantalla **💡 Mi progreso** (`#/progreso`) muestra todos los bombillos, etapa por etapa. Los que se prendieron desde tu última visita **se encienden con una animación** al entrar.
 
-`leerProgreso` en `lector.js` busca en `PROGRESO.md` las líneas con este formato:
+**¿Dónde se guardan?** En el `localStorage` **de tu navegador** (`web/guardado.js`, Tema 17 parte 8). Eso tiene tres consecuencias:
+
+| Pregunta | Respuesta |
+|---|---|
+| Si otra persona estudia en la página publicada, ¿cambia mi progreso? | **No.** Sus bombillos quedan en **su** navegador. Ella ve los suyos y tú los tuyos. |
+| ¿La página sabe quién soy? | No. No hay usuarios ni contraseñas: cada navegador es "una persona". |
+| Si estudio en la Mac, ¿lo veo en el iPad? | No automáticamente. En **Mi progreso** hay un **código** para copiar en la Mac y pegar en el iPad. |
+
+**"Voy aquí"** se calcula solo: es la primera clase, en el orden del mapa, que todavía tiene bombillos apagados. Y una clase sale **✓ hecha** cuando tiene todos sus bombillos prendidos.
 
 ```js
-const m = l.match(/^- \[( |x)\] (\d\d)/i);   // "- [x] 06 Git" → hecha; "- [ ] 01 … ← voy aquí" → actual
+function claseActual() {
+  return ORDEN.find((n) => !conteo[n] || prendidos(n) < conteo[n]);
+}
 ```
 
-Así, cuando la IA que te enseña actualiza `PROGRESO.md` al final de una clase (como dice `AGENTS.md`), **el mapa se actualiza solo**: aparece el ✓ y el "▶ voy aquí" se mueve.
+El id de cada bombillo usa **el nombre del archivo**, no su posición: `"15:LECCION.md:3"` es la parte 3 de la lección 15. Así, si a una clase se le agrega una pestaña nueva, los bombillos no se mueven.
 
-> ⚠️ **Cuidado:** si borras los datos del navegador, pierdes las marcas de "entendido" (no el progreso oficial, que está en `PROGRESO.md`).
+> 📌 **Nota:** `PROGRESO.md` sigue existiendo, pero ya **no** lo lee la página: es el diario para la IA que te enseña (qué hiciste, qué te costó, el próximo ejercicio). Si la página lo leyera, cualquiera que la abriera vería **tu** "voy aquí" como si fuera suyo.
+
+> ⚠️ **Cuidado:** si borras los datos del navegador, se apagan los bombillos de ese navegador. Guarda tu código de progreso de vez en cuando.
 
 **Preguntas**
-15. Terminas la clase 01 y la IA marca `- [x] 01` en `PROGRESO.md` y lo sube. ¿Qué cambia en el mapa?
-16. ¿Por qué tus marcas de "entendido" no aparecen en el iPad?
+15. Una persona en otro país estudia hasta la parte 5 en tu página publicada. Tú vas por la parte 2. ¿Qué ves tú?
+16. ¿Por qué tus bombillos de la Mac no aparecen solos en el iPad? ¿Cómo los pasas?
 
 ## 9. Publicar en GitHub Pages
 
@@ -317,8 +340,8 @@ Es igual que con **¿Qué dice la Biblia?** (Tema 12, parte 9): GitHub Pages sir
 12. "Esta misma computadora".
 13. El valor de `--acento` en `:root`.
 14. La monoespaciada alinea el código y distingue letras parecidas; la otra se lee más cómodo en párrafos largos.
-15. La clase 01 aparece con ✓ y el punto de su etapa se pone verde; el "▶ voy aquí" pasa a la clase siguiente que tenga la flecha.
-16. Porque `localStorage` es de cada navegador, en cada aparato.
+15. Tus bombillos: la parte 1 prendida y el "voy aquí" en tu clase. Lo de esa persona queda en su navegador.
+16. Porque `localStorage` es de cada navegador, en cada aparato. Se pasan con el código de **Mi progreso**: copiar en uno, pegar en el otro.
 17. Jekyll convertiría los `.md` en HTML y el mapa no podría leer las lecciones crudas.
 18. Porque con la cuenta gratis GitHub Pages solo publica repositorios públicos, y `estudios` es privado.
 19. Agregarla en `web/cursos.js`: en `CLASES` y en su etapa.

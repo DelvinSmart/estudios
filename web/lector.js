@@ -83,15 +83,3 @@ export function partir(md) {
     }),
   };
 }
-
-// Lee PROGRESO.md: qué clases están hechas y en cuál voy.
-export function leerProgreso(md) {
-  const estado = {};
-  for (const l of md.split('\n')) {
-    const m = l.match(/^- \[( |x)\] (\d\d)/i);
-    if (!m) continue;
-    if (m[1].toLowerCase() === 'x') estado[m[2]] = 'hecha';
-    else if (/voy aquí/i.test(l)) estado[m[2]] = 'actual';
-  }
-  return estado;
-}
