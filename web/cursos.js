@@ -42,6 +42,14 @@ export const CLASES = {
   '19': { carpeta: '19-agentes-de-ia', titulo: 'Agentes de IA', meta: 'Los patrones para diseñar, medir y publicar agentes', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
 };
 
+// El dibujo de cada clase en el mapa de islas.
+const ICONOS = {
+  '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
+  '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦',
+  '21': '🎓', '22': '🔐', '23': '🕵️', '24': '🛡️',
+};
+for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
+
 // Las clases que ya tienen su clase guiada (CLASE-GUIADA.md): va primero,
 // y la lección queda como "Resumen" para repasar.
 const GUIADAS = ['01', '02', '03', '04', '05', '06', '07', '15', '16', '17', '08', '09', '10', '11', '12', '13', '14', '18', '20'];

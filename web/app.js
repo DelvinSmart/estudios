@@ -16,6 +16,7 @@ import { idParte, estaEntendida, marcarEntendida, recienPrendidos, olvidarRecien
 import { prepararBuscador } from './buscar.js';
 import { crearPractica } from './practica.js';
 import * as nube from './nube.js';
+import { htmlMapa, htmlProgreso, activarMapas } from './mapa-islas.js';
 
 const app = document.getElementById('app');
 const migas = document.getElementById('migas');
@@ -187,28 +188,35 @@ function vistaInicio() {
   const totalBombillos = ORDEN.reduce((s, n) => s + (conteo[n] || 0), 0);
   const prendidosTodos = ORDEN.reduce((s, n) => s + prendidos(n), 0);
 
-  const etapas = ETAPAS.map((e, i) => {
-    const listas = e.clases.filter((n) => estadoClase(n) === 'hecha').length;
-    const puntos = e.clases.map((n) => `<i class="punto ${estadoClase(n)}" title="${dos(n)} ${escapar(CLASES[n].titulo)}"></i>`).join('');
-    const tieneActual = e.clases.includes(actual);
-    return `
-      <li class="parada ${tieneActual ? 'aqui' : ''}" style="--i:${i}">
-        <a class="nodo nodo-grande" href="#/etapa/${e.id}">
-          <span class="nodo-num">${dos(i + 1)}</span>
-          <span class="nodo-cuerpo">
-            <span class="nodo-titulo"><span class="emoji">${e.icono}</span> ${escapar(e.titulo)}</span>
-            <span class="nodo-desc">${escapar(e.desc)}</span>
-            <span class="nodo-pie"><span class="puntos-clases">${puntos}</span>
-              <span class="mono tenue">${listas}/${e.clases.length} clases</span>
-              ${tieneActual ? '<span class="insignia actual">▶ voy aquí</span>' : ''}</span>
-          </span>
-          <span class="flecha">→</span>
-        </a>
-      </li>`;
+  // Un mapa por curso: el de programación (sus etapas) y el de seguridad (sus clases).
+  let numEtapa = 0;
+  const mapas = Object.values(CURSOS).map((curso) => {
+    const etapas = ETAPAS.filter((e) => cursoDeEtapa(e) === curso.id);
+    const clases = ordenDe(curso.id);
+    const listas = clases.filter((n) => estadoClase(n) === 'hecha').length;
+    const ruta = curso.id === 'programacion' ? '#/certificado' : `#/certificado/${curso.id}`;
+    const final = {
+      titulo: listas === clases.length ? '¡Completaste el curso!' : 'La meta',
+      texto: listas === clases.length ? '🎓 ver mi certificado' : `Al final: tu certificado verificable de ${escapar(curso.corto.toLowerCase())}.`,
+      hecho: listas === clases.length, href: ruta,
+    };
+    // Si el curso tiene una sola etapa, el mapa muestra directo sus clases.
+    const paradas = etapas.length === 1 ? paradasDeClases(etapas[0]) : etapas.map((e) => {
+      numEtapa += 1;
+      const hechasE = e.clases.filter((n) => estadoClase(n) === 'hecha').length;
+      const estado = hechasE === e.clases.length ? 'hecha' : e.clases.includes(actual) ? 'actual' : hechasE || e.clases.some((n) => prendidos(n)) ? 'empezada' : 'pendiente';
+      return {
+        num: dos(numEtapa), titulo: escapar(e.titulo), desc: escapar(e.desc), href: `#/etapa/${e.id}`, estado, icono: e.icono,
+        pie: `<span class="avance">${hechasE}/${e.clases.length} clases</span>${estado === 'actual' ? '<span class="insignia actual">▶ voy aquí</span>' : ''}`,
+      };
+    });
+    if (etapas.length === 1) numEtapa += 1;
+    const cabeza = curso.id === 'programacion' ? '' : `<h2 class="titulo-mapa-curso"><span class="emoji">${etapas[0].icono}</span> Curso aparte: ${escapar(curso.corto)} <span class="mono tenue">· con su propio certificado</span></h2>`;
+    return `${cabeza}${htmlMapa({ paradas, final })}`;
   }).join('');
 
   app.innerHTML = `
-    <section class="portada">
+    <section class="portada cabeza-mapa"><div>
       <p class="mono comentario">// mi carrera de programación</p>
       <h1 class="titulo-grande">Mapa de <span class="acento">estudios</span></h1>
       <p class="bajada">Primero los fundamentos, después la web, los datos y la arquitectura.
@@ -219,15 +227,36 @@ function vistaInicio() {
         <span><b>${hechas}</b> terminadas</span>
         <a class="contador-bombillos" href="#/progreso"><span class="bombillo-chico ${prendidosTodos ? 'prendido' : ''}">💡</span><b>${prendidosTodos}</b>/${totalBombillos} bombillos</a>
       </div>
-      <div class="barra-progreso" role="progressbar" aria-valuenow="${hechas}" aria-valuemax="${total}"><span style="width:${(hechas / total) * 100}%"></span></div>
       <div class="acciones">
         ${actual ? `<a class="boton-principal" href="#/clase/${actual}">▶ ${prendidosTodos ? 'seguir donde quedé' : 'empezar'}: clase ${actual}, ${escapar(CLASES[actual].titulo)}</a>` : ''}
         <a class="boton" href="#/progreso">💡 mi progreso</a>
-      </div>
+      </div></div>
+      ${htmlProgreso(`${hechas} de ${total} clases`, hechas / total)}
     </section>
-    <ol class="camino">${etapas}</ol>
-    <p class="mono tenue centro final-camino">// fin del camino: ya puedes explicar todo en una entrevista</p>
-    <p class="centro"><a class="boton" href="#/certificado">🎓 certificado de finalización</a></p>`;
+    ${mapas}`;
+  activarMapas(app);
+}
+
+function navegarEtapas(n) {
+  const antes = ETAPAS[n - 2];
+  const despues = ETAPAS[n];
+  return `<nav class="pasos">
+    ${antes ? `<a class="paso" href="#/etapa/${antes.id}">← ${escapar(antes.titulo)}</a>` : '<span></span>'}
+    ${despues ? `<a class="paso derecha" href="#/etapa/${despues.id}">${escapar(despues.titulo)} →</a>` : '<span></span>'}
+  </nav>`;
+}
+
+// Las clases de una etapa, como paradas del mapa de islas.
+function paradasDeClases(etapa) {
+  return etapa.clases.map((num) => {
+    const est = estadoClase(num);
+    const total = conteo[num] || 0;
+    return {
+      num, titulo: escapar(CLASES[num].titulo), desc: escapar(CLASES[num].meta), href: `#/clase/${num}`,
+      estado: est, icono: CLASES[num].icono || '📘',
+      pie: `<span class="avance">${prendidos(num)}/${total} partes</span>${est === 'actual' ? '<span class="insignia actual">▶ voy aquí</span>' : ''}`,
+    };
+  });
 }
 
 // ---------- pantalla 2: el mapa de una etapa ----------
@@ -238,53 +267,22 @@ async function vistaEtapa(id) {
   const n = ETAPAS.indexOf(etapa) + 1;
   ponerMigas([{ texto: 'mapa', href: '#/' }, { texto: `${dos(n)} ${escapar(etapa.titulo)}`, corto: etapa.id }]);
 
-  const paradas = etapa.clases.map((num, i) => {
-    const c = CLASES[num];
-    const est = estadoClase(num);
-    return `
-      <li class="parada" style="--i:${i}">
-        <a class="nodo" href="#/clase/${num}">
-          <span class="nodo-num">${num}</span>
-          <span class="nodo-cuerpo">
-            <span class="nodo-titulo">${escapar(c.titulo)}</span>
-            <span class="nodo-desc">${escapar(c.meta)}</span>
-            <span class="nodo-pie"><span class="insignia ${est}">${ETIQUETA_ESTADO[est]}</span>
-              <span class="mono tenue" data-partes="${num}">…</span></span>
-          </span>
-          <span class="flecha">→</span>
-        </a>
-      </li>`;
-  }).join('');
+  const hechas = etapa.clases.filter((num) => estadoClase(num) === 'hecha').length;
+  const siguiente = ETAPAS[n];
+  const final = siguiente && cursoDeEtapa(siguiente) === cursoDeEtapa(etapa)
+    ? { titulo: hechas === etapa.clases.length ? '¡Etapa completa!' : 'Fin de la etapa', texto: `Sigue: ${escapar(siguiente.titulo)} →`, hecho: hechas === etapa.clases.length, href: `#/etapa/${siguiente.id}` }
+    : { titulo: hechas === etapa.clases.length ? '¡Completaste el curso!' : 'La meta', texto: '🎓 el certificado', hecho: hechas === etapa.clases.length, href: cursoDeEtapa(etapa) === 'programacion' ? '#/certificado' : `#/certificado/${cursoDeEtapa(etapa)}` };
 
   app.innerHTML = `
-    <section class="cabeza">
+    <section class="cabeza cabeza-mapa"><div>
       <p class="mono comentario">// etapa ${dos(n)} de ${ETAPAS.length}</p>
       <h1 class="titulo-medio"><span class="emoji">${etapa.icono}</span> ${escapar(etapa.titulo)}</h1>
-      <p class="bajada">${escapar(etapa.desc)}</p>
+      <p class="bajada">${escapar(etapa.desc)}</p></div>
+      ${htmlProgreso(`${hechas} de ${etapa.clases.length} clases`, hechas / etapa.clases.length)}
     </section>
-    <ol class="camino">${paradas}</ol>
+    ${htmlMapa({ paradas: paradasDeClases(etapa), final })}
     ${navegarEtapas(n)}`;
-
-  // Cuántas partes tiene cada clase (se lee de su LECCION.md).
-  etapa.clases.forEach(async (num) => {
-    const casilla = app.querySelector(`[data-partes="${num}"]`);
-    try {
-      const { partes } = partir(await leerArchivo(rutaDoc(num)));
-      const listas = partes.filter((_, i) => estaEntendida(idParte(num, 0, i + 1))).length;
-      if (casilla) casilla.textContent = `${partes.length} partes · ${listas} entendidas`;
-    } catch (e) {
-      if (casilla) casilla.textContent = 'todavía no existe';
-    }
-  });
-}
-
-function navegarEtapas(n) {
-  const antes = ETAPAS[n - 2];
-  const despues = ETAPAS[n];
-  return `<nav class="pasos">
-    ${antes ? `<a class="paso" href="#/etapa/${antes.id}">← ${escapar(antes.titulo)}</a>` : '<span></span>'}
-    ${despues ? `<a class="paso derecha" href="#/etapa/${despues.id}">${escapar(despues.titulo)} →</a>` : '<span></span>'}
-  </nav>`;
+  activarMapas(app);
 }
 
 // ---------- pantalla 3: el mapa de una clase ----------
@@ -310,30 +308,29 @@ async function vistaClase(num, doc) {
       `<a role="tab" class="pestana ${i === doc ? 'activa' : ''}" href="#/clase/${num}/${i}">${escapar(d.titulo)}</a>`).join('')}</div>`
     : '';
 
+  const enCurso = primeraPendiente(num, doc, partes.length);
   const paradas = partes.map((p, i) => {
-    const id = idParte(num, doc, i + 1);
-    const hecha = estaEntendida(id);
-    const subs = p.sub.length
-      ? `<span class="subs">${p.sub.slice(0, 8).map((s) => `<span class="sub">${enLinea(s)}</span>`).join('')}${p.sub.length > 8 ? `<span class="sub tenue">+${p.sub.length - 8}</span>` : ''}</span>`
-      : '';
+    const hecha = estaEntendida(idParte(num, doc, i + 1));
     const marcas = [
-      p.tieneEjemplo ? '<span title="tiene ejemplo de la vida real">🌎</span>' : '',
-      p.tieneCodigo ? '<span class="mono" title="tiene código">&lt;/&gt;</span>' : '',
+      p.tieneEjemplo ? '<span title="tiene ejemplos de la vida real">🌎 ejemplos</span>' : '',
+      p.tieneCodigo ? '<span title="tiene código">&lt;/&gt; código</span>' : '',
     ].join('');
-    return `
-      <li class="parada ${hecha ? 'lista' : ''}" style="--i:${Math.min(i, 12)}">
-        <a class="nodo" href="#/clase/${num}/${doc}/${i + 1}">
-          <span class="nodo-num">${hecha ? '✓' : dos(i + 1)}</span>
-          <span class="nodo-cuerpo">
-            <span class="nodo-titulo">${enLinea(p.titulo)}</span>
-            ${p.resumen ? `<span class="nodo-desc">${escapar(p.resumen)}</span>` : ''}
-            ${subs}
-            <span class="nodo-pie marcas">${marcas}</span>
-          </span>
-          <span class="flecha">→</span>
-        </a>
-      </li>`;
-  }).join('');
+    return {
+      num: dos(i + 1), titulo: enLinea(p.titulo), desc: p.resumen ? escapar(p.resumen) : '',
+      extra: p.sub.length ? `<ul class="isla-subs">${p.sub.map((t) => `<li>${enLinea(t)}</li>`).join('')}</ul>` : '',
+      href: `#/clase/${num}/${doc}/${i + 1}`,
+      estado: hecha ? 'hecha' : i + 1 === enCurso ? 'actual' : 'pendiente',
+      icono: hecha ? '💡' : '<span class="bombillo-apagado">💡</span>',
+      pie: `${marcas}${!hecha && i + 1 === enCurso ? '<span class="insignia actual">▶ sigue aquí</span>' : ''}`,
+    };
+  });
+  const siguienteClase = ORDEN[ORDEN.indexOf(num) + 1];
+  const final = {
+    titulo: listas === partes.length && partes.length ? '¡Clase completa!' : 'Fin de la clase',
+    texto: siguienteClase && cursoDeClase(siguienteClase) === cursoDeClase(num) ? `Sigue: clase ${siguienteClase}, ${escapar(CLASES[siguienteClase].titulo)} →` : '🎓 el certificado del curso',
+    hecho: listas === partes.length && partes.length > 0,
+    href: siguienteClase && cursoDeClase(siguienteClase) === cursoDeClase(num) ? `#/clase/${siguienteClase}` : (cursoDeClase(num) === 'programacion' ? '#/certificado' : `#/certificado/${cursoDeClase(num)}`),
+  };
 
   const est = estadoClase(num);
   app.innerHTML = `
@@ -352,8 +349,9 @@ async function vistaClase(num, doc) {
       </div>
     </section>
     <div id="intro"></div>
-    <ol class="camino camino-partes">${paradas}</ol>
+    ${htmlMapa({ paradas, final, clase: 'mapa-partes' })}
     ${navegarClases(num)}`;
+  activarMapas(app);
 
   if (intro) {
     const det = document.createElement('details');
@@ -429,6 +427,14 @@ async function vistaParte(num, doc, cual) {
   } else if (parte) {
     const id = idParte(num, doc, i);
     hoja.insertAdjacentHTML('beforeend', `
+      <nav class="pasos pasos-arriba">
+        <a class="paso" href="#/clase/${num}/${doc}">← volver al mapa de la clase</a>
+        <span class="mono tenue">
+          ${i > 1 ? `<a href="#/clase/${num}/${doc}/${i - 1}">‹ anterior</a>` : ''}
+          ${i > 1 && i < partes.length ? ' · ' : ''}
+          ${i < partes.length ? `<a href="#/clase/${num}/${doc}/${i + 1}">siguiente ›</a>` : ''}
+        </span>
+      </nav>
       <p class="mono comentario">// parte ${dos(i)} de ${dos(partes.length)}</p>
       <h1 class="titulo-parte grande">${enLinea(parte.titulo)}</h1>`);
     if (parte.sub.length > 1) {
