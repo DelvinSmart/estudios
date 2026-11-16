@@ -12,6 +12,8 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🎙️ **El profesor:** Delvin, hay cuatro palabras que suenan todas a "mandar la app a algún lado": **compilar**, **commit**, **push** y **deploy**. Se confunden muchísimo. Si las separas bien, todo lo demás de esta clase se ordena solo.
 
+> 🌎 **Otro ejemplo:** En una panadería: hornear el pan (compilar), anotar en la libreta qué horneaste (commit), mandar la libreta a la oficina (push) y llevar el pan a la tienda (deploy).
+
 | Palabra | Qué hace | Dónde queda | 🌎 En la vida real |
 |---|---|---|---|
 | **Compilar** | **Traduce** el código a algo que el teléfono entiende | Un archivo en tu Mac (`.apk`, `.aab`, `.app`) | Traducir una receta escrita a mano a un libro impreso |
@@ -24,6 +26,10 @@ Dos frases para no olvidar:
 - **Compilar no es entregar.** Compilar te deja un archivo; el deploy es llevarlo a su lugar.
 
 ### "Subir" a dónde: el mapa completo
+
+> 🌎 **En la vida real:** Es como los distintos destinos de un repartidor: la oficina (GitHub), la vidriera (Pages), la central (Firebase), tu casa para probar (tus teléfonos) y todas las tiendas del país (Google Play).
+
+> 🌎 **Otro ejemplo:** Es como mandar cosas por correo: una carta, un paquete, un giro de dinero y una encomienda grande van por ventanillas distintas, aunque todo sea "mandar".
 
 En tu vida de programador, "subir" puede querer decir cinco cosas distintas:
 
@@ -59,6 +65,10 @@ vf :: Commit sin push queda guardado solo en tu Mac
 
 > 🎙️ **El profesor:** esto ya lo estudiaste a fondo en el Tema 06. Aquí va la versión de todos los días, y los tres errores que más te van a salir.
 
+> 🌎 **En la vida real:** Es como guardar tus fotos del teléfono en la nube: primero ves cuáles son nuevas, eliges, les pones nombre al álbum y las subes.
+
+> 🌎 **Otro ejemplo:** Es como entregar un informe al jefe: primero lees si hay correcciones nuevas, haces lo tuyo, revisas, firmas y lo entregas.
+
 ### El ciclo de siempre
 
 ```bash
@@ -86,7 +96,13 @@ El nombre del commit dice **qué cambió y por qué** (Tema 06, parte 5), no "ca
 
 > 🌎 **En la vida real:** mirar qué hay en la mesa, elegir las fotos, pegarlas en el álbum con una nota, y mandar el álbum a la oficina.
 
+> 🌎 **Otro ejemplo:** Como entrar a una oficina compartida: primero miras qué dejaron los demás en tu escritorio (pull), después trabajas, revisas, firmas y lo dejas en la bandeja de salida.
+
 ### Los tres errores de push más comunes
+
+> 🌎 **En la vida real:** Es como un buzón lleno: si alguien ya dejó una carta antes, primero sacas la suya y después pones la tuya encima.
+
+> 🌎 **Otro ejemplo:** Es como volver a una reunión que siguió sin ti: primero te pones al día y después hablas.
 
 | Lo que dice | Qué pasó | Qué hacer |
 |---|---|---|
@@ -98,6 +114,10 @@ El nombre del commit dice **qué cambió y por qué** (Tema 06, parte 5), no "ca
 `git pull --rebase` = "baja lo que subieron los demás y pon mis commits **encima**, como si los hubiera hecho después". Así la historia queda recta y el push ya entra.
 
 ### ¿Está todo subido?
+
+> 🌎 **En la vida real:** Es como revisar la bandeja de salida del correo: si está vacía, todo se mandó.
+
+> 🌎 **Otro ejemplo:** Es como mirar la app del banco y ver "sin movimientos pendientes": todo está acreditado.
 
 `git status` siempre lo dice. Si muestra **`nothing to commit, working tree clean`** y **`Your branch is up to date with 'origin/main'`**, no hay nada sin guardar ni sin subir.
 
@@ -121,7 +141,15 @@ vf :: Antes de `git add -A` conviene mirar `git status`
 
 > 🎙️ **El profesor:** tus dos páginas viven en **GitHub Pages**, gratis y sin servidor propio. Pero se publican un poco distinto. Veamos las dos.
 
+> 🌎 **En la vida real:** Es como tener tus páginas en una vidriera que da a la calle, gratis, y que se renueva sola cada vez que cambias la mercadería.
+
+> 🌎 **Otro ejemplo:** Es como un tablero de anuncios público: lo que pegas en tu carpeta aparece en el tablero para que lo vea cualquiera.
+
 ### Tu página de estudios bíblicos (`que-dice-la-biblia`)
+
+> 🌎 **En la vida real:** Es como un diario con dos formas de mandar notas a la imprenta: por la app del celular (el panel) o entregando el papel en persona (git push). Las dos terminan impresas igual.
+
+> 🌎 **Otro ejemplo:** Es como hacer un pedido en un restaurante: desde la app o hablando con el mozo; los dos llegan a la misma cocina.
 
 Hay **dos caminos** para que un cambio llegue a internet, y los dos terminan igual:
 
@@ -138,6 +166,10 @@ cambio en GitHub ──► GitHub Actions: arma el sitio, crea la lista de estud
 ```
 
 ### Antes de subir código: pruébalo en tu Mac
+
+> 🌎 **En la vida real:** Es como probarte la ropa en el probador antes de pagar: si no te queda, la cambias antes de salir de la tienda.
+
+> 🌎 **Otro ejemplo:** Es como probar el pastel antes de llevarlo a la fiesta: si le falta azúcar, lo arreglas en casa.
 
 En la página de estudios, antes del push, arma el sitio tú mismo:
 
@@ -156,6 +188,10 @@ Abre `http://localhost:8000`, prueba el cambio, y apágalo con **Control + C** (
 
 ### Después de subir: mira si se publicó
 
+> 🌎 **En la vida real:** Es como el seguimiento de un paquete: "en camino", "entregado" o "devuelto". No basta con mandarlo; miras si llegó.
+
+> 🌎 **Otro ejemplo:** Es como mirar el semáforo de un lavadero automático: amarillo lavando, verde listo, rojo algo falló.
+
 Abre la pestaña **Actions** del repositorio (`github.com/DelvinSmart/que-dice-la-biblia/actions`), como en el Tema 04:
 
 - 🟡 **Círculo amarillo:** todavía está publicando.
@@ -165,6 +201,10 @@ Abre la pestaña **Actions** del repositorio (`github.com/DelvinSmart/que-dice-l
 > 📌 **Nota:** el proyecto de la página tiene su propia guía, `COMO-SUBIR-CAMBIOS.md`, con estos mismos pasos para esa carpeta.
 
 ### Este mapa de estudios (`estudios`)
+
+> 🌎 **En la vida real:** Es como un cartel de anuncios donde pegas tus hojas tal cual: no hay nadie que las acomode, se ven como las pegaste.
+
+> 🌎 **Otro ejemplo:** Es como compartir una carpeta pública de Drive: lo que subes, se ve igual.
 
 Más simple todavía: **no tiene Actions**. GitHub Pages sirve los archivos **tal cual** desde la rama `main`:
 
@@ -179,6 +219,10 @@ En uno o dos minutos está en `delvinsmart.github.io/estudios/`. El archivo `.no
 
 ### Activar GitHub Pages en un repositorio nuevo (una sola vez)
 
+> 🌎 **En la vida real:** Es como habilitar una vidriera la primera vez: hay que pedir el permiso una sola vez; después solo cambias lo que exhibes.
+
+> 🌎 **Otro ejemplo:** Es como abrir una cuenta en un servicio: se configura una vez y después se usa todos los días.
+
 1. El repositorio tiene que ser **público** (con la cuenta gratis).
 2. En GitHub: **Settings → Pages**.
 3. En **Source**, elige la rama (`main`) y la carpeta (`/` la raíz), o **GitHub Actions** si el proyecto tiene su propio `publicar.yml`.
@@ -189,6 +233,8 @@ En uno o dos minutos está en `delvinsmart.github.io/estudios/`. El archivo `.no
 Si publicaste y ves la versión vieja, no es que falló: GitHub Pages deja que el navegador guarde la página **10 minutos**. Recarga sin caché con **Cmd + Shift + R** (Tema 14, parte 2).
 
 > 🌎 **En la vida real:** GitHub Pages es una vidriera a la calle. La página de estudios tiene un **empleado** (Actions) que arma la vidriera cada vez que llega mercadería; el mapa pone la mercadería en la vidriera tal como llega.
+
+> 🌎 **Otro ejemplo:** Como una foto vieja en la pantalla del teléfono que no se actualiza hasta que deslizas para refrescar.
 
 ```practica
 elige :: Al tocar Publicar en el panel de estudios, ¿a dónde va el cambio primero? :: Directo a la página :: A GitHub, con tu llave; después Actions lo publica en Pages :: A Firebase
@@ -220,6 +266,8 @@ elige :: Cambiaste los textos de un estudio. ¿Desde dónde lo subes? :: Solo de
 
 > 🌎 **En la vida real:** cambiar el reglamento de la oficina central: llega a todas las sucursales al instante, sin que cada cliente tenga que actualizar nada en su teléfono.
 
+> 🌎 **Otro ejemplo:** Como cambiar el precio en el sistema central de una cadena de tiendas: todas las cajas lo ven al momento, sin que cada cliente haga nada.
+
 > 💡 **Idea:** si `firebase` no está instalado en la terminal, se usa `npx firebase-tools deploy ...` (como en el Tema 08): `npx` lo corre sin instalarlo.
 
 ```practica
@@ -249,7 +297,13 @@ vf :: Un deploy de Firebase es producción: afecta a todas las personas
 
 > 🌎 **En la vida real:** el APK es un traje **ya hecho** que te pones hoy. El AAB es **la tela con los moldes** que le mandas a la sastrería (Google), y ella corta un traje a la medida de cada cliente.
 
+> 🌎 **Otro ejemplo:** Como la diferencia entre un mueble ya armado (lo pones en tu casa) y uno en caja plana para que lo arme la tienda de cada cliente.
+
 ### Mira la hora del archivo
+
+> 🌎 **En la vida real:** Es como mirar la fecha de vencimiento de la leche antes de tomarla: si es vieja, no es la que acabas de comprar.
+
+> 🌎 **Otro ejemplo:** Es como revisar la hora de un mensaje antes de responder: a veces estás leyendo uno viejo.
 
 Antes de instalar un APK, comprueba **de qué hora es**:
 
@@ -273,6 +327,10 @@ escribe :: ¿Por qué hay que mirar la hora del APK antes de instalarlo? :: Porq
 
 > 🎙️ **El profesor:** esta parte es **la más importante de la clase**, porque un error aquí no tiene arreglo. Léela despacio.
 
+> 🌎 **En la vida real:** Es como la firma registrada de una empresa en el banco: todo cheque tiene que llevarla, y si cambia, el banco no paga.
+
+> 🌎 **Otro ejemplo:** Es como el sello oficial de un escribano: un documento sin ese sello no vale, por más perfecto que esté.
+
 ### Qué es la firma
 
 Cada APK y cada AAB se **firma** con una **llave** (un archivo llamado *keystore*, protegido con contraseñas). La firma es **la identidad de tu app** ante Google y ante los teléfonos: dice "esta app la hizo el dueño de Copiloto Driver".
@@ -282,7 +340,13 @@ Cada APK y cada AAB se **firma** con una **llave** (un archivo llamado *keystore
 
 > 🌎 **En la vida real:** la firma es tu **firma de puño y letra en un cheque**. El banco (Google) solo paga los cheques con **tu** firma. Uno con otra firma, por más que el cheque esté perfecto, se rechaza.
 
+> 🌎 **Otro ejemplo:** Como la huella digital de una persona: única, y el sistema solo abre la puerta con la tuya.
+
 ### Cómo elige el proyecto qué llave usar
+
+> 🌎 **En la vida real:** Es como un portero que pregunta: "¿tiene tarjeta de socio?" Si la tiene, lo deja pasar por la entrada principal; si no, lo manda a la de visitas.
+
+> 🌎 **Otro ejemplo:** Es como una cafetera que usa la cápsula original si está; si no, usa una genérica sin avisar.
 
 En `android/app/build.gradle` hay una línea que decide:
 
@@ -298,11 +362,19 @@ Esa variable, y las contraseñas, viven en un archivo **de tu Mac**, `~/.gradle/
 
 ### El peligro silencioso
 
+> 🌎 **En la vida real:** Es como una impresora que se queda sin tinta de color y sigue imprimiendo en blanco y negro sin avisarte: te enteras cuando ves el papel.
+
+> 🌎 **Otro ejemplo:** Es como un GPS que pierde la señal y sigue mostrando la última posición: parece que todo anda bien, hasta que te pierdes.
+
 Si ese archivo se pierde o se borran sus líneas, **el proyecto no te avisa**: cambia a la llave de debug **en silencio**, compila normal, y te enteras cuando Google rechaza la subida.
 
 Ya pasó algo parecido: un `expo prebuild` (Tema 04: regenera la carpeta `android/`) **borró el bloque de firma** de release, y por un rato los APK salieron con la llave de debug. Por eso existe el plugin `plugins/withReleaseSigning.js`, que **vuelve a poner** ese bloque después de cada `prebuild`. Es un "candado" como los del Tema 11.
 
 ### Comprobarlo en 2 segundos
+
+> 🌎 **En la vida real:** Es como revisar la firma de un contrato antes de entregarlo al banco.
+
+> 🌎 **Otro ejemplo:** Es como mirar el sello del pasaporte antes de ir al aeropuerto: dos segundos que te ahorran un viaje perdido.
 
 ```bash
 ./scripts/verificar-firma.sh
@@ -319,6 +391,8 @@ Te dice si el APK y el AAB llevan **tu** llave (✅) o no (❌). **Pásalo siemp
 - Si cambias de computadora, copia esas dos cosas a la nueva Mac, en las mismas carpetas.
 
 > 🌎 **En la vida real:** perder la llave es como perder **el único sello notarial** de tu escribanía: ningún documento nuevo sería válido, y tendrías que abrir otra escribanía con otro nombre.
+
+> 🌎 **Otro ejemplo:** Como la llave original de una caja fuerte: haces una copia y la guardas en otro lugar, por si pierdes la primera.
 
 > ✋ **Para y piensa:** compilas un AAB, todo dice `BUILD SUCCESSFUL`, y lo subes. Google lo rechaza por "chave errada". ¿Qué pasó, y qué debiste hacer antes?
 
@@ -345,7 +419,15 @@ vf :: `withReleaseSigning.js` vuelve a poner el bloque de firma después de cada
 
 > 🎙️ **El profesor:** probar en tu teléfono es el paso que **nunca** se salta (Temas 02, 05 y 11: compilar no es funcionar). En Android hay varias formas.
 
+> 🌎 **En la vida real:** Es como llevar el carro a probar a la calle de tu casa antes de un viaje largo: si algo suena raro, lo ves ahí.
+
+> 🌎 **Otro ejemplo:** Es como un chef que prueba la comida antes de servirla al cliente.
+
 ### Lo rápido: el script
+
+> 🌎 **En la vida real:** Es como el botón "lavado completo" del lavarropas: aprietas uno y hace todos los pasos.
+
+> 🌎 **Otro ejemplo:** Es como pedir un combo en vez de cada cosa por separado.
 
 Con el cable puesto y la **depuración USB aceptada** en el teléfono:
 
@@ -356,6 +438,10 @@ cd /Volumes/SSD_Desarrollo/Developer/copiloto-driver && ./scripts/instalar-andro
 Compila e instala de un tirón.
 
 ### A mano, paso a paso
+
+> 🌎 **En la vida real:** Es como armar un mueble siguiendo el instructivo paso por paso, para ver qué hace cada pieza.
+
+> 🌎 **Otro ejemplo:** Es como cocinar sin la máquina de pan: haces tú cada paso, y entiendes por qué sale como sale.
 
 ```bash
 cd android && ./gradlew assembleRelease && cd ..
@@ -371,6 +457,10 @@ adb install -r android/app/build/outputs/apk/release/app-release.apk
 
 ### Si hay dos aparatos conectados
 
+> 🌎 **En la vida real:** Es como tener dos televisores con el mismo control: tienes que decirle a cuál apuntar.
+
+> 🌎 **Otro ejemplo:** Es como llamar a una casa con dos teléfonos: pides por nombre a quién quieres.
+
 Si están el Samsung **y** el emulador, `adb` no sabe a cuál instalar. Míralos y elige con `-s` (*serial*):
 
 ```bash
@@ -379,6 +469,10 @@ adb -s <número-de-serie> install -r android/app/build/outputs/apk/release/app-r
 ```
 
 ### Sin cable y sin terminal
+
+> 🌎 **En la vida real:** Es como mandarle a alguien un instalador por WhatsApp: lo abre en su teléfono y lo instala él.
+
+> 🌎 **Otro ejemplo:** Es como pasar una canción por Bluetooth: llega el archivo y se abre en el otro teléfono.
 
 Copia el `app-release.apk` al teléfono (WhatsApp, Drive, Telegram) y ábrelo desde **Mis archivos → Descargas**. Android pedirá permiso para instalar de **origen desconocido**: **Ajustes → Permitir desde esta fuente → Instalar**. Ese aviso es normal: sale porque no viene de Play.
 
@@ -399,6 +493,8 @@ Cada vez que apagas el Wi-Fi o reinicias el Samsung, **el puerto cambia**: mira 
 
 > 🌎 **En la vida real:** `adb` es el cable de un mecánico que se conecta a la computadora del carro. `-r` es cambiar la radio sin borrar tus estaciones guardadas. Y emparejar por Wi-Fi es darle una llave a un vecino una sola vez: después solo tocas el timbre (`adb connect`).
 
+> 🌎 **Otro ejemplo:** Como emparejar unos auriculares Bluetooth: la primera vez con código, y después se conectan solos.
+
 ```practica
 elige :: ¿Qué hace `-r` en `adb install -r`? :: Borra la app :: Reinstala encima, conservando datos y sesión :: Reinicia el teléfono
 elige :: ¿Qué es `adb`? :: Un emulador :: La herramienta que habla con un teléfono Android desde la Mac :: Un tipo de archivo
@@ -414,11 +510,19 @@ vf :: Por Wi-Fi, el puerto de `adb connect` cambia al reiniciar el Samsung
 
 > 🎙️ **El profesor:** en el iPhone, un solo comando sirve para todo, con cable o sin él.
 
+> 🌎 **En la vida real:** Es como instalar una app en el iPhone de un amigo para que la pruebe: necesita confiar en ti la primera vez, y el permiso dura poco.
+
+> 🌎 **Otro ejemplo:** Es como prestar un pase de prueba de un gimnasio: sirve unos días y hay que renovarlo.
+
 ```bash
 cd /Volumes/SSD_Desarrollo/Developer/copiloto-driver && ./scripts/instalar-iphone.sh
 ```
 
 ### Por cable
+
+> 🌎 **En la vida real:** Es como cargar el teléfono con cable: lo conectas, aceptas "confiar en esta computadora", y empieza.
+
+> 🌎 **Otro ejemplo:** Es como conectar un pendrive: la primera vez la computadora pregunta si confías.
 
 1. Conecta el iPhone y **desbloquéalo**. Si pregunta "¿Confiar en esta computadora?" → **Confiar**.
 2. Corre el comando. Termina con **✅ Listo** y la app se abre sola.
@@ -427,11 +531,19 @@ La primera vez tarda unos 10 minutos (arma todo desde cero); después, de 2 a 4.
 
 ### Por Wi-Fi
 
+> 🌎 **En la vida real:** Es como emparejar el iPhone con el carro por Bluetooth: se configura una vez con el cable o el código, y después se conecta solo cuando están cerca.
+
+> 🌎 **Otro ejemplo:** Es como una impresora Wi-Fi: la configuras una vez y después imprimes desde cualquier lugar de la casa.
+
 **Preparación, una sola vez, con el cable puesto:** abre **Xcode** → **Window** → **Devices and Simulators** → elige tu iPhone → marca **"Connect via network"** → espera el icono de globo 🌐. Ya puedes quitar el cable.
 
 **Cada vez:** iPhone y Mac en el **mismo Wi-Fi**, el iPhone **desbloqueado y con la pantalla encendida** (si se apaga a mitad, falla), y el mismo comando.
 
 ### Los 7 días
+
+> 🌎 **En la vida real:** Es como un estacionamiento gratis por 7 días: después hay que renovar el ticket, o pagar el abono anual.
+
+> 🌎 **Otro ejemplo:** Es como una prueba gratis de un servicio de streaming: vence, y la vuelves a activar.
 
 La app en el iPhone **caduca a los 7 días**. **No es un fallo**: es el límite de la cuenta **gratis** de Apple. Cuando caduca, el iPhone dice que la app ya no está disponible. Solución: correr **el mismo comando**; el script saca un permiso nuevo solo, y tus datos no se pierden. Para quitar el límite hay que pagar la cuenta de desarrollador de Apple (99 USD al año).
 
@@ -440,6 +552,8 @@ La app en el iPhone **caduca a los 7 días**. **No es un fallo**: es el límite 
 La primera vez, el iPhone puede bloquear la app. Se arregla en **Ajustes → General → VPN y gestión de dispositivos** → toca tu cuenta → **Confiar**.
 
 > 🌎 **En la vida real:** la cuenta gratis de Apple es un **pase de visitante de 7 días**: vence, y vuelves a la recepción por otro. La cuenta paga es el pase de empleado, de un año.
+
+> 🌎 **Otro ejemplo:** Como cuando instalas un programa nuevo en la computadora y te pregunta "¿confías en este fabricante?": dices sí una vez.
 
 > 💡 **Idea:** un error real de la guía de tu app: el comando de Wi-Fi estaba **mal escrito** (decía una letra suelta en vez de `./scripts/instalar-iphone.sh`), y por eso "a la IA le funcionaba y a ti no": pegabas otra cosa. Cuando algo funciona para uno y no para otro, compara **exactamente** qué corre cada uno (Tema 07).
 
@@ -467,6 +581,8 @@ El **modo Expo** es el del Tema 05: cada cambio que guardas aparece solo, en seg
 
 > 🌎 **En la vida real:** el simulador de manejo de la autoescuela: practicas rápido y sin riesgo, pero el examen de verdad es en la calle (tu teléfono real).
 
+> 🌎 **Otro ejemplo:** Como practicar penales en un videojuego de fútbol: rápido y sin riesgo, pero el partido de verdad es en la cancha.
+
 ```practica
 elige :: ¿Qué es un emulador? :: Un teléfono viejo :: Un teléfono de mentira dentro de la Mac :: Un tipo de APK
 elige :: ¿Qué modo muestra cada cambio al instante? :: `final-android` :: `expo` :: `final-iphone`
@@ -478,6 +594,10 @@ vf :: Probar en el emulador reemplaza probar en el teléfono real
 ## 10. Publicar en Google Play
 
 > 🎙️ **El profesor:** ahora sí, la app **para todos**. Son dos pasos: generar el AAB y subirlo a Play Console.
+
+> 🌎 **En la vida real:** Es como lanzar un libro: preparas la edición final con su número, la mandas a la distribuidora, y la distribuidora la revisa antes de ponerla en las librerías.
+
+> 🌎 **Otro ejemplo:** Es como inscribir un auto nuevo: llevas los papeles con el número correcto, el registro los revisa, y recién ahí sale a la calle.
 
 ### Paso 1: subir el número de versión
 
@@ -501,7 +621,13 @@ Al terminar dice **✅ Listo** y abre `store-assets`, con un archivo como `copil
 
 > 🌎 **En la vida real:** el `versionCode` es el **número de edición** de un diario: el kiosco no acepta dos veces la edición 22. La `version` es la fecha que se ve en la tapa.
 
+> 🌎 **Otro ejemplo:** Como el número de serie de un billete: cada billete tiene uno distinto, y el banco rechaza un número repetido.
+
 ### Paso 2: subirlo en Play Console
+
+> 🌎 **En la vida real:** Es como entregar un trabajo en la plataforma de la universidad: subes el archivo, escribes una nota y lo envías a revisión.
+
+> 🌎 **Otro ejemplo:** Es como dejar un paquete en el correo: lo entregas en la ventanilla correcta, pones qué contiene, y esperas la confirmación.
 
 1. Entra a **play.google.com/console** → **Copiloto Driver**.
 2. Menú izquierdo: **Testar e lançar**.
@@ -528,6 +654,10 @@ Google **revisa** la actualización (de unas horas a 2 o 3 días). Cuando la apr
 | Avisos **amarillos** | Se leen y se puede seguir; los **rojos** sí bloquean |
 
 ### Un caso especial: los permisos delicados
+
+> 🌎 **En la vida real:** Es como pedir permiso especial para tener un perro grande en un edificio: tienes que explicar por qué, mostrar que es tranquilo y dejar que el administrador lo conozca.
+
+> 🌎 **Otro ejemplo:** Es como pedir un permiso de construcción para algo fuera de lo común: la municipalidad pide planos, fotos y una visita antes de aprobar.
 
 El cartón automático necesita leer la pantalla de las apps de viajes, y en Android eso solo se puede con la **API de Accesibilidad** (pensada para personas ciegas o con poca visión). Google la vigila de cerca, porque es la misma puerta que usan los programas espía. Cuando la detecta, **detiene la publicación** y pide tres cosas: una **declaración** de qué lees y para qué, un **video** mostrando la función, y una **cuenta de prueba** para el revisor. Hasta responder, la versión queda parada. Tu app tiene todo eso preparado en sus guías privadas (`PERMISOS_EN_GOOGLE_PLAY.md`, `SUBIR_ESTA_VERSION.md`).
 
@@ -556,6 +686,10 @@ escribe :: ¿Por qué Google pide una declaración, un video y una cuenta de pru
 
 > 🎙️ **El profesor:** juntemos todo. Este es el orden en que se trabaja en tu app, y es exactamente lo que te van a preguntar en una entrevista ("¿cómo llevas un cambio a producción?").
 
+> 🌎 **En la vida real:** Es como la rutina de un panadero: amasa, hornea, prueba, empaca, y solo cuando todo está bien abre la tienda.
+
+> 🌎 **Otro ejemplo:** Es como el orden de un vuelo: revisión, pasajeros a bordo, despegue, y nunca al revés.
+
 1. **Se cambia el código** en la Mac.
 2. **Se compila** → sale el APK.
 3. **Se instala en tu Samsung** (y en el iPhone) → **tú lo pruebas**.
@@ -565,6 +699,10 @@ escribe :: ¿Por qué Google pide una declaración, un video y una cuenta de pru
 7. Si cambió el servidor: `firebase deploy --only …`.
 
 ### Si trabajas con una IA
+
+> 🌎 **En la vida real:** Es como tener un asistente que prepara todo el paquete, pero no lo despacha hasta que tú lo apruebes.
+
+> 🌎 **Otro ejemplo:** Es como un contador que prepara la declaración de impuestos, pero la firma y la presentas tú.
 
 Si le pides el cambio a una IA en la carpeta del proyecto, ella puede hacer los pasos de traer, cambiar, probar, revisar y guardar, pero **solo hace el `git push` (y cualquier publicación) cuando tú se lo dices**. Así lo dicen los `AGENTS.md` de tus proyectos. Publicar es decisión tuya.
 
@@ -579,6 +717,8 @@ Tu app tiene un script que hace el ciclo completo, en orden, y **se detiene** si
 5. Te pregunta si quieres **deploy** de las Cloud Functions y del panel.
 
 > 🌎 **En la vida real:** la lista de un piloto antes de despegar: siempre en el mismo orden, y si una revisión falla, no despega.
+
+> 🌎 **Otro ejemplo:** Como el botón de "un toque" de algunas cafeteras: muele, calienta, sirve y limpia, en orden, y se detiene si falta agua.
 
 ```practica
 escribe :: Di en orden los pasos de un día de trabajo, desde el cambio hasta Google Play. :: Cambiar el código, compilar el APK, instalarlo en el teléfono y probarlo, confirmar que está bien, commit y push, y cuando se lanza: subir versión, generar el AAB, verificar la firma y subirlo a Google Play; y firebase deploy si cambió el servidor.
@@ -605,6 +745,8 @@ vf :: `release.sh` genera el AAB e instala en el iPhone al mismo tiempo
 
 > 🌎 **En la vida real:** antes de llamar al mecánico, revisa lo simple: ¿tiene nafta?, ¿está la llave puesta?, ¿el teléfono está desbloqueado? La mitad de los "errores" son eso.
 
+> 🌎 **Otro ejemplo:** Como cuando el teléfono no carga: antes de cambiarlo, pruebas otro enchufe, otro cable y si estaba bien conectado.
+
 ```practica
 elige :: El Samsung dice "signatures do not match". ¿Qué haces? :: Cambias la llave :: Desinstalas la app del Samsung y vuelves a correr el script :: Subes a Google Play
 elige :: Sale "No such file or directory" al correr un script. ¿Qué revisas primero? :: El código :: Que el SSD esté conectado :: GitHub
@@ -617,6 +759,8 @@ vf :: "database is locked" suele ser porque hay dos compilaciones a la vez
 ## Ejercicios
 
 > 🎙️ **El profesor:** estos son para hacerlos de verdad. Ve despacio y lee lo que dice la terminal después de cada comando.
+
+> 🌎 **En la vida real:** Es como la clase práctica de manejo en la calle: haces tú cada paso, con alguien al lado que te corrige.
 
 1. **Subir este mapa:** cambia una palabra en cualquier lección de `Aprender`, haz `git add -A`, `git commit -m "…"` y `git push`, y mírala publicada en dos minutos (con Cmd + Shift + R).
 2. **APK a mano:** genera el APK con `assembleRelease`, mira su hora con `ls -lh`, corre `verificar-firma.sh` e instálalo con `adb install -r`.
@@ -640,6 +784,8 @@ escribe :: ¿Qué tienes que copiar a una Mac nueva para poder seguir publicando
 ## Para la entrevista
 
 > 🎙️ **El profesor:** en voz alta.
+
+> 🌎 **En la vida real:** Contar cómo publicas es como contarle a un cliente cómo entregas un trabajo: lo pruebas, lo guardas, lo revisan y recién después lo entregas.
 
 > 🎤 **Entrevista:** "¿Cómo llevas un cambio a producción en tu app?"
 

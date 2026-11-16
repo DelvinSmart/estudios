@@ -20,6 +20,8 @@ A esto se le llama **una sola fuente de verdad** (*single source of truth*).
 
 > 🌎 **En la vida real:** si tienes la lista de compras en un papel **y** en el celular, tarde o temprano no coinciden. Lo correcto es **una sola lista**, que miras desde donde quieras.
 
+> 🌎 **Otro ejemplo:** Como el horario de un colectivo: está publicado en un solo lugar oficial, y todas las paradas muestran ese mismo horario. Si cambia, cambia en todas.
+
 > 💡 **Idea:** es la misma idea de tu página de estudios (contenido en JSON, Tema 12) y de la web de Copiloto (usa la app sin copiarla, Tema 13). Ya la viste tres veces: es una de las ideas más importantes de la ingeniería.
 
 ```practica
@@ -54,6 +56,8 @@ Aprender/
 Es la arquitectura del Tema 10 en pequeño: **los datos** (`cursos.js`) separados de **la lógica** (`lector.js`, `guardado.js`, `practica.js`) y de **la pantalla** (`app.js`, `estilos.css`).
 
 > 🌎 **En la vida real:** una caja de herramientas con compartimentos: cada uno, una cosa.
+
+> 🌎 **Otro ejemplo:** Como los compartimentos de un botiquín: curitas en uno, remedios en otro, termómetro en otro. Encuentras lo que buscas en segundos.
 
 ```practica
 elige :: Quieres cambiar el verde de la página. ¿Qué archivo abres? :: `app.js` :: `estilos.css` :: `cursos.js`
@@ -104,6 +108,8 @@ A esto se le llama **enrutador** (*router*), y a una página así, **SPA** (*Sin
 
 > 🌎 **En la vida real:** Google Maps: ves el país; tocas una ciudad y ves sus barrios; tocas un barrio y ves sus calles. Misma app, distinto acercamiento.
 
+> 🌎 **Otro ejemplo:** Como un libro con capítulos, secciones y páginas: abres el libro (etapas), eliges un capítulo (clase) y lees una sección (parte), sin cambiar de libro.
+
 > 💡 **Idea:** como cada pantalla tiene su dirección, puedes **guardar en favoritos** una parte exacta, mandársela a alguien, y el botón "atrás" del navegador funciona.
 
 ```practica
@@ -120,7 +126,15 @@ escribe :: ¿Qué es un enrutador en esta página? :: La función que mira lo qu
 
 > 🎙️ **El profesor:** ¿cómo convierte la página un `.md` en un mapa de partes? `lector.js` hace dos trabajos.
 
+> 🌎 **En la vida real:** Es como cortar un rollo de tela en pedazos marcados: cada marca (`##`) es un corte, y cada pedazo es una parte de la clase.
+
+> 🌎 **Otro ejemplo:** Es como separar una carta larga en capítulos donde dice "Capítulo", pero sin confundirte cuando esa palabra aparece dentro de una cita.
+
 ### 1. Traer el archivo (una sola vez)
+
+> 🌎 **En la vida real:** Es como sacar un libro de la biblioteca: la primera vez vas a buscarlo; las siguientes, ya lo tienes en tu mesa.
+
+> 🌎 **Otro ejemplo:** Es como descargar una canción para escucharla sin internet: la bajas una vez y después la escuchas cuantas veces quieras.
 
 ```js
 const memoria = new Map();
@@ -169,6 +183,10 @@ escribe :: ¿Por qué hay que saber si estamos dentro de un bloque de código al
 ## 5. Dibujar con plantillas, y las tarjetas de colores
 
 > 🎙️ **El profesor:** cada pantalla se arma con `map` y plantillas (Tema 17).
+
+> 🌎 **En la vida real:** Es como un sello de goma con huecos: lo estampas una vez por cada clase y llenas los huecos con su número y su nombre.
+
+> 🌎 **Otro ejemplo:** Es como imprimir etiquetas de un mismo modelo: el diseño es uno, cambia el texto de cada una.
 
 ```js
 const paradas = etapa.clases.map((num, i) => `
@@ -233,6 +251,8 @@ En internet, el servidor es **GitHub Pages** (parte 9).
 
 > 🌎 **En la vida real:** un empleado no puede entrar a cualquier cajón de la oficina: necesita que recepción le alcance lo que pide. Con doble clic no hay recepción.
 
+> 🌎 **Otro ejemplo:** Como una farmacia que no te deja entrar al depósito: pides en el mostrador y el farmacéutico te trae el remedio.
+
 ```practica
 elige :: Abres la página con doble clic y dice "No encontré…". ¿Qué pasó? :: Se borraron las clases :: Se abrió con `file://` y el navegador bloqueó `fetch`; hace falta un servidor :: Falta internet
 elige :: ¿Qué hace `python3 -m http.server 8123`? :: Instala Python :: Enciende un servidor de archivos en el puerto 8123 :: Publica en internet
@@ -244,6 +264,10 @@ vf :: En internet, el servidor del mapa es GitHub Pages
 ## 7. La letra de código y los colores
 
 > 🎙️ **El profesor:** el aspecto de "programador" sale del Tema 16, aplicado.
+
+> 🌎 **En la vida real:** Es como el uniforme de un equipo: los mismos colores en la camiseta, el short y las medias, para que se vea como un todo.
+
+> 🌎 **Otro ejemplo:** Es como la pantalla de una terminal: letras de máquina de escribir, fondo oscuro y un cursor que parpadea.
 
 **Los colores** son variables en `:root`. El tema oscuro es el de siempre, como un editor; el claro solo cambia los valores:
 
@@ -283,6 +307,10 @@ elige :: ¿Qué selector pone a la derecha las paradas pares? :: `.parada:first-
 
 > 🎙️ **El profesor:** dos cosas que se agregaron después, y que son las que más usas: los **bombillos** y las **prácticas**.
 
+> 🌎 **En la vida real:** Es como una tarjeta de puntos de una cafetería: cada café sella un casillero, y es tuya; nadie más la llena por ti.
+
+> 🌎 **Otro ejemplo:** Es como los sellos de un pasaporte: cada país visitado deja su marca, y el pasaporte es solo tuyo.
+
 ### Los bombillos
 
 Cada parte de cada clase es **un bombillo**. Se prende cuando, al terminar de leer la parte, tocas **"¿lo entendiste? márcalo"**. La pantalla **💡 Mi progreso** (`#/progreso`) los muestra todos, y los que se prendieron desde tu última visita **se encienden con una animación**.
@@ -301,7 +329,13 @@ El id de cada bombillo usa **el nombre del archivo**, no su posición: `"15:LECC
 
 > 🌎 **En la vida real:** en una biblioteca el libro es de todos, pero **tu marcapáginas es tuyo**.
 
+> 🌎 **Otro ejemplo:** Como el registro de horas de estudio en tu propio cuaderno: está en tu mochila, no en la de tu compañero.
+
 ### Las prácticas
+
+> 🌎 **En la vida real:** Es como el examen teórico de manejo: si fallas una pregunta, no apruebas, y lo vuelves a dar con las preguntas en otro orden.
+
+> 🌎 **Otro ejemplo:** Es como un videojuego con jefe de nivel: no pasas a la siguiente pantalla hasta ganarle sin perder.
 
 Dentro de un bloque de código con el lenguaje **`practica`**, cada línea es una pregunta, con los campos separados por ` :: `:
 
@@ -340,6 +374,8 @@ escribe :: ¿Por qué el id de un bombillo usa el nombre del archivo y no su pos
 
 > 🌎 **En la vida real:** pegar tu cartel en la pared de la calle en vez de tenerlo en tu cuarto. Y `.nojekyll` es un cartelito que dice "no reescriban mi cartel".
 
+> 🌎 **Otro ejemplo:** Como subir una foto a un álbum público: cualquiera con el enlace la puede ver.
+
 ```practica
 elige :: ¿Qué pasaría sin el archivo `.nojekyll`? :: Nada :: Jekyll convertiría los `.md` en HTML y el mapa no podría leerlos crudos :: La página sería más rápida
 elige :: ¿Por qué no se puede publicar `estudios` tal como está, con la cuenta gratis? :: Porque es muy grande :: Porque GitHub Pages gratis solo publica repositorios públicos, y `estudios` es privado :: Porque falta un archivo
@@ -366,6 +402,8 @@ vf :: Antes de publicar algo, hay que revisar que no tenga nada privado
 
 > 🌎 **En la vida real:** agregar una parada a la ruta del autobús: pintas el cartel en la parada (la carpeta y su lección) y la agregas al mapa de la ruta (el catálogo).
 
+> 🌎 **Otro ejemplo:** Como agregar un nuevo plato al menú de un restaurante: escribes la receta (la clase) y lo agregas a la carta (el catálogo).
+
 ```practica
 elige :: Agregaste la carpeta y la lección, pero la clase no aparece en el mapa. ¿Qué te faltó? :: Reiniciar la Mac :: Agregarla en `web/cursos.js` (en `CLASES` y en su etapa) :: Borrar el caché
 elige :: ¿Qué haces para que una clase muestre su clase guiada primero? :: Nada :: Guardar `CLASE-GUIADA.md` y agregar el número a `GUIADAS` en `cursos.js` :: Renombrar la lección
@@ -376,6 +414,8 @@ elige :: ¿Qué haces para que una clase muestre su clase guiada primero? :: Nad
 ## Ejercicios
 
 > 🎙️ **El profesor:** después de desarmar el motor, el aprendiz lo vuelve a armar.
+
+> 🌎 **En la vida real:** Es como volver a armar el motor que desarmaste: así sabes para qué servía cada pieza.
 
 1. Abre la terminal, entra a `Aprender` y levanta el servidor de la parte 6. Abre la página.
 2. Ábrela también con doble clic sobre `index.html`. ¿Qué mensaje sale? ¿Por qué?
@@ -403,6 +443,8 @@ vf :: El mapa lee los archivos .md cada vez :: V :: Una sola fuente de verdad.
 ## Para la entrevista
 
 > 🎙️ **El profesor:** cuéntalo como un proyecto tuyo, en voz alta.
+
+> 🌎 **En la vida real:** Contar cómo hiciste este mapa es como mostrar una herramienta que construiste para ti mismo: qué problema resuelve y cómo funciona por dentro.
 
 > 🎤 **Entrevista:** "¿Cómo funciona tu mapa de estudios?"
 

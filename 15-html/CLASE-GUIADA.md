@@ -10,6 +10,10 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🎙️ **El profesor:** Delvin, empezamos una etapa nueva: **la web**. Tu página **¿Qué dice la Biblia?** y este mismo mapa están hechos con tres piezas: HTML, CSS y JavaScript. Hoy, la primera. Y te adelanto algo: es la más fácil de las tres.
 
+> 🌎 **En la vida real:** Es como el esqueleto de un edificio en construcción: ya se ven los pisos, las paredes y las ventanas, aunque todavía no tenga pintura ni luz.
+
+> 🌎 **Otro ejemplo:** Es como el índice de un libro con los capítulos marcados: dice qué es título, qué es párrafo y qué es lista, sin decir de qué color van.
+
 ### Una página es un texto con etiquetas
 
 **HTML** quiere decir *HyperText Markup Language*: "lenguaje para **marcar** texto". No es un lenguaje de programación: **no hace cuentas ni toma decisiones** (no tiene `if`, ni funciones). Solo **describe qué es cada parte** de la página.
@@ -24,7 +28,11 @@ El navegador lee esas **etiquetas** y dibuja: un **título** grande (`h1`), un *
 
 > 🌎 **En la vida real:** las etiquetas de una mudanza. Pegas en cada caja "COCINA", "LIBROS", "FRÁGIL". La caja no cambia, pero ahora todos saben qué hay dentro. HTML pone etiquetas al contenido: "esto es un título", "esto es un botón".
 
+> 🌎 **Otro ejemplo:** Como los rótulos de un formulario impreso: "Nombre", "Dirección", "Firma". El papel no cambia, pero cada casilla ya dice qué va ahí.
+
 ### Las tres piezas de la web
+
+> 🌎 **Otro ejemplo:** En un carro: el chasis y la carrocería (HTML), la pintura y el tapizado (CSS), y el motor con la electricidad (JavaScript).
 
 | Pieza | Qué hace | 🌎 En una casa | En tu página de estudios |
 |---|---|---|---|
@@ -71,7 +79,13 @@ elige :: ¿Qué pieza hace que un botón responda al clic? :: HTML :: CSS :: Jav
 
 > 🌎 **En la vida real:** un sobre de carta. La etiqueta de apertura es abrir el sobre; la de cierre, cerrarlo; lo de adentro es la carta. Los **atributos** son lo que escribes **por fuera**: la dirección, "urgente". No son la carta, pero dicen algo sobre ella.
 
+> 🌎 **Otro ejemplo:** Como una etiqueta de precio en una tienda: la etiqueta (apertura y cierre) rodea el producto (el contenido), y en el costado tiene datos extra: código, talle, color (los atributos).
+
 ### Etiquetas que no se cierran
+
+> 🌎 **En la vida real:** Es como un sello de "PAGADO" en una factura: se estampa y listo; no envuelve nada adentro.
+
+> 🌎 **Otro ejemplo:** Es como un clavo en la pared: está o no está; no tiene un "principio" y un "fin" con algo en el medio.
 
 Algunas etiquetas **no tienen nada adentro**, así que no llevan cierre. Se llaman **vacías**:
 
@@ -82,6 +96,10 @@ Algunas etiquetas **no tienen nada adentro**, así que no llevan cierre. Se llam
 ```
 
 ### Los tres atributos más comunes
+
+> 🌎 **En la vida real:** Es como tu documento de identidad (id, único), tu equipo de fútbol (class, lo comparten muchos) y la dirección de tu casa (href, a dónde lleva).
+
+> 🌎 **Otro ejemplo:** Es como en una escuela: el número de matrícula es único (id), el grado lo comparten muchos alumnos (class).
 
 - **`id`**: un nombre **único** en toda la página. Como tu número de documento: solo tú lo tienes.
 - **`class`**: un **grupo**. Muchos elementos pueden tener la misma clase. Como "conductor de Uber": lo son miles.
@@ -143,6 +161,8 @@ Línea por línea:
 
 > 🌎 **En la vida real:** el formulario de un documento oficial: siempre la misma estructura (un encabezado con datos que nadie ve a simple vista, y el cuerpo con el contenido).
 
+> 🌎 **Otro ejemplo:** Como el esqueleto de una carta formal: membrete arriba, fecha, saludo, cuerpo, despedida y firma. Siempre en el mismo orden.
+
 > 💡 **Idea:** abre `index.html` de tu página `que-dice-la-biblia` y busca cada una de estas líneas. Están todas.
 
 **Prueba ahora:** reemplaza tu `practica/index.html` por este esqueleto, cambia el `<title>` por tu nombre y mira la pestaña del navegador.
@@ -170,6 +190,10 @@ escribe :: ¿Para qué sirve `<meta name="viewport">`? :: Para que en el celular
 ## 4. Las etiquetas de texto
 
 > 🎙️ **El profesor:** ahora el contenido. Un periódico tiene titular gigante, subtítulos, párrafos y palabras en negrita. Nadie lee un periódico donde todo es igual. Las etiquetas de texto le dan ese orden a la página.
+
+> 🌎 **En la vida real:** Es como una revista: el título de tapa enorme, los títulos de cada nota, los párrafos, las listas y las palabras resaltadas.
+
+> 🌎 **Otro ejemplo:** Es como un menú de restaurante: "Platos principales" (título), cada plato (lista) y "¡Recomendado!" en negrita.
 
 ```html
 <h1>Copiloto Driver</h1>
@@ -254,6 +278,8 @@ elige :: `<strong>` sirve para… :: Hacer un enlace :: Marcar algo importante (
 
 > 🌎 **En la vida real:** los carteles del supermercado: "Lácteos", "Panadería", "Cajas". Podrías poner todo en estantes sin cartel, pero te perderías.
 
+> 🌎 **Otro ejemplo:** Como las señales de un hospital: "Urgencias", "Radiología", "Salida". Sin ellas, todos los pasillos parecen iguales.
+
 > 💡 **Idea:** este mapa usa `header` (la barra de arriba), `nav` (las migas), `main` (el mapa) y `footer` (el pie). Abre `index.html` de la carpeta `Aprender` y búscalas.
 
 ```practica
@@ -306,6 +332,8 @@ Atributos útiles: `required` (obligatorio), `placeholder` (texto de ejemplo gri
 
 > 🌎 **En la vida real:** la hoja de inscripción del gimnasio: casillas para nombre y edad, una opción para marcar el plan, y el botón "Enviar". Cada casilla tiene su rótulo.
 
+> 🌎 **Otro ejemplo:** Como el formulario de un pedido de pizza por la web: casillas para la dirección, un menú para elegir el tamaño, una casilla para "sin cebolla" y el botón "Pedir".
+
 > 📌 **Nota:** el `type` del `input` importa mucho en el celular: `type="number"` abre el teclado de números; `type="email"`, uno con `@`.
 
 ```practica
@@ -342,6 +370,8 @@ Ese árbol se llama **DOM** (*Document Object Model*: "el documento como objetos
 
 > 🌎 **En la vida real:** un árbol genealógico. Arriba el abuelo (`html`); sus hijos, `head` y `body`; los hijos de `body`, `header`, `main`, `footer`…
 
+> 🌎 **Otro ejemplo:** Como el organigrama de una empresa: el gerente arriba, los jefes de cada área y, debajo, sus empleados. Cada uno sabe a quién responde.
+
 > 💡 **Idea:** en el navegador, clic derecho sobre cualquier cosa → **Inspeccionar**. Ves el árbol real de la página. Prueba con esta misma página.
 
 ```practica
@@ -367,6 +397,8 @@ vf :: Con "Inspeccionar" del navegador puedes ver el DOM real de una página
 
 > 🌎 **En la vida real:** abrir un paréntesis y olvidar cerrarlo en una carta: se entiende, pero confunde. El navegador hace lo mismo: entiende "más o menos".
 
+> 🌎 **Otro ejemplo:** Como escribir una dirección con el número mal: el cartero no te avisa del error; simplemente la carta no llega.
+
 > 💡 **Idea:** el validador oficial, **validator.w3.org**, revisa tu HTML y te dice cada error con su línea. Es como el CI del Tema 04, pero para HTML.
 
 > ✋ **Para y piensa:** tu imagen se ve en tu Mac pero no en GitHub Pages. El archivo se llama `Foto.PNG` y en el HTML escribiste `foto.png`. ¿Qué pasa?
@@ -390,6 +422,8 @@ elige :: ¿Qué herramienta revisa tu HTML y te dice los errores? :: Git :: vali
 ## Ejercicios
 
 > 🎙️ **El profesor:** ahora tú solo, en `practica/index.html`. Escribe cada línea, sin copiar y pegar.
+
+> 🌎 **En la vida real:** Es como armar tu primer mueble solo: siguiendo el instructivo, pieza por pieza, sin mirar cómo lo hizo otro.
 
 **A. Tu tarjeta de presentación**
 1. Arma el esqueleto completo de la parte 3.
@@ -469,6 +503,8 @@ elige :: ¿Qué herramienta revisa tu HTML y te dice los errores? :: Git :: vali
 ## Para la entrevista
 
 > 🎙️ **El profesor:** en voz alta.
+
+> 🌎 **En la vida real:** Explicar HTML en una entrevista es como explicar el plano de una casa: qué es cada parte, antes de hablar de la decoración.
 
 > 🎤 **Entrevista:** "¿Qué es HTML?"
 

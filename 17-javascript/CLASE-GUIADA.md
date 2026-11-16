@@ -10,6 +10,10 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🎙️ **El profesor:** Delvin, la casa ya tiene paredes (HTML) y pintura (CSS). Hoy instalamos **la electricidad**: que al tocar un botón pase algo. Eso es **JavaScript**. Ya leíste TypeScript en el Tema 01; JavaScript es lo mismo, **sin los tipos**. Así que empezamos con un repaso corto.
 
+> 🌎 **En la vida real:** Una variable es como una caja con etiqueta en un depósito: `const` es una caja sellada con cinta (no se cambia lo de adentro) y `let` es una caja con tapa (la puedes vaciar y volver a llenar). Una función es la máquina del depósito que empaqueta lo que le das.
+
+> 🌎 **Otro ejemplo:** Es como el marcador de un partido: el nombre del equipo no cambia (`const`), los goles sí van cambiando (`let`), y el tablero que suma un gol cada vez es la función.
+
 ```js
 const app = 'Uber';          // texto: no cambia
 let viajes = 0;              // número: va a cambiar
@@ -92,6 +96,8 @@ El `reduce` es el más difícil. Léelo así: empieza con `suma = 0`; para cada 
 
 > 🌎 **En la vida real:** una pila de recibos. `forEach` = mirar uno por uno. `map` = fotocopiar cada uno, pero cambiado (solo el total). `filter` = separar solo los de Uber. `find` = buscar el primero que cumpla algo. `reduce` = sumar todo en la calculadora.
 
+> 🌎 **Otro ejemplo:** Como una lista de pasajeros de un vuelo: revisarlos uno por uno (forEach), hacer las tarjetas de embarque (map), separar los de primera clase (filter), buscar a uno por nombre (find) y contar el total de equipaje (reduce).
+
 > 💡 **Idea:** este mapa usa `map` para convertir la lista de clases en tarjetas HTML. Abre `web/app.js` y busca `.map(`.
 
 > ✋ **Para y piensa:** ¿qué devuelve `[1, 2, 3].map((x) => x * 2)`?
@@ -139,6 +145,8 @@ const tarjeta = `
 
 > 🌎 **En la vida real:** una carta modelo con huecos: "Querido ____, tu pedido número ____ llegó". Llenas los huecos y listo.
 
+> 🌎 **Otro ejemplo:** Como un mensaje automático de WhatsApp Business: "Hola {nombre}, tu turno es el {día}". La plantilla es la misma, y los datos cambian para cada cliente.
+
 ```practica
 elige :: Reescribe `'Total: ' + total + ' reales'` con plantilla :: `'Total: ${total} reales'` :: `` `Total: ${total} reales` `` :: `"Total: total reales"`
 vf :: Con comillas simples `'...'` también funciona `${...}`
@@ -164,6 +172,8 @@ const tarjetas = document.querySelectorAll('.tarjeta');    // TODAS las .tarjeta
 
 > 🌎 **En la vida real:** pedir en una ferretería "deme **el** martillo rojo" (uno) o "deme **todos** los tornillos de 3 cm" (varios). Primero hay que encontrar la cosa para usarla.
 
+> 🌎 **Otro ejemplo:** Como buscar en el teléfono "el primer contacto que se llama Ana" o "todos los contactos del trabajo".
+
 ```practica
 elige :: ¿Cómo encuentras el elemento con `id="buscador"`? :: `document.querySelector('buscador')` :: `document.querySelector('#buscador')` :: `document.querySelector('.buscador')`
 elige :: ¿Qué devuelve `querySelector` si no encuentra nada? :: `0` :: `null` :: Una lista vacía
@@ -176,6 +186,10 @@ vf :: `querySelector` usa selectores distintos a los de CSS
 ## 5. Cambiar la página
 
 > 🎙️ **El profesor:** ya la encontraste. Ahora la cambias.
+
+> 🌎 **En la vida real:** Es como cambiar los carteles de una tienda sin cerrarla: cambias el precio, le pones "oferta" o agregas un cartel nuevo, mientras los clientes siguen adentro.
+
+> 🌎 **Otro ejemplo:** Es como editar un documento compartido en vivo: cambias una palabra y todos la ven al instante, sin volver a imprimir.
 
 ```js
 const titulo = document.querySelector('h1');
@@ -212,6 +226,8 @@ lista.appendChild(li);
 > ⚠️ **Cuidado:** `innerHTML` con texto que **escribió un usuario** es peligroso: si alguien escribe `<script>...`, lo ejecutarías. Para texto del usuario usa **`textContent`**, que lo muestra tal cual. Este mapa tiene una función `escapar(...)` justo para eso.
 
 > 🌎 **En la vida real:** el cartel de precios de la gasolinera con números que se cambian a mano: no construyes un cartel nuevo, cambias los números.
+
+> 🌎 **Otro ejemplo:** Como agregar una línea nueva a la lista del supermercado que está pegada en la heladera: la lista sigue ahí, con un renglón más.
 
 ```practica
 elige :: ¿Qué línea agrega la clase `activo` si no la tiene, y la quita si la tiene? :: `classList.add('activo')` :: `classList.toggle('activo')` :: `classList.remove('activo')`
@@ -261,6 +277,8 @@ formulario.addEventListener('submit', (evento) => {
 
 > 🌎 **En la vida real:** un timbre. Lo instalas y dices "**cuando** alguien lo toque, abre la puerta". No estás mirando la puerta todo el tiempo: el timbre te avisa.
 
+> 🌎 **Otro ejemplo:** Como el sensor de una puerta automática: no está abriendo todo el tiempo; espera a que alguien se acerque, y entonces se abre.
+
 > 💡 **Idea:** en esta página, si aprietas la tecla `/` se abre el buscador. Busca `'keydown'` en `web/buscar.js`.
 
 > ✋ **Para y piensa:** ¿qué evento usas para buscar mientras la persona escribe, letra por letra?
@@ -308,7 +326,13 @@ async function cargarEstudio() {
 
 > 🌎 **En la vida real:** pides una pizza por teléfono. No te quedas parado mirando la puerta: sigues con tus cosas, y **cuando llega**, la recibes. `fetch` es pedir; la promesa es el número de pedido; `await` es "cuando llegue, sigo".
 
+> 🌎 **Otro ejemplo:** Como mandar un mensaje y seguir con tu día: cuando llega la respuesta, la lees. No te quedas mirando la pantalla.
+
 ### JSON: datos como texto
+
+> 🌎 **En la vida real:** Es como una ficha de inscripción escrita en un formato que entienden todos los sistemas: cada dato con su nombre entre comillas.
+
+> 🌎 **Otro ejemplo:** Es como el formato de una factura electrónica: cualquier programa la puede leer porque sigue siempre las mismas reglas.
 
 **JSON** es la forma de guardar datos en un archivo de texto. Se parece a un objeto de JavaScript:
 
@@ -367,6 +391,8 @@ const entendido = JSON.parse(localStorage.getItem('entendido') || '{}');
 
 > 🌎 **En la vida real:** un cuaderno que el navegador guarda en un cajón **solo para esta página**. Si vuelves mañana, sigue ahí. Pero es de **este** navegador: en otro celular, el cuaderno está vacío.
 
+> 🌎 **Otro ejemplo:** Como la memoria de tu control remoto: recuerda el último canal que viste, pero solo en ese televisor.
+
 > ⚠️ **Cuidado:** en modo privado o con algunas configuraciones, `localStorage` da error. Por eso este mapa lo envuelve en `try { ... } catch { ... }`: si no se puede guardar, la página sigue funcionando. Míralo en `web/guardado.js`.
 
 ```practica
@@ -411,6 +437,8 @@ Este mapa está repartido así (es la arquitectura del Tema 10 en pequeño):
 
 > 🌎 **En la vida real:** en un restaurante no cocina todo una sola persona. Cada cocinero hace lo suyo y se **pasan** las cosas. Los módulos son los cocineros.
 
+> 🌎 **Otro ejemplo:** Como un equipo de fútbol: arquero, defensores, mediocampistas y delanteros; cada uno con su puesto, y se pasan la pelota.
+
 ```practica
 elige :: Para agregar una clase nueva al mapa, ¿qué archivo abres? :: `web/app.js` :: `web/cursos.js` :: `web/guardado.js`
 elige :: ¿Qué hay que poner en el `<script>` para usar `import`? :: `type="text"` :: `type="module"` :: Nada
@@ -422,6 +450,10 @@ vf :: `export` permite que otro archivo use una función
 ## 10. Cuando algo falla: la consola
 
 > 🎙️ **El profesor:** para terminar, lo del Tema 07 aplicado a la web. La consola es tu tablero de luces.
+
+> 🌎 **En la vida real:** Es como el tablero del carro: cuando algo falla, se prende una luz con un símbolo. Hay que saber leerla antes de abrir el capó.
+
+> 🌎 **Otro ejemplo:** Es como el mensaje de error de un cajero automático: "tarjeta vencida" o "saldo insuficiente" te dice exactamente qué pasó.
 
 Abre la consola: clic derecho → **Inspeccionar** → **Consola** (o `Cmd + Option + J`).
 
@@ -455,6 +487,8 @@ vf :: `Failed to fetch` puede pasar si abres la página con doble clic
 ## Ejercicios
 
 > 🎙️ **El profesor:** en `practica/app.js`. Escribe tú cada línea.
+
+> 🌎 **En la vida real:** Es como instalar tu primer timbre: conectas los cables tú, aprietas el botón, y suena.
 
 **A. Botón de tema**
 1. Agrega un `<button id="tema">◐</button>` al HTML.
@@ -544,6 +578,8 @@ cargar();
 ## Para la entrevista
 
 > 🎙️ **El profesor:** en voz alta.
+
+> 🌎 **En la vida real:** Explicar JavaScript en una entrevista es como explicar la electricidad de una casa: qué se enciende cuando tocas qué, y de dónde viene la corriente.
 
 > 🎤 **Entrevista:** "¿Qué es el DOM y cómo lo cambia JavaScript?" y "¿Qué es un evento?"
 
