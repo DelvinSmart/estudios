@@ -34,12 +34,13 @@ export const CLASES = {
   '16': { carpeta: '16-css', titulo: 'CSS', meta: 'Darle colores, letras, espacios y forma', docs: LECCION },
   '17': { carpeta: '17-javascript', titulo: 'JavaScript en la página', meta: 'Hacer que la página responda y cambie', docs: LECCION },
   '18': { carpeta: '18-como-hice-mi-mapa', titulo: 'Cómo hice mi mapa de estudios', meta: 'Esta misma página, explicada por dentro', docs: LECCION },
+  '20': { carpeta: '20-publicar-e-instalar', titulo: 'Publicar e instalar', meta: 'Subir a GitHub, a Pages, a Firebase, a tus teléfonos y a Google Play', docs: LECCION },
   '19': { carpeta: '19-agentes-de-ia', titulo: 'Agentes de IA', meta: 'Los patrones para diseñar, medir y publicar agentes', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
 };
 
 // Las clases que ya tienen su clase guiada (CLASE-GUIADA.md): va primero,
 // y la lección queda como "Resumen" para repasar.
-const GUIADAS = ['01', '02', '03', '04', '05', '06', '07', '15', '16', '17', '08', '09', '10', '11', '12', '13', '14', '18'];
+const GUIADAS = ['01', '02', '03', '04', '05', '06', '07', '15', '16', '17', '08', '09', '10', '11', '12', '13', '14', '18', '20'];
 for (const n of GUIADAS) {
   CLASES[n].docs = [
     { archivo: 'CLASE-GUIADA.md', titulo: 'Clase guiada' },
@@ -71,7 +72,7 @@ export const ETAPAS = [
   {
     id: 'proyectos', icono: '🚀', titulo: 'Mis proyectos por dentro',
     desc: 'Todo lo anterior, aplicado a lo que yo construí.',
-    clases: ['12', '13', '14', '18'],
+    clases: ['12', '13', '14', '18', '20'],
   },
   {
     id: 'ia', icono: '🤖', titulo: 'IA y agentes',

@@ -426,4 +426,4 @@ vf :: El mapa lee los archivos .md cada vez :: V :: Una sola fuente de verdad.
 escribe :: Explica el mapa en 3 frases, como en una entrevista. :: Es una SPA en HTML, CSS y JavaScript que lee los archivos Markdown de las clases con fetch y los muestra como mapa de etapas, clases y partes. Un enrutador mira lo que va después del # para dibujar cada pantalla. Tiene prácticas interactivas y el progreso se guarda en el navegador de cada persona.
 ```
 
-> 🔁 **Repaso final de la clase:** una sola fuente de verdad, un archivo por trabajo, el enrutador con `#`, leer y partir el Markdown, plantillas y tarjetas, el servidor, colores y letra sin ligaduras, bombillos y prácticas, publicar con `.nojekyll`, y cómo agregar clases. Próxima: **Tema 19, Agentes de IA**.
+> 🔁 **Repaso final de la clase:** una sola fuente de verdad, un archivo por trabajo, el enrutador con `#`, leer y partir el Markdown, plantillas y tarjetas, el servidor, colores y letra sin ligaduras, bombillos y prácticas, publicar con `.nojekyll`, y cómo agregar clases. Próxima: **Tema 20, Publicar e instalar**.

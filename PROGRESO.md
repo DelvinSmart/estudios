@@ -31,6 +31,7 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 13 Cómo hice la web de Copiloto Driver
 - [ ] 14 ¿Qué dice la Biblia? por dentro
 - [ ] 18 Cómo hice mi mapa de estudios
+- [ ] 20 Publicar e instalar
 - [ ] 19 Agentes de IA
 
 Una clase se marca con `[x]` solo cuando puedo explicarla en voz alta, como

@@ -16,7 +16,7 @@ en una entrevista.
 
 ## Las clases, en orden
 
-Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14 y 18) y al final la IA (19). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
+Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14, 18 y 20) y al final la IA (19). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
 explicación, los ejemplos, los ejercicios y las respuestas.
 
 | # | Clase | Qué voy a saber hacer al terminar |
@@ -39,6 +39,7 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 | 13 | [Cómo hice la web de Copiloto](13-como-hice-la-web/README.md) | Explicar la web: React, TypeScript, Vite, Tailwind y Firebase, y cómo usa el código del app sin copiarlo |
 | 14 | [¿Qué dice la Biblia? por dentro](14-que-dice-la-biblia-por-dentro/README.md) | Explicar cómo se muestran versículos de Logos y Lockman sin copiarlos, el medidor de citas, las fuentes, el griego y el motor de diseño con su candado, y todo lo que no funcionó |
 | 18 | [Cómo hice mi mapa de estudios](18-como-hice-mi-mapa/LECCION.md) | Explicar esta misma página por dentro: el enrutador, la lectura del Markdown, el progreso y la publicación |
+| 20 | [Publicar e instalar](20-publicar-e-instalar/LECCION.md) | Subir el código a GitHub, las páginas a GitHub Pages, el servidor a Firebase, la app al Samsung y al iPhone, y el AAB a Google Play, cuidando la llave de firma |
 | 19 | [Agentes de IA](19-agentes-de-ia/LECCION.md) | Los patrones para diseñar, evaluar y publicar agentes (basada en la guía de Bashiri Smith), con las 12 preguntas de entrevista |
 
 ## Cómo estudiar cada clase
