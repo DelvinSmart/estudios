@@ -20,6 +20,9 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 05 Mi primer cambio
 - [ ] 06 Git
 - [ ] 07 Leer errores
+- [ ] 15 HTML
+- [ ] 16 CSS
+- [ ] 17 JavaScript en la página
 - [ ] 08 Firebase por dentro
 - [ ] 09 CRUD en Node.js
 - [ ] 10 Arquitectura
@@ -27,6 +30,8 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 12 Cómo hice Estudios Bíblicos
 - [ ] 13 Cómo hice la web de Copiloto Driver
 - [ ] 14 ¿Qué dice la Biblia? por dentro
+- [ ] 18 Cómo hice mi mapa de estudios
+- [ ] 19 Agentes de IA
 
 Una clase se marca con `[x]` solo cuando puedo explicarla en voz alta, como
 en una entrevista.
