@@ -12,6 +12,8 @@ Tu app guarda los datos de las personas en **Firebase**. En este tema vas a ente
 
 > 🌎 **En la vida real:** es como alquilar un local en un shopping en vez de construir tu propio edificio. El shopping pone la seguridad, la luz, la limpieza y el estacionamiento; tú pagas el alquiler según cuánto usas y te dedicas a vender. Si un día llega mucha gente, el shopping abre más puertas; no tienes que construir nada.
 
+> 🌎 **Otro ejemplo:** Como usar la luz de la compañía eléctrica en vez de comprar un generador: no lo mantienes tú, pagas según lo que gastas.
+
 **Firebase** es un conjunto de servicios de Google para que una app tenga **servidor sin que tú administres un servidor**. Tú no compras una computadora ni la mantienes encendida: Google lo hace, y tú pagas por lo que usas.
 
 **Comparación:** en vez de construir un edificio para guardar tus cosas, alquilas casilleros, una oficina y un portero.
@@ -26,6 +28,8 @@ Tu app guarda los datos de las personas en **Firebase**. En este tema vas a ente
 > - **Hosting** = la **vidriera** que da a la calle: la página web que ve cualquiera.
 >
 > El **proyecto** `copiloto-driver-ia` es el contrato de alquiler: todo eso está a nombre de tu negocio.
+
+> 🌎 **Otro ejemplo:** En un hospital: la recepción que te identifica (Authentication), el archivo de historias clínicas (Firestore), el depósito de radiografías (Storage), los médicos que trabajan adentro (Cloud Functions) y la cartelera de la entrada (Hosting).
 
 | Pieza | Qué es | Para qué la usa Copiloto |
 |---|---|---|
@@ -47,6 +51,8 @@ Todo está en un **proyecto** de Firebase llamado `copiloto-driver-ia`.
 >
 > No es como Excel, donde todo está en una sola tabla gigante con filas y columnas iguales. Cada ficha puede tener sus propios renglones.
 
+> 🌎 **Otro ejemplo:** Como el fichero de una biblioteca: cajones por tema, una ficha por libro, los datos de cada ficha, y a veces una ficha con hojitas abrochadas.
+
 Firestore no usa tablas como Excel. Usa **colecciones** y **documentos**:
 
 | Palabra | Qué es | Comparación |
@@ -67,6 +73,8 @@ Firestore no usa tablas como Excel. Usa **colecciones** y **documentos**:
 > ¿Por qué cada uno en su departamento? Porque así la regla del portero es simple: "cada uno entra solo al suyo".
 >
 > El ingreso guardado es como un recibo: quién (Thermomac), cuánto (50), de qué tipo, cuándo y con qué carro.
+
+> 🌎 **Otro ejemplo:** Como los casilleros de un gimnasio: cada socio tiene el suyo con su número; las pesas del salón son de todos.
 
 ```
 users/                          ← colección: una entrada por persona
@@ -104,6 +112,8 @@ Un ingreso guardado se ve más o menos así:
 
 > 🌎 **En la vida real:** la app vive en millones de teléfonos que no controlas, como un edificio con muchas puertas. Cualquiera podría intentar entrar por una ventana, sin pasar por la recepción. Las **reglas** son el portero que está **dentro** de cada puerta y revisa la credencial de todo el que quiera abrir algo, venga por donde venga.
 
+> 🌎 **Otro ejemplo:** Como un cajero automático: cualquiera puede acercarse e intentar sacar plata; lo que protege es que el banco revisa la tarjeta y la clave en su sistema.
+
 La app está en el teléfono de cada persona, y **cualquiera puede intentar** leer o escribir en la base de datos directamente, sin usar la app. Por eso existen las **reglas de seguridad**: un archivo que dice quién puede hacer qué.
 
 Están en tu app, en **`firestore.rules`**.
@@ -117,6 +127,8 @@ Están en tu app, en **`firestore.rules`**.
 > - `&&` es "y": tiene que cumplir **todas**.
 >
 > Si el vecino del 302 quiere entrar al 305 con su propia credencial, el portero le dice: "Sin permiso" (*Missing or insufficient permissions*).
+
+> 🌎 **Otro ejemplo:** Es como retirar un paquete en el correo: muestras tu documento y tiene que coincidir con el nombre del paquete.
 ```
 match /users/{userId}/earnings/{docId} {
   allow read, write: if request.auth != null && request.auth.uid == userId && hasActiveAccess(userId);
@@ -133,6 +145,8 @@ Si alguien con sesión intenta leer los ingresos de otra persona, el `uid` no co
 ### Regla real 2: los colores del panel
 
 > 🌎 **En la vida real:** es como la **cartelera** del edificio: cualquier inquilino con credencial la puede **leer**, pero **ningún** inquilino puede escribir en ella (`if false`). Solo la administración (el servidor) tiene la llave de la vitrina y pega los avisos.
+
+> 🌎 **Otro ejemplo:** Como el horario de una farmacia pegado en la vidriera: todos lo pueden leer, solo el dueño lo cambia.
 ```
 match /vehicleColors/{id} {
   allow read: if request.auth != null;
@@ -145,6 +159,8 @@ match /vehicleColors/{id} {
 ### Por qué las reglas tienen pruebas
 
 > 🌎 **En la vida real:** es como probar las cerraduras de un edificio antes de que se muden los inquilinos. Usas una **maqueta** (el emulador) y mandas a alguien a intentar abrir la puerta del vecino. Si la cerradura no cede, aprobado. Si una sola cerradura falla, se pueden robar las cosas de **todos**.
+
+> 🌎 **Otro ejemplo:** Es como el examen práctico de un cerrajero: le dan puertas de práctica y tiene que demostrar que nadie más las abre.
 Un error en las reglas puede exponer los datos de todos. Por eso tu app tiene **23 pruebas de reglas** (`rules-test/`), que corren con el **emulador** de Firebase: una copia falsa de la base de datos en tu computadora. Ejemplo: intentan leer los ingresos de otra persona y comprueban que la regla lo **impida**.
 
 ## 5. Cloud Functions: el código del servidor
@@ -159,6 +175,8 @@ Un error en las reglas puede exponer los datos de todos. Por eso tu app tiene **
 > - `adminUpsertVehicleColor` / `adminUploadVehiclePhoto` = el que actualiza la cartelera, pero solo si se lo pide el dueño.
 > - `requestOtpCode` / `verifyOtpCode` = el que te manda el código por SMS y después revisa que lo escribiste bien.
 > - `revenueCatWebhook` = el que recibe el aviso del banco: "este cliente pagó".
+
+> 🌎 **Otro ejemplo:** Como la cocina de un restaurante: el cliente pide desde la mesa, pero el cuchillo, el fuego y la receta secreta se quedan atrás, con el cocinero.
 
 Algunas cosas **no pueden** hacerse en el teléfono:
 - **Secretos:** la clave de la IA (Gemini) no puede estar en la app, porque cualquiera podría sacarla. Vive en el servidor.
@@ -178,6 +196,8 @@ Están en la carpeta **`functions/src/`** de tu app. Ejemplos reales:
 ### Cómo se protege una función de administrador
 
 > 🌎 **En la vida real:** es como la oficina del gerente: tiene un timbre (`onCall`) que cualquiera puede tocar, pero la secretaria (`assertOwner`) mira quién es antes de abrir. Si no eres el dueño, te dice "no puede pasar" y ahí se termina.
+
+> 🌎 **Otro ejemplo:** Como una sala con lector de huella: la puerta está en un pasillo público, pero solo se abre con la huella del dueño.
 ```ts
 export const adminUpsertVehicleColor = onCall(async (request) => {
   assertOwner(request.auth?.token.email);
@@ -190,6 +210,8 @@ export const adminUpsertVehicleColor = onCall(async (request) => {
 ### Publicar (deploy)
 
 > 🌎 **En la vida real:** cambiar el reglamento interno en tu computadora no cambia nada en la oficina. Hay que **llevarlo e imprimirlo allá**. `deploy` es eso: mandar las instrucciones nuevas a los empleados de la nube.
+
+> 🌎 **Otro ejemplo:** Como actualizar el menú de una cadena de restaurantes: imprimirlo en la oficina no alcanza; hay que mandarlo a los locales.
 El código del servidor no cambia solo. Hay que **publicarlo**:
 ```bash
 npx firebase-tools deploy --only functions --project copiloto-driver-ia
@@ -207,6 +229,8 @@ Por eso, cuando agregamos algo en el servidor, te pasaba ese comando.
 > 6. **El Inicio** = la pantalla del banco que muestra tu saldo se actualiza sola, porque estaba atenta a la campanita.
 > 7. **El Copiloto** = tu asesor escucha la campanita (`earning.added`) y anota en su libreta: "hoy ganó 50 más".
 
+> 🌎 **Otro ejemplo:** Como un pedido online: llenas el carrito, se calcula el total, se manda al depósito, se verifica tu cuenta, se guarda, y te llega la notificación.
+
 Cuando registras R$ 50 en "Mi empresa":
 
 1. **La pantalla** (`FinanceUnifiedRegisterForm`) arma el ingreso.
@@ -222,6 +246,8 @@ Cuando registras R$ 50 en "Mi empresa":
 > 🌎 **En la vida real:** - **Nunca una clave secreta en la app**: es como nunca dejar la llave de la casa debajo del felpudo. Es el primer lugar donde miran los ladrones.
 > - **La cuenta de servicio fuera del proyecto**: es la llave maestra de todo el edificio. No se guarda en el mismo llavero que las demás, sino en una caja fuerte aparte.
 > - **Escrituras en producción, solo con tu aprobación**: como un contador que no puede mover dinero de tu cuenta sin tu firma.
+
+> 🌎 **Otro ejemplo:** Como las reglas de un banco: la clave nunca se dice por teléfono, la llave de la bóveda la guarda el gerente aparte, y nada grande se hace sin la firma del titular.
 
 Están en `AGENTS.md`, sección 9:
 - **Nunca** una clave secreta (`sk_...`) en la app ni en GitHub.

@@ -14,6 +14,8 @@ Hasta hoy, los commits y los push los hacía el script o Claude. En este tema va
 >
 > **Git vs. GitHub**: Git es el **álbum de fotos** que tienes en casa, con la historia de tu familia. GitHub es una **copia del álbum guardada en un banco**: si se te inunda la casa, la historia sigue a salvo, y además puedes mostrársela a otros.
 
+> 🌎 **Otro ejemplo:** Es como la libreta de mantenimiento del carro: cada servicio con fecha y qué se hizo. Si algo falla, miras hacia atrás y sabes cuándo empezó.
+
 **Git** es un programa que guarda **la historia** de tu código. Cada vez que guardas un punto de la historia, puedes volver a él, ver qué cambió y quién lo cambió.
 
 **Comparación:** es como el historial de un documento de Google Docs, pero tú decides cuándo se guarda cada versión y le pones un título.
@@ -41,6 +43,8 @@ Hasta hoy, los commits y los push los hacía el script o Claude. En este tema va
 > - **Pull request** = llevarle la maqueta al jefe de obra: "mire, ¿la pasamos a la casa de verdad?".
 > - **Merge** = construir en la casa lo que salió bien en la maqueta.
 
+> 🌎 **Otro ejemplo:** En un equipo de fútbol: el repositorio es la historia del club; un commit, cada partido; una rama, un entrenamiento táctico aparte; merge, usar esa táctica en el partido oficial; y un pull request, proponerle la táctica al entrenador.
+
 | Palabra | Significado | En tu app |
 |---|---|---|
 | **Repositorio** (repo) | La carpeta del proyecto con toda su historia | `copiloto-driver` |
@@ -63,6 +67,8 @@ Hasta hoy, los commits y los push los hacía el script o Claude. En este tema va
 > 3. **`git commit`** = cierras la caja con cinta y le pegas la etiqueta ("Regalo de cumpleaños para mamá"). Ya está lista, pero sigue en tu casa.
 > 4. **`git push`** = la llevas al correo. Ahora existe una copia lejos de tu casa, y allí la revisa el CI, como la aduana.
 
+> 🌎 **Otro ejemplo:** Como un pedido de comida: eliges los platos (add), confirmas el pedido con una nota (commit) y el repartidor lo lleva (push).
+
 ```
  Tu archivo  ──git add──▶  Staging  ──git commit──▶  Historia en tu Mac  ──git push──▶  GitHub
  (editado)                (preparado)                (guardado)                          (copia + CI)
@@ -76,6 +82,8 @@ Hasta hoy, los commits y los push los hacía el script o Claude. En este tema va
 ## 4. Tu app en números
 
 > 🌎 **En la vida real:** **295 commits** son como 295 páginas del diario de la obra. El código `2ce8c04` es como el **número de seguimiento** de un paquete de Correios: único, nadie más tiene el mismo, y con él encuentras exactamente ese envío.
+
+> 🌎 **Otro ejemplo:** Como el número de un boleto de avión: con ese código encuentras exactamente tu vuelo, aunque haya miles ese día.
 
 - Tu app tiene **295 commits** (al 10/11/2026).
 - Trabajas en la rama **`feature/smart-camera`**.
@@ -107,6 +115,8 @@ f333022 feat(ganhos,painel): Minha empresa, textos de como registrar e foto por 
 >
 > El **porqué** es lo más valioso: lo que hiciste se ve mirando el carro, pero **por qué** lo hiciste solo lo sabes tú.
 
+> 🌎 **Otro ejemplo:** Como el asunto de un correo bien escrito: "Factura de octubre – pago atrasado por cambio de banco" dice qué y por qué; "Hola" no dice nada.
+
 Tu repositorio usa una convención llamada **Conventional Commits**, con los mensajes en portugués:
 
 ```
@@ -130,9 +140,13 @@ Por qué se hizo el cambio, en 1 a 3 líneas.
 
 > 🌎 **En la vida real:** son los botones del control remoto del diario de obra. Cada uno hace una sola cosa.
 
+> 🌎 **Otro ejemplo:** Son como las herramientas de una caja: cada una sirve para un trabajo, y aprendes cuál usar en cada momento.
+
 ### Ver el estado
 
 > 🌎 **En la vida real:** `git status` es mirar el tablero del carro antes de arrancar: en qué marcha estás (la rama) y qué luces están encendidas (qué archivos cambiaste). Se hace **siempre**, antes y después.
+
+> 🌎 **Otro ejemplo:** Como mirar el carrito antes de pasar por la caja del supermercado: ves qué llevas antes de pagar.
 ```bash
 git status
 ```
@@ -141,6 +155,8 @@ Te dice en qué rama estás y qué archivos cambiaste. **Es el comando que más 
 ### Ver qué cambió
 
 > 🌎 **En la vida real:** `git diff` es como el **control de cambios** de Word: lo tachado en rojo (`-`) es lo que quitaste, lo subrayado en verde (`+`) es lo que agregaste.
+
+> 🌎 **Otro ejemplo:** Como comparar dos versiones de un CV con el control de cambios: ves exactamente qué palabras cambiaste.
 ```bash
 git diff
 ```
@@ -149,6 +165,8 @@ Muestra línea por línea lo que cambiaste. Las líneas con `-` (rojo) se quitar
 ### Ver la historia
 
 > 🌎 **En la vida real:** `git log` es hojear el álbum de fotos de atrás para adelante. `git show` es abrir una foto en grande para ver todos los detalles de ese día.
+
+> 🌎 **Otro ejemplo:** Como el historial de pedidos de una app: la lista (log) y el detalle de un pedido (show).
 ```bash
 git log --oneline -10
 ```
@@ -162,6 +180,8 @@ Lo que cambió en un commit específico.
 ### Preparar y guardar
 
 > 🌎 **En la vida real:** es elegir qué fotos van a la página (`git add`) y pegarlas con su nota (`git commit -m`). `git add -A` es "todas las fotos que tomé hoy".
+
+> 🌎 **Otro ejemplo:** Es como armar un paquete: eliges qué meter (add) y lo cierras con una etiqueta (commit).
 ```bash
 git add archivo.ts          # un archivo
 git add -A                   # todos los cambios
@@ -171,6 +191,8 @@ git commit -m "fix(app): corrige el texto del tanque"
 ### Subir
 
 > 🌎 **En la vida real:** `git push` es mandar las páginas nuevas del diario a la oficina central.
+
+> 🌎 **Otro ejemplo:** Es como subir un archivo a Google Drive: después de subirlo, está a salvo aunque se pierda tu teléfono.
 ```bash
 git push
 ```
@@ -178,6 +200,8 @@ git push
 ### Deshacer cambios que todavía no guardaste
 
 > 🌎 **En la vida real:** es arrugar el borrador y tirarlo: el archivo vuelve a como estaba en la última foto. Lo que escribiste en el borrador **no vuelve**.
+
+> 🌎 **Otro ejemplo:** Es como el botón "descartar borrador" de un correo: vuelve a como estaba y lo que escribiste no se recupera.
 ```bash
 git restore archivo.ts
 ```
@@ -188,6 +212,8 @@ git restore archivo.ts
 > 🌎 **En la vida real:** las ramas son como los carriles de una autopista: cada uno avanza por su lado sin chocar. `merge` es cuando dos carriles se juntan en uno. Borrar una rama ya unida es quitar los conos de un carril que ya no se usa.
 >
 > `switch` y `checkout` son como "carro" y "auto": el mismo vehículo, pero `switch` es el nombre más claro.
+
+> 🌎 **Otro ejemplo:** Como hacer una copia de un documento para probar cambios grandes sin tocar el original.
 ```bash
 git branch                  # ver las ramas (la tuya tiene *)
 git switch -c mi-rama       # crear una rama nueva y pasarte a ella
@@ -198,11 +224,15 @@ git switch main             # cambiarte a otra rama
 
 > 🌎 **En la vida real:** es el simulador de vuelo de los pilotos: aprendes a aterrizar en una pantalla antes de subirte a un avión con pasajeros. Aquí practicas con una carpeta de mentira.
 
+> 🌎 **Otro ejemplo:** Es como practicar recetas con ingredientes baratos antes de cocinar para una fiesta.
+
 Vas a practicar en una carpeta aparte, para no arriesgar la app. Escribe cada comando tú mismo.
 
 ### Parte A: crear un repositorio
 
 > 🌎 **En la vida real:** `git init` es como comprar un cuaderno nuevo y escribir en la tapa "Diario de obra". Desde ese momento, esa carpeta puede guardar historia. Por ahora, las hojas están en blanco.
+
+> 🌎 **Otro ejemplo:** Como abrir una carpeta nueva en el archivador y escribirle el nombre: desde ese momento puede guardar papeles.
 ```bash
 cd /Volumes/SSD_Desarrollo/Developer/Aprender/06-git
 mkdir practica
@@ -218,6 +248,8 @@ git init
 > - `git add` = la pones en la pila de "para pegar" (verde).
 > - `git commit` = la pegas en el álbum con su nota.
 > - `git log` = abres el álbum y ahí está.
+
+> 🌎 **Otro ejemplo:** Como el primer depósito en una cuenta nueva del banco: queda registrado con fecha y concepto.
 1. Crea un archivo `notas.txt` con una línea: `Mi primera nota`.
 2. `git status` → aparece en rojo: Git lo ve, pero no está preparado.
 3. `git add notas.txt`
@@ -228,6 +260,8 @@ git init
 ### Parte C: ver un cambio
 
 > 🌎 **En la vida real:** es comparar dos fotos de la misma pared: ayer tenía un cuadro, hoy tiene dos. `git diff` te señala el cuadro nuevo con un `+`.
+
+> 🌎 **Otro ejemplo:** Es como el resaltador amarillo que marca lo que agregaste a tus apuntes desde la última vez.
 1. Agrega otra línea a `notas.txt`: `Segunda nota`.
 2. `git diff` → ves la línea nueva con `+`.
 3. `git add -A` y `git commit -m "docs: segunda nota"`.
@@ -236,6 +270,8 @@ git init
 ### Parte D: deshacer
 
 > 🌎 **En la vida real:** es como borrar sin querer todo un mensaje de WhatsApp antes de mandarlo, y que exista un botón mágico que lo devuelve tal como estaba en la última versión guardada.
+
+> 🌎 **Otro ejemplo:** Es como volver a cargar una partida guardada del videojuego después de perder.
 1. Borra todo el contenido de `notas.txt` y guarda.
 2. `git status` → aparece modificado.
 3. `git restore notas.txt` → el archivo vuelve. Ábrelo y compruébalo.
@@ -243,6 +279,8 @@ git init
 ### Parte E: una rama
 
 > 🌎 **En la vida real:** es como probarte ropa en el probador: te pones la camisa nueva (la rama `experimento`), te miras, y al salir del probador (`git switch master`) vuelves con tu ropa de siempre. La camisa nueva no desapareció: está colgada en el probador esperando. `master` y `main` son el mismo cuarto con distinto cartel.
+
+> 🌎 **Otro ejemplo:** Como dos borradores de una carta: escribes una versión distinta en otra hoja; la original sigue intacta.
 1. `git switch -c experimento`
 2. Agrega una línea `Esto es un experimento` y haz commit.
 3. `git switch master`. Abre `notas.txt`: la línea del experimento **no está**.
@@ -254,6 +292,8 @@ Así trabajan los equipos: cada cosa nueva en su rama, sin dañar la principal.
 ### Parte F: unir
 
 > 🌎 **En la vida real:** `git merge` es decidir comprar la camisa: ahora la ropa de siempre incluye la camisa nueva.
+
+> 🌎 **Otro ejemplo:** Como pasar en limpio en el cuaderno lo que probaste en el borrador y te gustó.
 1. Ve a la rama principal: `git switch master`.
 2. `git merge experimento`
 3. Abre `notas.txt`: ahora la principal tiene la línea del experimento.
@@ -261,6 +301,8 @@ Así trabajan los equipos: cada cosa nueva en su rama, sin dañar la principal.
 ## 8. Lo que el script de tu app hace por ti
 
 > 🌎 **En la vida real:** el script era como un **lavadero automático**: tú metías el carro y salía limpio, sin saber qué pasaba adentro. Ahora sabes que adentro hay: revisar que no quedó nada prohibido en el carro (`git status`), enjabonar todo (`git add -A`), secar y poner el ticket (`git commit`) y sacarlo a la calle (`git push`).
+
+> 🌎 **Otro ejemplo:** Como el piloto automático de un avión: hace las mismas maniobras que haría el piloto, en el mismo orden.
 
 Cuando corrías `./scripts/tareas.sh` para el commit, el script hacía:
 1. `git status` para revisar que no subas un archivo prohibido (el AAB, la llave del keystore o la cuenta de servicio).
@@ -276,6 +318,8 @@ Ahora sabes qué es cada paso.
 >
 > Las **claves secretas** son como la llave de tu casa: nunca la mandas por foto en un grupo de WhatsApp. Aunque borres el mensaje después, alguien ya pudo haberla visto o guardado. Si pasa, **cambias la cerradura** (la clave), no basta con borrar el mensaje.
 
+> 🌎 **Otro ejemplo:** Es como no publicar la foto de tu tarjeta de crédito en redes: una vez que se compartió, no se puede borrar de los teléfonos de los demás.
+
 En tu app hay un archivo llamado **`.gitignore`**: la lista de lo que Git **no** debe guardar. Por ejemplo:
 - `node_modules/` (las librerías: se instalan con `npm ci`).
 - `android/` (se genera con `expo prebuild`).
@@ -287,6 +331,8 @@ Y nunca, por ninguna razón, se suben **claves secretas**, la llave del keystore
 
 > 🌎 **En la vida real:** es como la tarjetita de primeros auxilios pegada en la puerta de la nevera: no la memorizas, la tienes a mano. Los ⭐ son "lo que usas todos los días" (como el cepillo de dientes) y los ⚠️ son "cuidado, corta" (como el cuchillo).
 
+> 🌎 **Otro ejemplo:** Como el machete con fórmulas que tienes a mano en un examen con libro abierto: no lo memorizas, lo consultas.
+
 Todos los comandos más usados, en un solo lugar. Los que tienen ⚠️ **borran cosas**: úsalos solo si sabes lo que hacen. Los que tienen ⭐ son los de todos los días.
 
 ### Empezar
@@ -294,6 +340,8 @@ Todos los comandos más usados, en un solo lugar. Los que tienen ⚠️ **borran
 > 🌎 **En la vida real:** - `git init` = comprar un cuaderno nuevo.
 > - `git clone` = fotocopiar el cuaderno de otra persona entero, con toda su historia.
 > - `git config` = escribir tu nombre en la primera página, para que se sepa quién escribió cada cosa.
+
+> 🌎 **Otro ejemplo:** `git clone` es como fotocopiar un libro entero con todas sus notas; `git config` es escribir tu nombre en la primera página.
 | Comando | Qué hace |
 |---|---|
 | `git init` | Convierte la carpeta en un repositorio nuevo |
@@ -306,6 +354,8 @@ Todos los comandos más usados, en un solo lugar. Los que tienen ⚠️ **borran
 > 🌎 **En la vida real:** es la rutina diaria del cuaderno: mirar qué cambió (`status`), elegir qué anotar (`add`), anotarlo (`commit`), mandar la copia (`push`) y traer lo que anotaron los demás (`pull`).
 >
 > `git commit -am` es un atajo, como el "lavar y secar" de la lavadora, pero solo funciona con ropa que ya conocía: la ropa **nueva** hay que meterla a mano primero.
+
+> 🌎 **Otro ejemplo:** Es como la rutina de la mañana: mirar el teléfono, elegir qué responder, responder, enviar, y leer lo nuevo.
 | Comando | Qué hace |
 |---|---|
 | ⭐ `git status` | Qué cambió y en qué rama estás |
@@ -321,6 +371,8 @@ Todos los comandos más usados, en un solo lugar. Los que tienen ⚠️ **borran
 > 🌎 **En la vida real:** las ramas son como los carriles de una autopista: cada uno avanza por su lado sin chocar. `merge` es cuando dos carriles se juntan en uno. Borrar una rama ya unida es quitar los conos de un carril que ya no se usa.
 >
 > `switch` y `checkout` son como "carro" y "auto": el mismo vehículo, pero `switch` es el nombre más claro.
+
+> 🌎 **Otro ejemplo:** Como dos borradores del mismo documento que después se juntan en uno solo.
 | Comando | Qué hace |
 |---|---|
 | `git branch` | Lista las ramas (la tuya tiene `*`) |
@@ -341,6 +393,8 @@ Todos los comandos más usados, en un solo lugar. Los que tienen ⚠️ **borran
 > - `git clean -fd` ⚠️ = tirar a la basura todos los papeles sueltos que no estaban en el cuaderno.
 >
 > ¿Por qué `revert` y no `reset` cuando ya lo subiste? Porque otros ya fotocopiaron tu cuaderno. Si arrancas páginas, sus copias ya no coinciden con la tuya.
+
+> 🌎 **Otro ejemplo:** Como un libro ya impreso: no arrancas la página con el error; sacas una fe de erratas que lo corrige.
 | Comando | Qué hace |
 |---|---|
 | ⚠️ `git restore <archivo>` | Descarta los cambios de un archivo (no se recuperan) |
@@ -355,6 +409,8 @@ Todos los comandos más usados, en un solo lugar. Los que tienen ⚠️ **borran
 ### Guardar a un lado (stash)
 
 > 🌎 **En la vida real:** estás cocinando y tocan el timbre. No tiras la comida ni la terminas: la pones en la nevera (`stash`), atiendes, y después la sacas (`stash pop`). `stash list` es mirar qué hay en la nevera. `apply` es sacar una porción y dejar el resto guardado; `drop` es tirar lo que estaba en la nevera.
+
+> 🌎 **Otro ejemplo:** Como guardar el trabajo a medias en un cajón cuando te llaman a una reunión, y sacarlo al volver.
 Para cuando estás a mitad de algo y necesitas cambiar de rama sin hacer commit.
 
 | Comando | Qué hace |
@@ -373,6 +429,8 @@ Para cuando estás a mitad de algo y necesitas cambiar de rama sin hacer commit.
 > - `git fetch` = **mirar** el buzón sin abrir las cartas.
 > - `git pull` = abrir las cartas y mezclarlas con tus papeles. Por eso `pull` = `fetch` + `merge`.
 > - `git push origin --delete` = cerrar una casilla en la oficina.
+
+> 🌎 **Otro ejemplo:** `fetch` es ver en la app del banco qué movimientos nuevos hay; `pull` es además pasarlos a tu libreta.
 | Comando | Qué hace |
 |---|---|
 | `git remote -v` | Muestra a qué dirección de GitHub está conectado |
@@ -391,6 +449,8 @@ Para cuando estás a mitad de algo y necesitas cambiar de rama sin hacer commit.
 > - `git show` = la ficha completa de un día.
 > - `git blame` = como las firmas en un contrato: dice quién escribió cada renglón y cuándo.
 > - `git bisect` = buscar una palabra en el diccionario abriéndolo por la mitad, después por la mitad de la mitad… Así, entre 300 commits, encuentras el que trajo el error en unos 8 intentos.
+
+> 🌎 **Otro ejemplo:** `blame` es la firma en cada página de un contrato; `bisect` es encontrar qué día empezó una gotera revisando las fotos de la casa por mitades.
 | Comando | Qué hace |
 |---|---|
 | ⭐ `git log --oneline` | La historia, un commit por línea |

@@ -25,6 +25,8 @@ En el Tema 02 leíste pruebas. Ahora vas a **escribir una tú**, dentro de tu ap
 
 > 🌎 **En la vida real:** antes de inspeccionar un ascensor, el inspector lee el cartel: "máximo 8 personas, máximo 600 kg". Tú haces lo mismo con el nombre de la empresa: escribes las reglas del letrero (sin espacios de más, máximo 24 letras, máximo 2 palabras) para saber qué revisar.
 
+> 🌎 **Otro ejemplo:** Como antes de un partido: todos saben el reglamento (cuánto dura, qué es falta). Sin reglas, no se puede arbitrar.
+
 Antes de tocar el código, escribe en un papel la regla de `normalizeMyCompanyName`:
 
 > - Quita los espacios de los lados y deja un solo espacio entre palabras.
@@ -38,6 +40,8 @@ Antes de tocar el código, escribe en un papel la regla de `normalizeMyCompanyNa
 > 🌎 **En la vida real:** es como el profesor que prepara las respuestas del examen antes de corregir. Calculas **tú**, a mano, qué debe salir en cada caso.
 >
 > Los **casos de borde** son como el ascensor de "máximo 8 personas": lo interesante no es probar con 3 personas, es probar con **exactamente 8** (debe subir) y con **9** (no debe subir). Ahí es donde se esconden los errores: "Taxi Bom" (justo 2 palabras) y "Taxi Bom Ltda" (una de más).
+
+> 🌎 **Otro ejemplo:** Como revisar el vuelto antes de que te lo den: ya sabes cuánto tiene que ser, y por eso te das cuenta si está mal.
 
 Llena esta tabla **a mano**, sin correr nada. Es lo más importante del tema.
 
@@ -58,6 +62,8 @@ Llena esta tabla **a mano**, sin correr nada. Es lo más importante del tema.
 
 > 🌎 **En la vida real:** la carpeta `__tests__` es como el cajón del taller donde se guardan todas las hojas de inspección. El nombre terminado en `.test.ts` es como la etiqueta roja "INSPECCIÓN" en la carpeta: así Jest, cuando entra al cajón, sabe cuáles hojas le toca revisar y cuáles ignorar.
 
+> 🌎 **Otro ejemplo:** Como guardar las facturas en una carpeta con etiqueta "Facturas 2026": si las dejas en otro cajón, el contador no las encuentra.
+
 1. Abre la carpeta de la app en VS Code.
 2. Ve a la carpeta `src/utils/__tests__/`. Ahí viven las pruebas de las reglas.
 3. Crea un archivo nuevo llamado `miPrimeraPrueba.test.ts`.
@@ -72,6 +78,8 @@ Llena esta tabla **a mano**, sin correr nada. Es lo más importante del tema.
 > - `expect(x).toBe(y)` = "medí x, esperaba y". Si no coinciden, se marca con ✕.
 > - `() => { ... }` = una instrucción sin nombre, como un papelito que dice "haz esto" y que el inspector lee cuando llega a ese renglón.
 > - `toBeNull()` = "espero que me digan **no se puede**", como esperar que el ascensor **no** suba con 9 personas.
+
+> 🌎 **Otro ejemplo:** `import` es como pedir prestada una herramienta al vecino: no la fabricas, la traes de su casa para usarla.
 
 Copia esto en el archivo. Son las partes fijas; tú vas a completar el resto.
 
@@ -104,6 +112,8 @@ expect(normalizeMyCompanyName('Taxi Bom Ltda')).toBeNull();
 
 > 🌎 **En la vida real:** es como probar solo **una** hornalla de la estufa en vez de encender toda la cocina. Escribes el nombre de tu archivo para que Jest no revise las otras 180 pruebas; es más rápido y ves solo lo tuyo. La ✓ verde es el "aprobado" del inspector.
 
+> 🌎 **Otro ejemplo:** Es como probar una sola lámpara con su interruptor, en vez de prender toda la casa.
+
 En la terminal, dentro de la carpeta de la app:
 
 ```bash
@@ -129,6 +139,8 @@ Tests:       1 passed, 1 total
 > 2. ¿Leí bien el ticket?
 > 3. ¿La caja registradora está mal? (casi nunca es esto)
 
+> 🌎 **Otro ejemplo:** Como llenar un crucigrama palabra por palabra y verificar cada una con las que se cruzan.
+
 Agrega un `it(...)` por cada fila de tu tabla del Paso 2. Corre la prueba después de cada uno. Si alguno falla, revisa en este orden:
 1. ¿Calculé bien lo esperado?
 2. ¿Escribí bien la prueba (comillas, paréntesis)?
@@ -139,6 +151,8 @@ Agrega un `it(...)` por cada fila de tu tabla del Paso 2. Corre la prueba despu�
 > 🌎 **En la vida real:** es como cuando el bombero prueba la alarma de incendio con humo de verdad. Cambias el cartel del ascensor de "máximo 2" a "máximo 3" a propósito, y miras si tu inspección se da cuenta. Si tu prueba grita "✕ esperaba que no se pudiera, pero se pudo", tu prueba funciona.
 >
 > Y después **devuelves el cartel a su lugar**. Es como el bombero que, después del simulacro, vuelve a dejar la alarma lista: si la deja apagada, la casa queda sin protección.
+
+> 🌎 **Otro ejemplo:** Como un piloto de prueba que apaga un motor a propósito para ver si el avión avisa, y después lo vuelve a encender.
 
 Vas a comprobar que tu prueba **sí protege** la regla.
 
@@ -163,6 +177,8 @@ Se lee: "esperaba `null`, pero recibió el nombre". Tu prueba atrapó el cambio.
 ## Paso 8. Cierra
 
 > 🌎 **En la vida real:** como al terminar de cocinar: lavas las ollas y apagas la estufa. `git status` es como dar una última mirada a la cocina antes de salir para ver si quedó alguna hornalla encendida (algún archivo cambiado sin querer).
+
+> 🌎 **Otro ejemplo:** Como devolver las herramientas a su lugar después de trabajar: si las dejas tiradas, mañana no sabes qué tocaste.
 
 Esta regla ya tiene pruebas en `earningSourceRules.test.ts`, así que tu archivo es de práctica:
 - **Bórralo** cuando termines, o

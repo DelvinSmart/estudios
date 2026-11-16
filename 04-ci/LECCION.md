@@ -8,6 +8,8 @@
 >
 > "Computadora limpia" quiere decir que, para cada maleta, la máquina arranca de cero: no recuerda la maleta anterior.
 
+> 🌎 **Otro ejemplo:** Es como un vigilante nocturno: hace su ronda solo, todas las noches, aunque el dueño esté durmiendo o de viaje.
+
 **CI** viene del inglés *Continuous Integration*: **Integración Continua**.
 
 Es una **máquina en internet que revisa tu código sola cada vez que lo subes**. Tú haces `git push`, y en ese momento GitHub enciende una computadora limpia, descarga tu código, lo instala desde cero y corre todas las revisiones. Si algo falla, te avisa.
@@ -23,6 +25,8 @@ Es una **máquina en internet que revisa tu código sola cada vez que lo subes**
 > - **Confianza**: como el sello "revisado" de la revisión técnica del carro.
 >
 > El caso real es exactamente el del condimento escondido: tu Mac tenía algo instalado de antes que tapaba el problema.
+
+> 🌎 **Otro ejemplo:** Como un auditor externo: no se olvida, no conoce tus atajos, avisa rápido, deja un informe guardado y te da tranquilidad.
 
 | Para qué | Qué significa en tu app |
 |---|---|
@@ -40,6 +44,8 @@ Es una **máquina en internet que revisa tu código sola cada vez que lo subes**
 > - **No sabe si la regla es correcta**: si la lista del aeropuerto olvidó prohibir algo, el guardia lo deja pasar. Solo cumple la lista.
 > - **No publica en Google Play**: el inspector de la fábrica aprueba el carro, pero no lo lleva a la concesionaria. Eso lo haces tú.
 
+> 🌎 **Otro ejemplo:** Como el detector de metales del banco: encuentra armas, pero no sabe si la persona es amable, ni la lleva a su casa.
+
 - **No prueba la app en un teléfono.** No sabe si un botón se ve feo o si la app abre en el iPhone.
 - **No sabe si la regla es la correcta.** Solo revisa lo que las pruebas dicen.
 - **No publica en Google Play.** Solo revisa; publicar lo haces tú.
@@ -49,6 +55,8 @@ Es una **máquina en internet que revisa tu código sola cada vez que lo subes**
 > 🌎 **En la vida real:** es como la hoja de instrucciones pegada en la pared de la cocina de un restaurante: "al llegar cada pedido: lavar, cortar, cocinar, servir". GitHub busca esa hoja en un lugar fijo (`.github/workflows/`), igual que el cocinero nuevo siempre mira la misma pared.
 >
 > La **sangría** del YAML es como el índice de un libro: "Capítulo 1" y, más metido hacia adentro, "1.1", "1.2". Lo que está más adentro pertenece a lo de arriba.
+
+> 🌎 **Otro ejemplo:** Es como el horario de turnos pegado en la sala de empleados: está escrito en un lugar fijo que todos consultan.
 
 En tu app, en el archivo **`.github/workflows/ci.yml`**.
 
@@ -69,6 +77,8 @@ La herramienta que lo ejecuta se llama **GitHub Actions**. Es gratis para proyec
 > - `name` = el nombre del plato en el menú.
 > - `working-directory` = en **qué mesa** de la cocina se trabaja.
 
+> 🌎 **Otro ejemplo:** En un taller: `on` es "cuando llega un carro"; `jobs`, los mecánicos trabajando a la vez; `steps`, los pasos de cada uno; `uses`, una herramienta comprada; `run`, una orden directa.
+
 | Palabra | Significado |
 |---|---|
 | `on` | **Cuándo** se ejecuta |
@@ -84,9 +94,13 @@ La herramienta que lo ejecuta se llama **GitHub Actions**. Es gratis para proyec
 
 > 🌎 **En la vida real:** ahora leemos la hoja de instrucciones real de tu "restaurante", renglón por renglón.
 
+> 🌎 **Otro ejemplo:** Es como leer la factura detallada de un taller: cada renglón es un trabajo que se hizo, con su nombre.
+
 ### El comienzo
 
 > 🌎 **En la vida real:** es como el cartel en la puerta de la cocina: "Nombre: CI. Se activa: cada vez que llega un pedido (`push`) y cada vez que alguien propone un plato nuevo para el menú (`pull_request`)".
+
+> 🌎 **Otro ejemplo:** Como el timbre de una casa con dos botones: uno para visitas (push) y otro para el cartero (pull request).
 
 ```yaml
 name: CI
@@ -103,6 +117,8 @@ on:
 ### Las revisiones son 6 trabajos
 
 > 🌎 **En la vida real:** en un taller grande, cuando llega tu carro, 6 mecánicos lo revisan **a la vez**: motor, frenos, luces, electricidad, carrocería y el GPS. Así tarda 4 minutos y no 20. Cada uno tiene su propio banco de herramientas (su máquina).
+
+> 🌎 **Otro ejemplo:** Como una carrera de postas con todos corriendo a la vez en carriles distintos: termina cuando llega el último.
 
 Al 16/11/2026 son **6 trabajos** (antes eran 5; `webapp` se agregó con la web del Tema 13). Corren **al mismo tiempo**, cada uno en su máquina:
 
@@ -133,6 +149,8 @@ Al 16/11/2026 son **6 trabajos** (antes eran 5; `webapp` se agregó con la web d
 > - **Bundle**: comprobar que el carro se puede **armar completo**, no solo que cada pieza esté bien por separado.
 >
 > `--noEmit` = "revisa, pero no fabriques nada": el inspector mira, no construye.
+
+> 🌎 **Otro ejemplo:** Como el chequeo antes de un vuelo: el mecánico revisa motor, frenos, luces y combustible, uno tras otro, y si algo falla el avión no sale.
 
 ```yaml
   app:
@@ -169,6 +187,8 @@ Después vienen los pasos de revisión, en orden:
 
 > 🌎 **En la vida real:** es el mecánico especialista en una marca extranjera. El cartón habla **Kotlin**, que necesita **Java** como herramienta, igual que un carro alemán necesita llaves métricas especiales. `expo prebuild` es como armar el banco de trabajo de esa marca, que no viene de fábrica. `gradlew` es la máquina de diagnóstico propia de Android.
 
+> 🌎 **Otro ejemplo:** Es como revisar el GPS de un auto importado: hace falta el programa de esa marca para conectarse y leerlo.
+
 ```yaml
       - uses: actions/setup-java@v4
         with:
@@ -190,6 +210,8 @@ Después vienen los pasos de revisión, en orden:
 
 > 🌎 **En la vida real:** es el mecánico que revisa la **oficina central** (el servidor), no el carro. `working-directory: functions` es decirle "tú trabajas en el cuarto de atrás".
 
+> 🌎 **Otro ejemplo:** Es como el inspector que se queda en la cocina del restaurante: no revisa el salón, solo la cocina.
+
 ```yaml
     defaults:
       run:
@@ -207,6 +229,8 @@ Después vienen los pasos de revisión, en orden:
 
 > 🌎 **En la vida real:** es el cerrajero. El **emulador de Firebase** es una **maqueta** del edificio: el cerrajero intenta abrir la puerta del vecino en la maqueta, no en el edificio real. Si la cerradura lo **impide**, la prueba pasa. Así nadie toca a los inquilinos de verdad.
 
+> 🌎 **Otro ejemplo:** Como un ladrón contratado (con permiso) que intenta abrir las cajas fuertes de un banco de prueba.
+
 ```yaml
       - uses: actions/setup-java@v4
       ...
@@ -220,6 +244,8 @@ Después vienen los pasos de revisión, en orden:
 ### Trabajo 5: `panel`
 
 > 🌎 **En la vida real:** es comprobar que los muebles del panel web se pueden **armar** con las piezas de la caja. Si falta un tornillo, mejor enterarse ahora que el día de la mudanza (la publicación).
+
+> 🌎 **Otro ejemplo:** Es como probar que un mueble se puede armar con las piezas de la caja antes de llevarlo a casa del cliente.
 
 ```yaml
       - run: npm ci
@@ -237,6 +263,8 @@ Después vienen los pasos de revisión, en orden:
 > - 🟡 **amarillo**: todavía lo están lavando.
 >
 > `gh run list` es como llamar por teléfono al lavadero para preguntar "¿cómo van los últimos 5 carros?" en vez de ir en persona.
+
+> 🌎 **Otro ejemplo:** Como el historial de pedidos de una app de delivery: cada pedido con su estado, y entras a uno para ver el detalle.
 
 1. Entra a **github.com/DelvinSmart/copiloto-driver**.
 2. Toca la pestaña **Actions**.
@@ -262,6 +290,8 @@ gh run list --limit 5
 > 4. Empiezas con una sola regla.
 > 5. Abres el gimnasio y miras si la gente lo cumple (`git push` y la pestaña Actions).
 > 6. Cada vez que pasa un problema que se repite ("dejan las pesas tiradas"), agregas una regla nueva. Así nacieron tus candados de diseño y de ciclos.
+
+> 🌎 **Otro ejemplo:** Como las reglas de una casa con adolescentes: empiezas con una y agregas otra cada vez que pasa algo que no quieres que se repita.
 
 Así se hizo el de tu app, y así lo harías en cualquier proyecto:
 
@@ -294,6 +324,8 @@ Así se hizo el de tu app, y así lo harías en cualquier proyecto:
 > - **Cualquier otro número** = luz roja: "algo falló".
 >
 > Por eso tus scripts como `check:design` están hechos para "hacer sonar el detector" cuando ven un color suelto. El guardia no sabe nada de colores; solo escucha el pitido.
+
+> 🌎 **Otro ejemplo:** Como un semáforo: no sabe nada del tránsito; solo muestra verde o rojo según la señal que recibe.
 
 El CI no entiende tu app. **Solo entiende una cosa: si cada comando terminó bien o mal.**
 

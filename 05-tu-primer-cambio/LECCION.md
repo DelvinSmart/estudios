@@ -22,6 +22,8 @@ Hasta ahora leíste código y escribiste una prueba. Ahora vas a **cambiar la ap
 >
 > **La regla de oro** es como un restaurante con menú en varios idiomas: el mesero no se aprende el plato en cada idioma; señala el **número** del plato (la clave) y el menú de cada idioma dice el nombre.
 
+> 🌎 **Otro ejemplo:** Es como un supermercado: lácteos al fondo, limpieza en el pasillo 5, la caja a la salida. Sabes dónde buscar sin recorrer todo.
+
 Antes de cambiar algo hay que saber dónde buscarlo. Las carpetas principales de `src/`:
 
 | Carpeta | Qué hay | Ejemplo |
@@ -41,6 +43,8 @@ Antes de cambiar algo hay que saber dónde buscarlo. Las carpetas principales de
 
 > 🌎 **En la vida real:** es como pintar una pared mirando por una ventana mágica: cada pincelada que das, la ves al instante en la casa de verdad, sin tener que construir la casa de nuevo cada vez.
 
+> 🌎 **Otro ejemplo:** Como probarse ropa con un espejo al lado: cada cambio lo ves al instante, sin salir del probador.
+
 El modo Expo hace que cada cambio que guardas aparezca **solo**, en segundos, sin instalar de nuevo.
 
 En la terminal, dentro de la carpeta de la app:
@@ -53,6 +57,8 @@ Espera a que se abra la app en el simulador del iPhone. La primera vez tarda com
 
 > 🌎 **En la vida real:** es como cambiar el texto de un cartel de la tienda: no cambias la pared, solo el papel que está pegado.
 
+> 🌎 **Otro ejemplo:** Es como corregir una palabra en el subtítulo de una película: la película no cambia, solo el texto de abajo.
+
 Vas a cambiar el texto gris que aparece debajo de "Capacidad del tanque" en **Editar vehículo**:
 
 > Opcional. Muestra cuánto combustible queda, en el Inicio.
@@ -60,6 +66,8 @@ Vas a cambiar el texto gris que aparece debajo de "Capacidad del tanque" en **Ed
 ### Paso 1. Encuentra el texto
 
 > 🌎 **En la vida real:** **Cmd + Shift + F** es como el buscador de una biblioteca: escribes una frase y te dice en qué libro y en qué página está, sin que tengas que revisar estante por estante.
+
+> 🌎 **Otro ejemplo:** Como el buscador de tu correo: escribes una frase y aparecen todos los mensajes que la tienen.
 1. En VS Code presiona **Cmd + Shift + F** (buscar en todo el proyecto).
 2. Escribe: `Muestra cuánto combustible queda`
 3. Aparece en `src/i18n/locales/es.ts`:
@@ -74,6 +82,8 @@ Vas a cambiar el texto gris que aparece debajo de "Capacidad del tanque" en **Ed
 > - `types.ts` = **la lista oficial de platos**: dice que el plato 14 existe. Si alguien pide el plato 99 y no está en la lista, se le avisa enseguida.
 > - **Los seis archivos de idioma** = **el menú en seis idiomas**: el plato 14 se llama "Feijoada" en portugués y "Frijolada" en español.
 > - `t(...)` = **el mesero**: le dices "plato 14" y él te trae el nombre en el idioma del cliente.
+
+> 🌎 **Otro ejemplo:** Como el sistema de turnos de un banco: la pantalla muestra "Turno A15" (la clave), y el sistema sabe qué texto va con ese turno en cada idioma.
 - `tankCapacityHint` es la **clave**.
 - Busca ahora `tankCapacityHint` (Cmd + Shift + F). Aparece en tres lugares:
   1. `src/i18n/types.ts` → el **contrato**: dice que esa clave existe y que es texto.
@@ -87,6 +97,8 @@ Vas a cambiar el texto gris que aparece debajo de "Capacidad del tanque" en **Ed
 ### Paso 3. Cambia el texto
 
 > 🌎 **En la vida real:** es tachar el nombre del plato 14 en el menú en español y escribir otro. La cocina (la pantalla) no se entera ni le importa: sigue sirviendo "el plato 14".
+
+> 🌎 **Otro ejemplo:** Es como editar la descripción de tu perfil: cambias el texto, guardas, y el resto de la app sigue igual.
 En `es.ts`, cambia la línea por:
 ```ts
 tankCapacityHint: 'Opcional. ¡Este texto lo cambié yo!',
@@ -96,6 +108,8 @@ Guarda con **Cmd + S**.
 ### Paso 4. Míralo
 
 > 🌎 **En la vida real:** es salir a la puerta del restaurante y mirar si el cartel nuevo quedó bien puesto. **Cmd + R** es como prender y apagar la luz para ver mejor.
+
+> 🌎 **Otro ejemplo:** Es como probar el sabor después de agregar sal: no confías en que quedó bien, lo pruebas.
 En el simulador abre **Mi vehículo → el lápiz → baja hasta Capacidad del tanque**. Debe aparecer tu texto nuevo. Si la app está en español y no cambia, espera unos segundos o presiona **Cmd + R** en el simulador.
 
 **Lo que aprendiste:** cambiar un texto es cambiar **el archivo de idioma**, no la pantalla.
@@ -104,11 +118,15 @@ En el simulador abre **Mi vehículo → el lápiz → baja hasta Capacidad del t
 
 > 🌎 **En la vida real:** es como cambiar el largo de una cortina: la ventana es la misma, solo cambias cuánto la cubre.
 
+> 🌎 **Otro ejemplo:** Es como ajustar el ancho de una columna en una planilla: el contenido es el mismo, cambia el espacio.
+
 Vas a hacer más corta la barra de combustible de la tarjeta del vehículo.
 
 ### Paso 1. Encuentra la pieza
 
 > 🌎 **En la vida real:** los **estilos** son como la ficha técnica de un mueble: "ancho máximo 75 % de la pared". `maxWidth: '75%'` dice que la barra puede ocupar hasta tres cuartos del espacio, como una alfombra que cubre tres cuartos del piso.
+
+> 🌎 **Otro ejemplo:** Como la etiqueta de medidas de una cortina: "ancho máximo 1,5 m". La ventana no cambia, la cortina se adapta.
 Abre `src/components/vehicles/VehicleFuelGauge.tsx` y busca:
 ```ts
   bar: {
@@ -122,16 +140,22 @@ Abre `src/components/vehicles/VehicleFuelGauge.tsx` y busca:
 ### Paso 2. Cámbialo
 
 > 🌎 **En la vida real:** es cambiar en la ficha "75 %" por "40 %": la alfombra ahora cubre menos de la mitad del piso.
+
+> 🌎 **Otro ejemplo:** Es como cambiar el tamaño de letra del teléfono: un número, y todo se ve distinto.
 Pon `'40%'`. Guarda.
 
 ### Paso 3. Míralo
 
 > 🌎 **En la vida real:** es entrar a la sala y ver la alfombra nueva. Si la barra del Etios se ve más corta, tu cambio funcionó.
+
+> 🌎 **Otro ejemplo:** Es como manejar una cuadra después de ajustar el asiento, para ver si quedó cómodo.
 En el simulador ve al **Inicio**. La barra de combustible del Etios debe verse mucho más corta.
 
 ### Paso 4. Prueba otros valores
 
 > 🌎 **En la vida real:** como un peluquero que corta un poco, mira en el espejo, corta otro poco y vuelve a mirar. Así se diseña: cambiar, mirar, ajustar.
+
+> 🌎 **Otro ejemplo:** Como un fotógrafo que prueba varias distancias con el zoom hasta que la foto queda bien encuadrada.
 Prueba `'100%'`, y después `'60%'`. Así se diseña: se cambia, se mira y se ajusta.
 
 **Lo que aprendiste:** el aspecto de las piezas está en sus **estilos** (`StyleSheet.create`).
@@ -139,6 +163,8 @@ Prueba `'100%'`, y después `'60%'`. Así se diseña: se cambia, se mira y se aj
 ## 5. Rompe algo a propósito (y mira quién te avisa)
 
 > 🌎 **En la vida real:** es como arrancar una página del menú en inglés y ver si el gerente se da cuenta. El gerente (`npx tsc`) tiene la **lista oficial** de platos (`types.ts`) y revisa que cada menú los tenga todos. Al ver que en inglés falta el plato 14, dice: "este menú no se puede imprimir". Es el mismo gerente que trabaja en el CI del Tema 04.
+
+> 🌎 **Otro ejemplo:** Como la máquina de tickets del estacionamiento: si falta una pieza, la barrera no se levanta y te avisa.
 
 1. En `src/i18n/locales/en.ts` (inglés), busca la línea de `tankCapacityHint` y **bórrala**. Guarda.
 2. En la terminal corre:
@@ -154,6 +180,8 @@ Prueba `'100%'`, y después `'60%'`. Así se diseña: se cambia, se mira y se aj
 > 🌎 **En la vida real:** `git restore` es como el botón "descartar cambios" de un documento: vuelve el archivo a como estaba la última vez que lo guardaste "oficialmente". Pero ojo: es como tirar a la basura el borrador; lo que escribiste no se recupera. Úsalo solo en lo que de verdad quieres tirar.
 >
 > `git status` es la mirada final antes de salir de casa: "¿dejé algo encendido?".
+
+> 🌎 **Otro ejemplo:** Como el botón "deshacer" del Word que vuelve a la última vez que guardaste: lo que escribiste después, se pierde.
 
 Este tema es de práctica: **la app tiene que quedar como estaba**.
 
@@ -177,6 +205,8 @@ Corre `git status` otra vez. Esos archivos ya no deben aparecer.
 > 3. Pasas el inspector (las revisiones automáticas).
 > 4. El dueño de la casa abre la ducha y la prueba él mismo (tú, en tu teléfono).
 > 5. Recién ahí firmas la entrega (commit y push).
+
+> 🌎 **Otro ejemplo:** Como un vuelo comercial: se revisa en tierra, pasa el control técnico, un vuelo de prueba, y recién ahí lleva pasajeros.
 
 Cuando el cambio es para quedarse, en tu app siempre se sigue este orden (está en `AGENTS.md`):
 

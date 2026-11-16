@@ -18,6 +18,8 @@ En este tema vas a hacer un **servidor** pequeño, de verdad, con sus pruebas. E
 >
 > Casi cualquier sistema es eso: el banco con tus cuentas, la farmacia con sus remedios, tu app con los ingresos.
 
+> 🌎 **Otro ejemplo:** Como el inventario de una tienda: agregar productos nuevos, ver qué hay, corregir un precio y sacar lo que ya no se vende.
+
 Son las **4 operaciones básicas** sobre datos:
 
 | Letra | Significa | Verbo HTTP | En este proyecto | En Copiloto |
@@ -43,6 +45,8 @@ Casi todo sistema es esto: Copiloto Driver registra, muestra, edita y borra ingr
 > - **Puerto** = la **ventanilla** número 3000 del local: hay muchas ventanillas, y el mesero atiende en esa.
 > - **localhost** = "**este mismo local**": no vas a otro restaurante, pides en el tuyo.
 > - **API** = el **menú completo**: la lista de todo lo que se puede pedir.
+
+> 🌎 **Otro ejemplo:** En un banco: el servidor es el cajero; la petición, tu trámite; la respuesta, el comprobante; la ruta, la ventanilla; y la API, la lista de trámites posibles.
 
 | Palabra | Qué es |
 |---|---|
@@ -71,6 +75,8 @@ Casi todo sistema es esto: Copiloto Driver registra, muestra, edita y borra ingr
 >
 > ¿Por qué separar "el menú" de "abrir la puerta"? Para que el inspector pueda probar las recetas en una cocina de práctica, sin tener que abrir el local al público.
 
+> 🌎 **Otro ejemplo:** Como un local de comida rápida: el reglamento, el menú con recetas, abrir la persiana, y dos inspectores: uno revisa las reglas y otro hace un pedido completo.
+
 | Archivo | Qué es | Tipo de código |
 |---|---|---|
 | `src/validar.js` | Las **reglas**: ¿la descripción y el monto son válidos? | Reglas puras (como `utils/` en tu app) |
@@ -89,6 +95,8 @@ Casi todo sistema es esto: Copiloto Driver registra, muestra, edita y borra ingr
 > 4. El mensaje "Servidor listo" = el cartel encendido.
 >
 > **Ctrl + C** = cerrar la persiana al final del día.
+
+> 🌎 **Otro ejemplo:** Como encender una computadora nueva: la primera vez instalas los programas; después solo la prendes.
 
 1. Abre esta carpeta en la terminal:
    ```bash
@@ -117,6 +125,8 @@ El servidor queda encendido. Para apagarlo: **Ctrl + C**.
 > - **Error a propósito** = pedir "agua por menos 5 reales": el mesero te dice "eso no se puede".
 >
 > Las partes de `curl` son como una carta: `-X` es **qué** pides, `-H` es el sobre que dice "adentro va una comanda", `-d` es la comanda en sí.
+
+> 🌎 **Otro ejemplo:** `curl` es como pedir por teléfono en vez de ir en persona: haces el mismo pedido sin entrar a la tienda.
 
 Abre **otra** terminal (la primera está ocupada con el servidor) y pega los comandos uno por uno. `curl` es un programa que hace peticiones desde la terminal.
 
@@ -193,6 +203,8 @@ Regla fácil: **2xx** = bien, **4xx** = se equivocó quien pide, **5xx** = se eq
 >
 > **Ojo**: guardar en memoria es como anotar en una **pizarra**. Al cerrar el local (apagar el servidor), alguien la borra. Por eso el ejercicio 4 lo pasa a un cuaderno.
 
+> 🌎 **Otro ejemplo:** Como la máquina expendedora: valida el billete, si es falso lo devuelve; si no, te da el producto y un número de operación nuevo.
+
 La ruta de **crear**, de `src/app.js`:
 
 ```js
@@ -229,6 +241,8 @@ app.post('/gastos', (req, res) => {
 >
 > Es una **función pura**: como una calculadora de bolsillo. No toca la caja, no llama a nadie; con los mismos números da siempre el mismo resultado. Por eso es facilísima de probar.
 
+> 🌎 **Otro ejemplo:** Como la balanza del aeropuerto: revisa el peso y el tamaño de la maleta y te da una lista de problemas, vacía si todo está bien.
+
 `src/validar.js`:
 ```js
 function validarGasto(datos) {
@@ -254,6 +268,8 @@ Es una **función pura**: no toca el servidor ni la base de datos. Por eso se pr
 > 🌎 **En la vida real:** es como esconder un billete falso en la caja para ver si el cajero se da cuenta. Cambias "mayor que 0" por "no negativo", y el cajero **no se da cuenta**: nadie le enseñó a revisar el monto **exactamente cero**.
 >
 > Es como un guardia que revisa a menores de 18 años: comprobó a uno de 15 y a uno de 30, pero nunca a uno de **justo 18**. El sabotaje que no falla te muestra el agujero en la vigilancia.
+
+> 🌎 **Otro ejemplo:** Como un control de alcoholemia que revisó a quien tomó mucho y a quien no tomó nada, pero nunca a quien está justo en el límite.
 
 ```bash
 npm test

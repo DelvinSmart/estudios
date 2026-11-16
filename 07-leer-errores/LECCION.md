@@ -12,6 +12,8 @@ Un error no es un fracaso: es un **mensaje** del programa diciéndote qué sali�
 
 > 🌎 **En la vida real:** es como el médico serio: antes de recetar, pide el análisis de sangre. El que receta "por si acaso" sin mirar puede curarte algo que no tenías y dejarte enfermo de lo que sí tenías. Primero el dato real; después el cambio.
 
+> 🌎 **Otro ejemplo:** Como el detective que no acusa a nadie antes de tener pruebas: primero las huellas, después la conclusión.
+
 > **Verificar antes de adivinar.** Primero consigues el error real o el dato real. Después cambias algo.
 
 Está escrita en el documento principal de tu app (`AGENTS.md`), porque dos veces se "arregló" algo adivinando y el arreglo era falso.
@@ -24,6 +26,8 @@ Está escrita en el documento principal de tu app (`AGENTS.md`), porque dos vece
 > - **Lugar** = la dirección exacta: "Rua XV de Novembro, altura del 560". `(560,26)` es como "calle 560, casa 26".
 > - **Pista** = la nota del agente: "¿quiso decir que no vio el cartel?".
 > - **Pila (stack trace)** = el recorrido que hiciste hasta la multa: saliste de casa → tomaste la avenida → doblaste en la XV → ahí te pararon. Se lee del último lugar al primero.
+
+> 🌎 **Otro ejemplo:** Como la etiqueta de un error en una factura: tipo ("cobro doble"), descripción, lugar ("línea 3") y sugerencia ("solicite reembolso").
 
 Casi todos los errores tienen las mismas partes:
 
@@ -45,6 +49,8 @@ Casi todos los errores tienen las mismas partes:
 > - **Metro / Expo** = el pastel no sube en el horno: ya perdiste ingredientes y tiempo.
 > - **En ejecución** = el cliente muerde el pastel en su cumpleaños y está salado: **lo más caro**, porque ya le pasó a alguien.
 
+> 🌎 **Otro ejemplo:** Como encontrar un error en un vestido: en el molde (gratis), en la tela cortada (barato), en la prueba (caro) o en la fiesta, puesto (carísimo).
+
 | Dónde | Cuándo | Quién lo muestra |
 |---|---|---|
 | **TypeScript** | Antes de ejecutar (al revisar) | `npx tsc --noEmit -p .` y VS Code (subrayado rojo) |
@@ -58,11 +64,15 @@ Cuanto más arriba en la tabla aparece un error, **más barato** es arreglarlo. 
 
 > 🌎 **En la vida real:** como un médico que repasa casos de pacientes reales: no son ejemplos de libro, pasaron de verdad en tu app.
 
+> 🌎 **Otro ejemplo:** Son como la caja negra de vuelos anteriores: se estudian para que el próximo piloto no repita el error.
+
 Todos estos salieron el 10/11/2026 mientras trabajábamos en tu app.
 
 ### Error 1: un nombre que no existe
 
 > 🌎 **En la vida real:** es como pedirle a alguien de la casa "pásame a Juan al teléfono" y que te respondan "aquí no vive ningún Juan; ¿quisiste decir Juana?". Juan existe, pero vive en otra casa: te faltó **traerlo** (el `import`). "Cannot find name" casi siempre es eso: no lo trajiste o escribiste mal el nombre.
+
+> 🌎 **Otro ejemplo:** Como llamar a un contacto que no está guardado: el número existe, pero tu agenda no lo conoce hasta que lo guardas (el `import`).
 
 ```text
 src/screens/onboarding/VehicleSetupScreen.tsx(560,26): error TS2552:
@@ -81,6 +91,8 @@ Cannot find name 'VehicleTextField'. Did you mean 'VehicleSelectField'?
 
 > 🌎 **En la vida real:** es como un formulario de la Receita Federal que tiene el campo "CPF" con un asterisco (*) de obligatorio, y tú lo dejaste vacío. Hay dos salidas: lo llenas, o el formulario se cambia para que ese campo sea **opcional** (el `?`, como cuando un campo dice "(opcional)").
 
+> 🌎 **Otro ejemplo:** Como un formulario de inscripción que no se envía porque te faltó el teléfono, que era obligatorio.
+
 ```text
 src/screens/onboarding/VehicleSetupScreen.tsx(608,28): error TS2741:
 Property 'children' is missing in type '{ label: string; value: string; ... }'
@@ -97,6 +109,8 @@ but required in type 'VehicleSelectFieldProps'.
 
 > 🌎 **En la vida real:** es como tener una herramienta en la caja que ya no usas para nada: no estorba mucho, pero ocupa lugar y confunde al que abre la caja ("¿para qué será esto?"). Tu app tiene la regla de no dejar herramientas que no se usan.
 
+> 🌎 **Otro ejemplo:** Es como un contacto viejo en el teléfono de alguien que ya no existe: no molesta, pero ensucia la lista.
+
 ```text
 src/screens/copilot/IACopilotoScreen.styles.ts(2,10): error TS6133:
 'Platform' is declared but its value is never read.
@@ -111,6 +125,8 @@ src/screens/copilot/IACopilotoScreen.styles.ts(2,10): error TS6133:
 ### Error 4: una prueba que falla
 
 > 🌎 **En la vida real:** es como el inventario de la tienda: la lista dice que hay 5 productos en el estante, pero cuentas 6. Antes de acusar a alguien de robar al revés, preguntas: ¿alguien agregó un producto nuevo **a propósito**? Sí: se agregó "Mi empresa". El estante estaba bien; **la lista estaba vieja**.
+
+> 🌎 **Otro ejemplo:** Como el GPS que te marca un desvío: antes de pensar que se rompió, ves que abrieron una calle nueva. El mapa viejo (la prueba) era el que estaba mal.
 
 ```text
 not ok 77 - plataformas da conta: fixas do app + workApps ativas
@@ -131,6 +147,8 @@ not ok 77 - plataformas da conta: fixas do app + workApps ativas
 >
 > El `TypeError` es como pedirle a alguien que te diga el color de la camisa de una persona que **no está** en la sala: no puede, porque ahí no hay nadie (`null`). Con fotos reales, el detector de color "no veía a nadie".
 
+> 🌎 **Otro ejemplo:** Como un teléfono que no carga y no muestra nada: hay que probar con otro cable y otro enchufe hasta encontrar dónde está el problema.
+
 Viste en el panel que al mover el color "no pasaba nada": no salía ningún error en la pantalla. Para encontrarlo, se probó la misma función con la foto real del Etios, y apareció:
 
 ```text
@@ -147,6 +165,8 @@ TypeError: null is not an object (evaluating 'source.r')
 ### Error 6: la pantalla roja de Expo
 
 > 🌎 **En la vida real:** es como llamar a la pizzería y que no conteste nadie. La pizzería no está quebrada: simplemente **no abrió hoy**. Metro (el que entrega el código) estaba apagado. Lo enciendes y listo. No todos los problemas son "del código".
+
+> 🌎 **Otro ejemplo:** Como llegar a la tienda y encontrarla cerrada: no tienes que arreglar nada, solo esperar que abran (encender Metro).
 
 ```text
 Could not connect to development server.
@@ -173,6 +193,8 @@ URL: http://localhost:8081/...
 >
 > **Lo que no se hace**: cambiar batería, alternador, bujías y cables a la vez. Si arranca, no sabrás cuál era, y gastaste en cuatro piezas.
 
+> 🌎 **Otro ejemplo:** Como resolver por qué no carga el teléfono: miras qué dice, pruebas otro cable (un solo cambio), y si carga, era el cable.
+
 1. **Lee la primera línea completa.** Ahí está casi todo.
 2. **Ve al lugar exacto** (archivo y línea).
 3. **Pregúntate qué esperaba el programa** y qué encontró.
@@ -191,6 +213,8 @@ URL: http://localhost:8081/...
 > 3. **`console.log`** = poner un manómetro en la manguera para ver la presión real en ese punto, mientras el motor anda.
 > 4. **Borrarlos al final** = sacar los manómetros antes de devolver el carro al cliente.
 
+> 🌎 **Otro ejemplo:** Como cuando no entiendes una palabra en un contrato: la buscas, preguntas mostrando el texto exacto, y anotas lo que aprendiste.
+
 1. **Copia el mensaje exacto** (sin tus datos personales) y búscalo en Google. Casi siempre alguien ya lo tuvo.
 2. **Pregúntale a Claude** pegando el error completo, no un resumen.
 3. **Agrega un `console.log`** para ver el valor real de algo:
@@ -204,9 +228,13 @@ URL: http://localhost:8081/...
 
 > 🌎 **En la vida real:** es como los simulacros de incendio de la escuela: el fuego es de mentira, pero aprendes por dónde salir. Al final, todo vuelve a su lugar.
 
+> 🌎 **Otro ejemplo:** Es como el entrenamiento de un bombero con fuego controlado: apaga incendios a propósito para saber hacerlo cuando sea de verdad.
+
 ### Práctica 1: provoca un "Cannot find name"
 
 > 🌎 **En la vida real:** es escribir mal un contacto en el teléfono ("Juann") y ver que la agenda te dice "no existe; ¿quisiste decir Juan?".
+
+> 🌎 **Otro ejemplo:** Es como pedir en un restaurante un plato que no está en el menú: "no tenemos eso; ¿quiso decir…?".
 1. Abre `src/screens/onboarding/VehicleSetupScreen.tsx` y busca la línea `const tankCapacityLiters = vehicleHasFuelTank(vehicleType)` (cerca de la línea 468). Cambia `vehicleHasFuelTank` por `vehicleHasFuelTankk` (con doble k).
 2. Corre `npx tsc --noEmit -p .`
 3. Lee el error: tipo, archivo, línea y la pista.
@@ -215,6 +243,8 @@ URL: http://localhost:8081/...
 ### Práctica 2: provoca una prueba que falla
 
 > 🌎 **En la vida real:** es sacar a propósito "Mi empresa" de la lista de cosas que suman aparte, como si el cajero empezara a contar las monedas de la alcancía como si fueran el cuentakilómetros. La prueba lo atrapa.
+
+> 🌎 **Otro ejemplo:** Es como cambiar la respuesta correcta en la hoja de un examen para ver si el corrector lo detecta.
 1. En `src/data/workAppsCatalog.ts`, en `isImmutableEarningPlatform`, quita `|| appId === 'my_company'`.
 2. Corre `npx jest src/utils/__tests__/earningSourceRules.test.ts`
 3. Lee cuál prueba falló y qué esperaba.
@@ -223,6 +253,8 @@ URL: http://localhost:8081/...
 ### Práctica 3: provoca un error de tipo
 
 > 🌎 **En la vida real:** es escribir "seis" con letras en la casilla de un formulario que dice "solo números". El formulario lo rechaza: `"6"` entre comillas es una **palabra**, no un número, igual que la palabra "seis" escrita en un papel no sirve para sumar en la calculadora.
+
+> 🌎 **Otro ejemplo:** Es como poner gasolina común en un carro que pide diésel: la boquilla (TypeScript) no entra.
 1. Abre `src/components/vehicles/VehicleFuelGauge.tsx` y busca `thickness={FUEL_BAR_THICKNESS}` (el grosor de la barra, un número). Cámbialo por `thickness="6"` (un texto, entre comillas).
 2. Corre `npx tsc --noEmit -p .` y lee el error: dice que un `string` (texto) no sirve donde se espera un `number` (número).
 3. Arréglalo.
@@ -230,6 +262,8 @@ URL: http://localhost:8081/...
 ### Al terminar
 
 > 🌎 **En la vida real:** es lo que haces después del simulacro: contar a todos los alumnos y volver cada silla a su lugar. `git status` vacío = nadie quedó afuera.
+
+> 🌎 **Otro ejemplo:** Es como devolver las herramientas a su lugar después de un trabajo.
 ```bash
 git status
 git restore src/screens/onboarding/VehicleSetupScreen.tsx src/data/workAppsCatalog.ts src/components/vehicles/VehicleFuelGauge.tsx

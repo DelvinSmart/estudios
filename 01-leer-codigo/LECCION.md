@@ -12,6 +12,8 @@ Antes de escribir código hay que saber leerlo. Casi todo el código del mundo s
 > - `boolean` = la casilla de marcar ☐ Sí / ☐ No.
 > - `null` = dejar una casilla vacía **a propósito**, como poner "—" en "segundo apellido" cuando no tienes.
 
+> 🌎 **Otro ejemplo:** Es como cargar combustible: JavaScript es la bomba que te deja meter diésel en un carro a gasolina; TypeScript es la boquilla que no entra en el tanque equivocado.
+
 Tu app está escrita en **TypeScript**. Es JavaScript con **tipos**: a cada dato le dices qué clase de cosa es (texto, número, lista...). Si te equivocas, el programa avisa antes de llegar al teléfono.
 
 ```ts
@@ -36,6 +38,8 @@ let activo: boolean = true;         // verdadero o falso
 > - **Lista** = la lista del supermercado: arroz, frijoles, café… varias cosas en orden.
 > - **Objeto** = la ficha de tu carro en el taller: marca Toyota, modelo Etios, año 2017, color plata. Muchos datos, todos de la misma cosa, cada uno con su nombre.
 
+> 🌎 **Otro ejemplo:** En tu trabajo de conductor: la tarifa mínima (constante), el cálculo del valor del viaje (función), "si es de noche, cobra más" (if), los viajes del día (lista) y cada viaje con su origen y destino (objeto).
+
 | Pieza | Para qué | Cómo se ve |
 |---|---|---|
 | **Constante** | Guardar un valor con nombre que no cambia | `const MAX = 2;` |
@@ -54,6 +58,8 @@ let activo: boolean = true;         // verdadero o falso
 > 5. Si pasó todo, imprime el nombre limpio (`return clean`).
 >
 > La constante `MAX_WORDS = 2` es como la regla pegada en la pared de la imprenta: "máximo 2 palabras". Si el dueño cambia de idea, cambia **el cartel de la pared**, no le explica la regla a cada empleado.
+
+> 🌎 **Otro ejemplo:** Es como el nombre que pones en el WhatsApp del negocio: si es demasiado largo, aparece cortado con "…". Alguien tiene que limpiarlo y ponerle un límite.
 
 Archivo: `src/data/workAppsCatalog.ts`. Decide si el nombre que escribes para "Mi empresa" es válido.
 
@@ -100,6 +106,8 @@ export function normalizeMyCompanyName(text: string): string | null {
 >
 > `===` es como comparar dos llaves para ver si son **exactamente** iguales. `||` es el "o" de "aceptamos efectivo **o** tarjeta **o** Pix": con que se cumpla una, alcanza.
 
+> 🌎 **Otro ejemplo:** Es como el marcador de un partido: si a los 30 minutos dice 2-0 y al final 3-0, el resultado es 3-0, no 5-0. Uber es el marcador; Extras son goles sueltos que se suman.
+
 Archivo: `src/data/workAppsCatalog.ts`.
 
 ```ts
@@ -122,6 +130,8 @@ Una sola línea decide cómo se cuenta el dinero en toda la app. Por eso tiene p
 > 2. **Qué recibe y qué devuelve** = "entra fruta, sale jugo". Con eso entiendes el trabajo.
 > 3. **Los `if`** = las advertencias: "si la tapa no está puesta, no arranca". Ahí están las reglas.
 > 4. **No hace falta entender cada tornillo** para usar la licuadora. Primero la idea general; los detalles después.
+
+> 🌎 **Otro ejemplo:** Es como leer la etiqueta de un remedio que nunca usaste: para qué es, cómo se toma y las advertencias. No necesitas saber química para usarlo bien.
 
 1. **Lee el comentario** de arriba (`/** ... */`). Dice para qué existe.
 2. **Busca lo que recibe y lo que devuelve.** Eso te dice el trabajo de la función.
