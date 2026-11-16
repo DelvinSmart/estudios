@@ -5,7 +5,8 @@ import { CLASES, ETAPAS, CURSOS, cursoDeEtapa } from '../cursos.js';
 import { leerNombre, guardarNombre } from '../guardado.js';
 import * as nube from '../nube.js';
 import { app, ponerMigas, avisar, escapar, redibujar } from '../pantalla.js';
-import { ordenDe, totalPartes } from '../avance.js';
+import { ordenDe, totalPartes, prendidos } from '../avance.js';
+import { volverAntes } from './progreso.js';
 import { hayDatosDeSesion } from '../sesion.js';
 
 // ---------- pantalla 6: el certificado (uno por curso) ----------
@@ -80,59 +81,69 @@ function pantallaAviso(titulo, texto, acciones = '') {
     </section>`;
 }
 
-export async function vistaCertificado(curso, muestra) {
+// Una sola pantalla para los certificados:
+//   arriba, una pestaña por curso; en el medio, qué te falta y UN botón con el paso siguiente;
+//   abajo, siempre el certificado de ese curso (la muestra, o el tuyo cuando ya lo emitiste).
+export async function vistaCertificado(curso) {
   const c = CURSOS[curso];
   ponerMigas([{ texto: 'mapa', href: '#/' }, { texto: `certificado · ${c.corto.toLowerCase()}`, corto: 'certificado' }]);
   const total = totalPartes(curso);
-  const otros = Object.values(CURSOS).filter((o) => o.id !== curso)
-    .map((o) => `<a class="boton" href="${rutaCertificado(o.id)}">certificado de ${escapar(o.corto.toLowerCase())}</a>`).join('');
+  const local = ordenDe(curso).reduce((s, n) => s + prendidos(n), 0);
+  const pestanas = Object.values(CURSOS).map((o) =>
+    `<a class="pestana ${o.id === curso ? 'activa' : ''}" href="${rutaCertificado(o.id)}">${escapar(o.corto)}</a>`).join('');
 
-  if (muestra) {
-    app.innerHTML = `
-      <div class="cert-herramientas no-imprimir">
-        <p class="mono comentario">// muestra: así se verá cuando completes el curso "${escapar(c.corto.toLowerCase())}"</p>
-        <div class="fila-codigo"><a class="boton" href="${rutaCertificado(curso)}">mi certificado de verdad →</a>${otros}</div>
-      </div>
-      ${htmlCertificado({ nombre: leerNombre() || 'Tu Nombre Completo', fecha: new Date(), codigo: 'MUESTRA', curso, total, muestra: true })}`;
-    return;
-  }
+  app.innerHTML = `
+    <section class="cabeza no-imprimir">
+      <p class="mono comentario">// certificados de finalización · uno por curso</p>
+      <h1 class="titulo-medio">🎓 Certificados</h1>
+      <div class="pestanas" role="tablist">${pestanas}</div>
+      <div class="estado-cert" id="estado-cert"><p class="mono tenue">// revisando…</p></div>
+      ${volverAntes()}
+    </section>
+    <div id="cert-dibujo">${htmlCertificado({ nombre: leerNombre() || 'Tu Nombre Completo', fecha: new Date(), codigo: 'MUESTRA', curso, total, muestra: true })}</div>`;
 
-  const verMuestra = `<a class="boton" href="${rutaCertificado(curso)}/muestra">ver cómo será (muestra)</a>`;
-  app.innerHTML = '<p class="mono tenue centro">// conectando con la nube…</p>';
+  const estado = app.querySelector('#estado-cert');
+  const dibujo = app.querySelector('#cert-dibujo');
+  const barra = (n) => `<div class="barra-progreso ancha"><span style="width:${total ? (n / total) * 100 : 0}%"></span></div>`;
+  const pintar = (titulo, texto, acciones = '') => {
+    estado.innerHTML = `<p class="estado-titulo">${titulo}</p><div class="estado-texto">${texto}</div>${acciones ? `<div class="acciones">${acciones}</div>` : ''}`;
+  };
+  const verProgreso = '<a class="boton" href="#/progreso">💡 ver mi progreso</a>';
+  const nota = '<p class="mono tenue nota-muestra">↓ así será tu certificado (muestra)</p>';
+
   let quien = null;
   try { quien = hayDatosDeSesion() ? await nube.usuario() : null; } catch (e) {
-    pantallaAviso('☁ Sin conexión', 'No pude conectar con el servidor del certificado. Revisa tu internet y vuelve a intentar.');
+    pintar('☁ Sin conexión', 'No pude revisar tu certificado en el servidor. Abajo ves cómo será.', verProgreso);
+    dibujo.insertAdjacentHTML('afterbegin', nota);
     return;
   }
 
+  // 1) Sin cuenta: lo que llevas en este navegador, y entrar.
   if (!quien) {
     try { sessionStorage.setItem('mapa-volver', rutaCertificado(curso)); } catch (e) { /* nada */ }
-    pantallaAviso(`🎓 Certificado de ${escapar(c.corto.toLowerCase())}`,
-      `Para que el certificado se pueda <b>verificar</b>, tu progreso tiene que estar en el servidor, no solo en este navegador.
-       Entra con tu cuenta de Gmail: desde ahí, cada bombillo que prendas cuenta también en la nube.`,
-      `<a class="boton-principal" href="#/entrar">entrar o crear cuenta</a>${verMuestra}`);
+    pintar(`Llevas <b>${local}</b> de <b>${total}</b> partes en este navegador`,
+      `${barra(local)}<p>Para recibir el certificado <b>verificable</b>, tus bombillos tienen que estar en el servidor:
+        entra con tu cuenta de Gmail y, desde ahí, cada parte que apruebes cuenta en la nube.</p>`,
+      `<a class="boton-principal" href="#/entrar">entrar o crear cuenta</a>${verProgreso}`);
+    dibujo.insertAdjacentHTML('afterbegin', nota);
     return;
   }
   if (!nube.cuentaLista(quien)) {
-    pantallaAviso('📭 Falta verificar tu correo', `Abre el enlace que te mandamos a <b>${escapar(quien.email)}</b>.`,
+    pintar('📭 Falta verificar tu correo', `Abre el enlace que te mandamos a <b>${escapar(quien.email)}</b>.`,
       '<a class="boton-principal" href="#/entrar/verificar">verificar mi correo</a>');
+    dibujo.insertAdjacentHTML('afterbegin', nota);
     return;
   }
 
+  // 2) Ya lo emitió: el certificado de verdad, con sus botones.
   const propio = await nube.miCertificado(curso);
   if (propio) {
-    app.innerHTML = `
-      <div class="cert-herramientas no-imprimir">
-        <p class="mono comentario">// tu certificado · registrado en el servidor</p>
-        <div class="fila-codigo">
-          <button class="boton-principal" id="cert-imprimir" type="button">imprimir / guardar PDF</button>
-          <a class="boton" href="#/verificar/${propio.codigo}">página de verificación</a>
-          <button class="boton" id="cert-copiar" type="button">copiar enlace para LinkedIn</button>
-          <button class="boton" id="cert-borrar" type="button">corregir el nombre</button>
-          ${otros}
-        </div>
-      </div>
-      ${htmlCertificado({ nombre: propio.nombre, fecha: propio.emitido, codigo: propio.codigo, curso, total: propio.partes })}`;
+    pintar('✓ Tu certificado está emitido', `Código <b class="mono">${escapar(propio.codigo)}</b>. Cualquiera lo puede comprobar en la página de verificación.`,
+      `<button class="boton-principal" id="cert-imprimir" type="button">imprimir / guardar PDF</button>
+       <button class="boton" id="cert-copiar" type="button">copiar enlace para LinkedIn</button>
+       <a class="boton" href="#/verificar/${propio.codigo}">página de verificación</a>
+       <button class="boton" id="cert-borrar" type="button">corregir el nombre</button>`);
+    dibujo.innerHTML = htmlCertificado({ nombre: propio.nombre, fecha: propio.emitido, codigo: propio.codigo, curso, total: propio.partes });
     app.querySelector('#cert-imprimir').addEventListener('click', () => window.print());
     app.querySelector('#cert-copiar').addEventListener('click', async (ev) => {
       const enlace = `https://${URL_SITIO}/#/verificar/${propio.codigo}`;
@@ -146,37 +157,37 @@ export async function vistaCertificado(curso, muestra) {
     return;
   }
 
+  // 3) Con cuenta, todavía no termina: cuánto lleva en la nube.
+  const nombre = quien.displayName || leerNombre() || 'Tu Nombre Completo';
+  dibujo.innerHTML = nota + htmlCertificado({ nombre, fecha: new Date(), codigo: 'MUESTRA', curso, total, muestra: true });
   const progreso = await nube.leerProgresoNube(curso);
   const enNube = progreso?.n || 0;
   if (enNube < total) {
-    pantallaAviso('🎓 Todavía no',
-      `<p>El certificado de <b>${escapar(c.corto.toLowerCase())}</b> se emite cuando el servidor ve <b>todas</b> sus partes.
-       En la nube llevas <b>${enNube}</b> de <b>${total}</b>.</p>
-       <p>Los bombillos que prendiste <b>antes</b> de entrar con tu cuenta solo están en este navegador:
-       entra a esas partes y toca <b>☁ contar en la nube</b>.</p>
-       <div class="barra-progreso ancha"><span style="width:${(enNube / total) * 100}%"></span></div>`,
-      `<a class="boton-principal" href="#/progreso">💡 ver mi progreso</a>${verMuestra}${otros}`);
+    pintar(`Todavía no: llevas <b>${enNube}</b> de <b>${total}</b> partes en la nube`,
+      `${barra(enNube)}<p>Cuando el servidor vea todas las partes de <b>${escapar(c.corto.toLowerCase())}</b>, aquí aparece el botón para emitirlo.
+        ${local > enNube ? `En este navegador tienes ${local}: entra a esas partes y toca <b>☁ contar en la nube</b>.` : ''}</p>`,
+      verProgreso);
     return;
   }
 
-  pantallaAviso('🎓 ¡Completaste el curso!',
-    `<p>El servidor ve las ${total} partes de <b>${escapar(c.corto.toLowerCase())}</b>. Revisa tu nombre y emite tu certificado:
-      queda registrado con un código que cualquiera puede comprobar.</p>
+  // 4) Terminó: escribir el nombre y emitir.
+  pintar('🎉 ¡Completaste el curso!',
+    `<p>El servidor ve las ${total} partes. Revisa tu nombre y emite tu certificado.</p>
      <label class="cuenta-campo"><span class="mono">nombre completo, como en tu documento</span>
-       <input id="cert-nombre" maxlength="80" value="${escapar(quien.displayName || leerNombre() || '')}"></label>
+       <input id="cert-nombre" maxlength="80" value="${escapar(nombre === 'Tu Nombre Completo' ? '' : nombre)}"></label>
      <p class="cuenta-nota">⚠️ <b>Este es el nombre que saldrá impreso en el certificado.</b> Escríbelo completo, con tildes y apellidos,
-       igual que en tu documento de identidad. No pedimos CPF ni copia del documento: este sitio no tiene cómo confirmarlos
-       con el gobierno, y guardar esos datos sería un riesgo para ti. Por eso, el nombre depende de que lo escribas bien.</p>
+       igual que en tu documento. No pedimos CPF ni copia del documento: este sitio no tiene cómo confirmarlos con el gobierno,
+       y guardarlos sería un riesgo para ti.</p>
      <label class="cuenta-check"><input type="checkbox" id="cert-confirmo"> Confirmo que es mi nombre completo y correcto.</label>`,
-    `<button class="boton-principal" id="cert-emitir" type="button" disabled>emitir mi certificado</button>`);
+    '<button class="boton-principal" id="cert-emitir" type="button" disabled>emitir mi certificado</button>');
   const confirmo = app.querySelector('#cert-confirmo');
   const emitir = app.querySelector('#cert-emitir');
   confirmo.addEventListener('change', () => { emitir.disabled = !confirmo.checked; });
   emitir.addEventListener('click', async () => {
-    const nombre = app.querySelector('#cert-nombre').value.trim().replace(/\s+/g, ' ');
-    if (nombre.split(' ').length < 2) { avisar('✗ escribe tu nombre y tu apellido'); return; }
+    const elegido = app.querySelector('#cert-nombre').value.trim().replace(/\s+/g, ' ');
+    if (elegido.split(' ').length < 2) { avisar('✗ escribe tu nombre y tu apellido'); return; }
     emitir.disabled = true;
-    try { guardarNombre(nombre); await nube.emitirCertificado(curso, c.prefijo, nombre, total); redibujar(); }
+    try { guardarNombre(elegido); await nube.emitirCertificado(curso, c.prefijo, elegido, total); redibujar(); }
     catch (e) { emitir.disabled = false; avisar('✗ el servidor no lo aceptó; recarga e intenta de nuevo'); }
   });
 }

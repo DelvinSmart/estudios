@@ -38,7 +38,7 @@ async function dibujar() {
     if (partesRuta[0] === 'progreso') await vistaProgreso();
     else if (partesRuta[0] === 'certificado') {
       const curso = CURSOS[partesRuta[1]] ? partesRuta[1] : 'programacion';
-      await vistaCertificado(curso, partesRuta.includes('muestra'));
+      await vistaCertificado(curso); // …/muestra también abre esta misma pantalla
     }
     else if (partesRuta[0] === 'entrar') await vistaEntrar(partesRuta[1]);
     else if (partesRuta[0] === 'cuenta') await vistaCuenta();

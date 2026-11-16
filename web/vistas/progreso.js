@@ -105,7 +105,7 @@ export async function vistaProgreso() {
 }
 
 // El botón "← volver a donde estaba" (la última pantalla de estudio que se abrió).
-function volverAntes() {
+export function volverAntes() {
   let antes = '';
   try { antes = sessionStorage.getItem('mapa-antes') || ''; } catch (e) { /* nada */ }
   if (!/^#\/[\w\-/]*$/.test(antes)) return '';

@@ -714,6 +714,13 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 
 /* Botones de volver arriba de cada parte */
 .volver-antes { margin-top: 14px; }
+.estado-cert { margin-top: 16px; padding: 16px 18px; border: 1px solid var(--borde-fuerte); border-radius: 14px; background: var(--tarjeta); display: flex; flex-direction: column; gap: 10px; max-width: 760px; }
+.estado-cert .estado-titulo { margin: 0; font: 700 1.05rem var(--mono); }
+.estado-cert .estado-texto { display: flex; flex-direction: column; gap: 10px; }
+.estado-cert .estado-texto p { margin: 0; color: var(--tenue); line-height: 1.55; }
+.estado-cert .acciones { margin: 0; }
+.estado-cert .acciones .boton, .estado-cert .acciones .boton-principal { margin-top: 0; }
+.nota-muestra { margin: 0 0 10px; text-align: center; font-size: 0.82rem; }
 .pasos-arriba { margin: 0 0 18px; padding: 0 0 12px; border-bottom: 1px dashed var(--borde); }
 
 @media (max-width: 640px) {
