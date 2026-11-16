@@ -177,7 +177,7 @@ function vistaInicio() {
   const totalBombillos = ORDEN.reduce((s, n) => s + (conteo[n] || 0), 0);
   const prendidosTodos = ORDEN.reduce((s, n) => s + prendidos(n), 0);
 
-  const etapas = ETAPAS.map((e, i) => {
+  const etapas = ETAPAS.map((e) => {
     const listas = e.clases.filter((n) => estadoClase(n) === 'hecha').length;
     const puntos = e.clases.map((n) => `<i class="punto ${estadoClase(n)}" title="${dos(n)} ${escapar(CLASES[n].titulo)}"></i>`).join('');
     const tieneActual = e.clases.includes(actual);
@@ -595,10 +595,13 @@ async function vistaCertificado(muestra) {
   const fecha = completo ? fechaUltimoBombillo() : new Date();
   const fechaTexto = fecha.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' });
   const codigo = muestra && !completo ? 'MUESTRA' : await codigoVerificacion(nombre, fecha);
-  const romanos = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
   const etapas = ETAPAS.map((e, i) => `
-    <li><span class="cert-num">${romanos[i] || i + 1}</span>${escapar(e.titulo)}</li>`).join('');
+    <li><span class="cert-num">[✓]</span>${escapar(e.titulo)}</li>`).join('');
   const anio = fecha.getFullYear();
+  // El nombre y el código, escritos en binario (8 bits por letra), para las columnas de los lados.
+  const binario = (t) => [...new TextEncoder().encode(t)].map((b) => b.toString(2).padStart(8, '0')).join('');
+  const bitsIzq = binario(`${nombre} ${codigo} `).repeat(12).slice(0, 1400);
+  const bitsDer = binario(`mapa-de-estudios ${anio} 20/20 ${total}/${total} exit 0 `).repeat(6).slice(0, 1400);
 
   app.innerHTML = `
     <div class="cert-herramientas no-imprimir">
@@ -612,26 +615,29 @@ async function vistaCertificado(muestra) {
       <div class="cert-hoja">
         <span class="cert-esquina e1"></span><span class="cert-esquina e2"></span>
         <span class="cert-esquina e3"></span><span class="cert-esquina e4"></span>
+        <div class="cert-bits izq" aria-hidden="true">${bitsIzq}</div>
+        <div class="cert-bits der" aria-hidden="true">${bitsDer}</div>
         <p class="cert-marca">delvin@estudios:~$ ./certificado</p>
         <h1 class="cert-titulo">Certificado</h1>
         <p class="cert-tipo">de finalización</p>
+        <p class="cert-estado">status: <b>completado</b> · ${ORDEN.length}/${ORDEN.length} clases · ${total}/${total} partes · exit 0</p>
         <p class="cert-otorga">Se otorga a</p>
         <p class="cert-nombre">${escapar(nombre || '—')}</p>
         <p class="cert-texto">por completar el curso <b>Mapa de estudios: programación, de los fundamentos a los agentes de IA</b>,
           con sus ${ORDEN.length} clases y ${total} partes, aprobando la práctica de cada una.</p>
         <ul class="cert-etapas">${etapas}</ul>
         <div class="cert-pie">
-          <div class="cert-dato"><span class="cert-valor">${escapar(fechaTexto)}</span><span class="cert-rotulo">Fecha</span></div>
+          <div class="cert-dato"><span class="cert-valor">${escapar(fechaTexto)}</span><span class="cert-rotulo">// fecha</span></div>
           <svg class="cert-sello" viewBox="0 0 120 120" aria-hidden="true">
             <defs><path id="cert-arco" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
             <circle cx="60" cy="60" r="57" class="s-borde"/>
             <circle cx="60" cy="60" r="51" class="s-fino"/>
             <circle cx="60" cy="60" r="34" class="s-fino"/>
-            <text class="s-texto"><textPath href="#cert-arco" startOffset="0" textLength="272" lengthAdjust="spacing">MAPA DE ESTUDIOS · ${anio} · COMPLETADO ·</textPath></text>
+            <text class="s-texto"><textPath href="#cert-arco" startOffset="0" textLength="272" lengthAdjust="spacing">&lt;/&gt; MAPA_DE_ESTUDIOS · ${anio} · COMPLETADO ·</textPath></text>
             <path class="s-bombillo" d="M60 38c-9 0-15 7-15 15 0 6 3 9 6 12 2 2 3 4 3 7h12c0-3 1-5 3-7 3-3 6-6 6-12 0-8-6-15-15-15z"/>
             <path class="s-base" d="M54 76h12M55 80h10M57 84h6"/>
           </svg>
-          <div class="cert-dato"><span class="cert-valor mono">${codigo}</span><span class="cert-rotulo">Código de verificación</span></div>
+          <div class="cert-dato"><span class="cert-valor mono">${codigo}</span><span class="cert-rotulo">// código de verificación</span></div>
         </div>
         <p class="cert-aviso">Emitido por el propio curso (delvinsmart.github.io/estudios), de forma automática, a partir del progreso guardado
           en el navegador de quien lo completó. No es un título oficial ni está acreditado por ninguna institución educativa.</p>
