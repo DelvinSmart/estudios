@@ -10,7 +10,12 @@ Datos: `cursos/{curso}/progreso/{uid}`, `cursos/{curso}/emitidos/{uid}` y `certi
 | `generar-reglas.mjs` | Arma `firestore.rules` metiendo la lista real de las partes. |
 | `firestore.rules` | Lo que se sube a Firebase (generado, no lo edites a mano). |
 | `partes.mjs` | Lee los `.md` y lista los ids de todas las partes. |
-| `pruebas/reglas.test.mjs` | 30 pruebas: las trampas tienen que fallar y lo correcto tiene que pasar. |
+| `pruebas/reglas.test.mjs` | 31 pruebas: las trampas tienen que fallar y lo correcto tiene que pasar. |
+| `funciones/index.js` | La función que manda los correos de la cuenta (verificar y contraseña nueva). |
+| `funciones/correos.js` | El diseño de esos correos. |
+| `funciones/limites.js` | Los topes: 1 por minuto y 5 por día por persona; 250 de verificación y 150 de contraseña por día en todo el sitio, **separados**, para que abusar de uno no bloquee el otro. |
+
+Pruebas de la función: `cd firebase/funciones && npm test`. Para subirla: `firebase deploy --only functions`.
 
 ## Si agregas o quitas partes (títulos `##`) de una clase
 

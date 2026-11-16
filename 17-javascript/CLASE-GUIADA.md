@@ -433,7 +433,8 @@ Este mapa está repartido así (es la arquitectura del Tema 10 en pequeño):
 | `web/guardado.js` | Guardar y leer en `localStorage` |
 | `web/practica.js` | Las prácticas interactivas |
 | `web/buscar.js` | El buscador |
-| `web/app.js` | Decidir qué pantalla mostrar y dibujarla |
+| `web/app.js` | Decidir qué pantalla mostrar (mira la dirección y llama a la que toca) |
+| `web/vistas/` | Cada pantalla en su propio archivo: `mapas.js`, `parte.js`, `progreso.js`, `cuenta.js`, `certificado.js` |
 
 > 🌎 **En la vida real:** en un restaurante no cocina todo una sola persona. Cada cocinero hace lo suyo y se **pasan** las cosas. Los módulos son los cocineros.
 

@@ -21,7 +21,7 @@ Un buen pedido tiene cuatro piezas:
 ```text
 ❌ "arregla el login"
 
-✅ En mi sitio (HTML, CSS y JavaScript, sin frameworks), en web/app.js,
+✅ En mi sitio (HTML, CSS y JavaScript, sin frameworks), en web/vistas/cuenta.js,
    la pantalla #/entrar muestra "No se pudo completar" al crear cuenta.
    Encuentra la causa y corrígela.
    No cambies el diseño ni agregues librerías.
@@ -72,7 +72,7 @@ Tres frases que ahorran mucho: **qué pasó**, **qué esperabas que pasara** y *
 
 ### Con una herramienta de código, señala el archivo
 
-En Claude Code, OpenCode o Codex no hace falta pegar el código: la herramienta lo lee. Pero ayuda **nombrar el archivo** (`web/app.js`) o la pantalla, para que no busque en todo el proyecto.
+En Claude Code, OpenCode o Codex no hace falta pegar el código: la herramienta lo lee. Pero ayuda **nombrar el archivo** (`web/vistas/parte.js`) o la pantalla, para que no busque en todo el proyecto.
 
 > 🌎 **En la vida real:** "la llave está en el segundo cajón de la cocina" vs "la llave está en algún lugar de la casa".
 
@@ -83,7 +83,7 @@ vf :: Para un error, basta con decir "sale un error"
 vf :: Decir qué ya intentaste evita que la IA te proponga lo mismo
 elige :: ¿Qué tres cosas conviene contar sobre un problema? :: Tu nombre, tu edad, tu ciudad :: Qué pasó, qué esperabas y qué ya probaste :: Solo el título
 elige :: En Claude Code, ¿hace falta pegar todo el archivo? :: Sí, siempre :: No: la herramienta lo lee; ayuda nombrar el archivo :: No se puede usar con archivos
-escribe :: Escribe un buen pedido para este caso: al tocar "marcar entendido" no se prende el bombillo y en la consola sale un error. :: Ejemplo: en web/app.js, al tocar "¿lo entendiste? márcalo" en una parte, no se prende el bombillo; en la consola sale este error completo: (lo pego). Esperaba que se prendiera y saliera el aviso. Ya recargué con Cmd+Shift+R. Encuentra la causa y corrígela sin cambiar el diseño.
+escribe :: Escribe un buen pedido para este caso: al tocar "marcar entendido" no se prende el bombillo y en la consola sale un error. :: Ejemplo: en web/vistas/parte.js, al tocar "¿lo entendiste? márcalo" en una parte, no se prende el bombillo; en la consola sale este error completo: (lo pego). Esperaba que se prendiera y saliera el aviso. Ya recargué con Cmd+Shift+R. Encuentra la causa y corrígela sin cambiar el diseño.
 ```
 
 ## Parte 3. Trabajar en pasos

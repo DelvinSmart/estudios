@@ -308,7 +308,8 @@ Este mapa está partido así (es la arquitectura del Tema 10 en pequeño):
 | `web/lector.js` | Leer los `.md` y partirlos en partes |
 | `web/guardado.js` | Guardar y leer en `localStorage` |
 | `web/buscar.js` | El buscador |
-| `web/app.js` | Decidir qué pantalla mostrar y dibujarla |
+| `web/app.js` | Decidir qué pantalla mostrar (mira la dirección y llama a la que toca) |
+| `web/vistas/` | Cada pantalla en su propio archivo: `mapas.js`, `parte.js`, `progreso.js`, `cuenta.js`, `certificado.js` |
 
 **Preguntas**
 16. Si quieres agregar una clase nueva al mapa, ¿qué archivo abres?

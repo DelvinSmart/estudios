@@ -44,16 +44,23 @@ Aprender/
 ├── 01-leer-codigo/LECCION.md  y  CLASE-GUIADA.md
 ├── …                   las clases
 └── web/
-    ├── cursos.js       los datos: las etapas y qué clases tiene cada una
+    ├── cursos.js       los datos: los cursos, las etapas y qué clases tiene cada una
     ├── lector.js       lee un .md y lo parte en partes
     ├── guardado.js     lo que se guarda en el navegador: tema, bombillos y prácticas
+    ├── avance.js       cuántas partes tiene cada clase y cuántas están prendidas
     ├── practica.js     las prácticas interactivas
+    ├── markdown.js     convierte el .md en página: avisos, código, prácticas y enlaces
     ├── buscar.js       el buscador
-    ├── app.js          decide qué pantalla mostrar y la dibuja
+    ├── nube.js         todo lo que habla con Firebase: cuenta, progreso y certificado
+    ├── sesion.js       el "usuario@estudios" de arriba y si hay sesión abierta
+    ├── mapa-islas.js   el mapa de islas con su camino
+    ├── pantalla.js     lo que comparten las pantallas: migas, avisos y errores
+    ├── app.js          mira la dirección y decide qué pantalla mostrar
+    ├── vistas/         una pantalla por archivo: mapas, parte, progreso, cuenta y certificado
     └── estilos.css     todos los colores, letras y formas
 ```
 
-Es la arquitectura del Tema 10 en pequeño: **los datos** (`cursos.js`) separados de **la lógica** (`lector.js`, `guardado.js`, `practica.js`) y de **la pantalla** (`app.js`, `estilos.css`).
+Es la arquitectura del Tema 10 en pequeño: **los datos** (`cursos.js`) separados de **la lógica** (`lector.js`, `guardado.js`, `avance.js`, `practica.js`, `nube.js`) y de **la pantalla** (`app.js`, `vistas/`, `estilos.css`). Y dentro de la pantalla, **una pantalla por archivo**: si algo falla en el certificado, abres `vistas/certificado.js` y no tienes que buscar entre 1.200 líneas.
 
 > 🌎 **En la vida real:** una caja de herramientas con compartimentos: cada uno, una cosa.
 
@@ -66,7 +73,7 @@ elige :: ¿Qué archivo arma las preguntas de verdadero o falso? :: `buscar.js` 
 vf :: `PROGRESO.md` es leído por la página para mostrar el progreso
 ```
 
-> 🔁 **Repaso:** `cursos.js` (datos), `lector.js` / `guardado.js` / `practica.js` / `buscar.js` (lógica), `app.js` + `estilos.css` (pantalla).
+> 🔁 **Repaso:** `cursos.js` (datos), `lector.js` / `guardado.js` / `practica.js` / `buscar.js` (lógica), `app.js` + `vistas/` + `estilos.css` (pantalla).
 
 ## 3. Tres niveles de mapa, una sola página
 
@@ -351,7 +358,7 @@ escribe :: ¿Qué es un `boolean`? :: Un dato que solo puede ser true o false.
 
 **La regla:** para aprobar hay que **acertar todas en el mismo intento**. Si fallas una, ves la explicación y **repites el bloque entero en otro orden** (para que no lo hagas de memoria). Mientras la práctica de una parte no esté aprobada, **el botón del bombillo queda bloqueado 🔒**.
 
-`practica.js` lo hace con lo del Tema 17: lee las líneas con `split(' :: ')`, arma botones con plantillas, escucha clics con `addEventListener`, y al aprobar guarda en `localStorage` y avisa con un evento propio (`practica-aprobada`), que `app.js` escucha para desbloquear el botón.
+`practica.js` lo hace con lo del Tema 17: lee las líneas con `split(' :: ')`, arma botones con plantillas, escucha clics con `addEventListener`, y al aprobar guarda en `localStorage` y avisa con un evento propio (`practica-aprobada`), que `vistas/parte.js` escucha para desbloquear el botón.
 
 ```practica
 elige :: Una persona en otro país estudia hasta la parte 5 en tu página publicada. Tú vas por la 2. ¿Qué ves? :: La parte 5 :: Tus bombillos: la parte 2 :: Nada
@@ -431,7 +438,7 @@ elige :: ¿Qué haces para que una clase muestre su clase guiada primero? :: Nad
 2. Ábrela también con doble clic sobre `index.html`. ¿Qué mensaje sale? ¿Por qué?
 3. En `web/estilos.css`, cambia `--acento` del tema oscuro por otro color. Recarga (con **Cmd + Shift + R**, por la caché).
 4. En cualquier lección, agrega una tarjeta `> 💡 **Idea:** ...` y un bloque `practica` con una pregunta `vf`. Recarga y pruébalo.
-5. Abre `web/app.js`, busca `vistaInicio` y explica cómo calcula cuántas clases están terminadas.
+5. Abre `web/vistas/mapas.js`, busca `vistaInicio` y explica cómo calcula cuántas clases están terminadas.
 
 <details>
 <summary>Ver las correcciones explicadas</summary>

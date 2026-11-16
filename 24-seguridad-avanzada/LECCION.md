@@ -55,7 +55,7 @@ vf :: La severidad depende de qué tan fácil es explotar la falla y cuánto da�
 elige :: ¿Cuál de estas fue una categoría de la auditoría de Copiloto? :: Colores de la app :: Aislamiento por dueño :: Velocidad de carga
 elige :: "Cualquiera puede leer los datos de todos los usuarios" es… :: Baja :: Informativa :: Crítica
 elige :: ¿Qué es CVSS? :: Un lenguaje :: Un sistema para puntuar la gravedad de una falla de 0 a 10 :: Un antivirus
-escribe :: Escribe el alcance de una auditoría para este mismo mapa de estudios. :: Por ejemplo: revisar web/ (app.js, nube.js, practica.js) y firebase/ (reglas), solo en el emulador y en una copia local; categorías: aislamiento por dueño, permisos en el navegador, IDOR, secretos y XSS; sin tocar los datos reales.
+escribe :: Escribe el alcance de una auditoría para este mismo mapa de estudios. :: Por ejemplo: revisar web/ (vistas/, nube.js, practica.js) y firebase/ (reglas), solo en el emulador y en una copia local; categorías: aislamiento por dueño, permisos en el navegador, IDOR, secretos y XSS; sin tocar los datos reales.
 ```
 
 ## Parte 2. Leer reglas de Firebase como atacante

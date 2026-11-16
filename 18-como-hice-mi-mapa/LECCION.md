@@ -38,15 +38,23 @@ Aprender/
 ├── 01-leer-codigo/LECCION.md
 ├── …                   las clases, como siempre
 └── web/
-    ├── cursos.js       los datos: las etapas y qué clases tiene cada una
+    ├── cursos.js       los datos: los cursos, las etapas y qué clases tiene cada una
     ├── lector.js       lee un .md y lo parte en partes
-    ├── guardado.js     lo que se guarda en el navegador (tema y partes entendidas)
+    ├── guardado.js     lo que se guarda en el navegador: tema, bombillos y prácticas
+    ├── avance.js       cuántas partes tiene cada clase y cuántas están prendidas
+    ├── practica.js     las prácticas interactivas
+    ├── markdown.js     convierte el .md en página: avisos, código, prácticas y enlaces
     ├── buscar.js       el buscador
-    ├── app.js          decide qué pantalla mostrar y la dibuja
+    ├── nube.js         todo lo que habla con Firebase: cuenta, progreso y certificado
+    ├── sesion.js       el "usuario@estudios" de arriba y si hay sesión abierta
+    ├── mapa-islas.js   el mapa de islas con su camino
+    ├── pantalla.js     lo que comparten las pantallas: migas, avisos y errores
+    ├── app.js          mira la dirección y decide qué pantalla mostrar
+    ├── vistas/         una pantalla por archivo: mapas, parte, progreso, cuenta y certificado
     └── estilos.css     todos los colores, letras y formas
 ```
 
-Es la arquitectura del Tema 10 en pequeño: **los datos** (`cursos.js`) están separados de **la lógica** (`lector.js`, `guardado.js`) y de **la pantalla** (`app.js`, `estilos.css`).
+Es la arquitectura del Tema 10 en pequeño: **los datos** (`cursos.js`) están separados de **la lógica** (`lector.js`, `guardado.js`, `avance.js`, `nube.js`) y de **la pantalla** (`app.js`, `vistas/`, `estilos.css`). Dentro de la pantalla hay **una pantalla por archivo** en `web/vistas/`: así ninguno crece hasta volverse imposible de leer.
 
 **Preguntas**
 3. Quieres cambiar el verde de la página. ¿Qué archivo abres?
@@ -232,7 +240,7 @@ En internet, el servidor es **GitHub Pages** (parte 9).
 - **IBM Plex Sans** para los párrafos largos: se lee más cómodo.
 
 **Los detalles de "terminal":**
-- Arriba, `delvin@estudios:~/fundamentos/01-leer-codigo$` muestra **dónde estás**, como la terminal muestra la carpeta actual. Lo actualiza `ponerMigas` en `app.js`.
+- Arriba, `delvin@estudios:~/fundamentos/01-leer-codigo$` muestra **dónde estás**, como la terminal muestra la carpeta actual. Lo actualiza `ponerMigas` en `pantalla.js`.
 - El cursor que parpadea es una caja con `animation: parpadeo 1.1s steps(1) infinite`.
 - Los comentarios grises `// clase 15` imitan comentarios de código.
 
@@ -333,7 +341,7 @@ Es igual que con **¿Qué dice la Biblia?** (Tema 12, parte 9): GitHub Pages sir
 6. Agrega una etapa nueva de prueba en `web/cursos.js` (con una clase que ya existe). Mira cómo aparece en el mapa. Después déjalo como estaba.
 
 **D. Leer código real**
-7. Abre `web/app.js` y busca la función `vistaInicio`. Explica con tus palabras cómo calcula cuántas clases están terminadas.
+7. Abre `web/vistas/mapas.js` y busca la función `vistaInicio`. Explica con tus palabras cómo calcula cuántas clases están terminadas.
 
 ## Respuestas (míralas solo después de intentarlo)
 

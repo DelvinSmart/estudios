@@ -9,7 +9,9 @@
 | Archivo | Qué hace |
 |---|---|
 | `web/nube.js` | Todo lo que habla con Firebase: cuenta, progreso y certificado |
-| `web/app.js` | Las pantallas: entrar, crear cuenta, recuperar, mi cuenta, certificado y verificar |
+| `web/vistas/cuenta.js` | Las pantallas de la cuenta: entrar, crear cuenta, recuperar y mi cuenta |
+| `web/vistas/certificado.js` | El certificado de cada curso y la página para verificarlo |
+| `firebase/funciones/limites.js` | Los topes de correos (por persona y por día, separados por tipo) |
 | `firebase/reglas.plantilla` | Las reglas de seguridad, escritas a mano |
 | `firebase/generar-reglas.mjs` | Arma `firestore.rules` con la lista real de partes |
 | `firebase/pruebas/reglas.test.mjs` | Las trampas que intentamos; todas tienen que fallar |
