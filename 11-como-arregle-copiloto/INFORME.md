@@ -1,10 +1,14 @@
 # Informe: cómo se arregló Copiloto Driver
 
+> 🌎 **En la vida real:** es el **informe del taller** después de una reparación grande: qué tenía el carro, qué se midió, qué se cambió, cuánto mejoró y qué errores se cometieron en el camino.
+
 **Fechas:** 4 y 5 de noviembre de 2026
 **Trabajo:** dirigido por Delvin, con el código hecho por Claude. Delvin decidió las prioridades, pidió los cambios y probó la app.
 **Una forma corta de contarlo:** una app publicada era lenta, y al medir en vez de adivinar se encontraron las causas reales. Después se ordenó el código y se añadieron revisiones automáticas para que esos errores no volvieran.
 
 ## 1. Resultado en números
+
+> 🌎 **En la vida real:** es como la hoja de "antes y después" de una reforma: "la casa tardaba 17 minutos en calentarse; ahora tarda 6". Los números convencen más que "ahora anda mejor", igual que un análisis de sangre convence más que "me siento bien".
 
 | Qué | Antes | Después |
 |---|---|---|
@@ -23,7 +27,15 @@ Los tiempos se midieron en un teléfono real. Pueden variar según la red y el e
 
 ## 2. El problema de la lentitud
 
+> 🌎 **En la vida real:** es como un carro que tarda mucho en arrancar. Puede ser la batería, el motor de arranque, el combustible o un cable suelto. El buen mecánico no cambia todo: mide.
+
 ### Cómo se investigó
+
+> 🌎 **En la vida real:** es como encontrar dónde se te va el tiempo en la mañana:
+> 1. **Marcas de tiempo** = anotar la hora al despertar, al bañarte, al desayunar y al salir.
+> 2. **Detector de trabas** = una alarma que suena cada minuto: si suena tarde, es que estabas trabado en algo.
+> 3. **Cronómetro por módulo** = medir cuánto tardas en **cada** tarea por separado.
+> 4. **Perfilador** = una cámara que te graba toda la mañana y muestra: "20 minutos buscando las llaves".
 Primero supusimos causas, y varias suposiciones fueron falsas. Lo que funcionó fue medir, en este orden:
 
 1. **Marcas de tiempo** en el arranque, para ver dónde se iba el tiempo.
@@ -32,6 +44,12 @@ Primero supusimos causas, y varias suposiciones fueron falsas. Lo que funcionó 
 4. **Perfilador de Hermes,** que muestra en qué función se gasta cada milisegundo.
 
 ### Causas reales
+
+> 🌎 **En la vida real:** - **Ordenar 254 ciudades al abrir** = ordenar alfabéticamente la guía telefónica cada mañana antes de usarla, en vez de comprarla ya ordenada.
+> - **El reloj cada segundo** = repintar el cartel de la tienda cada segundo cuando solo cambia la hora una vez por minuto.
+> - **El gráfico de 365 días** = rehacer la contabilidad del año completo cada vez que alguien mira el saldo.
+> - **Un formateador nuevo cada vez** = comprar una calculadora nueva para cada cuenta, en vez de usar siempre la misma.
+> - **Firestore letra por letra** = comparar dos direcciones idénticas letra por letra, cuando bastaba con ver que eran **el mismo papel**.
 
 | Causa | Costo medido | Arreglo |
 |---|---|---|
@@ -42,9 +60,13 @@ Primero supusimos causas, y varias suposiciones fueron falsas. Lo que funcionó 
 | Firestore comparaba letra por letra partes iguales de cada ruta | ~6 s con 736 documentos | Parche de 1 línea en el SDK: `if (e === t) return 0` |
 
 ### La idea más importante
+
+> 🌎 **En la vida real:** parecía que la tienda tardaba en abrir porque el camión de la mercadería (la nube) llegaba tarde. Pero la pista fue el reloj de la pared: si **el reloj** se atrasa, no es el camión; es que el empleado estaba tan ocupado que ni miraba el reloj. El problema estaba **adentro**, no en la calle.
 Antes de medir, yo sospechaba que la pantalla inicial esperaba a la nube. **Era falso.** La pista fue un temporizador de 3,5 s que saltó a los 5,5 s: un temporizador solo se atrasa si el hilo está ocupado. Por eso el arreglo correcto no era tocar la red.
 
 ## 3. Respuesta inmediata al tocar
+
+> 🌎 **En la vida real:** es como un ascensor: cuando aprietas el botón, se tiene que **iluminar al instante**, aunque el ascensor tarde en llegar. Si no se ilumina, la gente lo aprieta diez veces. La app ahora "ilumina el botón" en el mismo toque.
 
 - La burbuja de la barra ahora se mueve en el mismo toque, y la pantalla cambia en el cuadro siguiente.
 - El menú se desliza al tocar volver, sin esperar a redibujar el Início.
@@ -52,6 +74,8 @@ Antes de medir, yo sospechaba que la pantalla inicial esperaba a la nube. **Era 
 - El encogido de la barra usa un resorte más corto.
 
 ## 4. Pantalla del San
+
+> 🌎 **En la vida real:** es como llamar al banco: no es lo mismo "un momento, estoy buscando" (cargando), "el sistema está caído, llame más tarde" (falló) y "usted no tiene cuentas" (no hay datos). Antes, si el sistema estaba caído, te decían "usted no tiene cuentas, ¿quiere abrir una?". Eso asusta a cualquiera.
 Si fallaba la carga, aparecía el botón de crear un San, como si no existieran datos. Ahora hay tres estados distintos:
 
 | Estado | Qué se ve |
@@ -64,7 +88,11 @@ Esa pieza quedó reutilizable: `LoadFailedCard`.
 
 ## 5. El plan de 7 puntos
 
+> 🌎 **En la vida real:** es la lista de tareas de la reforma, en orden de importancia: primero la electricidad y el agua (el dinero), después la pintura.
+
 ### Punto 1: pruebas de dinero
+
+> 🌎 **En la vida real:** es contratar a un auditor para revisar la caja. Para saber si el auditor es bueno, le escondes **19 errores a propósito** en los libros: los encontró todos. Y además encontró **dos errores reales** que nadie había visto, como contar dos veces el mismo billete.
 Se crearon 92 pruebas basadas en las reglas del negocio, como "Uber cierra el día a las 04:00". Para comprobar que servían, se metieron 19 errores a propósito, y las pruebas detectaron los 19.
 
 Las pruebas encontraron dos errores reales:
@@ -74,24 +102,38 @@ Las pruebas encontraron dos errores reales:
 También se unificó el uso del día fiscal guardado en cada registro.
 
 ### Punto 2: revisión automática (CI)
+
+> 🌎 **En la vida real:** es el inspector de la fábrica del Tema 04. Al revisar en una máquina limpia, encontró algo que en tu Mac no se veía, como una receta que solo salía bien en tu cocina porque tenías un condimento que la receta no mencionaba.
 Cada subida a GitHub revisa sola tipos, diseño, secretos y pruebas. Al probar en una copia limpia apareció un fallo invisible en la Mac: TypeScript revisaba el panel sin tener sus dependencias.
 
 ### Punto 3: botones
+
+> 🌎 **En la vida real:** es como cambiar los 112 interruptores de luz de un edificio, cada uno de una marca distinta, por **un solo modelo** igual en todo el edificio. Ahora, si quieres que todos hagan "clic" más suave, cambias el modelo una vez.
 Los 112 `Pressable` sueltos pasaron al motor `Touchable`. Además, un solo control del panel maneja la reacción al toque en Android y iPhone.
 
 ### Punto 4: tema claro
+
+> 🌎 **En la vida real:** en vez de que cada habitación decida "si es de día, abro la cortina", hay **una central** que lo hace para toda la casa. Y los candados de contraste son como un inspector que revisa que se pueda leer el cartel, haya sol o no.
 Las 21 condiciones `isLightTheme` de las pantallas pasaron a tokens. Se añadieron al panel 4 colores y 3 intensidades, con candados de contraste.
 
 ### Punto 5: ciclos
+
+> 🌎 **En la vida real:** eran 22 parejas de vecinos que decían "yo no salgo hasta que salgas tú". Nueve eran falsas alarmas (solo se miraban por foto). Las otras se resolvieron poniendo la escalera en común en el pasillo.
 De 22 a 0. Nueve eran falsos: solo importaban un tipo. Los demás se resolvieron moviendo funciones a archivos nuevos, sin cambiar los cálculos.
 
 ### Punto 6: archivos gigantes
+
+> 🌎 **En la vida real:** es como un manual de 1.000 páginas que nadie lee. Se dividió en capítulos con su propio cuadernito, sin cambiar lo que dice.
 Siete archivos bajaron de 1.000 líneas, moviendo bloques enteros a hooks y componentes.
 
 ### Punto 7: proveedores anidados
+
+> 🌎 **En la vida real:** son como **muñecas rusas**: 21 cajas, una dentro de otra. Hoy no molesta, pero abrir la del centro lleva tiempo. Queda en la lista para más adelante.
 Sigue pendiente. Hoy no causa un problema visible.
 
 ## 6. Revisión posterior
+
+> 🌎 **En la vida real:** es la segunda inspección después de terminar la obra: una mirada fresca encuentra cosas que el que construyó ya no ve, como un ojo nuevo que lee tu carta y encuentra faltas de ortografía.
 Una revisión completa encontró 15 problemas: 14 corregidos y 1 en parte. Entre ellos:
 - La IA y los textos usaban "motorista" o "conductor".
 - Había vulnerabilidades críticas y altas en dependencias.
@@ -101,6 +143,10 @@ Una revisión completa encontró 15 problemas: 14 corregidos y 1 en parte. Entre
 El detalle está en `material/INFORME_REVISION_2026-11-05.md`.
 
 ## 7. Errores cometidos en el camino
+
+> 🌎 **En la vida real:** es el **cuaderno de errores** del cocinero: "le puse sal sin probar", "subí el fuego y se quemó", "probé el horno con la puerta abierta y la temperatura salió mal". Contar los errores con honestidad muestra que aprendiste; esconderlos muestra lo contrario.
+>
+> El de la vc89 es el más importante: **compilar no es funcionar**, como un carro que pasa la revisión en papel pero que nadie intentó arrancar.
 Esta parte es de las más útiles para explicar el proyecto con honestidad.
 
 | Error | Qué pasó | Lección |
@@ -114,9 +160,13 @@ Esta parte es de las más útiles para explicar el proyecto con honestidad.
 | Dibujo con cables inventados | El nudo no salía del código | Un diagrama debe venir de datos reales |
 
 ## 8. Por qué el mapa final se hizo con código
+
+> 🌎 **En la vida real:** un pintor puede dibujar un plano eléctrico muy bonito, pero si un cable está mal dibujado, el electricista conecta mal. Un plano técnico se hace **con medidas reales**, no a ojo.
 Las IA de imágenes dibujaron bonito, pero no lograron conectar bien los cables. Se generó con código porque un mapa técnico debe ser exacto, y así cada cable sale de datos medidos con `madge`.
 
 ## 9. Lo que falta
+
+> 🌎 **En la vida real:** es la lista de "pendientes" que deja el maestro de obra: cosas que no urgen, pero que no se olvidan.
 El deploy y la app ya están publicados, según confirmó Delvin. Lo que queda:
 
 - Probar el flujo completo en el iPhone y el Samsung.
@@ -126,6 +176,8 @@ El deploy y la app ya están publicados, según confirmó Delvin. Lo que queda:
 - Decidir el punto 7 y la unión con `main`.
 
 ## 10. Commits
+
+> 🌎 **En la vida real:** son las **fotos con fecha** del diario de obra (Tema 06): cada una muestra una etapa de la reparación.
 
 | Commit | Qué incluye |
 |---|---|
@@ -140,6 +192,8 @@ El deploy y la app ya están publicados, según confirmó Delvin. Lo que queda:
 | `63ccfca` | versionCode 90 |
 
 ## 11. Cómo explicarlo en una entrevista
+
+> 🌎 **En la vida real:** es como contar en el ascensor, en 30 segundos, la historia de la reparación: "el carro tardaba 18 en arrancar; medí, encontré cuatro causas, quedó en 6, y dejé revisiones para que no vuelva a pasar".
 
 **En 30 segundos:**
 > Mi app tardaba casi 18 segundos en abrir en un teléfono de gama media. En vez de adivinar, medí con un perfilador y encontré las causas: un ordenamiento al arrancar, un redibujo por segundo, un gráfico que recalculaba todo y una comparación lenta en Firestore. Bajó a unos 6 segundos. Después añadí pruebas, encontré dos errores reales de dinero y dejé revisiones automáticas para que no volvieran.

@@ -1,5 +1,7 @@
 # Lección 14: ¿Qué dice la Biblia? por dentro
 
+> 🌎 **En la vida real:** como en la lección 12, esta clase trata de **cómo funciona la página por dentro** (derechos, fuentes, medidas, diseño), no del contenido de los estudios. Es el diario de obra de un día de mucho trabajo.
+
 Este es el **Tema 14** del curso. Cuenta todo lo que se hizo el **15 de noviembre de 2026** en la página de estudios: el nombre nuevo, los derechos de la LBLA, las fuentes, el griego, el motor de diseño, la Reina-Valera de Logos, la LBLA de Lockman, y **todo lo que se intentó y no funcionó**. Estudia una parte por día. Abre el archivo del que habla cada parte (en `SSD_Desarrollo/Developer/que-dice-la-biblia`) y míralo mientras lees. Primero intenta responder las preguntas sin mirar. Las respuestas están al final.
 
 Los ejemplos están simplificados para aprender. El código real puede verse un poco distinto.
@@ -7,6 +9,10 @@ Los ejemplos están simplificados para aprender. El código real puede verse un 
 ---
 
 ## Parte 1. El mapa del día
+
+> 🌎 **En la vida real:** es como la lista de tareas que deja un electricista al final de una jornada larga: "cambié el tablero, puse enchufes en la cocina, arreglé la luz del pasillo", con **en qué habitación** está cada cosa.
+>
+> La idea que une todo es la del **molde de pan**: se mejoró **el molde** una sola vez, y todos los panes (todos los estudios) salen mejor, sin tocar uno por uno.
 
 En un solo día la página cambió mucho. Este es el resumen:
 
@@ -33,6 +39,12 @@ En un solo día la página cambió mucho. Este es el resumen:
 
 ## Parte 2. El nombre y una sola dirección
 
+> 🌎 **En la vida real:** - **Renombrar vs. copiar**: es como cambiar el cartel de tu negocio en vez de abrir otro local con otro nombre. El local es el mismo, con toda su historia y sus clientes.
+> - **Redirecciones**: era como dejar un cartel en la dirección vieja que dice "nos mudamos a la otra cuadra". Decidiste tener **una sola dirección** y nada más.
+> - **El código de 8 letras**: es como el número de turno que te da la pantalla del banco: aparece **en la pantalla** (la terminal), no te llega por SMS.
+> - **La caché**: es como cuando ya leíste el diario de la mañana y alguien te dice que salió una edición nueva: tú sigues con el viejo en la mano 10 minutos. **Cmd + Shift + R** es ir al kiosco a buscar el nuevo.
+> - **`?v=lbla12`**: es como ponerle "edición 12" en la tapa: el kiosquero ve que es otra edición y no te da la vieja.
+
 **Qué se hizo:**
 1. El título visible pasó de "Estudios Bíblicos" a **"¿Qué dice la Biblia?"**.
 2. **El repositorio se renombró** (no se copió) de `estudios-biblicos` a `que-dice-la-biblia`. El historial se quedó entero: 30 cambios.
@@ -52,6 +64,10 @@ En un solo día la página cambió mucho. Este es el resumen:
 ---
 
 ## Parte 3. Los derechos de la LBLA
+
+> 🌎 **En la vida real:** es como las reglas para usar fotos de un fotógrafo profesional: "puedes usar hasta 500, no todo el álbum, que no sean más de una cuarta parte de tu revista, y siempre con mi nombre debajo".
+>
+> Lo importante es que el crédito lo pone **la plantilla sola**, como una impresora que siempre imprime el pie de página: nadie tiene que acordarse. `esLBLA` es como el empleado que mira la etiqueta de cada foto y, si dice "LBLA", le pega el crédito.
 
 Lo comprobé en la página oficial de **Lockman**, los dueños de la LBLA:
 - Se pueden citar **hasta 500 versículos** sin pedir permiso.
@@ -74,6 +90,14 @@ const esLBLA = ref => /\bLBLA\b/.test(ref || "");
 ---
 
 ## Parte 4. Conseguir los versículos: lo que no se pudo y lo que sí
+
+> 🌎 **En la vida real:** - **YouVersion**: fuiste a la tienda y no tenían ese producto.
+> - **Una IA de memoria**: es como pedirle a alguien que te recite de memoria un contrato: te dice algo **parecido**, pero en un contrato cada palabra importa.
+> - **Scraping**: es como entrar a una librería y fotocopiar páginas de un libro que dice "prohibido fotocopiar". Y **CORS** es el guardia que no te deja sacar el libro de la tienda.
+> - **El robot de fotos**: es lo mismo que fotocopiar, pero con otra máquina.
+> - **Mostrar Bible.com adentro**: el dueño no deja que pongas su vidriera dentro de tu tienda.
+>
+> **Lo que sí**: el **buscador** es como darle al lector la **dirección exacta** de la biblioteca y el estante; **reutilizar** es usar la cita que ya habías copiado tú antes; **leer capturas** es como pasar tus propias fotos por el escáner de casa. La diferencia con el robot: con tus fotos, **tú** trajiste el libro; el robot entraría **a la casa de otro**.
 
 **El sueño:** que la página traiga sola el texto de la LBLA. Esto es todo lo que se probó:
 
@@ -103,6 +127,12 @@ const esLBLA = ref => /\bLBLA\b/.test(ref || "");
 
 ## Parte 5. El medidor de citas
 
+> 🌎 **En la vida real:** es como la **balanza de la aerolínea** antes de facturar: si la maleta pasa de 23 kg, no la despachan y te dicen cuánto sobra. Aquí, si las citas pasan del 25 %, **Publicar no publica** y te dice cuántas palabras faltan.
+>
+> La cuenta del 25 %: es como una pizza en 4 porciones. Si la Biblia puede ser **una** porción como máximo, lo tuyo tiene que ser las **otras tres**.
+>
+> Dónde quedó el medidor: como el indicador de batería del celular: un número chiquito siempre a la vista, y el detalle solo si lo tocas.
+
 Para cumplir la regla de Lockman, el panel **mide** cada estudio (`js/panel-medidor.js`):
 - **Versículos:** cuenta los de cada pasaje por su referencia ("Efesios 5:22-25" son 4).
 - **Porcentaje:** cuenta las **palabras** de los versículos y las de todo lo que escribiste (títulos, preguntas, textos, fuentes). Para que la Biblia sea como máximo el 25%, lo tuyo tiene que ser al menos 3 veces lo bíblico.
@@ -119,6 +149,11 @@ Para cumplir la regla de Lockman, el panel **mide** cada estudio (`js/panel-medi
 ---
 
 ## Parte 6. Las fuentes
+
+> 🌎 **En la vida real:** las fuentes son como las **notas al pie** de un libro: de dónde salió cada dato.
+> - Guardarlas **en el subpunto** es como pegar el ticket de compra **dentro de la caja** del producto: si mueves la caja, el ticket se va con ella.
+> - Los **botoncitos** son como el "ver más" de una noticia: no te llenan la página.
+> - **Verificar cada link** es como el periodista que llama a la fuente antes de publicar. Así se encontró que una frase estaba atribuida al libro equivocado, como citar a un autor por algo que en realidad dijo otro.
 
 **Qué son:** de dónde salió cada dato (un léxico, un libro, un artículo), con un resumen y su link.
 
@@ -140,6 +175,10 @@ Para cumplir la regla de Lockman, el panel **mide** cada estudio (`js/panel-medi
 
 ## Parte 7. El texto griego (SBLGNT)
 
+> 🌎 **En la vida real:** es como la diferencia entre una **canción con derechos** (no la puedes poner en tu video) y una **música libre de derechos** (la usas tranquilo, solo pones el crédito). El NA28 es la primera; el SBLGNT, la segunda.
+>
+> Guardarlo **dentro de la página**, un archivo por libro, es como tener la **enciclopedia en tu estante**: no dependes de nadie para consultarla. "+ Griego" es como un índice que va solo a la página correcta.
+
 **Qué texto griego se puede publicar:**
 | Texto | ¿Se puede? |
 |---|---|
@@ -157,6 +196,14 @@ Para cumplir la regla de Lockman, el panel **mide** cada estudio (`js/panel-medi
 ---
 
 ## Parte 8. Los pasajes cerrados y los recuadros en orden
+
+> 🌎 **En la vida real:** los pasajes cerrados son como un **acordeón** de un folleto: ves el título y lo abres si quieres leer.
+>
+> El orden de los efectos es como la **puerta giratoria** de un banco: no entra el siguiente hasta que salió el anterior. Nunca hay dos personas en el mismo compartimento.
+>
+> Leer el tiempo del motor (`--dur-200`) es como que los dos bailarines escuchen **la misma música**: si cada uno contara los tiempos por su cuenta, terminarían desfasados.
+>
+> En el PDF todo sale abierto, porque en un papel impreso no se puede "tocar para abrir".
 
 **Antes:** cada pasaje se veía completo y ocupaba mucho.
 
@@ -180,6 +227,15 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 
 ## Parte 9. La Reina-Valera 1960 con Logos
 
+> 🌎 **En la vida real:** la mejora de velocidad es como hacer las compras:
+> 1. **El globo**: ir al mercado y que el empleado te haga esperar **a propósito** medio segundo antes de atender cada producto, uno por uno.
+> 2. **Pedir directo, todos a la vez**: mandar la lista entera por WhatsApp y que te lo preparen todo junto.
+> 3. **Adelantarlos**: que la bolsa ya esté lista en la puerta **antes** de que llegues.
+>
+> **JSONP**: es como pedir una pizza diciendo "cuando llegue, toque el timbre que dice *Delvin*": el repartidor (el `<script>`) llega y toca **tu** timbre (llama a tu función) con la pizza (los datos).
+>
+> **El riesgo**: es usar la puerta de servicio de un local; funciona hoy, pero si la cambian de lugar, nadie te avisa.
+
 **Logos** tiene un servicio gratis, **Reftagger**, que muestra versículos en un globo. Tiene la RVR 1960 con su licencia. **No tiene la LBLA ni ninguna versión en portugués** (se probaron ARA, ARC, NVT, NAA, NTLH, ACF…).
 
 **Cómo fue cambiando:**
@@ -202,6 +258,16 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 ---
 
 ## Parte 10. La LBLA con Lockman (la más difícil)
+
+> 🌎 **En la vida real:** el **iframe** es como colgar en tu pared una **ventana que da a la casa del vecino**: ves lo que hay, pero no puedes meter la mano ni medir sus muebles. Por eso todo se hizo **calculando**.
+>
+> Los intentos son como acomodar un cuadro en una pared: primero era enorme, después se veía el marco, después las letras grandes, después se cortaba… y en cada paso se ajustó **una** cosa.
+>
+> **Calcular el alto** es lo más ingenioso: es como un sastre que no puede medir a una persona, pero sí a su **hermano gemelo**. Mide al gemelo (el mismo versículo en Reina-Valera) y con eso corta la tela.
+>
+> **Calibrar** es como ajustar una balanza de cocina: primero creías que cada letra ocupaba 9,15; pesaste 32 cosas reales y descubriste que era 8,1. Se prefirió que sobre un poquito de tela antes que quedar corto.
+>
+> La **tapa transparente** es como poner un vidrio sobre una maqueta en un museo: aunque alguien intente tocarla (Safari), no puede moverla.
 
 **La idea:** Lockman tiene su propia Biblia en línea, `bible.lockman.org`. Su página **sí se deja mostrar dentro de otra** (en un *iframe*: una ventana a otra página). El texto no se copia: es la página de Lockman dentro de la tuya.
 
@@ -237,6 +303,13 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 
 ## Parte 11. El motor de diseño y el candado
 
+> 🌎 **En la vida real:** antes era como una casa con **770 enchufes de modelos distintos**. Ahora:
+> - `motor.css` = **un solo catálogo** de piezas oficiales para toda la casa.
+> - El **candado** = el inspector que, antes de entregar la obra, revisa que no haya **ninguna** pieza fuera de catálogo. Si encuentra una, no se entrega y dice dónde está.
+> - La excepción de `@media` = como una regla de la municipalidad que obliga a escribir ciertas medidas a mano en los planos.
+>
+> **Cómo se comprobó**: como el juego de las **7 diferencias**, pero con 3.900 elementos: se puso la página nueva al lado de la vieja y se compararon todos. 0 diferencias.
+
 **Antes:** los colores estaban en un archivo, pero **unos 770 valores** (tamaños, espacios, tiempos, sombras) estaban escritos a mano en todos lados.
 
 **Ahora:**
@@ -254,6 +327,11 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 
 ## Parte 12. PDF, tema, "nuevo" y otros detalles
 
+> 🌎 **En la vida real:** - **PDF claro y oscuro**: como imprimir el mismo menú en dos versiones, para el día y para la noche.
+> - **Botón de tema**: como una lámpara que viene encendida según la luz del cuarto, pero si tú la cambias, **recuerda** tu elección en todas las habitaciones. Se carga **en el `<head>`** para que no haga un parpadeo, como prender la luz antes de abrir la puerta.
+> - **"Nuevo" que desaparece**: como la etiqueta de "no leído" de un correo: se quita cuando lo abres. En el teléfono, lo que quedó fuera de la vista todavía no cuenta como leído.
+> - **Links sin `https://`**: como un corrector que te completa "gmail" con ".com".
+
 | Qué | Cómo funciona |
 |---|---|
 | **PDF claro y oscuro** | `pdf.html?tema=claro` u `oscuro`; el script genera dos archivos por estudio. Claro = gris suave (no blanco), oscuro = azul muy oscuro (no negro). |
@@ -268,6 +346,16 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 ---
 
 ## Parte 13. Todo lo que salió mal (y cómo se arregló)
+
+> 🌎 **En la vida real:** es el **cuaderno de errores** de la jornada. Algunas lecciones en lenguaje de todos los días:
+> - **Tener permiso para citar no es tener de dónde traer**: poder usar una canción no quiere decir que alguien te mande el archivo.
+> - **Decir primero dónde funciona cada cosa**: antes de mandar a alguien a una tienda, asegúrate de que está abierta.
+> - **Preguntar antes de crear**: no le cuelgues un cartel nuevo a alguien en su casa sin preguntarle.
+> - **Medir antes de cambiar**: el globo tardaba por la espera, no por internet.
+> - **Medir en varios anchos**: una camisa puede quedar bien de frente y mal de costado.
+> - **Calibrar con muchos datos**: no se ajusta la balanza con una sola manzana.
+> - **Cada navegador tiene sus defectos**: como cada carro tiene su mañita; hay que probar en el que maneja la persona.
+> - **GitHub falló una vez**: a veces el problema es del correo, no de tu carta: se vuelve a mandar.
 
 | Qué pasó | Qué se aprendió |
 |---|---|
@@ -290,6 +378,8 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 ---
 
 ## Respuestas
+
+> 🌎 **En la vida real:** las soluciones del final: se miran **después** de intentarlo, como las respuestas de una sopa de letras.
 
 1. No. Se cambia la plantilla una sola vez y todos los estudios se ven igual, porque los estudios son solo datos.
 2. La Reina-Valera en `js/rvr.js`; la LBLA en `js/mapa.js` (`abrirLBLA` y `medidasLBLA`).

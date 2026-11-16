@@ -1,6 +1,10 @@
 # Tema 02: Pruebas automáticas
 
+> 🌎 **En la vida real:** piensa en la revisión técnica de un carro. Antes de dejarlo salir a la calle, alguien comprueba con una lista: frenos ✔, luces ✔, cinturones ✔. Las pruebas automáticas son esa lista, pero la revisa una máquina sola, cada vez que tocas algo.
+
 ## 1. ¿Qué es una prueba?
+
+> 🌎 **En la vida real:** es como el panadero que, antes de abrir, prueba un pan de cada horneada. Sabe cómo **debe** saber (lo esperado), lo muerde (lo recibido) y compara. Si sabe a sal en vez de azúcar, para todo antes de venderlo. Una prueba automática hace ese mordisco sola, en milisegundos, cada vez que cambias la receta.
 
 Una prueba es un pequeño programa que revisa si otro programa hace lo correcto.
 
@@ -11,6 +15,15 @@ Toda prueba hace la misma pregunta:
 > Con estos datos, ¿el resultado es el que yo esperaba?
 
 ## 2. ¿Para qué sirve?
+
+> 🌎 **En la vida real:** piensa en las luces del tablero del carro:
+> - **Encontrar errores**: la luz de aceite se enciende antes de que se funda el motor, no después.
+> - **Proteger lo que ya funciona**: el mecánico te cambia los frenos y, al prender el carro, el tablero te avisa si desconectó el sensor del ABS sin querer.
+> - **Cambiar sin miedo**: puedes cambiar la radio tranquilo porque, si tocas un cable que no debías, una luz se enciende.
+> - **Dejar claras las reglas**: el manual dice "la presión de las llantas debe ser 32". Una prueba es esa frase escrita para que la revise una máquina.
+> - **Ahorrar tiempo**: no tienes que abrir el capó y revisar todo a mano cada mañana.
+>
+> El caso de `Uber` y `uber` es como un cajero que cuenta dos veces el mismo billete porque uno estaba al derecho y otro al revés.
 
 | Para qué | Qué significa |
 |---|---|
@@ -26,12 +39,28 @@ Toda prueba hace la misma pregunta:
 
 ## 3. Lo que una prueba NO hace
 
+> 🌎 **En la vida real:** - **No prueba que no haya errores**: el detector de humo de la cocina no te avisa si hay una fuga de agua en el baño. Solo vigila lo que le pusiste a vigilar.
+> - **No sabe cuál es la regla correcta**: si la receta dice "2 kilos de sal" y el panadero la sigue al pie de la letra, el pan sale "correcto" según la receta, pero incomible.
+> - **No ve la pantalla**: una balanza dice que el pastel pesa 1 kg, pero no te dice si está feo.
+> - **No reemplaza el teléfono real**: un carro puede pasar la revisión en el taller y aun así hacer un ruido raro en la carretera. Hay que manejarlo de verdad.
+
 - **No prueba que no existan errores.** Solo revisa los casos que escribiste.
 - **No sabe cuál es la regla correcta.** Si la regla está mal, la prueba también.
 - **Normalmente no ve la pantalla.** No sabe si algo se ve feo.
 - **No reemplaza probar en un teléfono real.** Copiloto tuvo una versión que pasaba todas las revisiones y no abría en el iPhone.
 
 ## 4. Palabras que vas a escuchar
+
+> 🌎 **En la vida real:** todo esto pasa en una cocina:
+> - **Prueba**: probar la sopa con la cuchara.
+> - **Assert / expect**: el momento en que dices "debería estar salada".
+> - **Esperado**: cómo dice la receta que debe saber.
+> - **Recibido**: cómo sabe de verdad.
+> - **Pasar / fallar**: "está perfecta" / "le falta sal".
+> - **Caso borde**: el límite. La tienda abre a las 8:00: ¿qué pasa si llegas justo a las 8:00 en punto?
+> - **Regresión**: arreglaste la gotera del techo y ahora la puerta no cierra, cuando antes cerraba bien.
+> - **Mock**: el muñeco de pruebas de choque. No es una persona de verdad, pero ocupa su lugar para probar el cinturón sin lastimar a nadie.
+> - **CI**: un inspector que revisa cada pan que sale del horno, sin que se lo pidas.
 
 | Palabra | Significado |
 |---|---|
@@ -47,6 +76,15 @@ Toda prueba hace la misma pregunta:
 | CI | La máquina que corre las pruebas sola en cada subida (Tema 04) |
 
 ## 5. Los tres tipos
+
+> 🌎 **En la vida real:** construir un carro:
+> - **Unitaria**: el fabricante prueba **una** bujía en la mesa: ¿da chispa? Rápido y barato.
+> - **Integración**: monta el motor completo y lo enciende: ¿las piezas funcionan **juntas**?
+> - **E2E (punta a punta)**: un piloto saca el carro a la calle, frena, dobla y estaciona, como un cliente real. Es lo más completo, pero lento y caro.
+>
+> **La pirámide**: haces miles de pruebas de bujías, cientos de motores encendidos y pocas vueltas por la calle. Si solo hicieras vueltas por la calle, tardarías días en descubrir que la bujía era el problema.
+>
+> El ejemplo de **Maestro** es como un robot que agarra tu celular y hace exactamente lo que haría un conductor: abre la app, toca "Registrar ingreso", escribe 100, guarda y mira si aparece "Guardado con éxito".
 
 | Tipo | Qué revisa | Con un carro | Velocidad |
 |---|---|---|---|
@@ -76,14 +114,25 @@ Un ejemplo de E2E con **Maestro**, una herramienta para apps móviles (Playwrigh
 
 ## 6. Cómo se hace una prueba, paso a paso
 
+> 🌎 **En la vida real:** es la misma forma de probar una receta nueva antes de venderla en tu restaurante: escribes la receta, piensas qué puede salir mal, cocinas, la pruebas, la arruinas a propósito para ver si te das cuenta, y corriges.
+
 El ejemplo completo está en la carpeta `ejemplo-meta/`. Queremos una función que diga cuánto falta para una meta.
 
 ### Paso 1. Escribe la regla en palabras
+
+> 🌎 **En la vida real:** antes de armar un mueble, lees en una frase qué vas a construir: "una mesa de 4 patas, de 1 metro de alto". Si no sabes qué debe salir, no puedes saber si salió bien.
+>
+> Con la meta: "si quiero juntar 500 en el día y llevo 300, me faltan 200; si ya junté 500 o más, no me falta nada".
 > Si gané menos que la meta, muestra lo que falta. Si ya llegué o la pasé, falta 0.
 
 Sin regla clara no hay prueba posible.
 
 ### Paso 2. Piensa los casos
+
+> 🌎 **En la vida real:** un profesor que corrige un examen ya tiene las respuestas correctas **antes** de empezar. Si primero leyera las respuestas del alumno y después decidiera cuál es la correcta, aprobaría a todos.
+> - **Normal**: llevas 300, la meta es 500 → faltan 200.
+> - **Borde**: llegaste justo a 500 → falta 0. Es como el ascensor que dice "máximo 8 personas": ¿entra la octava? Los límites son donde más se equivoca la gente.
+> - **Pasaste**: llevas 700 → falta 0, no "−200". Nadie dice "me faltan menos doscientos reales".
 
 | Caso | Ganado | Meta | Esperado |
 |---|---|---|---|
@@ -94,6 +143,10 @@ Sin regla clara no hay prueba posible.
 Calcula el resultado **antes** de correr el código. Si copias lo que el código devuelve, solo confirmas lo que ya hace, aunque esté mal.
 
 ### Paso 3. El código (`meta.js`)
+
+> 🌎 **En la vida real:** `Math.max(0, ...)` es como el piso de un ascensor: aunque aprietes "bajar" muchas veces, no baja más allá de la planta baja. El resultado nunca queda debajo de 0.
+>
+> `module.exports` es como poner un producto en la vitrina de la tienda: si no lo pones ahí, nadie de afuera lo puede comprar (ningún otro archivo lo puede usar).
 ```js
 function faltaParaMeta(ganado, meta) {
   return Math.max(0, meta - ganado);
@@ -106,6 +159,12 @@ module.exports = { faltaParaMeta };
 - `module.exports` permite usar la función en otro archivo.
 
 ### Paso 4. Las pruebas (`meta.test.js`)
+
+> 🌎 **En la vida real:** es la hoja del inspector de calidad:
+> - `require('node:test')` = traer el portapapeles con la hoja de revisión.
+> - `require('node:assert/strict')` = traer la regla para medir.
+> - `test('...')` = cada renglón de la hoja: "la puerta debe cerrar sola".
+> - `assert.equal(recibido, esperado)` = medir y comparar: "mide 80 cm, debía medir 80 cm ✔".
 ```js
 const test = require('node:test');
 const assert = require('node:assert/strict');
@@ -129,6 +188,8 @@ test('si pasé la meta, falta 0 y no un número negativo', () => {
 - `assert.equal(recibido, esperado)` compara los dos.
 
 ### Paso 5. Córrelas
+
+> 🌎 **En la vida real:** es apretar el botón de "autodiagnóstico" de la lavadora: en segundos te dice "6 revisiones, 6 bien, 0 mal". Siempre quieres ver **0 mal** (`fail 0`).
 ```bash
 cd ejemplo-meta
 node --test
@@ -141,6 +202,8 @@ node --test
 Salen 6 porque esa carpeta también trae las 3 pruebas del ejercicio del descuento. Quieres siempre `fail 0`.
 
 ### Paso 6. Sabotea
+
+> 🌎 **En la vida real:** es como probar la alarma de la casa: abres la ventana **a propósito** para ver si suena. Si nunca la probaste, no sabes si funciona o si está desconectada. Una prueba que nunca falló es una alarma que nunca sonó.
 Una prueba que nunca ha fallado no ha demostrado nada. En `meta.js` quita el `Math.max`:
 ```js
 return meta - ganado;
@@ -148,6 +211,8 @@ return meta - ganado;
 Corre `node --test` otra vez.
 
 ### Paso 7. Lee el error
+
+> 🌎 **En la vida real:** el mensaje del error es como la nota que deja el mecánico: "esperaba 32 libras de presión en la llanta, encontré 20". Te dice qué esperaba, qué encontró y dónde. Con eso sabes exactamente qué arreglar.
 ```text
 not ok 3 - si pasé la meta, falta 0 y no un número negativo
   expected: 0
@@ -158,9 +223,18 @@ Se lee: "si pasé la meta, debía dar 0, pero dio -200". 500 − 700 = −200, p
 **Un error no es malo.** La prueba que falla te avisa antes de que le pase a un usuario.
 
 ### Paso 8. Corrige y repite
+
+> 🌎 **En la vida real:** como afinar una guitarra: giras la clavija, tocas la cuerda, escuchas, y repites hasta que suene bien. Corriges y corres las pruebas hasta ver `fail 0`.
 Devuelve el `Math.max` y corre de nuevo hasta ver `fail 0`.
 
 ### Cuando una prueba falla, revisa en este orden
+
+> 🌎 **En la vida real:** si el GPS te manda a un lugar raro, revisas en orden:
+> 1. **¿La regla es correcta?** ¿Escribiste bien la dirección a donde querías ir?
+> 2. **¿La prueba está bien escrita?** ¿El GPS entendió bien lo que escribiste, o escribiste "Rua das Flores" en otra ciudad?
+> 3. **¿El código está mal?** Recién ahí piensas que el GPS tiene un error.
+>
+> El caso del San es como reclamar que el bus no pasó a las 7:00 cuando el horario decía 7:40: el bus estaba bien, el error era tuyo al mirar el horario.
 1. **¿La regla es correcta?**
 2. **¿Mi prueba está bien escrita?**
 3. **¿El código está mal?**
@@ -168,6 +242,12 @@ Devuelve el `Math.max` y corre de nuevo hasta ver `fail 0`.
 **Caso real:** una prueba del San falló porque revisaba el 1 de enero, y la última rodada era el 4. La app estaba bien; el error era de la prueba.
 
 ## 7. Las pruebas de tu app
+
+> 🌎 **En la vida real:** un edificio tiene distintos inspectores: el electricista revisa los cables, el plomero las tuberías, el bombero las salidas de emergencia y el de ascensores, los ascensores. Tu app tiene cuatro grupos de inspectores:
+> - **App (187)**: revisan las cuentas y la pantalla del teléfono.
+> - **Servidor (153)**: revisan lo que pasa en la "oficina central" en la nube.
+> - **Reglas de seguridad (23)**: revisan que las cerraduras de cada apartamento funcionen.
+> - **Cartón automático (61)**: revisan la parte que lee las ofertas de viaje en Android.
 
 Al 10/11/2026 Copiloto Driver tiene **más de 400 pruebas automáticas**, en cuatro grupos:
 
@@ -182,6 +262,14 @@ Los números cambian: cada vez que se agrega algo importante, se agregan sus pru
 
 ### Qué protegen (ejemplos reales)
 
+> 🌎 **En la vida real:** cada archivo de pruebas es como una cámara de seguridad apuntando a un lugar específico:
+> - `earningSourceRules`: la caja registradora. Que no se sume dos veces la misma plata.
+> - `appFiscalDay`: el reloj. Para Uber el día "cambia" a las 4 de la madrugada, como una panadería que cierra caja a las 4 y no a medianoche.
+> - `fuelLevel`: el medidor de gasolina del tablero.
+> - `sanPaymentReminders`: el que te recuerda pagar la cuota del San, y que no te moleste si ya pagaste.
+> - `earningsLogic`: que el asistente entienda igual "mi empresa" que "minha empresa", como un recepcionista bilingüe.
+> - `firestore.rules`: la cerradura de cada casillero del gimnasio, para que nadie abra el del vecino.
+
 | Archivo | Qué regla protege |
 |---|---|
 | `src/utils/__tests__/earningSourceRules.test.ts` | Mi empresa, Particulares y Extras son independientes; Uber y las plataformas nuevas acumulan; Extras no entra en el tanque; un extra de la cartera cuenta una sola vez |
@@ -192,6 +280,10 @@ Los números cambian: cada vez que se agrega algo importante, se agregan sus pru
 | `rules-test/firestore.rules.test.js` | Que nadie lea los datos de otra persona |
 
 ### Una prueba de tu app, leída
+
+> 🌎 **En la vida real:** el `for` es como el inspector que revisa **los tres** extintores del piso, uno por uno, con la misma pregunta: "¿está cargado?". En vez de escribir tres pruebas iguales, escribe una y la repite con cada uno.
+>
+> `it` y `test` son la misma cosa con distinto nombre, como "carro" y "auto".
 Del archivo `earningSourceRules.test.ts` (un poco simplificado para leerlo mejor):
 
 ```ts
@@ -208,6 +300,13 @@ it('Minha empresa, Corridas particulares e Extras nunca acumulam', () => {
 Es la función que leíste en el Tema 01. Si alguien la cambia sin querer y Mi empresa empieza a acumular, esta prueba falla y el error no llega a Google Play.
 
 ## 8. Cómo es en un proyecto real
+
+> 🌎 **En la vida real:** es como un cocinero en un restaurante:
+> 1. Cambia la receta.
+> 2. La prueba él mismo en su cocina.
+> 3. La manda a la cocina central.
+> 4. El jefe de cocina la vuelve a probar en una cocina limpia, por si en la casa del cocinero había algo que la hacía salir bien "de casualidad".
+> 5. Si sale mal, se entera en minutos y no cuando el cliente ya se quejó.
 1. Cambias el código.
 2. Corres las pruebas en tu computadora.
 3. Subes a GitHub.
@@ -216,12 +315,18 @@ Es la función que leíste en el Tema 01. Si alguien la cambia sin querer y Mi e
 
 ## Ejercicios
 
+> 🌎 **En la vida real:** son las prácticas de manejo en el estacionamiento antes de salir a la avenida. En `ejemplo-meta` no puedes romper nada de verdad: es un carro de autoescuela con doble pedal.
+
 1. En `ejemplo-meta`, corre `node --test` y anota cuántas pasan.
 2. Haz el sabotaje del Paso 6 y lee el error en voz alta.
 3. **Ejercicio del descuento:** haz la función `aplicarDescuento(precio, porcentaje)` y pruébala con 20 %, 0 % y 100 %. Después sabotéala cambiando el `-` por `+`. Deben fallar 2 pruebas y la de 0 % sigue pasando, porque sumar o restar 0 da lo mismo. Eso muestra por qué hacen falta varios casos. La solución está en `ejemplo-meta/descuento.js` y `descuento.test.js`; mírala solo al final.
 4. En la carpeta de la app, corre `npm test` y busca la línea `Tests:`. ¿Cuántas pasaron?
 
 ## Para la entrevista
+
+> 🌎 **En la vida real:** en una entrevista te van a preguntar como pregunta un cliente a un mecánico: "¿y cómo sabe que quedó bien?". La respuesta buena no es "confíe en mí"; es "tengo una lista de revisiones que se corre sola y la probé en el carro de verdad".
+> - **TDD**: como el sastre que primero toma las medidas (la prueba) y después corta la tela (el código).
+> - **Cobertura**: qué porcentaje de las habitaciones de la casa revisó el inspector. Que haya entrado al 90 % no quiere decir que haya mirado bien cada una.
 
 **¿Para qué sirven las pruebas?**
 > Para comprobar automáticamente que el código cumple las reglas, detectar errores temprano y poder cambiarlo con seguridad.
@@ -239,4 +344,6 @@ Es la función que leíste en el Tema 01. Si alguien la cambia sin querer y Mi e
 > El porcentaje del código que las pruebas ejecutan. Un número alto no garantiza que las pruebas sean buenas.
 
 ## Para memorizar
+
+> 🌎 **En la vida real:** es la receta de siempre, como la de lavarse las manos: mojar → jabón → frotar → enjuagar → secar. Aquí: regla → casos → código → prueba → correr → sabotear → leer el error → corregir.
 Regla → casos → código → prueba → correr → sabotear → leer el error → corregir.

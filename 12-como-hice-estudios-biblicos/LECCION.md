@@ -1,5 +1,7 @@
 # Lección 12: Cómo hice Estudios Bíblicos
 
+> 🌎 **En la vida real:** esta clase no es sobre el contenido de los estudios: es sobre **cómo está construida la página**, igual que una clase de carpintería sobre cómo se hizo una biblioteca, no sobre los libros que tiene.
+
 Este es el **Tema 12** del curso. Estudia una parte por día. Abre el archivo del que habla cada parte (en `SSD_Desarrollo/Developer/que-dice-la-biblia`) y míralo mientras lees. Primero intenta responder las preguntas sin mirar. Las respuestas están al final.
 
 Los ejemplos están simplificados para aprender. El código real puede verse un poco distinto.
@@ -7,6 +9,10 @@ Los ejemplos están simplificados para aprender. El código real puede verse un 
 ---
 
 ## Parte 1. La idea en una frase
+
+> 🌎 **En la vida real:** además del proyector: es como un **álbum de figuritas**. El álbum (el código) es siempre el mismo, con sus casilleros numerados. Las figuritas (el contenido, el JSON) cambian. Si el álbum se imprime mejor, todas las figuritas se ven mejor sin tener que tocarlas.
+>
+> La estructura tema → puntos → subpuntos → bloques es como un **libro**: el libro, sus capítulos, las secciones de cada capítulo y, dentro, los párrafos, las fotos y las citas.
 
 **Qué es:** una página que muestra estudios bíblicos como un **mapa**. El estudio es el **tema** (por ejemplo, "¿Lenguas extrañas?"). El tema tiene **puntos** (1, 2, 3…), cada punto tiene **subpuntos** (1.1, 1.2…) y cada subpunto tiene **bloques**: texto, pasaje bíblico, subtítulo, imagen o video.
 
@@ -26,6 +32,13 @@ Los ejemplos están simplificados para aprender. El código real puede verse un 
 
 ## Parte 2. Las tres tecnologías: HTML, CSS y JavaScript
 
+> 🌎 **En la vida real:** además de la casa: piensa en un **muñeco**:
+> - **HTML** = el **esqueleto**: cabeza, brazos, piernas.
+> - **CSS** = la **ropa y el peinado**: cómo se ve.
+> - **JavaScript** = los **músculos**: lo que lo hace moverse cuando aprietas un botón.
+>
+> **Sin frameworks**: para un viaje corto al mercado vas en bicicleta, no alquilas un camión. La página es pequeña; un framework sería el camión.
+
 Este proyecto **no usa frameworks** (ni React, ni Vue). Solo las tres piezas básicas de la web:
 
 | Pieza | Qué hace | Comparación |
@@ -43,6 +56,13 @@ Este proyecto **no usa frameworks** (ni React, ni Vue). Solo las tres piezas bá
 ---
 
 ## Parte 3. El mapa de archivos
+
+> 🌎 **En la vida real:** es una **cocina bien organizada**, donde cada cajón tiene una sola cosa: cubiertos aquí, ollas allá. El "código espagueti" es el cajón donde están mezclados los cubiertos, las pilas, los recibos y las llaves: encontrar algo es una pesadilla.
+> - `estudios/` = la **despensa** con los ingredientes (el contenido).
+> - Los `.html` = los **platos** donde se sirve.
+> - `css/` = la **decoración** de la mesa.
+> - `js/` = los **cocineros**, cada uno con su tarea: uno corta, otro cocina, otro sirve.
+> - `scripts/` y `publicar.yml` = el **delivery** que lleva todo a la calle.
 
 Cada archivo tiene **una sola tarea**. Eso es lo contrario del "código espagueti", donde todo está mezclado.
 
@@ -94,6 +114,10 @@ que-dice-la-biblia/
 
 ## Parte 4. Cómo es un estudio por dentro (el JSON)
 
+> 🌎 **En la vida real:** el JSON es como una **ficha de inscripción** con casilleros que tienen nombre: "Título: ___", "Idioma: ___". Las llaves `{ }` son **una ficha**; los corchetes `[ ]` son **una pila de fichas** en orden.
+>
+> **Lo de los nombres viejos** (`temas` guarda los puntos): es como una calle que cambió de nombre, pero las cartas viejas siguen llegando con el nombre anterior. Para no perder esas cartas, el cartero sigue aceptando el nombre viejo, y alguien lo dejó anotado.
+
 **Qué es JSON:** un formato de texto para guardar datos con nombres. Llaves `{ }` para un objeto, corchetes `[ ]` para una lista.
 
 ```json
@@ -133,6 +157,8 @@ que-dice-la-biblia/
 
 ## Parte 5. Las interconexiones: qué pasa cuando abres un estudio
 
+> 🌎 **En la vida real:** además de la cadena de montaje: es como **preparar un café**. Primero hierves el agua (`ui.js`), después pones el café en el filtro (`estudios.js`), después tienes la taza lista (`efectos.js`) y recién ahí sirves (`mapa.js`). Si intentas servir antes de hervir el agua, no hay café. Por eso el orden de los `<script>` importa.
+
 Abre `estudio.html?e=lenguas-extranas`. Pasa esto, en orden:
 
 ```
@@ -162,6 +188,10 @@ estudio.html
 ---
 
 ## Parte 6. Una función que sirve para todo: `puntoHTML`
+
+> 🌎 **En la vida real:** `bloqueHTML` es como la **máquina de un fotocopiador** que reconoce qué le diste: si es una hoja, la copia; si es una foto, la imprime en papel brillante; si es un video, pone un reproductor. Y la **misma** máquina se usa en la oficina (la página), en la imprenta (el PDF) y en el borrador (la vista previa). Por eso los tres salen idénticos.
+>
+> `esc()` es como poner un texto **entre comillas** en una carta, para que nadie confunda lo que alguien escribió con una orden. Si un título dice `<b>`, se muestra como texto, no como instrucción.
 
 En `js/estudios.js`, la función `bloqueHTML` mira el **tipo** de cada bloque y devuelve el HTML que le corresponde:
 
@@ -196,6 +226,12 @@ Por eso, lo que ves en la vista previa del panel es **exactamente** lo que sale 
 ---
 
 ## Parte 7. Los colores: tokens
+
+> 🌎 **En la vida real:** es como en una **empresa de pintura** donde los colores tienen nombre de catálogo: "Morado Atardecer". En vez de anotar la fórmula química en 20 paredes, anotas el nombre. Si el fabricante mejora la fórmula, todas las paredes "Morado Atardecer" se actualizan.
+>
+> El camino del color es como un **pedido de pintura**: el cliente dice "morado" (JSON) → la tienda lo traduce al código del catálogo `--b2` (`estudios.js`) → el pintor marca esa habitación con ese código (`mapa.js`) → todo lo de la habitación usa "el color de esta habitación" (`--c`).
+>
+> El **modo oscuro** es como tener la misma pintura en versión **para interior** y **para exterior**: mismo nombre, distinto brillo según la luz.
 
 **Qué es un token de color:** un **nombre** para un color, definido una sola vez. En vez de escribir `#7A3FA0` en veinte lugares, se escribe `var(--b2)`.
 
@@ -233,6 +269,8 @@ Así, **un solo dato** ("morado") pinta todo ese punto, y el mismo nombre funcio
 
 ## Parte 8. El efecto de entrada
 
+> 🌎 **En la vida real:** es como un **telón de teatro**: el JavaScript es el **tramoyista** que decide **cuándo** subir el telón (cuando el actor aparece en escena, avisado por el `IntersectionObserver`, que es como el que mira por la cortina). El CSS es el **mecanismo** del telón: si sube rápido o lento, suave o de golpe. Y si alguien del público pidió "sin efectos", el telón ya está arriba desde el principio.
+
 En `js/efectos.js` y al final de `css/styles.css`. Es el mismo efecto de la landing de Copiloto:
 
 ```css
@@ -252,6 +290,10 @@ En `js/efectos.js` y al final de `css/styles.css`. Es el mismo efecto de la land
 ---
 
 ## Parte 9. Cómo se publica (sin servidor)
+
+> 🌎 **En la vida real:** es como mandar un libro a una **imprenta automática**: tú entregas el manuscrito (guardas o haces `git push`), la imprenta arma el índice (`indice.json`), imprime una versión en PDF de cada capítulo y lo pone en la vidriera (GitHub Pages). En 1 o 2 minutos está a la venta.
+>
+> ¿Por qué hace falta el índice? Porque una página estática es como un **cartel pegado en la pared**: no puede ir a la bodega a mirar qué cajas hay. Alguien tiene que escribir la lista y pegarla en el cartel.
 
 La página vive en **GitHub Pages**, que es gratis. No hay servidor propio.
 
@@ -277,6 +319,12 @@ En 1 o 2 minutos, la página y los PDF están actualizados
 ---
 
 ## Parte 10. El panel y la llave
+
+> 🌎 **En la vida real:** el panel es como la **puerta de un edificio que da a la calle**: cualquiera puede llegar hasta ella, pero sin llave no entra. La llave (el *token*) es como una **llave que solo abre un cuarto**, no todo el edificio. Se guarda **en tu bolsillo** (`localStorage`), no se deja colgada en la puerta. Y quien decide si la llave sirve es la **cerradura** (GitHub), no la puerta.
+>
+> La **ruta** `temas.0.puntos.1.titulo` es como una dirección: "edificio 0, piso 1, departamento título". Con un solo cartero que sabe leer direcciones, no hace falta un cartero por cada departamento.
+>
+> La **vista previa** con `postMessage` es como un **probador con espejo**: cada vez que cambias algo, alguien te pasa la prenda nueva por debajo de la cortina y el espejo te la muestra.
 
 El panel (`panel.html`) **es una página pública**, pero sin la llave no puede guardar nada.
 
@@ -309,6 +357,11 @@ El panel (`panel.html`) **es una página pública**, pero sin la llave no puede 
 
 ## Parte 11. Las ayudas para los versículos
 
+> 🌎 **En la vida real:** - **Expresión regular**: es como el empleado del correo que reconoce un código postal de un vistazo: "5 números, un guion, 3 números". Aquí reconoce el patrón "libro + capítulo:versículo + sigla". Y limpia los **caracteres invisibles**, como quien saca las pelusas de un sobre antes de archivarlo.
+> - **Tesseract.js**: es como el **escáner del supermercado** que lee el código de barras, pero leyendo letras de una foto, y sin mandar la foto a ningún lado.
+> - **`rangos()`**: es como decir "del 1 al 3" en vez de "1, 2 y 3" cuando dictas números de asientos.
+> - **Achicar fotos**: es como mandar una foto por WhatsApp en vez de por correo en tamaño original: se ve bien en el celular y no tarda nada en llegar.
+
 **"Pegar desde la app Biblia"** (`panel-pegar.js`): lee el texto copiado y encuentra la referencia con una **expresión regular** (un patrón de texto):
 
 ```js
@@ -336,6 +389,13 @@ rangos(["1","2","3","5"]) // "1-3, 5"
 
 ## Parte 12. Decisiones que se tomaron (y lo que salió mal)
 
+> 🌎 **En la vida real:** - **Pages CMS**: como comprar un mueble armado que no entra por la puerta; terminas haciéndolo a medida.
+> - **El lector de voz**: como instalar un timbre que no suena en la casa de la mitad de los vecinos: mejor quitarlo que dejar un botón que no hace nada.
+> - **La limpieza que borraba el griego**: como una lavadora que, al lavar, despinta los bordados. Se cambió el programa para que respete los bordados.
+> - **`panel.js` de 500 líneas**: el cajón de los cubiertos que creció tanto que se dividió en varios.
+> - **Números mal leídos en fotos**: como un dictado con ruido: antes de usarlo, se relee y se corrige.
+> - **Derechos de autor**: como no fotocopiar un libro entero; se usa solo lo que el dueño permite.
+
 Explicar los errores también es parte de una entrevista.
 
 | Qué pasó | Qué se decidió |
@@ -353,6 +413,8 @@ Explicar los errores también es parte de una entrevista.
 ---
 
 ## Respuestas
+
+> 🌎 **En la vida real:** las soluciones del final: se miran **después** de intentarlo, como cuando corriges tu propio crucigrama.
 
 1. El **tema** es el estudio completo. Los **puntos** son los números grandes (1, 2, 3). Los **subpuntos** son 1.1, 1.2… y tienen el contenido.
 2. Para que una sola plantilla sirva para todos los estudios: si se mejora el código, mejoran todos a la vez.

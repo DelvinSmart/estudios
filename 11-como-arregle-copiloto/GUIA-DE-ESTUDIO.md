@@ -1,10 +1,18 @@
 # Guía de estudio: lo que aprendí arreglando Copiloto
 
+> 🌎 **En la vida real:** es como el cuaderno de un mecánico después de reparar un carro difícil: no solo dice "lo arreglé", sino **qué aprendió** en cada paso para la próxima vez.
+
 Este es el **Tema 11** del curso: lo avanzado. Hazlo después de los Temas 01 a 10. Estudia una parte por día. Primero intenta responder sin mirar. Las respuestas están al final.
 
 Los ejemplos se simplificaron para aprender. El código real puede verse un poco distinto.
 
 ## Parte 1. El hilo de JavaScript
+
+> 🌎 **En la vida real:** la lección ya usa la cajera única del supermercado. Otro ejemplo: es un **puente de un solo carril**. Si un camión se queda parado en medio del puente 5 segundos, ningún carro cruza, aunque la ruta del otro lado esté vacía (aunque internet funcione perfecto).
+>
+> El **temporizador atrasado** es como poner la alarma del horno a los 3,5 minutos y que suene a los 5,5: el horno no se equivocó; estabas tan ocupado en el teléfono que no la escuchaste hasta que colgaste.
+>
+> En el ejercicio, el `while` es el camión parado en el puente: el "hola" quería cruzar a los 100 ms, pero tuvo que esperar 2 segundos.
 
 **Qué es:** tu código de React Native corre, casi todo, en un solo hilo. Solo puede hacer una cosa a la vez.
 
@@ -28,6 +36,11 @@ while (Date.now() < fin) {}
 
 ## Parte 2. Medir antes de arreglar
 
+> 🌎 **En la vida real:** es como un médico que no receta sin análisis:
+> - **Marcas de tiempo** = anotar a qué hora saliste de casa, a qué hora llegaste al semáforo y a qué hora al trabajo: así sabes **en qué tramo** se te fue el tiempo.
+> - **Detector de trabas** = el sensor que avisa "el tránsito está detenido".
+> - **Perfilador** = la cámara del helicóptero de tránsito: te muestra **exactamente qué camión** está trabando la avenida.
+
 **Qué es:** buscar el dato real antes de cambiar el código.
 
 | Herramienta | Qué responde |
@@ -41,6 +54,10 @@ while (Date.now() < fin) {}
 4. ¿Qué diferencia hay entre una marca de tiempo y un perfilador?
 
 ## Parte 3. Redibujos en React
+
+> 🌎 **En la vida real:** es como un pintor que repinta **toda la pared** cada vez que cambia algo. Si el reloj cambia cada segundo, repinta la pared 60 veces por minuto, aunque en la pared solo se vean horas y minutos.
+>
+> Lo mejor es como el cartel de "Próximo bus: 14:32": se actualiza **una vez por minuto**, justo cuando cambia el minuto. `60000 - (Date.now() % 60000)` calcula "cuántos segundos faltan para el próximo minuto en punto", como mirar el reloj a las 14:31:45 y saber que faltan 15 segundos para las 14:32.
 
 **Qué es:** al cambiar el estado, React vuelve a ejecutar el componente. Si es grande, eso cuesta tiempo.
 
@@ -59,6 +76,10 @@ setTimeout(refresh, 60000 - (Date.now() % 60000));
 
 ## Parte 4. `useMemo` y dependencias
 
+> 🌎 **En la vida real:** `useMemo` es como un **estudiante que guarda la respuesta** de una cuenta difícil en un papel. Si el profesor le pregunta lo mismo, lee el papel en vez de calcular de nuevo. Pero solo si **los números de la pregunta** no cambiaron.
+>
+> El problema de los objetos: es como dos **gemelos idénticos**. Se parecen en todo, pero son dos personas distintas con distinto documento. React pregunta "¿es **la misma persona**?", no "¿se parecen?". Por eso `{ a: 1 } === { a: 1 }` da `false`. La solución es comparar los **datos** (el número de la meta diaria), no la persona.
+
 **Qué es:** `useMemo` guarda un cálculo y lo repite solo si cambian sus dependencias. Los objetos se comparan por referencia.
 
 ```tsx
@@ -74,6 +95,12 @@ useMemo(calcular, [goals.daily, goals.weekly]); // recalcula si cambia el valor
 6. ¿Por qué `{ a: 1 } === { a: 1 }` da `false`?
 
 ## Parte 5. Índices y caché
+
+> 🌎 **En la vida real:** - **Índice**: la lección usa el índice de un libro. Otro ejemplo: la **guía telefónica** ordenada por apellido. No lees de la A a la Z para encontrar a "Rodríguez": vas directo a la R.
+> - **Caché**: es tener el café ya molido en un frasco en vez de moler granos cada vez que quieres una taza. Lo caro (moler) se hace una vez.
+> - **219.000 pasos**: es como buscar en 600 boletas, una por una, para **cada uno** de los 365 días. Mejor ordenar las boletas una vez en 365 sobres, uno por día.
+>
+> **Riesgo del caché**: el café molido hace mucho tiempo pierde sabor (se desactualiza), y si guardas demasiados frascos te llenan la cocina. **Cuándo no vale**: si moler tarda un segundo, o si cada día cambias de café, el frasco no te ahorra nada.
 
 **Índice:** en vez de recorrer toda la lista cada vez, se organiza una vez y se busca directo. Es como el índice de un libro.
 
@@ -98,6 +125,10 @@ Recorrer 600 registros para 365 días son 219.000 pasos. Con índice, se recorre
 
 ## Parte 6. Pruebas automáticas
 
+> 🌎 **En la vida real:** **La regla más importante**: el inspector de una obra revisa contra **los planos del arquitecto**, no contra lo que el albañil ya construyó. Si copias en la prueba lo que el código hace hoy, es como dibujar los planos mirando la pared torcida: la pared "cumple" los planos, pero está torcida.
+>
+> **Sabotaje (mutation testing)**: es como el banco que manda **clientes falsos** con billetes falsos para ver si los cajeros los detectan. Si nadie detecta nada, el entrenamiento no sirve. Si lo detectan, ese cajero sabe reconocer **ese** tipo de billete, no todos.
+
 **Qué es:** código que comprueba otro código. La lección completa es el [Tema 02](../02-pruebas-automaticas/LECCION.md); aquí solo va lo que se aprendió arreglando Copiloto.
 
 **La regla más importante:** escribe la prueba según lo que **debe** pasar, no copiando lo que el código hace hoy.
@@ -119,6 +150,10 @@ it('corrida Uber a las 02:00 cuenta en el día anterior', () => {
 
 ## Parte 7. Normalizar datos
 
+> 🌎 **En la vida real:** es como en una lista de asistencia donde alguien firmó "Delvin", otro "delvin" y otro "DELVIN". Si no los unificas, parece que vinieron tres personas. **Normalizar** es escribir todos los nombres de la misma forma antes de contar.
+>
+> El caso de Uber es como si el cajero contara "Uber" en un sobre y "uber" en otro, pero después, al sumar, metiera la plata de los dos en los dos sobres: 30 y 30 = 60, cuando en realidad solo había 30.
+
 **Qué es:** dar una sola forma a los datos antes de usarlos.
 
 ```ts
@@ -134,6 +169,10 @@ new Set(records.map((r) => normalizeFiscalAppId(r.appId)));
 
 ## Parte 8. Fechas y día fiscal
 
+> 🌎 **En la vida real:** es como la **panadería que cierra la caja a las 4 de la mañana**: lo que vendiste a las 2 AM del día 5 cuenta en la caja del día 4, porque para la panadería el día 4 todavía no terminó. Es lo que pasa con una fiesta de Año Nuevo: a la 1 de la madrugada del 1 de enero, todos siguen diciendo "la fiesta de anoche".
+>
+> Los **bordes** (03:59 y 04:00) son como el último minuto antes de que cierre la caja: ahí es donde más se equivocan las cuentas.
+
 **Qué es:** el día del negocio no siempre coincide con el del calendario. Para Uber, las 02:00 del día 5 aún pertenecen al día 4.
 
 **Prueba siempre los bordes:** 03:59 y 04:00, el fin de mes y otras zonas horarias.
@@ -142,6 +181,8 @@ new Set(records.map((r) => normalizeFiscalAppId(r.appId)));
 12. ¿Por qué "Ontem" salía igual a "Hoje" de madrugada?
 
 ## Parte 9. CI
+
+> 🌎 **En la vida real:** además del inspector de la fábrica: es como el **control de alcoholemia** en la carretera. No le importa si te sientes bien; te hace soplar a ti y a todos, siempre. La **máquina limpia** es como hacer el examen con un aparato recién calibrado, no con el tuyo de casa, que quizás marca de menos.
 
 **Qué es:** Integración Continua. Una máquina limpia revisa cada subida. La lección completa, con el archivo de tu app explicado línea por línea, es el [Tema 04](../04-ci/LECCION.md).
 
@@ -155,6 +196,13 @@ new Set(records.map((r) => normalizeFiscalAppId(r.appId)));
 13. ¿Qué no puede detectar la CI?
 
 ## Parte 10. Motores, tokens y candados
+
+> 🌎 **En la vida real:** piensa en una **cadena de comida rápida**:
+> - **Token** = el nombre oficial de un color de la marca: "Rojo Corporativo". Nadie dice "ese rojo más o menos": dicen el nombre, y el manual dice el código exacto.
+> - **Motor** = la **central** que manda el uniforme a todos los locales. Si la marca cambia el uniforme, cambia en un solo lugar y llega a todos.
+> - **Candado** = el **inspector** que visita los locales y multa al que se hizo su propio uniforme. El motor existe, pero sin inspector, alguien siempre se lo salta.
+>
+> **Ventaja de cambiar en un solo lugar**: como cambiar el precio en el sistema central y que se actualice en todas las cajas, en vez de ir caja por caja con un marcador.
 
 **Token:** un nombre para un valor de diseño, como `dash.radiusLg`.
 
@@ -175,6 +223,12 @@ color: dash.formHint
 
 ## Parte 11. Ciclos entre archivos
 
+> 🌎 **En la vida real:** es el clásico: "para conseguir trabajo necesito experiencia, y para tener experiencia necesito trabajo". O dos personas en una puerta diciendo "pase usted", "no, pase usted", y nadie entra.
+>
+> **Solución**: un tercero. Si los dos vecinos se pelean por una escalera, la compra el edificio y la usan los dos: ya no dependen uno del otro. Es lo que se hizo con `vehicleOdometer`.
+>
+> `import type` es como pedir **solo la foto** del vecino para saber cómo es, no que venga en persona: la foto desaparece al final, no crea un compromiso.
+
 **Qué es:** A importa B, y B importa A. Puede causar errores al cargar y hace el código más difícil de cambiar.
 
 **Solución común:** mover lo compartido a un tercer archivo.
@@ -191,6 +245,14 @@ Después: los dos importan vehicleOdometer
 
 ## Parte 12. Refactorizar
 
+> 🌎 **En la vida real:** es **reorganizar el placard**: cambias de lugar la ropa, pero no tiras ni compras nada. Al terminar tienes la misma ropa, solo que la encuentras más rápido.
+>
+> Para hacerlo seguro: antes sacas una **foto** del placard (las pruebas), mueves la ropa sin cortarla ni cambiarla, y al final comparas con la foto.
+>
+> **Hook propio** (`useFuelActions`) es como armar un **kit**: en vez de buscar la jarra, el filtro y el café cada mañana, los tienes juntos en una bandeja "kit del café".
+>
+> **¿Dividir un archivo lo hace mejor?** No siempre: repartir la ropa en cinco cajones al azar no ordena nada. Cada cajón tiene que tener **un tipo** de ropa.
+
 **Qué es:** cambiar la estructura sin cambiar lo que hace el programa.
 
 **Cómo hacerlo seguro:** tener pruebas, mover sin reescribir y comparar antes y después.
@@ -202,6 +264,12 @@ Después: los dos importan vehicleOdometer
 
 ## Parte 13. Dependencias y parches
 
+> 🌎 **En la vida real:** las librerías son **muebles comprados**. A veces vienen con una pata floja y le pones una **cuña** (`patch-package`) cada vez que lo armas.
+>
+> El riesgo: la cuña está hecha **a medida de ese modelo exacto**. Si compras el modelo nuevo (actualizas Firebase), la cuña ya no entra, y encima te quedaste con **dos mesas** iguales en la sala (dos copias de `@firebase/app`), que chocan entre sí.
+>
+> ¿Por qué las revisiones pasaron? Porque revisaron cada mueble en la caja, pero nadie **armó la sala completa** y se sentó a comer (nadie arrancó la app).
+
 **Qué es:** las librerías también tienen errores. `patch-package` guarda un cambio y lo reaplica al instalar.
 
 **Riesgo real:** el parche depende de una versión exacta. Al actualizar Firebase dejó de aplicarse, y dos copias de `@firebase/app` rompieron el arranque.
@@ -210,6 +278,13 @@ Después: los dos importan vehicleOdometer
 18. ¿Por qué TypeScript y las pruebas pasaron aunque la app no abría?
 
 ## Parte 14. Trabajar con IA
+
+> 🌎 **En la vida real:** trabajar con IA es como contratar a un **ayudante muy rápido pero que a veces habla con demasiada seguridad**:
+> 1. **Pide medidas**: no "¿está bien la pared?", sino "¿cuántos centímetros tiene?".
+> 2. **Mira que funcione**: no aceptes "ya quedó" sin abrir la canilla tú.
+> 3. **Revisa los números**: como revisar el ticket del supermercado.
+> 4. **No publiques lo que no puedas explicar**: no firmes un contrato que no leíste.
+> 5. **Para lo exacto, datos o código**: un plano de electricidad no se hace con un dibujo artístico "parecido"; cada cable tiene que ir donde dice. Por eso el mapa se hizo con código.
 
 1. Pide medidas, no opiniones.
 2. Exige ver el resultado funcionando.
@@ -221,6 +296,8 @@ Después: los dos importan vehicleOdometer
 19. ¿Por qué el mapa final se generó con código?
 
 ## Práctica final
+
+> 🌎 **En la vida real:** es como contarle a un amigo, sin leer, cómo arreglaste tu carro: en un minuto, con tus palabras. Si lo puedes contar así, lo entendiste.
 Explica estas historias en voz alta, en 1 minuto cada una, sin leer:
 
 1. Cómo encontraste la causa de la lentitud.
@@ -229,6 +306,8 @@ Explica estas historias en voz alta, en 1 minuto cada una, sin leer:
 4. Qué aprendiste de la vc89 rota.
 
 ## Respuestas
+
+> 🌎 **En la vida real:** son las soluciones del final del libro: se miran **después** de intentarlo, como el resultado del partido después de haber hecho tu pronóstico.
 
 1. El hilo puede estar ocupado con cálculos, sin que la red tenga relación.
 2. Que el hilo no pudo ejecutarlo a tiempo porque estaba bloqueado.

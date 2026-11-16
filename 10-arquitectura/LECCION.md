@@ -1,5 +1,7 @@
 # Tema 10: Arquitectura de software
 
+> 🌎 **En la vida real:** la arquitectura de un programa es como el **organigrama y el plano** de una empresa: qué departamentos hay, qué hace cada uno y quién le puede pedir cosas a quién. La vendedora no entra a la caja fuerte; le pide al tesorero.
+
 **Arquitectura** es la forma en que se **organiza** el código de un programa: en qué partes se divide, qué hace cada parte y quién puede hablar con quién.
 
 **Antes de empezar:** Temas 01 a 09. Este tema es más teórico; los anteriores te dan los ejemplos.
@@ -7,6 +9,12 @@
 **Tiempo:** de 2 a 3 horas (puedes dividirlo en dos días).
 
 ## 1. ¿Por qué importa?
+
+> 🌎 **En la vida real:** piensa en un supermercado bien organizado:
+> - **Cambiar sin miedo**: cambias de proveedor de leche y los clientes ni se enteran; la góndola sigue en el mismo lugar.
+> - **Probar fácil**: puedes revisar si la balanza de la carnicería pesa bien sin abrir el supermercado al público.
+> - **Entender rápido**: un empleado nuevo sabe que los lácteos están en la heladera del fondo, como en todos los supermercados.
+> - **Trabajar en equipo**: el repositor de bebidas y el de limpieza trabajan al mismo tiempo sin chocar, porque cada uno tiene su pasillo.
 
 **Comparación:** una casa se puede construir de cualquier forma, pero si los cables eléctricos pasan por dentro de las cañerías, el día que quieres cambiar una llave terminas rompiendo una pared. Una buena arquitectura pone cada cosa en su lugar, y así se puede cambiar una parte **sin romper las demás**.
 
@@ -21,6 +29,13 @@ Una buena arquitectura logra:
 
 ## 2. La idea base: separar responsabilidades
 
+> 🌎 **En la vida real:** un restaurante tiene tres zonas:
+> - **Presentación** = el **salón**: mesas, mozos, la carta. Lo que el cliente ve y toca.
+> - **Reglas de negocio** = las **recetas**: cuánta sal lleva la sopa, cuánto tiempo se cocina la carne. Valen igual si el restaurante cambia de local.
+> - **Datos** = la **despensa y los proveedores**: de dónde sale la carne y dónde se guarda.
+>
+> **La regla de oro**: la receta dice "200 g de carne", no "200 g de carne del frigorífico Pérez, de la cámara del fondo". Si cambias de proveedor o de heladera, la receta no se toca.
+
 Casi todas las arquitecturas dividen el código en estas **responsabilidades**:
 
 | Responsabilidad | Qué hace | En Copiloto |
@@ -34,6 +49,14 @@ Casi todas las arquitecturas dividen el código en estas **responsabilidades**:
 Ya lo viste: la función `isImmutableEarningPlatform` (Tema 01) no sabe nada de Firestore ni de botones. Por eso se pudo probar en milisegundos (Tema 02).
 
 ## 3. Clean Architecture (Arquitectura Limpia)
+
+> 🌎 **En la vida real:** es como una **cebolla** o como los anillos de seguridad de un banco:
+> - En el **centro**, la bóveda: lo más valioso (las reglas del negocio).
+> - Alrededor, los empleados que hacen las operaciones.
+> - Más afuera, la ventanilla y los formularios.
+> - Afuera de todo, la calle: los edificios, la luz, internet.
+>
+> Lo de afuera cambia seguido (cambias el diseño de la ventanilla, de proveedor de internet). Lo del centro casi nunca.
 
 La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos, uno dentro del otro:
 
@@ -54,6 +77,12 @@ La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos,
 
 ### Las cuatro capas
 
+> 🌎 **En la vida real:** en una fábrica de pan:
+> - **Entidades (centro)** = qué **es** un pan: harina, agua, sal, levadura. Eso no cambia nunca.
+> - **Casos de uso** = lo que la panadería **hace**: "hornear una tanda", "vender una docena".
+> - **Adaptadores** = el **mostrador** y el **cajero**: traducen "quiero 12 pancitos" del cliente a "vender una docena" para la panadería.
+> - **Frameworks (afuera)** = el **horno** de marca X, la **caja registradora** de marca Y. Se pueden cambiar por otras marcas.
+
 | Capa | Qué contiene | Ejemplo en tu app |
 |---|---|---|
 | **Entidades** (centro) | Los objetos del negocio y sus reglas más básicas | Un `EarningRecord` (un ingreso), un `SanGroup` |
@@ -63,6 +92,10 @@ La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos,
 
 ### La regla de la dependencia
 
+> 🌎 **En la vida real:** en un hospital, el cirujano (el centro) no necesita saber qué marca de bisturí compró la administración. Dice: "necesito **un bisturí** de tal tamaño" (la **interfaz**, el contrato). La administración (afuera) consigue uno que cumpla. Si cambian de proveedor, el cirujano opera igual.
+>
+> Eso es la **inversión de dependencias**: el de adentro dice **qué** necesita; el de afuera se encarga del **cómo**. Nunca al revés.
+
 > **El código solo puede depender hacia adentro.**
 
 - Las pantallas (afuera) pueden usar los casos de uso (adentro).
@@ -71,6 +104,14 @@ La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos,
 ¿Cómo guarda datos un caso de uso si no puede conocer Firestore? Con una **interfaz**: un contrato que dice *qué* se puede hacer, sin decir *cómo*. El de adentro define el contrato; el de afuera lo cumple. Esto se llama **inversión de dependencias**.
 
 ## 4. El ejemplo real de tu app: el módulo del San
+
+> 🌎 **En la vida real:** el San es como una **cooperativa** bien organizada, con sus oficinas:
+> - `models/` = los **estatutos**: qué es un grupo, qué es un miembro.
+> - `service/` = la **tesorería**: quién paga, cuándo, a quién le toca la mano.
+> - `repository/` = el **archivo**: dónde se guardan los papeles.
+> - `controller/` = la **recepción**: recibe a los socios y los manda a la oficina correcta.
+> - `events/` = el **altavoz**: "atención, ya pagó Juan".
+> - `notifications/` = los **avisos** que llegan al celular de cada socio.
 
 El San es la parte de tu app más parecida a Clean Architecture. Mira sus carpetas en `src/san/`:
 
@@ -85,6 +126,10 @@ src/san/
 ```
 
 ### El contrato (la interfaz)
+
+> 🌎 **En la vida real:** es como el **contrato de un puesto de trabajo** de archivista: "tiene que saber guardar papeles, buscarlos por número y destruirlos". El contrato no dice si va a usar archivador metálico, cajas de cartón o una computadora. Dice **qué**, no **cómo**.
+>
+> `Promise` es como el **ticket de la tintorería**: te lo dan ahora, pero la ropa la recibes **después**. Guardar en internet tarda; mientras tanto, tienes el ticket.
 
 En `src/san/repository/SanRepository.ts`:
 
@@ -108,6 +153,11 @@ export interface SanRepository {
 
 ### Tres formas de cumplir el mismo contrato
 
+> 🌎 **En la vida real:** son tres archivistas distintos, y los tres cumplen el mismo contrato:
+> - **Firestore** = el que guarda en el **archivo del banco** (la nube): para la vida real.
+> - **AsyncStorage** = el que guarda en un **cajón de tu casa** (el teléfono): para cuando no hay internet.
+> - **InMemory** = el que anota en un **papelito** que se tira al final del día: perfecto para practicar, porque cada mañana empieza limpio.
+
 En la misma carpeta hay **tres implementaciones**:
 
 | Archivo | Dónde guarda | Para qué |
@@ -117,6 +167,8 @@ En la misma carpeta hay **tres implementaciones**:
 | `InMemorySanRepository.ts` | En la memoria (se borra al cerrar) | Ideal para pruebas: no necesita internet |
 
 ### La fábrica que elige
+
+> 🌎 **En la vida real:** es como la **agencia de empleo**: los de la tesorería solo dicen "mándenme un archivista". La agencia es la **única** que conoce a los tres y elige cuál manda. Si mañana aparece un archivista nuevo, solo se avisa a la agencia: la tesorería ni se entera.
 
 En `SanRepositoryFactory.ts`:
 
@@ -140,6 +192,14 @@ export function createSanRepository(provider) {
 **El beneficio:** si mañana quisieras cambiar Firestore por otra base de datos, escribirías un `OtraBaseSanRepository` que cumpla el contrato y cambiarías **una línea** en la fábrica. Las reglas del San, las pantallas y las pruebas no se tocarían.
 
 ## 5. Arquitectura hexagonal (puertos y adaptadores)
+
+> 🌎 **En la vida real:** piensa en un **televisor**. Por detrás tiene **puertos**: HDMI, USB, antena. El televisor (el centro) no sabe si en el HDMI enchufaste una PlayStation, un decodificador o una notebook. Solo sabe hablar "HDMI".
+> - **Puerto** = el agujero HDMI: el contrato.
+> - **Adaptador** = el aparato que enchufas: la consola, el decodificador.
+> - **Adaptadores de entrada** = el **control remoto**: te permite pedirle cosas al televisor (las pantallas, el `SanController`).
+> - **Adaptadores de salida** = los **parlantes**: el televisor les manda el sonido (la base de datos, los avisos).
+>
+> **Clean vs. hexagonal**: son la misma idea con distinto dibujo, como "carro" y "auto". Clean divide más el centro; hexagonal pone el foco en los enchufes.
 
 La propuso **Alistair Cockburn** en 2005. Es la misma idea que Clean Architecture, dibujada distinto: el centro es un hexágono con las reglas, y alrededor se enchufan las cosas de afuera.
 
@@ -170,6 +230,13 @@ La propuso **Alistair Cockburn** en 2005. Es la misma idea que Clean Architectur
 
 ## 6. MVC (Modelo, Vista, Controlador)
 
+> 🌎 **En la vida real:** un restaurante clásico:
+> - **Vista** = la **mesa y el plato**: lo que el cliente ve.
+> - **Controlador** = el **mozo**: toma el pedido, lo lleva a la cocina y trae el plato.
+> - **Modelo** = la **cocina**: tiene los ingredientes y las recetas.
+>
+> En el San: tocas "Ya pagué" (le haces una seña al mozo) → el mozo va a la cocina ("registren el pago de Juan") → la cocina lo anota → el mozo vuelve y te muestra la cuenta actualizada.
+
 Es una de las más antiguas (de los años 70) y muy usada en servidores web.
 
 | Parte | Qué hace | En tu San |
@@ -182,6 +249,13 @@ Es una de las más antiguas (de los años 70) y muy usada en servidores web.
 
 ## 7. MVVM (Modelo, Vista, Modelo de vista)
 
+> 🌎 **En la vida real:** es el **tablero del carro**:
+> - **Modelo** = el **motor y los sensores**: saben la temperatura, las revoluciones y cuánta gasolina hay.
+> - **Vista** = las **agujas del tablero**: solo se mueven a donde les dicen. No calculan nada.
+> - **Modelo de vista** = la **computadora del tablero**: lee los sensores, hace las cuentas ("con estos litros te quedan 120 km") y le pasa a la aguja el número ya listo. Cuando cambia el dato, la aguja se mueve sola.
+>
+> Eso es justo `useVehicleFuelLevel` (la computadora) y `VehicleFuelGauge` (la aguja).
+
 Es la más común en **apps móviles** (Android, iOS) y encaja bien con React.
 
 | Parte | Qué hace | En tu app |
@@ -193,6 +267,15 @@ Es la más común en **apps móviles** (Android, iOS) y encaja bien con React.
 **Ejemplo real:** el hook `useVehicleFuelLevel` (en `src/hooks/`) junta los abastecimientos y el kilometraje, calcula el nivel del tanque y se lo entrega listo a la barra de combustible. La barra (`VehicleFuelGauge`) solo dibuja lo que recibe; no calcula nada.
 
 ## 8. ¿Qué arquitectura usa tu app?
+
+> 🌎 **En la vida real:** es como una casa que se fue ampliando: la cocina se hizo con un estilo, el cuarto nuevo con otro. Funciona y está ordenada, pero no todo es igual:
+> - **El San** = el ala nueva, construida con planos de arquitecto.
+> - **Las pantallas** = el tablero del carro (MVVM).
+> - **`utils/`** = el recetario guardado en el centro de la casa.
+> - **El Copiloto** = una **zapatilla eléctrica** (regleta) donde cada parte de la app se enchufa.
+> - **Cloud Functions** = un **taller aparte** en el fondo del terreno.
+>
+> **Lo que se puede mejorar**: `EarningsContext` es como un cocinero que, además de cocinar, va él mismo al proveedor a buscar la carne. Funciona, pero mezcla dos trabajos.
 
 Tu app es una **mezcla**, como la mayoría de las apps reales:
 
@@ -210,9 +293,13 @@ Tu app es una **mezcla**, como la mayoría de las apps reales:
 
 ## 9. Cuidado: no exagerar
 
+> 🌎 **En la vida real:** para hacer un huevo frito no necesitas una cocina industrial con cinco ayudantes. Para un restaurante de 200 cubiertos, sí. Usa la organización que el trabajo pide: tu app pone "cocina industrial" en el San (complejo y compartido) y "sartén y listo" en lo simple.
+
 Más capas no siempre es mejor. En un proyecto chico, una Clean Architecture completa puede ser **demasiado**: muchos archivos para hacer algo simple. Se usa la arquitectura que el proyecto **necesita**. Tu app la usa completa donde vale la pena (el San, que es complejo y compartido entre personas) y más simple donde no.
 
 ## Ejercicios
+
+> 🌎 **En la vida real:** es como recorrer la cooperativa con el organigrama en la mano y señalar: "esto es recepción, esto es tesorería, esto es el archivo".
 
 1. Abre `src/san/repository/` y cuenta cuántas implementaciones del contrato hay. ¿Cuál usa la app real?
 2. Abre `src/san/service/SanService.ts` y busca si importa algo de Firestore. ¿Por qué no debería?
@@ -239,6 +326,8 @@ Más capas no siempre es mejor. En un proyecto chico, una Clean Architecture com
 </details>
 
 ## Para la entrevista
+
+> 🌎 **En la vida real:** explícalo con el televisor y sus puertos, o con el cirujano y el bisturí: "las reglas están en el centro y piden lo que necesitan por contrato; lo de afuera se enchufa y se puede cambiar". Y si te preguntan si siempre lo harías: "no; para un huevo frito no armo una cocina industrial".
 
 **¿Qué es Clean Architecture?**
 > Una forma de organizar el código en capas, con las reglas del negocio en el centro y las herramientas (base de datos, interfaz) afuera. La regla principal es que las dependencias apuntan hacia adentro: las reglas no conocen la base de datos; se comunican por interfaces. Así se pueden cambiar las herramientas y probar las reglas solas.

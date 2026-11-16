@@ -1,8 +1,16 @@
 # Tema 01: Leer código
 
+> 🌎 **En la vida real:** aprender a leer código es como aprender a leer una receta de cocina antes de cocinar. Primero entiendes qué dice ("pica la cebolla, fríela 5 minutos"); recién después te animas a escribir tu propia receta.
+
 Antes de escribir código hay que saber leerlo. Casi todo el código del mundo se arma con las mismas piezas. Aquí las vas a aprender con dos funciones reales de tu app.
 
 ## 1. El lenguaje: TypeScript
+
+> 🌎 **En la vida real:** imagina un formulario del banco con casillas marcadas: "Fecha (solo números)", "Nombre (solo letras)". Si escribes tu nombre en la casilla de la fecha, el empleado te lo devuelve **antes** de procesarlo. JavaScript es un formulario sin esas marcas: aceptaría el error y fallaría después. TypeScript es el formulario con las marcas.
+> - `string` = la casilla "escribe aquí tu nombre".
+> - `number` = la casilla "cuántos litros cargaste".
+> - `boolean` = la casilla de marcar ☐ Sí / ☐ No.
+> - `null` = dejar una casilla vacía **a propósito**, como poner "—" en "segundo apellido" cuando no tienes.
 
 Tu app está escrita en **TypeScript**. Es JavaScript con **tipos**: a cada dato le dices qué clase de cosa es (texto, número, lista...). Si te equivocas, el programa avisa antes de llegar al teléfono.
 
@@ -21,6 +29,13 @@ let activo: boolean = true;         // verdadero o falso
 
 ## 2. Las cinco piezas
 
+> 🌎 **En la vida real:** piensa en una cocina:
+> - **Constante** = la etiqueta del frasco que dice "Sal". El frasco siempre se llama igual; lo encuentras por su nombre.
+> - **Función** = la licuadora: le pones frutas (lo que recibe), aprietas el botón y te da un jugo (lo que devuelve). Siempre hace el mismo trabajo.
+> - **if** = la decisión "**si** el agua está hirviendo, **entonces** echo la pasta". Si no, espero.
+> - **Lista** = la lista del supermercado: arroz, frijoles, café… varias cosas en orden.
+> - **Objeto** = la ficha de tu carro en el taller: marca Toyota, modelo Etios, año 2017, color plata. Muchos datos, todos de la misma cosa, cada uno con su nombre.
+
 | Pieza | Para qué | Cómo se ve |
 |---|---|---|
 | **Constante** | Guardar un valor con nombre que no cambia | `const MAX = 2;` |
@@ -30,6 +45,15 @@ let activo: boolean = true;         // verdadero o falso
 | **Objeto** | Varios datos de una misma cosa, con nombre | `{ marca: 'Toyota', anio: 2017 }` |
 
 ## 3. Primer ejemplo real: el nombre de "Mi empresa"
+
+> 🌎 **En la vida real:** es como el empleado de una imprenta que hace letreros para camionetas. Tú le dices el nombre y él:
+> 1. Quita los espacios de más ("  Thermomac  " → "Thermomac"), como quien sacude el polvo antes de empezar.
+> 2. Si no le dijiste nada, deja el letrero de siempre ("Mi empresa").
+> 3. Si el nombre tiene más de 24 letras, te dice "no cabe en el letrero" (eso es `null`).
+> 4. Si tiene más de 2 palabras, también te dice "no cabe".
+> 5. Si pasó todo, imprime el nombre limpio (`return clean`).
+>
+> La constante `MAX_WORDS = 2` es como la regla pegada en la pared de la imprenta: "máximo 2 palabras". Si el dueño cambia de idea, cambia **el cartel de la pared**, no le explica la regla a cada empleado.
 
 Archivo: `src/data/workAppsCatalog.ts`. Decide si el nombre que escribes para "Mi empresa" es válido.
 
@@ -70,6 +94,12 @@ export function normalizeMyCompanyName(text: string): string | null {
 
 ## 4. Segundo ejemplo real: ¿un ingreso es acumulativo?
 
+> 🌎 **En la vida real:** piensa en el cuentakilómetros del carro y en una alcancía:
+> - **Uber (acumulativo)** es como el cuentakilómetros: el número que ves **ya incluye** todo lo anterior. Si a las 10 dice 150 y a las 18 dice 320, ganaste 320 en el día, no 470. No se suman.
+> - **Extras, Viajes particulares, Mi empresa (no acumulativos)** son como monedas que echas en la alcancía: cada una se **suma** a las anteriores. Una de 50 y otra de 30 son 80.
+>
+> `===` es como comparar dos llaves para ver si son **exactamente** iguales. `||` es el "o" de "aceptamos efectivo **o** tarjeta **o** Pix": con que se cumpla una, alcanza.
+
 Archivo: `src/data/workAppsCatalog.ts`.
 
 ```ts
@@ -87,12 +117,20 @@ Una sola línea decide cómo se cuenta el dinero en toda la app. Por eso tiene p
 
 ## 5. Cómo leer cualquier archivo
 
+> 🌎 **En la vida real:** es como leer un electrodoméstico nuevo sin leer todo el manual:
+> 1. **El comentario de arriba** = la etiqueta de la caja: "Licuadora de 3 velocidades". Ya sabes para qué sirve.
+> 2. **Qué recibe y qué devuelve** = "entra fruta, sale jugo". Con eso entiendes el trabajo.
+> 3. **Los `if`** = las advertencias: "si la tapa no está puesta, no arranca". Ahí están las reglas.
+> 4. **No hace falta entender cada tornillo** para usar la licuadora. Primero la idea general; los detalles después.
+
 1. **Lee el comentario** de arriba (`/** ... */`). Dice para qué existe.
 2. **Busca lo que recibe y lo que devuelve.** Eso te dice el trabajo de la función.
 3. **Lee los `if`.** Ahí están las reglas.
 4. **No necesitas entender cada símbolo.** Primero la idea, después los detalles.
 
 ## Ejercicios
+
+> 🌎 **En la vida real:** es como el examen práctico de manejo: leer el manual no alcanza, hay que sentarse al volante. Equivocarte aquí es seguro; es un estacionamiento vacío, no la avenida.
 
 **A. ¿Qué devuelve `normalizeMyCompanyName`?**
 1. `"  Thermomac  "`
@@ -110,6 +148,8 @@ Una sola línea decide cómo se cuenta el dinero en toda la app. Por eso tiene p
 
 ## Respuestas (míralas solo después de intentarlo)
 
+> 🌎 **En la vida real:** es como el sudoku del periódico: las soluciones están al final de la página, pero si las miras antes, el juego no te enseña nada.
+
 <details>
 <summary>Ver respuestas</summary>
 
@@ -125,6 +165,8 @@ Una sola línea decide cómo se cuenta el dinero en toda la app. Por eso tiene p
 </details>
 
 ## Para la entrevista
+
+> 🌎 **En la vida real:** es como ensayar en voz alta lo que vas a decir antes de pedir un aumento. Si no lo puedes explicar con tus palabras a alguien que no sabe del tema, todavía no lo entendiste del todo.
 
 **¿Qué es una función?**
 > Un bloque de código con nombre que recibe datos, hace un trabajo y devuelve un resultado. Por ejemplo, en mi app una función recibe el nombre de la empresa y devuelve el nombre limpio o `null` si es inválido.
