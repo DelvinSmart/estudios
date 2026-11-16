@@ -738,3 +738,12 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
   .isla, .camino-pendiente, .isla-parada.actual .isla-pasto { animation: none; }
 }
 .bombillo-apagado { filter: grayscale(1) brightness(0.75); opacity: 0.7; }
+
+/* ---------- 15. Escuchar en voz alta ---------- */
+.voz-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 4px 0 18px; padding: 10px 12px; border: 1px dashed var(--borde-fuerte); border-radius: 12px; font-size: 0.8rem; }
+.voz-barra .boton { margin: 0; padding: 7px 12px; font-size: 0.82rem; }
+.voz-opcion { display: inline-flex; align-items: center; gap: 6px; color: var(--tenue); }
+.voz-opcion select { max-width: 190px; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--borde); background: var(--fondo-2); color: var(--texto); font: inherit; }
+.leyendo { outline: 2px solid color-mix(in srgb, var(--acento) 70%, transparent); outline-offset: 4px; border-radius: 6px; background: color-mix(in srgb, var(--acento) 7%, transparent); transition: background 0.2s; }
+@media (max-width: 640px) { .voz-opcion select { max-width: 140px; } }
+.voz-barra [hidden] { display: none !important; }

@@ -8,6 +8,7 @@ import * as nube from '../nube.js';
 import { app, ponerMigas, avisar, enLinea, escapar, dos } from '../pantalla.js';
 import { rutaDoc, etapaDe, cursoDeClase } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
+import { ponerBarraDeVoz } from '../voz.js';
 import { hayDatosDeSesion } from '../sesion.js';
 import { vistaInicio } from './mapas.js';
 
@@ -74,6 +75,8 @@ export async function vistaParte(num, doc, cual) {
         `<a href="#" data-sub="${k}">${/^\d/.test(s) ? '' : `<span class="mono acento">${dos(i)}.${k + 1}</span> `}${enLinea(s)}</a>`).join('')}</div>`);
     }
     hoja.appendChild(pintarMarkdown(parte.md, c.carpeta, idParte(num, doc, i)));
+    // 🔊 Escuchar la parte con la voz del aparato, justo debajo del título.
+    ponerBarraDeVoz(hoja, hoja.querySelector('.mini-mapa') || hoja.querySelector('.texto'));
 
     // El mini mapa salta a cada subtítulo de la parte.
     const subtitulos = hoja.querySelectorAll('.texto h3');
