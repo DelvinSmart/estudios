@@ -177,7 +177,7 @@ function vistaInicio() {
   const totalBombillos = ORDEN.reduce((s, n) => s + (conteo[n] || 0), 0);
   const prendidosTodos = ORDEN.reduce((s, n) => s + prendidos(n), 0);
 
-  const etapas = ETAPAS.map((e) => {
+  const etapas = ETAPAS.map((e, i) => {
     const listas = e.clases.filter((n) => estadoClase(n) === 'hecha').length;
     const puntos = e.clases.map((n) => `<i class="punto ${estadoClase(n)}" title="${dos(n)} ${escapar(CLASES[n].titulo)}"></i>`).join('');
     const tieneActual = e.clases.includes(actual);
@@ -595,7 +595,7 @@ async function vistaCertificado(muestra) {
   const fecha = completo ? fechaUltimoBombillo() : new Date();
   const fechaTexto = fecha.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' });
   const codigo = muestra && !completo ? 'MUESTRA' : await codigoVerificacion(nombre, fecha);
-  const etapas = ETAPAS.map((e, i) => `
+  const etapas = ETAPAS.map((e) => `
     <li><span class="cert-num">[✓]</span>${escapar(e.titulo)}</li>`).join('');
   const anio = fecha.getFullYear();
   // El nombre y el código, escritos en binario (8 bits por letra), para las columnas de los lados.
@@ -656,7 +656,7 @@ async function dibujar() {
   const partesRuta = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
   try {
     if (partesRuta[0] === 'progreso') await vistaProgreso();
-    else if (partesRuta[0] === 'certificado') vistaCertificado(partesRuta[1] === 'muestra');
+    else if (partesRuta[0] === 'certificado') await vistaCertificado(partesRuta[1] === 'muestra');
     else if (partesRuta[0] === 'etapa') await vistaEtapa(partesRuta[1]);
     else if (partesRuta[0] === 'clase' && partesRuta[3]) await vistaParte(partesRuta[1], +partesRuta[2] || 0, partesRuta[3]);
     else if (partesRuta[0] === 'clase') await vistaClase(partesRuta[1], +partesRuta[2] || 0);

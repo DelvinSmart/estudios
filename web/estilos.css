@@ -484,7 +484,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .cert-herramientas .boton, .cert-herramientas .boton-principal { margin-top: 0; }
 .cert-herramientas .boton-principal:disabled { opacity: 0.45; cursor: not-allowed; }
 
-/* La hoja: siempre papel claro (como un diploma impreso), en proporción A4 apaisada.
+/* La hoja: con los colores del sitio (fondo oscuro de editor), en proporción A4 apaisada.
    Las medidas van en cqw (1% del ancho de la hoja), así en el celular se ve igual pero más chico. */
 .certificado { max-width: 960px; margin: 0 auto 30px; container-type: inline-size; position: relative; }
 .cert-hoja {
@@ -499,7 +499,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
   border-radius: 10px; box-shadow: var(--sombra); border: 1px solid #232d3a;
   display: flex; flex-direction: column; align-items: center;
 }
-/* Doble marco dorado */
+/* Doble marco fino (línea y línea punteada) */
 .cert-hoja::before, .cert-hoja::after { content: ''; position: absolute; pointer-events: none; }
 .cert-hoja::before { inset: 2cqw; border: 0.12cqw solid #34414f; border-radius: 0.6cqw; }
 .cert-hoja::after { inset: 2.6cqw; border: 0.08cqw dashed #232d3a; border-radius: 0.4cqw; }
@@ -556,7 +556,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
   font: 800 14cqw var(--mono); color: rgb(255 123 114 / 0.13); transform: rotate(-16deg);
 }
 
-/* Al imprimir: solo el certificado, en blanco, en una hoja apaisada. */
+/* Al imprimir: solo el certificado, con su fondo oscuro, en una hoja A4 apaisada. */
 @media print {
   @page { size: A4 landscape; margin: 0; }
   html, body { background: #fff !important; }
