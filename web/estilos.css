@@ -488,20 +488,21 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
    Las medidas van en cqw (1% del ancho de la hoja), así en el celular se ve igual pero más chico. */
 .certificado { max-width: 960px; margin: 0 auto 30px; container-type: inline-size; position: relative; }
 .cert-hoja {
-  --papel: #f1e6cc; --tinta: #1c2430; --tinta-suave: #5a5446; --oro: #9c7526; --oro-claro: #cdb06a; --verde: #1a7f37;
+  --papel: #0d1117; --tinta: #d8e0ea; --tinta-suave: #8796aa; --oro: #e3b341; --oro-claro: #6b5a2a; --verde: #7ee787; --azul: #79c0ff;
   position: relative; aspect-ratio: 297 / 210; overflow: hidden;
   padding: 6.2cqw 8cqw 3.6cqw; text-align: center; color: var(--tinta);
   background:
-    radial-gradient(ellipse at 50% 0%, rgb(250 243 225 / 0.85), transparent 60%),
-    radial-gradient(ellipse at 50% 120%, rgb(156 117 38 / 0.18), transparent 60%),
+    radial-gradient(ellipse at 50% -10%, rgb(126 231 135 / 0.10), transparent 55%),
+    linear-gradient(rgb(255 255 255 / 0.025) 1px, transparent 1px) 0 0 / 100% 2.4cqw,
+    radial-gradient(ellipse at 50% 120%, rgb(121 192 255 / 0.10), transparent 60%),
     var(--papel);
-  border-radius: 6px; box-shadow: var(--sombra);
+  border-radius: 10px; box-shadow: var(--sombra); border: 1px solid #232d3a;
   display: flex; flex-direction: column; align-items: center;
 }
 /* Doble marco dorado */
 .cert-hoja::before, .cert-hoja::after { content: ''; position: absolute; pointer-events: none; }
-.cert-hoja::before { inset: 2cqw; border: 0.35cqw solid var(--oro); }
-.cert-hoja::after { inset: 2.9cqw; border: 0.12cqw solid var(--oro-claro); }
+.cert-hoja::before { inset: 2cqw; border: 0.12cqw solid #34414f; border-radius: 0.6cqw; }
+.cert-hoja::after { inset: 2.6cqw; border: 0.08cqw dashed #232d3a; border-radius: 0.4cqw; }
 /* Esquinas con forma de llaves de código */
 .cert-esquina { position: absolute; width: 4cqw; height: 4cqw; border: 0 solid var(--verde); z-index: 1; }
 .cert-esquina.e1 { top: 3.8cqw; left: 3.8cqw; border-top-width: 0.3cqw; border-left-width: 0.3cqw; }
@@ -514,22 +515,22 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .cert-bits {
   position: absolute; top: 8.5cqw; bottom: 8.5cqw; width: 3.2cqw; overflow: hidden;
   font: 500 0.95cqw/1.25 var(--mono); letter-spacing: 0.08em; word-break: break-all; text-align: center;
-  color: var(--verde); opacity: 0.45;
+  color: var(--verde); opacity: 0.3;
   -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
   mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
 }
-.cert-bits.izq { left: 3.6cqw; }
-.cert-bits.der { right: 3.6cqw; color: var(--oro); opacity: 0.55; }
+.cert-bits.izq { left: 3.6cqw; color: var(--verde); opacity: 0.3; }
+.cert-bits.der { right: 3.6cqw; color: var(--azul); opacity: 0.3; }
 .cert-estado { font: 500 1.05cqw var(--mono); color: var(--tinta-suave); margin-top: 1cqw !important; letter-spacing: 0.02em; }
 .cert-estado b { color: var(--verde); font-weight: 700; }
 .cert-marca { font: 500 1.15cqw var(--mono); color: var(--verde); letter-spacing: 0.04em; }
-.cert-titulo { font: 600 6.4cqw/1 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.06em; margin-top: 1.2cqw !important; color: var(--tinta); }
-.cert-tipo { font: 600 1.3cqw var(--sans); letter-spacing: 0.55em; text-transform: uppercase; color: var(--oro); margin-top: 0.6cqw !important; padding-left: 0.55em; }
-.cert-otorga { font: italic 400 1.9cqw 'Cormorant Garamond', Georgia, serif; color: var(--tinta-suave); margin-top: 2.6cqw !important; }
+.cert-titulo { font: 800 5.6cqw/1 var(--mono); letter-spacing: -0.01em; margin-top: 1.2cqw !important; color: var(--tinta); }
+.cert-tipo { font: 600 1.3cqw var(--mono); letter-spacing: 0.55em; text-transform: uppercase; color: var(--oro); margin-top: 0.6cqw !important; padding-left: 0.55em; }
+.cert-otorga { font: 400 1.5cqw var(--mono); color: var(--tinta-suave); margin-top: 2.6cqw !important; }
 .cert-nombre {
-  font: italic 600 5cqw/1.15 'Cormorant Garamond', Georgia, serif; color: var(--tinta);
+  font: 700 4.2cqw/1.2 var(--mono); color: var(--verde);
   margin-top: 0.4cqw !important; padding: 0 4cqw 0.8cqw; min-width: 50%;
-  border-bottom: 0.15cqw solid var(--oro);
+  border-bottom: 0.15cqw solid var(--oro-claro);
 }
 .cert-texto { font: 400 1.55cqw/1.55 var(--sans); color: var(--tinta-suave); max-width: 74ch; text-wrap: balance; margin-top: 1.8cqw !important; }
 .cert-texto b { color: var(--tinta); font-weight: 600; }
@@ -539,8 +540,8 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 
 .cert-pie { margin-top: auto; width: 84%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 4cqw; }
 .cert-dato { display: flex; flex-direction: column; align-items: center; gap: 0.7cqw; }
-.cert-valor { font: 500 1.55cqw var(--sans); color: var(--tinta); padding: 0 1cqw 0.7cqw; width: 100%; border-bottom: 0.1cqw solid var(--tinta-suave); }
-.cert-valor.mono { font-family: var(--mono); font-size: 1.35cqw; letter-spacing: 0.03em; }
+.cert-valor { font: 500 1.5cqw var(--mono); color: var(--tinta); padding: 0 1cqw 0.7cqw; width: 100%; border-bottom: 0.1cqw solid #34414f; }
+.cert-valor.mono { font-size: 1.35cqw; letter-spacing: 0.03em; color: var(--azul); }
 .cert-rotulo { font: 500 1cqw var(--mono); letter-spacing: 0.04em; color: var(--tinta-suave); }
 .cert-sello { width: 10.5cqw; height: 10.5cqw; }
 .cert-sello .s-borde { fill: var(--oro); }
@@ -552,7 +553,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 
 .certificado.es-muestra .cert-hoja::after {
   content: 'MUESTRA'; inset: 0; border: 0; display: grid; place-items: center; z-index: 2;
-  font: 800 14cqw var(--mono); color: rgb(207 34 46 / 0.12); transform: rotate(-16deg);
+  font: 800 14cqw var(--mono); color: rgb(255 123 114 / 0.13); transform: rotate(-16deg);
 }
 
 /* Al imprimir: solo el certificado, en blanco, en una hoja apaisada. */
