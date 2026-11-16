@@ -28,19 +28,22 @@ const oyentes = new Set();
 function cargar() {
   if (!cargando) {
     cargando = (async () => {
-      const [{ initializeApp }, A, F] = await Promise.all([
+      const [{ initializeApp }, A, F, Fn] = await Promise.all([
         import(`${SDK}firebase-app.js`),
         import(`${SDK}firebase-auth.js`),
         import(`${SDK}firebase-firestore.js`),
+        import(`${SDK}firebase-functions.js`),
       ]);
       const app = initializeApp(CONFIG);
       const auth = A.getAuth(app);
       auth.languageCode = 'es'; // los correos (verificar, recuperar contraseña) llegan en español
       const db = F.getFirestore(app);
+      // La función que manda los correos con el diseño del sitio (firebase/funciones/index.js).
+      const enviarCorreo = Fn.httpsCallable(Fn.getFunctions(app, 'us-central1'), 'enviarCorreoCuenta');
       // Esperar a saber si ya había una sesión abierta; después, avisar de cada cambio.
       await new Promise((listo) => { const parar = A.onAuthStateChanged(auth, () => { parar(); listo(); }); });
       A.onAuthStateChanged(auth, (u) => { for (const k in progresoCache) delete progresoCache[k]; oyentes.forEach((f) => f(u)); });
-      return { A, F, auth, db };
+      return { A, F, auth, db, enviarCorreo };
     })();
     cargando.catch(() => { cargando = null; });
   }
@@ -84,7 +87,7 @@ export async function crearCuenta(nombre, correo, contrasena) {
   if (!esGmail(correo)) throw Object.assign(new Error('solo gmail'), { code: 'propio/no-gmail' });
   const r = await A.createUserWithEmailAndPassword(auth, correo.trim(), contrasena);
   await A.updateProfile(r.user, { displayName: nombre });
-  await A.sendEmailVerification(r.user, volverA('/entrar/listo'));
+  await mandarVerificacion();
   return r.user;
 }
 
@@ -100,9 +103,20 @@ export async function entrarConGoogle() {
   return r.user;
 }
 
+// El correo de verificación sale de nuestra función (con el diseño del sitio).
+// Si la función no responde, se usa el correo simple de Firebase para no dejar a nadie trabado.
+async function mandarVerificacion() {
+  const { A, auth, enviarCorreo } = await cargar();
+  try {
+    await enviarCorreo({ tipo: 'verificar' });
+  } catch (e) {
+    if (e?.code === 'functions/resource-exhausted') throw Object.assign(new Error('espera'), { code: 'auth/too-many-requests' });
+    await A.sendEmailVerification(auth.currentUser, volverA('/entrar/listo'));
+  }
+}
+
 export async function reenviarVerificacion() {
-  const { A, auth } = await cargar();
-  await A.sendEmailVerification(auth.currentUser, volverA('/entrar/listo'));
+  await mandarVerificacion();
 }
 
 // Después de tocar el enlace del correo: recarga la cuenta y pide un "pase" nuevo,
@@ -118,7 +132,14 @@ export async function refrescarCuenta() {
 // Siempre responde igual, exista o no la cuenta: así nadie puede usar esta pantalla
 // para averiguar qué correos están registrados.
 export async function recuperarContrasena(correo) {
-  const { A, auth } = await cargar();
+  const { A, auth, enviarCorreo } = await cargar();
+  try {
+    await enviarCorreo({ tipo: 'contrasena', correo: correo.trim() });
+    return;
+  } catch (e) {
+    if (e?.code === 'functions/invalid-argument') throw Object.assign(new Error('correo'), { code: 'auth/invalid-email' });
+    // Si la función no responde, se usa el correo simple de Firebase.
+  }
   try { await A.sendPasswordResetEmail(auth, correo.trim(), volverA('/entrar')); } catch (e) {
     if (e.code === 'auth/invalid-email' || e.code === 'auth/too-many-requests' || e.code === 'auth/network-request-failed') throw e;
   }

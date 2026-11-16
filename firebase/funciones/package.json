@@ -1,0 +1,16 @@
+{
+  "name": "mapa-estudios-funciones",
+  "description": "Cloud Functions del Mapa de estudios: manda los correos de la cuenta con el diseño del sitio",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "engines": { "node": "22" },
+  "scripts": {
+    "test": "node --test correos.test.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^14.5.1",
+    "firebase-functions": "^7.4.0",
+    "nodemailer": "^10.6.0"
+  }
+}
