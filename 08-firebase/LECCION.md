@@ -113,7 +113,7 @@ Están en tu app, en **`firestore.rules`**.
 > 🌎 **En la vida real:** es exactamente el portero de un edificio:
 > - "¿Tiene credencial?" (`request.auth != null`). Si no, no entra.
 > - "¿El número de su credencial es el mismo que el de este departamento?" (`uid == userId`). Si no, no entra.
-> - "¿Está al día?" (`hasActiveAccess`).
+> - `hasActiveAccess`: antes era "¿está al día con la suscripción?". Desde el 31/10/2026 la app es gratis y solo revisa que haya sesión (lo pago del Copiloto se controla en el servidor).
 > - `&&` es "y": tiene que cumplir **todas**.
 >
 > Si el vecino del 302 quiere entrar al 305 con su propia credencial, el portero le dice: "Sin permiso" (*Missing or insufficient permissions*).
@@ -126,6 +126,7 @@ match /users/{userId}/earnings/{docId} {
 - `allow read, write` → permite leer y escribir...
 - `if request.auth != null` → ...solo si **inició sesión**...
 - `&& request.auth.uid == userId` → ...y si el `uid` de quien pide es **el mismo** de la carpeta. `&&` se lee "y".
+- `&& hasActiveAccess(userId)` → ...y una revisión de acceso. Antes miraba la suscripción; desde el 31/10/2026 (la app es gratis) solo revisa que haya sesión. Se dejó en su lugar por si algo vuelve a ser pago.
 
 Si alguien con sesión intenta leer los ingresos de otra persona, el `uid` no coincide y Firestore responde **"Missing or insufficient permissions"** (sin permiso).
 
