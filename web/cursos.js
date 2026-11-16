@@ -47,6 +47,30 @@ export const CLASES = {
   '41': { carpeta: '41-python-modulos-y-entornos', titulo: 'Módulos, paquetes y entornos', meta: 'import, la biblioteca estándar, pip y venv', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '42': { carpeta: '42-python-clases-y-objetos', titulo: 'Clases y objetos', meta: 'class, __init__, self, herencia y dataclasses', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '43': { carpeta: '43-python-pruebas-y-proyecto', titulo: 'Pruebas y un proyecto real', meta: 'pytest, el resumen de la semana de un conductor y las APIs', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '44': { carpeta: '44-mapa-de-los-lenguajes', titulo: 'El mapa de los lenguajes', meta: 'JavaScript, TypeScript, Node, React, React Native, Expo, Kotlin y Swift: qué es cada uno', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '45': { carpeta: '45-js-variables-y-tipos', titulo: 'Variables, tipos y la consola', meta: 'const, let, los tipos, las plantillas y ===', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '46': { carpeta: '46-js-decisiones-y-ciclos', titulo: 'Decisiones y ciclos', meta: 'if, ternario, falsy, ??, ?., for...of, while y switch', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '47': { carpeta: '47-js-funciones', titulo: 'Funciones', meta: 'Flechas, parámetros, closures y callbacks', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '48': { carpeta: '48-js-arrays-y-objetos', titulo: 'Arrays y objetos', meta: 'map, filter, reduce, spread, desestructuración y JSON', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '49': { carpeta: '49-js-asincronia', titulo: 'Asincronía', meta: 'Promesas, async/await, fetch y Firebase', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '50': { carpeta: '50-js-modulos-npm-y-node', titulo: 'Módulos, npm y Node.js', meta: 'import/export, package.json, scripts y la estructura de un proyecto', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '51': { carpeta: '51-ts-tipos-e-interfaces', titulo: 'TypeScript: tipos e interfaces', meta: 'Inferencia, uniones, interfaces y funciones tipadas', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '52': { carpeta: '52-ts-genericos-y-configuracion', titulo: 'TypeScript: genéricos y configuración', meta: 'Genéricos, unknown, Partial, tsconfig y los errores típicos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '53': { carpeta: '53-js-proyecto-con-pruebas', titulo: 'Un proyecto con pruebas', meta: 'Gastos del carro en TypeScript, probado con Vitest', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '54': { carpeta: '54-rn-react-componentes', titulo: 'React: componentes y props', meta: 'Componentes, JSX, listas con key y props', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '55': { carpeta: '55-rn-estado-y-efectos', titulo: 'Estado, eventos y efectos', meta: 'useState, formularios, useEffect y los hooks', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '56': { carpeta: '56-rn-piezas-y-estilos', titulo: 'Las piezas del teléfono y los estilos', meta: 'View, Text, FlatList, StyleSheet, Flexbox y SafeArea', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '57': { carpeta: '57-rn-expo', titulo: 'Expo: crear la app y verla en el iPhone', meta: 'create-expo-app, Expo Go y Expo Snack', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '58': { carpeta: '58-rn-navegacion-y-almacenamiento', titulo: 'Navegación y guardar en el teléfono', meta: 'React Navigation, params tipados y AsyncStorage', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '59': { carpeta: '59-rn-datos-y-rendimiento', titulo: 'Datos con Firebase y rendimiento', meta: 'onSnapshot, Context, memo y medir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '60': { carpeta: '60-rn-publicar', titulo: 'Probar y publicar la app', meta: 'Testing Library, EAS Build, AAB, tiendas y actualizaciones', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '61': { carpeta: '61-kotlin-primeros-pasos', titulo: 'Primeros pasos', meta: 'Playground, val y var, tipos y plantillas', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '62': { carpeta: '62-kotlin-null-y-decisiones', titulo: 'Null safety, decisiones y ciclos', meta: 'String?, ?., ?:, if y when como expresiones, rangos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '63': { carpeta: '63-kotlin-funciones-y-colecciones', titulo: 'Funciones, lambdas y colecciones', meta: 'fun, lambdas, extensiones, map, filter y sumOf', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '64': { carpeta: '64-kotlin-clases', titulo: 'Clases, data class, enum y sealed', meta: 'Modelar datos y estados', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '65': { carpeta: '65-kotlin-corrutinas', titulo: 'Corrutinas', meta: 'suspend, launch, async, scope, Dispatchers y Flow', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '66': { carpeta: '66-kotlin-android-compose', titulo: 'Tu primera app Android con Compose', meta: 'Android Studio, @Composable, estado y ViewModel', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '67': { carpeta: '67-kotlin-datos-pruebas-publicar', titulo: 'Datos, pruebas y publicar', meta: 'DataStore, Room, Firebase, JUnit, AAB y React Native vs Kotlin', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '19': { carpeta: '19-agentes-de-ia', titulo: 'Qué es un agente', meta: 'Python para leer los ejemplos, las piezas y el ciclo de un agente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '25': { carpeta: '25-agentes-cinco-patrones', titulo: 'Los cinco patrones', meta: 'Herramientas (ReAct), planificación, reflexión, enrutamiento y multiagente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '26': { carpeta: '26-agentes-veinte-patrones', titulo: 'Veinte patrones más', meta: 'Flujo, razonamiento, coordinación, control, conocimiento y cómo elegir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -66,6 +90,9 @@ const ICONOS = {
   '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
   '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁',
   '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄',
+  '44': '🗺️', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪',
+  '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀',
+  '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦',
   '21': '🎓', '22': '🔐', '23': '🕵️', '24': '🛡️',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
@@ -80,6 +107,11 @@ const LOGOS_CLASE = {
   '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '25': ['python', 'javascript'], '27': ['python'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
   '35': ['claude', 'git'],
+  '44': ['javascript', 'typescript', 'react', 'kotlin'],
+  '45': ['javascript'], '46': ['javascript'], '47': ['javascript'], '48': ['javascript'], '49': ['javascript', 'firebase'],
+  '50': ['node', 'javascript'], '51': ['typescript'], '52': ['typescript'], '53': ['typescript', 'vitest'],
+  '54': ['react', 'typescript'], '55': ['react'], '56': ['react'], '57': ['expo', 'apple'], '58': ['react'], '59': ['firebase', 'react'], '60': ['expo', 'android', 'apple'],
+  '61': ['kotlin'], '62': ['kotlin'], '63': ['kotlin'], '64': ['kotlin'], '65': ['kotlin'], '66': ['compose', 'kotlin', 'android'], '67': ['androide', 'firebase', 'gradle'],
   '36': ['python'], '37': ['python'], '38': ['python'], '39': ['python'], '40': ['python', 'markdown'],
   '41': ['python', 'bash'], '42': ['python'], '43': ['python', 'github'],
 };
@@ -99,7 +131,7 @@ export const ETAPAS = [
   {
     id: 'fundamentos', icono: '🧱', titulo: 'Fundamentos', logos: ['typescript', 'git', 'jest'],
     desc: 'Leer código, probarlo, guardarlo y entender sus errores. La base de todo.',
-    clases: ['01', '02', '03', '04', '05', '06', '07'],
+    clases: ['44', '01', '02', '03', '04', '05', '06', '07'],
   },
   {
     id: 'web', icono: '🌐', titulo: 'La web: HTML, CSS y JavaScript', logos: ['html', 'css', 'javascript'],
@@ -120,6 +152,21 @@ export const ETAPAS = [
     id: 'proyectos', icono: '🚀', titulo: 'Mis proyectos por dentro', logos: ['react', 'firebase', 'github'],
     desc: 'Todo lo anterior, aplicado a lo que yo construí.',
     clases: ['12', '13', '14', '18', '20', '21'],
+  },
+  {
+    id: 'javascript', curso: 'javascript', icono: '🟨', titulo: 'JavaScript + TypeScript', logos: ['javascript', 'typescript', 'node', 'vitest'],
+    desc: 'Un curso aparte, con su propio certificado: JavaScript de cero a completo, y después TypeScript.',
+    clases: ['45', '46', '47', '48', '49', '50', '51', '52', '53'],
+  },
+  {
+    id: 'reactnative', curso: 'reactnative', icono: '📱', titulo: 'React Native', logos: ['react', 'typescript', 'expo', 'firebase'],
+    desc: 'Un curso aparte, con su propio certificado: apps para iPhone y Android con un solo código, como Copiloto.',
+    clases: ['54', '55', '56', '57', '58', '59', '60'],
+  },
+  {
+    id: 'kotlin', curso: 'kotlin', icono: '🤖', titulo: 'Kotlin', logos: ['kotlin', 'compose', 'androide', 'gradle'],
+    desc: 'Un curso aparte, con su propio certificado: el lenguaje nativo de Android, hasta publicar una app.',
+    clases: ['61', '62', '63', '64', '65', '66', '67'],
   },
   {
     id: 'python', curso: 'python', icono: '🐍', titulo: 'Python', logos: ['python'],
@@ -149,6 +196,18 @@ export const CURSOS = {
   programacion: {
     id: 'programacion', titulo: 'Programación', icono: '💻', prefijo: 'ME', corto: 'Mapa de estudios',
     nombre: 'Mapa de estudios: programación, de los fundamentos a los agentes de IA',
+  },
+  javascript: {
+    id: 'javascript', titulo: 'JavaScript + TypeScript', icono: '🟨', prefijo: 'JS', corto: 'JavaScript + TypeScript',
+    nombre: 'JavaScript + TypeScript: de cero a un proyecto con pruebas',
+  },
+  reactnative: {
+    id: 'reactnative', titulo: 'React Native', icono: '📱', prefijo: 'RN', corto: 'React Native',
+    nombre: 'React Native: apps para iPhone y Android, de los componentes a publicar',
+  },
+  kotlin: {
+    id: 'kotlin', titulo: 'Kotlin', icono: '🤖', prefijo: 'KT', corto: 'Kotlin',
+    nombre: 'Kotlin: del lenguaje a una app Android con Jetpack Compose',
   },
   python: {
     id: 'python', titulo: 'Python', icono: '🐍', prefijo: 'PY', corto: 'Python',

@@ -430,6 +430,52 @@ elige :: ¿Qué haces para que una clase muestre su clase guiada primero? :: Nad
 
 > 🔁 **Repaso:** carpeta + `.md` → `CLASES` y `ETAPAS` en `cursos.js` → (opcional) `CLASE-GUIADA.md` + `GUIADAS` → README y PROGRESO → subir.
 
+## 11. Moverse entre muchos cursos: catálogo, rutas y menú en árbol
+
+> 🎙️ **El profesor:** un amigo te pregunta: *"con tantos cursos en Markdown y una SPA ligera, ¿cómo organizas las carpetas y las rutas para que moverse sea fácil y rápido? ¿Tienes categorías o un menú lateral en árbol?"*. Esta parte es tu respuesta. Tiene cuatro piezas.
+
+**1. El orden vive en un catálogo, no en las carpetas.** Las carpetas solo guardan el texto (`15-html/LECCION.md`). Qué cursos hay, qué etapas tiene cada uno y qué clases tiene cada etapa lo dice **un solo archivo**: `web/cursos.js` (`CURSOS`, `ETAPAS` y `CLASES`). Mover una clase de un curso a otro es cambiar una línea, sin mover archivos ni romper enlaces.
+
+```js
+export const CURSOS = { programacion: { titulo: 'Programación', icono: '💻', prefijo: 'ME', … }, python: { … } };
+export const ETAPAS = [{ id: 'web', titulo: 'La web: HTML, CSS y JavaScript', clases: ['15', '16', '17'] }, …];
+```
+
+**2. Cada pantalla tiene su dirección.** El enrutador (parte 3) creció con los cursos:
+
+| Dirección | Qué muestra |
+|---|---|
+| `#/curso/python` | El mapa de un solo curso |
+| `#/etapa/web` | Una etapa con sus clases |
+| `#/clase/15/0/3` | La parte 3 de la clase 15 |
+| `#/certificado/python` | El certificado de ese curso |
+| `#/laboratorio` | El laboratorio de CRUD |
+
+**3. Rápido porque carga solo lo que abres.** Una clase se descarga la primera vez que la abres y queda guardada en memoria (`leerArchivo`, parte 4); si vuelves, ya no se descarga. Firebase solo se carga si iniciaste sesión. Por eso la página sigue liviana aunque haya cientos de partes.
+
+**4. Varias formas de moverse, para distintos momentos:**
+- **El mapa de islas** (inicio → curso → etapa → clase): para ver el camino y motivarte.
+- **Las pestañas de cursos** en el inicio: para saltar directo al mapa de un curso.
+- **El menú ☰ en árbol** (`web/menu.js`): Curso → Etapas → Clases desde cualquier pantalla, con el avance de cada clase y la tuya marcada. Se arma cada vez que se abre, así siempre muestra el avance del momento.
+- **Las migas** (`mapa / 02 La web / 15 HTML`), el **buscador** (`/`) y los botones **anterior / siguiente / volver**.
+
+> 🌎 **En la vida real:** un supermercado grande: los carteles de pasillo (las pestañas), el plano en la entrada (el mapa) y el empleado que te dice "pasillo 7, segundo estante" (el menú en árbol). Las cajas pueden cambiar de lugar sin que cambies tu forma de buscar.
+
+> 🌎 **Otro ejemplo:** Como el índice de un libro grande más el marcador: el índice te deja saltar a cualquier capítulo y el marcador te devuelve a donde estabas.
+
+> 💡 **Idea:** el menú en árbol y el mapa de islas usan **los mismos datos** (`cursos.js`). Si agregas un curso, aparece solo en los dos.
+
+```practica
+vf :: En este sitio, el orden de los cursos depende de cómo se llamen las carpetas
+elige :: ¿Qué dirección abre solo el mapa del curso de Python? :: #/python :: #/curso/python :: #/clase/python
+elige :: ¿Por qué la página sigue rápida con tantos cursos? :: Porque descarga todo al empezar :: Porque cada clase se descarga solo cuando la abres y queda guardada en memoria :: Porque no tiene imágenes
+elige :: ¿Qué hace el menú ☰? :: Cambia el tema :: Muestra Curso → Etapas → Clases con el avance, desde cualquier pantalla :: Borra el progreso
+vf :: Si agregas un curso en cursos.js, aparece solo en el mapa y en el menú en árbol
+escribe :: Responde con tus palabras la pregunta del amigo: ¿cómo organizaste la navegación entre tantos cursos? :: El orden está en un catálogo (cursos.js), no en las carpetas; cada pantalla tiene su dirección (#/curso, #/etapa, #/clase) y una sola página la dibuja; las clases se descargan solo al abrirlas y quedan en memoria; y para moverse hay mapa de islas, pestañas de cursos, un menú en árbol, migas, buscador y botones de anterior y siguiente.
+```
+
+> 🔁 **Repaso:** catálogo (`cursos.js`) → direcciones (`#/curso/…`) → carga bajo demanda → mapa, pestañas, menú ☰, migas y buscador.
+
 ## Ejercicios
 
 > 🎙️ **El profesor:** después de desarmar el motor, el aprendiz lo vuelve a armar.

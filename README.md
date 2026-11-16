@@ -16,7 +16,7 @@ en una entrevista.
 
 ## Las clases, en orden
 
-Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14, 18, 20 y 21). Aparte, cada uno con su propio certificado: **Python** (36 a 43), **seguridad** (22 a 24), **IA para programadores** (30 a 35) y **agentes de IA** (19 y 25 a 29). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
+Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14, 18, 20 y 21). Aparte, cada uno con su propio certificado: **JavaScript + TypeScript** (45 a 53), **React Native** (54 a 60), **Kotlin** (61 a 67), **Python** (36 a 43), **seguridad** (22 a 24), **IA para programadores** (30 a 35) y **agentes de IA** (19 y 25 a 29). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
 explicación, los ejemplos, los ejercicios y las respuestas.
 
 | # | Clase | Qué voy a saber hacer al terminar |
@@ -44,6 +44,10 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 | 22 | [Seguridad básica](22-seguridad-basica/LECCION.md) | Ética y ley, pensar como atacante, contraseñas, secretos, phishing, el navegador y HTTPS (curso de seguridad) |
 | 23 | [Seguridad intermedia](23-seguridad-intermedia/LECCION.md) | OWASP Top 10: IDOR, inyección, XSS, sesiones, CSRF, dependencias y prompt injection (curso de seguridad) |
 | 24 | [Seguridad avanzada](24-seguridad-avanzada/LECCION.md) | Auditar un sistema entero, reglas de Firebase como atacante, abuso de costos, herramientas, reportes y tu camino (curso de seguridad) |
+| 44 | [El mapa de los lenguajes](44-mapa-de-los-lenguajes/LECCION.md) | La primera de Fundamentos: JavaScript, TypeScript, Node, React, React Native, Expo, Kotlin y Swift, con tus apps como ejemplo |
+| 45–53 | [JavaScript + TypeScript](45-js-variables-y-tipos/LECCION.md) | Curso aparte: variables, decisiones, funciones, arrays y objetos, asincronía, módulos, TypeScript I y II, y un proyecto con Vitest |
+| 54–60 | [React Native](54-rn-react-componentes/LECCION.md) | Curso aparte: componentes, estado, piezas y estilos, Expo, navegación, Firebase y rendimiento, publicar |
+| 61–67 | [Kotlin](61-kotlin-primeros-pasos/LECCION.md) | Curso aparte: el lenguaje, null safety, colecciones, clases, corrutinas, Jetpack Compose y publicar |
 | 36 | [Python: primeros pasos](36-python-primeros-pasos/LECCION.md) | Curso de Python: correrlo, variables, tipos, print e input |
 | 37 | [Decisiones y repeticiones](37-python-decisiones-y-repeticiones/LECCION.md) | La sangría, if, elif, else, for, range y while |
 | 38 | [Listas, tuplas, diccionarios y conjuntos](38-python-colecciones/LECCION.md) | Agrupar datos y las comprensiones |
@@ -64,9 +68,11 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 
 **Sin IA:** cada clase tiene su **`CLASE-GUIADA.md`**: la clase completa, como si un profesor la diera, con pausas de "✋ Para y piensa", prácticas de verdadero o falso, elegir y escribir (hay que acertar todas para prender el bombillo 💡 de la parte) y la simulación de entrevista. En el mapa (`index.html`) es la primera pestaña de cada clase. La `LECCION.md` queda como resumen. En la clase 19 (agentes) la lección misma es la clase completa, con los ejemplos en JavaScript y en Python.
 
+**Moverse entre cursos:** pestañas de cursos en el inicio, `#/curso/<id>` para el mapa de un curso, y el menú ☰ en árbol (Curso → Etapas → Clases) desde cualquier pantalla (`web/menu.js`).
+
 **Laboratorio de CRUD** (`#/laboratorio`): escribes en el navegador las funciones crear, leer, actualizar y borrar, y ves al lado los datos, la consola y 11 pruebas. El código corre en una caja aislada (iframe con sandbox), sin acceso al sitio ni a la cuenta.
 
-**Certificados verificables:** cada curso (programación, Python, seguridad, IA para programadores y agentes de IA) tiene el suyo. Hay que entrar con una cuenta de Gmail verificada (`#/entrar`): así cada bombillo queda en Firebase con la hora del servidor, y al completar todas las partes se emite el certificado con un código (`ME-…`, `PY-…`, `SE-…`, `IA-…` o `AG-…`) que cualquiera comprueba en `#/verificar/CÓDIGO`. Cómo funciona por dentro: clase 21 y `firebase/LEEME.md`. Lo emite el propio curso; no es un título oficial.
+**Certificados verificables:** cada curso (programación, JavaScript + TypeScript, React Native, Kotlin, Python, seguridad, IA para programadores y agentes de IA) tiene el suyo. Hay que entrar con una cuenta de Gmail verificada (`#/entrar`): así cada bombillo queda en Firebase con la hora del servidor, y al completar todas las partes se emite el certificado con un código (`ME-…`, `JS-…`, `RN-…`, `KT-…`, `PY-…`, `SE-…`, `IA-…` o `AG-…`) que cualquiera comprueba en `#/verificar/CÓDIGO`. Cómo funciona por dentro: clase 21 y `firebase/LEEME.md`. Lo emite el propio curso; no es un título oficial.
 
 **Con una IA:** sigue los pasos de abajo y [AGENTS.md](AGENTS.md).
 

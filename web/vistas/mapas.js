@@ -57,6 +57,12 @@ export function vistaInicio(soloCurso) {
     ${Object.values(CURSOS).map((c) => `<a class="pestana ${soloCurso === c.id ? 'activa' : ''}" href="#/curso/${c.id}">${c.icono} ${escapar(c.titulo)}</a>`).join('')}
   </nav>`;
 
+  // Un solo curso: sin la portada grande, directo a su mapa.
+  if (soloCurso) {
+    app.innerHTML = `<section class="cabeza"><p class="mono comentario">// curso</p></section>${pestanasCursos}${mapas}`;
+    activarMapas(app);
+    return;
+  }
   app.innerHTML = `
     <section class="portada cabeza-mapa"><div>
       <p class="mono comentario">// mi carrera de programación</p>

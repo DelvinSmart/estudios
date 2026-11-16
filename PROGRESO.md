@@ -13,6 +13,7 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 
 ## Mi avance
 
+- [ ] 44 El mapa de los lenguajes
 - [ ] 01 Leer código ← **voy aquí**
 - [ ] 02 Pruebas automáticas
 - [ ] 03 Mi primera prueba
@@ -33,6 +34,35 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 18 Cómo hice mi mapa de estudios
 - [ ] 20 Publicar e instalar
 - [ ] 21 El certificado verificable
+
+**Curso JavaScript + TypeScript** (certificado aparte)
+- [ ] 45 Variables, tipos y la consola
+- [ ] 46 Decisiones y ciclos
+- [ ] 47 Funciones
+- [ ] 48 Arrays y objetos
+- [ ] 49 Asincronía
+- [ ] 50 Módulos, npm y Node.js
+- [ ] 51 TypeScript: tipos e interfaces
+- [ ] 52 TypeScript: genéricos y configuración
+- [ ] 53 Un proyecto con pruebas
+
+**Curso React Native** (certificado aparte)
+- [ ] 54 React: componentes y props
+- [ ] 55 Estado, eventos y efectos
+- [ ] 56 Las piezas del teléfono y los estilos
+- [ ] 57 Expo: crear la app y verla en el iPhone
+- [ ] 58 Navegación y guardar en el teléfono
+- [ ] 59 Datos con Firebase y rendimiento
+- [ ] 60 Probar y publicar la app
+
+**Curso Kotlin** (certificado aparte)
+- [ ] 61 Primeros pasos
+- [ ] 62 Null safety, decisiones y ciclos
+- [ ] 63 Funciones, lambdas y colecciones
+- [ ] 64 Clases, data class, enum y sealed
+- [ ] 65 Corrutinas
+- [ ] 66 Tu primera app Android con Compose
+- [ ] 67 Datos, pruebas y publicar
 
 **Curso de Python** (certificado aparte)
 - [ ] 36 Primeros pasos
