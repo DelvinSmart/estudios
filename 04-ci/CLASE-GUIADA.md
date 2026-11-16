@@ -10,6 +10,10 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🎙️ **El profesor:** Delvin, en los Temas 02 y 03 **tú** corrías las pruebas a mano. Pero ¿qué pasa el día que tienes prisa, o que te olvidas? Hoy vamos a ver al "empleado" que las corre **solo**, cada vez que subes algo, sin que se lo pidas: el **CI**.
 
+> 🌎 **En la vida real:** Es como un vigilante nocturno de un edificio: hace su ronda solo, todas las noches, aunque el dueño esté durmiendo o de viaje.
+
+> 🌎 **Otro ejemplo:** Es como el corrector automático de un examen con tarjeta de respuestas: cada examen que entra se corrige igual, sin cansarse y sin favoritos.
+
 ### La definición
 
 **CI** viene del inglés *Continuous Integration*: **Integración Continua**. Es **una máquina en internet que revisa tu código sola cada vez que lo subes**.
@@ -25,6 +29,8 @@ Así funciona, paso a paso:
 "**Computadora limpia**" quiere decir que arranca de cero cada vez: no tiene nada de lo que tú tengas instalado en tu Mac, ni recuerda la subida anterior.
 
 > 🌎 **En la vida real:** el control de equipaje del aeropuerto. Cada maleta (cada `git push`) pasa por los rayos X, **siempre**, sin excepción. Al guardia no le importa si tienes prisa o si "es solo una maleta chiquita". Si encuentra algo prohibido, la maleta no sube al avión.
+
+> 🌎 **Otro ejemplo:** Como el lavadero automático de carros: entras, y el carro pasa siempre por las mismas etapas (jabón, cepillo, enjuague, secado), sin que tengas que pedir cada una.
 
 > ✋ **Para y piensa:** ¿qué tienes que hacer tú para que el CI corra?
 
@@ -49,6 +55,8 @@ vf :: Si una revisión falla, el CI me avisa
 
 > 🎙️ **El profesor:** "si yo ya corro las pruebas en mi Mac, ¿para qué otra máquina?" Buena pregunta. Te doy cinco razones y una historia real de tu app.
 
+> 🌎 **Otro ejemplo:** Como un auditor externo que revisa las cuentas de tu negocio: no se olvida, no conoce tus atajos, avisa rápido, deja un informe guardado y te da tranquilidad.
+
 | Para qué | Qué significa en tu app | 🌎 En la vida real |
 |---|---|---|
 | **Nadie se olvida** | Aunque tengas prisa, la máquina corre las 400 pruebas igual | El lavaplatos: aunque estés cansado, lava todo |
@@ -62,6 +70,8 @@ vf :: Si una revisión falla, el CI me avisa
 En tu app, la copia limpia del CI **encontró un fallo que en tu Mac no se veía**. ¿Cómo puede ser? Tu Mac tenía cosas instaladas de antes que, sin que nadie lo supiera, **tapaban** el problema. En la máquina limpia, sin esas cosas, el fallo apareció.
 
 > 🌎 **En la vida real:** en tu casa la receta sale bien porque tenías un condimento guardado que ni recordabas. En la cocina de tu amigo descubres que **la receta no lo menciona**: sin él, sale mal.
+
+> 🌎 **Otro ejemplo:** Como un remedio que te sirve solo porque en tu casa tomas también otro sin darte cuenta: en otra casa, sin ese otro, no funciona. La máquina limpia descubre esas dependencias escondidas.
 
 > ✋ **Para y piensa:** si otra persona descarga tu código en su computadora, ¿a quién se parece más su computadora: a tu Mac o a la del CI?
 
@@ -105,6 +115,10 @@ escribe :: Nombra los tres límites del CI. :: No prueba en un teléfono real, n
 
 > 🎙️ **El profesor:** el CI no es magia: es **un archivo de texto** dentro de tu proyecto. Vamos a ver dónde está y en qué formato se escribe.
 
+> 🌎 **En la vida real:** Es como la caja de instrucciones de un electrodoméstico: siempre está en el mismo lugar (adentro de la tapa), para que cualquiera la encuentre.
+
+> 🌎 **Otro ejemplo:** Es como el horario de turnos pegado en la sala de empleados: no está en la cabeza de nadie, está escrito en un lugar fijo que todos consultan.
+
 En tu app vive en el archivo **`.github/workflows/ci.yml`**.
 
 - **`.github/workflows/`** es la carpeta donde GitHub **siempre** busca las instrucciones. El punto al principio de `.github` hace que sea una carpeta "oculta" en la Mac (en VS Code sí se ve).
@@ -128,6 +142,8 @@ Se lee: hay un `carro`; **dentro** del carro (porque está corrido hacia adentro
 
 > 🌎 **En la vida real:** la sangría del YAML es como el índice de un libro: "Capítulo 1" y, más metido hacia adentro, "1.1", "1.2". Lo que está más adentro pertenece a lo de arriba.
 
+> 🌎 **Otro ejemplo:** Como la lista de una mudanza con sangría: "Cocina" y, corridos hacia adentro, "platos, ollas, vasos". Lo de adentro pertenece a la cocina.
+
 > ⚠️ **Cuidado:** en YAML un espacio de más o de menos **cambia el significado** (o rompe el archivo). Por eso se usan siempre 2 espacios por nivel.
 
 ```practica
@@ -143,6 +159,8 @@ vf :: En YAML da igual poner un espacio de más
 ## 5. Las palabras del archivo
 
 > 🎙️ **El profesor:** un archivo de CI usa siempre las mismas ocho palabras. Apréndelas con una sola imagen: **la cocina de un restaurante**.
+
+> 🌎 **Otro ejemplo:** En un taller de carros: `on` es "cuando llega un carro"; los `jobs` son los mecánicos trabajando a la vez; los `steps` son los pasos de cada uno; `uses` es una herramienta comprada hecha; y `run` es una orden directa: "cambia el filtro".
 
 | Palabra | Significado | 🌎 En el restaurante |
 |---|---|---|
@@ -182,7 +200,15 @@ elige :: `runs-on: ubuntu-latest` quiere decir… :: Que corre en un iPhone :: Q
 
 > 🎙️ **El profesor:** ahora leemos el archivo **real** de tu app, como hicimos con las funciones en el Tema 01. Es el más largo de la clase: tómate tu tiempo.
 
+> 🌎 **En la vida real:** Leer el archivo real es como leer el reglamento interno de tu propia empresa: ya conoces las palabras, ahora ves las reglas de verdad.
+
+> 🌎 **Otro ejemplo:** Es como leer la factura detallada de un taller: cada renglón es un trabajo que se hizo, con su nombre.
+
 ### El comienzo
+
+> 🌎 **En la vida real:** Como el cartel de horario de una tienda: "abre cada vez que llega un cliente (push) y cuando alguien pide una cotización (pull request)".
+
+> 🌎 **Otro ejemplo:** Como el timbre de una casa con dos botones: uno para visitas (push) y otro para el cartero (pull request). Los dos hacen sonar el mismo timbre.
 
 ```yaml
 name: CI
@@ -210,6 +236,8 @@ Hoy (noviembre de 2026) el CI de tu app tiene **6 trabajos** que corren **al mis
 | 6 | `webapp` | La web del usuario: que se pueda armar y que pasen sus pruebas |
 
 > 🌎 **En la vida real:** en un taller grande, 6 mecánicos revisan tu carro **a la vez**: motor, frenos, luces, electricidad, carrocería y el GPS. Así tarda 4 minutos y no 20.
+
+> 🌎 **Otro ejemplo:** Como una carrera de postas donde todos corren a la vez en carriles distintos: la carrera termina cuando llega el último, no la suma de todos.
 
 > 📌 **Nota:** antes eran 5; el trabajo `webapp` se agregó cuando se hizo la web (Tema 13). Así crece un CI: cada parte nueva trae su revisión.
 
@@ -254,6 +282,10 @@ Después, las revisiones, en orden:
 
 ### Trabajo 2: `carton-android`
 
+> 🌎 **En la vida real:** Es como el técnico especialista en una marca extranjera: necesita sus propias herramientas (Java) y armar su banco de trabajo (`prebuild`) antes de revisar.
+
+> 🌎 **Otro ejemplo:** Es como revisar el GPS de un auto importado: hace falta el programa de esa marca para conectarse y leerlo.
+
 ```yaml
       - uses: actions/setup-java@v4
         with:
@@ -272,6 +304,10 @@ Después, las revisiones, en orden:
 - `./gradlew` es la herramienta que arma proyectos Android; `testDebugUnitTest` corre las pruebas del cartón.
 
 ### Trabajo 3: `functions`
+
+> 🌎 **En la vida real:** Es como revisar la oficina central de un banco, no las sucursales: es otro edificio (la carpeta `functions`), con sus propias revisiones.
+
+> 🌎 **Otro ejemplo:** Es como el inspector que se queda en la cocina del restaurante: no revisa el salón, solo la cocina.
 
 ```yaml
     defaults:
@@ -293,7 +329,13 @@ Después, las revisiones, en orden:
 
 > 🌎 **En la vida real:** el cerrajero prueba en una **maqueta** del edificio si se puede abrir la puerta del vecino. Si la cerradura lo impide, la prueba pasa. Nadie toca a los inquilinos de verdad.
 
+> 🌎 **Otro ejemplo:** Como un ladrón contratado (con permiso) que intenta abrir las cajas fuertes de un banco de prueba: si no puede, las cerraduras sirven.
+
 ### Trabajo 5: `panel`
+
+> 🌎 **En la vida real:** Es como armar la vidriera de una tienda antes de abrir: si falta una pieza, mejor enterarse hoy que el día de la inauguración.
+
+> 🌎 **Otro ejemplo:** Es como probar que un mueble se puede armar con las piezas de la caja, antes de llevarlo a casa del cliente.
 
 ```yaml
       - run: npm ci
@@ -304,6 +346,10 @@ Después, las revisiones, en orden:
 Arma el panel web. Si no se puede armar, no se podría publicar.
 
 ### Trabajo 6: `webapp`
+
+> 🌎 **En la vida real:** Es como revisar la segunda sucursal de un restaurante: usa la misma cocina central, así que se revisan las dos cosas, la sucursal y lo que comparte.
+
+> 🌎 **Otro ejemplo:** Es como probar un control remoto universal: tiene que funcionar con tu televisor (la app) y con el de la sala (la web).
 
 ```yaml
       - run: npm ci
@@ -364,6 +410,8 @@ gh run list --limit 5
 
 > 🌎 **En la vida real:** la pestaña Actions es el semáforo del lavadero de carros. `gh run list` es llamar por teléfono al lavadero para preguntar "¿cómo van los últimos 5?".
 
+> 🌎 **Otro ejemplo:** Como el historial de pedidos de una app de delivery: cada pedido con su estado (en camino, entregado, cancelado), y entras a uno para ver el detalle.
+
 ```practica
 elige :: ¿En qué pestaña de GitHub ves el CI? :: Code :: Actions :: Settings
 elige :: Una corrida en amarillo 🟡 quiere decir… :: Que falló :: Que todavía está corriendo :: Que pasó
@@ -401,6 +449,8 @@ jobs:
 6. **Agrega revisiones de a una.** Cada vez que encuentres un error que se repite, crea una revisión para que no vuelva. **Así nacieron el candado de diseño y el de ciclos** en tu app.
 
 > 🌎 **En la vida real:** el reglamento de un gimnasio nuevo: empiezas con una regla ("todos firman al entrar") y, cada vez que se repite un problema ("dejan las pesas tiradas"), agregas otra.
+
+> 🌎 **Otro ejemplo:** Como armar las reglas de una casa con hijos adolescentes: empiezas con una ("avisar si llegas tarde") y agregas otra cada vez que pasa algo que no quieres que se repita.
 
 > ✋ **Para y piensa:** lee el CI mínimo de arriba y di en voz alta qué hace, línea por línea.
 
@@ -443,6 +493,8 @@ Si todo está bien, escribe "✔ Tamaño: ningún archivo pasa de 1000 líneas" 
 
 > 🌎 **En la vida real:** el guardia que solo mira la luz del detector de metales: **verde o roja**. No sabe qué llevas en el bolsillo, solo si sonó.
 
+> 🌎 **Otro ejemplo:** Como un semáforo: no sabe nada del tránsito ni de los conductores; solo muestra verde o rojo según la señal que recibe.
+
 ```practica
 elige :: ¿Qué código de salida significa "todo bien"? :: 1 :: 0 :: 200
 vf :: El CI entiende qué es un color mal puesto
@@ -455,6 +507,8 @@ escribe :: Explica con tus palabras cómo "piensa" el CI. :: Solo mira el códig
 ## Ejercicios
 
 > 🎙️ **El profesor:** a la práctica. Si tienes la app, hazlos en la computadora. Si no, igual puedes responder 4, 5 y 6.
+
+> 🌎 **En la vida real:** Es como recorrer la fábrica con el jefe y explicar con tus palabras qué hace cada máquina.
 
 1. Abre `.github/workflows/ci.yml` en tu app y busca los 6 trabajos. Escribe con tus palabras qué hace cada uno.
 2. Entra a la pestaña **Actions** y abre la última subida. ¿Cuánto tardó? ¿Cuál fue el trabajo más lento?

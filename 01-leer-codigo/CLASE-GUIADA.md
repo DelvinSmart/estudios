@@ -12,11 +12,17 @@ Esta es la clase **como si yo te la estuviera dando**, para que la puedas estudi
 
 > 🎙️ **El profesor:** Delvin, empecemos por lo más básico de todo: ¿qué es el código? El código es **una lista de órdenes escritas para una computadora**. La computadora es muy obediente pero nada inteligente: hace **exactamente** lo que dice el texto, ni más ni menos. Por eso el código se escribe con reglas muy estrictas, como un formulario oficial.
 
+> 🌎 **En la vida real:** Escribir código es como dejarle una nota a alguien muy obediente pero que no piensa: si dice "compra 2 panes", compra 2, aunque la panadería esté cerrada. Por eso las órdenes tienen que ser exactas.
+
+> 🌎 **Otro ejemplo:** Es como el GPS: hace exactamente lo que le programaron. Si la dirección está mal escrita, te lleva tranquilo al lugar equivocado, sin dudar.
+
 ### Qué es un lenguaje de programación
 
 Igual que las personas hablan español o portugués, las computadoras se programan en **lenguajes**: JavaScript, Python, Java, Kotlin… Cada uno tiene sus palabras y sus reglas. Tu app, **Copiloto Driver**, está escrita en **TypeScript**.
 
 > 🌎 **En la vida real:** el español y el portugués se parecen mucho: si sabes uno, lees bastante del otro. Con los lenguajes de programación pasa lo mismo. Si aprendes a leer TypeScript, después vas a entender gran parte de JavaScript, Java o Kotlin.
+
+> 🌎 **Otro ejemplo:** Los lenguajes son como las marcas de carro: Toyota, Fiat o Chevrolet tienen volante, pedales y cambios. Si manejas uno, en pocos minutos manejas otro; solo cambia dónde está cada botón.
 
 ### JavaScript y TypeScript: la diferencia
 
@@ -28,7 +34,13 @@ Con TypeScript, ese error aparece **antes**, cuando el programador escribe el c�
 
 > 🌎 **En la vida real:** un formulario del banco con casillas marcadas: "Fecha (solo números)", "Nombre (solo letras)". Si escribes tu nombre en la casilla de la fecha, el empleado te lo devuelve **antes** de procesarlo. JavaScript es un formulario sin esas marcas: acepta cualquier cosa y el problema aparece después. TypeScript es el formulario con las marcas.
 
+> 🌎 **Otro ejemplo:** Es como cargar combustible: JavaScript es la bomba que te deja meter diésel en un carro a gasolina, y te enteras cuando el motor falla en la calle. TypeScript es la boquilla que no entra en el tanque equivocado.
+
 ### Cómo se lee una línea con tipo
+
+> 🌎 **En la vida real:** Es como etiquetar frascos en la cocina: "crea un frasco llamado azúcar, solo para cosas dulces, y llénalo con 1 kilo". El nombre es el frasco, el tipo es lo que se permite meter, y el `=` es llenarlo.
+
+> 🌎 **Otro ejemplo:** Es como anotar en la libreta del carro: "kilometraje (número) = 45.000". Tiene nombre, dice qué clase de dato es y guarda el valor.
 
 Mira esta línea con calma. Vamos pieza por pieza:
 
@@ -71,6 +83,8 @@ Fíjate en tres detalles que confunden al principio:
 3. **`string | null`** se lee **"texto o nada"**. La barra `|` significa **"o"**.
 
 > 🌎 **En la vida real:** `null` es dejar una casilla vacía **a propósito**, como poner "—" en "segundo apellido" cuando no tienes. No es un error: es la respuesta "no hay".
+
+> 🌎 **Otro ejemplo:** En la planilla de un viaje: el pasajero es `string` ("Juan"), el valor es `number` (18,50), "¿pagó con tarjeta?" es `boolean` (sí o no) y la propina, si no hubo, es `null` (nada, a propósito).
 
 > ✋ **Para y piensa:** ¿de qué tipo es cada uno? `'Uber'`, `3.5`, `false`, `'false'`.
 
@@ -118,6 +132,10 @@ elige :: ¿Qué es TypeScript? :: Un lenguaje distinto que no tiene nada que ver
 
 > 🎙️ **El profesor:** ahora te voy a contar un secreto que tranquiliza mucho: **casi todo el código del mundo se arma con las mismas cinco piezas**. Una app gigante como Uber y tu función más chica usan las mismas cinco. Si las reconoces, puedes empezar a leer cualquier archivo.
 
+> 🌎 **En la vida real:** Con un juego de Lego armas una casa, un avión o un barco, pero las piezas siempre son las mismas. El código es igual: millones de programas distintos, hechos con las mismas cinco piezas.
+
+> 🌎 **Otro ejemplo:** Las cinco piezas son como las notas musicales: con solo siete notas se escribieron todas las canciones del mundo.
+
 Las vamos a ver una por una, siempre con la misma pregunta: **¿para qué sirve?**
 
 ### Pieza 1: la constante
@@ -131,6 +149,8 @@ Una **constante** es una caja con nombre **cuyo contenido no cambia nunca**. Se 
 Por costumbre, las constantes de "reglas" se escriben **EN_MAYÚSCULAS_CON_GUIONES**, para que se vean de lejos.
 
 > 🌎 **En la vida real:** la etiqueta del frasco que dice "Sal". El frasco siempre se llama igual, y lo encuentras por su nombre. No lo vas a cambiar por "Azúcar" a mitad de la receta.
+
+> 🌎 **Otro ejemplo:** El número de tu cédula: se da una vez y no cambia nunca. Todos los papeles lo usan por su nombre, "cédula", sin volver a preguntártelo.
 
 ### Pieza 2: la función
 
@@ -158,6 +178,8 @@ Leámosla pieza por pieza:
 
 > 🌎 **En la vida real:** la licuadora. Le pones frutas (lo que recibe), aprietas el botón y te da un jugo (lo que devuelve). Siempre hace el mismo trabajo, y la usas todos los días sin volver a armarla.
 
+> 🌎 **Otro ejemplo:** Una máquina de café: le das una cápsula y agua, aprietas el botón y te devuelve un café. Siempre el mismo trabajo, cada vez que la usas.
+
 ### Pieza 3: el `if` (la decisión)
 
 ```ts
@@ -172,6 +194,8 @@ Leída: **"si los litros son más que cero, guarda la carga"**.
 
 > 🌎 **En la vida real:** "**si** el agua está hirviendo, **entonces** echo la pasta". Si no está hirviendo, espero. Cada `if` es una regla de decisión.
 
+> 🌎 **Otro ejemplo:** El semáforo: **si** está en rojo, frenas; **si no**, sigues. Cada `if` es una decisión de ese tipo.
+
 ### Pieza 4: la lista (array)
 
 ```ts
@@ -181,6 +205,8 @@ const apps = ['Uber', '99', 'inDrive'];
 Una **lista** guarda **varios valores en orden**, entre corchetes `[ ]`, separados por comas. A cada uno se llega por su **posición**, que empieza en **cero**: `apps[0]` es `'Uber'`, `apps[1]` es `'99'`.
 
 > 🌎 **En la vida real:** la lista del supermercado: arroz, frijoles, café. Varias cosas, en orden.
+
+> 🌎 **Otro ejemplo:** La fila de un banco: varias personas en orden, y cada una tiene su turno: la primera es la 0, la segunda la 1.
 
 ### Pieza 5: el objeto
 
@@ -194,7 +220,13 @@ Un **objeto** guarda **varios datos de una misma cosa**, cada uno con su nombre.
 
 > 🌎 **En la vida real:** la ficha de tu carro en el taller: marca Toyota, modelo Etios, año 2017, color plata. Muchos datos, todos del mismo carro, cada uno con su nombre.
 
+> 🌎 **Otro ejemplo:** Tu perfil en una app: nombre, foto, ciudad, teléfono. Varios datos, todos de la misma persona, cada uno con su etiqueta.
+
 ### Las cinco juntas
+
+> 🌎 **En la vida real:** Es como una cocina: la etiqueta del frasco (constante), la licuadora (función), "si hierve, echo la pasta" (if), la lista de compras (lista) y la ficha de la receta (objeto). Con eso se cocina casi todo.
+
+> 🌎 **Otro ejemplo:** En tu trabajo de conductor: la tarifa mínima (constante), el cálculo del valor del viaje (función), "si es de noche, cobra más" (if), los viajes del día (lista) y cada viaje con su origen, destino y valor (objeto).
 
 | Pieza | Para qué | Cómo se reconoce |
 |---|---|---|
@@ -248,6 +280,10 @@ vf :: `carro.modelo` lee el dato `modelo` del objeto `carro`
 
 > 🎙️ **El profesor:** basta de ejemplos inventados. Ahora vamos a leer **código real de tu app**, el que corre hoy en los teléfonos. No te asustes si al principio se ve raro: vamos a ir línea por línea, y al final lo vas a poder explicar tú.
 
+> 🌎 **En la vida real:** Es como el formulario para inscribir a un niño en la escuela: alguien tiene que revisar que el nombre esté bien escrito y que entre en la casilla antes de imprimir la credencial.
+
+> 🌎 **Otro ejemplo:** Es como el nombre que pones en el WhatsApp del negocio: si es demasiado largo, aparece cortado con "…". Por eso conviene un límite.
+
 ### El problema que resuelve
 
 En Copiloto Driver hay una plataforma llamada **"Mi empresa"**, para quien trabaja para su propia empresa. El conductor puede cambiarle el nombre (por ejemplo, a "Thermomac"). Pero ese nombre aparece en botones y tarjetas chicas, así que no puede ser cualquier cosa: tiene que ser **corto**. Alguien tiene que **revisar y limpiar** lo que el conductor escribe.
@@ -270,6 +306,8 @@ export function normalizeMyCompanyName(text: string): string | null {
 
 > 🌎 **En la vida real:** el empleado de una imprenta que hace letreros para camionetas. Tú le dices el nombre, y él: sacude el polvo (quita espacios de más), revisa que entre en el letrero (máximo 24 letras y 2 palabras) y, si todo está bien, lo imprime. Si no entra, te dice "no cabe".
 
+> 🌎 **Otro ejemplo:** Como el cartel de un taxi con el nombre de la empresa: si escribes "Transportes Rodríguez e Hijos del Sur Limitada", no entra en la puerta del carro.
+
 ### Las dos reglas de arriba
 
 ```ts
@@ -283,7 +321,13 @@ export const MY_COMPANY_NAME_MAX_LENGTH = 24;
 
 > 🌎 **En la vida real:** la regla pegada en la pared de la imprenta: "máximo 2 palabras". Si el dueño cambia de idea, cambia **el cartel**, no le explica la regla a cada empleado por separado.
 
+> 🌎 **Otro ejemplo:** Es como el límite de equipaje de la aerolínea: está escrito una vez en el reglamento (23 kg), y todos los empleados lo leen de ahí. Si cambia a 25, se cambia en el reglamento.
+
 ### El comentario
+
+> 🌎 **En la vida real:** Es como la etiqueta pegada en una caja de mudanza: "platos, frágil". No es la mercadería, pero te dice qué hay adentro sin abrirla.
+
+> 🌎 **Otro ejemplo:** Es como la nota que deja un mecánico en el capó: "cambié el aceite, revisar en 5.000 km". El carro no la lee; la lee la próxima persona.
 
 ```ts
 /** Limpa o nome digitado; `null` = inválido (vazio volta ao nome padrão). */
@@ -292,6 +336,10 @@ export const MY_COMPANY_NAME_MAX_LENGTH = 24;
 Todo lo que está entre `/**` y `*/` es un **comentario**: la computadora lo ignora. Está en portugués porque el código de tu app tiene sus comentarios en portugués. Dice: *"Limpia el nombre escrito; `null` = inválido (vacío vuelve al nombre por defecto)"*. **Siempre lee el comentario primero**: te cuenta en una línea para qué existe la función.
 
 ### La firma de la función
+
+> 🌎 **En la vida real:** Es como la portada de un formulario: "Solicitud de licencia. Entregue: su documento. Recibirá: la licencia o una carta de rechazo". Con solo leer la portada sabes qué hace la oficina.
+
+> 🌎 **Otro ejemplo:** Es como el menú de un restaurante: "Hamburguesa: lleva pan y carne, sale con papas". Sabes qué entra y qué sale sin entrar a la cocina.
 
 ```ts
 export function normalizeMyCompanyName(text: string): string | null {
@@ -332,7 +380,13 @@ Veamos qué le pasa a un texto, paso a paso (uso `·` para mostrar cada espacio)
 
 > 🌎 **En la vida real:** sacudir el polvo antes de empezar: el empleado de la imprenta no imprime los espacios que se te escaparon con el pulgar.
 
+> 🌎 **Otro ejemplo:** Como limpiar un texto que copiaste de WhatsApp con espacios de más: dejas un espacio entre palabras y borras los de las puntas.
+
 ### Línea 2: ¿escribió algo?
+
+> 🌎 **En la vida real:** Como el cajero que te dice "no escribió ningún monto, vuelva al inicio": si no hay nada, no sigue con el trámite.
+
+> 🌎 **Otro ejemplo:** Como dejar en blanco el apodo de tu perfil: la app vuelve a mostrar tu nombre normal.
 
 ```ts
 if (!clean) return '';
@@ -346,6 +400,10 @@ if (!clean) return '';
 
 ### Línea 3: ¿es demasiado largo?
 
+> 🌎 **En la vida real:** Como el límite de caracteres de una placa de carro: si no entra en la placa, no se puede fabricar.
+
+> 🌎 **Otro ejemplo:** Como un SMS antiguo: más de 160 letras no entraban en un solo mensaje.
+
 ```ts
 if (clean.length > MY_COMPANY_NAME_MAX_LENGTH) return null;
 ```
@@ -355,6 +413,10 @@ if (clean.length > MY_COMPANY_NAME_MAX_LENGTH) return null;
 - Se lee: **"si tiene más de 24 caracteres, devuelve `null`"** (no sirve) y termina.
 
 ### Línea 4: ¿son demasiadas palabras?
+
+> 🌎 **En la vida real:** Como el cartel de un local que solo tiene lugar para dos palabras grandes: "Pizza Rápida" entra; "Pizzería La Rápida del Centro" no.
+
+> 🌎 **Otro ejemplo:** Como cortar un pan en rebanadas para contar cuántas hay: `split` corta el nombre en palabras y `length` las cuenta.
 
 ```ts
 if (clean.split(' ').length > MY_COMPANY_NAME_MAX_WORDS) return null;
@@ -369,6 +431,10 @@ if (clean.split(' ').length > MY_COMPANY_NAME_MAX_WORDS) return null;
 
 ### Línea 5: todo bien
 
+> 🌎 **En la vida real:** Como el guardia que, después de revisar el documento, la mochila y la entrada, te dice "puede pasar".
+
+> 🌎 **Otro ejemplo:** Como un control de calidad: si el producto pasó todos los controles, sale a la venta tal como está.
+
 ```ts
 return clean;
 ```
@@ -376,6 +442,10 @@ return clean;
 Si llegó hasta aquí, pasó todos los controles. Devuelve **el nombre limpio**.
 
 ### La función entera, como un colador
+
+> 🌎 **En la vida real:** Un colador de café con varias mallas: el agua pasa por la primera, la segunda y la tercera, y lo que se traba en una malla ya no sigue.
+
+> 🌎 **Otro ejemplo:** La revisión técnica del carro por estaciones: luces, frenos y emisiones. Si falla en frenos, no sigue a emisiones: sale con el rechazo.
 
 Piensa en la función como **un colador de tres filtros**. Cada `if` es un filtro; si el nombre se traba en uno, sale por ahí y no sigue:
 
@@ -435,6 +505,10 @@ vf :: Si quiero permitir 3 palabras, tengo que cambiar el `2` en el `if`
 
 > 🎙️ **El profesor:** ahora una función cortita, de una sola línea… pero que decide **cómo se cuenta el dinero en toda tu app**. Es un buen ejemplo de que en programación lo corto puede ser lo más importante.
 
+> 🌎 **En la vida real:** Como la diferencia entre el saldo de tu cuenta del banco (ya incluye todo lo anterior) y los depósitos sueltos que haces (cada uno se suma).
+
+> 🌎 **Otro ejemplo:** Como el marcador de un partido: si a los 30 minutos dice 2-0 y al final 3-0, el resultado es 3-0, no 5-0. El marcador ya acumula.
+
 ### El problema que resuelve
 
 En Copiloto, cada plataforma registra lo ganado de una de dos formas:
@@ -454,11 +528,21 @@ export function isImmutableEarningPlatform(appId: string): boolean {
 
 > 🌎 **En la vida real:** el cuentakilómetros y la alcancía. El **cuentakilómetros** (Uber) ya muestra todo lo acumulado: no se suman las lecturas. La **alcancía** (Extras) junta monedas sueltas: cada una se suma a las anteriores.
 
+> 🌎 **Otro ejemplo:** Como la pantalla de la bomba de gasolina: el número que ves ya es el total cargado hasta ahora; no sumas cada vistazo.
+
 ### El comentario
+
+> 🌎 **En la vida real:** Como el instructivo pegado en la tapa de una caja de herramientas: te cuenta en una línea para qué sirve todo lo de adentro.
+
+> 🌎 **Otro ejemplo:** Como el título de un video: "Cómo cambiar una llanta". Antes de verlo, ya sabes de qué trata.
 
 Dice, en portugués: *"Cada registro es independiente (nunca 'total del día'): Mi empresa, Viajes particulares y Extras. Las demás plataformas acumulan."* Otra vez: el comentario ya te contó toda la historia.
 
 ### La firma
+
+> 🌎 **En la vida real:** Como una pregunta de sí o no en un formulario: "¿Es extranjero? ☐ Sí ☐ No". Entra un dato, sale sí o no.
+
+> 🌎 **Otro ejemplo:** Como el portero que solo responde "pasa" o "no pasa". No da explicaciones largas: devuelve un `boolean`.
 
 - **Nombre:** `isImmutableEarningPlatform` = "¿es una plataforma de ingresos *inmutables*?". *Inmutable* = que no cambia: cada registro queda tal cual, no se "pisa" con el total siguiente.
 - **Recibe:** `appId: string` → el **identificador** de la plataforma, un texto corto como `'uber'` o `'extras'`.
@@ -485,7 +569,13 @@ Leída entera: **"devuelve sí si el id es `'extras'`, o si es `'particular_trip
 
 > 🌎 **En la vida real:** `===` es comparar dos llaves para ver si son **exactamente** iguales. `||` es el cartel de la tienda que dice "aceptamos efectivo **o** tarjeta **o** Pix": con que se cumpla una, alcanza.
 
+> 🌎 **Otro ejemplo:** Como el control de un evento con lista VIP: "si te llamas Ana, **o** Pedro, **o** Lucía, pasas". Con estar en uno de los tres nombres, alcanza.
+
 ### Probándola a mano
+
+> 🌎 **En la vida real:** Como probar las llaves de un llavero en una puerta: una por una, hasta que una abre (o ninguna).
+
+> 🌎 **Otro ejemplo:** Como verificar un pedido con la lista en la mano: "¿esto es Extras? No. ¿Viajes particulares? No. ¿Mi empresa? No" → entonces es acumulativa.
 
 | Le pasas | `=== 'extras'` | `=== 'particular_trips'` | `=== 'my_company'` | Devuelve |
 |---|---|---|---|---|
@@ -496,6 +586,10 @@ Leída entera: **"devuelve sí si el id es `'extras'`, o si es `'particular_trip
 > 💡 **Idea:** fíjate en la fila de `'extras'`: apenas la primera comparación da sí, `||` ya sabe que la respuesta es `true` y **no mira las demás**. Con "o", una sola alcanza.
 
 ### Por qué una línea tan chica es tan importante
+
+> 🌎 **En la vida real:** Como el tornillo de la rueda del carro: es una pieza chiquita, pero si se suelta, se va la rueda entera.
+
+> 🌎 **Otro ejemplo:** Como un decimal mal puesto en un cheque: un solo punto convierte 100 en 10.000.
 
 Todos los totales de ganancias de la app dependen de esta respuesta. Si alguien la cambia por error, **todas** las ganancias de Extras se calcularían mal. Por eso esta función tiene **pruebas automáticas** que revisan que siga respondiendo bien (eso lo ves en el Tema 02).
 
@@ -541,6 +635,10 @@ vf :: Una función de una sola línea no puede ser importante
 
 > 🎙️ **El profesor:** ya leíste dos funciones reales. Ahora te doy **el método**, para que puedas leer cualquier otra tú solo. Y una tranquilidad: ni los programadores con 20 años de experiencia entienden cada símbolo de un archivo nuevo a la primera. Lo que hacen es seguir un orden.
 
+> 🌎 **En la vida real:** Leer código nuevo es como llegar a una ciudad desconocida: primero miras el mapa general y los letreros grandes; las calles chicas las aprendes después.
+
+> 🌎 **Otro ejemplo:** Es como leer un contrato largo: primero el título y de qué trata, después qué das y qué recibes, y después las condiciones ("si pasa esto, entonces…").
+
 ### Los cuatro pasos
 
 1. **Lee el comentario de arriba** (`/** … */`). Te dice **para qué existe**. Muchas veces con eso ya sabes el 70%.
@@ -550,7 +648,13 @@ vf :: Una función de una sola línea no puede ser importante
 
 > 🌎 **En la vida real:** un electrodoméstico nuevo. No lees el manual entero: miras la caja ("licuadora de 3 velocidades"), ves qué entra y qué sale (fruta → jugo), lees las advertencias ("si la tapa no está, no arranca"), y no necesitas entender cada tornillo para usarla.
 
+> 🌎 **Otro ejemplo:** Como armar un mueble nuevo: miras la foto de la caja, qué piezas trae, las advertencias del manual, y no te trabas en cada tornillo antes de empezar.
+
 ### Probemos el método con una función nueva
+
+> 🌎 **En la vida real:** Como leer la etiqueta de un remedio que nunca usaste: nombre (para qué es), qué tomas y qué hace, y las advertencias ("no tomar si…").
+
+> 🌎 **Otro ejemplo:** Como entender una señal de tránsito nueva: ves el dibujo, lees la palabra y adivinas la regla: "no pasan bicicletas".
 
 Esta también es de tu app, del archivo `src/utils/fuelLevel.ts`. No la viste antes:
 
@@ -593,6 +697,8 @@ vf :: Hay que entender cada símbolo antes de seguir leyendo
 
 > 🎙️ **El profesor:** ahora te toca a ti, sin ayuda. Usa una hoja de papel. Para cada respuesta, **escribe primero tu razonamiento** ("primero limpia, después…"), no solo el resultado. Recién cuando termines todas, abre las correcciones.
 
+> 🌎 **En la vida real:** Practicar es como los penales en el entrenamiento: no hay público, puedes errar, y cada error te enseña dónde apuntar.
+
 **A. ¿Qué devuelve `normalizeMyCompanyName`?** Sigue el colador de la parte 3.
 1. `"  Thermomac  "`
 2. `"Refrigeración   Silva"` (con muchos espacios en el medio)
@@ -632,6 +738,8 @@ vf :: Hay que entender cada símbolo antes de seguir leyendo
 ## Para la entrevista
 
 > 🎙️ **El profesor:** última parte. Imagina que estás en una entrevista de trabajo y te hacen estas preguntas. **Respóndelas en voz alta**, como si hablaras con una persona, **antes** de leer la respuesta modelo. No tiene que ser igual: tiene que decir lo mismo con tus palabras.
+
+> 🌎 **En la vida real:** La entrevista es como contarle a un cliente cómo reparaste su carro: con tus palabras, con un ejemplo real, y sin leer.
 
 > 🎤 **Entrevista:** "¿Qué es una función?"
 

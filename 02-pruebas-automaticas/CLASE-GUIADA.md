@@ -10,6 +10,10 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🎙️ **El profesor:** Delvin, hoy vamos a ver algo que separa a un programador aficionado de uno profesional: **las pruebas automáticas**. Tu app tiene más de 400. Cuando termines esta clase, vas a poder explicar en una entrevista qué son, para qué sirven y cómo se escribe una.
 
+> 🌎 **En la vida real:** Es como el control de calidad de una fábrica de galletas: una máquina toma una galleta de cada lote, la pesa y la compara con el peso correcto. Si no coincide, se para la línea.
+
+> 🌎 **Otro ejemplo:** Es como el corrector ortográfico del teléfono: revisa solo cada palabra que escribes, sin que se lo pidas, y te marca en rojo la que está mal.
+
 ### La idea en una frase
 
 Una prueba es **un pequeño programa que revisa si otro programa hace lo correcto**.
@@ -24,7 +28,13 @@ Una prueba automática hace exactamente eso, pero **la hace la máquina sola**, 
 
 > 🌎 **En la vida real:** el panadero que, antes de abrir, prueba un pan de cada horneada. Sabe cómo **debe** saber (lo esperado), lo muerde (lo recibido) y compara. Si sabe a sal en vez de azúcar, para todo antes de venderlo.
 
+> 🌎 **Otro ejemplo:** Como la prueba de alcoholemia: soplas (le das un dato), la máquina compara con el límite permitido (lo esperado) y da "aprobado" o "reprobado".
+
 ### La pregunta de toda prueba
+
+> 🌎 **En la vida real:** Como pesar un paquete en el correo: "con esta caja, ¿la balanza marca lo que dice la etiqueta?". Si dice 2 kg y marca 2 kg, pasa.
+
+> 🌎 **Otro ejemplo:** Como revisar el vuelto en una tienda: "pagué 50, la compra era 32, ¿me dieron 18?". Esa pregunta es una prueba.
 
 Todas las pruebas del mundo, de todas las empresas, hacen **la misma pregunta**:
 
@@ -56,7 +66,13 @@ elige :: Pruebo `2 + 2` y sale `5`. ¿Qué pasa con la prueba? :: Pasa :: Falla 
 
 > 🎙️ **El profesor:** "¿y para qué escribir más código si la app ya funciona?" Es la pregunta que se hace todo el mundo al principio. Te respondo con cinco razones, y con un caso real de tu app que te va a convencer.
 
+> 🌎 **En la vida real:** Es como el cinturón de seguridad: el 99 % de los viajes no lo necesitas, pero el día que lo necesitas, te salva.
+
+> 🌎 **Otro ejemplo:** Es como el seguro del carro: pagas un poco siempre (escribir pruebas) para no pagar muchísimo el día del choque (un error en producción).
+
 ### Las cinco razones
+
+> 🌎 **Otro ejemplo:** Como las cámaras de un estacionamiento: no evitan todos los problemas, pero te avisan rápido, quedan como registro y te dejan tranquilo para hacer otras cosas.
 
 | Para qué | Qué significa | 🌎 En el carro |
 |---|---|---|
@@ -73,6 +89,8 @@ En tu app, las pruebas encontraron esto: si una cuenta tenía registros con `Ube
 ¿Por qué es tan grave? Porque **un error de dinero así puede pasar meses sin que nadie lo note**. El conductor ve un número, confía en él, y nunca sabe que está mal. Una prueba lo atrapó antes.
 
 > 🌎 **En la vida real:** un cajero que cuenta dos veces el mismo billete porque uno estaba al derecho y otro al revés. El total "parece" razonable, pero está inflado.
+
+> 🌎 **Otro ejemplo:** Como dos personas que anotan los gastos de la casa en la misma libreta, una con "Supermercado" y otra con "supermercado": al sumar "por lugar", aparecen dos supermercados y la cuenta sale mal.
 
 > 💡 **Idea:** la mejor comparación: **una prueba es como la alarma de humo**. No apaga el fuego, pero avisa antes de que se queme la casa.
 
@@ -98,6 +116,10 @@ elige :: ¿Por qué los errores de dinero son peligrosos? :: Porque hacen que la
 ## 3. Lo que una prueba NO hace
 
 > 🎙️ **El profesor:** ahora lo contrario. Un buen programador sabe para qué sirven las pruebas **y también sus límites**. En una entrevista, decir "las pruebas no garantizan que no haya errores" te hace ver con experiencia.
+
+> 🌎 **En la vida real:** Una prueba es como el detector de metales del banco: encuentra armas, pero no sabe si la persona tiene malas intenciones. Detecta solo lo que fue hecho para detectar.
+
+> 🌎 **Otro ejemplo:** Es como un examen de matemáticas: si aprobaste las 10 preguntas, sabes esas 10, no toda la matemática.
 
 ### Los cuatro límites
 
@@ -132,6 +154,8 @@ escribe :: Explica con un ejemplo de la vida real por qué una prueba no garanti
 ## 4. Palabras que vas a escuchar
 
 > 🎙️ **El profesor:** en un equipo de trabajo vas a oír estas palabras todos los días: "falló el assert", "eso es una regresión", "pon un mock". Vamos a aprenderlas con una sola escena: **una cocina**.
+
+> 🌎 **Otro ejemplo:** En el fútbol: la prueba es el VAR; esperado es la regla ("no puede estar adelantado"); recibido es la jugada real; caso borde es el jugador que está justo en la línea; y la regresión es el error que ya se había corregido y vuelve a pasar.
 
 | Palabra | Significado | 🌎 En la cocina |
 |---|---|---|
@@ -175,7 +199,13 @@ escribe :: Con tus palabras: ¿qué es el CI? :: Una máquina que corre todas la
 
 > 🎙️ **El profesor:** no todas las pruebas son iguales. Hay pruebas chiquitas que revisan una función, y pruebas grandes que usan la app entera como si fueran un conductor. Vamos a ver las tres y por qué se reparten en forma de **pirámide**.
 
+> 🌎 **En la vida real:** Es como revisar una casa: primero cada enchufe (unitaria), después que la luz y el agua funcionen juntas (integración), y al final vivir un día entero en ella (E2E).
+
+> 🌎 **Otro ejemplo:** Es como preparar una fiesta: pruebas cada plato (unitaria), que la comida y las bebidas lleguen juntas a la mesa (integración) y, al final, el ensayo completo con invitados (E2E).
+
 ### Unitaria, integración y de punta a punta
+
+> 🌎 **Otro ejemplo:** En un restaurante: probar la salsa sola (unitaria), probar el plato completo (integración) y que un cliente misterioso pida, coma y pague (E2E).
 
 | Tipo | Qué revisa | 🌎 Con un carro | Velocidad |
 |---|---|---|---|
@@ -197,7 +227,13 @@ escribe :: Con tus palabras: ¿qué es el CI? :: Una máquina que corre todas la
 
 > 🌎 **En la vida real:** haces miles de pruebas de bujías, cientos de motores encendidos y pocas vueltas por la calle. Si solo hicieras vueltas por la calle, tardarías días en descubrir que la bujía era el problema.
 
+> 🌎 **Otro ejemplo:** Como estudiar para un examen: muchas preguntas cortas de repaso (rápidas), algunos ejercicios largos y un solo simulacro completo antes del examen.
+
 ### Una prueba E2E de verdad
+
+> 🌎 **En la vida real:** Es como un cliente misterioso que entra a tu tienda, pide un producto, paga y revisa que le den el ticket. Prueba la tienda entera, como lo haría un cliente de verdad.
+
+> 🌎 **Otro ejemplo:** Es como el robot de una fábrica de autos que se sienta al volante, prende el carro, maneja una vuelta y estaciona, siempre igual.
 
 Para apps de celular existe **Maestro** (para web: Playwright y Cypress). Mira qué fácil se lee:
 
@@ -235,6 +271,10 @@ escribe :: ¿Por qué hay muchas pruebas unitarias y pocas E2E? :: Porque las un
 
 > 🎙️ **El profesor:** esta es la parte más importante de la clase. Vamos a hacer una prueba **de principio a fin**, con un ejemplo de tu vida de conductor: **cuánto me falta para la meta del día**. Son ocho pasos. Te recomiendo hacerlos en tu computadora mientras lees; el ejemplo completo está en la carpeta `ejemplo-meta/`.
 
+> 🌎 **En la vida real:** Es como seguir una receta nueva: leer qué plato es, preparar los ingredientes, cocinar, probar, arruinarlo a propósito para entender qué lo arruina, y corregir.
+
+> 🌎 **Otro ejemplo:** Es como armar un mueble con el instructivo: no te saltas pasos, y si algo no encaja vuelves al paso anterior.
+
 ### Paso 1. Escribe la regla en palabras
 
 Antes de escribir una sola línea de código, escribe **qué tiene que pasar**, en español:
@@ -244,6 +284,8 @@ Antes de escribir una sola línea de código, escribe **qué tiene que pasar**, 
 Sin una regla clara **no hay prueba posible**, porque no sabrías qué esperar.
 
 > 🌎 **En la vida real:** antes de armar un mueble, lees qué vas a construir: "una mesa de 4 patas, de 1 metro de alto". Si no sabes qué debe salir, no sabes si salió bien.
+
+> 🌎 **Otro ejemplo:** Como el contrato de alquiler antes de mudarte: "el alquiler vence el día 10; si pasa, hay multa". Sin la regla escrita, no sabes si pagaste tarde o no.
 
 ### Paso 2. Piensa los casos (y calcula lo esperado tú)
 
@@ -258,6 +300,8 @@ Elige casos que cubran la regla, **incluido el borde**:
 ⚠️ La regla de oro: **calcula lo esperado con tu cabeza, ANTES de correr el código.** Si primero corres el código y copias lo que devuelve, solo confirmas lo que ya hace, aunque esté mal.
 
 > 🌎 **En la vida real:** el profesor que corrige un examen tiene las respuestas correctas **antes** de empezar. Si primero leyera las del alumno y después decidiera cuál es la correcta, aprobaría a todos.
+
+> 🌎 **Otro ejemplo:** Como el árbitro que conoce el reglamento antes del partido: no decide qué es falta mirando qué hizo el jugador; ya sabía la regla.
 
 ### Paso 3. El código (`meta.js`)
 
@@ -274,6 +318,8 @@ module.exports = { faltaParaMeta };
 - `module.exports = { faltaParaMeta }` "pone la función en la vitrina" para que otro archivo (el de las pruebas) la pueda usar. Es el `export` del Tema 01, en el estilo antiguo de Node.
 
 > 🌎 **En la vida real:** `Math.max(0, …)` es el piso de un ascensor: aunque aprietes "bajar" muchas veces, no baja más allá de la planta baja.
+
+> 🌎 **Otro ejemplo:** `Math.max(0, …)` es como el saldo del metro que nunca baja de cero: aunque el viaje cueste más, no te deja en negativo.
 
 ### Paso 4. Las pruebas (`meta.test.js`)
 
@@ -304,7 +350,13 @@ Línea por línea:
 
 > 🌎 **En la vida real:** es la hoja del inspector de calidad: el portapapeles (`node:test`), la regla para medir (`assert`), un renglón por revisión (`test`), y la medición "mide 80 cm, debía medir 80 cm ✓" (`assert.equal`).
 
+> 🌎 **Otro ejemplo:** Es como una lista de chequeo de un piloto: cada renglón es una pregunta ("¿combustible?") con la respuesta esperada ("lleno"), y se marca ✓ o ✗.
+
 ### Paso 5. Córrelas
+
+> 🌎 **En la vida real:** Es como apretar el botón "probar" de la alarma de humo: en un segundo te dice si funciona.
+
+> 🌎 **Otro ejemplo:** Es como el autodiagnóstico de un carro moderno al encenderlo: revisa todo y te muestra en el tablero si hay algo mal.
 
 ```bash
 cd ejemplo-meta
@@ -333,7 +385,13 @@ y corre `node --test` otra vez.
 
 > 🌎 **En la vida real:** probar la alarma de la casa abriendo la ventana **a propósito**. Si nunca la probaste, no sabes si funciona o si está desconectada.
 
+> 🌎 **Otro ejemplo:** Como un simulacro de incendio: haces sonar la alarma a propósito para ver si todos saben salir. Si nadie se mueve, el plan no sirve.
+
 ### Paso 7. Lee el error
+
+> 🌎 **En la vida real:** Como el resultado de un análisis de sangre: "esperado: azúcar menor a 100; resultado: 140". Te dice qué valor salió mal y cuánto.
+
+> 🌎 **Otro ejemplo:** Como la multa de velocidad: "máximo 60, iba a 80, en la calle tal". Dice qué se esperaba, qué pasó y dónde.
 
 ```text
 not ok 3 - si pasé la meta, falta 0 y no un número negativo
@@ -349,6 +407,10 @@ Fíjate que las pruebas 1 y 2 **siguen pasando**: con 300 da 200 y con 500 da 0,
 
 ### Paso 8. Corrige y repite
 
+> 🌎 **En la vida real:** Como apretar un tornillo flojo y volver a probar la mesa hasta que no se mueva.
+
+> 🌎 **Otro ejemplo:** Como un sastre: ajusta la costura, te pruebas el pantalón, y repite hasta que queda justo.
+
 Vuelve a poner el `Math.max` y corre de nuevo hasta ver `fail 0`.
 
 ### Cuando una prueba falla, revisa en este orden
@@ -360,6 +422,8 @@ Vuelve a poner el `Math.max` y corre de nuevo hasta ver `fail 0`.
 El código es **el último** sospechoso, no el primero. Caso real de tu app: una prueba del San falló porque revisaba el 1 de enero, pero la última rodada era el día 4. **La app estaba bien; la prueba estaba mal.**
 
 > 🌎 **En la vida real:** si reclamas que el bus no pasó a las 7:00 cuando el horario decía 7:40, el bus estaba bien: el error era tuyo al mirar el horario.
+
+> 🌎 **Otro ejemplo:** Si la balanza dice que pesas 10 kilos de más, antes de ponerte a dieta revisas: ¿está en cero la balanza?, ¿tenías la mochila puesta? Recién después piensas que engordaste.
 
 > ✋ **Para y piensa:** sin el `Math.max`, ¿qué devuelve `faltaParaMeta(800, 500)`? ¿Qué prueba lo atrapa?
 
@@ -387,6 +451,10 @@ elige :: ¿Qué hace `module.exports = { faltaParaMeta }`? :: Borra la función 
 
 > 🎙️ **El profesor:** ahora mira lo que ya tienes. Tu app no tiene "algunas pruebas": tiene **más de 400**, en cuatro grupos. Esto es algo de lo que puedes hablar con orgullo en una entrevista.
 
+> 🌎 **En la vida real:** Es como un edificio grande con inspección de luz, agua, gas y ascensores, cada una con su inspector. Tu app tiene sus cuatro inspectores.
+
+> 🌎 **Otro ejemplo:** Es como un hospital con médicos de distintas especialidades: cada grupo de pruebas cuida una parte del cuerpo de la app.
+
 ### Los cuatro grupos (al 10/11/2026)
 
 | Grupo | Cuántas | Dónde están | Herramienta | Cómo se corren |
@@ -398,9 +466,15 @@ elige :: ¿Qué hace `module.exports = { faltaParaMeta }`? :: Borra la función 
 
 > 🌎 **En la vida real:** un edificio con distintos inspectores: el electricista (la app), el de la oficina central (el servidor), el cerrajero de cada apartamento (las reglas de seguridad) y el de los ascensores (el cartón automático de Android).
 
+> 🌎 **Otro ejemplo:** Como un auto revisado por distintos talleres: el mecánico del motor, el electricista, el cerrajero de las puertas y el especialista en la radio.
+
 Los números cambian: cada vez que se agrega algo importante, se agregan sus pruebas.
 
 ### Qué protegen
+
+> 🌎 **En la vida real:** Cada archivo de prueba es como un guardia en una puerta distinta: uno cuida la caja (el dinero), otro el reloj (el día de Uber), otro el tanque.
+
+> 🌎 **Otro ejemplo:** Es como la lista de cosas que revisa tu seguro: motor, vidrios, robo… Cada prueba cubre un riesgo con nombre.
 
 | Archivo | Qué regla protege |
 |---|---|
@@ -432,6 +506,8 @@ Si alguien cambia esa función sin querer y Mi empresa empieza a acumular, **est
 
 > 🌎 **En la vida real:** el `for` es el inspector que revisa los **tres** extintores del piso con la misma pregunta, en vez de escribir tres hojas iguales.
 
+> 🌎 **Otro ejemplo:** Como el profesor que pasa lista con la misma pregunta para tres alumnos: "¿trajo la tarea?", en vez de escribir tres preguntas iguales.
+
 ```practica
 elige :: ¿Cuántas pruebas automáticas tiene tu app, más o menos? :: Unas 40 :: Más de 400 :: Ninguna
 elige :: ¿Qué prueba protege que nadie lea los datos de otra persona? :: `fuelLevel.test.ts` :: `firestore.rules.test.js` :: `appFiscalDay.test.ts`
@@ -457,6 +533,8 @@ escribe :: Explica qué hace la prueba de `earningSourceRules` que leímos. :: R
 
 > 🌎 **En la vida real:** el cocinero prueba la receta en su cocina, y el jefe la vuelve a probar en una cocina limpia, por si en la casa del cocinero había algo que la hacía salir bien de casualidad.
 
+> 🌎 **Otro ejemplo:** Como una receta de la abuela que funciona en su cocina, pero que alguien prueba en otra cocina antes de venderla en la panadería: así sabes que no dependía de su horno.
+
 ```practica
 escribe :: Describe los 5 pasos de un cambio en un proyecto real. :: Cambio el código, corro las pruebas en mi computadora, subo a GitHub, el CI las corre otra vez en una máquina limpia, y si algo falla me entero en minutos.
 vf :: Si las pruebas pasan en mi computadora, no hace falta el CI
@@ -468,6 +546,8 @@ elige :: ¿Dónde corre el CI las pruebas? :: En el teléfono del usuario :: En 
 ## Ejercicios
 
 > 🎙️ **El profesor:** ahora en tu computadora. Abre la terminal y entra a la carpeta de esta clase.
+
+> 🌎 **En la vida real:** Es como practicar estacionar en un estacionamiento vacío: si chocas un cono, no pasa nada, y aprendes.
 
 1. En `ejemplo-meta`, corre `node --test` y anota cuántas pasan.
 2. Haz el sabotaje del Paso 6 y **lee el error en voz alta**: qué prueba, qué esperaba, qué recibió.
@@ -519,6 +599,8 @@ elige :: `aplicarDescuento(100, 20)` debería dar… :: 120 :: 80 :: 20
 ## Para la entrevista
 
 > 🎙️ **El profesor:** responde en voz alta, como si estuvieras frente al entrevistador. Después compara.
+
+> 🌎 **En la vida real:** Es como explicarle a un amigo cómo revisas tu carro antes de un viaje largo: con tus palabras y con lo que de verdad haces.
 
 > 🎤 **Entrevista:** "¿Para qué sirven las pruebas?"
 

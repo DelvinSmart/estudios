@@ -51,6 +51,8 @@ Si te olvidaste de alguna, vuelve a mirar la función en el Tema 01, parte 3.
 
 > 🌎 **En la vida real:** antes de inspeccionar un ascensor, el inspector lee el cartel: "máximo 8 personas, máximo 600 kg". Tú lees las reglas del letrero antes de revisar.
 
+> 🌎 **Otro ejemplo:** Como antes de jugar un partido: primero todos saben el reglamento (cuánto dura, qué es falta). Sin reglas, no se puede arbitrar.
+
 ```practica
 escribe :: Escribe las cinco reglas de `normalizeMyCompanyName`. :: Limpia los espacios (un solo espacio entre palabras, sin espacios a los lados); si queda vacío devuelve vacío; más de 24 letras es null; más de 2 palabras es null; si no, devuelve el nombre limpio.
 vf :: Si el nombre queda vacío, la función devuelve `null`
@@ -79,6 +81,8 @@ Llena esta tabla en tu papel:
 **Fíjate en los casos de borde.** No es casualidad que estén "Taxi Bom" (justo 2 palabras) y "Taxi Bom Ltda" (una de más). **Los errores viven en los bordes**: es donde un programador pone `>` cuando debía poner `>=`.
 
 > 🌎 **En la vida real:** con el ascensor de "máximo 8 personas", lo interesante no es probar con 3 personas: es probar con **exactamente 8** (debe subir) y con **9** (no debe subir).
+
+> 🌎 **Otro ejemplo:** Como el profesor que, antes de corregir, ya tiene escrita la hoja de respuestas, incluidas las preguntas difíciles.
 
 > ✋ **Para y piensa:** llena las 8 filas antes de abrir.
 
@@ -113,6 +117,10 @@ vf :: Un caso de borde es probar justo en el límite de la regla
 
 > 🎙️ **El profesor:** ahora sí, a la computadora. Vamos a crear el archivo y escribir la primera prueba. Te explico cada pieza nueva.
 
+> 🌎 **En la vida real:** Es como abrir un cuaderno nuevo para un examen: le pones nombre a la tapa (el archivo `.test.ts`) y escribes el encabezado antes de las respuestas.
+
+> 🌎 **Otro ejemplo:** Es como llenar una planilla de inspección que ya viene impresa: el título arriba (`describe`), un renglón por revisión (`it`), y el resultado en cada renglón (`expect`).
+
 ### Paso 3: crear el archivo
 
 1. Abre la carpeta de la app en VS Code.
@@ -122,6 +130,8 @@ vf :: Un caso de borde es probar justo en el límite de la regla
 El nombre **tiene que terminar en `.test.ts`**. Así Jest sabe que es una prueba. Si lo llamas `miPrimeraPrueba.ts`, Jest no lo ve.
 
 > 🌎 **En la vida real:** la carpeta `__tests__` es el cajón donde se guardan las hojas de inspección, y `.test.ts` es la etiqueta roja "INSPECCIÓN": así Jest sabe qué hojas le toca revisar.
+
+> 🌎 **Otro ejemplo:** Como guardar las facturas en una carpeta con etiqueta "Facturas 2026": si las dejas sueltas en otro cajón, el contador no las encuentra.
 
 ### Paso 4: el esqueleto
 
@@ -145,6 +155,8 @@ Pieza por pieza:
 - No se escribe `.ts` al final: Jest lo encuentra solo.
 
 > 🌎 **En la vida real:** `../../` es decir "sal de esta habitación, sal del pasillo, y entra a la bodega".
+
+> 🌎 **Otro ejemplo:** `import` es como pedir prestada una herramienta al vecino: no la fabricas, la traes de su casa (de su archivo) para usarla.
 
 **`describe('nombre de Mi empresa', () => { ... });`**
 - **Agrupa** varias pruebas bajo un título. Es el título de la hoja de inspección.
@@ -218,6 +230,8 @@ Léelo: `PASS` (pasó), el título del `describe`, y debajo la ✓ con la frase 
 
 > 🌎 **En la vida real:** es probar **una** hornalla en vez de encender toda la cocina.
 
+> 🌎 **Otro ejemplo:** Es como probar una sola lámpara con el interruptor, en vez de prender toda la casa para ver si esa funciona.
+
 > ✋ **Para y piensa:** si escribes mal el nombre del archivo en el comando, ¿qué crees que pasa?
 
 <details>
@@ -247,6 +261,8 @@ Si alguno falla, revisa **en este orden**:
 3. ¿El código de la app está mal? (**casi nunca** será esto)
 
 > 🌎 **En la vida real:** cuando la cuenta del supermercado no cuadra: ¿sumé bien yo? ¿leí bien el ticket? Recién al final: ¿la caja registradora está mal?
+
+> 🌎 **Otro ejemplo:** Como llenar el crucigrama palabra por palabra y verificar cada una con las que se cruzan, en vez de llenarlo todo y revisar al final.
 
 > ✋ **Para y piensa:** escribe tú los 8 `it`. Después compara.
 
@@ -328,6 +344,8 @@ Se lee: **"esperaba `null`, pero recibió el nombre"**. Tu prueba atrapó el cam
 
 > 🌎 **En la vida real:** el bombero prueba la alarma con humo de verdad, y después del simulacro **la deja lista otra vez**. Si la deja apagada, la casa queda sin protección.
 
+> 🌎 **Otro ejemplo:** Como un piloto de prueba que apaga un motor a propósito para ver si el avión avisa, y después lo vuelve a encender.
+
 > ✋ **Para y piensa:** con el máximo cambiado a 3, ¿la prueba de "Taxi Bom" (2 palabras) falla o pasa?
 
 <details>
@@ -363,6 +381,8 @@ git status
 `git status` te muestra **qué archivos cambiaron**. Si sale `src/data/workAppsCatalog.ts` como modificado, **todavía no devolviste el 2**. Arréglalo antes de seguir. (En el Tema 06 vas a ver Git a fondo.)
 
 > 🌎 **En la vida real:** dar una última mirada a la cocina antes de salir, para ver si quedó alguna hornalla encendida.
+
+> 🌎 **Otro ejemplo:** Como devolver las herramientas a su lugar después de trabajar: si las dejas tiradas, mañana no sabes qué tocaste.
 
 ```practica
 elige :: ¿Qué te muestra `git status`? :: Las pruebas que pasaron :: Qué archivos cambiaron :: La versión de la app
@@ -422,6 +442,8 @@ elige :: Desde `src/utils/__tests__/`, ¿cómo importas `src/utils/fuelLevel.ts`
 
 > 🎙️ **El profesor:** si estás sin la carpeta de la app, puedes practicar **exactamente lo mismo** con un archivo propio. Crea una carpeta `practica-03` y dentro dos archivos.
 
+> 🌎 **En la vida real:** Si no tienes la cocina del restaurante, practicas la receta en tu casa con lo que tienes: el plato y los pasos son los mismos.
+
 `nombre.js`:
 
 ```js
@@ -457,6 +479,8 @@ Córrelo con `node --test` dentro de la carpeta. Agrega los otros 6 casos de la 
 ## Para la entrevista
 
 > 🎙️ **El profesor:** esta pregunta es casi segura en una entrevista. Respóndela en voz alta, contando **tu** prueba.
+
+> 🌎 **En la vida real:** Contar tu primera prueba es como contar tu primer gol: dónde estabas, qué hiciste y cómo supiste que entró.
 
 > 🎤 **Entrevista:** "Cuéntame una prueba que escribiste."
 

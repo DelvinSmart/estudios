@@ -18,6 +18,8 @@ Y antes de todo, la regla de oro, que está escrita en el documento principal de
 
 > 🌎 **En la vida real:** el médico serio pide el análisis de sangre antes de recetar. El que receta "por si acaso" puede curarte algo que no tenías y dejarte enfermo de lo que sí tenías.
 
+> 🌎 **Otro ejemplo:** Como el detective que no acusa a nadie antes de tener pruebas: primero las huellas, después la conclusión.
+
 > ✋ **Para y piensa:** la app muestra mal un total. Tienes una idea: "seguro es el cálculo del San". ¿Qué haces primero?
 
 <details>
@@ -52,7 +54,13 @@ elige :: ¿Qué se hace primero ante un problema? :: Cambiar algo a ver si se ar
 
 > 🌎 **En la vida real:** un error es como una multa de tránsito. **Tipo** = la infracción ("exceso de velocidad"). **Mensaje** = lo que pasó ("80 en zona de 60"). **Lugar** = la dirección exacta. **Pista** = la nota del agente. **Pila** = el recorrido que hiciste hasta que te pararon, leído del último lugar al primero.
 
+> 🌎 **Otro ejemplo:** Como la etiqueta de un error en la factura: tipo ("cobro doble"), descripción ("se cobró dos veces el mismo producto"), lugar ("línea 3") y sugerencia ("solicite reembolso").
+
 ### Las palabras en inglés que más vas a ver
+
+> 🌎 **En la vida real:** Son como las señales de tránsito en otro país: al principio no las entiendes, pero son pocas y se repiten siempre; en una semana las lees sin pensar.
+
+> 🌎 **Otro ejemplo:** Son como las palabras de un menú en inglés en un aeropuerto: "Departures", "Gate", "Delayed"; con diez palabras te mueves por todo el aeropuerto.
 
 | En el error | Quiere decir |
 |---|---|
@@ -100,6 +108,8 @@ Cuanto más arriba en la tabla, **más barato**. Un error de TypeScript **nunca*
 
 > 🌎 **En la vida real:** un pastel. **TypeScript** = leer la receta y ver que dice "2 kilos de sal": lo arreglas gratis. **Pruebas** = probar la masa cruda. **Metro** = el pastel no sube en el horno. **En ejecución** = el cliente lo muerde en su cumpleaños: lo más caro.
 
+> 🌎 **Otro ejemplo:** Como encontrar un error en un vestido: en el molde (gratis), en la tela cortada (barato), en la prueba (caro) o en la fiesta, puesto (carísimo).
+
 > 💡 **Idea:** por eso tu app usa TypeScript y tiene tantas pruebas: para que los errores aparezcan **arriba** en la tabla, y no en el teléfono de un conductor.
 
 ```practica
@@ -114,6 +124,10 @@ elige :: La pantalla roja del simulador al abrir la app es un error de… :: Typ
 ## 4. Errores reales, leídos
 
 > 🎙️ **El profesor:** ahora seis errores **de verdad**, que salieron el 10 de noviembre de 2026 trabajando en tu app. Vamos uno por uno, como un médico que repasa casos reales. Para cada uno: qué dice, cuál era la causa real y qué se hizo.
+
+> 🌎 **En la vida real:** Estos errores son como casos clínicos que estudia un médico: no son inventados; le pasaron a pacientes reales, y por eso enseñan tanto.
+
+> 🌎 **Otro ejemplo:** Son como la caja negra de vuelos anteriores: se estudian para que el próximo piloto no repita el error.
 
 ### Error 1: un nombre que no existe
 
@@ -131,6 +145,8 @@ Cannot find name 'VehicleTextField'. Did you mean 'VehicleSelectField'?
 
 > 🌎 **En la vida real:** "pásame a Juan" → "aquí no vive ningún Juan; ¿quisiste decir Juana?". Juan existe, pero vive en otra casa: te faltó **traerlo**.
 
+> 🌎 **Otro ejemplo:** Como llamar a un contacto que no está guardado en tu teléfono: el número existe, pero tu agenda no lo conoce hasta que lo guardas (el `import`).
+
 ### Error 2: falta un dato obligatorio
 
 ```text
@@ -147,7 +163,13 @@ but required in type 'VehicleSelectFieldProps'.
 
 > 🌎 **En la vida real:** un formulario con el campo "CPF" marcado con asterisco (*) de obligatorio, y lo dejaste vacío.
 
+> 🌎 **Otro ejemplo:** Como un formulario de inscripción que no se envía porque te faltó el teléfono, que era obligatorio.
+
 ### Error 3: algo declarado que no se usa
+
+> 🌎 **En la vida real:** Es como tener en la mochila un paraguas que no usas: no hace daño, pero ocupa lugar y confunde al que la abre.
+
+> 🌎 **Otro ejemplo:** Es como un contacto viejo en el teléfono de alguien que ya no existe: no molesta, pero ensucia la lista.
 
 ```text
 src/screens/copilot/IACopilotoScreen.styles.ts(2,10): error TS6133:
@@ -177,6 +199,8 @@ not ok 77 - plataformas da conta: fixas do app + workApps ativas
 
 > 🌎 **En la vida real:** el inventario dice 5 productos y cuentas 6. Antes de pensar algo raro: ¿alguien agregó uno **a propósito**? Sí. La lista estaba vieja.
 
+> 🌎 **Otro ejemplo:** Como el GPS que te marca un desvío: antes de pensar que se rompió, ves que abrieron una calle nueva. El mapa viejo (la prueba) era el que estaba mal.
+
 ### Error 5: el error de verdad detrás de "no pasa nada"
 
 En el panel de tu app, al mover el color de la foto de un carro, **no pasaba nada**, y no salía ningún error. Para encontrarlo, se probó la misma función **con la foto real del Etios**, y apareció:
@@ -194,6 +218,8 @@ TypeError: null is not an object (evaluating 'source.r')
 
 > 🌎 **En la vida real:** pedir el color de la camisa de alguien que **no está** en la sala: no se puede, ahí no hay nadie (`null`).
 
+> 🌎 **Otro ejemplo:** Como un carro que no arranca sin hacer ruido: "no hace nada" no significa que no tenga nada; hay que conectar el escáner con la llave puesta.
+
 ### Error 6: la pantalla roja de Expo
 
 ```text
@@ -208,6 +234,8 @@ URL: http://localhost:8081/...
 **Lección:** **no todos los errores son del código**. A veces solo falta encender algo.
 
 > 🌎 **En la vida real:** llamas a la pizzería y no contesta nadie. No quebró: no abrió hoy.
+
+> 🌎 **Otro ejemplo:** Como llegar a la tienda y encontrarla cerrada: no tienes que arreglar nada, solo esperar que abran (encender Metro).
 
 > ✋ **Para y piensa:** de los seis, ¿en cuál el código de la app **no tenía nada mal**?
 
@@ -249,6 +277,8 @@ escribe :: Explica el error `TypeError: null is not an object (evaluating 'sourc
 
 > 🌎 **En la vida real:** el mecánico bueno lee el escáner, abre el capó justo donde está la pieza, ve que esperaba 12 voltios y hay 8, reproduce el ruido subiendo una cuesta, piensa "es la batería", cambia **solo** la batería, comprueba que arranca, y se pregunta por qué se descargó. El malo cambia batería, alternador, bujías y cables a la vez.
 
+> 🌎 **Otro ejemplo:** Como resolver por qué no carga el teléfono: miras qué dice, pruebas otro cable (un solo cambio), y si carga, era el cable; no cambias cable, cargador y enchufe a la vez.
+
 > ✋ **Para y piensa:** ¿por qué el paso 4 (reproducir) va antes de cambiar nada?
 
 <details>
@@ -285,6 +315,8 @@ console.log('[MiPantalla] valor del color:', source);
 
 > 🌎 **En la vida real:** buscar en Google = preguntar en el grupo de conductores; pegar el error completo = llevarle al mecánico el papel del escáner, no decir "hace un ruidito"; `console.log` = poner un manómetro en la manguera para ver la presión real; borrarlos = sacar los manómetros antes de devolver el carro.
 
+> 🌎 **Otro ejemplo:** Como cuando no entiendes una palabra en un contrato: la buscas, le preguntas a alguien que sepa mostrándole el texto exacto, y anotas lo que aprendiste.
+
 ```practica
 elige :: ¿Qué le pegas a una IA para que te ayude? :: Un resumen: "me sale un error" :: El mensaje de error completo :: Una foto borrosa
 elige :: ¿Para qué sirve un `console.log`? :: Para arreglar el error solo :: Para ver el valor real de algo mientras el programa corre :: Para borrar archivos
@@ -298,7 +330,15 @@ vf :: Los `console.log` se dejan en la app para siempre
 
 > 🎙️ **El profesor:** ahora vas a **provocar** errores a propósito, leerlos y arreglarlos. Es un simulacro: el fuego es de mentira, y al final todo vuelve a su lugar.
 
+> 🌎 **En la vida real:** Es como un simulacro de incendio en la escuela: el fuego es de mentira, pero aprendes por dónde salir.
+
+> 🌎 **Otro ejemplo:** Es como el entrenamiento de un bombero con fuego controlado: apaga incendios a propósito para saber hacerlo cuando sea de verdad.
+
 ### Práctica 1: provocar un "Cannot find name"
+
+> 🌎 **En la vida real:** Es como escribir mal el nombre de una calle en el GPS: te responde "no encontré esa dirección; ¿quisiste decir…?".
+
+> 🌎 **Otro ejemplo:** Es como pedir en un restaurante un plato que no está en el menú: "no tenemos eso; ¿quiso decir…?".
 
 1. Abre `src/screens/onboarding/VehicleSetupScreen.tsx` y busca `const tankCapacityLiters = vehicleHasFuelTank(vehicleType)` (cerca de la línea 468). Cambia `vehicleHasFuelTank` por **`vehicleHasFuelTankk`** (doble k).
 2. Corre `npx tsc --noEmit -p .`
@@ -307,6 +347,10 @@ vf :: Los `console.log` se dejan en la app para siempre
 
 ### Práctica 2: provocar una prueba que falla
 
+> 🌎 **En la vida real:** Es como sacar una pieza del motor a propósito para ver si se enciende la luz del tablero.
+
+> 🌎 **Otro ejemplo:** Es como cambiar la respuesta correcta en la hoja de un examen para ver si el corrector lo detecta.
+
 1. En `src/data/workAppsCatalog.ts`, en `isImmutableEarningPlatform`, quita `|| appId === 'my_company'`.
 2. Corre `npx jest src/utils/__tests__/earningSourceRules.test.ts`
 3. Lee **cuál prueba falló** y **qué esperaba**: la de "Mi empresa, Viajes particulares y Extras nunca acumulan" esperaba `true` para `my_company` y recibió `false`.
@@ -314,11 +358,19 @@ vf :: Los `console.log` se dejan en la app para siempre
 
 ### Práctica 3: provocar un error de tipo
 
+> 🌎 **En la vida real:** Es como escribir "seis" con letras en un campo que dice "solo números": el formulario lo rechaza.
+
+> 🌎 **Otro ejemplo:** Es como poner gasolina común en un carro que pide diésel: el surtidor (TypeScript) no deja meter la boquilla equivocada.
+
 1. Abre `src/components/vehicles/VehicleFuelGauge.tsx` y busca `thickness={FUEL_BAR_THICKNESS}` (el grosor de la barra, un número). Cámbialo por **`thickness="6"`** (un texto, entre comillas).
 2. Corre `npx tsc --noEmit -p .` y lee el error: un `string` (texto) no sirve donde se espera un `number` (número). Es exactamente lo del Tema 01: `"6"` con comillas es texto.
 3. Arréglalo.
 
 ### Al terminar
+
+> 🌎 **En la vida real:** Es como devolver las herramientas a su lugar después de un trabajo.
+
+> 🌎 **Otro ejemplo:** Es como contar a los alumnos al volver de una excursión: si falta uno, no te vas.
 
 ```bash
 git status
@@ -341,6 +393,8 @@ vf :: Al terminar la práctica, `git status` no debe mostrar archivos cambiados
 ## Ejercicios
 
 > 🎙️ **El profesor:** examen de "luces del tablero": te muestro el error y tú dices qué significa y qué harías. Escribe tus respuestas antes de abrir.
+
+> 🌎 **En la vida real:** Es como un examen de luces del tablero: te muestran la luz y dices qué significa y qué harías.
 
 1. `error TS2307: Cannot find module '../utils/fuelLevell'`
 2. `TypeError: undefined is not a function`
@@ -366,6 +420,8 @@ elige :: `Missing or insufficient permissions` de Firebase quiere decir… :: Qu
 ## Para la entrevista
 
 > 🎙️ **El profesor:** estas dos son de las preguntas más comunes en entrevistas. Respóndelas en voz alta.
+
+> 🌎 **En la vida real:** Contar cómo depuras es como contarle a un cliente cómo encontraste el ruido raro de su carro: con método, no con suerte.
 
 > 🎤 **Entrevista:** "¿Cómo depuras un error?"
 

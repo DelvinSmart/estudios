@@ -10,7 +10,13 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🎙️ **El profesor:** Delvin, hasta hoy leíste código, escribiste una prueba y entendiste el CI. Hoy vas a **cambiar tu app con tus manos** y ver el cambio en la pantalla. Pero antes de cambiar algo, hay que saber **dónde buscarlo**. Una app grande es como una casa grande: si no sabes en qué habitación está la llave, no la encuentras.
 
+> 🌎 **En la vida real:** Es como conocer un supermercado antes de buscar algo: sabes que los lácteos están al fondo y la limpieza en el pasillo 5, así no recorres todo.
+
+> 🌎 **Otro ejemplo:** Es como el organigrama de una empresa: antes de pedir algo, sabes a qué departamento ir.
+
 ### Las carpetas de `src/`
+
+> 🌎 **Otro ejemplo:** Como un edificio de oficinas: recepción (las pantallas), muebles que se repiten en cada piso (componentes), carteles en varios idiomas (i18n), el manual de colores de la marca (theme), la calculadora del contador (utils) y la conexión de luz y agua (services).
 
 Todo el código de la app vive dentro de `src/`. Estas son sus habitaciones:
 
@@ -34,6 +40,8 @@ En tu app, **los textos nunca se escriben directamente en la pantalla**. La pant
 ¿Por qué? Porque tu app está en **seis idiomas** (español, portugués, inglés, francés, italiano y alemán). Si el texto estuviera escrito en la pantalla, existiría en uno solo.
 
 > 🌎 **En la vida real:** un restaurante con menú en varios idiomas: el mesero no se aprende el plato en cada idioma; señala el **número** del plato (la clave), y el menú de cada idioma dice el nombre.
+
+> 🌎 **Otro ejemplo:** Como los carteles de un aeropuerto: el cartel dice "Puerta 7" en un solo lugar del sistema, y cada pantalla lo muestra en el idioma del pasajero.
 
 > ✋ **Para y piensa:** quieres cambiar el color de un botón. ¿En qué carpeta buscarías primero?
 
@@ -72,6 +80,8 @@ Espera a que se abra la app en el simulador. **La primera vez tarda como un minu
 
 > 🌎 **En la vida real:** pintar una pared mirando por una ventana mágica: cada pincelada aparece al instante en la casa de verdad, sin construir la casa de nuevo.
 
+> 🌎 **Otro ejemplo:** Como probarse ropa con un espejo al lado: cada cambio lo ves al instante, sin tener que salir del probador.
+
 ```practica
 elige :: ¿Qué tiene de bueno el modo Expo? :: Publica la app en la tienda :: Cada cambio que guardas aparece solo, en segundos :: Borra los cambios
 vf :: La primera vez que se abre el simulador puede tardar como un minuto
@@ -82,6 +92,10 @@ vf :: La primera vez que se abre el simulador puede tardar como un minuto
 ## 3. Primer cambio: un texto
 
 > 🎙️ **El profesor:** empezamos por lo más simple: cambiar un texto. Y en el camino vas a entender **cómo llega un texto desde un archivo hasta la pantalla**, que es lo importante.
+
+> 🌎 **En la vida real:** Es como cambiar un precio en la pizarra de un restaurante: no tocas la cocina, solo la tiza.
+
+> 🌎 **Otro ejemplo:** Es como corregir una palabra en el subtítulo de una película: la película no cambia, solo el texto que aparece abajo.
 
 Vamos a cambiar el texto gris que aparece debajo de "Capacidad del tanque" en **Editar vehículo**:
 
@@ -98,6 +112,8 @@ tankCapacityHint: 'Opcional. Muestra cuánto combustible queda, en el Inicio.',
 ```
 
 > 🌎 **En la vida real:** Cmd + Shift + F es el buscador de una biblioteca: escribes una frase y te dice en qué libro y en qué página está.
+
+> 🌎 **Otro ejemplo:** Como usar el buscador de tu correo: escribes una frase y aparecen todos los mensajes que la tienen.
 
 ### Paso 2: entender cómo llega a la pantalla
 
@@ -141,7 +157,13 @@ vehicles: {
 
 > 🌎 **En la vida real:** `tankCapacityHint` es **el número del plato**; `types.ts` es **la lista oficial de platos**; los seis archivos son **el menú en seis idiomas**; y `t(...)` es **el mesero**: le dices "plato 14" y te trae el nombre en el idioma del cliente.
 
+> 🌎 **Otro ejemplo:** Como el sistema de turnos de un banco: la pantalla muestra "Turno A15" (la clave), y el sistema sabe qué ventanilla y qué nombre van con ese turno en cada idioma.
+
 ### Paso 3: cambiarlo
+
+> 🌎 **En la vida real:** Es como cambiar el texto de un letrero luminoso: cambias las letras en el sistema y el letrero muestra lo nuevo.
+
+> 🌎 **Otro ejemplo:** Es como editar la descripción de tu perfil: cambias el texto, guardas, y el resto de la app sigue igual.
 
 En `es.ts`, cambia la línea por:
 
@@ -152,6 +174,10 @@ tankCapacityHint: 'Opcional. ¡Este texto lo cambié yo!',
 Guarda con **Cmd + S**.
 
 ### Paso 4: mirarlo
+
+> 🌎 **En la vida real:** Es como salir a la calle a ver el cartel nuevo de tu negocio: así sabes si se lee bien.
+
+> 🌎 **Otro ejemplo:** Es como probar el sabor después de agregar sal: no confías en que quedó bien, lo pruebas.
 
 En el simulador abre **Mi vehículo → el lápiz → baja hasta Capacidad del tanque**. Debe aparecer tu texto nuevo. Si la app está en español y no cambia, espera unos segundos o presiona **Cmd + R** en el simulador (recargar).
 
@@ -182,6 +208,10 @@ escribe :: Explica el camino de un texto desde el archivo hasta la pantalla. :: 
 
 > 🎙️ **El profesor:** ahora algo visual: vas a hacer **más corta la barra de combustible** de la tarjeta del vehículo. Así aprendes dónde vive el **aspecto** de una pieza.
 
+> 🌎 **En la vida real:** Es como mover un cuadro en la pared: no cambias el cuadro, cambias dónde y cuánto ocupa.
+
+> 🌎 **Otro ejemplo:** Es como ajustar el ancho de una columna en una planilla: el contenido es el mismo, solo cambia el espacio.
+
 ### Paso 1: encontrar la pieza
 
 Abre `src/components/vehicles/VehicleFuelGauge.tsx` y busca:
@@ -200,11 +230,21 @@ Abre `src/components/vehicles/VehicleFuelGauge.tsx` y busca:
 
 > 🌎 **En la vida real:** la ficha técnica de un mueble: "ancho máximo 75 % de la pared". Como una alfombra que cubre tres cuartos del piso.
 
+> 🌎 **Otro ejemplo:** Como la etiqueta de medidas de una cortina: "ancho máximo 1,5 m". La ventana no cambia, la cortina se adapta.
+
 ### Paso 2: cambiarlo
+
+> 🌎 **En la vida real:** Es como cambiar el tamaño de letra del teléfono: un número, y todo se ve distinto.
+
+> 🌎 **Otro ejemplo:** Es como ajustar la altura de una silla de oficina con la palanca: un cambio pequeño, y lo notas enseguida.
 
 Pon `'40%'` y guarda.
 
 ### Paso 3: mirarlo
+
+> 🌎 **En la vida real:** Es como mirar en el espejo después de cortarte el pelo.
+
+> 🌎 **Otro ejemplo:** Es como manejar una cuadra después de ajustar el asiento, para ver si quedó cómodo.
 
 En el simulador ve al **Inicio**. La barra de combustible del Etios debe verse **mucho más corta**.
 
@@ -213,6 +253,8 @@ En el simulador ve al **Inicio**. La barra de combustible del Etios debe verse *
 Prueba `'100%'`, y después `'60%'`. **Así se diseña:** se cambia, se mira, se ajusta.
 
 > 🌎 **En la vida real:** el peluquero corta un poco, mira en el espejo, corta otro poco y vuelve a mirar.
+
+> 🌎 **Otro ejemplo:** Como un fotógrafo que prueba varias distancias con el zoom hasta que la foto queda bien encuadrada.
 
 **Lo que aprendiste:** el aspecto de las piezas está en sus **estilos** (`StyleSheet.create`).
 
@@ -253,6 +295,8 @@ npx tsc --noEmit -p .
 
 > 🌎 **En la vida real:** arrancas una página del menú en inglés. El gerente (`npx tsc`) tiene la **lista oficial** de platos (`types.ts`) y revisa que cada menú los tenga todos. Al ver que en inglés falta el plato, dice: "este menú no se puede imprimir".
 
+> 🌎 **Otro ejemplo:** Como la máquina de tickets del estacionamiento: si falta una pieza, la barrera no se levanta y te avisa que algo está mal.
+
 ```practica
 elige :: ¿Qué comando avisa que falta una traducción? :: `npm test` :: `npx tsc --noEmit -p .` :: `git status`
 vf :: Si falta una traducción y subo el código, el CI se pone rojo
@@ -283,6 +327,8 @@ Corre `git status` otra vez: **esos archivos ya no deben aparecer**.
 
 > 🌎 **En la vida real:** `git restore` es el botón "descartar cambios": el archivo vuelve a como estaba la última vez que lo guardaste "oficialmente".
 
+> 🌎 **Otro ejemplo:** Como el botón "deshacer" del Word, pero que vuelve a la última vez que guardaste: lo que escribiste después, se pierde.
+
 ```practica
 elige :: ¿Qué hace `git restore archivo`? :: Sube el archivo a GitHub :: Devuelve el archivo a como estaba, borrando los cambios :: Muestra qué cambió
 vf :: Los cambios que se borran con `git restore` se pueden recuperar fácilmente
@@ -302,6 +348,8 @@ vf :: Después de deshacer, `git status` no debería mostrar los tres archivos
 5. Solo entonces: **commit y push** (Tema 06).
 
 > 🌎 **En la vida real:** reformar el baño de un cliente: haces el trabajo, lo miras tú, pasa el inspector, el dueño abre la ducha y la prueba él mismo, y recién ahí firmas la entrega.
+
+> 🌎 **Otro ejemplo:** Como un vuelo comercial: el avión se revisa en tierra, después pasa el control técnico, después un vuelo de prueba, y recién ahí lleva pasajeros.
 
 > ✋ **Para y piensa:** ¿por qué el paso 4 (probar en el teléfono) va **antes** de subir?
 
@@ -324,6 +372,8 @@ vf :: Si pasan `tsc` y `npm test`, se puede subir sin probar en el teléfono
 
 > 🎙️ **El profesor:** ahora tú solo. Este es para hacerlo en la computadora.
 
+> 🌎 **En la vida real:** Es como la segunda vez que cambias un foco: ya sabes dónde está el interruptor, y lo haces solo.
+
 1. Cambia otro texto: el título **"Registrar ingreso"**. Encuéntralo, cámbialo en español, míralo en el simulador y **deshazlo**.
 2. Si cambias un texto solo en `es.ts`, ¿la persona que usa la app en portugués lo ve cambiado? ¿Por qué?
 3. ¿Por qué los textos no se escriben directamente en la pantalla?
@@ -342,6 +392,8 @@ vf :: Si pasan `tsc` y `npm test`, se puede subir sin probar en el teléfono
 ## Para la entrevista
 
 > 🎙️ **El profesor:** responde en voz alta.
+
+> 🌎 **En la vida real:** Explicar los idiomas de tu app es como explicar un menú con fotos y números: la cocina es una, y cada cliente lo lee en su idioma.
 
 > 🎤 **Entrevista:** "¿Cómo maneja tu app varios idiomas?"
 

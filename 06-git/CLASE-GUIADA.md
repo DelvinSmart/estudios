@@ -10,6 +10,10 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🎙️ **El profesor:** Delvin, hasta hoy los commits y los push los hacía un script o una IA por ti. Hoy vas a entender **qué pasa por dentro** y a hacerlo tú mismo. Git es una de las herramientas que **todo** programador del mundo usa todos los días; en una entrevista lo dan por sabido.
 
+> 🌎 **En la vida real:** Git es como el historial de versiones de un contrato en la escribanía: cada versión firmada queda guardada con su fecha, y siempre puedes ver qué cambió entre una y otra.
+
+> 🌎 **Otro ejemplo:** Es como la libreta de mantenimiento del carro: cada servicio anotado con fecha y qué se hizo. Si algo falla, miras hacia atrás y sabes cuándo empezó.
+
 ### Git: la historia de tu código
 
 **Git** es un programa que guarda **la historia** de tu código. Cada vez que guardas un punto de la historia (un **commit**), después puedes:
@@ -18,6 +22,8 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 - y saber **quién** lo cambió y **por qué**.
 
 > 🌎 **En la vida real:** los **puntos de guardado** de un videojuego. Antes de pelear con el jefe final, guardas la partida. Si pierdes, vuelves a ese punto; no empiezas de cero. Y tú decides cuándo guardar y le pones nombre: "antes del castillo".
+
+> 🌎 **Otro ejemplo:** Como las fotos de antes y después en una obra: puedes comparar cualquier día con cualquier otro.
 
 ### Git no es GitHub
 
@@ -32,6 +38,8 @@ Esto confunde a casi todos al principio:
 Git funciona **sin internet**: guarda la historia en tu Mac. GitHub es un lugar en la nube donde **subes una copia** de esa historia.
 
 > 🌎 **En la vida real:** Git es el **álbum de fotos** que tienes en casa. GitHub es una **copia del álbum guardada en un banco**: si se te inunda la casa, la historia sigue a salvo, y además se la puedes mostrar a otros.
+
+> 🌎 **Otro ejemplo:** Git es tu cuaderno de recetas en la cocina; GitHub es la copia que guardaste en la nube, que además puedes compartir con tu familia.
 
 > ✋ **Para y piensa:** estás en un avión sin internet. ¿Puedes hacer commits?
 
@@ -55,6 +63,8 @@ elige :: Un commit es como… :: un archivo borrado :: un punto de guardado del 
 ## 2. Las palabras
 
 > 🎙️ **El profesor:** Git tiene su vocabulario, y en un equipo lo vas a oír todo el día: "haz un PR", "mergea la rama", "haz pull". Vamos con una sola imagen: **el diario de una obra de construcción**.
+
+> 🌎 **Otro ejemplo:** En un equipo de fútbol: el repositorio es la historia del club; un commit, cada partido jugado con su resultado; una rama, un entrenamiento táctico aparte; merge, usar esa táctica en el partido oficial; y un pull request, proponerle la táctica al entrenador antes.
 
 | Palabra | Significado | En tu app | 🌎 En la obra |
 |---|---|---|---|
@@ -112,6 +122,8 @@ escribe :: ¿Qué es el diff? :: Las diferencias entre dos versiones: qué líne
 
 > 🌎 **En la vida real:** mandar un paquete por correo. **Editas** = preparas el regalo. **`git add`** = lo metes en la caja (todavía puedes sacar o agregar). **`git commit`** = cierras la caja con cinta y le pegas la etiqueta; está lista pero sigue en tu casa. **`git push`** = la llevas al correo, y allá la revisa la aduana (el CI).
 
+> 🌎 **Otro ejemplo:** Como un pedido de comida: eliges los platos (add), confirmas el pedido con una nota (commit) y el repartidor lo lleva a destino (push).
+
 > ✋ **Para y piensa:** hiciste `git commit` pero no `git push`. ¿Tu cambio está en GitHub?
 
 <details>
@@ -153,6 +165,8 @@ f333022 feat(ganhos,painel): Minha empresa, textos de como registrar e foto por 
 
 > 🌎 **En la vida real:** el identificador es el **número de seguimiento** de un paquete de Correios: único, y con él encuentras exactamente ese envío.
 
+> 🌎 **Otro ejemplo:** Como el número de un boleto de avión: con ese código encuentras exactamente tu vuelo, aunque haya miles ese día.
+
 ```practica
 elige :: En `2ce8c04 chore(release): versionCode 93`, ¿qué es `2ce8c04`? :: El mensaje :: El identificador único del commit :: La fecha
 vf :: Dos commits distintos pueden tener el mismo identificador
@@ -164,6 +178,8 @@ elige :: ¿En qué rama trabajas la app? :: `main` :: `feature/smart-camera` :: 
 ## 5. Cómo se escribe un buen mensaje
 
 > 🎙️ **El profesor:** un mensaje de commit lo vas a leer **tú mismo dentro de seis meses**, buscando por qué hiciste algo. Escríbelo para ese Delvin del futuro.
+
+> 🌎 **Otro ejemplo:** Como el asunto de un correo bien escrito: "Factura de octubre – pago atrasado por cambio de banco" dice qué y por qué; "Hola" no dice nada.
 
 Tu repositorio usa una convención llamada **Conventional Commits** (con los mensajes en portugués):
 
@@ -210,6 +226,10 @@ escribe :: Escribe un buen mensaje de commit para: arreglaste que el nombre de M
 
 > 🎙️ **El profesor:** ahora los botones del control remoto. Cada comando hace **una** cosa. Te los explico y en la parte 7 los usas.
 
+> 🌎 **En la vida real:** Los comandos son como los botones de una cámara: uno para ver la pantalla, otro para sacar la foto, otro para borrar, otro para mandar.
+
+> 🌎 **Otro ejemplo:** Son como las herramientas de una caja: cada una sirve para un trabajo, y aprendes cuál usar en cada momento.
+
 ### `git status` — ver el estado
 
 ```bash
@@ -219,6 +239,8 @@ git status
 Te dice **en qué rama estás** y **qué archivos cambiaste**. Es el comando que más vas a usar: **antes y después de todo**.
 
 > 🌎 **En la vida real:** mirar el tablero del carro antes de arrancar: en qué marcha estás y qué luces están encendidas.
+
+> 🌎 **Otro ejemplo:** Como mirar el carrito antes de pasar por la caja del supermercado: ves qué llevas antes de pagar.
 
 ### `git diff` — ver qué cambió
 
@@ -230,6 +252,8 @@ Muestra línea por línea lo que cambiaste: las líneas con **`-`** (rojo) se qu
 
 > 🌎 **En la vida real:** el control de cambios de Word: lo tachado en rojo, lo nuevo en verde.
 
+> 🌎 **Otro ejemplo:** Como comparar dos versiones de un CV con el control de cambios: ves exactamente qué palabras cambiaste.
+
 ### `git log` y `git show` — ver la historia
 
 ```bash
@@ -239,7 +263,13 @@ git show f333022           # qué cambió en ese commit
 
 > 🌎 **En la vida real:** `git log` es hojear el álbum; `git show` es abrir una foto en grande.
 
+> 🌎 **Otro ejemplo:** Como el historial de pedidos de una app: la lista (log) y el detalle de un pedido (show).
+
 ### `git add` y `git commit` — preparar y guardar
+
+> 🌎 **En la vida real:** Es como armar un paquete: eliges qué meter (add) y lo cierras con una etiqueta (commit). Hasta que no lo cierras, puedes sacar o agregar cosas.
+
+> 🌎 **Otro ejemplo:** Es como elegir fotos para un álbum: marcas las que van (add) y las pegas con una nota debajo (commit).
 
 ```bash
 git add archivo.ts          # prepara un archivo
@@ -251,11 +281,19 @@ git commit -m "fix(app): corrige el texto del tanque"
 
 ### `git push` — subir
 
+> 🌎 **En la vida real:** Es como mandar las fotos del álbum por correo a la familia: hasta que no las mandas, solo las tienes tú.
+
+> 🌎 **Otro ejemplo:** Es como subir un archivo a Google Drive: después de subirlo, está a salvo aunque se pierda tu teléfono.
+
 ```bash
 git push
 ```
 
 ### `git restore` — deshacer lo no guardado
+
+> 🌎 **En la vida real:** Es como apretar "descartar borrador" en un correo: vuelve a como estaba y lo que escribiste no se recupera.
+
+> 🌎 **Otro ejemplo:** Es como arrugar una hoja de borrador y tirarla: vuelves a la última versión limpia del cuaderno.
 
 ```bash
 git restore archivo.ts
@@ -275,6 +313,8 @@ git switch main             # cambiarte a otra rama
 
 > 🌎 **En la vida real:** las ramas son los carriles de una autopista: cada uno avanza por su lado sin chocar.
 
+> 🌎 **Otro ejemplo:** Como hacer una copia de un documento para probar cambios grandes sin tocar el original; si te gusta, reemplazas el original.
+
 ```practica
 elige :: ¿Qué comando usas antes y después de todo? :: `git push` :: `git status` :: `git log`
 elige :: En `git diff`, una línea con `+` es… :: una línea quitada :: una línea agregada :: un error
@@ -289,6 +329,10 @@ vf :: `git add -A` prepara todos los cambios
 ## 7. Práctica guiada (sin tocar la app)
 
 > 🎙️ **El profesor:** ahora a la terminal. Vas a practicar en una **carpeta de mentira**, así no arriesgas nada. Escribe cada comando **tú mismo**, y después de cada uno mira qué pasó.
+
+> 🌎 **En la vida real:** Es como el simulador de vuelo: practicas despegar y aterrizar sin un avión de verdad.
+
+> 🌎 **Otro ejemplo:** Es como practicar recetas con ingredientes baratos antes de cocinar para una fiesta.
 
 ### Parte A: crear un repositorio
 
@@ -306,6 +350,8 @@ Corre `git status`: dice que **no hay commits todavía** (*No commits yet*).
 
 > 🌎 **En la vida real:** `git init` es comprar un cuaderno nuevo y escribir en la tapa "Diario de obra".
 
+> 🌎 **Otro ejemplo:** Como abrir una carpeta nueva en el archivador y escribirle el nombre: desde ese momento puede guardar papeles.
+
 ### Parte B: tu primer commit
 
 1. Crea un archivo `notas.txt` con una línea: `Mi primera nota`.
@@ -317,7 +363,13 @@ Corre `git status`: dice que **no hay commits todavía** (*No commits yet*).
 
 > 🌎 **En la vida real:** en rojo = la foto está tirada en la mesa; `git add` = la pones en la pila "para pegar"; `git commit` = la pegas en el álbum con su nota.
 
+> 🌎 **Otro ejemplo:** Como el primer depósito en una cuenta nueva del banco: queda registrado con fecha y concepto.
+
 ### Parte C: ver un cambio
+
+> 🌎 **En la vida real:** Es como comparar dos fotos de tu sala: ayer sin cuadro, hoy con cuadro. `git diff` te señala el cuadro nuevo.
+
+> 🌎 **Otro ejemplo:** Es como el resaltador amarillo que marca lo que agregaste a tus apuntes desde la última vez.
 
 1. Agrega otra línea a `notas.txt`: `Segunda nota`.
 2. `git diff` → ves la línea nueva con **`+`**.
@@ -325,6 +377,10 @@ Corre `git status`: dice que **no hay commits todavía** (*No commits yet*).
 4. `git log --oneline` → **dos** commits.
 
 ### Parte D: deshacer
+
+> 🌎 **En la vida real:** Es como el botón "restablecer" de un formulario: borra lo que escribiste y lo deja como estaba guardado.
+
+> 🌎 **Otro ejemplo:** Es como volver a cargar una partida guardada del videojuego después de perder.
 
 1. Borra **todo** el contenido de `notas.txt` y guarda.
 2. `git status` → aparece **modificado**.
@@ -341,6 +397,8 @@ Corre `git status`: dice que **no hay commits todavía** (*No commits yet*).
 
 > 🌎 **En la vida real:** probarte ropa en el probador: te pones la camisa nueva (la rama `experimento`); al salir (`git switch master`) vuelves con tu ropa de siempre. La camisa no desapareció: está colgada esperando.
 
+> 🌎 **Otro ejemplo:** Como dos borradores de una carta: escribes una versión distinta en otra hoja; la carta original sigue intacta en la primera.
+
 ### Parte F: unir
 
 1. Ve a la principal: `git switch master`.
@@ -348,6 +406,8 @@ Corre `git status`: dice que **no hay commits todavía** (*No commits yet*).
 3. Abre `notas.txt`: ahora la principal **tiene** la línea del experimento.
 
 > 🌎 **En la vida real:** `git merge` es decidir comprar la camisa: ahora tu ropa de siempre la incluye.
+
+> 🌎 **Otro ejemplo:** Como pasar en limpio en el cuaderno lo que probaste en el borrador y te gustó.
 
 **Así trabajan los equipos:** cada cosa nueva en su rama, sin dañar la principal, y se une cuando está lista.
 
@@ -382,6 +442,8 @@ escribe :: Cuenta lo que pasó en la Parte E con tus palabras. :: Creé la rama 
 
 > 🌎 **En la vida real:** el script era un **lavadero automático**: metías el carro y salía limpio. Ahora sabes qué pasa adentro: revisar (`status`), enjabonar (`add`), secar y poner el ticket (`commit`), sacarlo a la calle (`push`).
 
+> 🌎 **Otro ejemplo:** Como el piloto automático de un avión: hace las mismas maniobras que haría el piloto, en el mismo orden.
+
 ```practica
 escribe :: ¿Qué hace el script de guardar de tu app, paso a paso? :: Revisa con git status que no haya archivos prohibidos, hace git add -A, hace git commit con el mensaje y hace git push.
 vf :: El script hacía algo distinto a los comandos de Git
@@ -393,6 +455,10 @@ vf :: El script hacía algo distinto a los comandos de Git
 
 > 🎙️ **El profesor:** esta parte es de **seguridad**, y es muy seria: hay cosas que **jamás** deben llegar a GitHub.
 
+> 🌎 **En la vida real:** Es como la caja fuerte de un hotel: hay cosas que nunca se dejan sobre la cama de la habitación.
+
+> 🌎 **Otro ejemplo:** Es como no publicar la foto de tu tarjeta de crédito en redes: una vez que se compartió, no se puede borrar de los teléfonos de los demás.
+
 ### El archivo `.gitignore`
 
 Es la lista de lo que Git **no** debe guardar. En tu app, por ejemplo:
@@ -401,6 +467,8 @@ Es la lista de lo que Git **no** debe guardar. En tu app, por ejemplo:
 - `store-assets/` → ahí se guardan los AAB (los archivos que se suben a Google Play).
 
 > 🌎 **En la vida real:** la lista de cosas que **no van en la mudanza**: la basura, los muebles que se arman de nuevo allá, las cajas pesadas guardadas en otro lado.
+
+> 🌎 **Otro ejemplo:** Como la lista de "no llevar" de un viaje en avión: líquidos de más, cosas que se compran allá, cosas pesadas que no hacen falta.
 
 ### Las claves secretas
 
@@ -411,6 +479,8 @@ Nunca, por ninguna razón, se suben **claves secretas**, la **llave del keystore
 **Si alguna vez subes una clave por error: la cambias inmediatamente.** Borrarla no alcanza.
 
 > 🌎 **En la vida real:** mandar la foto de la llave de tu casa a un grupo de WhatsApp. Aunque borres el mensaje, alguien ya pudo verla o guardarla. Lo único seguro es **cambiar la cerradura**.
+
+> 🌎 **Otro ejemplo:** Como la clave del cajero: si alguien la vio, no basta con taparla; vas al banco y la cambias.
 
 > ✋ **Para y piensa:** subiste por error un archivo con una clave secreta, y en el commit siguiente lo borraste. ¿Estás a salvo?
 
@@ -434,6 +504,10 @@ escribe :: ¿Qué haces si subiste una clave secreta por error? :: La cambio inm
 
 > 🎙️ **El profesor:** la chuleta completa está en el [resumen](LECCION.md). Aquí te explico los que te sacan de apuros, porque son los que más asustan y los que más preguntan en entrevistas.
 
+> 🌎 **En la vida real:** Los comandos de rescate son como el kit de emergencia del carro: gato, triángulo y llanta de auxilio. No los usas todos los días, pero el día que hacen falta, salvan el viaje.
+
+> 🌎 **Otro ejemplo:** Son como los botones de emergencia de un ascensor: cada uno para un problema distinto.
+
 ### Deshacer, del más seguro al más peligroso
 
 | Comando | Qué hace | ¿Se pierde algo? |
@@ -448,6 +522,8 @@ escribe :: ¿Qué haces si subiste una clave secreta por error? :: La cambio inm
 
 > 🌎 **En la vida real:** `git revert` es como el banco que **no borra** un cobro equivocado del extracto, sino que agrega una línea de devolución. La historia queda completa y honesta.
 
+> 🌎 **Otro ejemplo:** Como corregir un error en un libro ya impreso: no arrancas la página (rompería todos los ejemplares); sacas una fe de erratas que lo corrige.
+
 ### Guardar a un lado: `stash`
 
 Estás a mitad de algo y necesitas cambiar de rama urgente, sin hacer commit:
@@ -459,6 +535,8 @@ git stash pop   # los devuelve (y los quita de la lista)
 
 > 🌎 **En la vida real:** estás cocinando y tocan el timbre. Pones la comida en la nevera (`stash`), atiendes, y después la sacas (`stash pop`).
 
+> 🌎 **Otro ejemplo:** Como guardar el trabajo a medias en un cajón cuando te llaman a una reunión urgente, y sacarlo al volver.
+
 ### `fetch` y `pull`
 
 - `git fetch` → **mira** qué hay de nuevo en GitHub, **sin** mezclarlo con lo tuyo.
@@ -466,12 +544,16 @@ git stash pop   # los devuelve (y los quita de la lista)
 
 > 🌎 **En la vida real:** `fetch` es mirar el buzón sin abrir las cartas; `pull` es abrirlas y mezclarlas con tus papeles.
 
+> 🌎 **Otro ejemplo:** `fetch` es ver en la app del banco qué movimientos nuevos hay; `pull` es además pasarlos a tu libreta de cuentas.
+
 ### Investigar: `blame` y `bisect`
 
 - `git blame archivo` → quién cambió cada línea y en qué commit.
 - `git bisect` → busca **por mitades** en qué commit apareció un error. Entre 300 commits, lo encuentra en unos **8 intentos**.
 
 > 🌎 **En la vida real:** `bisect` es buscar una palabra en el diccionario abriéndolo por la mitad, después por la mitad de la mitad…
+
+> 🌎 **Otro ejemplo:** `blame` es como la firma en cada página de un contrato: sabes quién escribió qué. `bisect` es como encontrar qué día empezó una gotera revisando las fotos de la casa por mitades.
 
 Prueba en tu app (**sin riesgo, solo mira**):
 
@@ -493,6 +575,8 @@ escribe :: ¿Por qué se prefiere `revert` y no `reset` para algo que ya está e
 ## Ejercicios
 
 > 🎙️ **El profesor:** si tienes la app, hazlos en su carpeta. Las preguntas 4, 5 y 6 se responden sin computadora.
+
+> 🌎 **En la vida real:** Es como el examen práctico de una autoescuela: sales con el instructor y haces cada maniobra tú.
 
 1. Haz la práctica completa (Partes A a F) de la parte 7.
 2. En la carpeta de la app, corre `git log --oneline -5` y explica con tus palabras qué hizo cada commit.
@@ -516,6 +600,8 @@ escribe :: ¿Por qué se prefiere `revert` y no `reset` para algo que ya está e
 ## Para la entrevista
 
 > 🎙️ **El profesor:** en voz alta.
+
+> 🌎 **En la vida real:** Explicar cómo trabajas con Git es como contarle a un jefe cómo organizas tus archivos: con orden, nombres claros y copia de seguridad.
 
 > 🎤 **Entrevista:** "¿Cómo trabajas con Git?"
 
