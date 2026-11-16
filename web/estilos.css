@@ -695,7 +695,8 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .isla-estrella { position: absolute; top: -12px; right: -8px; font-size: 22px; filter: drop-shadow(0 0 8px rgb(227 179 65 / 0.8)); }
 
 /* Estados */
-.isla-parada.pendiente .isla { filter: saturate(0.55) brightness(0.85); }
+.isla-parada.pendiente .isla { filter: saturate(0.25) brightness(0.5); }
+.isla-parada.pendiente .isla-tarjeta { opacity: 0.72; }
 .isla-parada.hecha .isla-tarjeta { border-color: color-mix(in srgb, var(--acento) 55%, var(--borde-fuerte)); }
 .isla-parada.actual .isla-tarjeta { border-color: var(--acento); box-shadow: 0 0 0 3px color-mix(in srgb, var(--acento) 22%, transparent), var(--sombra); }
 .isla-parada.actual .isla-pasto { animation: latir 1.8s ease-in-out infinite; }

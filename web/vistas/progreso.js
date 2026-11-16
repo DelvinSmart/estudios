@@ -6,7 +6,7 @@ import { leerArchivo, partir, textoPlano } from '../lector.js';
 import { idParte, estaEntendida, recienPrendidos, olvidarRecien, exportarProgreso, importarProgreso } from '../guardado.js';
 import * as nube from '../nube.js';
 import { app, ponerMigas, escapar, dos, redibujar } from '../pantalla.js';
-import { conteo, ORDEN, rutaDoc, ordenDe, totalPartes, prendidos, estadoClase } from '../avance.js';
+import { conteo, ORDEN, rutaDoc, ordenDe, totalPartes, prendidos, estadoClase, numeroEnCurso } from '../avance.js';
 import { hayDatosDeSesion, recordarSesion } from '../sesion.js';
 
 // ---------- pantalla 5: mi progreso (los bombillos), separado por curso ----------
@@ -33,7 +33,7 @@ export async function vistaProgreso() {
           href="#/clase/${num}/0/${i + 1}" title="${escapar(`${dos(i + 1)}. ${t}`)}" aria-label="${escapar(`Parte ${i + 1}: ${t}, ${prendido ? 'entendida' : 'pendiente'}`)}">💡</a>`;
       }).join('');
       return `<div class="fila-bombillos ${estadoClase(num)}">
-        <a class="fila-clase" href="#/clase/${num}"><span class="mono acento">${num}</span> ${escapar(CLASES[num].titulo)}</a>
+        <a class="fila-clase" href="#/clase/${num}"><span class="mono acento">${numeroEnCurso(num)}</span> ${escapar(CLASES[num].titulo)}</a>
         <span class="bombillos">${bombillos}</span>
         <span class="mono tenue cuenta">${prendidos(num)}/${conteo[num] || 0}</span>
       </div>`;

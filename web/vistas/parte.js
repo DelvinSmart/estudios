@@ -6,7 +6,7 @@ import { leerArchivo, partir } from '../lector.js';
 import { idParte, estaEntendida, marcarEntendida } from '../guardado.js';
 import * as nube from '../nube.js';
 import { app, ponerMigas, avisar, enLinea, escapar, dos } from '../pantalla.js';
-import { rutaDoc, etapaDe, cursoDeClase } from '../avance.js';
+import { rutaDoc, etapaDe, cursoDeClase, numeroEnCurso } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
 import { ponerBarraDeVoz } from '../voz.js';
 import { hayDatosDeSesion } from '../sesion.js';
@@ -28,7 +28,7 @@ export async function vistaParte(num, doc, cual) {
   ponerMigas([
     { texto: 'mapa', href: '#/' },
     { texto: `${dos(n)}`, href: `#/etapa/${etapa.id}`, corto: etapa.id },
-    { texto: `${num} ${escapar(c.titulo)}`, href: `#/clase/${num}/${doc}`, corto: c.carpeta },
+    { texto: `${numeroEnCurso(num)} ${escapar(c.titulo)}`, href: `#/clase/${num}/${doc}`, corto: c.carpeta },
     { texto: todo ? 'todo' : `parte ${dos(i)}`, corto: todo ? 'todo' : dos(i) },
   ]);
 
@@ -42,7 +42,7 @@ export async function vistaParte(num, doc, cual) {
     <div class="lectura">
       <aside class="indice">
         <p class="mono comentario">// ${escapar(c.docs[doc].titulo.toLowerCase())}</p>
-        <a class="indice-clase" href="#/clase/${num}/${doc}">${num} · ${enLinea(titulo || c.titulo)}</a>
+        <a class="indice-clase" href="#/clase/${num}/${doc}">${numeroEnCurso(num)} · ${enLinea(titulo || c.titulo)}</a>
         <nav>${indice}</nav>
       </aside>
       <article class="hoja" id="hoja"></article>
@@ -50,7 +50,7 @@ export async function vistaParte(num, doc, cual) {
   const hoja = app.querySelector('#hoja');
 
   if (todo) {
-    hoja.insertAdjacentHTML('beforeend', `<p class="mono comentario">// clase ${num} completa</p><h1 class="titulo-medio">${enLinea(titulo || c.titulo)}</h1>`);
+    hoja.insertAdjacentHTML('beforeend', `<p class="mono comentario">// clase ${numeroEnCurso(num)} completa</p><h1 class="titulo-medio">${enLinea(titulo || c.titulo)}</h1>`);
     if (intro) hoja.appendChild(pintarMarkdown(intro, c.carpeta));
     partes.forEach((p, k) => {
       hoja.insertAdjacentHTML('beforeend', `<h2 class="titulo-parte"><span class="mono acento">${dos(k + 1)}</span> ${enLinea(p.titulo)}</h2>`);

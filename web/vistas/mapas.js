@@ -7,7 +7,7 @@ import { leerArchivo, partir } from '../lector.js';
 import { idParte, estaEntendida } from '../guardado.js';
 import { htmlMapa, htmlProgreso, activarMapas } from '../mapa-islas.js';
 import { app, ponerMigas, escapar, enLinea, dos } from '../pantalla.js';
-import { conteo, ORDEN, rutaDoc, etapaDe, cursoDeClase, ordenDe, prendidos, claseActual, estadoClase, ETIQUETA_ESTADO } from '../avance.js';
+import { conteo, ORDEN, rutaDoc, etapaDe, cursoDeClase, ordenDe, prendidos, claseActual, estadoClase, ETIQUETA_ESTADO, numeroEnCurso } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
 
 // ---------- pantalla 1: el mapa grande ----------
@@ -76,7 +76,7 @@ export function vistaInicio(soloCurso) {
         <a class="contador-bombillos" href="#/progreso"><span class="bombillo-chico ${prendidosTodos ? 'prendido' : ''}">💡</span><b>${prendidosTodos}</b>/${totalBombillos} bombillos</a>
       </div>
       <div class="acciones">
-        ${actual ? `<a class="boton-principal" href="#/clase/${actual}">▶ ${prendidosTodos ? 'seguir donde quedé' : 'empezar'}: clase ${actual}, ${escapar(CLASES[actual].titulo)}</a>` : ''}
+        ${actual ? `<a class="boton-principal" href="#/clase/${actual}">▶ ${prendidosTodos ? 'seguir donde quedé' : 'empezar'}: clase ${numeroEnCurso(actual)}, ${escapar(CLASES[actual].titulo)}</a>` : ''}
         <a class="boton" href="#/progreso">💡 mi progreso</a>
       </div></div>
       ${htmlProgreso(`${hechas} de ${total} clases`, hechas / total)}
@@ -101,7 +101,7 @@ function paradasDeClases(etapa) {
     const est = estadoClase(num);
     const total = conteo[num] || 0;
     return {
-      num, titulo: escapar(CLASES[num].titulo) + htmlLogos(CLASES[num].logos), desc: escapar(CLASES[num].meta), href: `#/clase/${num}`,
+      num: numeroEnCurso(num), titulo: escapar(CLASES[num].titulo) + htmlLogos(CLASES[num].logos), desc: escapar(CLASES[num].meta), href: `#/clase/${num}`,
       estado: est, icono: CLASES[num].logos ? htmlLogo(CLASES[num].logos[0], 'isla') : (CLASES[num].icono || '📘'),
       pie: `<span class="avance">${prendidos(num)}/${total} partes</span>${est === 'actual' ? '<span class="insignia actual">▶ voy aquí</span>' : ''}`,
     };
@@ -145,7 +145,7 @@ export async function vistaClase(num, doc) {
   ponerMigas([
     { texto: 'mapa', href: '#/' },
     { texto: `${dos(n)} ${escapar(etapa.titulo)}`, href: `#/etapa/${etapa.id}`, corto: etapa.id },
-    { texto: `${num} ${escapar(c.titulo)}`, corto: c.carpeta },
+    { texto: `${numeroEnCurso(num)} ${escapar(c.titulo)}`, corto: c.carpeta },
   ]);
 
   const md = await leerArchivo(rutaDoc(num, doc));
@@ -176,7 +176,7 @@ export async function vistaClase(num, doc) {
   const siguienteClase = ORDEN[ORDEN.indexOf(num) + 1];
   const final = {
     titulo: listas === partes.length && partes.length ? '¡Clase completa!' : 'Fin de la clase',
-    texto: siguienteClase && cursoDeClase(siguienteClase) === cursoDeClase(num) ? `Sigue: clase ${siguienteClase}, ${escapar(CLASES[siguienteClase].titulo)} →` : '🎓 el certificado del curso',
+    texto: siguienteClase && cursoDeClase(siguienteClase) === cursoDeClase(num) ? `Sigue: clase ${numeroEnCurso(siguienteClase)}, ${escapar(CLASES[siguienteClase].titulo)} →` : '🎓 el certificado del curso',
     hecho: listas === partes.length && partes.length > 0,
     href: siguienteClase && cursoDeClase(siguienteClase) === cursoDeClase(num) ? `#/clase/${siguienteClase}` : (cursoDeClase(num) === 'programacion' ? '#/certificado' : `#/certificado/${cursoDeClase(num)}`),
   };
@@ -184,7 +184,7 @@ export async function vistaClase(num, doc) {
   const est = estadoClase(num);
   app.innerHTML = `
     <section class="cabeza">
-      <p class="mono comentario">// clase ${num} · <span class="insignia ${est}">${ETIQUETA_ESTADO[est]}</span></p>
+      <p class="mono comentario">// clase ${numeroEnCurso(num)} · <span class="insignia ${est}">${ETIQUETA_ESTADO[est]}</span></p>
       <h1 class="titulo-medio">${enLinea(titulo || c.titulo)} ${htmlLogos(c.logos, 'medio')}</h1>
       <p class="bajada">${escapar(c.meta)}</p>
       ${pestanas}

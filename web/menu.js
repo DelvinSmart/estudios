@@ -4,7 +4,7 @@
 
 import { CLASES, ETAPAS, CURSOS, cursoDeEtapa } from './cursos.js';
 import { escapar } from './pantalla.js';
-import { conteo, prendidos, estadoClase, etapaDe } from './avance.js';
+import { conteo, prendidos, estadoClase, etapaDe, numeroEnCurso } from './avance.js';
 
 function dondeEstoy() {
   const [que, id] = location.hash.replace(/^#\/?/, '').split('/');
@@ -26,7 +26,7 @@ function armarArbol() {
         const listos = prendidos(n);
         const marca = total && listos === total ? '✓' : listos ? '◐' : '○';
         return `<li><a class="arbol-clase ${aqui.clase === n ? 'aqui' : ''}" href="#/clase/${n}">
-          <span class="mono arbol-marca">${marca}</span><span class="mono acento">${n}</span> ${escapar(CLASES[n].titulo)}
+          <span class="mono arbol-marca">${marca}</span><span class="mono acento">${numeroEnCurso(n)}</span> ${escapar(CLASES[n].titulo)}
           <span class="mono tenue arbol-cuenta">${listos}/${total}</span></a></li>`;
       }).join('');
       // En cursos de una sola etapa, las clases cuelgan directo del curso.

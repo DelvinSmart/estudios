@@ -2,6 +2,7 @@
 // "función" y "funcion" cuentan igual (se ignoran tildes y mayúsculas).
 
 import { CLASES } from './cursos.js';
+import { numeroEnCurso } from './avance.js';
 import { leerArchivo, partir, textoPlano } from './lector.js';
 
 const sinTildes = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -64,7 +65,7 @@ export function prepararBuscador() {
     resultados.innerHTML = hallados.length
       ? `<p class="mono tenue">${hallados.length === 40 ? '40+' : hallados.length} resultados</p>` + hallados.map((r) => `
         <a class="resultado" href="#/clase/${r.num}/${r.doc}/${r.parte}">
-          <span class="mono acento">${r.num}.${String(r.parte).padStart(2, '0')}</span>
+          <span class="mono acento">${numeroEnCurso(r.num)}.${String(r.parte).padStart(2, '0')}</span>
           <span><b>${escapar(r.titulo)}</b> <span class="tenue">· ${escapar(r.clase)}${r.doc ? ' · ' + escapar(r.docTitulo) : ''}</span><br>
           <span class="tenue">${recorte(r.texto, palabra)}</span></span>
         </a>`).join('')

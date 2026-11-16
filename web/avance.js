@@ -21,6 +21,9 @@ export function etapaDe(num) {
 // A qué curso pertenece una clase, y las clases y partes de cada curso.
 export const cursoDeClase = (num) => cursoDeEtapa(etapaDe(num) || {});
 export const ordenDe = (curso) => clasesDelCurso(curso);
+// El número que se muestra: el lugar de la clase dentro de su curso (01, 02…),
+// no el nombre de su carpeta (que puede ser 44 aunque la clase vaya primera).
+export const numeroEnCurso = (num) => String(ordenDe(cursoDeClase(num)).indexOf(num) + 1).padStart(2, '0');
 export const totalPartes = (curso) => ordenDe(curso).reduce((s, n) => s + (conteo[n] || 0), 0);
 
 // Los bombillos prendidos de una clase (en su documento principal).
