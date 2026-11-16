@@ -133,6 +133,7 @@ a:hover { text-decoration: underline; }
 .contadores { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 0.9rem; color: var(--tenue); margin-bottom: 12px; }
 .contadores b { color: var(--acento); font-size: 1.2rem; }
 
+.barra-progreso + .acciones { margin-top: 24px; }
 .barra-progreso { height: 6px; border-radius: 99px; background: var(--borde); overflow: hidden; max-width: 520px; }
 .barra-progreso span { display: block; height: 100%; background: linear-gradient(90deg, var(--acento), var(--acento-2)); border-radius: inherit; transition: width 0.6s; }
 .fila-progreso { display: flex; align-items: center; gap: 14px; font-size: 0.82rem; color: var(--tenue); margin: 18px 0; }
@@ -585,7 +586,8 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 
 
 /* ---------- 13. La cuenta: entrar, crear, recuperar (aspecto de ventana de terminal) ---------- */
-.cuenta { display: grid; place-items: start center; padding: 28px 0 40px; }
+/* La tarjeta queda centrada en la pantalla, a lo alto y a lo ancho. */
+.cuenta { display: grid; place-items: center; min-height: calc(100vh - 190px); min-height: calc(100dvh - 190px); padding: 28px 0 40px; }
 .cuenta-tarjeta { width: min(100%, 460px); background: var(--tarjeta); border: 1px solid var(--borde-fuerte); border-radius: 14px; box-shadow: var(--sombra); overflow: hidden; }
 .cuenta-barra { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: var(--fondo-2); border-bottom: 1px solid var(--borde); font-size: 0.78rem; color: var(--tenue); }
 .cuenta-barra i { width: 11px; height: 11px; border-radius: 50%; background: var(--borde-fuerte); }

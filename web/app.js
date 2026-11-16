@@ -726,7 +726,7 @@ function despuesDeEntrar() {
   recordarSesion(true);
   nube.usuario().then((u) => {
     ponerPrompt(u);
-    location.hash = nube.cuentaLista(u) ? (sessionStorage.getItem('mapa-volver') || '#/progreso') : '#/entrar/verificar';
+    location.hash = nube.cuentaLista(u) ? (sessionStorage.getItem('mapa-volver') || '#/') : '#/entrar/verificar';
     try { sessionStorage.removeItem('mapa-volver'); } catch (e) { /* nada */ }
   });
 }
@@ -821,7 +821,7 @@ async function vistaEntrar(paso) {
     if (nube.cuentaLista(u)) {
       tarjetaCuenta('./verificar-correo', '✓ Correo verificado', `
         <p class="bajada">Listo, <b>${escapar(u.displayName || u.email)}</b>. Desde ahora, cada bombillo que prendas cuenta en la nube.</p>
-        <a class="boton-principal ancho" href="#/progreso">ir a mi progreso</a>`);
+        <a class="boton-principal ancho" href="#/">ir al mapa</a>`);
       ponerPrompt(u);
       return;
     }
@@ -873,7 +873,7 @@ async function vistaAccion(modo, codigo) {
       await nube.confirmarCorreoConEnlace(codigo);
       tarjetaCuenta('./verificar-correo', '✓ Correo verificado', `
         <p class="bajada">Listo. Ya puedes entrar y tus bombillos contarán en la nube.</p>
-        <a class="boton-principal ancho" href="#/progreso">ir a mi progreso</a>`);
+        <a class="boton-principal ancho" href="#/">ir al mapa</a>`);
     } catch (e) {
       tarjetaCuenta('./verificar-correo', 'Enlace no válido', `<p class="bajada">${escapar(mensajeDe(e))}</p>
         <a class="boton ancho" href="#/entrar/verificar">pedir otro</a>`);
