@@ -65,7 +65,8 @@ a { color: var(--acento-2); text-decoration: none; }
 a:hover { text-decoration: underline; }
 .mono { font-family: var(--mono); }
 /* Sin ligaduras: que "===" o "=>" se vean como se escriben, letra por letra. */
-code, pre, .mono, .titulo-grande, .titulo-medio, .titulo-parte, .nodo-titulo { font-variant-ligatures: none; }
+/* El atajo "font:" lo reinicia en cada elemento, por eso va con !important. */
+* { font-feature-settings: "liga" 0, "calt" 0, "dlig" 0 !important; }
 .tenue { color: var(--tenue); }
 .acento { color: var(--acento); }
 .centro { text-align: center; }

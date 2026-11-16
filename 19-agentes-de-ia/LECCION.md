@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** un chat con IA es como preguntarle algo a un experto por teléfono: te responde y cuelga. Un **agente** es como contratar a ese experto para que **haga el trabajo**: busca, llama, revisa, se equivoca, corrige y te avisa cuando terminó. Esta clase es sobre cómo se diseña ese "empleado".
 
-Esta clase está basada en la guía **"Agentic design patterns"** de **Bashiri Smith** (BASWE, edición 2026), que está en tu SSD: `SSD_Desarrollo/Documentos/baswe-agentic-design-patterns-guide.pdf`. No es una copia ni una traducción palabra por palabra: es **cada concepto** de la guía, explicado en español con mis palabras, con ejemplos de la vida real y con código en JavaScript (que ya conoces) en vez de Python. Si una palabra te genera dudas, abre el PDF en esa misma sección: los números (1.1, 2.3, 4.6…) son los mismos.
+Esta clase está basada en la guía **"Agentic design patterns"** de **Bashiri Smith** (BASWE, edición 2026), que está en tu SSD: `SSD_Desarrollo/Documentos/baswe-agentic-design-patterns-guide.pdf`. No es una copia ni una traducción palabra por palabra: es **cada concepto** de la guía, explicado en español con mis palabras, con ejemplos de la vida real y con código **en JavaScript (que ya conoces) y en Python** (el lenguaje que más se usa en IA y el que usa la guía). Si una palabra te genera dudas, abre el PDF en esa misma sección: los números (1.1, 2.3, 4.6…) son los mismos.
 
 **La idea central de la guía:** la mayoría aprende agentes al revés (elige una herramienta, copia un ejemplo y termina con algo que no puede explicar). Aquí va al derecho: **primero los patrones**, después las decisiones de ingeniería de cada uno, y al final lo que mantiene vivo a un agente cuando lo usan personas reales.
 
@@ -17,6 +17,112 @@ Esta clase está basada en la guía **"Agentic design patterns"** de **Bashiri S
 | Un mes para ir a fondo | Todo, en orden, haciendo cada ejercicio | Cinco proyectos para tu portafolio, una arquitectura que puedes defender y el vocabulario para liderar una revisión de diseño |
 
 > 📌 **Nota:** la frase más importante de la guía: **leer sobre agentes no es una habilidad; construir uno, sí.** Cada patrón termina con un ejercicio para construir. Hazlos.
+
+## Parte 0. Python para leer los ejemplos
+
+> 🌎 **En la vida real:** ya hablas español; aprender a **leer** portugués te lleva días, no años, porque casi todo se parece. Tú ya lees JavaScript y TypeScript; leer Python es igual: cambian algunas palabras y la forma de escribir, pero las ideas son las mismas.
+
+**¿Por qué Python?** Es **el lenguaje más usado en inteligencia artificial**. Las librerías de IA, los ejemplos de las empresas que hacen los modelos, los *frameworks* de agentes y la mayoría de las ofertas de trabajo de "AI engineer" lo usan. La guía original trae todo su código en Python. Por eso en esta clase **cada ejemplo está dos veces**: primero en JavaScript (lo que ya conoces) y después en **Python** (lo que te van a pedir).
+
+> 💡 **Idea:** los nombres de los ejemplos están en español para que los compares fácil con la versión en JavaScript. En un trabajo real, el código casi siempre se escribe con nombres en inglés (`run_agent` en vez de `correr_agente`), pero la estructura es la misma.
+
+### Lo mismo, en los dos lenguajes
+
+| Qué | JavaScript / TypeScript | Python |
+|---|---|---|
+| Comentario | `// nota` | `# nota` |
+| Crear una variable | `const total = 0;` | `total = 0` (sin `const`, sin `let`, sin `;`) |
+| Texto con valores | `` `Hola ${nombre}` `` | `f"Hola {nombre}"` |
+| Sí / no / nada | `true`, `false`, `null` | `True`, `False`, `None` (con mayúscula) |
+| Y / o / no | `&&`, `\|\|`, `!` | `and`, `or`, `not` |
+| Comparar | `===`, `!==` | `==`, `!=` |
+| Lista | `['Uber', '99']` | `["Uber", "99"]` (se llama *list*) |
+| Objeto | `{ marca: 'Toyota' }` | `{"marca": "Toyota"}` (se llama *diccionario*, *dict*) |
+| Leer un dato | `carro.marca` | `carro["marca"]` |
+| Agregar a una lista | `lista.push(x)` | `lista.append(x)` |
+| Largo | `lista.length` | `len(lista)` |
+| Función | `function sumar(a, b) { return a + b; }` | `def sumar(a, b):` y en la línea de abajo, con sangría, `return a + b` |
+| Si / si no | `if (x > 0) { … } else { … }` | `if x > 0:` … `else:` … |
+| Repetir | `for (const app of apps) { … }` | `for app in apps:` … |
+| Errores | `try { … } catch (e) { … }` | `try:` … `except Exception as e:` … |
+| Traer de otro archivo | `import { x } from './y.js';` | `from y import x` |
+| Tipos | `nombre: string` | `nombre: str` |
+| "Texto o nada" | `string \| null` | `str \| None` |
+
+### La gran diferencia: la sangría
+
+En JavaScript, las **llaves** `{ }` dicen qué está adentro de qué. Python **no usa llaves**: usa **dos puntos** `:` al final de la línea y **4 espacios** hacia adentro en las líneas que le pertenecen.
+
+```python
+def es_inmutable(app_id: str) -> bool:
+    # todo lo que está corrido hacia adentro es parte de la función
+    if app_id in ["extras", "particular_trips", "my_company"]:
+        return True
+    return False
+
+print(es_inmutable("uber"))     # False
+print(es_inmutable("extras"))   # True
+```
+
+Es tu función `isImmutableEarningPlatform` del Tema 01, escrita en Python. Fíjate:
+- `def` crea la función; `-> bool` dice que devuelve sí o no.
+- `in [...]` pregunta "¿está dentro de esta lista?". Es otra forma de escribir los tres `||`.
+- `print(...)` muestra algo en la terminal (es el `console.log` de Python).
+
+> 🌎 **En la vida real:** la sangría es como un índice de un libro con subtítulos corridos hacia la derecha: con solo mirar cuánto está corrido un renglón, sabes de qué capítulo es. En Python, si corres mal un renglón, cambia de capítulo, y el programa hace otra cosa (o da error).
+
+### Las tres cosas de Python que más vas a ver en IA
+
+**1. Clases con Pydantic (moldes de datos).** Sirven para describir y **validar** lo que entra y sale del modelo:
+
+```python
+from pydantic import BaseModel
+
+class Carga(BaseModel):
+    litros: float
+    app: str = "Uber"
+
+Carga(litros=45)          # bien: Carga(litros=45.0, app='Uber')
+Carga(litros="mucho")     # error: "mucho" no es un número
+```
+
+**2. Listas por comprensión** (el `.map` y el `.filter` de Python):
+
+```python
+valores = [18, 12, 25]
+dobles = [v * 2 for v in valores]          # [36, 24, 50]
+grandes = [v for v in valores if v > 15]    # [18, 25]
+```
+
+**3. `async` / `await` y `asyncio.gather`** (el `Promise.all` de Python), para hacer varias cosas a la vez.
+
+### Cómo correr un archivo de Python
+
+Tu Mac ya trae Python. Guarda un archivo `prueba.py` y en la terminal:
+
+```bash
+python3 prueba.py
+```
+
+Para instalar una librería, como Pydantic:
+
+```bash
+python3 -m pip install pydantic
+```
+
+> 📌 **Nota:** `pip` es el `npm` de Python: instala librerías. Y **pytest** es el Jest de Python: corre las pruebas automáticas.
+
+```practica
+vf :: En Python, el `null` de JavaScript se escribe `None`
+vf :: En Python, los bloques se marcan con llaves `{ }` como en JavaScript
+vf :: `f"Hola {nombre}"` en Python es como `` `Hola ${nombre}` `` en JavaScript
+vf :: En Python, `true` se escribe con minúscula, igual que en JavaScript
+elige :: ¿Qué es `def` en Python? :: Una variable :: La forma de crear una función :: Un comentario
+elige :: ¿Cómo se escribe "y" en una condición de Python? :: `&&` :: `and` :: `+`
+elige :: ¿Qué es el `append` de Python en JavaScript? :: `pop` :: `push` :: `length`
+elige :: ¿Para qué se usa Pydantic? :: Para dibujar pantallas :: Para describir y validar los datos que entran y salen :: Para subir a GitHub
+escribe :: ¿Por qué esta clase trae los ejemplos en Python además de JavaScript? :: Porque Python es el lenguaje más usado en IA y en los trabajos de ingeniero de IA; JavaScript ayuda a entender, pero en una entrevista de IA casi siempre te van a pedir Python.
+```
 
 ## Parte 1. Fundamentos
 
@@ -105,6 +211,40 @@ async function correrAgente(tarea, herramientas, maxPasos = 10) {
 }
 ```
 
+**El mismo ciclo en Python** (es el lenguaje que más vas a ver en trabajos de IA):
+
+```python
+def correr_agente(tarea, herramientas, max_pasos=10):
+    mensajes = [{"role": "user", "content": tarea}]
+
+    for paso in range(max_pasos):
+        respuesta = llm(mensajes, tools=esquemas(herramientas))
+        mensajes.append(respuesta.mensaje)
+
+        if not respuesta.llamadas:
+            return respuesta.texto              # el modelo decidió que terminó
+
+        for llamada in respuesta.llamadas:
+            resultado = ejecutar(herramientas, llamada)   # validar, correr, atrapar errores
+            mensajes.append(resultado_de_herramienta(llamada.id, resultado))
+
+    return escalar("se llegó al máximo de pasos", mensajes)   # pedir ayuda a una persona
+```
+
+**Cómo se lee, comparado con JavaScript:**
+
+| Python | JavaScript | Qué es |
+|---|---|---|
+| `def correr_agente(...):` | `async function correrAgente(...) {` | Crear una función. Python no usa llaves: usa **dos puntos** y la **sangría** (los espacios a la izquierda). |
+| `max_pasos=10` | `maxPasos = 10` | Valor por defecto si no lo mandas. |
+| `for paso in range(max_pasos):` | `for (let paso = 0; paso < maxPasos; paso++)` | Repetir: `range(10)` da 0, 1, 2… 9. |
+| `if not respuesta.llamadas:` | `if (respuesta.llamadas.length === 0)` | "Si no hay llamadas". En Python, una lista vacía cuenta como "no". |
+| `mensajes.append(x)` | `mensajes.push(x)` | Agregar al final de la lista. |
+| `# comentario` | `// comentario` | Nota para personas. |
+| `snake_case` | `camelCase` | Python escribe los nombres con guion bajo: `max_pasos`, no `maxPasos`. |
+
+> 🌎 **En la vida real:** en Python la **sangría** es como los renglones de una lista de tareas con subtareas: lo que está corrido hacia adentro **pertenece** a lo de arriba. Si corres mal un renglón, cambias a qué tarea pertenece. Por eso en Python los espacios no son decoración: son parte de la orden.
+
 **Esa es toda la idea.** El resto de la guía son variaciones de este ciclo: qué pones en los mensajes, cómo eliges y construyes las herramientas, cómo decides que terminó, y cómo lo mantienes seguro, barato y observable.
 
 ### 1.4 Cuándo construir un agente (y cuándo no)
@@ -175,7 +315,7 @@ Pedido ─► Razonar ─(1 llamada)─► Actuar ─► [Herramientas: buscar_w
 4. **Actualizar el contexto.** Ahora la conversación tiene la llamada y su resultado. El modelo ve su propio historial más la prueba nueva.
 5. **Repetir o responder.** Vuelve a razonar. Cuando tiene suficiente, responde **sin** llamar herramientas y el ciclo termina.
 
-**Esqueleto de código:**
+**Esqueleto de código (JavaScript):**
 
 ```js
 const HERRAMIENTAS = {
@@ -199,6 +339,49 @@ async function ejecutar(llamada) {
   }
 }
 ```
+
+**El mismo esqueleto en Python.** En Python, para describir y validar los datos de una herramienta se usa casi siempre **Pydantic**, una librería muy popular en trabajos de IA:
+
+```python
+from pydantic import BaseModel
+
+class EntradaBusqueda(BaseModel):
+    consulta: str
+    max_resultados: int = 5
+
+HERRAMIENTAS = {
+    "buscar_docs": {
+        "descripcion": (
+            "Busca en la documentación del producto. Úsala para preguntas sobre "
+            "cómo funciona el producto. Devuelve título, enlace y un fragmento."
+        ),
+        "esquema": EntradaBusqueda,
+        "fn": buscar_docs,
+    },
+}
+
+def ejecutar(llamada):
+    h = HERRAMIENTAS.get(llamada.nombre)
+    if h is None:
+        return {"ok": False, "error": f"no existe la herramienta {llamada.nombre}"}
+    try:
+        args = h["esquema"](**llamada.argumentos)       # primero validar
+        return {"ok": True, "datos": h["fn"](**args.model_dump())}
+    except Exception as e:
+        return {"ok": False, "error": f"{type(e).__name__}: {e}"}   # el error vuelve al modelo
+```
+
+**Cómo se lee:**
+- `class EntradaBusqueda(BaseModel):` crea un **molde** de datos. `consulta: str` dice "tiene que haber un texto llamado consulta"; `max_resultados: int = 5` dice "un número entero, y si no viene, vale 5". Si el modelo manda algo que no encaja, Pydantic **lanza un error** solo.
+- `HERRAMIENTAS = { ... }` es un **diccionario**: lo mismo que un objeto de JavaScript, con las claves entre comillas.
+- `.get(llamada.nombre)` busca en el diccionario y, si no existe, da `None` (el `null` de Python).
+- `is None` se lee "es nada".
+- `f"no existe {llamada.nombre}"` es una **f-string**: lo mismo que `` `no existe ${llamada.nombre}` `` en JavaScript.
+- `**llamada.argumentos` "desarma" el diccionario y pasa cada clave como un dato con nombre: `{"consulta": "precios"}` se vuelve `consulta="precios"`.
+- `try: … except Exception as e:` es el `try { … } catch (e) { … }` de JavaScript.
+- `.model_dump()` convierte el molde ya validado de vuelta en un diccionario.
+
+> 🌎 **En la vida real:** el molde de Pydantic es como el formulario de la aduana: si llenas "edad" con letras, el agente de aduana te lo devuelve **en la ventanilla**, antes de que entres al país. Así el error no llega adentro.
 
 **Fíjate en el camino del error.** Una herramienta que **revienta** mata el ciclo. Una herramienta que **devuelve un error ordenado** le da al modelo la oportunidad de recuperarse: probar con otros datos, elegir otra herramienta o explicarle al usuario qué pasó.
 
@@ -244,7 +427,7 @@ Paso 1 ✓ hecho · Paso 2 ✓ hecho · Paso 3 … corriendo · Paso 4 ○ pendi
 
 **Planificar y ejecutar contra ReAct:** ReAct decide **un paso a la vez**: es flexible, pero puede dar vueltas. Planificar **se compromete con una estructura** desde el principio: es eficiente y fácil de auditar, pero se puede comprometer con un plan malo. Lo que se usa en producción es **un híbrido**: planificar primero, ejecutar cada paso con un ciclo ReAct corto y replanificar en puntos de control.
 
-**Esqueleto de código:**
+**Esqueleto de código (JavaScript):**
 
 ```js
 // El plan es un objeto, no un texto suelto.
@@ -262,6 +445,43 @@ for (const paso of plan.pasos) {
   guardar(paso.id, resultado.datos);
 }
 ```
+
+**El mismo esqueleto en Python:**
+
+```python
+from pydantic import BaseModel
+
+class Paso(BaseModel):
+    id: int
+    descripcion: str
+    herramienta: str | None = None
+    depende_de: list[int] = []
+    estado: str = "pendiente"
+
+class Plan(BaseModel):
+    objetivo: str
+    pasos: list[Paso]
+
+plan = planificador(objetivo, formato_salida=Plan)   # el modelo devuelve un Plan válido
+
+for paso in plan.pasos:
+    contexto = resultados_de(paso.depende_de)
+    resultado = ejecutor(paso, contexto)             # un ciclo ReAct chico
+    if resultado.fallo:
+        plan = replanificador(objetivo, plan, resultado)   # rehace lo que falta
+        continue
+    paso.estado = "hecho"
+    guardar(paso.id, resultado.datos)
+```
+
+**Cómo se lee:**
+- `str | None = None` → "un texto **o** nada, y por defecto nada". Igual que `string | null` en TypeScript.
+- `list[int]` → "una lista de números enteros".
+- `list[Paso]` → "una lista de Pasos": un molde puede tener adentro otros moldes.
+- `formato_salida=Plan` → le pides al modelo que su respuesta **encaje en el molde** `Plan`. Así el plan es **datos**, no un párrafo.
+- `continue` → "salta al siguiente paso del `for`", igual que en JavaScript.
+
+> 🌎 **En la vida real:** el molde `Plan` es como la planilla de obra con columnas fijas (número, tarea, herramienta, depende de, estado). Nadie la llena como una carta: se llena casilla por casilla, y así cualquiera la puede leer y controlar.
 
 **Cuándo usarlo:**
 - Tareas de varios pasos cuya **forma se conoce** de antemano: informes de investigación, migraciones de datos, cambios en varios archivos de código.
@@ -306,7 +526,7 @@ Tope de intentos: después se escala, o se devuelve el mejor borrador marcado.
 
 > 💡 **Idea:** "determinístico" quiere decir que con lo mismo, da siempre lo mismo. Tus 400 pruebas de Copiloto (Tema 02) son un crítico determinístico: no opinan, verifican.
 
-**Esqueleto de código:**
+**Esqueleto de código (JavaScript):**
 
 ```js
 let borrador = await generador(tarea);
@@ -324,6 +544,42 @@ for (let intento = 0; intento < MAX_INTENTOS; intento++) {
 return marcarParaRevision(mejor.borrador);
 ```
 
+**El mismo esqueleto en Python:**
+
+```python
+from pydantic import BaseModel
+
+class Veredicto(BaseModel):
+    paso: bool
+    problemas: list[str]
+    puntaje: int   # de 1 a 10
+
+borrador = generador(tarea)
+mejor = (0, borrador)
+
+for intento in range(MAX_INTENTOS):
+    veredicto = critico(tarea, borrador, criterios=CRITERIOS, formato_salida=Veredicto)
+    pruebas = correr_pruebas(borrador) if es_codigo(borrador) else None
+    if veredicto.paso and (pruebas is None or pruebas.ok):
+        return borrador
+
+    correcciones = veredicto.problemas + (pruebas.fallas if pruebas else [])
+    mejor = max(mejor, (veredicto.puntaje, borrador))
+    borrador = generador(tarea, anterior=borrador, correcciones=correcciones)
+
+return marcar_para_revision(mejor[1], correcciones)
+```
+
+**Cómo se lee:**
+- `bool` es el `boolean` de Python. Sus valores se escriben con mayúscula: `True` y `False`.
+- `x if condición else y` es el "si no" en una línea: `correr_pruebas(borrador) if es_codigo(borrador) else None` = "si es código, corre las pruebas; si no, nada". En JavaScript sería `esCodigo(b) ? correrPruebas(b) : null`.
+- `and` y `or` son el `&&` y el `||` de JavaScript. Python los escribe con palabras.
+- `(0, borrador)` es una **tupla**: una pareja de valores que no cambia. `max(mejor, (puntaje, borrador))` se queda con la pareja de **puntaje más alto**, porque Python compara las tuplas por su primer valor.
+- `mejor[1]` es el segundo valor de la pareja (las posiciones empiezan en 0, como en JavaScript).
+- En Python, las pruebas automáticas se hacen normalmente con **pytest**, que cumple el mismo papel que Jest o `node:test`.
+
+> 🌎 **En la vida real:** la tupla `(puntaje, borrador)` es como la nota pegada con un clip a cada examen. Al final, el profesor no relee todo: mira los clips y se queda con el examen de nota más alta.
+
 **Cuándo usarlo:**
 - La calidad importa más que la velocidad: código, documentos largos, contenido para clientes, cualquier cosa con criterios.
 - Puedes expresar el éxito como **criterios que se pueden revisar**.
@@ -340,7 +596,7 @@ return marcarParaRevision(mejor.borrador);
 
 > 🎤 **Entrevista:** la reflexión es un ciclo **evaluador-optimizador** (*evaluator-optimizer*). Conoce ese nombre. Y sabe que el evaluador puede ser un modelo, un conjunto de pruebas o una persona, y que los sistemas más fuertes **combinan los tres**.
 
-**Ejercicio para construir:** envuelve una generación de código en un ciclo de reflexión donde el crítico son **las pruebas** (en tu caso, Jest o `node:test`). Genera una función a partir de una descripción, corre las pruebas, devuelve las fallas, tope de tres intentos. Mide cuántas pasan con y sin el ciclo, en 20 descripciones.
+**Ejercicio para construir:** envuelve una generación de código en un ciclo de reflexión donde el crítico son **las pruebas**: **pytest** en Python (lo que usa la guía), o Jest / `node:test` en JavaScript. Genera una función a partir de una descripción, corre las pruebas, devuelve las fallas, tope de tres intentos. Mide cuántas pasan con y sin el ciclo, en 20 descripciones.
 
 ### 2.4 Enrutamiento
 
@@ -363,7 +619,7 @@ Cada especialista tiene su prompt, sus herramientas y su modelo. El enrutador es
 4. **Responder.** Su resultado vuelve al usuario, a veces pasando por un paso común de formato.
 5. **Plan B.** Poca confianza o categoría desconocida → un encargado general o **una pregunta para aclarar**. **Nunca** a un especialista al azar.
 
-**Esqueleto de código:**
+**Esqueleto de código (JavaScript):**
 
 ```js
 const ESPECIALISTAS = {
@@ -380,6 +636,38 @@ if (ruta.categoria === 'no_claro' || ruta.confianza < 0.7) {
 }
 return ESPECIALISTAS[ruta.categoria](pedido, ruta.datos, estado);
 ```
+
+**El mismo esqueleto en Python:**
+
+```python
+from typing import Literal
+from pydantic import BaseModel
+
+class Ruta(BaseModel):
+    categoria: Literal["codigo", "investigacion", "soporte", "no_claro"]
+    confianza: float
+    datos: dict = {}
+
+ESPECIALISTAS = {
+    "codigo": agente_codigo,                 # herramientas: correr_codigo, leer_repo
+    "investigacion": agente_investigacion,   # herramientas: buscar_web, traer_url
+    "soporte": agente_soporte,               # herramientas: ver_cuenta, crear_ticket
+}
+
+ruta = enrutador(pedido, formato_salida=Ruta)   # un modelo chico y rápido
+
+if ruta.categoria == "no_claro" or ruta.confianza < 0.7:
+    return pedir_aclaracion(pedido)
+return ESPECIALISTAS[ruta.categoria](pedido, ruta.datos, estado)
+```
+
+**Cómo se lee:**
+- `Literal["codigo", "investigacion", ...]` → la categoría **solo** puede ser una de esas palabras. Es la "lista cerrada de opciones" de la parte 4.4: el modelo no puede inventar una categoría nueva.
+- `float` → un número con decimales (la confianza va de 0 a 1).
+- `==` → en Python se compara con **dos** iguales (no tres como en JavaScript).
+- `ESPECIALISTAS[ruta.categoria](...)` → busca en el diccionario la función del especialista y **la llama** en el mismo momento.
+
+> 🌎 **En la vida real:** el `Literal` es como el menú de la recepción del hospital con botones fijos: "traumatología", "cardiología", "pediatría", "no sé". La recepcionista no puede escribir a mano "la sala del fondo": solo puede apretar uno de esos botones.
 
 **Cuándo usarlo:**
 - Las entradas caen en categorías distintas que necesitan prompts, herramientas o modelos distintos.
@@ -421,7 +709,7 @@ Los trabajadores le reportan al supervisor, nunca entre ellos. Cada uno devuelve
 
 **Supervisor-trabajadores contra orquestador-trabajadores:** el primero tiene un **equipo fijo** de especialistas con nombre. El segundo **crea trabajadores en el momento**, y el orquestador decide cuántas partes hay. La mecánica es la misma; la diferencia es si el equipo se diseña antes (más predecible) o se arma para cada tarea (más flexible).
 
-**Esqueleto de código:**
+**Esqueleto de código (JavaScript):**
 
 ```js
 // decision = { delegaciones: [{ trabajador: 'investigador'|'analista'|'redactor', encargo, entregar }] }
@@ -435,6 +723,40 @@ const resultados = await Promise.all(                      // todos al mismo tie
 
 const final = await sintetizador(tarea, resultados);       // reconciliar los choques de forma explícita
 ```
+
+**El mismo esqueleto en Python.** Para correr varios trabajadores **al mismo tiempo**, Python usa `asyncio`:
+
+```python
+import asyncio
+from typing import Literal
+from pydantic import BaseModel
+
+class Delegacion(BaseModel):
+    trabajador: Literal["investigador", "analista", "redactor"]
+    encargo: str
+    entregar: str
+
+class DecisionSupervisor(BaseModel):
+    delegaciones: list[Delegacion]
+
+async def correr_supervisor(tarea):
+    decision = await supervisor(tarea, formato_salida=DecisionSupervisor)
+
+    resultados = await asyncio.gather(*[            # todos al mismo tiempo
+        TRABAJADORES[d.trabajador].correr(d.encargo, contexto=compartido, rastro=rastro.hijo(d.trabajador))
+        for d in decision.delegaciones
+    ])
+
+    return await sintetizador(tarea, resultados)   # reconciliar los choques de forma explícita
+```
+
+**Cómo se lee:**
+- `async def` y `await` funcionan igual que `async function` y `await` en JavaScript (Tema 17, parte 7).
+- `asyncio.gather(...)` es el `Promise.all(...)` de Python: espera a que terminen **todos**.
+- `[ … for d in decision.delegaciones ]` es una **lista por comprensión**: arma una lista recorriendo otra, en una línea. Es el `.map(...)` de JavaScript.
+- El `*` delante de la lista la "desarma" y le pasa cada elemento por separado a `gather`.
+
+> 🌎 **En la vida real:** `asyncio.gather` es como poner tres ollas en tres hornallas al mismo tiempo, en vez de cocinar una, esperar, y recién poner la otra. La cena sale en el tiempo de la olla más lenta, no en la suma de las tres.
 
 > 💡 **Idea:** `Promise.all` es el `await` del Tema 17, pero para **varias** promesas a la vez: espera a que lleguen todas.
 
@@ -705,6 +1027,33 @@ Las herramientas son **la interfaz entre el modelo y el mundo**. **Muchas fallas
 }
 ```
 
+**En Python** la misma definición es un **diccionario** con la misma forma, y se le pasa al modelo en la lista de herramientas:
+
+```python
+buscar_pedido = {
+    "name": "buscar_pedido",
+    "description": (
+        "Busca UN pedido por su número. Úsala cuando el usuario menciona un número de pedido "
+        "o pregunta por una compra concreta. NO la uses para buscar pedidos por fecha o por "
+        "cliente: para eso está buscar_pedidos. Devuelve: estado, productos, totales y "
+        "movimientos del envío. Solo lectura."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "id_pedido": {
+                "type": "string",
+                "pattern": "^PED-[0-9]{8}$",
+                "description": "Número de pedido con el formato PED-12345678",
+            },
+        },
+        "required": ["id_pedido"],
+    },
+}
+```
+
+- Los textos largos entre paréntesis `( "…" "…" )` se **pegan solos**: Python junta los pedazos en un solo texto. Sirve para que la descripción no quede en una línea larguísima.
+
 Fíjate: dice **cuándo usarla**, **cuándo no** y **qué devuelve**; el `pattern` hace imposible pasar un número mal formado, y avisa que es **solo lectura**.
 
 ### 4.3 Manejo del estado
@@ -737,6 +1086,35 @@ function guardarPunto(estado: EstadoAgente): void {
   almacen.poner(`ejecuciones:${estado.idEjecucion}:paso:${estado.paso}`, serializar(estado));
 }
 ```
+
+**El mismo estado en Python:**
+
+```python
+from typing import Any, TypedDict
+
+class EstadoAgente(TypedDict):
+    id_ejecucion: str
+    mensajes: list[dict]             # estado de la conversación
+    plan: Plan | None                # estado de la tarea
+    resultados: dict[int, Any]
+    paso: int
+    tokens_usados: int
+    costo_usd: float
+    esperando_persona: bool
+    final: str | None
+    version_esquema: int
+
+def guardar_punto(estado: EstadoAgente) -> None:
+    almacen.poner(f"ejecuciones:{estado['id_ejecucion']}:paso:{estado['paso']}", serializar(estado))
+```
+
+**Cómo se lee:**
+- `TypedDict` describe un **diccionario con campos fijos y tipos**: es el `type EstadoAgente = { ... }` de TypeScript.
+- `dict[int, Any]` → un diccionario cuyas claves son números y sus valores pueden ser cualquier cosa (`Any`).
+- `-> None` después de los paréntesis dice **qué devuelve** la función: aquí, nada. Es el `: void` de TypeScript.
+- `estado['paso']` → así se lee un dato de un diccionario en Python (con corchetes y comillas, no con punto).
+
+> 🌎 **En la vida real:** el `TypedDict` es la ficha de la partida guardada del videojuego, con casillas fijas: nivel, vidas, objetos. Si mañana agregas una casilla nueva ("mascota"), subes la `version_esquema` para que las partidas viejas sigan cargando.
 
 > 💡 **Idea:** es TypeScript, como tu app (Tema 01). Los tipos aquí hacen el mismo trabajo: si alguien escribe mal un campo, se entera antes de correrlo.
 
@@ -861,6 +1239,21 @@ Califica la respuesta en cada criterio de 1 a 5. Cita las pruebas.
 Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "reprueba"}
 `;
 ```
+
+**El mismo juez en Python:**
+
+```python
+CRITERIOS_JUEZ = """
+Califica la respuesta en cada criterio de 1 a 5. Cita las pruebas.
+1. Correcta: cada dato está apoyado por los resultados de las herramientas.
+2. Completa: responde toda la pregunta del usuario.
+3. Segura: no rompe reglas ni filtra datos internos.
+4. Formato: cumple la estructura pedida.
+Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "reprueba"}
+"""
+```
+
+- Las **tres comillas** `"""…"""` crean un texto de varias líneas, como las comillas invertidas de JavaScript.
 
 ### 5.4 Las métricas que importan
 
@@ -1151,12 +1544,12 @@ Las fuentes en las que se apoya la guía (los títulos van en inglés, como se p
 4. Tu agente acierta el 80% de las veces. ¿Cuál es la probabilidad de que acierte **5 veces seguidas** (pass^5)?
 5. Un agente de correo **lee tus correos**, **lee páginas web** que vienen en los correos y **puede responder correos**. ¿Qué peligro tiene? ¿Qué pata de la trifecta quitarías?
 
-**B. Con código (los ejercicios de la guía, en JavaScript)**
+**B. Con código (los ejercicios de la guía). Hazlos primero en Python, que es lo que piden los trabajos de IA; si te trabas, hazlos en JavaScript y después pásalos a Python.**
 6. **ReAct** (2.1): tres herramientas (búsqueda, calculadora, fecha de hoy), pregunta por el próximo feriado, registra cada paso, y después quita la herramienta de la fecha.
 7. **Planificación** (2.2): plan de 3 a 6 búsquedas en JSON, imprimir el estado de cada paso, meter una falla a propósito y ver que se recupera.
-8. **Reflexión** (2.3): generar una función y usar `node:test` como crítico, tope de 3 intentos, medir en 20 casos con y sin el ciclo.
+8. **Reflexión** (2.3): generar una función y usar `node:test` como crítico, o **pytest** en Python como crítico, tope de 3 intentos, medir en 20 casos con y sin el ciclo.
 9. **Enrutamiento** (2.4): tres caminos, umbral de confianza, 30 pedidos de prueba con 5 ambiguos, medir aciertos.
-10. **Supervisor** (2.5): tres trabajadores con `Promise.all`, rastrear la ejecución y encontrar el tramo más caro.
+10. **Supervisor** (2.5): tres trabajadores con `asyncio.gather` (Python) o `Promise.all` (JavaScript), rastrear la ejecución y encontrar el tramo más caro.
 
 ## Respuestas (míralas solo después de intentarlo)
 
