@@ -9,10 +9,7 @@ const CON_ENTREVISTA = [
 ];
 
 export const CLASES = {
-  '01': {
-    carpeta: '01-leer-codigo', titulo: 'Leer código', meta: 'Leer una función de la app y decir qué hace',
-    docs: [{ archivo: 'CLASE-GUIADA.md', titulo: 'Clase guiada' }, { archivo: 'LECCION.md', titulo: 'Resumen' }],
-  },
+  '01': { carpeta: '01-leer-codigo', titulo: 'Leer código', meta: 'Leer una función de la app y decir qué hace', docs: LECCION },
   '02': { carpeta: '02-pruebas-automaticas', titulo: 'Pruebas automáticas', meta: 'Entender las más de 400 pruebas de la app y correrlas', docs: LECCION },
   '03': { carpeta: '03-tu-primera-prueba', titulo: 'Mi primera prueba', meta: 'Escribir una prueba yo solo', docs: LECCION },
   '04': { carpeta: '04-ci', titulo: 'CI', meta: 'Explicar qué revisa la máquina en cada subida', docs: LECCION },
@@ -39,6 +36,16 @@ export const CLASES = {
   '18': { carpeta: '18-como-hice-mi-mapa', titulo: 'Cómo hice mi mapa de estudios', meta: 'Esta misma página, explicada por dentro', docs: LECCION },
   '19': { carpeta: '19-agentes-de-ia', titulo: 'Agentes de IA', meta: 'Los patrones para diseñar, medir y publicar agentes', docs: LECCION },
 };
+
+// Las clases que ya tienen su clase guiada (CLASE-GUIADA.md): va primero,
+// y la lección queda como "Resumen" para repasar.
+const GUIADAS = ['01', '02', '03', '04'];
+for (const n of GUIADAS) {
+  CLASES[n].docs = [
+    { archivo: 'CLASE-GUIADA.md', titulo: 'Clase guiada' },
+    ...CLASES[n].docs.map((d) => (d.archivo === 'LECCION.md' ? { ...d, titulo: 'Resumen' } : d)),
+  ];
+}
 
 export const ETAPAS = [
   {

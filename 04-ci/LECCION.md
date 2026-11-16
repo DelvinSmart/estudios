@@ -100,11 +100,11 @@ on:
 - `on: push` significa que corre **en cada subida**.
 - `pull_request` significa que corre también cuando alguien propone un cambio (eso se ve en el Tema 06).
 
-### Las 5 revisiones son 5 trabajos
+### Las revisiones son 6 trabajos
 
-> 🌎 **En la vida real:** en un taller grande, cuando llega tu carro, 5 mecánicos lo revisan **a la vez**: uno el motor, otro los frenos, otro las luces, otro la electricidad y otro la carrocería. Así tarda 4 minutos y no 20. Cada uno tiene su propio banco de herramientas (su máquina).
+> 🌎 **En la vida real:** en un taller grande, cuando llega tu carro, 6 mecánicos lo revisan **a la vez**: motor, frenos, luces, electricidad, carrocería y el GPS. Así tarda 4 minutos y no 20. Cada uno tiene su propio banco de herramientas (su máquina).
 
-Cuando el mapa dice "5 revisiones en cada subida", habla de estos 5 trabajos. Corren **al mismo tiempo**, cada uno en su máquina:
+Al 16/11/2026 son **6 trabajos** (antes eran 5; `webapp` se agregó con la web del Tema 13). Corren **al mismo tiempo**, cada uno en su máquina:
 
 | # | Trabajo | Qué revisa |
 |---|---|---|
@@ -113,6 +113,7 @@ Cuando el mapa dice "5 revisiones en cada subida", habla de estos 5 trabajos. Co
 | 3 | `functions` | El servidor (Cloud Functions): sus pruebas |
 | 4 | `reglas` | Las reglas de seguridad de Firestore: que nadie lea datos ajenos |
 | 5 | `panel` | Que el panel web se pueda armar |
+| 6 | `webapp` | Que la web del usuario se pueda armar y pasen sus pruebas |
 
 ### Trabajo 1: `app` (el más grande)
 
@@ -243,7 +244,7 @@ Después vienen los pasos de revisión, en orden:
    - ✅ **verde**: todo pasó.
    - ❌ **rojo**: algo falló.
    - 🟡 **amarillo**: todavía está corriendo.
-4. Toca una para ver los 5 trabajos, y toca un trabajo para ver cada paso. El paso que falló está marcado en rojo y abajo está el error.
+4. Toca una para ver los 6 trabajos, y toca un trabajo para ver cada paso. El paso que falló está marcado en rojo y abajo está el error.
 
 **Tus últimas subidas (10/11/2026):** las 6 últimas pasaron, cada una en unos 4 minutos.
 
@@ -305,9 +306,9 @@ Por eso los scripts como `check:design` están hechos para **terminar con error*
 
 ## Ejercicios
 
-> 🌎 **En la vida real:** es como recorrer el taller con el jefe y señalar a cada uno de los 5 mecánicos diciendo con tus palabras qué hace cada uno.
+> 🌎 **En la vida real:** es como recorrer el taller con el jefe y señalar a cada uno de los 6 mecánicos diciendo con tus palabras qué hace cada uno.
 
-1. Abre `.github/workflows/ci.yml` en tu app y busca los 5 trabajos. Escribe con tus palabras qué hace cada uno.
+1. Abre `.github/workflows/ci.yml` en tu app y busca los 6 trabajos. Escribe con tus palabras qué hace cada uno.
 2. Entra a la pestaña **Actions** de tu repositorio y abre la última subida. ¿Cuánto tardó? ¿Cuál fue el trabajo más lento?
 3. En la terminal de la app corre `npm run check:size`. ¿Qué dice?
 4. Pregunta: si cambias un color a mano en una pantalla (`color: '#FF0000'`), ¿qué paso del CI falla?
@@ -332,7 +333,7 @@ Por eso los scripts como `check:design` están hechos para **terminar con error*
 > Integración continua: en cada subida, una máquina limpia descarga el código, lo instala desde cero y corre las revisiones automáticas. Si algo falla, el equipo lo sabe en minutos.
 
 **¿Qué revisa el CI de tu app?**
-> Cinco trabajos en paralelo: la app (tipos, diseño, ciclos, tamaño, secretos, pruebas y que se pueda armar para Android e iOS), las pruebas en Kotlin del módulo de Android, las del servidor, las de las reglas de seguridad de Firestore y que el panel web se pueda armar.
+> Seis trabajos en paralelo: la app (tipos, diseño, ciclos, tamaño, secretos, pruebas y que se pueda armar para Android e iOS), las pruebas en Kotlin del módulo de Android, las del servidor, las de las reglas de seguridad de Firestore, que el panel web se pueda armar, y la web del usuario con sus pruebas.
 
 **¿Qué diferencia hay entre CI y CD?**
 > CI revisa el código en cada subida. CD (entrega continua) además lo publica solo. Mi app tiene CI; la publicación la hago yo.
