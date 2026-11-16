@@ -16,7 +16,7 @@ en una entrevista.
 
 ## Las clases, en orden
 
-Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14, 18 y 20) y al final la IA (19). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
+Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14, 18, 20 y 21) y al final la IA (19). Aparte, con su propio certificado, está el curso de **seguridad** (22, 23 y 24). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
 explicación, los ejemplos, los ejercicios y las respuestas.
 
 | # | Clase | Qué voy a saber hacer al terminar |
@@ -40,13 +40,17 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 | 14 | [¿Qué dice la Biblia? por dentro](14-que-dice-la-biblia-por-dentro/README.md) | Explicar cómo se muestran versículos de Logos y Lockman sin copiarlos, el medidor de citas, las fuentes, el griego y el motor de diseño con su candado, y todo lo que no funcionó |
 | 18 | [Cómo hice mi mapa de estudios](18-como-hice-mi-mapa/LECCION.md) | Explicar esta misma página por dentro: el enrutador, la lectura del Markdown, el progreso y la publicación |
 | 20 | [Publicar e instalar](20-publicar-e-instalar/LECCION.md) | Subir el código a GitHub, las páginas a GitHub Pages, el servidor a Firebase, la app al Samsung y al iPhone, y el AAB a Google Play, cuidando la llave de firma |
+| 21 | [El certificado verificable](21-certificado-verificable/LECCION.md) | Login con correo de Gmail, progreso en Firestore, reglas que no se dejan engañar y cómo se prueban atacándolas |
+| 22 | [Seguridad básica](22-seguridad-basica/LECCION.md) | Ética y ley, pensar como atacante, contraseñas, secretos, phishing, el navegador y HTTPS (curso de seguridad) |
+| 23 | [Seguridad intermedia](23-seguridad-intermedia/LECCION.md) | OWASP Top 10: IDOR, inyección, XSS, sesiones, CSRF, dependencias y prompt injection (curso de seguridad) |
+| 24 | [Seguridad avanzada](24-seguridad-avanzada/LECCION.md) | Auditar un sistema entero, reglas de Firebase como atacante, abuso de costos, herramientas, reportes y tu camino (curso de seguridad) |
 | 19 | [Agentes de IA](19-agentes-de-ia/LECCION.md) | Los patrones para diseñar, evaluar y publicar agentes (basada en la guía de Bashiri Smith), con las 12 preguntas de entrevista |
 
 ## Cómo estudiar cada clase
 
 **Sin IA:** cada clase tiene su **`CLASE-GUIADA.md`**: la clase completa, como si un profesor la diera, con pausas de "✋ Para y piensa", prácticas de verdadero o falso, elegir y escribir (hay que acertar todas para prender el bombillo 💡 de la parte) y la simulación de entrevista. En el mapa (`index.html`) es la primera pestaña de cada clase. La `LECCION.md` queda como resumen. En la clase 19 (agentes) la lección misma es la clase completa, con los ejemplos en JavaScript y en Python.
 
-**Certificado:** al prender todos los bombillos del mapa, la pantalla 🎓 *Certificado de finalización* (`#/certificado`) lo genera con tu nombre, la fecha y un código, para imprimir o guardar en PDF. Lo emite el propio curso; no es un título oficial.
+**Certificados verificables:** cada curso (programación y seguridad) tiene el suyo. Hay que entrar con una cuenta de Gmail verificada (`#/entrar`): así cada bombillo queda en Firebase con la hora del servidor, y al completar todas las partes se emite el certificado con un código (`ME-…` o `SE-…`) que cualquiera comprueba en `#/verificar/CÓDIGO`. Cómo funciona por dentro: clase 21 y `firebase/LEEME.md`. Lo emite el propio curso; no es un título oficial.
 
 **Con una IA:** sigue los pasos de abajo y [AGENTS.md](AGENTS.md).
 

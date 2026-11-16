@@ -1,6 +1,8 @@
 # Firebase del Mapa de estudios
 
-Proyecto: **mapa-estudios-ds** (separado de Copiloto). Solo sirve para que el certificado se pueda **verificar**.
+Proyecto: **mapa-estudios-ds** (separado de Copiloto). Solo sirve para que los certificados se puedan **verificar**.
+
+Datos: `cursos/{curso}/progreso/{uid}`, `cursos/{curso}/emitidos/{uid}` y `certificados/{codigo}`. Solo cuentas de Gmail con el correo verificado.
 
 | Archivo | Para qué |
 |---|---|
@@ -8,7 +10,7 @@ Proyecto: **mapa-estudios-ds** (separado de Copiloto). Solo sirve para que el ce
 | `generar-reglas.mjs` | Arma `firestore.rules` metiendo la lista real de las partes. |
 | `firestore.rules` | Lo que se sube a Firebase (generado, no lo edites a mano). |
 | `partes.mjs` | Lee los `.md` y lista los ids de todas las partes. |
-| `pruebas/reglas.test.mjs` | 24 intentos de hacer trampa; todos tienen que fallar. |
+| `pruebas/reglas.test.mjs` | 30 pruebas: las trampas tienen que fallar y lo correcto tiene que pasar. |
 
 ## Si agregas o quitas partes (títulos `##`) de una clase
 

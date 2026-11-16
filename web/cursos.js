@@ -35,6 +35,10 @@ export const CLASES = {
   '17': { carpeta: '17-javascript', titulo: 'JavaScript en la página', meta: 'Hacer que la página responda y cambie', docs: LECCION },
   '18': { carpeta: '18-como-hice-mi-mapa', titulo: 'Cómo hice mi mapa de estudios', meta: 'Esta misma página, explicada por dentro', docs: LECCION },
   '20': { carpeta: '20-publicar-e-instalar', titulo: 'Publicar e instalar', meta: 'Subir a GitHub, a Pages, a Firebase, a tus teléfonos y a Google Play', docs: LECCION },
+  '21': { carpeta: '21-certificado-verificable', titulo: 'El certificado verificable', meta: 'Login con correo, Firebase y reglas que no se dejan engañar', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '22': { carpeta: '22-seguridad-basica', titulo: 'Seguridad básica', meta: 'Pensar como atacante: contraseñas, secretos, phishing y el navegador', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '23': { carpeta: '23-seguridad-intermedia', titulo: 'Seguridad intermedia', meta: 'Las vulnerabilidades web más comunes y cómo se cierran', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '24': { carpeta: '24-seguridad-avanzada', titulo: 'Seguridad avanzada', meta: 'Auditar un sistema entero, como hicimos con Copiloto', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '19': { carpeta: '19-agentes-de-ia', titulo: 'Agentes de IA', meta: 'Los patrones para diseñar, medir y publicar agentes', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
 };
 
@@ -72,11 +76,38 @@ export const ETAPAS = [
   {
     id: 'proyectos', icono: '🚀', titulo: 'Mis proyectos por dentro',
     desc: 'Todo lo anterior, aplicado a lo que yo construí.',
-    clases: ['12', '13', '14', '18', '20'],
+    clases: ['12', '13', '14', '18', '20', '21'],
   },
   {
     id: 'ia', icono: '🤖', titulo: 'IA y agentes',
     desc: 'Lo último: cómo se trabaja con inteligencia artificial y agentes.',
     clases: ['19'],
   },
+  {
+    id: 'seguridad', curso: 'seguridad', icono: '🛡️', titulo: 'Seguridad: pensar como hacker',
+    desc: 'Un curso aparte, con su propio certificado: cómo atacan y cómo se defiende un sistema.',
+    clases: ['22', '23', '24'],
+  },
 ];
+
+// Los cursos: cada uno tiene su propio progreso en la nube y su propio certificado.
+// El prefijo va al comienzo del código de verificación (ME-…, SE-…).
+export const CURSOS = {
+  programacion: {
+    id: 'programacion', prefijo: 'ME', corto: 'Mapa de estudios',
+    nombre: 'Mapa de estudios: programación, de los fundamentos a los agentes de IA',
+  },
+  seguridad: {
+    id: 'seguridad', prefijo: 'SE', corto: 'Seguridad',
+    nombre: 'Seguridad: pensar como hacker, de lo básico a auditar un sistema',
+  },
+};
+
+export function cursoDeEtapa(etapa) {
+  return etapa.curso || 'programacion';
+}
+
+// Las clases de un curso, en orden.
+export function clasesDelCurso(curso) {
+  return ETAPAS.filter((e) => cursoDeEtapa(e) === curso).flatMap((e) => e.clases);
+}

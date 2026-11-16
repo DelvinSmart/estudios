@@ -583,3 +583,46 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
     -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
+
+/* ---------- 13. La cuenta: entrar, crear, recuperar (aspecto de ventana de terminal) ---------- */
+.cuenta { display: grid; place-items: start center; padding: 28px 0 40px; }
+.cuenta-tarjeta { width: min(100%, 460px); background: var(--tarjeta); border: 1px solid var(--borde-fuerte); border-radius: 14px; box-shadow: var(--sombra); overflow: hidden; }
+.cuenta-barra { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: var(--fondo-2); border-bottom: 1px solid var(--borde); font-size: 0.78rem; color: var(--tenue); }
+.cuenta-barra i { width: 11px; height: 11px; border-radius: 50%; background: var(--borde-fuerte); }
+.cuenta-barra i:nth-child(1) { background: var(--rojo); } .cuenta-barra i:nth-child(2) { background: var(--amarillo); } .cuenta-barra i:nth-child(3) { background: var(--acento); }
+.cuenta-barra span { margin-left: 8px; }
+.cuenta-barra span::before { content: '~$ '; color: var(--acento); }
+.cuenta-cuerpo { padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 12px; }
+.cuenta-cuerpo .titulo-medio { margin: 0; }
+.cuenta-cuerpo .bajada { margin: 0; font-size: 0.95rem; }
+.cuenta-campo { display: flex; flex-direction: column; gap: 6px; }
+.cuenta-campo > span:first-child { font-size: 0.78rem; color: var(--tenue); }
+.cuenta-campo > span:first-child::before { content: '> '; color: var(--acento); }
+.cuenta-campo input, .clave input { width: 100%; padding: 11px 12px; border-radius: 10px; border: 1px solid var(--borde); background: var(--fondo-2); color: var(--texto); font: inherit; }
+.cuenta-campo input:focus, .clave input:focus { outline: 2px solid color-mix(in srgb, var(--acento) 55%, transparent); border-color: var(--acento); }
+.clave { position: relative; display: block; }
+.clave input { padding-right: 76px; }
+.ver-clave { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: 0; color: var(--acento-2); font-size: 0.75rem; cursor: pointer; padding: 6px 8px; }
+.ancho { width: 100%; justify-content: center; text-align: center; margin-top: 0 !important; }
+.separador { display: flex; align-items: center; gap: 10px; color: var(--tenue); font-size: 0.75rem; }
+.separador::before, .separador::after { content: ''; flex: 1; border-top: 1px dashed var(--borde-fuerte); }
+.boton-google { width: 100%; display: inline-flex; justify-content: center; align-items: center; gap: 10px; margin-top: 0 !important; }
+.boton-google .g { font: 800 1rem var(--sans); color: var(--acento-2); }
+.opcion { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border: 1px solid var(--borde); border-radius: 12px; background: var(--fondo-2); color: var(--texto); text-decoration: none; }
+.opcion:hover { border-color: var(--acento); }
+.opcion span { font-size: 0.85rem; color: var(--tenue); }
+.cuenta-nota { margin: 0; font-size: 0.82rem; color: var(--tenue); line-height: 1.5; padding: 10px 12px; border-left: 3px solid var(--amarillo); background: color-mix(in srgb, var(--amarillo) 7%, transparent); border-radius: 0 8px 8px 0; }
+.cuenta-ok { margin: 0; font-size: 0.88rem; padding: 10px 12px; border-left: 3px solid var(--acento); background: color-mix(in srgb, var(--acento) 8%, transparent); border-radius: 0 8px 8px 0; }
+.cuenta-error { margin: 0; min-height: 1em; font-size: 0.82rem; color: var(--rojo); }
+.cuenta-error:empty { display: none; }
+.cuenta-ayuda { margin: -4px 0 0; text-align: right; font-size: 0.85rem; }
+.cuenta-pie { margin: 4px 0 0; text-align: center; font-size: 0.88rem; color: var(--tenue); }
+.cuenta-pasos { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; }
+.cuenta-check { display: flex; gap: 10px; align-items: flex-start; font-size: 0.9rem; margin: 6px 0; }
+.cuenta-check input { margin-top: 4px; accent-color: var(--acento); }
+.cuenta-detalle summary { cursor: pointer; color: var(--acento-2); font-size: 0.85rem; }
+.cuenta-detalle[open] { display: flex; flex-direction: column; gap: 10px; }
+.cuenta-cuerpo .datos-verificacion { margin: 0; }
+.cabeza .cuenta-campo { margin-top: 14px; max-width: 520px; }
+.cabeza .cuenta-nota { margin-top: 10px; max-width: 70ch; }
+.curso-progreso { margin-top: 30px; padding-top: 10px; border-top: 1px solid var(--borde); }

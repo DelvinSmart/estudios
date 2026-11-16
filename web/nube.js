@@ -2,8 +2,8 @@
 //
 // Para qué sirve: que el certificado se pueda VERIFICAR. El progreso del navegador
 // (guardado.js) lo puede cambiar cualquiera desde la consola; el de Firebase no,
-// porque las reglas (firebase/firestore.rules) solo aceptan un bombillo a la vez,
-// de la lista oficial, con la hora del servidor y con una espera entre uno y otro.
+// porque las reglas (firebase/firestore.rules) solo aceptan cuentas de Gmail verificadas,
+// un bombillo a la vez, de la lista oficial, con la hora del servidor y con espera entre uno y otro.
 //
 // Esta configuración NO es secreta: toda app web de Firebase la lleva a la vista.
 // Lo que protege los datos son las reglas, no esconder estos valores.
@@ -17,10 +17,12 @@ const CONFIG = {
 };
 const SDK = 'https://www.gstatic.com/firebasejs/11.10.0/';
 export const ESPERA_SEGUNDOS = 60; // igual que en firebase/generar-reglas.mjs
-const FORMATO_CODIGO = /^ME-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$/;
+const FORMATO_CODIGO = /^(ME|SE)-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$/;
+const ES_GMAIL = /^[^@\s]+@gmail\.com$/i;
 
 let cargando = null;
-let progresoCache = null; // el último progreso leído de la nube
+const progresoCache = {}; // { curso: datos } — el último progreso leído de la nube
+const oyentes = new Set();
 
 // Carga Firebase solo cuando hace falta (la primera vez que alguien lo usa).
 function cargar() {
@@ -33,9 +35,11 @@ function cargar() {
       ]);
       const app = initializeApp(CONFIG);
       const auth = A.getAuth(app);
+      auth.languageCode = 'es'; // los correos (verificar, recuperar contraseña) llegan en español
       const db = F.getFirestore(app);
-      // Esperar a saber si ya había una sesión abierta.
+      // Esperar a saber si ya había una sesión abierta; después, avisar de cada cambio.
       await new Promise((listo) => { const parar = A.onAuthStateChanged(auth, () => { parar(); listo(); }); });
+      A.onAuthStateChanged(auth, (u) => { for (const k in progresoCache) delete progresoCache[k]; oyentes.forEach((f) => f(u)); });
       return { A, F, auth, db };
     })();
     cargando.catch(() => { cargando = null; });
@@ -43,105 +47,191 @@ function cargar() {
   return cargando;
 }
 
+// ---------- la sesión ----------
+
+export function esGmail(correo) {
+  return ES_GMAIL.test(String(correo || '').trim());
+}
+
 export async function usuario() {
   const { auth } = await cargar();
   return auth.currentUser;
 }
 
-export async function entrar() {
+// Lista para usar la nube: sesión abierta, correo de Gmail y verificado.
+export function cuentaLista(u) {
+  return Boolean(u && u.emailVerified && esGmail(u.email));
+}
+
+export function alCambiarSesion(funcion) {
+  oyentes.add(funcion);
+  cargar().then(({ auth }) => funcion(auth.currentUser)).catch(() => funcion(null));
+}
+
+// A dónde vuelve la persona cuando toca el enlace del correo.
+function volverA(ruta) {
+  return { url: `${location.origin}${location.pathname}#${ruta}` };
+}
+
+export async function entrarConCorreo(correo, contrasena) {
   const { A, auth } = await cargar();
-  await A.signInWithPopup(auth, new A.GoogleAuthProvider());
-  progresoCache = null;
+  const r = await A.signInWithEmailAndPassword(auth, correo.trim(), contrasena);
+  return r.user;
+}
+
+export async function crearCuenta(nombre, correo, contrasena) {
+  const { A, auth } = await cargar();
+  if (!esGmail(correo)) throw Object.assign(new Error('solo gmail'), { code: 'propio/no-gmail' });
+  const r = await A.createUserWithEmailAndPassword(auth, correo.trim(), contrasena);
+  await A.updateProfile(r.user, { displayName: nombre });
+  await A.sendEmailVerification(r.user, volverA('/entrar/listo'));
+  return r.user;
+}
+
+export async function entrarConGoogle() {
+  const { A, auth } = await cargar();
+  const proveedor = new A.GoogleAuthProvider();
+  proveedor.setCustomParameters({ prompt: 'select_account' });
+  const r = await A.signInWithPopup(auth, proveedor);
+  if (!esGmail(r.user.email)) {
+    await A.signOut(auth);
+    throw Object.assign(new Error('solo gmail'), { code: 'propio/no-gmail' });
+  }
+  return r.user;
+}
+
+export async function reenviarVerificacion() {
+  const { A, auth } = await cargar();
+  await A.sendEmailVerification(auth.currentUser, volverA('/entrar/listo'));
+}
+
+// Después de tocar el enlace del correo: recarga la cuenta y pide un "pase" nuevo,
+// porque las reglas leen email_verified del pase (token), no de la pantalla.
+export async function refrescarCuenta() {
+  const { auth } = await cargar();
+  if (!auth.currentUser) return null;
+  await auth.currentUser.reload();
+  await auth.currentUser.getIdToken(true);
   return auth.currentUser;
+}
+
+// Siempre responde igual, exista o no la cuenta: así nadie puede usar esta pantalla
+// para averiguar qué correos están registrados.
+export async function recuperarContrasena(correo) {
+  const { A, auth } = await cargar();
+  try { await A.sendPasswordResetEmail(auth, correo.trim(), volverA('/entrar')); } catch (e) {
+    if (e.code === 'auth/invalid-email' || e.code === 'auth/too-many-requests' || e.code === 'auth/network-request-failed') throw e;
+  }
+}
+
+// Los enlaces que llegan por correo (cuando la URL de acción apunta a este sitio).
+export async function revisarEnlace(codigo) {
+  const { A, auth } = await cargar();
+  return A.checkActionCode(auth, codigo);
+}
+export async function cambiarContrasenaConEnlace(codigo, nueva) {
+  const { A, auth } = await cargar();
+  await A.confirmPasswordReset(auth, codigo, nueva);
+}
+export async function confirmarCorreoConEnlace(codigo) {
+  const { A, auth } = await cargar();
+  await A.applyActionCode(auth, codigo);
+  if (auth.currentUser) await refrescarCuenta();
+}
+
+export async function cambiarNombre(nombre) {
+  const { A, auth } = await cargar();
+  await A.updateProfile(auth.currentUser, { displayName: nombre });
 }
 
 export async function salir() {
   const { A, auth } = await cargar();
-  progresoCache = null;
   await A.signOut(auth);
 }
 
-// El progreso en la nube: { n, inicio, ultimo, partes: {id: fecha} } o null si aún no hay.
-export async function leerProgresoNube() {
+// ---------- el progreso, por curso: cursos/{curso}/progreso/{uid} ----------
+
+export async function leerProgresoNube(curso) {
   const { F, auth, db } = await cargar();
-  if (!auth.currentUser) return null;
-  const foto = await F.getDoc(F.doc(db, 'progreso', auth.currentUser.uid));
-  progresoCache = foto.exists() ? foto.data() : null;
-  return progresoCache;
+  if (!cuentaLista(auth.currentUser)) return null;
+  const foto = await F.getDoc(F.doc(db, 'cursos', curso, 'progreso', auth.currentUser.uid));
+  progresoCache[curso] = foto.exists() ? foto.data() : null;
+  return progresoCache[curso];
 }
 
-export function estaEnNube(id) {
-  return Boolean(progresoCache?.partes?.[id]);
+export function estaEnNube(curso, id) {
+  return Boolean(progresoCache[curso]?.partes?.[id]);
 }
 
 // Prende un bombillo en la nube.
-// Devuelve { ok: true } o { ok: false, motivo: 'sin-sesion' | 'ya' | 'espera' | 'error', segundos }.
-export async function prenderEnNube(id) {
+// Devuelve { ok: true } o { ok: false, motivo: 'sin-sesion' | 'sin-verificar' | 'ya' | 'espera' | 'error', segundos }.
+export async function prenderEnNube(curso, id) {
   const { F, auth, db } = await cargar();
   if (!auth.currentUser) return { ok: false, motivo: 'sin-sesion' };
-  const ref = F.doc(db, 'progreso', auth.currentUser.uid);
-  const actual = progresoCache ?? (await leerProgresoNube());
+  if (!cuentaLista(auth.currentUser)) return { ok: false, motivo: 'sin-verificar' };
+  const ref = F.doc(db, 'cursos', curso, 'progreso', auth.currentUser.uid);
+  const actual = progresoCache[curso] ?? (await leerProgresoNube(curso));
   const ahora = F.serverTimestamp();
+  const faltan = (p) => Math.ceil(ESPERA_SEGUNDOS - (Date.now() - p.ultimo.toMillis()) / 1000);
   try {
     if (!actual) {
       // El primer bombillo crea el documento.
       await F.setDoc(ref, { n: 1, inicio: ahora, ultimo: ahora, ultimaParte: id, partes: { [id]: ahora } });
     } else {
       if (actual.partes?.[id]) return { ok: false, motivo: 'ya' };
-      const faltan = Math.ceil(ESPERA_SEGUNDOS - (Date.now() - actual.ultimo.toMillis()) / 1000);
-      if (faltan > 0) return { ok: false, motivo: 'espera', segundos: faltan };
+      if (faltan(actual) > 0) return { ok: false, motivo: 'espera', segundos: faltan(actual) };
       // Ojo: el id lleva un punto ("CLASE-GUIADA.md"); con updateDoc('partes.id') se partiría en dos.
       // Por eso se usa setDoc con merge, que trata el id como una sola llave.
       await F.setDoc(ref, { n: actual.n + 1, ultimo: ahora, ultimaParte: id, partes: { [id]: ahora } }, { merge: true });
     }
-    await leerProgresoNube();
+    await leerProgresoNube(curso);
     return { ok: true };
   } catch (e) {
-    await leerProgresoNube().catch(() => {});
-    if (estaEnNube(id)) return { ok: true };
-    const espera = progresoCache ? Math.ceil(ESPERA_SEGUNDOS - (Date.now() - progresoCache.ultimo.toMillis()) / 1000) : 0;
-    return espera > 0 ? { ok: false, motivo: 'espera', segundos: espera } : { ok: false, motivo: 'error' };
+    await leerProgresoNube(curso).catch(() => {});
+    if (estaEnNube(curso, id)) return { ok: true };
+    const p = progresoCache[curso];
+    return p && faltan(p) > 0 ? { ok: false, motivo: 'espera', segundos: faltan(p) } : { ok: false, motivo: 'error' };
   }
 }
 
 // ---------- el certificado ----------
 
-function codigoNuevo() {
+function codigoNuevo(prefijo) {
   const bytes = crypto.getRandomValues(new Uint8Array(6));
   const hex = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('').toUpperCase();
-  return `ME-${hex.slice(0, 4)}-${hex.slice(4, 8)}-${hex.slice(8, 12)}`;
+  return `${prefijo}-${hex.slice(0, 4)}-${hex.slice(4, 8)}-${hex.slice(8, 12)}`;
 }
 
-// El certificado ya emitido de quien tiene la sesión abierta: { codigo, ...datos } o null.
-export async function miCertificado() {
+// El certificado ya emitido de ese curso, de quien tiene la sesión abierta, o null.
+export async function miCertificado(curso) {
   const { F, auth, db } = await cargar();
-  if (!auth.currentUser) return null;
-  const emitido = await F.getDoc(F.doc(db, 'emitidos', auth.currentUser.uid));
+  if (!cuentaLista(auth.currentUser)) return null;
+  const emitido = await F.getDoc(F.doc(db, 'cursos', curso, 'emitidos', auth.currentUser.uid));
   if (!emitido.exists()) return null;
   return verificar(emitido.data().codigo);
 }
 
-// Emite el certificado. Las reglas lo rechazan si en la nube no están TODAS las partes.
-export async function emitirCertificado(nombre, total) {
+// Emite el certificado. Las reglas lo rechazan si en la nube no están TODAS las partes del curso.
+export async function emitirCertificado(curso, prefijo, nombre, total) {
   const { F, auth, db } = await cargar();
   const uid = auth.currentUser.uid;
-  const progreso = await leerProgresoNube();
-  const codigo = codigoNuevo();
+  const progreso = await leerProgresoNube(curso);
+  const codigo = codigoNuevo(prefijo);
   const lote = F.writeBatch(db);
   lote.set(F.doc(db, 'certificados', codigo), {
-    uid, nombre, emitido: F.serverTimestamp(), partes: total, inicio: progreso.inicio, fin: progreso.ultimo,
+    uid, curso, nombre, emitido: F.serverTimestamp(), partes: total, inicio: progreso.inicio, fin: progreso.ultimo,
   });
-  lote.set(F.doc(db, 'emitidos', uid), { codigo });
+  lote.set(F.doc(db, 'cursos', curso, 'emitidos', uid), { codigo });
   await lote.commit();
   return codigo;
 }
 
 // Borra el propio certificado (para corregir el nombre y emitirlo de nuevo).
-export async function borrarMiCertificado(codigo) {
+export async function borrarMiCertificado(curso, codigo) {
   const { F, auth, db } = await cargar();
   const lote = F.writeBatch(db);
   lote.delete(F.doc(db, 'certificados', codigo));
-  lote.delete(F.doc(db, 'emitidos', auth.currentUser.uid));
+  lote.delete(F.doc(db, 'cursos', curso, 'emitidos', auth.currentUser.uid));
   await lote.commit();
 }
 
@@ -152,5 +242,5 @@ export async function verificar(codigo) {
   const foto = await F.getDoc(F.doc(db, 'certificados', codigo));
   if (!foto.exists()) return null;
   const d = foto.data();
-  return { codigo, nombre: d.nombre, partes: d.partes, emitido: d.emitido.toDate(), inicio: d.inicio.toDate(), fin: d.fin.toDate() };
+  return { codigo, curso: d.curso, nombre: d.nombre, partes: d.partes, emitido: d.emitido.toDate(), inicio: d.inicio.toDate(), fin: d.fin.toDate() };
 }

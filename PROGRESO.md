@@ -32,6 +32,12 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 14 ¿Qué dice la Biblia? por dentro
 - [ ] 18 Cómo hice mi mapa de estudios
 - [ ] 20 Publicar e instalar
+- [ ] 21 El certificado verificable
+
+**Curso de seguridad** (certificado aparte)
+- [ ] 22 Seguridad básica
+- [ ] 23 Seguridad intermedia
+- [ ] 24 Seguridad avanzada
 - [ ] 19 Agentes de IA
 
 Una clase se marca con `[x]` solo cuando puedo explicarla en voz alta, como
