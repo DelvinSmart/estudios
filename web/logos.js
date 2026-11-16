@@ -30,6 +30,8 @@ const LOGOS = {
   gemini: { nombre: 'Gemini', simple: 'googlegemini', color: '#8E75B2' },
   ollama: { nombre: 'Ollama', simple: 'ollama', color: 'currentColor' },
   owasp: { nombre: 'OWASP', simple: 'owasp', color: 'currentColor' },
+  bitwarden: { nombre: 'Bitwarden (gestor de contraseñas)', simple: 'bitwarden', color: '#175DDC' },
+  letsencrypt: { nombre: "Let's Encrypt (HTTPS)", simple: 'letsencrypt', color: 'currentColor' },
 };
 
 // Un logo. tam: 'chico' (junto al texto), 'medio' (títulos) o 'isla' (el dibujo de la isla).
