@@ -59,19 +59,30 @@ vf :: Commit sin push queda guardado solo en tu Mac
 
 > 🎙️ **El profesor:** esto ya lo estudiaste a fondo en el Tema 06. Aquí va la versión de todos los días, y los tres errores que más te van a salir.
 
-### Los cuatro comandos, siempre los mismos
+### El ciclo de siempre
 
 ```bash
 cd /Volumes/SSD_Desarrollo/Developer/copiloto-driver   # 0. ponerte en la carpeta del proyecto
-git status                                             # 1. ver qué cambió
-git add -A                                             # 2. marcar todo lo que entra en la foto
-git commit -m "fix(ganhos): arreglé el cálculo de inDrive"   # 3. sacar la foto con su nombre
-git push                                               # 4. subirla a GitHub
+git pull                                               # 1. traer lo último ANTES de cambiar nada
+#                                                         2. hacer tu cambio y probarlo
+git status                                             # 3. ver qué archivos cambiaron
+git diff                                               #    …y qué líneas (se sale con q)
+git add -A                                             # 4. marcar lo que entra en la foto
+git commit -m "fix(ganhos): arreglé el cálculo de inDrive"   # 5. sacar la foto con su nombre
+git push                                               # 6. subirla a GitHub
+```
+
+**¿Por qué `git pull` primero?** Porque puede haber en GitHub cosas que tu Mac no tiene: algo que publicaste desde el **panel** en el teléfono o en el iPad, o lo que subió otra sesión. Si las traes **antes** de cambiar, después el push entra sin pelear.
+
+**¿`git add -A` o con nombres?** `-A` marca **todo** lo que cambió. Es cómodo, pero solo úsalo **después de mirar `git status`**: si aparece algo que no querías subir (un archivo de prueba, algo que tocaste sin querer), mejor marca **solo** lo tuyo, con su nombre:
+
+```bash
+git add js/panel-editor.js css/panel.css
 ```
 
 Funciona **igual** en cualquier proyecto: `copiloto-driver`, `que-dice-la-biblia` o `Aprender`. Lo único que cambia es la carpeta del paso 0.
 
-El nombre del commit dice **qué cambió y por qué** (Tema 06, parte 5), no "cambios" ni "actualización".
+El nombre del commit dice **qué cambió y por qué** (Tema 06, parte 5), no "cambios" ni "actualización". Por ejemplo: `"Panel: el botón Publicar ahora avisa cuando falta la llave"`.
 
 > 🌎 **En la vida real:** mirar qué hay en la mesa, elegir las fotos, pegarlas en el álbum con una nota, y mandar el álbum a la oficina.
 
@@ -79,11 +90,16 @@ El nombre del commit dice **qué cambió y por qué** (Tema 06, parte 5), no "ca
 
 | Lo que dice | Qué pasó | Qué hacer |
 |---|---|---|
-| `rejected` o `non-fast-forward` | Alguien (u otra sesión tuya, o el panel de estudios) subió algo antes | `git pull --rebase` y después `git push` |
+| `rejected`, `fetch first` o `non-fast-forward` | Alguien guardó algo en GitHub después de tu último `git pull` (casi siempre tú, desde el panel) | `git pull --rebase` y después `git push` |
+| Quieres **deshacer** un cambio que ya subiste | — | `git log --oneline -5` para ver el código del commit, y `git revert <código>` + `git push`. Crea un commit nuevo que lo deshace, sin borrar la historia (Tema 06, parte 10) |
 | Pide usuario y contraseña | GitHub ya no acepta la contraseña normal | Hace falta un **token** (una llave especial), que se configura una vez |
 | `fatal: not a git repository` | No estás en la carpeta del proyecto | Haz el `cd` a la carpeta y repite |
 
 `git pull --rebase` = "baja lo que subieron los demás y pon mis commits **encima**, como si los hubiera hecho después". Así la historia queda recta y el push ya entra.
+
+### ¿Está todo subido?
+
+`git status` siempre lo dice. Si muestra **`nothing to commit, working tree clean`** y **`Your branch is up to date with 'origin/main'`**, no hay nada sin guardar ni sin subir.
 
 > 💡 **Idea:** con tu página de estudios bíblicos esto pasa mucho: si guardaste algo desde el **panel**, el panel lo subió directo a GitHub. Si después quieres hacer push desde la Mac, primero tienes que **bajar** lo del panel. Es lo que hicimos con el `git pull`.
 
@@ -93,9 +109,13 @@ elige :: `git push` dice `rejected`. ¿Qué haces? :: Borras todo :: `git pull -
 elige :: Dice `fatal: not a git repository`. ¿Qué pasó? :: Se borró GitHub :: No estás en la carpeta del proyecto :: Falta internet
 vf :: GitHub acepta la contraseña normal de tu cuenta para hacer push
 escribe :: ¿Qué hace `git pull --rebase`? :: Baja lo que subieron los demás y pone mis commits encima, para que el push entre.
+elige :: ¿Qué comando va antes de empezar a cambiar nada? :: `git push` :: `git pull` :: `git commit`
+elige :: Subiste un cambio que rompió algo. ¿Cómo lo deshaces sin borrar la historia? :: `git reset --hard` :: `git revert <código>` y `git push` :: Borrando el repositorio
+elige :: `git status` dice "working tree clean" y "up to date with 'origin/main'". ¿Qué significa? :: Que hay cambios sin subir :: Que todo está guardado y subido :: Que falta un pull
+vf :: Antes de `git add -A` conviene mirar `git status`
 ```
 
-> 🔁 **Repaso:** `cd` → `status` → `add -A` → `commit -m` → `push`. Si rechaza: `pull --rebase`. Si pide contraseña: token. Si no es repositorio: `cd`.
+> 🔁 **Repaso:** `cd` → **`pull`** → cambiar y probar → `status` / `diff` → `add` → `commit -m` → `push`. Si rechaza: `pull --rebase`. Para deshacer algo subido: `revert`. Si `status` dice "clean" y "up to date", todo está subido.
 
 ## 3. Subir tus páginas (GitHub Pages)
 
@@ -108,12 +128,41 @@ Hay **dos caminos** para que un cambio llegue a internet, y los dos terminan igu
 1. **Desde el panel** (`panel.html`): editas y tocas **Publicar**. El panel le manda el cambio a GitHub **con tu llave** (Tema 12, parte 10). No usas la terminal.
 2. **Desde la Mac:** cambias archivos y haces `git add` → `git commit` → `git push`, como en la parte 2.
 
-Las dos cosas hacen lo mismo: dejan el cambio **en GitHub**. Y en cuanto llega, **GitHub Actions** corre `publicar.yml` (Tema 12, parte 9):
+¿Cuál usar? Un **estudio** (textos, pasajes, fuentes) se cambia desde el **panel**, en cualquier aparato. El **código** (`js/`, `css/`, `panel.html`, `estudio.html`, `pdf.html`, `scripts/`) se cambia desde la **Mac**, con la SSD conectada.
+
+Las dos cosas hacen lo mismo: dejan el cambio **en GitHub**, en la rama `main`. Y todo lo que llega a `main` se publica solo: **GitHub Actions** corre `publicar.yml` (Tema 12, parte 9):
 
 ```text
 cambio en GitHub ──► GitHub Actions: arma el sitio, crea la lista de estudios y los PDF ──► GitHub Pages
                                                                    (en 1 o 2 minutos)
 ```
+
+### Antes de subir código: pruébalo en tu Mac
+
+En la página de estudios, antes del push, arma el sitio tú mismo:
+
+```bash
+cd /Volumes/SSD_Desarrollo/Developer/que-dice-la-biblia
+node scripts/construir.mjs
+```
+
+Tiene que decir **`Candado de diseño: … ✓`** y **`Sitio listo en _site/`**. Si el candado dice que un color o un tamaño no sale de `css/motor.css` (Tema 14, parte 11), **corrígelo antes**: con ese error, GitHub tampoco publica. Para verlo en el navegador:
+
+```bash
+cd _site && python3 -m http.server 8000
+```
+
+Abre `http://localhost:8000`, prueba el cambio, y apágalo con **Control + C** (y `cd ..` para volver a la carpeta). Es el mismo servidor del Tema 18, parte 6.
+
+### Después de subir: mira si se publicó
+
+Abre la pestaña **Actions** del repositorio (`github.com/DelvinSmart/que-dice-la-biblia/actions`), como en el Tema 04:
+
+- 🟡 **Círculo amarillo:** todavía está publicando.
+- ✅ **Visto verde:** listo. Recarga la página.
+- ❌ **X roja:** no se publicó. Entra en la X para ver el error. **La página sigue como estaba antes**: nadie ve nada roto.
+
+> 📌 **Nota:** el proyecto de la página tiene su propia guía, `COMO-SUBIR-CAMBIOS.md`, con estos mismos pasos para esa carpeta.
 
 ### Este mapa de estudios (`estudios`)
 
@@ -147,9 +196,12 @@ elige :: ¿Qué diferencia hay entre cómo se publican la página de estudios y 
 elige :: Publicaste y ves la versión vieja. ¿Qué haces primero? :: Volver a publicar :: Recargar sin caché con Cmd + Shift + R :: Borrar el repositorio
 vf :: Con la cuenta gratis de GitHub, Pages solo publica repositorios públicos
 vf :: Si guardaste desde el panel, después desde la Mac conviene hacer `git pull` antes de push
+elige :: Antes de subir código de la página de estudios, ¿qué comando la arma y revisa el candado de diseño? :: `git push` :: `node scripts/construir.mjs` :: `npm test`
+elige :: En la pestaña Actions sale una X roja. ¿Qué pasa con la página? :: Se rompió para todos :: No se publicó: sigue como estaba antes; entras en la X para ver el error :: Se borró
+elige :: Cambiaste los textos de un estudio. ¿Desde dónde lo subes? :: Solo desde la Mac :: Desde el panel, con Publicar, en cualquier aparato :: Desde Firebase
 ```
 
-> 🔁 **Repaso:** estudios bíblicos: panel o `git push` → Actions → Pages. Mapa: `git push` → Pages directo. Pages se activa en Settings → Pages. Si ves lo viejo: Cmd + Shift + R.
+> 🔁 **Repaso:** estudios bíblicos: estudios desde el panel, código desde la Mac (probado con `construir.mjs`) → Actions (mira el visto verde) → Pages. Mapa: `git push` → Pages directo. Pages se activa en Settings → Pages. Si ves lo viejo: Cmd + Shift + R.
 
 ## 4. Subir el servidor (Firebase)
 
@@ -511,6 +563,10 @@ escribe :: ¿Por qué Google pide una declaración, un video y una cuenta de pru
 5. **Commit + push** → queda guardado y en GitHub, y corre el CI (Tema 04).
 6. Cuando hay varias cosas acumuladas y dices "lanzamos": subir versión → **generar el AAB** → **verificar la firma** → subirlo a Google Play.
 7. Si cambió el servidor: `firebase deploy --only …`.
+
+### Si trabajas con una IA
+
+Si le pides el cambio a una IA en la carpeta del proyecto, ella puede hacer los pasos de traer, cambiar, probar, revisar y guardar, pero **solo hace el `git push` (y cualquier publicación) cuando tú se lo dices**. Así lo dicen los `AGENTS.md` de tus proyectos. Publicar es decisión tuya.
 
 ### El script de todo junto: `release.sh`
 

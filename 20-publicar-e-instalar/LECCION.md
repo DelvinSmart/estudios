@@ -25,8 +25,8 @@ Resumen para repasar. La explicación completa, con prácticas, está en la [cla
 
 | Qué | A dónde | Cómo |
 |---|---|---|
-| Código | GitHub | `git add -A` → `git commit -m "…"` → `git push` |
-| Página de estudios bíblicos | GitHub Pages | Panel (Publicar) o `git push` → GitHub Actions → Pages |
+| Código | GitHub | `git pull` → cambiar y probar → `git status` → `git add` → `git commit -m "…"` → `git push` |
+| Página de estudios bíblicos | GitHub Pages | Estudios: panel (Publicar). Código: `node scripts/construir.mjs` para probar → `git push` → GitHub Actions (mira el visto verde) → Pages |
 | Este mapa | GitHub Pages | `git push` → Pages directo desde `main` |
 | Servidor de la app | Firebase | `firebase deploy --only functions` / `hosting:admin` / `hosting:landing` / `firestore:rules` |
 | App para probar | Samsung / iPhone | `./scripts/instalar-android.sh` / `./scripts/instalar-iphone.sh` |
@@ -39,6 +39,8 @@ Resumen para repasar. La explicación completa, con prácticas, está en la [cla
 | Dice | Qué hacer |
 |---|---|
 | `rejected` / `non-fast-forward` | `git pull --rebase` y `git push` |
+| Deshacer algo ya subido | `git revert <código>` y `git push` |
+| ¿Está todo subido? | `git status`: "working tree clean" y "up to date with 'origin/main'" |
 | Pide usuario y contraseña | Hace falta un token |
 | `not a git repository` | `cd` a la carpeta del proyecto |
 
