@@ -46,6 +46,8 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 
 **Sin IA:** cada clase tiene su **`CLASE-GUIADA.md`**: la clase completa, como si un profesor la diera, con pausas de "✋ Para y piensa", prácticas de verdadero o falso, elegir y escribir (hay que acertar todas para prender el bombillo 💡 de la parte) y la simulación de entrevista. En el mapa (`index.html`) es la primera pestaña de cada clase. La `LECCION.md` queda como resumen. En la clase 19 (agentes) la lección misma es la clase completa, con los ejemplos en JavaScript y en Python.
 
+**Certificado:** al prender todos los bombillos del mapa, la pantalla 🎓 *Certificado de finalización* (`#/certificado`) lo genera con tu nombre, la fecha y un código, para imprimir o guardar en PDF. Lo emite el propio curso; no es un título oficial.
+
 **Con una IA:** sigue los pasos de abajo y [AGENTS.md](AGENTS.md).
 
 1. **Leer la lección por partes**, con la IA, sin adelantarse.

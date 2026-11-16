@@ -361,6 +361,16 @@ vf :: Si fallas una pregunta de una práctica, igual se aprueba
 escribe :: ¿Por qué el id de un bombillo usa el nombre del archivo y no su posición? :: Para que, si se agrega una pestaña nueva a una clase, los bombillos no se muevan a otras partes.
 ```
 
+### El certificado de finalización
+
+Cuando **todos** los bombillos están prendidos, la pantalla `#/certificado` muestra un **certificado de finalización**: tu nombre, la fecha del último bombillo, las etapas y clases, y un **código** (`ME-XXXX-XXXX-XXXX`) calculado con SHA-256 a partir de tu nombre, la fecha y la lista de clases. Se imprime o se guarda en PDF con `window.print()` y unos estilos `@media print` (hoja apaisada, fondo blanco).
+
+Es **honesto**: dice que lo emite el propio curso y que **no es un título oficial**. Y como el progreso vive en el navegador, comprueba que la persona completó el curso en su aparato, pero no es una verificación a prueba de trampas (para eso haría falta un servidor).
+
+> 🌎 **En la vida real:** es como el diploma que da una academia de manejo al terminar el curso: dice que completaste el curso de esa academia, no que sea la licencia oficial.
+
+> 🌎 **Otro ejemplo:** es como el certificado de un curso en línea gratis: vale como constancia de que lo hiciste, y lo que más vale es lo que aprendiste.
+
 > 🔁 **Repaso:** bombillos en `localStorage` (cada persona los suyos, código para pasarlos); "voy aquí" calculado; prácticas en bloques `practica` con `vf`, `elige` y `escribe`; todas bien para aprobar, y el bombillo bloqueado hasta entonces.
 
 ## 9. Publicar en GitHub Pages

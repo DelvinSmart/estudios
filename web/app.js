@@ -8,7 +8,7 @@
 
 import { CLASES, ETAPAS } from './cursos.js';
 import { leerArchivo, partir, textoPlano } from './lector.js';
-import { idParte, estaEntendida, marcarEntendida, recienPrendidos, olvidarRecien, exportarProgreso, importarProgreso, leerTema, guardarTema } from './guardado.js';
+import { idParte, estaEntendida, marcarEntendida, recienPrendidos, olvidarRecien, exportarProgreso, importarProgreso, leerTema, guardarTema, fechaUltimoBombillo, leerNombre, guardarNombre } from './guardado.js';
 import { prepararBuscador } from './buscar.js';
 import { crearPractica } from './practica.js';
 
@@ -216,7 +216,8 @@ function vistaInicio() {
       </div>
     </section>
     <ol class="camino">${etapas}</ol>
-    <p class="mono tenue centro final-camino">// fin del camino: ya puedes explicar todo en una entrevista</p>`;
+    <p class="mono tenue centro final-camino">// fin del camino: ya puedes explicar todo en una entrevista</p>
+    <p class="centro"><a class="boton" href="#/certificado">🎓 certificado de finalización</a></p>`;
 }
 
 // ---------- pantalla 2: el mapa de una etapa ----------
@@ -517,6 +518,7 @@ async function vistaProgreso() {
       <div class="barra-progreso ancha"><span style="width:${total ? (prendidosTodos / total) * 100 : 0}%"></span></div>
     </section>
     ${etapas}
+    <p class="centro"><a class="boton" href="#/certificado">🎓 ${prendidosTodos === total ? 'ver mi certificado' : `certificado: faltan ${total - prendidosTodos} bombillos`}</a></p>
     <details class="intro llevar">
       <summary class="mono">// llevar mi progreso a otro aparato (de la Mac al iPad, por ejemplo)</summary>
       <div class="texto">
@@ -549,12 +551,92 @@ async function vistaProgreso() {
   olvidarRecien();
 }
 
+// ---------- pantalla 6: el certificado ----------
+// Aparece cuando TODOS los bombillos están prendidos (y para prenderlos hay que aprobar las prácticas).
+// Es un certificado de finalización emitido por el propio curso: no es un título oficial.
+
+async function codigoVerificacion(nombre, fecha) {
+  const datos = `${nombre}|${fecha.toISOString().slice(0, 10)}|${ORDEN.join(',')}`;
+  try {
+    const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(datos));
+    const hex = [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+    return `ME-${hex.slice(0, 4)}-${hex.slice(4, 8)}-${hex.slice(8, 12)}`;
+  } catch (e) {
+    return 'ME-SIN-CODIGO';
+  }
+}
+
+async function vistaCertificado(muestra) {
+  ponerMigas([{ texto: 'mapa', href: '#/' }, { texto: 'certificado', corto: 'certificado' }]);
+  const total = ORDEN.reduce((s, n) => s + (conteo[n] || 0), 0);
+  const listos = ORDEN.reduce((s, n) => s + prendidos(n), 0);
+  const completo = listos === total && total > 0;
+
+  if (!completo && !muestra) {
+    const faltan = ORDEN.filter((n) => prendidos(n) < (conteo[n] || 0));
+    app.innerHTML = `
+      <section class="cabeza">
+        <p class="mono comentario">// certificado de finalización</p>
+        <h1 class="titulo-medio">🎓 Todavía no</h1>
+        <p class="bajada">El certificado aparece cuando prendes <b>todos</b> los bombillos del curso.
+          Llevas <b>${listos}</b> de <b>${total}</b>. Cada bombillo se prende al aprobar la práctica de esa parte
+          y marcarla como entendida.</p>
+        <div class="barra-progreso ancha"><span style="width:${total ? (listos / total) * 100 : 0}%"></span></div>
+        <p class="mono tenue">// clases que faltan: ${faltan.map((n) => `<a href="#/clase/${n}">${n}</a>`).join(' · ')}</p>
+        <div class="acciones">
+          <a class="boton-principal" href="#/progreso">💡 ver mi progreso</a>
+          <a class="boton" href="#/certificado/muestra">ver cómo será (muestra)</a>
+        </div>
+      </section>`;
+    return;
+  }
+
+  const nombre = leerNombre() || (muestra ? 'Tu nombre' : '');
+  const fecha = completo ? fechaUltimoBombillo() : new Date();
+  const fechaTexto = fecha.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' });
+  const codigo = muestra && !completo ? 'MUESTRA' : await codigoVerificacion(nombre, fecha);
+  const etapas = ETAPAS.map((e) => `
+    <li><span class="emoji">${e.icono}</span> <b>${escapar(e.titulo)}</b>
+      <span class="tenue">— ${e.clases.map((n) => escapar(CLASES[n].titulo)).join(' · ')}</span></li>`).join('');
+
+  app.innerHTML = `
+    <div class="cert-herramientas no-imprimir">
+      <p class="mono comentario">// ${muestra && !completo ? 'muestra: así se verá cuando completes el curso' : 'tu certificado'}</p>
+      <label class="mono" for="cert-nombre">nombre completo</label>
+      <div class="fila-codigo"><input id="cert-nombre" class="mono" value="${escapar(leerNombre())}" placeholder="Escribe tu nombre como quieres que aparezca">
+        <button class="boton" id="cert-guardar" type="button">poner</button>
+        <button class="boton-principal" id="cert-imprimir" type="button" ${completo ? '' : 'disabled'}>imprimir / guardar PDF</button></div>
+    </div>
+    <article class="certificado ${muestra && !completo ? 'es-muestra' : ''}">
+      <p class="cert-marca mono">delvin@estudios:~$ ./certificado</p>
+      <p class="cert-tipo mono">Certificado de finalización</p>
+      <p class="cert-texto">Se deja constancia de que</p>
+      <h1 class="cert-nombre">${escapar(nombre || '—')}</h1>
+      <p class="cert-texto">completó el curso <b>Mapa de estudios: programación, de los fundamentos a los agentes de IA</b>,
+        con sus <b>${ORDEN.length} clases</b> y <b>${total} partes</b>, aprobando la práctica de cada parte.</p>
+      <ul class="cert-etapas">${etapas}</ul>
+      <div class="cert-pie">
+        <div><span class="mono tenue">fecha</span><br>${escapar(fechaTexto)}</div>
+        <div><span class="mono tenue">código</span><br><span class="mono">${codigo}</span></div>
+        <div><span class="mono tenue">curso</span><br>delvinsmart.github.io/estudios</div>
+      </div>
+      <p class="cert-aviso">Certificado emitido por el propio curso, de forma automática, a partir del progreso guardado en el navegador
+        de quien lo completó. No es un título oficial ni está acreditado por ninguna institución educativa.</p>
+    </article>`;
+
+  const entrada = app.querySelector('#cert-nombre');
+  app.querySelector('#cert-guardar').addEventListener('click', () => { guardarNombre(entrada.value.trim()); dibujar(); });
+  entrada.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { guardarNombre(entrada.value.trim()); dibujar(); } });
+  app.querySelector('#cert-imprimir').addEventListener('click', () => window.print());
+}
+
 // ---------- el que decide qué pantalla mostrar ----------
 
 async function dibujar() {
   const partesRuta = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
   try {
     if (partesRuta[0] === 'progreso') await vistaProgreso();
+    else if (partesRuta[0] === 'certificado') vistaCertificado(partesRuta[1] === 'muestra');
     else if (partesRuta[0] === 'etapa') await vistaEtapa(partesRuta[1]);
     else if (partesRuta[0] === 'clase' && partesRuta[3]) await vistaParte(partesRuta[1], +partesRuta[2] || 0, partesRuta[3]);
     else if (partesRuta[0] === 'clase') await vistaClase(partesRuta[1], +partesRuta[2] || 0);

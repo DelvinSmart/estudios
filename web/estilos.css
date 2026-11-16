@@ -475,3 +475,47 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .practica-final.mal { color: var(--rojo); }
 .practica-pie .boton { margin: 0 0 12px; }
 #boton-entendido:disabled { opacity: 0.5; cursor: not-allowed; border-color: var(--borde); color: var(--tenue); }
+
+/* ---------- 12. El certificado ---------- */
+.cert-herramientas { max-width: 860px; margin: 26px auto 18px; }
+.cert-herramientas label { font-size: 0.8rem; color: var(--tenue); }
+.cert-herramientas .fila-codigo { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.cert-herramientas input { flex: 1 1 240px; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--borde); background: var(--fondo-2); color: var(--texto); }
+.cert-herramientas .boton, .cert-herramientas .boton-principal { margin-top: 0; }
+.cert-herramientas .boton-principal:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.certificado {
+  position: relative; max-width: 860px; margin: 0 auto; padding: 48px 56px 36px;
+  background: var(--tarjeta); border: 1px solid var(--borde-fuerte); border-radius: 18px;
+  box-shadow: var(--sombra), inset 0 0 0 8px var(--fondo-2), inset 0 0 0 9px color-mix(in srgb, var(--acento) 40%, transparent);
+  text-align: center; overflow: hidden;
+}
+.certificado.es-muestra::after {
+  content: 'MUESTRA'; position: absolute; inset: 0; display: grid; place-items: center;
+  font: 800 clamp(3rem, 12vw, 7rem) var(--mono); color: color-mix(in srgb, var(--rojo) 18%, transparent);
+  transform: rotate(-18deg); pointer-events: none;
+}
+.cert-marca { font-size: 0.8rem; color: var(--acento); margin: 0 0 22px; }
+.cert-tipo { font-size: 0.95rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--tenue); margin: 0 0 18px; }
+.cert-texto { max-width: 60ch; margin: 8px auto; font-size: 1.05rem; }
+.cert-nombre { font: 800 clamp(1.8rem, 5vw, 2.8rem)/1.15 var(--mono); margin: 6px 0 10px; color: var(--texto); }
+.cert-etapas { list-style: none; padding: 0; margin: 22px auto; max-width: 64ch; text-align: left; font-size: 0.88rem; line-height: 1.5; }
+.cert-etapas li { padding: 6px 0; border-top: 1px dashed var(--borde); }
+.cert-pie { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--borde); font-size: 0.9rem; text-align: left; }
+.cert-aviso { margin: 20px auto 0; max-width: 70ch; font-size: 0.72rem; color: var(--tenue); line-height: 1.5; }
+
+@media (max-width: 600px) {
+  .certificado { padding: 32px 18px 24px; }
+}
+
+/* Al imprimir: solo el certificado, en blanco, en una hoja apaisada. */
+@media print {
+  @page { size: A4 landscape; margin: 12mm; }
+  body { background: #fff !important; color: #111 !important; }
+  .barra, .migas, .pie, .buscador, .no-imprimir, .tostada { display: none !important; }
+  .app { padding: 0; max-width: none; }
+  .certificado { box-shadow: none; border: 2px solid #1a7f37; background: #fff; color: #111; max-width: none; padding: 28px 40px; }
+  .certificado * { color: #111 !important; }
+  .cert-marca { color: #1a7f37 !important; }
+  .cert-etapas li { border-color: #ccc; }
+}

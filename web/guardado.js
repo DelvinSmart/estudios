@@ -76,6 +76,20 @@ export function importarProgreso(codigo) {
   return Object.keys(entendido).length;
 }
 
+// Para el certificado: la fecha del último bombillo prendido y el nombre de la persona.
+export function fechaUltimoBombillo() {
+  const valores = Object.values(leer(CLAVE_ENTENDIDO, {})).filter((v) => typeof v === 'number');
+  return valores.length ? new Date(Math.max(...valores)) : new Date();
+}
+
+export function leerNombre() {
+  return leer('mapa-nombre', '');
+}
+
+export function guardarNombre(nombre) {
+  escribir('mapa-nombre', nombre);
+}
+
 export function leerTema() {
   try { return localStorage.getItem('mapa-tema'); } catch (e) { return null; }
 }
