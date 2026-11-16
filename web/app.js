@@ -25,6 +25,7 @@ import { vistaParte } from './vistas/parte.js';
 import { vistaProgreso } from './vistas/progreso.js';
 import { vistaEntrar, vistaAccion, vistaCuenta } from './vistas/cuenta.js';
 import { vistaCertificado, vistaVerificar } from './vistas/certificado.js';
+import { vistaLaboratorio } from './vistas/laboratorio.js';
 
 // ---------- el que decide qué pantalla mostrar ----------
 
@@ -43,6 +44,7 @@ async function dibujar() {
     else if (partesRuta[0] === 'entrar') await vistaEntrar(partesRuta[1]);
     else if (partesRuta[0] === 'cuenta') await vistaCuenta();
     else if (partesRuta[0] === 'verificar') await vistaVerificar(partesRuta[1]);
+    else if (partesRuta[0] === 'laboratorio') vistaLaboratorio();
     else if (partesRuta[0] === 'etapa') await vistaEtapa(partesRuta[1]);
     else if (partesRuta[0] === 'clase' && partesRuta[3]) await vistaParte(partesRuta[1], +partesRuta[2] || 0, partesRuta[3]);
     else if (partesRuta[0] === 'clase') await vistaClase(partesRuta[1], +partesRuta[2] || 0);

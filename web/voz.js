@@ -71,13 +71,23 @@ export async function ponerBarraDeVoz(hoja, antesDe) {
   const boton = (n) => barra.querySelector(`[data-voz="${n}"]`);
   const selVoz = boton('voz');
   const voces = await vocesEnEspanol();
-  if (!voces.length) { barra.innerHTML = '<span class="tenue">// este aparato no tiene voces en español para leer en voz alta</span>'; return; }
-  const elegida = voces.find((v) => v.voiceURI === pref.voz) || mejorVoz(voces);
-  selVoz.innerHTML = voces.map((v) => `<option value="${v.voiceURI}" ${v === elegida ? 'selected' : ''}>${v.name.replace(/\s*\(.*\)/, '')} · ${v.lang}</option>`).join('');
+  // Algunos celulares no dan la lista de voces: igual se puede leer con la voz del sistema en español.
+  if (voces.length) {
+    const elegida = voces.find((v) => v.voiceURI === pref.voz) || mejorVoz(voces);
+    selVoz.innerHTML = voces.map((v) => `<option value="${v.voiceURI}" ${v === elegida ? 'selected' : ''}>${v.name.replace(/\s*\(.*\)/, '')} · ${v.lang}</option>`).join('');
+  } else {
+    selVoz.innerHTML = '<option value="">voz del sistema</option>';
+  }
+  const ayuda = document.createElement('p');
+  ayuda.className = 'voz-ayuda tenue';
+  ayuda.hidden = true;
+  ayuda.innerHTML = '¿No suena? En el <b>iPhone</b>, quita el <b>modo silencio</b> (el botón del costado) y sube el volumen. En <b>Android</b>, revisa que esté instalada la voz en español (Ajustes → Texto a voz).';
+  barra.appendChild(ayuda);
 
   let cola = [];
   let posicion = 0;
   let leyendo = false;
+  let turno = 0; // cada frase lleva un número: si cambiamos algo a la mitad, las frases viejas se ignoran
   const marcar = (el) => {
     hoja.querySelectorAll('.leyendo').forEach((x) => x.classList.remove('leyendo'));
     if (el) { el.classList.add('leyendo'); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
@@ -88,26 +98,40 @@ export async function ponerBarraDeVoz(hoja, antesDe) {
     boton('pausa').hidden = estado !== 'hablando';
     boton('parar').hidden = estado === 'quieto';
   };
-  const terminar = () => { leyendo = false; sintetizador.cancel(); marcar(null); mostrar('quieto'); posicion = 0; };
+  const callarYa = () => { if (sintetizador.speaking || sintetizador.pending || sintetizador.paused) sintetizador.cancel(); };
+  const terminar = () => { leyendo = false; turno += 1; callarYa(); marcar(null); mostrar('quieto'); posicion = 0; };
 
   // Lee un pedazo y, cuando termina, el siguiente (un pedazo por vez evita que el navegador corte textos largos).
   const decir = () => {
     if (!leyendo) return;
     if (posicion >= cola.length) { terminar(); return; }
+    const miTurno = ++turno;
     const { el, texto } = cola[posicion];
     const frase = new SpeechSynthesisUtterance(texto);
     const voz = voces.find((v) => v.voiceURI === selVoz.value);
-    if (voz) { frase.voice = voz; frase.lang = voz.lang; } else frase.lang = 'es-MX';
+    if (voz) { frase.voice = voz; frase.lang = voz.lang; } else frase.lang = 'es-ES';
     frase.rate = Number(boton('velocidad').value) || 1;
-    frase.onend = () => { if (leyendo) { posicion += 1; decir(); } };
-    frase.onerror = (ev) => { if (ev.error !== 'interrupted' && ev.error !== 'canceled') { posicion += 1; decir(); } };
+    frase.onstart = () => { ayuda.hidden = true; };
+    frase.onend = () => { if (leyendo && miTurno === turno) { posicion += 1; decir(); } };
+    frase.onerror = (ev) => {
+      if (miTurno !== turno || ev.error === 'interrupted' || ev.error === 'canceled') return;
+      posicion += 1; decir();
+    };
     marcar(el);
     sintetizador.speak(frase);
   };
 
+  // Cambiar la velocidad o la voz mientras habla: repite el párrafo actual con el cambio.
+  const aplicarCambio = () => {
+    if (!leyendo || sintetizador.paused) return;
+    turno += 1;
+    callarYa();
+    setTimeout(decir, 80);
+  };
+
   boton('escuchar').addEventListener('click', () => {
     if (sintetizador.paused) { sintetizador.resume(); mostrar('hablando'); return; }
-    sintetizador.cancel();
+    callarYa(); // en el iPhone, cancelar sin necesidad justo antes de hablar a veces deja la voz muda
     cola = pedazos(hoja);
     // Si el usuario ya bajó, empieza desde el primer párrafo que está a la vista.
     const enVista = cola.findIndex(({ el }) => el.getBoundingClientRect().bottom > 80);
@@ -115,11 +139,13 @@ export async function ponerBarraDeVoz(hoja, antesDe) {
     leyendo = true;
     mostrar('hablando');
     decir();
+    // Si a los 3 segundos no empezó a sonar, mostramos qué revisar.
+    setTimeout(() => { if (leyendo && !sintetizador.speaking) ayuda.hidden = false; }, 3000);
   });
   boton('pausa').addEventListener('click', () => { sintetizador.pause(); mostrar('pausado'); });
   boton('parar').addEventListener('click', terminar);
-  boton('velocidad').addEventListener('change', (ev) => guardarPreferencias({ velocidad: Number(ev.target.value) }));
-  selVoz.addEventListener('change', (ev) => guardarPreferencias({ voz: ev.target.value }));
+  boton('velocidad').addEventListener('change', (ev) => { guardarPreferencias({ velocidad: Number(ev.target.value) }); aplicarCambio(); });
+  selVoz.addEventListener('change', (ev) => { guardarPreferencias({ voz: ev.target.value }); aplicarCambio(); });
 
   // Al ir a otra pantalla, se calla.
   const callar = () => { terminar(); window.removeEventListener('hashchange', callar); };

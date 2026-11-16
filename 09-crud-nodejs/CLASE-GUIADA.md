@@ -35,6 +35,8 @@ vf :: Editar un ingreso en Copiloto es una operación de actualizar (U)
 
 > 🔁 **Repaso:** Create (POST), Read (GET), Update (PUT), Delete (DELETE).
 
+> 🧪 **Practícalo aquí mismo:** en el [laboratorio de CRUD](#/laboratorio) escribes las cuatro funciones (crear, leer, actualizar y borrar) en JavaScript y ves al lado los datos y las pruebas, sin instalar nada. Después vuelve aquí para hacerlo con un servidor de verdad.
+
 ## 2. Las palabras
 
 > 🎙️ **El profesor:** antes de ver el código, el vocabulario. Todo pasa en **un restaurante**.

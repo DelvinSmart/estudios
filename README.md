@@ -64,6 +64,8 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 
 **Sin IA:** cada clase tiene su **`CLASE-GUIADA.md`**: la clase completa, como si un profesor la diera, con pausas de "✋ Para y piensa", prácticas de verdadero o falso, elegir y escribir (hay que acertar todas para prender el bombillo 💡 de la parte) y la simulación de entrevista. En el mapa (`index.html`) es la primera pestaña de cada clase. La `LECCION.md` queda como resumen. En la clase 19 (agentes) la lección misma es la clase completa, con los ejemplos en JavaScript y en Python.
 
+**Laboratorio de CRUD** (`#/laboratorio`): escribes en el navegador las funciones crear, leer, actualizar y borrar, y ves al lado los datos, la consola y 11 pruebas. El código corre en una caja aislada (iframe con sandbox), sin acceso al sitio ni a la cuenta.
+
 **Certificados verificables:** cada curso (programación, Python, seguridad, IA para programadores y agentes de IA) tiene el suyo. Hay que entrar con una cuenta de Gmail verificada (`#/entrar`): así cada bombillo queda en Firebase con la hora del servidor, y al completar todas las partes se emite el certificado con un código (`ME-…`, `PY-…`, `SE-…`, `IA-…` o `AG-…`) que cualquiera comprueba en `#/verificar/CÓDIGO`. Cómo funciona por dentro: clase 21 y `firebase/LEEME.md`. Lo emite el propio curso; no es un título oficial.
 
 **Con una IA:** sigue los pasos de abajo y [AGENTS.md](AGENTS.md).

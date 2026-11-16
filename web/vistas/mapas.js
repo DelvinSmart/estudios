@@ -178,6 +178,7 @@ export async function vistaClase(num, doc) {
       <div class="acciones">
         ${partes.length ? `<a class="boton-principal" href="#/clase/${num}/${doc}/${primeraPendiente(num, doc, partes.length)}">▶ ${listas ? 'seguir' : 'empezar'}</a>` : ''}
         <a class="boton" href="#/clase/${num}/${doc}/todo">leer todo de corrido</a>
+        ${num === '09' ? '<a class="boton" href="#/laboratorio">🧪 laboratorio de CRUD</a>' : ''}
       </div>
     </section>
     <div id="intro"></div>
