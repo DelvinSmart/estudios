@@ -72,6 +72,10 @@ escribe :: Explica la regla de oro de separar responsabilidades. :: Las reglas d
 
 > 🎙️ **El profesor:** ahora la más famosa, la que más vas a oír: **Clean Architecture**. La propuso **Robert C. Martin** (le dicen "Uncle Bob", el tío Bob) en 2012. Se dibuja como círculos, uno dentro del otro.
 
+> 🌎 **En la vida real:** Es como una cebolla: las capas de afuera se pelan y se cambian; el corazón queda igual.
+
+> 🌎 **Otro ejemplo:** Es como un país: la constitución (el centro) casi no cambia; las leyes, los ministerios y los edificios (afuera) cambian más seguido.
+
 ```text
 ┌──────────────────────────────────────────────┐
 │  Frameworks y drivers                        │  ← Firestore, React Native, Expo, la web
@@ -89,6 +93,8 @@ escribe :: Explica la regla de oro de separar responsabilidades. :: Las reglas d
 
 ### Las cuatro capas, de adentro hacia afuera
 
+> 🌎 **Otro ejemplo:** En un banco: qué es una cuenta (entidad), abrir una cuenta o transferir (caso de uso), el cajero y la app (adaptadores), y el sistema de computadoras que usen (framework).
+
 | Capa | Qué contiene | Ejemplo en tu app | 🌎 En una panadería |
 |---|---|---|---|
 | **Entidades** (centro) | Los objetos del negocio y sus reglas más básicas | Un `EarningRecord` (un ingreso), un `SanGroup` | Qué **es** un pan: harina, agua, sal |
@@ -99,6 +105,10 @@ escribe :: Explica la regla de oro de separar responsabilidades. :: Las reglas d
 Lo de **afuera cambia seguido** (cambias de diseño, de base de datos, de librería). Lo del **centro casi nunca** (un ingreso sigue siendo un ingreso).
 
 ### La regla de la dependencia
+
+> 🌎 **En la vida real:** Es como en una empresa: el dueño fija las reglas y los empleados las siguen; nunca al revés.
+
+> 🌎 **Otro ejemplo:** Es como un enchufe en la pared: el aparato depende del enchufe, pero el enchufe no sabe qué aparato le pusiste.
 
 Esta es **la** regla de Clean Architecture. Apréndela de memoria:
 
@@ -114,6 +124,8 @@ Esta es **la** regla de Clean Architecture. Apréndela de memoria:
 Con una **interfaz**: un **contrato** que dice **qué** se puede hacer, sin decir **cómo**. El de **adentro** define el contrato ("necesito guardar y buscar grupos"); el de **afuera** lo cumple ("yo lo hago con Firestore"). Esto se llama **inversión de dependencias**.
 
 > 🌎 **En la vida real:** el cirujano no necesita saber qué marca de bisturí compró el hospital. Dice: "necesito **un bisturí** de tal tamaño" (el contrato). La administración consigue uno que cumpla. Si cambian de proveedor, el cirujano opera igual. El de adentro dice **qué** necesita; el de afuera se encarga del **cómo**.
+
+> 🌎 **Otro ejemplo:** Como pedir "un taxi" por una app: tú dices qué necesitas (ir del punto A al B) y no te importa qué modelo de carro llegue, mientras cumpla.
 
 > ✋ **Para y piensa:** un caso de uso necesita la fecha de hoy. ¿Debería llamar directamente al reloj del teléfono?
 
@@ -151,7 +163,13 @@ src/san/
 
 > 🌎 **En la vida real:** una cooperativa bien organizada: los **estatutos** (models), la **tesorería** (service), el **archivo** (repository), la **recepción** (controller), el **altavoz** (events) y los **avisos al celular** (notifications).
 
+> 🌎 **Otro ejemplo:** Como un club deportivo bien organizado: reglamento, tesorería, archivo, secretaría, megáfono y avisos al celular de los socios.
+
 ### El contrato
+
+> 🌎 **En la vida real:** Es como el contrato de un plomero: "tiene que arreglar fugas y cambiar caños". No dice qué marca de llave usa.
+
+> 🌎 **Otro ejemplo:** Es como el tamaño estándar de una bombilla: cualquier marca que cumpla ese tamaño entra en tu lámpara.
 
 En `src/san/repository/SanRepository.ts` (los comentarios del código están en portugués):
 
@@ -176,6 +194,8 @@ export interface SanRepository {
 - `SanGroup | null` = "un grupo, o nada si no existe" (Tema 01).
 
 ### Tres formas de cumplir el mismo contrato
+
+> 🌎 **Otro ejemplo:** Como tres formas de guardar plata: en el banco (Firestore), en una alcancía en casa (teléfono), o en el bolsillo durante el día (memoria).
 
 | Archivo | Dónde guarda | Para qué | 🌎 El archivista |
 |---|---|---|---|
@@ -208,6 +228,8 @@ export function createSanRepository(provider) {
 - Es el **único lugar** que sabe que existe Firestore.
 
 > 🌎 **En la vida real:** la **agencia de empleo**: la tesorería dice "mándenme un archivista", y la agencia, la única que conoce a los tres, elige cuál manda.
+
+> 🌎 **Otro ejemplo:** Como la central de una cadena de pizzerías: tú llamas a un solo número, y la central decide qué local te manda la pizza.
 
 **El beneficio:** si mañana quisieras cambiar Firestore por otra base de datos, escribirías un `OtraBaseSanRepository` que cumpla el contrato y cambiarías **una línea** en la fábrica. Las reglas del San, las pantallas y las pruebas **no se tocan**. Es exactamente el ejercicio 5 del Tema 09.
 
@@ -259,6 +281,8 @@ El centro es un **hexágono** con las reglas, y alrededor se **enchufan** las co
 | **Adaptador de salida** | A quien el centro **le pide** cosas | La base de datos, los avisos |
 
 > 🌎 **En la vida real:** un **televisor**. Por detrás tiene **puertos** (HDMI, USB). El televisor no sabe si en el HDMI enchufaste una PlayStation o un decodificador: solo habla "HDMI". El **control remoto** es un adaptador de entrada (le pides cosas); los **parlantes**, uno de salida (el televisor les manda el sonido).
+
+> 🌎 **Otro ejemplo:** Como un cargador universal con puntas intercambiables: el cargador es el mismo, cambias la punta según el teléfono.
 
 **¿Clean o hexagonal?** En la práctica, casi la misma cosa: las dos separan las reglas de las herramientas y usan contratos. **Clean** divide el centro en más capas (entidades y casos de uso); **hexagonal** pone el foco en los puertos y adaptadores (los enchufes).
 
@@ -342,6 +366,8 @@ escribe :: ¿Qué diferencia hay entre MVC y MVVM? :: En MVC el controlador le d
 
 > 🌎 **En la vida real:** una casa que se fue ampliando: el ala nueva (el San) con planos de arquitecto, el resto con otros estilos. Y `EarningsContext` es un cocinero que, además de cocinar, va él mismo al proveedor: funciona, pero mezcla dos trabajos.
 
+> 🌎 **Otro ejemplo:** Como un barrio que creció con el tiempo: unas calles planificadas y otras que se fueron haciendo; funciona, y se sabe qué se podría ordenar.
+
 > 💡 **Idea:** decir **qué mejorarías** de tu propia app en una entrevista no te hace ver mal: te hace ver con criterio.
 
 ```practica
@@ -363,6 +389,8 @@ Por ejemplo, tu página **¿Qué dice la Biblia?** y este mapa no usan Clean Arc
 
 > 🌎 **En la vida real:** para hacer un huevo frito no necesitas una cocina industrial con cinco ayudantes. Para un restaurante de 200 cubiertos, sí.
 
+> 🌎 **Otro ejemplo:** Como usar camión de mudanza para llevar una carta: funciona, pero es exagerado. Se elige el transporte según la carga.
+
 ```practica
 vf :: Siempre conviene usar Clean Architecture completa, aunque el proyecto sea chico
 escribe :: ¿Cuándo usarías Clean Architecture y cuándo no? :: Donde la lógica es compleja o puede cambiar de herramienta, como el San; en partes o proyectos simples, una estructura más directa es mejor.
@@ -373,6 +401,8 @@ escribe :: ¿Cuándo usarías Clean Architecture y cuándo no? :: Donde la lógi
 ## Ejercicios
 
 > 🎙️ **El profesor:** si tienes la app, abre los archivos. Si no, responde con lo que viste en la clase.
+
+> 🌎 **En la vida real:** Es como recorrer el edificio con el plano y señalar cada sector: esto es recepción, esto es archivo.
 
 1. Abre `src/san/repository/` y cuenta cuántas implementaciones del contrato hay. ¿Cuál usa la app real?
 2. Abre `src/san/service/SanService.ts` y busca si importa algo de Firestore. ¿Por qué no debería?
@@ -407,6 +437,8 @@ elige :: `src/screens/onboarding/VehicleSetupScreen.tsx` es… :: Presentación 
 ## Para la entrevista
 
 > 🎙️ **El profesor:** esta es una de las conversaciones más importantes de tu entrevista. Practícala varias veces, en voz alta.
+
+> 🌎 **En la vida real:** Explicar la arquitectura de tu app es como explicar el plano de tu casa: qué cuarto es cuál y por qué está ahí.
 
 > 🎤 **Entrevista:** "¿Qué es Clean Architecture?"
 

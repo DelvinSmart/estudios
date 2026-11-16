@@ -10,11 +10,17 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🎙️ **El profesor:** Delvin, empecemos por el problema. Tu app, publicada en Google Play, tardaba **17,7 segundos** en mostrar el Início en un Samsung A31. Para un conductor, eso es eternidad. Para entender por qué, hay que entender **una idea**: el hilo de JavaScript.
 
+> 🌎 **En la vida real:** Es como una cocina con un solo cocinero: si se pone a pelar 50 kilos de papa, nadie más recibe su plato hasta que termine, aunque la heladera esté llena.
+
+> 🌎 **Otro ejemplo:** Es como una sola línea de teléfono en una oficina: mientras alguien habla una hora, todas las demás llamadas dan ocupado.
+
 ### Una sola cajera
 
 El código de React Native corre, casi todo, en **un solo hilo**: **solo puede hacer una cosa a la vez**. Mientras está haciendo una cuenta larga, no puede responder a un toque, ni mover una animación, ni disparar un temporizador.
 
 > 🌎 **En la vida real:** una caja de supermercado con **una sola cajera**. Si un cliente tarda 5 minutos, todos los demás esperan, aunque tengan una sola cosa. O un **puente de un solo carril**: si un camión se queda parado en medio, ningún carro cruza, aunque la ruta del otro lado esté vacía.
+
+> 🌎 **Otro ejemplo:** Como un peaje con una sola cabina abierta: un auto que tarda en pagar frena a toda la fila.
 
 **En Copiloto:** ordenar una lista de ciudades **ocupó el hilo 4,8 segundos**. Durante ese tiempo, la app no respondía a nada.
 
@@ -24,7 +30,13 @@ Un temporizador (`setTimeout`) de 3,5 segundos **saltó a los 5,5 segundos**. Un
 
 > 🌎 **En la vida real:** pones la alarma del horno a los 3,5 minutos y suena a los 5,5. El horno no se equivocó: estabas tan ocupado en el teléfono que no la escuchaste hasta que colgaste.
 
+> 🌎 **Otro ejemplo:** Como el colectivo que debía pasar a las 8:00 y llega a las 8:20 porque estaba trabado en un embotellamiento: el horario estaba bien; algo lo frenó en el camino.
+
 ### Pruébalo tú
+
+> 🌎 **En la vida real:** Es como pedir un café y que el barista se ponga a contar hasta 2.000 antes de servirlo: el café estaba listo, pero esperó a terminar de contar.
+
+> 🌎 **Otro ejemplo:** Es como poner un huevo a hervir 3 minutos, pero quedarte trabado en una llamada de 2 minutos más: el huevo sale duro aunque el reloj del horno funcionaba.
 
 Pega esto en Node (en la terminal: `node`, Enter, y pega):
 
@@ -61,7 +73,13 @@ elige :: ¿Cuánto tiempo ocupaba el hilo ordenar las ciudades? :: 0,1 s :: 4,8 
 
 > 🎙️ **El profesor:** esta es la lección **más importante** de la historia, y la del Tema 07: **verificar antes de adivinar**. Y te voy a contar cómo se aprendió… equivocándose primero.
 
+> 🌎 **En la vida real:** Es como un médico que antes de operar pide radiografías, análisis y una tomografía: cada estudio dice algo distinto.
+
+> 🌎 **Otro ejemplo:** Es como encontrar por qué llegas tarde al trabajo: anotas a qué hora sales, cuánto tardas en cada tramo, y descubres que era el semáforo de la esquina, no el tránsito.
+
 ### El primer arreglo que no sirvió
+
+> 🌎 **Otro ejemplo:** Como cambiar la batería del carro porque "seguro es eso", y descubrir que el problema era un fusible: se gastó plata y el carro sigue sin arrancar.
 
 Antes de medir, la sospecha era: "la pantalla inicial (el *splash*) espera a la nube". Se cambió el código del splash… y **no hizo nada**. ¿Por qué? Porque `reloadSettings` (la carga de ajustes) ya volvía **de inmediato** para las cuentas en la nube. La suposición era **falsa**.
 
@@ -109,6 +127,8 @@ escribe :: ¿Cuál es la lección principal de esta parte? :: Medir antes de arr
 
 > 🌎 **En la vida real:** ordenar la guía telefónica cada mañana antes de usarla; repintar el cartel cada segundo cuando la hora cambia por minuto; rehacer la contabilidad del año cada vez que alguien mira el saldo; comprar una calculadora nueva para cada cuenta; comparar dos papeles idénticos letra por letra cuando bastaba ver que eran **el mismo papel**.
 
+> 🌎 **Otro ejemplo:** Como una casa que gasta mucha luz: el medidor muestra que no era la heladera, sino la ducha eléctrica, el aire y una lámpara que quedó prendida.
+
 ### El reloj: los redibujos de React
 
 En React, **cada vez que cambia el estado**, el componente se **vuelve a dibujar** (se vuelve a ejecutar). Si el componente es grande (como el Início), eso cuesta.
@@ -129,6 +149,8 @@ setTimeout(refresh, 60000 - (Date.now() % 60000));
 Si son las 14:31:45, faltan 15 segundos: espera 15.000 ms, y actualiza justo a las 14:32.
 
 > 🌎 **En la vida real:** el cartel "Próximo bus: 14:32" se actualiza **una vez por minuto**, justo cuando cambia el minuto.
+
+> 🌎 **Otro ejemplo:** Como un reloj de pared que alguien vuelve a pintar entero cada segundo, cuando solo la aguja de los minutos cambia una vez por minuto.
 
 ```practica
 elige :: ¿Cuál fue la causa que más tardó al abrir? :: El reloj :: Ordenar 254 ciudades con `localeCompare` (4,8 s) :: El formateador
@@ -163,6 +185,8 @@ useMemo(calcular, [goals.daily, goals.weekly]); // recalcula si cambia el valor
 
 > 🌎 **En la vida real:** dos **gemelos idénticos**: se parecen en todo, pero son dos personas con distinto documento. React pregunta "¿es **la misma persona**?", no "¿se parecen?". `useMemo` es el estudiante que guarda la respuesta de una cuenta difícil en un papel, y solo recalcula si cambian **los números** de la pregunta.
 
+> 🌎 **Otro ejemplo:** Como guardar el resultado de una cuenta difícil en un papel: si te preguntan lo mismo, lees el papel. Pero si cada vez te dan el problema en una hoja nueva, aunque diga lo mismo, crees que es otro y vuelves a calcular.
+
 > ✋ **Para y piensa:** `const a = { x: 1 }; const b = a;` ¿`a === b` da `true` o `false`?
 
 <details>
@@ -186,6 +210,10 @@ escribe :: ¿Por qué el gráfico recalculaba siempre los 365 días? :: Porque l
 
 > 🎙️ **El profesor:** dos técnicas para no repetir trabajo caro. Las vas a usar toda la vida.
 
+> 🌎 **En la vida real:** Es como organizar la ropa: en vez de revolver todo el armario cada mañana, separas por tipo una vez (índice) y dejas a mano lo que usas siempre (caché).
+
+> 🌎 **Otro ejemplo:** Es como la cocina de un restaurante: los ingredientes picados de antemano (caché) y ordenados por estante (índice) para no buscar en cada pedido.
+
 ### Índice
 
 Recorrer 600 registros **para cada uno** de 365 días son **219.000 pasos**. Con un **índice**, los recorres **una vez**, los organizas por día, y después cada búsqueda es **directa**.
@@ -203,6 +231,8 @@ porDia.get('2026-11-04');   // directo, sin recorrer todo
 Un **`Map`** es como un objeto especial para buscar por clave: `set(clave, valor)` guarda, `get(clave)` busca, `has(clave)` pregunta si existe.
 
 > 🌎 **En la vida real:** la guía telefónica ordenada por apellido: no lees de la A a la Z para encontrar "Rodríguez", vas directo a la R. Mejor ordenar las 600 boletas **una vez** en 365 sobres que buscar boleta por boleta cada día.
+
+> 🌎 **Otro ejemplo:** Como el índice alfabético de un recetario: vas directo a "Pollo", sin hojear todas las páginas.
 
 ### Caché
 
@@ -222,6 +252,8 @@ function dateFormat(locale, options) {
 - Devuelve el guardado. La segunda vez, no crea nada.
 
 > 🌎 **En la vida real:** tener el café ya molido en un frasco en vez de moler cada vez.
+
+> 🌎 **Otro ejemplo:** Como guardar los contactos frecuentes en favoritos: no los buscas en toda la agenda cada vez.
 
 **Riesgos del caché:** que quede **desactualizado** o que **crezca demasiado**. **Cuándo no vale:** si lo que guardas es **barato** de crear, o si **cambia casi siempre**.
 
@@ -257,6 +289,10 @@ vf :: 600 registros recorridos para cada uno de 365 días son unos 219.000 pasos
 
 > 🎙️ **El profesor:** después de la velocidad, se agregaron **pruebas de dinero**. La base está en el Tema 02; aquí van las dos lecciones nuevas de esta historia.
 
+> 🌎 **En la vida real:** Es como la auditoría de una empresa: se revisan las cuentas contra las reglas contables, y se esconden errores a propósito para ver si el auditor los encuentra.
+
+> 🌎 **Otro ejemplo:** Es como el control de calidad de una fábrica de medicamentos: cada lote se prueba contra la fórmula oficial, no contra el lote anterior.
+
 ### La regla más importante
 
 > Escribe la prueba según lo que **debe** pasar, no copiando lo que el código hace hoy.
@@ -272,6 +308,8 @@ Se lee: "un viaje de Uber de 100 a las 20:00 del día 4, y otro de 40 a las **02
 
 > 🌎 **En la vida real:** el inspector revisa contra **los planos del arquitecto**, no contra lo que el albañil ya construyó. Si copias en la prueba lo que el código hace hoy, dibujas los planos mirando la pared torcida.
 
+> 🌎 **Otro ejemplo:** Como un juez que decide según la ley, no según lo que hizo el acusado: la prueba sale de la regla, no del código.
+
 ### El sabotaje (*mutation testing*)
 
 Se crearon **92 pruebas**, y para comprobar que servían, se metieron **19 errores a propósito**: las pruebas detectaron **los 19**. A esa técnica se le llama **mutation testing**.
@@ -281,6 +319,8 @@ Y lo mejor: las pruebas encontraron **dos errores reales** que nadie había vist
 **Ojo:** un sabotaje detectado demuestra que **esa** prueba detecta **ese** tipo de error. **No** demuestra que no existan otros.
 
 > 🌎 **En la vida real:** el banco manda clientes falsos con billetes falsos para ver si los cajeros los detectan.
+
+> 🌎 **Otro ejemplo:** Como un simulacro de evacuación con humo falso: si todos salen bien, el plan sirve para ese tipo de emergencia, no para todas.
 
 ```practica
 escribe :: ¿Cuál es la regla más importante al escribir una prueba? :: Escribirla según lo que debe pasar (la regla del negocio), no copiando lo que el código hace hoy.
@@ -312,6 +352,8 @@ Un **`Set`** es una lista **sin repetidos**: guarda cada valor una sola vez.
 
 > 🌎 **En la vida real:** en una lista de asistencia alguien firmó "Delvin" y otro "delvin". Si no los unificas, parece que vinieron dos personas. Y el cajero que contó la plata de los dos sobres en los dos sobres: 30 y 30 = 60.
 
+> 🌎 **Otro ejemplo:** Como una planilla donde una persona escribió "Supermercado Bom" y otra "supermercado bom": al agrupar parecen dos tiendas, y los totales se duplican si se suman mal.
+
 > ✋ **Para y piensa:** si hubiera `Uber`, `uber` y `UBER` el mismo día (con 10 cada uno), ¿cuánto mostraba el error?
 
 <details>
@@ -342,6 +384,8 @@ El **día del negocio** no siempre coincide con el del calendario. Para **Uber**
 
 > 🌎 **En la vida real:** la panadería que cierra la caja a las 4 de la mañana: lo vendido a las 2 AM del día 5 cuenta en la caja del día 4. Como en Año Nuevo: a la 1 de la madrugada del 1 de enero, todos dicen "la fiesta de anoche".
 
+> 🌎 **Otro ejemplo:** Como la jornada de un vigilante nocturno que entra a las 22:00 y sale a las 6:00: lo que pasa a las 2 de la mañana es parte de su turno de "ayer".
+
 > 💡 **Idea:** ¿te acuerdas de la prueba que el Tema 02 dice que se configura con `TZ=America/Sao_Paulo`? Es por esto: las fechas dependen de la zona horaria.
 
 ```practica
@@ -360,6 +404,8 @@ escribe :: ¿Por qué "Ontem" salía igual a "Hoje" de madrugada? :: Porque calc
 Cada subida a GitHub empezó a revisar sola tipos, diseño, secretos y pruebas. Y al probar en una **máquina limpia** apareció un fallo **invisible en la Mac**: TypeScript revisaba el panel **sin tener sus dependencias** instaladas. En la Mac funcionaba porque estaban instaladas de antes.
 
 > 🌎 **En la vida real:** el control de alcoholemia en la carretera: no le importa si te sientes bien; te hace soplar a ti y a todos. La máquina limpia es el aparato recién calibrado, no el tuyo de casa.
+
+> 🌎 **Otro ejemplo:** Como el examen de manejo: lo haces en el auto de la autoescuela, no en el tuyo con tus mañas; si apruebas ahí, manejas bien en cualquiera.
 
 **Lo que el CI no puede detectar:** lo que no revisa. Por ejemplo, cómo se ve una pantalla o si la app abre en un teléfono real (parte 13 lo demuestra).
 
@@ -391,6 +437,8 @@ color: dash.formHint
 
 > 🌎 **En la vida real:** una cadena de comida rápida. El **token** es "Rojo Corporativo"; el **motor** es la central que manda el uniforme a todos los locales; el **candado** es el inspector que multa al que se hizo su propio uniforme. El motor existe, pero sin inspector alguien siempre se lo salta.
 
+> 🌎 **Otro ejemplo:** Como el uniforme de una empresa: el color oficial tiene nombre (token), la empresa los reparte desde un solo lugar (motor) y un supervisor revisa que nadie lleve uno hecho a mano (candado).
+
 ```practica
 elige :: ¿Qué es un token de diseño? :: Una contraseña :: Un nombre para un valor de diseño, como `dash.formHint` :: Un botón
 elige :: ¿Qué es `Touchable` en tu app? :: Un token :: Un motor: controla el toque en toda la app :: Un candado
@@ -418,6 +466,8 @@ Después: los dos importan vehicleOdometer
 
 > 🌎 **En la vida real:** "para conseguir trabajo necesito experiencia, y para tener experiencia necesito trabajo". La solución es un tercero: si dos vecinos se pelean por una escalera, la compra el edificio y la usan los dos. Y `import type` es pedir **solo la foto** del vecino, no que venga en persona.
 
+> 🌎 **Otro ejemplo:** Como dos compañeros que no pueden empezar su tarea porque cada uno espera que el otro termine primero: se resuelve dándoles a los dos una herramienta común.
+
 ```practica
 escribe :: ¿Qué es un ciclo entre archivos? :: Cuando A importa a B y B importa a A; puede romper la carga y hace el código difícil de cambiar.
 elige :: ¿Cómo se rompe un ciclo normalmente? :: Borrando los dos archivos :: Moviendo lo compartido a un tercer archivo :: Juntando todo en uno
@@ -441,6 +491,8 @@ elige :: ¿De cuántos ciclos a cuántos se pasó? :: De 9 a 0 :: De 22 a 0 :: D
 Una herramienta que se usó: el **hook propio**, una función `useAlgo` que agrupa lógica de React, como `useFuelActions`.
 
 > 🌎 **En la vida real:** reorganizar el placard: cambias de lugar la ropa, pero no tiras ni compras nada. Antes sacas una foto, mueves la ropa sin cortarla, y al final comparas. Un hook propio es armar un **kit del café** en una bandeja.
+
+> 🌎 **Otro ejemplo:** Como reorganizar los cajones de la cocina: los mismos cubiertos, solo mejor ubicados; la comida sale igual.
 
 **¿Dividir un archivo garantiza que sea mejor?** **No.** Un archivo grande puede dividirse mal. Importa que **cada parte tenga una responsabilidad clara** (Tema 10). Repartir la ropa en cinco cajones al azar no ordena nada.
 
@@ -471,6 +523,8 @@ Las librerías también tienen errores. Para el problema de Firestore (parte 3) 
 
 > 🌎 **En la vida real:** las librerías son muebles comprados; el parche es una **cuña** hecha a medida para la pata floja de **ese** modelo. Si compras el modelo nuevo, la cuña no entra, y encima te quedaste con **dos mesas** iguales en la sala. Las revisiones miraron cada mueble en su caja, pero nadie **armó la sala y se sentó a comer**.
 
+> 🌎 **Otro ejemplo:** Como un repuesto adaptado a mano para un modelo de carro: si cambias de modelo, el repuesto ya no calza, y te quedas con dos piezas que chocan.
+
 ```practica
 elige :: ¿Qué hace `patch-package`? :: Borra librerías :: Guarda un cambio a una librería y lo reaplica al instalar :: Publica la app
 elige :: ¿Por qué se rompió la vc89? :: Por un error de tipeo :: El parche dejó de aplicarse al actualizar y quedaron dos copias de `@firebase/app` :: Porque el iPhone era viejo
@@ -494,6 +548,8 @@ escribe :: ¿Cuál es la lección de la vc89? :: Compilar no es funcionar: aunqu
 
 > 🌎 **En la vida real:** un ayudante muy rápido, pero que a veces habla con demasiada seguridad. Pídele medidas, abre la canilla tú, revisa el ticket, no firmes lo que no leíste, y un plano eléctrico no se hace "a ojo".
 
+> 🌎 **Otro ejemplo:** Como un pasante muy rápido y entusiasta: le pides el trabajo, pero revisas los números, pruebas que funcione y no firmas nada que no entiendas.
+
 > 💡 **Idea:** estas cinco reglas son las mismas de la clase 19 (agentes): verificar, medir, y una persona en el ciclo.
 
 ```practica
@@ -507,6 +563,8 @@ vf :: Si la IA dice "ya quedó", se puede publicar sin probar
 ## Los números finales
 
 > 🎙️ **El profesor:** para cerrar la historia, el "antes y después". Los números convencen más que "ahora anda mejor".
+
+> 🌎 **En la vida real:** Los números de antes y después son como la foto del antes y después de una dieta: convencen más que "me siento mejor".
 
 | Qué | Antes | Después |
 |---|---|---|
@@ -539,6 +597,8 @@ vf :: Contar los errores cometidos en una entrevista te hace ver mal
 ## Práctica final y entrevista
 
 > 🎙️ **El profesor:** el examen de esta clase es contar historias. Cada una **en 1 minuto, en voz alta, sin leer**. Después compara con la versión modelo.
+
+> 🌎 **En la vida real:** Contar esta historia es como contarle a un cliente la reparación de su carro: qué tenía, cómo lo encontraste, qué cambiaste y cómo quedó.
 
 > 🎤 **Entrevista:** "Cuéntame un problema difícil que resolviste." (versión de 30 segundos)
 

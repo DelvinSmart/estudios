@@ -27,6 +27,8 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🌎 **En la vida real:** se mejoró **el molde** del pan una sola vez, y todos los panes salen mejor, sin tocar uno por uno.
 
+> 🌎 **Otro ejemplo:** Como una lista de mejoras de un día en un taller: cambiamos el tablero, las luces y la radio, y cada cosa con el lugar del carro donde está.
+
 > 📌 **Nota:** después del 15/11 siguieron los cambios (por ejemplo, una tarjeta "Reglas para la IA" en el panel y la portada a todo el ancho). La idea de fondo es la misma.
 
 ```practica
@@ -42,6 +44,10 @@ vf :: Casi todo lo de este día se hizo en la plantilla, una sola vez
 
 > 🎙️ **El profesor:** empezó con algo simple, el nombre. Pero trajo tres lecciones: renombrar, no complicar, y la caché.
 
+> 🌎 **En la vida real:** Es como cambiar el nombre de tu negocio: actualizas el cartel, pero el local, los clientes y la historia siguen siendo los mismos.
+
+> 🌎 **Otro ejemplo:** Es como cambiar tu número de teléfono: se lo avisas a todos una vez y usas uno solo, en vez de tener dos líneas con desvíos.
+
 ### Renombrar, no copiar
 
 1. El título visible pasó de "Estudios Bíblicos" a **"¿Qué dice la Biblia?"**.
@@ -52,7 +58,13 @@ vf :: Casi todo lo de este día se hizo en la plantilla, una sola vez
 
 > 🌎 **En la vida real:** cambiar el cartel de tu negocio, no abrir otro local con otro nombre.
 
+> 🌎 **Otro ejemplo:** Como cambiarte el apellido en el registro civil: sigues siendo tú, con todos tus documentos anteriores.
+
 ### Lo que se intentó y se quitó
+
+> 🌎 **En la vida real:** Es como poner un cartel de "nos mudamos" en el local viejo, y después decidir que es más simple tener una sola dirección y quitarlo.
+
+> 🌎 **Otro ejemplo:** Es como tener dos números de teléfono con desvío: funciona, pero confunde. Decidiste uno solo.
 
 Para no romper los links viejos, se crearon **redirecciones** (un repositorio vacío que mandaba a la dirección nueva). Tú decidiste que no: **"un solo link, una sola cosa, nada de redireccionar"**. Se borraron.
 
@@ -65,6 +77,8 @@ GitHub Pages le dice al navegador que guarde cada página **10 minutos** (`cache
 - Para todos: cada vez que cambia un CSS o un JS, se cambia su "versión" en el HTML: `styles.css?v=lbla12`. Para el navegador, `?v=lbla12` es **otro archivo**, así que no usa el viejo.
 
 > 🌎 **En la vida real:** la caché es seguir leyendo el diario de la mañana aunque salió una edición nueva. `?v=lbla12` es ponerle "edición 12" en la tapa.
+
+> 🌎 **Otro ejemplo:** Como el periódico que ya compraste: aunque salió una edición nueva, sigues con el viejo hasta que vas al kiosco por otro.
 
 > 💡 **Idea:** este mismo mapa tuvo el problema de la caché cuando lo probamos (el CSS viejo seguía cargado). Es un problema de todos los días en la web.
 
@@ -80,6 +94,10 @@ vf :: El código de 8 letras de GitHub llega por SMS al teléfono
 ## 3. Los derechos de la LBLA
 
 > 🎙️ **El profesor:** ahora algo serio: **derechos de autor**. La LBLA (La Biblia de las Américas) tiene dueño: **Lockman**. Antes de usarla, se leyeron sus reglas en su página oficial.
+
+> 🌎 **En la vida real:** Es como usar canciones en un video de YouTube: hay reglas de cuánto puedes usar y siempre con el crédito del autor.
+
+> 🌎 **Otro ejemplo:** Es como citar un libro en una tesis: puedes citar partes, con la fuente, pero no copiar el libro entero.
 
 Las reglas de Lockman:
 - Se pueden citar **hasta 500 versículos** sin pedir permiso.
@@ -100,6 +118,8 @@ Leída: "`esLBLA` recibe una referencia y devuelve **sí** si contiene la palabr
 **Lo importante:** **nadie tiene que acordarse** de poner el aviso. Lo pone la plantilla.
 
 > 🌎 **En la vida real:** las reglas para usar fotos de un fotógrafo: "hasta 500, no todo el álbum, no más de un cuarto de tu revista, y siempre con mi nombre". Y una impresora que **siempre** imprime el pie de página.
+
+> 🌎 **Otro ejemplo:** Como una imprenta que siempre pone el pie de página con el copyright: el autor no tiene que acordarse.
 
 ```practica
 escribe :: ¿Cuántos versículos de la LBLA se pueden citar y con qué condiciones? :: Hasta 500, sin citar un libro completo, sin pasar del 25% del texto del estudio, y con el aviso completo y el link a LBLA.com.
@@ -128,7 +148,13 @@ Dos palabras importantes:
 
 > 🌎 **En la vida real:** pedirle a alguien que te recite un contrato de memoria: te dice algo **parecido**, pero en un contrato cada palabra importa. Y el scraping es fotocopiar un libro que dice "prohibido fotocopiar"; CORS es el guardia que no te deja sacar el libro de la tienda.
 
+> 🌎 **Otro ejemplo:** Como querer una película para ver en casa: no se graba del cine (prohibido); se compra o se alquila donde está permitido.
+
 ### Lo que sí se hizo
+
+> 🌎 **En la vida real:** Es como no poder fotocopiar un libro, pero sí anotar la página exacta para que cada uno lo lea en la biblioteca.
+
+> 🌎 **Otro ejemplo:** Es como el que trae su propia comida a una reunión: la trae él, nadie la saca de la heladera de otro.
 
 1. **Buscador:** escoges libro, capítulo y versículos, y "Abrir en la Biblia" abre el pasaje exacto en Bible.com. La dirección se arma sola: `bible.com/bible/89/1TI.2.11-14.LBLA` (el 89 es la LBLA).
 2. **Versículos ya copiados:** si un versículo ya está en otro estudio, el panel lo **reutiliza** (`js/panel-reusar.js`).
@@ -161,6 +187,8 @@ vf :: Con una foto tuya, eres tú quien trae el texto, igual que al pegarlo
 **La cuenta:** para que la Biblia sea **como máximo el 25 %** (1 de cada 4), lo tuyo tiene que ser **las otras 3 partes**: al menos **3 veces** lo bíblico.
 
 > 🌎 **En la vida real:** una pizza en 4 porciones: si la Biblia puede ser **una** porción como máximo, lo tuyo son las otras tres. Y el medidor es la balanza de la aerolínea: si te pasas de peso, no despacha.
+
+> 🌎 **Otro ejemplo:** Como el límite de equipaje de mano: si te pasas, no te dejan subir hasta que saques algo.
 
 **Lo que encontró:** Lenguas extrañas estaba en **25,3 %** (pasado). Con sus 34 fuentes bajó a **23,4 %**.
 
@@ -198,7 +226,13 @@ vf :: Si el estudio pasa del 25 %, Publicar igual publica
 
 > 🌎 **En la vida real:** pegar el ticket de compra **dentro de la caja** del producto: si mueves la caja, el ticket se va con ella.
 
+> 🌎 **Otro ejemplo:** Como las notas al pie de un libro de historia: cada dato con su fuente, pegada a la página donde se usa.
+
 ### Verificar antes de poner
+
+> 🌎 **En la vida real:** Es como el periodista que llama a la fuente antes de publicar: si no confirma, no sale.
+
+> 🌎 **Otro ejemplo:** Es como revisar el ticket del supermercado antes de guardarlo: a veces descubres un producto cobrado que no llevaste.
 
 Se pusieron **34 fuentes** en Lenguas extrañas, y **cada link se abrió** para ver que decía lo que el estudio afirma. Así se encontró **un error**: lo de "tardaban un año en subir la torre" **no está** en el Pirkei de-Rabbi Eliezer; está en otro libro, el **Sefer HaYashar**. Se corrigió.
 
@@ -231,6 +265,8 @@ vf :: Se abrió cada link de las fuentes antes de publicarlas
 
 > 🌎 **En la vida real:** una canción con derechos (NA28) contra una música libre de derechos (SBLGNT). Y tenerlo dentro de la página es tener la enciclopedia en tu estante.
 
+> 🌎 **Otro ejemplo:** Como usar música libre de derechos en un video: la usas tranquilo, solo pones el crédito del músico.
+
 ```practica
 elige :: ¿Por qué se usó el SBLGNT y no el Nestlé-Aland? :: Porque es más nuevo :: Porque el SBLGNT tiene licencia libre (CC BY 4.0) y el NA28 tiene derechos :: Porque es más corto
 elige :: ¿Cómo está guardado el griego? :: En un servidor de otro :: Dentro de la página, un JSON por libro :: En el PDF
@@ -249,6 +285,8 @@ escribe :: ¿Por qué el griego sí se puede traer solo y la LBLA no? :: Porque 
 
 > 🌎 **En la vida real:** un acordeón de un folleto: ves el título y lo abres si quieres leer.
 
+> 🌎 **Otro ejemplo:** Como un menú de restaurante con fotos chiquitas: tocas la que te interesa y se agranda.
+
 ### El orden de los efectos
 
 En `abrirRecuadro` (`js/mapa.js`): si había otro recuadro abierto, **primero se va con su efecto y recién después entra el nuevo**. Nunca hay dos a la vez:
@@ -262,6 +300,8 @@ Leída: "si hay recuadros abiertos, espera lo que dura el cierre y después mues
 `duracionCierre()` **lee el tiempo del motor** (la variable CSS `--dur-200`). Así, el JavaScript **espera exactamente lo mismo** que dura el efecto en el CSS, y no hay un número escrito a mano en dos lugares (Tema 11: tokens).
 
 > 🌎 **En la vida real:** la puerta giratoria del banco: no entra el siguiente hasta que salió el anterior. Y leer el tiempo del motor es que los dos bailarines escuchen **la misma música**.
+
+> 🌎 **Otro ejemplo:** Como la fila de un baño de un solo lugar: entra el siguiente cuando sale el anterior.
 
 **En el PDF** los pasajes salen **completos**, porque en papel no se puede tocar nada.
 
@@ -291,11 +331,15 @@ Tres ideas de velocidad, en orden: **quitar una espera innecesaria**, **hacer la
 
 > 🌎 **En la vida real:** el empleado que te hace esperar a propósito antes de cada producto (el globo); mandar la lista entera por WhatsApp (todos a la vez); y que la bolsa ya esté lista en la puerta antes de que llegues (adelantarlos).
 
+> 🌎 **Otro ejemplo:** Como pedir el pedido entero de una vez y que ya esté embolsado cuando llegas, en vez de esperar producto por producto.
+
 ### JSONP
 
 Logos responde con **JSONP**: en vez de `fetch`, se agrega un **`<script>`** cuya dirección es la del servicio, y ese script, al cargar, **llama a una función nuestra** con los datos. La dirección es como `reftagger.bibliacdn.com/bible/rvr60/1Timothy3.2`. Se comprobó con los 66 libros (Cantares se escribe "Song").
 
 > 🌎 **En la vida real:** pedir una pizza diciendo "cuando llegue, toca el timbre que dice *Delvin*": el repartidor (el `<script>`) llega y toca **tu** timbre (llama a tu función) con la pizza (los datos).
+
+> 🌎 **Otro ejemplo:** Como dejar tu número de teléfono en un mostrador: cuando llega tu pedido, te llaman a ti con los datos.
 
 **El riesgo:** ese servicio **no está documentado** para usarse así. Si Logos lo cambia, el botón dejaría de cargar. Es bueno decirlo en voz alta: es una **deuda técnica conocida**.
 
@@ -318,7 +362,13 @@ vf :: El servicio de Logos usado así está documentado y garantizado
 
 > 🌎 **En la vida real:** colgar en tu pared una ventana que da a la casa del vecino: ves lo que hay, pero no puedes meter la mano ni medir sus muebles.
 
+> 🌎 **Otro ejemplo:** Como un cuadro con vidrio en un museo: lo ves entero, pero no puedes tocarlo ni moverlo.
+
 ### El camino, paso a paso
+
+> 🌎 **En la vida real:** Es como acomodar un cuadro en la pared: lo subes, lo bajas, lo achicas y lo centras, un ajuste a la vez, hasta que queda bien.
+
+> 🌎 **Otro ejemplo:** Es como ajustar un espejo retrovisor: cada vuelta es un pequeño cambio, hasta ver justo lo que necesitas.
 
 | Intento | Problema | Arreglo |
 |---|---|---|
@@ -340,6 +390,8 @@ vf :: El servicio de Logos usado así está documentado y garantizado
 **Calibrar** es ajustar un número con **datos reales**, no con un solo ejemplo.
 
 > 🌎 **En la vida real:** un sastre que no puede medir a una persona, pero sí a su **hermano gemelo**: mide al gemelo (la Reina-Valera) y con eso corta la tela. Y calibrar es ajustar la balanza de cocina pesando 32 cosas, no una manzana.
+
+> 🌎 **Otro ejemplo:** Como un costurero que calcula cuánta tela hace falta mirando el talle de otra camisa del mismo modelo.
 
 Todas las medidas están **en el motor**, con la fecha en que se midieron (`--lbla-encabezado`, `--lbla-tarjeta`, `--lbla-linea`, `--lbla-ancho-letra`…). Si Lockman cambia su página, se vuelven a medir y se cambian **solo ahí**.
 
@@ -366,6 +418,10 @@ elige :: ¿Por qué hizo falta una tapa transparente si ya estaba `pointer-event
 
 > 🎙️ **El profesor:** el mismo concepto que viste en la app (Tema 11) y en la web (Tema 13), ahora en tu página de estudios.
 
+> 🌎 **En la vida real:** Es como tener todas las medidas de una casa en un solo plano: si el arquitecto cambia una, la cambia ahí y todos los albañiles la siguen.
+
+> 🌎 **Otro ejemplo:** Es como el diapasón que afina todos los instrumentos de una orquesta: una sola nota de referencia para todos.
+
 **Antes:** los colores estaban en un archivo, pero **unos 770 valores** (tamaños, espacios, tiempos, sombras) estaban **escritos a mano** en todos lados.
 
 **Ahora:**
@@ -378,6 +434,8 @@ elige :: ¿Por qué hizo falta una tapa transparente si ya estaba `pointer-event
 Se comparó la página nueva con la publicada, **elemento por elemento**: más de **3.900 elementos, 0 diferencias**. Es un **refactor** (Tema 11): cambiar la estructura sin cambiar lo que se ve, y **comprobarlo**.
 
 > 🌎 **En la vida real:** una casa con 770 enchufes de modelos distintos que pasa a tener **un solo catálogo**, con un inspector que revisa que no quede ninguno fuera. Y la comprobación es el juego de las 7 diferencias con 3.900 elementos: 0 diferencias.
+
+> 🌎 **Otro ejemplo:** Como comparar dos fotos de una sala antes y después de reorganizar el mueble: si no se movió nada, la foto es idéntica.
 
 ```practica
 elige :: ¿Qué hace el candado y cuándo se ejecuta? :: Borra colores al publicar :: Busca valores escritos a mano fuera del motor antes de armar el sitio; si encuentra uno, no publica :: Cambia los colores de noche
@@ -401,6 +459,8 @@ vf :: Los `@media` pueden usar variables CSS
 ¿Por qué `tema.js` va **en el `<head>`**? Porque así se aplica **antes** de dibujar la página. Si fuera al final, la página aparecería un instante en el tema equivocado y después cambiaría: un **parpadeo**. (Este mapa hace lo mismo: mira el `<script>` del `<head>` de `index.html`.)
 
 > 🌎 **En la vida real:** prender la luz antes de abrir la puerta. Y "nuevo" es la etiqueta de "no leído" de un correo: se quita cuando lo abres.
+
+> 🌎 **Otro ejemplo:** Como un auto con detalles de cortesía: la luz interior que se prende sola, el asiento que recuerda tu posición y el aviso de puerta abierta.
 
 ```practica
 elige :: ¿Dónde se guarda el tema que escoge la persona? :: En GitHub :: En su aparato (`localStorage`) :: En el JSON
@@ -431,6 +491,8 @@ vf :: Se generan dos PDF por estudio: claro y oscuro
 
 > 🌎 **En la vida real:** poder usar una canción no quiere decir que alguien te mande el archivo; antes de mandar a alguien a una tienda, asegúrate de que está abierta; una camisa puede quedar bien de frente y mal de costado; no se ajusta la balanza con una sola manzana.
 
+> 🌎 **Otro ejemplo:** Como el cuaderno de errores de una obra: cada problema con lo que se aprendió, para no repetirlo.
+
 ```practica
 escribe :: Nombra dos cosas que se aprendieron midiendo en vez de suponer. :: Que el ancho de letra era 8,1 y no 9,15; que el tiempo se perdía en la espera del globo de Logos y no en la red; o que Lockman cambia de diseño desde 645 px.
 elige :: ¿Por qué hay que probar en el navegador de la persona y no solo en uno? :: Porque es más lindo :: Porque cada navegador tiene sus defectos, como Safari con los iframes :: Porque todos son iguales
@@ -442,6 +504,8 @@ vf :: Tener permiso para citar la LBLA significa tener de dónde traer el texto 
 ## Para la entrevista
 
 > 🎙️ **El profesor:** de este día salen dos historias muy buenas. En voz alta.
+
+> 🌎 **En la vida real:** Contar este día es como contar una jornada de taller difícil: qué se intentó, qué no funcionó y cómo se resolvió.
 
 > 🎤 **Entrevista:** "Cuéntame un problema técnico difícil que resolviste."
 

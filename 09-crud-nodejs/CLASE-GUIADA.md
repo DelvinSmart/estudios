@@ -23,6 +23,8 @@ Casi todo sistema es esto: el banco con tus cuentas, la farmacia con sus remedio
 
 > 🌎 **En la vida real:** la libreta de contactos del celular: **agregar** un contacto (C), **buscarlo** (R), **cambiarle** el número (U) y **borrarlo** (D).
 
+> 🌎 **Otro ejemplo:** Como el inventario de una tienda: agregar productos nuevos, ver qué hay, corregir un precio y sacar lo que ya no se vende.
+
 ```practica
 escribe :: ¿Qué es un CRUD? :: Las cuatro operaciones básicas sobre datos: crear, leer, actualizar y borrar (POST, GET, PUT y DELETE).
 elige :: ¿Qué verbo HTTP se usa para crear? :: `GET` :: `POST` :: `DELETE`
@@ -36,6 +38,8 @@ vf :: Editar un ingreso en Copiloto es una operación de actualizar (U)
 ## 2. Las palabras
 
 > 🎙️ **El profesor:** antes de ver el código, el vocabulario. Todo pasa en **un restaurante**.
+
+> 🌎 **Otro ejemplo:** En un banco: el servidor es el cajero; la petición, tu trámite; la respuesta, tu comprobante; la ruta, la ventanilla; y la API, la lista de trámites que se pueden hacer.
 
 | Palabra | Qué es | 🌎 En el restaurante |
 |---|---|---|
@@ -66,6 +70,8 @@ escribe :: ¿Qué tiene una petición HTTP? :: Un verbo (GET, POST…), una ruta
 ## 3. Qué hay en esta carpeta
 
 > 🎙️ **El profesor:** el proyecto tiene cinco archivos, cada uno con un trabajo. Así se organiza un backend bien hecho.
+
+> 🌎 **Otro ejemplo:** Como un local de comida rápida: el reglamento (validar), el menú con recetas (app), abrir la persiana (server), y dos inspectores: uno revisa las reglas, otro hace un pedido completo.
 
 | Archivo | Qué es | 🌎 En el restaurante |
 |---|---|---|
@@ -103,6 +109,8 @@ npm start
 Debe decir: **`Servidor listo en http://localhost:3000`**. El servidor **queda encendido**, esperando pedidos. Para apagarlo: **Ctrl + C**.
 
 > 🌎 **En la vida real:** entrar al local, comprar los utensilios la primera vez, y abrir la puerta con el cartel de "abierto". Ctrl + C es cerrar la persiana.
+
+> 🌎 **Otro ejemplo:** Como encender una computadora nueva: la primera vez instalas los programas; después solo la prendes.
 
 ```practica
 elige :: ¿Qué hace `npm install`? :: Enciende el servidor :: Instala las librerías (solo la primera vez) :: Corre las pruebas
@@ -151,6 +159,8 @@ curl -X POST localhost:3000/gastos -H "Content-Type: application/json" -d '{"des
 Respuesta: `{"errores":["El monto debe ser un número mayor que 0."]}`
 
 > 🌎 **En la vida real:** "anote: gasolina, 120" (crear); "muéstreme todo" (listar); "el número 1 no era 120, era 150" (actualizar); "tache el número 1" (borrar); y pedir "agua por menos 5 reales" para que el mesero diga "eso no se puede".
+
+> 🌎 **Otro ejemplo:** `curl` es como pedir por teléfono en vez de ir en persona: haces el mismo pedido, sin entrar a la tienda.
 
 > ✋ **Para y piensa:** creas un gasto, lo borras, y después pides `curl localhost:3000/gastos/1`. ¿Qué crees que responde?
 
@@ -226,6 +236,8 @@ app.post('/gastos', (req, res) => {
 
 > 🌎 **En la vida real:** `siguienteId++` es el turnero de la carnicería: te da el 7 y ya deja listo el 8 para el próximo.
 
+> 🌎 **Otro ejemplo:** Como la máquina expendedora: validas el billete, si es falso lo devuelve; si no, te da el producto y un número de operación nuevo.
+
 > ⚠️ **Cuidado:** los datos viven en una **lista en memoria**. Al apagar el servidor, **se borran**. Es una pizarra, no un cuaderno. El ejercicio 4 lo resuelve.
 
 > ✋ **Para y piensa:** si `siguienteId` vale 3 y llega un gasto válido, ¿qué id recibe? ¿Y cuánto vale `siguienteId` después?
@@ -275,6 +287,8 @@ Es una **función pura**: con los mismos datos, da siempre el mismo resultado, y
 
 > 🌎 **En la vida real:** el portero de la discoteca con su libreta de problemas: empieza vacía; "¿trajo nombre?"; "¿el monto es un número de verdad y mayor que 0?"; al final entrega la libreta. Vacía = puede pasar.
 
+> 🌎 **Otro ejemplo:** Como la balanza del aeropuerto: revisa el peso y el tamaño de la maleta y te da una lista de problemas, vacía si todo está bien.
+
 ```practica
 elige :: ¿Qué devuelve `validarGasto` si todo está bien? :: `true` :: Una lista vacía `[]` :: `null`
 elige :: `validarGasto({ descripcion: 'Agua', monto: 0 })` devuelve… :: `[]` :: Una lista con un error del monto :: Una lista con dos errores
@@ -313,6 +327,8 @@ Es exactamente el Tema 02: **los errores viven en los bordes**, y **un sabotaje 
 
 > 🌎 **En la vida real:** un guardia que revisa que no entren menores de 18: comprobó a uno de 15 y a uno de 30, pero nunca a uno de **justo 18**.
 
+> 🌎 **Otro ejemplo:** Como un control de alcoholemia que revisó a quien tomó mucho y a quien no tomó nada, pero nunca a quien está justo en el límite permitido.
+
 ```practica
 vf :: Con el sabotaje `< 0`, alguna prueba falla
 elige :: ¿Qué enseña el sabotaje que no falla? :: Que las pruebas sobran :: Que falta una prueba del borde (monto 0) :: Que el código está perfecto
@@ -326,7 +342,11 @@ escribe :: ¿Qué es un caso de borde y por qué hay que probarlo? :: Es el valo
 
 > 🎙️ **El profesor:** ahora la tarea grande, **un ejercicio por día**, en orden. Después de cada uno: `npm test`. Intenta **sin mirar** la solución; ábrela solo para corregirte.
 
+> 🌎 **En la vida real:** Es como un plan de entrenamiento de un mes: un ejercicio nuevo por día, y no pasas al siguiente sin dominar el anterior.
+
 ### Ejercicio 0: la prueba que falta
+
+> 🌎 **En la vida real:** Es como agregarle al examen la pregunta difícil que faltaba: la del caso justo en el límite.
 
 En `test/validar.test.js`, agrega una prueba que diga que un monto de **0** es inválido.
 - Corre `npm test`: debe pasar.
@@ -391,6 +411,8 @@ test('rechaza un gasto sin categoría', () => {
 
 ### Ejercicio 2: el total
 
+> 🌎 **En la vida real:** Es como la suma al pie de una factura: recorre todos los renglones y te da el total.
+
 Agrega `GET /gastos/total`, que devuelva `{ "total": 123 }` con la suma de todos los montos.
 - **Pista:** ponlo **antes** de `GET /gastos/:id`. Después ponlo **después** y mira qué pasa. ¿Por qué?
 - Agrega una prueba.
@@ -426,6 +448,8 @@ test('el total suma los montos', async (t) => {
 </details>
 
 ### Ejercicio 3: pruebas para lo nuevo
+
+> 🌎 **En la vida real:** Es como revisar que cada mueble nuevo de la casa tenga su garantía y su manual.
 
 Revisa que todo lo que agregaste en los ejercicios 1 y 2 tenga pruebas, incluidos los casos de error.
 
@@ -512,6 +536,8 @@ escribe :: ¿Qué es un repositorio y para qué sirve? :: Una pieza con funcione
 ## Para la entrevista
 
 > 🎙️ **El profesor:** estas preguntas aparecen en casi todas las entrevistas de backend. En voz alta.
+
+> 🌎 **En la vida real:** Explicar un CRUD es como explicar una agenda: anotar, mirar, corregir y borrar.
 
 > 🎤 **Entrevista:** "¿Qué es un CRUD?" y "¿Diferencia entre PUT y PATCH?"
 

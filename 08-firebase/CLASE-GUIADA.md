@@ -16,6 +16,8 @@ A esto se le llama **backend** (la parte de atrás: datos, seguridad, lógica en
 
 > 🌎 **En la vida real:** alquilar un local en un shopping en vez de construir tu propio edificio. El shopping pone la seguridad, la luz, la limpieza; tú pagas el alquiler según cuánto usas y te dedicas a vender. Si un día llega mucha gente, el shopping abre más puertas.
 
+> 🌎 **Otro ejemplo:** Como usar la luz de la compañía eléctrica en vez de comprar un generador: no lo mantienes tú, pagas según lo que gastas, y si consumes más, la compañía lo da.
+
 ```practica
 escribe :: Con tus palabras: ¿qué es Firebase? :: Un conjunto de servicios de Google que le da a la app un servidor (datos, inicio de sesión, funciones) sin que yo tenga que administrar computadoras; pago por lo que uso.
 elige :: ¿Qué es el backend? :: Las pantallas de la app :: La parte de atrás: datos, seguridad y lógica en la nube :: El teléfono
@@ -27,6 +29,8 @@ vf :: Con Firebase tienes que comprar y mantener tu propio servidor
 ## 2. Las piezas que usa tu app
 
 > 🎙️ **El profesor:** Firebase no es una cosa: son varias piezas. Tu app usa cinco. Imagínalas como **los servicios de un edificio de oficinas**.
+
+> 🌎 **Otro ejemplo:** En un hospital: la recepción que te identifica (Authentication), el archivo de historias clínicas (Firestore), el depósito de radiografías (Storage), los médicos que trabajan adentro (Cloud Functions) y la cartelera de la entrada (Hosting).
 
 | Pieza | Qué es | Para qué la usa Copiloto | 🌎 En el edificio |
 |---|---|---|---|
@@ -63,6 +67,8 @@ vf :: El panel web se publica con Firebase Hosting
 
 > 🎙️ **El profesor:** Firestore no es como Excel. No hay una tabla gigante con filas y columnas. Hay **colecciones** y **documentos**. Con la imagen correcta, es muy fácil.
 
+> 🌎 **Otro ejemplo:** Como el fichero de una biblioteca: cajones por tema (colecciones), una ficha por libro (documentos), los datos de cada ficha (campos), y a veces una ficha con hojitas abrochadas (subcolecciones).
+
 | Palabra | Qué es | 🌎 En el archivador |
 |---|---|---|
 | **Colección** | Un grupo de documentos del mismo tipo | Un **cajón** con etiqueta: "Clientes" |
@@ -98,7 +104,13 @@ Las llaves `{uid}` y `{id}` quieren decir "aquí va un valor distinto en cada ca
 
 > 🌎 **En la vida real:** un edificio de departamentos. `users/` es el edificio; `{uid}` es **tu departamento**, con tu número en la puerta; adentro, cada habitación guarda lo tuyo. Afuera están los **espacios comunes**: el salón del San, la cartelera de colores, el buzón de reclamos.
 
+> 🌎 **Otro ejemplo:** Como los casilleros de un gimnasio: cada socio tiene el suyo con su número, y adentro guarda sus cosas; las pesas del salón son de todos.
+
 ### Un ingreso, por dentro
+
+> 🌎 **En la vida real:** Un ingreso guardado es como un recibo de taxi: quién (la plataforma), cuánto (50), de qué tipo, a qué hora y con qué carro.
+
+> 🌎 **Otro ejemplo:** Es como una fila de una planilla de gastos: cada columna con su nombre y su valor, solo que en JSON.
 
 ```json
 {
@@ -137,6 +149,10 @@ escribe :: ¿Por qué casi todo está dentro de `users/{uid}`? :: Para que los d
 
 > 🎙️ **El profesor:** esta es **la parte más importante de la clase**, y una de las más importantes de toda tu carrera. Presta atención.
 
+> 🌎 **En la vida real:** Es como la cerradura de cada habitación de un hotel: la llave de tu habitación no abre la del vecino, aunque los dos estén en el mismo pasillo.
+
+> 🌎 **Otro ejemplo:** Es como el control de acceso de un edificio de oficinas: la tarjeta de cada empleado solo abre los pisos donde trabaja.
+
 ### El problema
 
 La app está en el teléfono de miles de personas que **no controlas**. Y aquí va algo que sorprende: **cualquiera puede intentar** leer o escribir en tu base de datos **directamente**, sin usar tu app (con una app falsa, o con un programa). La app no es una muralla.
@@ -145,7 +161,13 @@ Por eso existen las **reglas de seguridad**: un archivo, **`firestore.rules`**, 
 
 > 🌎 **En la vida real:** un edificio con muchas puertas y ventanas. Alguien podría entrar por una ventana sin pasar por la recepción. Las reglas son un portero **dentro de cada puerta**, que revisa la credencial de todo el que quiera abrir algo.
 
+> 🌎 **Otro ejemplo:** Como un cajero automático: cualquiera puede acercarse e intentar sacar plata; lo que protege es que el banco revisa la tarjeta y la clave en su sistema, no la pantalla del cajero.
+
 ### Regla real 1: cada uno ve solo sus ingresos
+
+> 🌎 **En la vida real:** Es como la caja de seguridad de un banco: necesitas tu identificación (sesión) **y** que la caja sea la tuya (el uid). Con una sola de las dos, no se abre.
+
+> 🌎 **Otro ejemplo:** Es como retirar un paquete en el correo: muestras tu documento y tiene que coincidir con el nombre del paquete.
 
 ```text
 match /users/{userId}/earnings/{docId} {
@@ -179,7 +201,13 @@ match /vehicleColors/{id} {
 
 > 🌎 **En la vida real:** la cartelera del edificio: cualquier inquilino la puede **leer**, pero ningún inquilino puede escribir en ella. Solo la administración tiene la llave de la vitrina.
 
+> 🌎 **Otro ejemplo:** Como el horario de una farmacia pegado en la vidriera: todos lo pueden leer, pero solo el dueño lo cambia.
+
 ### Las reglas tienen pruebas
+
+> 🌎 **En la vida real:** Es como probar las alarmas de un banco con un ladrón de mentira, en un edificio de práctica, antes de abrir al público.
+
+> 🌎 **Otro ejemplo:** Es como el examen práctico de un cerrajero: le dan puertas de práctica y tiene que demostrar que nadie más las abre.
 
 Un error en las reglas puede exponer los datos de **todas** las personas. Por eso tu app tiene pruebas de reglas (`rules-test/`), que corren con el **emulador** de Firebase: una copia falsa de la base de datos en tu computadora. Por ejemplo, intentan leer los ingresos de otra persona y comprueban que la regla **lo impida**. Y corren en el CI (Tema 04, trabajo `reglas`).
 
@@ -215,6 +243,8 @@ Tres motivos:
 
 > 🌎 **En la vida real:** en el banco, la combinación de la caja fuerte no se pega en el cajero automático: la sabe solo el empleado de adentro.
 
+> 🌎 **Otro ejemplo:** Como la cocina de un restaurante: el cliente pide desde la mesa, pero el cuchillo, el fuego y la receta secreta se quedan atrás, con el cocinero.
+
 Están en la carpeta **`functions/src/`**. Algunas reales:
 
 | Función | Qué hace |
@@ -240,6 +270,8 @@ export const adminUpsertVehicleColor = onCall(async (request) => {
 
 > 🌎 **En la vida real:** la oficina del gerente tiene un timbre (`onCall`) que cualquiera puede tocar, pero la secretaria (`assertOwner`) mira quién es antes de abrir.
 
+> 🌎 **Otro ejemplo:** Como una sala de servidores con lector de huella: la puerta está en un pasillo público, pero solo se abre con la huella del dueño.
+
 ### Publicar (deploy)
 
 El código del servidor no cambia solo cuando lo guardas. Hay que **publicarlo**:
@@ -253,6 +285,8 @@ npx firebase-tools deploy --only functions --project copiloto-driver-ia
 - `--project copiloto-driver-ia` = en qué proyecto.
 
 > 🌎 **En la vida real:** cambiar el reglamento en tu computadora no cambia nada en la oficina; hay que llevarlo e imprimirlo allá.
+
+> 🌎 **Otro ejemplo:** Como actualizar el menú de una cadena de restaurantes: imprimirlo en la oficina no alcanza; hay que mandarlo a los locales.
 
 ```practica
 elige :: ¿Por qué la clave de Gemini está en el servidor y no en la app? :: Porque la app es lenta :: Porque todo lo que está en la app se puede extraer :: Porque Google lo exige
@@ -277,6 +311,8 @@ escribe :: Nombra los tres motivos para poner código en el servidor. :: Secreto
 7. **El Copiloto** recibe un evento (`earning.added`) y actualiza su memoria.
 
 > 🌎 **En la vida real:** depositar en el banco. Llenas la boleta (pantalla); el cajero decide cómo se cuenta (contexto); lo lleva a **tu** carpeta (servicio); el guardia revisa que la carpeta sea la tuya (reglas); se guarda y suena una campanita (Firestore); la pantalla del saldo se actualiza sola; tu asesor anota "hoy ganó 50 más" (Copiloto).
+
+> 🌎 **Otro ejemplo:** Como un pedido online: llenas el carrito (pantalla), se calcula el total con las promociones (contexto), se manda al depósito (servicio), se verifica tu cuenta (reglas), se guarda el pedido, y te llega la notificación (Inicio y Copiloto).
 
 > ✋ **Para y piensa:** en el paso 4, ¿qué pasaría si el `uid` no fuera el tuyo?
 
@@ -305,6 +341,8 @@ vf :: La pantalla del Inicio se actualiza sola porque escucha los cambios de Fir
 
 > 🌎 **En la vida real:** nunca la llave de la casa debajo del felpudo; la llave maestra del edificio en una caja fuerte aparte, no en el mismo llavero; y el contador no mueve dinero sin tu firma.
 
+> 🌎 **Otro ejemplo:** Como las reglas de un banco: la clave nunca se dice por teléfono, la llave de la bóveda la guarda el gerente aparte, y ningún movimiento grande se hace sin la firma del titular.
+
 > 💡 **Idea:** ¿y la configuración de Firebase que sí está en la app (el nombre del proyecto, etc.)? Esa es **pública por diseño**: no es un secreto. Lo que protege los datos no es esconder esa configuración, sino **las reglas**. Esto lo vas a ver otra vez en el Tema 13.
 
 ```practica
@@ -318,6 +356,8 @@ escribe :: Di las tres reglas de seguridad de esta parte. :: Nunca claves secret
 ## Ejercicios
 
 > 🎙️ **El profesor:** solo mirar, **nunca tocar** producción. Si no tienes acceso a la app o a la consola, responde 4 y 5.
+
+> 🌎 **En la vida real:** Es como hacer una visita guiada al edificio con el plano en la mano, mirando cada cerradura, sin tocar nada.
 
 1. Abre `firestore.rules` y busca la regla de `expenses`. Explica con tus palabras quién puede leer los gastos.
 2. Busca la regla de `billing`. ¿Por qué la app no puede escribir la suscripción?
@@ -353,6 +393,8 @@ elige :: ¿Por qué la app no puede escribir `billing`? :: Porque es muy grande 
 ## Para la entrevista
 
 > 🎙️ **El profesor:** en voz alta. Esta es de las respuestas que más te van a lucir.
+
+> 🌎 **En la vida real:** Explicar tu backend es como explicar un edificio: recepción, archivo, portero y oficina de atrás, cada uno con su trabajo.
 
 > 🎤 **Entrevista:** "¿Cómo está hecho el backend de tu app?"
 

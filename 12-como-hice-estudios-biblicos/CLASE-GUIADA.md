@@ -12,6 +12,10 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 > 🎙️ **El profesor:** Delvin, esta clase es especial: es **tu** proyecto, y es el ejemplo perfecto de todo lo que aprendiste en la etapa de la web. Si mañana te piden "muéstrame algo que hayas hecho con HTML, CSS y JavaScript", este es. Empecemos por la idea que lo sostiene todo.
 
+> 🌎 **En la vida real:** Es como una plantilla de invitación de cumpleaños: el diseño es uno solo, y para cada niño solo cambias el nombre, la fecha y el lugar.
+
+> 🌎 **Otro ejemplo:** Es como un televisor: el aparato (el código) es el mismo, y lo que cambia es el canal que pones (el estudio).
+
 ### Qué es
 
 Una página que muestra estudios bíblicos **como un mapa**. Cada estudio tiene esta forma:
@@ -24,6 +28,8 @@ Tema (el estudio)  →  Puntos (1, 2, 3…)  →  Subpuntos (1.1, 1.2…)  →  
 
 > 🌎 **En la vida real:** como un **libro**: el libro, sus capítulos, las secciones de cada capítulo, y dentro los párrafos, las fotos y las citas.
 
+> 🌎 **Otro ejemplo:** Como un álbum de fotos de un viaje: el viaje, cada ciudad, cada día en esa ciudad, y en cada día las fotos, los textos y los tickets.
+
 ### La decisión más importante de toda la arquitectura
 
 > **El contenido está separado del código.** Los estudios son archivos de **datos** (JSON). El código es **una plantilla** que sabe dibujar **cualquier** estudio.
@@ -31,6 +37,8 @@ Tema (el estudio)  →  Puntos (1, 2, 3…)  →  Subpuntos (1.1, 1.2…)  →  
 **¿Por qué importa?** Si mejoras el diseño o arreglas un error, se arregla en **todos** los estudios al mismo tiempo. No hay que tocar estudio por estudio.
 
 > 🌎 **En la vida real:** una **iglesia con un proyector**. El proyector (el código) es siempre el mismo; lo que cambia es la presentación que pones (el estudio). No compras un proyector nuevo para cada prédica. O un **álbum de figuritas**: el álbum es el mismo, las figuritas cambian.
+
+> 🌎 **Otro ejemplo:** Como un molde de torta: haces una torta distinta cada vez (el relleno), pero el molde es el mismo y les da a todas la misma forma.
 
 > 💡 **Idea:** este mapa de estudios hace exactamente lo mismo con tus `LECCION.md` (Tema 18): "una sola fuente de verdad".
 
@@ -57,6 +65,8 @@ elige :: Un bloque puede ser… :: Solo texto :: Texto, pasaje, subtítulo, imag
 **Por qué sin frameworks:** la página es **pequeña**. Un framework agrega cosas que no necesita. Así **carga rápido**, y cualquier persona que sepa lo básico de la web puede entender el código.
 
 > 🌎 **En la vida real:** para ir al mercado vas en bicicleta, no alquilas un camión. Para un muñeco: HTML es el esqueleto, CSS la ropa, JavaScript los músculos.
+
+> 🌎 **Otro ejemplo:** Como armar un puesto en la feria con una mesa y un toldo, en vez de construir un local: para lo que vendes, alcanza y sobra.
 
 > 💡 **Idea:** tu web de Copiloto (Tema 13) sí usa React. ¿Contradicción? No: esa web es grande y comparte código con la app. **Se elige la herramienta según el tamaño del trabajo** (Tema 10, parte 9).
 
@@ -106,6 +116,8 @@ que-dice-la-biblia/
 **La regla para recordar:** *los HTML dicen **qué hay**, los CSS **cómo se ve**, los JS **qué hace**, y `estudios/` **qué se enseña**.*
 
 > 🌎 **En la vida real:** una cocina bien organizada: la despensa (`estudios/`), los platos (`.html`), la decoración (`css/`), los cocineros con una tarea cada uno (`js/`) y el delivery (`scripts/` y `publicar.yml`).
+
+> 🌎 **Otro ejemplo:** Como una caja de herramientas con compartimentos: los destornilladores en uno, las llaves en otro; sabes dónde está cada cosa sin revolver.
 
 > 📌 **Nota:** después del 13/11 se agregaron más archivos (por ejemplo `biblia.js`, `tema.js`, `panel-ia.js`, `panel-medidor.js`); los ves en el Tema 14. La idea es la misma: uno por tarea.
 
@@ -161,6 +173,8 @@ Leámoslo:
 
 > 🌎 **En la vida real:** una calle que cambió de nombre, pero las cartas viejas siguen llegando con el nombre anterior. El cartero sigue aceptando el nombre viejo, y alguien lo dejó anotado.
 
+> 🌎 **Otro ejemplo:** Como un formulario impreso con casilleros: "Nombre:", "Idioma:", y una lista de "Puntos" con sus renglones.
+
 ```practica
 elige :: ¿Qué campo hace que aparezca el botón ES | PT? :: `idioma` :: `otro_idioma` :: `titulo`
 elige :: Un bloque con `"tipo": "pasaje"`, ¿qué dos campos más trae? :: `texto` y `color` :: `referencia` y `versiculos` :: `titulo` y `nuevo`
@@ -194,6 +208,8 @@ estudio.html
 
 > 🌎 **En la vida real:** preparar un café: hierves el agua (`ui.js`), pones el café en el filtro (`estudios.js`), tienes la taza lista (`efectos.js`) y recién ahí sirves (`mapa.js`). O una cadena de montaje: el que pinta va después del que arma la carrocería.
 
+> 🌎 **Otro ejemplo:** Como armar un sándwich: pan, manteca, jamón, queso, pan. Si pones el queso antes del pan, se te cae todo. El orden importa.
+
 > 💡 **Idea:** este mapa de estudios usa **módulos** (`import`/`export`, Tema 17 parte 9), que resuelven el orden solos. La página de estudios usa el orden de los `<script>`: es la forma más simple, y funciona bien en una página chica.
 
 **Ejercicio:** abre `estudio.html`, busca las etiquetas `<script>` al final, anota el orden y explica por qué es ese.
@@ -210,6 +226,10 @@ escribe :: ¿Qué error saldría si `mapa.js` se cargara antes que `estudios.js`
 ## 6. Una función que sirve para todo: `bloqueHTML` y `puntoHTML`
 
 > 🎙️ **El profesor:** esta es **la** pieza más elegante del proyecto. Míralo con cuidado, porque es lo que más te va a lucir en una entrevista.
+
+> 🌎 **En la vida real:** Es como la máquina de un fotógrafo que imprime las mismas fotos para el álbum, para el cuadro y para el celular: si mejora la máquina, mejoran las tres copias.
+
+> 🌎 **Otro ejemplo:** Es como un traductor que traduce igual en la reunión, en el contrato y en el correo: un solo traductor, tres lugares, el mismo resultado.
 
 En `js/estudios.js`, la función `bloqueHTML` mira el **tipo** de cada bloque y devuelve el HTML que le corresponde:
 
@@ -243,6 +263,8 @@ Por eso, lo que ves en la vista previa del panel es **exactamente** lo que sale 
 
 > 🌎 **En la vida real:** `bloqueHTML` es una fotocopiadora que reconoce qué le diste (hoja, foto, video) y la **misma** máquina se usa en la oficina, en la imprenta y en el borrador. `esc()` es poner un texto **entre comillas** en una carta, para que nadie confunda lo que alguien escribió con una orden.
 
+> 🌎 **Otro ejemplo:** Como poner entre comillas lo que alguien dijo en un acta: queda claro que es una cita, no una orden del que escribe el acta.
+
 ```practica
 elige :: ¿Cuántos lugares usan la misma función para dibujar los bloques? :: 1 :: 2 :: 3
 elige :: Para agregar un tipo de bloque nuevo y que se vea en la página, el PDF y la vista previa, ¿cuántos archivos tocas como mínimo? :: Tres :: Uno: `js/estudios.js` (y el CSS si quieres un estilo especial) :: Ninguno
@@ -256,6 +278,10 @@ escribe :: ¿Por qué usar una sola función para la página, el PDF y la vista 
 ## 7. Los colores: tokens
 
 > 🎙️ **El profesor:** ahora el diseño. Aquí ves el Tema 16 (variables CSS) aplicado a un proyecto real, de punta a punta.
+
+> 🌎 **En la vida real:** Es como los colores de un equipo de fútbol: "azul del club" se define una vez, y la camiseta, la bandera y el escudo lo usan por su nombre.
+
+> 🌎 **Otro ejemplo:** Es como las pinturas de una casa con nombre de catálogo: si cambias la fórmula del "verde salvia", cambian todas las paredes que lo usan.
 
 En `css/styles.css`, arriba de todo:
 
@@ -288,6 +314,8 @@ Así, **un solo dato** ("morado") pinta todo ese punto, y funciona en modo claro
 
 > 🌎 **En la vida real:** un pedido de pintura: el cliente dice "morado" (JSON) → la tienda lo traduce al código del catálogo `--b2` (`estudios.js`) → el pintor marca esa habitación con ese código (`mapa.js`) → todo lo de la habitación usa "el color de esta habitación" (`--c`).
 
+> 🌎 **Otro ejemplo:** Como pedir "el color del equipo" en una tienda de camisetas: el vendedor lo busca en el catálogo y lo usa en el número, el nombre y el escudo.
+
 ```practica
 elige :: Si quiero que todos los morados sean un poco más oscuros, ¿cuántas líneas cambio? :: Una por cada estudio :: Dos: la del modo claro y la del modo oscuro (y la del PDF si también) :: Ninguna
 elige :: ¿Qué es `--c`? :: Un color fijo :: El color del punto actual, que usa todo lo de adentro :: Una clase
@@ -315,6 +343,8 @@ En `js/efectos.js` y al final de `css/styles.css` (es el mismo efecto de la land
 **La separación:** el JavaScript solo decide **cuándo** (pone y quita clases); el CSS decide **cómo** se ve el movimiento.
 
 > 🌎 **En la vida real:** un telón de teatro: el JavaScript es el tramoyista que decide **cuándo** subirlo (avisado por el que mira por la cortina, el `IntersectionObserver`); el CSS es el **mecanismo** del telón.
+
+> 🌎 **Otro ejemplo:** Como las luces de un escenario: el técnico decide cuándo se prenden; el reflector decide cómo se ve la luz.
 
 ```practica
 elige :: En el efecto de entrada, ¿qué hace JavaScript? :: Dibuja la animación :: Decide cuándo (pone y quita clases) :: Nada
@@ -347,6 +377,8 @@ Es un **CI** como el del Tema 04, pero en vez de solo revisar, **publica**: eso 
 
 > 🌎 **En la vida real:** una imprenta automática: entregas el manuscrito, la imprenta arma el índice, imprime un PDF de cada capítulo y lo pone en la vidriera. Y una página estática es un cartel pegado en la pared: no puede ir a la bodega a ver qué cajas hay; alguien tiene que escribir la lista.
 
+> 🌎 **Otro ejemplo:** Como una revista que se imprime y se reparte sola cada vez que el editor entrega el material: el editor no tiene que llevarla a los kioscos.
+
 ```practica
 elige :: ¿Dónde vive la página? :: En un servidor propio :: En GitHub Pages :: En Firebase
 elige :: ¿Por qué la página de inicio necesita `indice.json`? :: Por estética :: Porque una página estática no puede ver qué archivos hay en una carpeta :: Porque lo exige Google
@@ -360,6 +392,10 @@ vf :: Este proceso de publicar solo es un ejemplo de CD (entrega continua)
 
 > 🎙️ **El profesor:** el panel (`panel.html`) es la parte más interesante del proyecto: **una página pública que edita archivos de GitHub**. ¿Cómo es seguro?
 
+> 🌎 **En la vida real:** Es como un buzón en la calle con candado: cualquiera ve el buzón, pero solo quien tiene la llave lo abre y deja cartas.
+
+> 🌎 **Otro ejemplo:** Es como el panel de control de un edificio inteligente: está en la pared, pero sin la tarjeta del administrador no cambia nada.
+
 ### La llave
 
 - El panel **es una página pública**, pero **sin la llave no puede guardar nada**.
@@ -371,7 +407,13 @@ Es la misma idea de las reglas de Firestore (Tema 08): **la seguridad la pone el
 
 > 🌎 **En la vida real:** una puerta que da a la calle: cualquiera llega hasta ella, pero sin llave no entra. La llave solo abre **un cuarto**, se guarda **en tu bolsillo**, y quien decide si sirve es la **cerradura** (GitHub), no la puerta.
 
+> 🌎 **Otro ejemplo:** Como la llave de un depósito alquilado que solo abre ese depósito, no toda la empresa de depósitos.
+
 ### Un archivo por tarea
+
+> 🌎 **En la vida real:** Es como un equipo de mudanza donde uno embala, otro carga, otro maneja y otro descarga: cada uno su tarea, y nadie se pisa.
+
+> 🌎 **Otro ejemplo:** Es como los cajones de un escritorio ordenado: uno para papeles, otro para lapiceras, otro para cables.
 
 | Archivo | Tarea |
 |---|---|
@@ -390,11 +432,15 @@ El editor encuentra cada campo con una **ruta** como `temas.0.puntos.1.titulo` (
 
 > 🌎 **En la vida real:** una dirección: "edificio 0, piso 1, departamento título". Con un solo cartero que sabe leer direcciones, no hace falta un cartero por departamento.
 
+> 🌎 **Otro ejemplo:** Como la dirección de un asiento en un estadio: tribuna 2, fila 0, asiento 1. Con un solo acomodador que sabe leer direcciones, encuentra cualquier asiento.
+
 ### La vista previa
 
 Es la página real del estudio (`estudio.html?vista=1`) dentro de un cuadro (un `iframe`). El panel le **manda** el estudio con **`postMessage`** (una forma de mandarle mensajes a otra página) cada vez que cambias algo, y ella se vuelve a dibujar.
 
 > 🌎 **En la vida real:** un probador con espejo: cada vez que cambias algo, alguien te pasa la prenda nueva por debajo de la cortina y el espejo te la muestra.
+
+> 🌎 **Otro ejemplo:** Como una vidriera con un empleado detrás: cada vez que cambias el precio en la libreta, él actualiza el cartel de la vidriera.
 
 ```practica
 elige :: ¿Puede otra persona guardar cambios si abre el panel? :: Sí, es público :: No: sin una llave válida, GitHub rechaza cualquier cambio :: Solo de noche
@@ -410,6 +456,10 @@ escribe :: ¿Por qué el panel es seguro aunque sea una página pública? :: Por
 
 > 🎙️ **El profesor:** tres ayudas que hacen cómodo cargar versículos, y cada una enseña una técnica distinta.
 
+> 🌎 **En la vida real:** Son como los accesorios de una cocina que te ahorran trabajo: el rallador, la licuadora y el procesador hacen en segundos lo que a mano tardaría mucho.
+
+> 🌎 **Otro ejemplo:** Son como el escáner, el lector de códigos y la balanza de una caja de supermercado: cada uno acelera un paso distinto.
+
 ### Pegar desde la app Biblia (`panel-pegar.js`)
 
 Lee el texto copiado y encuentra la referencia con una **expresión regular** (Tema 01: un patrón de texto):
@@ -423,7 +473,13 @@ No hace falta entender cada símbolo: reconoce "**(un número opcional como en 1
 
 > 🌎 **En la vida real:** el empleado del correo que reconoce un código postal de un vistazo.
 
+> 🌎 **Otro ejemplo:** Como el lector de códigos de barras del supermercado: reconoce el patrón y sabe qué producto es.
+
 ### Leer de una foto (`panel-foto.js`)
+
+> 🌎 **En la vida real:** Es como el escáner de documentos del celular: sacas la foto y convierte las letras en texto, sin mandar la foto a ningún lado.
+
+> 🌎 **Otro ejemplo:** Es como copiar a mano lo que dice un cartel, pero hecho por una máquina, y después lo revisas por si leyó algo mal.
 
 Usa **Tesseract.js**, un lector de texto (**OCR**: reconocimiento de caracteres) que funciona **dentro del navegador**: **la foto no sale del aparato**. Después, `rangos()` arma la referencia:
 
@@ -441,6 +497,8 @@ Antes de subir, la foto se achica con un **`<canvas>`** (un lienzo para dibujar 
 
 > 🌎 **En la vida real:** mandar una foto por WhatsApp en vez de por correo en tamaño original.
 
+> 🌎 **Otro ejemplo:** Como comprimir un archivo antes de mandarlo por correo: llega rápido y no llena la casilla.
+
 ```practica
 elige :: ¿Qué devuelve `rangos(["2","3","4","10"])`? :: "2, 3, 4, 10" :: "2-4, 10" :: "2-10"
 elige :: ¿Por qué se achican las fotos antes de subirlas? :: Para que se vean más feas :: Para que la página cargue rápido y el repositorio no se llene :: Porque GitHub lo exige
@@ -453,6 +511,8 @@ elige :: ¿Qué es OCR? :: Un formato de imagen :: Reconocer texto en una imagen
 ## 12. Decisiones que se tomaron (y lo que salió mal)
 
 > 🎙️ **El profesor:** en una entrevista, contar **qué salió mal y qué decidiste** vale tanto como contar lo que salió bien. Estas son las decisiones reales del proyecto.
+
+> 🌎 **Otro ejemplo:** Como el cuaderno de errores de un cocinero: "esta receta se quemaba a 200°, ahora va a 180°". Contar lo que salió mal enseña tanto como lo que salió bien.
 
 | Qué pasó | Qué se decidió | 🌎 Como… |
 |---|---|---|
@@ -475,6 +535,8 @@ vf :: Contar lo que salió mal en un proyecto ayuda en una entrevista
 ## Para la entrevista
 
 > 🎙️ **El profesor:** la explicación completa está en [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md). Aquí, la versión para decir en voz alta en un minuto.
+
+> 🌎 **En la vida real:** Contar este proyecto es como mostrar una casa que construiste: el plano, los materiales, por qué hiciste cada cosa y qué cambiarías.
 
 > 🎤 **Entrevista:** "Cuéntame de un proyecto web que hayas hecho."
 
