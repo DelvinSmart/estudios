@@ -62,6 +62,19 @@ const ICONOS = {
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
 
+// Los logos de las tecnologías de cada clase (ver web/logos.js). El primero va en la isla.
+const LOGOS_CLASE = {
+  '01': ['typescript'], '02': ['jest'], '03': ['jest', 'typescript'], '04': ['acciones', 'github'], '05': ['typescript', 'git'],
+  '06': ['git', 'github'], '08': ['firebase'], '09': ['node', 'javascript'], '11': ['react', 'typescript', 'firebase'],
+  '12': ['html', 'css', 'javascript'], '13': ['react', 'typescript', 'vite', 'tailwind', 'firebase'], '14': ['html', 'css', 'javascript'],
+  '15': ['html'], '16': ['css'], '17': ['javascript'], '18': ['html', 'css', 'javascript', 'markdown'],
+  '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'],
+  '23': ['owasp'], '24': ['owasp', 'firebase'], '25': ['python', 'javascript'], '27': ['python'],
+  '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
+  '35': ['claude', 'git'],
+};
+for (const [n, logos] of Object.entries(LOGOS_CLASE)) if (CLASES[n]) CLASES[n].logos = logos;
+
 // Las clases que ya tienen su clase guiada (CLASE-GUIADA.md): va primero,
 // y la lección queda como "Resumen" para repasar.
 const GUIADAS = ['01', '02', '03', '04', '05', '06', '07', '15', '16', '17', '08', '09', '10', '11', '12', '13', '14', '18', '20'];
@@ -74,17 +87,17 @@ for (const n of GUIADAS) {
 
 export const ETAPAS = [
   {
-    id: 'fundamentos', icono: '🧱', titulo: 'Fundamentos',
+    id: 'fundamentos', icono: '🧱', titulo: 'Fundamentos', logos: ['typescript', 'git', 'jest'],
     desc: 'Leer código, probarlo, guardarlo y entender sus errores. La base de todo.',
     clases: ['01', '02', '03', '04', '05', '06', '07'],
   },
   {
-    id: 'web', icono: '🌐', titulo: 'La web: HTML, CSS y JavaScript',
+    id: 'web', icono: '🌐', titulo: 'La web: HTML, CSS y JavaScript', logos: ['html', 'css', 'javascript'],
     desc: 'Las tres piezas con las que se hace cualquier página.',
     clases: ['15', '16', '17'],
   },
   {
-    id: 'backend', icono: '🔥', titulo: 'Backend y datos',
+    id: 'backend', icono: '🔥', titulo: 'Backend y datos', logos: ['firebase', 'node'],
     desc: 'Dónde se guardan los datos y cómo se hace un servidor.',
     clases: ['08', '09'],
   },
@@ -94,22 +107,22 @@ export const ETAPAS = [
     clases: ['10', '11'],
   },
   {
-    id: 'proyectos', icono: '🚀', titulo: 'Mis proyectos por dentro',
+    id: 'proyectos', icono: '🚀', titulo: 'Mis proyectos por dentro', logos: ['react', 'firebase', 'github'],
     desc: 'Todo lo anterior, aplicado a lo que yo construí.',
     clases: ['12', '13', '14', '18', '20', '21'],
   },
   {
-    id: 'seguridad', curso: 'seguridad', icono: '🛡️', titulo: 'Seguridad: pensar como hacker',
+    id: 'seguridad', curso: 'seguridad', icono: '🛡️', titulo: 'Seguridad: pensar como hacker', logos: ['owasp'],
     desc: 'Un curso aparte, con su propio certificado: cómo atacan y cómo se defiende un sistema.',
     clases: ['22', '23', '24'],
   },
   {
-    id: 'ia-programadores', curso: 'ia', icono: '🧠', titulo: 'IA para programadores',
+    id: 'ia-programadores', curso: 'ia', icono: '🧠', titulo: 'IA para programadores', logos: ['claude', 'gemini', 'ollama'],
     desc: 'Un curso aparte, con su propio certificado: trabajar con Claude, Gemini, OpenCode, Codex y Llama sin romper nada.',
     clases: ['30', '31', '32', '33', '34', '35'],
   },
   {
-    id: 'agentes', curso: 'agentes', icono: '🤖', titulo: 'Agentes de IA',
+    id: 'agentes', curso: 'agentes', icono: '🤖', titulo: 'Agentes de IA', logos: ['python', 'javascript'],
     desc: 'Un curso aparte, con su propio certificado: diseñar, medir y publicar tus propios agentes.',
     clases: ['19', '25', '26', '27', '28', '29'],
   },

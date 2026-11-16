@@ -1,6 +1,7 @@
 // Pantallas 6 y 7: el certificado de cada curso (emitido en Firebase) y la página pública
 // para verificar un código. Es un certificado del propio curso: no es un título oficial.
 
+import { htmlLogos } from '../logos.js';
 import { CLASES, ETAPAS, CURSOS, cursoDeEtapa } from '../cursos.js';
 import { leerNombre, guardarNombre } from '../guardado.js';
 import * as nube from '../nube.js';
@@ -28,8 +29,9 @@ function htmlCertificado({ nombre, fecha, codigo, curso, total, muestra }) {
   const anio = fecha.getFullYear();
   const etapas = ETAPAS.filter((e) => cursoDeEtapa(e) === curso);
   // En un curso de una sola etapa, se listan sus clases; si no, las etapas.
-  const items = (etapas.length === 1 ? etapas[0].clases.map((n) => CLASES[n].titulo) : etapas.map((e) => e.titulo))
-    .map((t) => `<li><span class="cert-num">[✓]</span>${escapar(t)}</li>`).join('');
+  // Cada punto con sus logos al lado (HTML, CSS, JavaScript…).
+  const items = (etapas.length === 1 ? etapas[0].clases.map((n) => CLASES[n]) : etapas)
+    .map((x) => `<li><span class="cert-num">[✓]</span>${escapar(x.titulo)}${htmlLogos(x.logos)}</li>`).join('');
   // El nombre y el código, escritos en binario (8 bits por letra), para las columnas de los lados.
   const binario = (t) => [...new TextEncoder().encode(t)].map((b) => b.toString(2).padStart(8, '0')).join('');
   const bitsIzq = binario(`${nombre} ${codigo} `).repeat(12).slice(0, 1400);

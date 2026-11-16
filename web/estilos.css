@@ -747,3 +747,17 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .leyendo { outline: 2px solid color-mix(in srgb, var(--acento) 70%, transparent); outline-offset: 4px; border-radius: 6px; background: color-mix(in srgb, var(--acento) 7%, transparent); transition: background 0.2s; }
 @media (max-width: 640px) { .voz-opcion select { max-width: 140px; } }
 .voz-barra [hidden] { display: none !important; }
+
+/* ---------- 16. Logos de las tecnologías ---------- */
+.logos { display: inline-flex; align-items: center; gap: 5px; margin-left: 8px; vertical-align: middle; }
+.logo { display: inline-block; flex: 0 0 auto; vertical-align: middle; object-fit: contain; }
+.logo-chico { width: 16px; height: 16px; }
+.logo-medio { width: 30px; height: 30px; }
+.logo-isla { width: 56px; height: 56px; filter: drop-shadow(0 4px 10px rgb(0 0 0 / 0.45)); }
+.logo-mono { background: var(--logo-color, currentColor); -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; }
+.isla-titulo .logos { margin-left: 6px; }
+.titulo-medio .logos { margin-left: 10px; gap: 8px; }
+/* En el certificado, el tamaño sigue al del papel */
+.cert-etapas .logos { margin-left: 0.7cqw; gap: 0.5cqw; }
+.cert-etapas .logo-chico { width: 2cqw; height: 2cqw; }
+@media (max-width: 640px) { .logo-isla { width: 40px; height: 40px; } .logo-medio { width: 24px; height: 24px; } }

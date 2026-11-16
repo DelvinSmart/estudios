@@ -1,6 +1,7 @@
 // Pantallas 1, 2 y 3: el mapa grande (cursos y etapas), el de una etapa (sus clases)
 // y el de una clase (sus partes). Las tres usan el mapa de islas.
 
+import { htmlLogo, htmlLogos } from '../logos.js';
 import { CLASES, ETAPAS, CURSOS, cursoDeEtapa } from '../cursos.js';
 import { leerArchivo, partir } from '../lector.js';
 import { idParte, estaEntendida } from '../guardado.js';
@@ -37,7 +38,7 @@ export function vistaInicio() {
       const hechasE = e.clases.filter((n) => estadoClase(n) === 'hecha').length;
       const estado = hechasE === e.clases.length ? 'hecha' : e.clases.includes(actual) ? 'actual' : hechasE || e.clases.some((n) => prendidos(n)) ? 'empezada' : 'pendiente';
       return {
-        num: dos(numEtapa), titulo: escapar(e.titulo), desc: escapar(e.desc), href: `#/etapa/${e.id}`, estado, icono: e.icono,
+        num: dos(numEtapa), titulo: escapar(e.titulo) + htmlLogos(e.logos), desc: escapar(e.desc), href: `#/etapa/${e.id}`, estado, icono: e.icono,
         pie: `<span class="avance">${hechasE}/${e.clases.length} clases</span>${estado === 'actual' ? '<span class="insignia actual">▶ voy aquí</span>' : ''}`,
       };
     });
@@ -83,8 +84,8 @@ function paradasDeClases(etapa) {
     const est = estadoClase(num);
     const total = conteo[num] || 0;
     return {
-      num, titulo: escapar(CLASES[num].titulo), desc: escapar(CLASES[num].meta), href: `#/clase/${num}`,
-      estado: est, icono: CLASES[num].icono || '📘',
+      num, titulo: escapar(CLASES[num].titulo) + htmlLogos(CLASES[num].logos), desc: escapar(CLASES[num].meta), href: `#/clase/${num}`,
+      estado: est, icono: CLASES[num].logos ? htmlLogo(CLASES[num].logos[0], 'isla') : (CLASES[num].icono || '📘'),
       pie: `<span class="avance">${prendidos(num)}/${total} partes</span>${est === 'actual' ? '<span class="insignia actual">▶ voy aquí</span>' : ''}`,
     };
   });
@@ -107,7 +108,7 @@ export async function vistaEtapa(id) {
   app.innerHTML = `
     <section class="cabeza cabeza-mapa"><div>
       <p class="mono comentario">// etapa ${dos(n)} de ${ETAPAS.length}</p>
-      <h1 class="titulo-medio"><span class="emoji">${etapa.icono}</span> ${escapar(etapa.titulo)}</h1>
+      <h1 class="titulo-medio"><span class="emoji">${etapa.icono}</span> ${escapar(etapa.titulo)} ${htmlLogos(etapa.logos, 'medio')}</h1>
       <p class="bajada">${escapar(etapa.desc)}</p></div>
       ${htmlProgreso(`${hechas} de ${etapa.clases.length} clases`, hechas / etapa.clases.length)}
     </section>
@@ -167,7 +168,7 @@ export async function vistaClase(num, doc) {
   app.innerHTML = `
     <section class="cabeza">
       <p class="mono comentario">// clase ${num} · <span class="insignia ${est}">${ETIQUETA_ESTADO[est]}</span></p>
-      <h1 class="titulo-medio">${enLinea(titulo || c.titulo)}</h1>
+      <h1 class="titulo-medio">${enLinea(titulo || c.titulo)} ${htmlLogos(c.logos, 'medio')}</h1>
       <p class="bajada">${escapar(c.meta)}</p>
       ${pestanas}
       <div class="fila-progreso mono">
