@@ -199,3 +199,8 @@ test('los cursos nuevos (ia y agentes) aceptan sus partes y no las de otro curso
   await assertSucceeds(setDoc(doc(db('ana'), RUTA('ana', 'agentes')), primero(porCurso.agentes[0])));
   await assertFails(setDoc(doc(db('beto'), RUTA('beto', 'agentes')), primero(porCurso.ia[0])));
 });
+
+test('el curso de Python acepta sus partes y su prefijo PY', async () => {
+  await assertSucceeds(setDoc(doc(db('ana'), RUTA('ana', 'python')), primero(porCurso.python[0])));
+  await assertFails(setDoc(doc(db('beto'), RUTA('beto', 'python')), primero(porCurso.programacion[0])));
+});

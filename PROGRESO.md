@@ -34,6 +34,16 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 20 Publicar e instalar
 - [ ] 21 El certificado verificable
 
+**Curso de Python** (certificado aparte)
+- [ ] 36 Primeros pasos
+- [ ] 37 Decisiones y repeticiones
+- [ ] 38 Listas, tuplas, diccionarios y conjuntos
+- [ ] 39 Funciones
+- [ ] 40 Errores y archivos
+- [ ] 41 Módulos, paquetes y entornos
+- [ ] 42 Clases y objetos
+- [ ] 43 Pruebas y un proyecto real
+
 **Curso de seguridad** (certificado aparte)
 - [ ] 22 Seguridad básica
 - [ ] 23 Seguridad intermedia

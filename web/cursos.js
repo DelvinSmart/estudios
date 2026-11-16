@@ -39,6 +39,14 @@ export const CLASES = {
   '22': { carpeta: '22-seguridad-basica', titulo: 'Seguridad básica', meta: 'Pensar como atacante: contraseñas, secretos, phishing y el navegador', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '23': { carpeta: '23-seguridad-intermedia', titulo: 'Seguridad intermedia', meta: 'Las vulnerabilidades web más comunes y cómo se cierran', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '24': { carpeta: '24-seguridad-avanzada', titulo: 'Seguridad avanzada', meta: 'Auditar un sistema entero, como hicimos con Copiloto', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '36': { carpeta: '36-python-primeros-pasos', titulo: 'Primeros pasos', meta: 'Correr Python, variables, tipos, print e input', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '37': { carpeta: '37-python-decisiones-y-repeticiones', titulo: 'Decisiones y repeticiones', meta: 'La sangría, if, elif, else, for, range y while', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '38': { carpeta: '38-python-colecciones', titulo: 'Listas, tuplas, diccionarios y conjuntos', meta: 'Agrupar datos y las comprensiones', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '39': { carpeta: '39-python-funciones', titulo: 'Funciones', meta: 'def, parámetros, return, alcance, lambda y tipos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '40': { carpeta: '40-python-errores-y-archivos', titulo: 'Errores y archivos', meta: 'Leer errores, try y except, raise, texto, CSV y JSON', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '41': { carpeta: '41-python-modulos-y-entornos', titulo: 'Módulos, paquetes y entornos', meta: 'import, la biblioteca estándar, pip y venv', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '42': { carpeta: '42-python-clases-y-objetos', titulo: 'Clases y objetos', meta: 'class, __init__, self, herencia y dataclasses', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '43': { carpeta: '43-python-pruebas-y-proyecto', titulo: 'Pruebas y un proyecto real', meta: 'pytest, el resumen de la semana de un conductor y las APIs', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '19': { carpeta: '19-agentes-de-ia', titulo: 'Qué es un agente', meta: 'Python para leer los ejemplos, las piezas y el ciclo de un agente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '25': { carpeta: '25-agentes-cinco-patrones', titulo: 'Los cinco patrones', meta: 'Herramientas (ReAct), planificación, reflexión, enrutamiento y multiagente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '26': { carpeta: '26-agentes-veinte-patrones', titulo: 'Veinte patrones más', meta: 'Flujo, razonamiento, coordinación, control, conocimiento y cómo elegir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -72,6 +80,8 @@ const LOGOS_CLASE = {
   '23': ['owasp'], '24': ['owasp', 'firebase'], '25': ['python', 'javascript'], '27': ['python'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
   '35': ['claude', 'git'],
+  '36': ['python'], '37': ['python'], '38': ['python'], '39': ['python'], '40': ['python', 'markdown'],
+  '41': ['python', 'bash'], '42': ['python'], '43': ['python', 'github'],
 };
 for (const [n, logos] of Object.entries(LOGOS_CLASE)) if (CLASES[n]) CLASES[n].logos = logos;
 
@@ -112,6 +122,11 @@ export const ETAPAS = [
     clases: ['12', '13', '14', '18', '20', '21'],
   },
   {
+    id: 'python', curso: 'python', icono: '🐍', titulo: 'Python', logos: ['python'],
+    desc: 'Un curso aparte, con su propio certificado: Python completo, de los primeros pasos a un proyecto con pruebas.',
+    clases: ['36', '37', '38', '39', '40', '41', '42', '43'],
+  },
+  {
     id: 'seguridad', curso: 'seguridad', icono: '🛡️', titulo: 'Seguridad: pensar como hacker', logos: ['owasp'],
     desc: 'Un curso aparte, con su propio certificado: cómo atacan y cómo se defiende un sistema.',
     clases: ['22', '23', '24'],
@@ -134,6 +149,10 @@ export const CURSOS = {
   programacion: {
     id: 'programacion', prefijo: 'ME', corto: 'Mapa de estudios',
     nombre: 'Mapa de estudios: programación, de los fundamentos a los agentes de IA',
+  },
+  python: {
+    id: 'python', prefijo: 'PY', corto: 'Python',
+    nombre: 'Python: de los primeros pasos a un proyecto real con pruebas',
   },
   seguridad: {
     id: 'seguridad', prefijo: 'SE', corto: 'Seguridad',

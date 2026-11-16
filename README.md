@@ -16,7 +16,7 @@ en una entrevista.
 
 ## Las clases, en orden
 
-Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14, 18, 20 y 21). Aparte, cada uno con su propio certificado: **seguridad** (22 a 24), **IA para programadores** (30 a 35) y **agentes de IA** (19 y 25 a 29). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
+Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14, 18, 20 y 21). Aparte, cada uno con su propio certificado: **Python** (36 a 43), **seguridad** (22 a 24), **IA para programadores** (30 a 35) y **agentes de IA** (19 y 25 a 29). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
 explicación, los ejemplos, los ejercicios y las respuestas.
 
 | # | Clase | Qué voy a saber hacer al terminar |
@@ -44,6 +44,14 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 | 22 | [Seguridad básica](22-seguridad-basica/LECCION.md) | Ética y ley, pensar como atacante, contraseñas, secretos, phishing, el navegador y HTTPS (curso de seguridad) |
 | 23 | [Seguridad intermedia](23-seguridad-intermedia/LECCION.md) | OWASP Top 10: IDOR, inyección, XSS, sesiones, CSRF, dependencias y prompt injection (curso de seguridad) |
 | 24 | [Seguridad avanzada](24-seguridad-avanzada/LECCION.md) | Auditar un sistema entero, reglas de Firebase como atacante, abuso de costos, herramientas, reportes y tu camino (curso de seguridad) |
+| 36 | [Python: primeros pasos](36-python-primeros-pasos/LECCION.md) | Curso de Python: correrlo, variables, tipos, print e input |
+| 37 | [Decisiones y repeticiones](37-python-decisiones-y-repeticiones/LECCION.md) | La sangría, if, elif, else, for, range y while |
+| 38 | [Listas, tuplas, diccionarios y conjuntos](38-python-colecciones/LECCION.md) | Agrupar datos y las comprensiones |
+| 39 | [Funciones](39-python-funciones/LECCION.md) | def, parámetros, return, alcance, lambda y tipos |
+| 40 | [Errores y archivos](40-python-errores-y-archivos/LECCION.md) | Leer errores, try y except, raise, texto, CSV y JSON |
+| 41 | [Módulos, paquetes y entornos](41-python-modulos-y-entornos/LECCION.md) | import, la biblioteca estándar, pip y venv |
+| 42 | [Clases y objetos](42-python-clases-y-objetos/LECCION.md) | class, __init__, self, herencia y dataclasses |
+| 43 | [Pruebas y un proyecto real](43-python-pruebas-y-proyecto/LECCION.md) | pytest y el resumen de la semana de un conductor |
 | 30 | [Cómo funciona un modelo](30-ia-como-funciona/LECCION.md) | IA para programadores: qué hace bien, qué inventa, tokens, contexto, planes y privacidad |
 | 31 | [Pedir bien](31-ia-pedir-bien/LECCION.md) | Las piezas de un buen pedido y cómo mejorarlo con Gemini |
 | 32 | [Claude y Claude Code](32-ia-claude-code/LECCION.md) | CLAUDE.md, AGENTS.md, revisar el diff, sesiones, subagentes y MCP |
@@ -56,7 +64,7 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 
 **Sin IA:** cada clase tiene su **`CLASE-GUIADA.md`**: la clase completa, como si un profesor la diera, con pausas de "✋ Para y piensa", prácticas de verdadero o falso, elegir y escribir (hay que acertar todas para prender el bombillo 💡 de la parte) y la simulación de entrevista. En el mapa (`index.html`) es la primera pestaña de cada clase. La `LECCION.md` queda como resumen. En la clase 19 (agentes) la lección misma es la clase completa, con los ejemplos en JavaScript y en Python.
 
-**Certificados verificables:** cada curso (programación, seguridad, IA para programadores y agentes de IA) tiene el suyo. Hay que entrar con una cuenta de Gmail verificada (`#/entrar`): así cada bombillo queda en Firebase con la hora del servidor, y al completar todas las partes se emite el certificado con un código (`ME-…`, `SE-…`, `IA-…` o `AG-…`) que cualquiera comprueba en `#/verificar/CÓDIGO`. Cómo funciona por dentro: clase 21 y `firebase/LEEME.md`. Lo emite el propio curso; no es un título oficial.
+**Certificados verificables:** cada curso (programación, Python, seguridad, IA para programadores y agentes de IA) tiene el suyo. Hay que entrar con una cuenta de Gmail verificada (`#/entrar`): así cada bombillo queda en Firebase con la hora del servidor, y al completar todas las partes se emite el certificado con un código (`ME-…`, `PY-…`, `SE-…`, `IA-…` o `AG-…`) que cualquiera comprueba en `#/verificar/CÓDIGO`. Cómo funciona por dentro: clase 21 y `firebase/LEEME.md`. Lo emite el propio curso; no es un título oficial.
 
 **Con una IA:** sigue los pasos de abajo y [AGENTS.md](AGENTS.md).
 

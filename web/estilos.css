@@ -15,6 +15,7 @@
   --texto: #d8e0ea;
   --tenue: #8796aa;
   --acento: #7ee787;      /* verde terminal */
+  --sobre-acento: #06210f; /* letras y símbolos encima del verde */
   --acento-2: #79c0ff;    /* azul */
   --amarillo: #e3b341;
   --rojo: #ff7b72;
@@ -36,6 +37,7 @@
   --texto: #1d232b;
   --tenue: #5b6673;
   --acento: #1a7f37;
+  --sobre-acento: #ffffff; /* en tema claro, letras blancas sobre el verde */
   --acento-2: #0969da;
   --amarillo: #9a6700;
   --rojo: #cf222e;
@@ -144,7 +146,7 @@ a:hover { text-decoration: underline; }
   padding: 11px 18px; border-radius: 12px; margin-top: 18px;
   font: 600 0.9rem var(--mono); cursor: pointer;
 }
-.boton-principal { background: var(--acento); color: #06210f; border: 1px solid var(--acento); }
+.boton-principal { background: var(--acento); color: var(--sobre-acento); border: 1px solid var(--acento); }
 .boton-principal:hover { text-decoration: none; filter: brightness(1.08); }
 .boton { background: var(--tarjeta); color: var(--texto); border: 1px solid var(--borde); }
 .boton:hover { text-decoration: none; border-color: var(--acento); }
@@ -191,7 +193,7 @@ a:hover { text-decoration: underline; }
   background: color-mix(in srgb, var(--acento) 10%, transparent);
   border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent);
 }
-.parada.lista .nodo-num { background: var(--acento); color: #06210f; }
+.parada.lista .nodo-num { background: var(--acento); color: var(--sobre-acento); }
 .nodo-grande .nodo-num { min-width: 58px; height: 58px; font-size: 1.35rem; }
 .nodo-cuerpo { display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1; }
 .nodo-titulo { font: 700 1.08rem/1.35 var(--mono); }
@@ -452,7 +454,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .practica-lista { list-style: none; counter-reset: preg; padding: 0; margin: 0; }
 .pregunta { counter-increment: preg; position: relative; padding: 12px 0 12px 34px; border-top: 1px dashed var(--borde); }
 .pregunta::before { content: counter(preg); position: absolute; left: 0; top: 13px; width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; font: 700 0.75rem var(--mono); background: var(--fondo-2); border: 1px solid var(--borde); color: var(--tenue); }
-.pregunta.bien::before { content: '✓'; background: var(--acento); color: #06210f; border-color: var(--acento); }
+.pregunta.bien::before { content: '✓'; background: var(--acento); color: var(--sobre-acento); border-color: var(--acento); }
 .pregunta.mal::before { content: '✗'; background: var(--rojo); color: #fff; border-color: var(--rojo); }
 .enunciado { margin: 0 0 8px; }
 .pregunta .opciones { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -700,7 +702,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .isla-meta.hecha .isla-icono { filter: drop-shadow(0 0 22px rgb(227 179 65 / 0.8)); }
 .isla-meta .isla-tarjeta { align-items: center; text-align: center; padding-left: 26px; }
 .isla-meta .isla-titulo { color: var(--acento); padding: 0; }
-.isla-check { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--acento); color: #06210f; font-weight: 800; }
+.isla-check { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--acento); color: var(--sobre-acento); font-weight: 800; }
 
 /* "⭐ Tu progreso" */
 .tu-progreso { min-width: 220px; padding: 14px 18px; border-radius: 16px; background: var(--tarjeta); border: 1px solid var(--borde-fuerte); box-shadow: var(--sombra); }

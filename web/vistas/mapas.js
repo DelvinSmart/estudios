@@ -52,7 +52,7 @@ export function vistaInicio() {
       <p class="mono comentario">// mi carrera de programación</p>
       <h1 class="titulo-grande">Mapa de <span class="acento">estudios</span></h1>
       <p class="bajada">Primero los fundamentos, después la web, los datos, la arquitectura y mis proyectos.
-        Aparte, con su propio certificado: seguridad, IA para programadores y agentes de IA.</p>
+        Aparte, cada uno con su certificado: Python, seguridad, IA para programadores y agentes de IA.</p>
       <div class="contadores mono">
         <span><b>${ETAPAS.length}</b> etapas</span>
         <span><b>${total}</b> clases</span>
