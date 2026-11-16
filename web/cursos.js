@@ -39,7 +39,7 @@ export const CLASES = {
 
 // Las clases que ya tienen su clase guiada (CLASE-GUIADA.md): va primero,
 // y la lección queda como "Resumen" para repasar.
-const GUIADAS = ['01', '02', '03', '04'];
+const GUIADAS = ['01', '02', '03', '04', '05', '06', '07'];
 for (const n of GUIADAS) {
   CLASES[n].docs = [
     { archivo: 'CLASE-GUIADA.md', titulo: 'Clase guiada' },
