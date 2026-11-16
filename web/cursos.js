@@ -39,13 +39,25 @@ export const CLASES = {
   '22': { carpeta: '22-seguridad-basica', titulo: 'Seguridad básica', meta: 'Pensar como atacante: contraseñas, secretos, phishing y el navegador', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '23': { carpeta: '23-seguridad-intermedia', titulo: 'Seguridad intermedia', meta: 'Las vulnerabilidades web más comunes y cómo se cierran', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '24': { carpeta: '24-seguridad-avanzada', titulo: 'Seguridad avanzada', meta: 'Auditar un sistema entero, como hicimos con Copiloto', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
-  '19': { carpeta: '19-agentes-de-ia', titulo: 'Agentes de IA', meta: 'Los patrones para diseñar, medir y publicar agentes', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '19': { carpeta: '19-agentes-de-ia', titulo: 'Qué es un agente', meta: 'Python para leer los ejemplos, las piezas y el ciclo de un agente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '25': { carpeta: '25-agentes-cinco-patrones', titulo: 'Los cinco patrones', meta: 'Herramientas (ReAct), planificación, reflexión, enrutamiento y multiagente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '26': { carpeta: '26-agentes-veinte-patrones', titulo: 'Veinte patrones más', meta: 'Flujo, razonamiento, coordinación, control, conocimiento y cómo elegir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '27': { carpeta: '27-agentes-disenar', titulo: 'Diseñar un agente', meta: 'Contexto, herramientas, estado, salidas, modelo y protocolos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '28': { carpeta: '28-agentes-evaluar-publicar', titulo: 'Evaluar y publicar', meta: 'Medir un agente con pruebas y llevarlo a producción', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '29': { carpeta: '29-agentes-todo-junto', titulo: 'Todo junto', meta: 'La arquitectura completa, la lista para producción y la entrevista', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '30': { carpeta: '30-ia-como-funciona', titulo: 'Cómo funciona un modelo', meta: 'Qué hace bien, qué inventa, tokens, contexto, planes y privacidad', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '31': { carpeta: '31-ia-pedir-bien', titulo: 'Pedir bien', meta: 'Las piezas de un buen pedido, errores, pasos y mejorar el pedido con Gemini', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '32': { carpeta: '32-ia-claude-code', titulo: 'Claude y Claude Code', meta: 'Tu herramienta principal: CLAUDE.md, AGENTS.md, revisar, sesiones y MCP', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '33': { carpeta: '33-ia-otras-herramientas', titulo: 'Otras herramientas', meta: 'OpenCode, Codex, Gemini y modelos locales con Llama', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '34': { carpeta: '34-ia-sin-romper-nada', titulo: 'Trabajar sin romper nada', meta: 'Errores típicos de la IA, revisar, secretos, ataques y costos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '35': { carpeta: '35-ia-tu-flujo', titulo: 'Tu flujo de trabajo', meta: 'De la idea a lo publicado, y seguir aprendiendo de verdad', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
 };
 
 // El dibujo de cada clase en el mapa de islas.
 const ICONOS = {
   '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
-  '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦',
+  '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁',
+  '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄',
   '21': '🎓', '22': '🔐', '23': '🕵️', '24': '🛡️',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
@@ -87,14 +99,19 @@ export const ETAPAS = [
     clases: ['12', '13', '14', '18', '20', '21'],
   },
   {
-    id: 'ia', icono: '🤖', titulo: 'IA y agentes',
-    desc: 'Lo último: cómo se trabaja con inteligencia artificial y agentes.',
-    clases: ['19'],
-  },
-  {
     id: 'seguridad', curso: 'seguridad', icono: '🛡️', titulo: 'Seguridad: pensar como hacker',
     desc: 'Un curso aparte, con su propio certificado: cómo atacan y cómo se defiende un sistema.',
     clases: ['22', '23', '24'],
+  },
+  {
+    id: 'ia-programadores', curso: 'ia', icono: '🧠', titulo: 'IA para programadores',
+    desc: 'Un curso aparte, con su propio certificado: trabajar con Claude, Gemini, OpenCode, Codex y Llama sin romper nada.',
+    clases: ['30', '31', '32', '33', '34', '35'],
+  },
+  {
+    id: 'agentes', curso: 'agentes', icono: '🤖', titulo: 'Agentes de IA',
+    desc: 'Un curso aparte, con su propio certificado: diseñar, medir y publicar tus propios agentes.',
+    clases: ['19', '25', '26', '27', '28', '29'],
   },
 ];
 
@@ -108,6 +125,14 @@ export const CURSOS = {
   seguridad: {
     id: 'seguridad', prefijo: 'SE', corto: 'Seguridad',
     nombre: 'Seguridad: pensar como hacker, de lo básico a auditar un sistema',
+  },
+  ia: {
+    id: 'ia', prefijo: 'IA', corto: 'IA para programadores',
+    nombre: 'IA para programadores: trabajar con Claude, Gemini, OpenCode, Codex y Llama',
+  },
+  agentes: {
+    id: 'agentes', prefijo: 'AG', corto: 'Agentes de IA',
+    nombre: 'Agentes de IA: patrones para diseñar, medir y publicar agentes',
   },
 };
 

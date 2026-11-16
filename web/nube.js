@@ -17,7 +17,7 @@ const CONFIG = {
 };
 const SDK = 'https://www.gstatic.com/firebasejs/11.10.0/';
 export const ESPERA_SEGUNDOS = 60; // igual que en firebase/generar-reglas.mjs
-const FORMATO_CODIGO = /^(ME|SE)-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$/;
+const FORMATO_CODIGO = /^(ME|SE|IA|AG)-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$/;
 const ES_GMAIL = /^[^@\s]+@gmail\.com$/i;
 
 let cargando = null;

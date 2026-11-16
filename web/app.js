@@ -219,8 +219,8 @@ function vistaInicio() {
     <section class="portada cabeza-mapa"><div>
       <p class="mono comentario">// mi carrera de programación</p>
       <h1 class="titulo-grande">Mapa de <span class="acento">estudios</span></h1>
-      <p class="bajada">Primero los fundamentos, después la web, los datos y la arquitectura.
-        Al final, la inteligencia artificial. Cada parada se abre en otro mapa por dentro.</p>
+      <p class="bajada">Primero los fundamentos, después la web, los datos, la arquitectura y mis proyectos.
+        Aparte, con su propio certificado: seguridad, IA para programadores y agentes de IA.</p>
       <div class="contadores mono">
         <span><b>${ETAPAS.length}</b> etapas</span>
         <span><b>${total}</b> clases</span>
@@ -478,6 +478,9 @@ async function vistaParte(num, doc, cual) {
     // La nube: si hay sesión, el bombillo también se registra en Firebase (para el certificado).
     const cajaNube = hoja.querySelector('#nube-parte');
     const curso = cursoDeClase(num);
+    // Para el certificado solo cuentan las partes del documento principal (la primera pestaña);
+    // las de "Resumen", "Informe" o "Para la entrevista" quedan solo en este navegador.
+    const cuentaEnNube = doc === 0;
     const subirANube = async (ponerAviso) => {
       const r = await nube.prenderEnNube(curso, id).catch(() => ({ ok: false, motivo: 'error' }));
       if (r.motivo === 'sin-sesion') return;
@@ -493,7 +496,7 @@ async function vistaParte(num, doc, cual) {
       cajaNube.querySelector('button').addEventListener('click', () => subirANube(true));
     };
     // Al abrir la parte: si está prendida aquí pero no en la nube, ofrecer contarla.
-    (hayDatosDeSesion() ? nube.usuario() : Promise.resolve(null)).then(async (quien) => {
+    (cuentaEnNube && hayDatosDeSesion() ? nube.usuario() : Promise.resolve(null)).then(async (quien) => {
       if (!nube.cuentaLista(quien) || !estaEntendida(id)) return;
       await nube.leerProgresoNube(curso);
       if (nube.estaEnNube(curso, id)) { cajaNube.innerHTML = '☁ contado en la nube'; return; }
@@ -508,7 +511,7 @@ async function vistaParte(num, doc, cual) {
       ev.currentTarget.textContent = ahora ? '✓ ya lo entendí' : '¿lo entendiste? márcalo';
       app.querySelector('.indice nav a.activa span').textContent = ahora ? '✓' : dos(i);
       if (!ahora) { cajaNube.textContent = ''; return; }
-      const quien = hayDatosDeSesion() ? await nube.usuario().catch(() => null) : null;
+      const quien = cuentaEnNube && hayDatosDeSesion() ? await nube.usuario().catch(() => null) : null;
       if (quien) subirANube(true);
       else avisar('💡 se prendió un bombillo <span class="tenue">· ver mi progreso →</span>');
     });
@@ -575,6 +578,7 @@ async function vistaProgreso() {
         <b>"¿lo entendiste? márcalo"</b>. Cada curso tiene sus bombillos y su certificado.
         ${recien.size ? `<span class="insignia actual">+${recien.size} desde la última vez</span>` : ''}</p>
       <div class="caja-nube mono" id="caja-nube">☁ …</div>
+      ${volverAntes()}
     </section>
     ${cursos}
     <details class="intro llevar">
@@ -607,6 +611,14 @@ async function vistaProgreso() {
   pintarCajaNube(app.querySelector('#caja-nube'));
   // Ya los viste prenderse: la próxima vez no se animan de nuevo.
   olvidarRecien();
+}
+
+// El botón "← volver a donde estaba" (la última pantalla de estudio que se abrió).
+function volverAntes() {
+  let antes = '';
+  try { antes = sessionStorage.getItem('mapa-antes') || ''; } catch (e) { /* nada */ }
+  if (!/^#\/[\w\-/]*$/.test(antes)) return '';
+  return `<p class="volver-antes"><a class="boton" href="${antes}">← volver a donde estaba</a></p>`;
 }
 
 // La cajita de "Mi progreso": quién entró y cuántos bombillos cuentan en la nube en cada curso.
@@ -689,7 +701,7 @@ const mensajeDe = (e) => e?.mensaje || MENSAJES_ERROR[e?.code]
 // El marco de todas las pantallas de la cuenta: una tarjeta con aspecto de terminal.
 function tarjetaCuenta(comando, titulo, cuerpo) {
   app.innerHTML = `
-    <section class="cuenta">
+    <section class="cuenta-pantalla">
       <div class="cuenta-tarjeta">
         <div class="cuenta-barra mono"><i></i><i></i><i></i><span>${escapar(comando)}</span></div>
         <div class="cuenta-cuerpo">
@@ -1144,7 +1156,7 @@ async function vistaVerificar(codigo) {
   };
 
   if (!codigo) {
-    pantallaAviso('🔎 Verificar un certificado', 'Escribe el código que aparece en el certificado (empieza con ME- o SE-).', formulario());
+    pantallaAviso('🔎 Verificar un certificado', 'Escribe el código que aparece en el certificado (empieza con ME-, SE-, IA- o AG-).', formulario());
     conectar();
     return;
   }
@@ -1185,6 +1197,10 @@ async function vistaVerificar(codigo) {
 
 async function dibujar() {
   const partesRuta = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
+  // Recordar la última pantalla de estudio (mapa, etapa, clase o parte) para poder volver a ella.
+  if (!['progreso', 'certificado', 'entrar', 'cuenta', 'verificar'].includes(partesRuta[0])) {
+    try { sessionStorage.setItem('mapa-antes', location.hash || '#/'); } catch (e) { /* sin almacenamiento */ }
+  }
   try {
     if (partesRuta[0] === 'progreso') await vistaProgreso();
     else if (partesRuta[0] === 'certificado') {

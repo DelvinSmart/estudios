@@ -38,7 +38,22 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 22 Seguridad básica
 - [ ] 23 Seguridad intermedia
 - [ ] 24 Seguridad avanzada
-- [ ] 19 Agentes de IA
+
+**Curso IA para programadores** (certificado aparte)
+- [ ] 30 Cómo funciona un modelo
+- [ ] 31 Pedir bien
+- [ ] 32 Claude y Claude Code
+- [ ] 33 Otras herramientas
+- [ ] 34 Trabajar sin romper nada
+- [ ] 35 Tu flujo de trabajo
+
+**Curso Agentes de IA** (certificado aparte)
+- [ ] 19 Qué es un agente
+- [ ] 25 Los cinco patrones
+- [ ] 26 Veinte patrones más
+- [ ] 27 Diseñar un agente
+- [ ] 28 Evaluar y publicar
+- [ ] 29 Todo junto
 
 Una clase se marca con `[x]` solo cuando puedo explicarla en voz alta, como
 en una entrevista.

@@ -16,7 +16,7 @@ en una entrevista.
 
 ## Las clases, en orden
 
-Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14, 18, 20 y 21) y al final la IA (19). Aparte, con su propio certificado, está el curso de **seguridad** (22, 23 y 24). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
+Cada clase se apoya en la anterior. El orden es el del mapa: primero los fundamentos (01 a 07), después la web (15 a 17), los datos (08 y 09), la arquitectura (10 y 11), mis proyectos (12, 13, 14, 18, 20 y 21). Aparte, cada uno con su propio certificado: **seguridad** (22 a 24), **IA para programadores** (30 a 35) y **agentes de IA** (19 y 25 a 29). Los números son el nombre de la carpeta, no el orden. Cada carpeta tiene su `LECCION.md` con la
 explicación, los ejemplos, los ejercicios y las respuestas.
 
 | # | Clase | Qué voy a saber hacer al terminar |
@@ -44,13 +44,19 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 | 22 | [Seguridad básica](22-seguridad-basica/LECCION.md) | Ética y ley, pensar como atacante, contraseñas, secretos, phishing, el navegador y HTTPS (curso de seguridad) |
 | 23 | [Seguridad intermedia](23-seguridad-intermedia/LECCION.md) | OWASP Top 10: IDOR, inyección, XSS, sesiones, CSRF, dependencias y prompt injection (curso de seguridad) |
 | 24 | [Seguridad avanzada](24-seguridad-avanzada/LECCION.md) | Auditar un sistema entero, reglas de Firebase como atacante, abuso de costos, herramientas, reportes y tu camino (curso de seguridad) |
-| 19 | [Agentes de IA](19-agentes-de-ia/LECCION.md) | Los patrones para diseñar, evaluar y publicar agentes (basada en la guía de Bashiri Smith), con las 12 preguntas de entrevista |
+| 30 | [Cómo funciona un modelo](30-ia-como-funciona/LECCION.md) | IA para programadores: qué hace bien, qué inventa, tokens, contexto, planes y privacidad |
+| 31 | [Pedir bien](31-ia-pedir-bien/LECCION.md) | Las piezas de un buen pedido y cómo mejorarlo con Gemini |
+| 32 | [Claude y Claude Code](32-ia-claude-code/LECCION.md) | CLAUDE.md, AGENTS.md, revisar el diff, sesiones, subagentes y MCP |
+| 33 | [Otras herramientas](33-ia-otras-herramientas/LECCION.md) | OpenCode, Codex, Gemini CLI y Llama con Ollama |
+| 34 | [Trabajar sin romper nada](34-ia-sin-romper-nada/LECCION.md) | Errores típicos de la IA, revisar, secretos, ataques y costos |
+| 35 | [Tu flujo de trabajo](35-ia-tu-flujo/LECCION.md) | De la idea a lo publicado, y aprender de verdad |
+| 19, 25–29 | Agentes de IA (curso aparte) | Qué es un agente, los cinco patrones, veinte más, diseñar, evaluar y publicar, y todo junto |
 
 ## Cómo estudiar cada clase
 
 **Sin IA:** cada clase tiene su **`CLASE-GUIADA.md`**: la clase completa, como si un profesor la diera, con pausas de "✋ Para y piensa", prácticas de verdadero o falso, elegir y escribir (hay que acertar todas para prender el bombillo 💡 de la parte) y la simulación de entrevista. En el mapa (`index.html`) es la primera pestaña de cada clase. La `LECCION.md` queda como resumen. En la clase 19 (agentes) la lección misma es la clase completa, con los ejemplos en JavaScript y en Python.
 
-**Certificados verificables:** cada curso (programación y seguridad) tiene el suyo. Hay que entrar con una cuenta de Gmail verificada (`#/entrar`): así cada bombillo queda en Firebase con la hora del servidor, y al completar todas las partes se emite el certificado con un código (`ME-…` o `SE-…`) que cualquiera comprueba en `#/verificar/CÓDIGO`. Cómo funciona por dentro: clase 21 y `firebase/LEEME.md`. Lo emite el propio curso; no es un título oficial.
+**Certificados verificables:** cada curso (programación, seguridad, IA para programadores y agentes de IA) tiene el suyo. Hay que entrar con una cuenta de Gmail verificada (`#/entrar`): así cada bombillo queda en Firebase con la hora del servidor, y al completar todas las partes se emite el certificado con un código (`ME-…`, `SE-…`, `IA-…` o `AG-…`) que cualquiera comprueba en `#/verificar/CÓDIGO`. Cómo funciona por dentro: clase 21 y `firebase/LEEME.md`. Lo emite el propio curso; no es un título oficial.
 
 **Con una IA:** sigue los pasos de abajo y [AGENTS.md](AGENTS.md).
 

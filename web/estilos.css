@@ -586,8 +586,9 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 
 
 /* ---------- 13. La cuenta: entrar, crear, recuperar (aspecto de ventana de terminal) ---------- */
-/* La tarjeta queda centrada en la pantalla, a lo alto y a lo ancho. */
-.cuenta { display: grid; place-items: center; min-height: calc(100vh - 190px); min-height: calc(100dvh - 190px); padding: 28px 0 40px; }
+/* La tarjeta queda centrada en la pantalla, a lo alto y a lo ancho.
+   (Ojo: se llama .cuenta-pantalla; .cuenta es el contador "0/7" de Mi progreso.) */
+.cuenta-pantalla { display: grid; place-items: center; min-height: calc(100vh - 190px); min-height: calc(100dvh - 190px); padding: 28px 0 40px; }
 .cuenta-tarjeta { width: min(100%, 460px); background: var(--tarjeta); border: 1px solid var(--borde-fuerte); border-radius: 14px; box-shadow: var(--sombra); overflow: hidden; }
 .cuenta-barra { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: var(--fondo-2); border-bottom: 1px solid var(--borde); font-size: 0.78rem; color: var(--tenue); }
 .cuenta-barra i { width: 11px; height: 11px; border-radius: 50%; background: var(--borde-fuerte); }
@@ -712,6 +713,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .titulo-mapa-curso { display: flex; align-items: center; gap: 10px; margin: 34px 0 6px; font: 700 1.15rem var(--mono); }
 
 /* Botones de volver arriba de cada parte */
+.volver-antes { margin-top: 14px; }
 .pasos-arriba { margin: 0 0 18px; padding: 0 0 12px; border-bottom: 1px dashed var(--borde); }
 
 @media (max-width: 640px) {

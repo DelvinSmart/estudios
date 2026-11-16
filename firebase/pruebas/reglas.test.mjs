@@ -193,3 +193,9 @@ test('el prefijo del código tiene que ser el del curso (ME para programación)'
   const fechas = await sembrar('ana', TOTAL);
   await assertFails(emitir('ana', 'SE-1A2B-3C4D-5E6F', {}, { inicio: fechas.inicio, fin: fechas.ultimo }));
 });
+
+test('los cursos nuevos (ia y agentes) aceptan sus partes y no las de otro curso', async () => {
+  await assertSucceeds(setDoc(doc(db('ana'), RUTA('ana', 'ia')), primero(porCurso.ia[0])));
+  await assertSucceeds(setDoc(doc(db('ana'), RUTA('ana', 'agentes')), primero(porCurso.agentes[0])));
+  await assertFails(setDoc(doc(db('beto'), RUTA('beto', 'agentes')), primero(porCurso.ia[0])));
+});
