@@ -6,7 +6,7 @@
   "main": "index.js",
   "engines": { "node": "22" },
   "scripts": {
-    "test": "node --test correos.test.js limites.test.js"
+    "test": "node --test correos.test.js limites.test.js corregir.test.js"
   },
   "dependencies": {
     "firebase-admin": "^14.5.1",

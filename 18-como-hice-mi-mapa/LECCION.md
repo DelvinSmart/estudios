@@ -176,8 +176,10 @@ elige :: ¿De qué tipo es `45`? :: string :: *number :: boolean :: → Sin comi
 escribe :: ¿Qué es un `boolean`? :: Un dato que solo puede ser true o false.
 ```
 
+Así **se escriben**. Pero en GitHub **no quedan así**: el script `firebase/separar-respuestas.mjs` saca la respuesta (`V`, el `*` y la explicación) y la guarda en un archivo privado que no se publica. En el `.md` queda solo `elige :: ¿De qué tipo es `45`? :: string :: number :: boolean`. Las corrige **el servidor** (lo ves completo en el Tema 21, Parte 8).
+
 - `vf` es verdadero o falso; `elige` tiene varias opciones y la correcta lleva `*`; `escribe` te deja responder con tus palabras y después comparar con la respuesta modelo.
-- **Para aprobar hay que acertar todas en el mismo intento.** Si fallas una, ves la explicación y repites el bloque entero, en otro orden (para que no lo hagas de memoria).
+- **Eliges todas tus respuestas y tocas "revisar".** Para aprobar hay que acertar todas en el mismo intento. Si fallas, ves **cuáles** fallaste (no cuál era la correcta) y repites el bloque entero, en otro orden (para que no lo hagas de memoria).
 - Mientras la práctica de una parte no esté aprobada, el botón del bombillo de esa parte queda **bloqueado** 🔒.
 
 > 💡 **Idea:** gracias a esto, en tus `.md` puedes escribir `> 💡 **Idea:** ...` o `> ⚠️ **Cuidado:** ...` y en la página aparecen como tarjetas amarillas o rojas, sin tocar código.

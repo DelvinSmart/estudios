@@ -39,11 +39,14 @@ function cargar() {
       auth.languageCode = 'es'; // los correos (verificar, recuperar contraseña) llegan en español
       const db = F.getFirestore(app);
       // La función que manda los correos con el diseño del sitio (firebase/funciones/index.js).
-      const enviarCorreo = Fn.httpsCallable(Fn.getFunctions(app, 'us-central1'), 'enviarCorreoCuenta');
+      const funciones = Fn.getFunctions(app, 'us-central1');
+      const enviarCorreo = Fn.httpsCallable(funciones, 'enviarCorreoCuenta');
+      // La que corrige las prácticas con las respuestas privadas (firebase/funciones/index.js).
+      const corregir = Fn.httpsCallable(funciones, 'corregirPractica');
       // Esperar a saber si ya había una sesión abierta; después, avisar de cada cambio.
       await new Promise((listo) => { const parar = A.onAuthStateChanged(auth, () => { parar(); listo(); }); });
       A.onAuthStateChanged(auth, (u) => { for (const k in progresoCache) delete progresoCache[k]; oyentes.forEach((f) => f(u)); });
-      return { A, F, auth, db, enviarCorreo };
+      return { A, F, auth, db, enviarCorreo, corregir };
     })();
     cargando.catch(() => { cargando = null; });
   }
@@ -264,4 +267,23 @@ export async function verificar(codigo) {
   if (!foto.exists()) return null;
   const d = foto.data();
   return { codigo, curso: d.curso, nombre: d.nombre, partes: d.partes, emitido: d.emitido.toDate(), inicio: d.inicio.toDate(), fin: d.fin.toDate() };
+}
+
+// ---------- las prácticas: las corrige el servidor ----------
+
+// Manda las respuestas de una práctica y devuelve { aprobada, resultados, explicaciones, guardada }.
+// respuestas: { índice de la pregunta: 'V' | 'F' | número de opción }.
+// Si hay sesión con correo verificado, el servidor también guarda la aprobación (para la nube).
+export async function corregirPractica(id, respuestas) {
+  const { corregir } = await cargar();
+  const r = await corregir({ id, respuestas });
+  return r.data;
+}
+
+// ¿El servidor ya aprobó la práctica de esta parte? (para explicar por qué un bombillo no sube a la nube)
+export async function parteAprobadaEnNube(curso, parte) {
+  const { F, auth, db } = await cargar();
+  if (!cuentaLista(auth.currentUser)) return false;
+  const foto = await F.getDoc(F.doc(db, 'cursos', curso, 'aprobadas', auth.currentUser.uid));
+  return Boolean(foto.exists() && foto.data().partes?.[parte]);
 }

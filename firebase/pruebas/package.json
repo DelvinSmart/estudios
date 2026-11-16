@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "firebase emulators:exec --only firestore --project demo-mapa \"node --test reglas.test.mjs\""
+    "test": "firebase emulators:exec --only firestore --project demo-mapa \"node --test reglas.test.mjs\"",
+    "integracion": "cd .. && firebase emulators:exec --only functions,firestore,auth --project demo-mapa \"cd pruebas && node --test integracion.test.mjs\""
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^4.0.1",

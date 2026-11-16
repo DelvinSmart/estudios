@@ -11,6 +11,8 @@
 | `web/nube.js` | Todo lo que habla con Firebase: cuenta, progreso y certificado |
 | `web/vistas/cuenta.js` | Las pantallas de la cuenta: entrar, crear cuenta, recuperar y mi cuenta |
 | `web/vistas/certificado.js` | El certificado de cada curso y la página para verificarlo |
+| `firebase/separar-respuestas.mjs` | Saca las respuestas de los `.md` y las guarda en el archivo privado (Parte 8) |
+| `firebase/funciones/corregir.js` | Corrige una práctica con las respuestas privadas (Parte 8) |
 | `firebase/funciones/limites.js` | Los topes de correos (por persona y por día, separados por tipo) |
 | `firebase/reglas.plantilla` | Las reglas de seguridad, escritas a mano |
 | `firebase/generar-reglas.mjs` | Arma `firestore.rules` con la lista real de partes |
@@ -357,7 +359,7 @@ Esconder cómo funciona algo y esperar que nadie lo descubra se llama **segurida
 
 ### Qué sí es secreto
 
-La configuración de Firebase en `web/nube.js` (`apiKey`, `projectId`…) **no es secreta**: toda app web la lleva a la vista y solo identifica el proyecto. Lo que **sí** sería secreto: claves de servicio (*service account*), contraseñas, tokens de pago. Esas **nunca** van en el repositorio.
+La configuración de Firebase en `web/nube.js` (`apiKey`, `projectId`…) **no es secreta**: toda app web la lleva a la vista y solo identifica el proyecto. Lo que **sí** sería secreto: claves de servicio (*service account*), contraseñas, tokens de pago, y **las respuestas de las prácticas** (`firebase/funciones/respuestas.json`, Parte 8). Esas **nunca** van en el repositorio.
 
 > 🌎 **En la vida real:** la dirección de tu casa no es secreta (te llegan cartas); la llave sí.
 
@@ -371,9 +373,127 @@ elige :: ¿Cuál de estas cosas NUNCA debe ir en el repositorio? :: El projectId
 escribe :: Explícale a alguien por qué este curso puede mostrar sus reglas de seguridad sin peligro. :: Porque las reglas se ejecutan en los servidores de Google, no en el navegador; aunque alguien las lea, no las puede cambiar ni saltar, y lo que no se debe publicar son las llaves secretas, que no están en el código.
 ```
 
+## Parte 8. Las respuestas en el servidor
+
+> 🌎 **En la vida real:** en un examen de manejo, el examinador no te entrega la hoja con las respuestas junto con las preguntas. Él tiene la plantilla y te dice si aprobaste.
+
+> 🌎 **Otro ejemplo:** Es como una máquina de café con monedas: tú pones la moneda, pero la máquina decide si es buena; la lista de monedas válidas no está pegada afuera.
+
+### El problema: las respuestas estaban en GitHub
+
+Hasta aquí, el servidor exigía un bombillo a la vez y 60 segundos entre uno y otro. Pero las prácticas se corregían **en el navegador**, y para eso las respuestas tenían que estar en los `.md`, que son **públicos** en GitHub. Alguien podía abrir el archivo, ver `*CSS` o `:: V ::` y aprobar todo sin estudiar.
+
+> 🌎 **En la vida real:** es como dejar el solucionario del libro pegado al final de cada capítulo: el que quiere, copia.
+
+> 🌎 **Otro ejemplo:** Es como un concurso de la tele donde la respuesta correcta sale escrita en la pantalla antes de que el participante conteste.
+
+### La pregunta es pública; la respuesta, privada
+
+Las prácticas se siguen escribiendo igual que siempre, con la respuesta. Después se corre un script que las **separa**:
+
+```bash
+node firebase/separar-respuestas.mjs            # saca las respuestas de los .md
+node firebase/separar-respuestas.mjs --revisar  # falla si alguna respuesta quedó a la vista
+```
+
+- En el `.md` queda solo la pregunta: `elige :: ¿Qué pieza decide los colores? :: HTML :: CSS :: JavaScript`, sin el `*` y sin la explicación.
+- La respuesta va a `firebase/funciones/respuestas.json`, que está en `.gitignore`: **nunca se sube a GitHub**. Solo viaja dentro de la función de Firebase.
+- Cada práctica tiene un id, por ejemplo `15:CLASE-GUIADA.md:2:practica1` (clase, archivo, parte y número de práctica). Si una práctica cambia de lugar, el script la reconoce por sus enunciados y no pierde la respuesta.
+
+> 🌎 **En la vida real:** es como el profesor que imprime el examen para los alumnos y guarda la plantilla de corrección en su cajón.
+
+> 🌎 **Otro ejemplo:** Es como el menú de un restaurante: está a la vista de todos; la receta secreta queda en la cocina.
+
+### La función que corrige
+
+`corregirPractica` es una **Cloud Function**: código que corre en los servidores de Google, no en tu navegador. Recibe tus respuestas (el número de la opción o `V`/`F`), las compara con `respuestas.json` y contesta. La lógica está en `firebase/funciones/corregir.js`, separada para poder probarla sola:
+
+```js
+export function corregir(entrada, respuestas) {
+  const resultados = entrada.preguntas.map((p, i) => {
+    if (p.tipo === 'escribe') return null; // esa se autoevalúa
+    const dada = respuestas[i];
+    if (p.tipo === 'vf') return dada === p.correcta;
+    return Number.isInteger(dada) && dada === p.correcta;
+  });
+  const aprobada = resultados.every((x) => x !== false);
+  // Las explicaciones (que muchas veces dicen la respuesta) solo se entregan al aprobar.
+  return { aprobada, resultados, explicaciones: aprobada ? /* … */ [] : null };
+}
+```
+
+Tres decisiones que la hacen difícil de engañar:
+
+- **Al fallar no dice cuál era la correcta.** Solo dice cuáles fallaste. Si dijera "la correcta era CSS", con un intento fallado ya tendrías todas.
+- **Se revisa el bloque entero de una vez**, no pregunta por pregunta. Si fuera de a una, bastaría con probar las 2 o 3 opciones de cada pregunta.
+- **Hay que esperar 15 segundos después de fallar**, y hay un tope de intentos por día. Probar al azar se vuelve muy lento.
+
+> 🌎 **En la vida real:** es como un cajero automático: si pones mal la clave no te dice cuál dígito estaba mal, y después de varios intentos se traba un rato.
+
+> 🌎 **Otro ejemplo:** Es como el semáforo del examen de manejo: al final te dicen "reprobaste en estacionamiento", pero no te muestran cómo lo hubiera hecho el examinador para que lo copies en el siguiente intento.
+
+### La regla nueva: el bombillo exige la aprobación del servidor
+
+Cuando apruebas con tu cuenta abierta, la función escribe en `cursos/{curso}/aprobadas/{uid}`. **Nadie puede escribir ahí desde el navegador**: la regla es `allow write: if false`, y solo la función (que tiene permisos de administrador) lo hace. Y la regla del progreso ahora pide una condición más:
+
+```js
+function aprobadaPorElServidor(curso, uid, parte) {
+  return !(parte in conPractica(curso))
+    || (exists(/databases/$(database)/documents/cursos/$(curso)/aprobadas/$(uid))
+        && parte in get(/databases/$(database)/documents/cursos/$(curso)/aprobadas/$(uid)).data.partes);
+}
+```
+
+O sea: si la parte tiene práctica, el bombillo solo se prende en la nube si **el servidor** ya la aprobó. La lista `conPractica` la arma `generar-reglas.mjs` leyendo los `.md`.
+
+> 🌎 **En la vida real:** es como el sello del notario: tú puedes llevar el papel, pero solo el notario puede ponerle el sello, y sin sello no vale.
+
+> 🌎 **Otro ejemplo:** Es como la nota final de la escuela: la escribe la secretaría en el sistema, no el alumno en su cuaderno.
+
+### Sin cuenta también se corrige
+
+Quien estudia sin cuenta también manda sus respuestas a la función: así aprende igual. La diferencia es que **no se guarda nada** en el servidor (la aprobación queda solo en su navegador) y hay un tope de intentos por día por conexión. Por eso las prácticas ahora **necesitan internet**.
+
+> 🌎 **En la vida real:** es como un simulador de examen en una autoescuela: puedes practicar todo lo que quieras, pero el que vale para la licencia es el examen oficial con tu documento.
+
+> 🌎 **Otro ejemplo:** Es como probarte ropa en la tienda: puedes probarte todo, pero solo lo que pasas por la caja queda registrado como tuyo.
+
+### Lo que todavía no protege
+
+Ser honesto con los límites también es parte de la seguridad:
+
+- **El historial de Git.** Las respuestas estuvieron en GitHub antes de este cambio, y el historial guarda las versiones viejas. Quien busque ahí todavía las encuentra. Borrarlas del historial exige reescribirlo, y eso es una decisión aparte.
+- **Las de "escribe con tus palabras"** siguen siendo autoevaluadas: ninguna máquina las corrige con seguridad sin usar IA.
+- **La fuerza bruta lenta.** Alguien con mucha paciencia puede probar combinaciones, pero con 15 segundos por intento fallado y 60 segundos por bombillo, terminar sin estudiar lleva más tiempo que estudiar.
+- **El archivo privado vive en tu disco.** Si se pierde, se pierden las respuestas: hay que tener un respaldo fuera de GitHub.
+
+> 🌎 **En la vida real:** ninguna casa es imposible de robar; una buena cerradura hace que robarla cueste más que lo que vale.
+
+> 🌎 **Otro ejemplo:** Es como el cinturón de seguridad: no evita todos los accidentes, pero cambia mucho el resultado.
+
+### Agregar preguntas nuevas
+
+1. Escribe la práctica en el `.md` como siempre, con la respuesta (`:: V ::`, el `*` y la explicación con `→`).
+2. Corre `node firebase/separar-respuestas.mjs`: saca las respuestas y las guarda en el archivo privado.
+3. Corre `node firebase/generar-reglas.mjs` y las pruebas.
+4. Sube la función (`firebase deploy --only functions:corregirPractica`) y las reglas, y después publica el sitio.
+
+> 🌎 **En la vida real:** es como cuando el profesor arma un examen nuevo: escribe preguntas y respuestas juntas, y después separa la hoja de los alumnos de la plantilla.
+
+> 🌎 **Otro ejemplo:** Es como cargar un producto nuevo en una tienda online: le pones el precio en el sistema (privado) y la foto en la vitrina (pública).
+
+```practica
+vf :: Después de este cambio, las respuestas de las prácticas ya no están en los .md que se publican en GitHub
+vf :: Si fallas una práctica, el servidor te dice cuál era la opción correcta para que aprendas
+elige :: ¿Quién puede escribir en cursos/{curso}/aprobadas/{uid}? :: La persona, desde su navegador :: Solo la función corregirPractica del servidor :: Cualquiera con la apiKey
+elige :: ¿Por qué se revisa el bloque entero de una vez y no pregunta por pregunta? :: Porque es más rápido de programar :: Porque de a una bastaría con probar las 2 o 3 opciones de cada pregunta :: Porque Firebase no deja otra forma
+elige :: ¿Qué sigue sin estar protegido del todo? :: La hora del servidor :: El historial de Git, donde quedaron las respuestas viejas :: El código de verificación
+escribe :: Explica con tus palabras qué cambia para alguien que intenta copiar las respuestas desde GitHub. :: Ya no las encuentra en los archivos públicos: solo están las preguntas. Para aprobar tiene que mandar sus respuestas al servidor, que no le dice cuál era la correcta y lo hace esperar después de fallar; y sin la aprobación del servidor, las reglas no dejan prender el bombillo en la nube.
+```
+
 ## Resumen para la entrevista
 
-> 🎤 **Si te preguntan "¿cómo evitaste que hicieran trampa con el certificado?":** "El progreso del navegador no sirve como prueba, así que lo moví a Firestore. Las reglas solo aceptan cuentas de Gmail verificadas, un bombillo a la vez, de una lista oficial, con la hora del servidor y una espera mínima entre uno y otro. El certificado se emite en un lote que las reglas validan contra el progreso, y la verificación es pública por código pero no se pueden listar todos. Lo probé con el emulador escribiendo cada trampa como prueba automática."
+> 🎤 **Si te preguntan "¿cómo evitaste que hicieran trampa con el certificado?":** "El progreso del navegador no sirve como prueba, así que lo moví a Firestore. Las reglas solo aceptan cuentas de Gmail verificadas, un bombillo a la vez, de una lista oficial, con la hora del servidor y una espera mínima entre uno y otro. El certificado se emite en un lote que las reglas validan contra el progreso, y la verificación es pública por código pero no se pueden listar todos. Las prácticas las corrige una Cloud Function con respuestas que no están en el repositorio, y las reglas solo dejan prender el bombillo si el servidor aprobó la práctica. Lo probé con el emulador escribiendo cada trampa como prueba automática, y con una prueba de punta a punta."
 
 > 🌎 **En la vida real:** es como contar cómo cerraste tu casa: no basta con decir "tiene llave", hay que explicar cada puerta.
 

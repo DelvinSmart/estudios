@@ -352,13 +352,15 @@ elige :: ¿De qué tipo es `45`? :: string :: *number :: boolean :: → Sin comi
 escribe :: ¿Qué es un `boolean`? :: Un dato que solo puede ser true o false.
 ```
 
+Así **se escriben**. Pero en GitHub **no quedan así**: el script `firebase/separar-respuestas.mjs` saca la respuesta (`V`, el `*` y la explicación) y la guarda en un archivo privado que no se publica. En el `.md` queda solo `elige :: ¿De qué tipo es `45`? :: string :: number :: boolean`. Las corrige **el servidor** (lo ves completo en el Tema 21, Parte 8).
+
 - **`vf`** = verdadero o falso.
 - **`elige`** = varias opciones; la correcta lleva `*`; la explicación empieza con `→`.
 - **`escribe`** = respondes con tus palabras y después comparas con la respuesta modelo (y dices honestamente si dijiste lo mismo).
 
-**La regla:** para aprobar hay que **acertar todas en el mismo intento**. Si fallas una, ves la explicación y **repites el bloque entero en otro orden** (para que no lo hagas de memoria). Mientras la práctica de una parte no esté aprobada, **el botón del bombillo queda bloqueado 🔒**.
+**La regla:** eliges todas tus respuestas y tocas **revisar**; para aprobar hay que **acertar todas en el mismo intento**. Si fallas, ves **cuáles** fallaste (no cuál era la correcta) y **repites el bloque entero en otro orden** (para que no lo hagas de memoria). Mientras la práctica de una parte no esté aprobada, **el botón del bombillo queda bloqueado 🔒**.
 
-`practica.js` lo hace con lo del Tema 17: lee las líneas con `split(' :: ')`, arma botones con plantillas, escucha clics con `addEventListener`, y al aprobar guarda en `localStorage` y avisa con un evento propio (`practica-aprobada`), que `vistas/parte.js` escucha para desbloquear el botón.
+`practica.js` lo hace con lo del Tema 17: lee las líneas con `split(' :: ')`, arma botones con plantillas, escucha clics con `addEventListener`, manda tus respuestas al servidor con `await` (Tema 21, Parte 8), y al aprobar guarda en `localStorage` y avisa con un evento propio (`practica-aprobada`), que `vistas/parte.js` escucha para desbloquear el botón.
 
 ```practica
 elige :: Una persona en otro país estudia hasta la parte 5 en tu página publicada. Tú vas por la 2. ¿Qué ves? :: La parte 5 :: Tus bombillos: la parte 2 :: Nada

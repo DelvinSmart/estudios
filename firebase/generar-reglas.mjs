@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { CURSOS } from '../web/cursos.js';
 import { listarPartes } from './partes.mjs';
+import { partesConPractica } from './practicas.mjs';
 
 export const ESPERA_SEGUNDOS = 60;
 const aqui = new URL('.', import.meta.url);
@@ -21,6 +22,7 @@ export function construirReglas(espera = ESPERA_SEGUNDOS) {
     `function cursos() { return [${Object.keys(CURSOS).map((c) => `'${c}'`).join(', ')}]; }`,
     `    function partes(curso) {\n      return ${segunCurso(Object.fromEntries(Object.entries(porCurso).map(([c, ids]) => [c, lista(ids)])), '[]')};\n    }`,
     `    function total(curso) { return ${segunCurso(Object.fromEntries(Object.entries(porCurso).map(([c, ids]) => [c, ids.length])), '-1')}; }`,
+    `    function conPractica(curso) {\n      return ${segunCurso(Object.fromEntries(Object.entries(partesConPractica()).map(([c, ids]) => [c, lista(ids)])), '[]')};\n    }`,
     `    function prefijo(curso) { return ${segunCurso(Object.fromEntries(Object.entries(CURSOS).map(([c, d]) => [c, `'${d.prefijo}'`])), "'??'")}; }`,
   ].join('\n');
   const texto = readFileSync(new URL('reglas.plantilla', aqui), 'utf8')

@@ -1,5 +1,30 @@
 {
-  "firestore": { "rules": "firestore.rules", "database": "(default)" },
-  "functions": [{ "source": "funciones", "codebase": "default", "runtime": "nodejs22", "ignore": ["node_modules", "*.test.js"] }],
-  "emulators": { "firestore": { "port": 8080 }, "auth": { "port": 9099 }, "ui": { "enabled": false }, "singleProjectMode": true }
+ "firestore": {
+  "rules": "firestore.rules",
+  "database": "(default)"
+ },
+ "functions": [
+  {
+   "source": "funciones",
+   "codebase": "default",
+   "runtime": "nodejs22",
+   "ignore": [
+    "node_modules",
+    "*.test.js",
+    ".secret.local"
+   ]
+  }
+ ],
+ "emulators": {
+  "firestore": {
+   "port": 8080
+  },
+  "auth": {
+   "port": 9099
+  },
+  "ui": {
+   "enabled": false
+  },
+  "singleProjectMode": true
+ }
 }

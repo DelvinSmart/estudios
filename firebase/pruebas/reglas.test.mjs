@@ -5,6 +5,7 @@ import { test, before, after, beforeEach } from 'node:test';
 import { initializeTestEnvironment, assertFails, assertSucceeds } from '@firebase/rules-unit-testing';
 import { doc, setDoc, updateDoc, getDoc, getDocs, deleteDoc, collection, writeBatch, serverTimestamp, Timestamp, deleteField } from 'firebase/firestore';
 import { construirReglas } from '../generar-reglas.mjs';
+import { partesConPractica } from '../practicas.mjs';
 
 const ESPERA = 2; // en las pruebas la espera es de 2 s para no tardar
 const { texto, porCurso } = construirReglas(ESPERA);
@@ -18,7 +19,17 @@ before(async () => {
   env = await initializeTestEnvironment({ projectId: 'demo-mapa', firestore: { rules: texto, host: '127.0.0.1', port: 8080 } });
 });
 after(async () => { await env.cleanup(); });
-beforeEach(async () => { await env.clearFirestore(); });
+const CON_PRACTICA = partesConPractica();
+// Lo que escribiría la función corregirPractica: las partes con práctica aprobada por el servidor.
+async function aprobarEnServidor(uid, curso, partes) {
+  await env.withSecurityRulesDisabled((c) => setDoc(doc(c.firestore(), `cursos/${curso}/aprobadas/${uid}`),
+    { partes: Object.fromEntries(partes.map((p) => [p, Timestamp.now()])) }, { merge: true }));
+}
+// Para las pruebas de antes: ana y beto ya aprobaron todas las prácticas de todos los cursos.
+beforeEach(async () => {
+  await env.clearFirestore();
+  for (const uid of ['ana', 'beto']) for (const [curso, partes] of Object.entries(CON_PRACTICA)) await aprobarEnServidor(uid, curso, partes);
+});
 
 // Por defecto: cuenta de Gmail con el correo verificado (lo que piden las reglas).
 const db = (uid, token = { email: `${uid}@gmail.com`, email_verified: true }) =>
@@ -203,4 +214,33 @@ test('los cursos nuevos (ia y agentes) aceptan sus partes y no las de otro curso
 test('el curso de Python acepta sus partes y su prefijo PY', async () => {
   await assertSucceeds(setDoc(doc(db('ana'), RUTA('ana', 'python')), primero(porCurso.python[0])));
   await assertFails(setDoc(doc(db('beto'), RUTA('beto', 'python')), primero(porCurso.programacion[0])));
+});
+
+// ---------------- prácticas corregidas en el servidor ----------------
+test('una parte con práctica NO se prende si el servidor no aprobó la práctica', async () => {
+  const parte = CON_PRACTICA.programacion[0];
+  await assertFails(setDoc(doc(db('carla'), RUTA('carla')), primero(parte)));
+  await aprobarEnServidor('carla', 'programacion', [parte]);
+  await assertSucceeds(setDoc(doc(db('carla'), RUTA('carla')), primero(parte)));
+});
+test('una parte sin práctica se prende sin aprobación', async () => {
+  const sin = ids.find((i) => !CON_PRACTICA.programacion.includes(i));
+  if (!sin) return; // si todas tuvieran práctica, no hay nada que probar
+  await assertSucceeds(setDoc(doc(db('carla'), RUTA('carla')), primero(sin)));
+});
+test('nadie puede aprobarse a sí mismo una práctica (solo la función del servidor)', async () => {
+  const ruta = 'cursos/programacion/aprobadas/carla';
+  await assertFails(setDoc(doc(db('carla'), ruta), { partes: { [CON_PRACTICA.programacion[0]]: serverTimestamp() } }));
+  await assertFails(setDoc(doc(db('carla'), ruta), { partes: {} }, { merge: true }));
+});
+test('cada persona solo puede leer sus propias aprobaciones', async () => {
+  await aprobarEnServidor('carla', 'programacion', [CON_PRACTICA.programacion[0]]);
+  await assertSucceeds(getDoc(doc(db('carla'), 'cursos/programacion/aprobadas/carla')));
+  await assertFails(getDoc(doc(db('beto'), 'cursos/programacion/aprobadas/carla')));
+  await assertFails(getDoc(doc(db(null), 'cursos/programacion/aprobadas/carla')));
+});
+test('la aprobación de una parte no sirve para otra parte', async () => {
+  const [a, b] = CON_PRACTICA.programacion;
+  await aprobarEnServidor('carla', 'programacion', [a]);
+  await assertFails(setDoc(doc(db('carla'), RUTA('carla')), primero(b)));
 });

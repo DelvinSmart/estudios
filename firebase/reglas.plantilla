@@ -7,6 +7,7 @@ rules_version = '2';
 //   - cuentas con correo de Gmail VERIFICADO;
 //   - prender UN bombillo a la vez, de la lista oficial de ese curso, con la hora del servidor,
 //     y al menos __ESPERA__ segundos después del anterior;
+//   - en las partes con práctica, solo si el servidor ya la aprobó (respuestas privadas);
 //   - nunca borrar, cambiar ni adelantar fechas;
 //   - emitir el certificado solo si el servidor ya ve TODAS las partes de ese curso.
 service cloud.firestore {
@@ -20,6 +21,13 @@ service cloud.firestore {
       return request.auth != null
         && request.auth.token.email_verified == true
         && request.auth.token.email.lower().matches('^[^@]+@gmail[.]com$');
+    }
+    // Las partes con práctica solo se prenden si el SERVIDOR aprobó su práctica
+    // (la función corregirPractica escribe en cursos/{curso}/aprobadas/{uid}; el navegador no puede).
+    function aprobadaPorElServidor(curso, uid, parte) {
+      return !(parte in conPractica(curso))
+        || (exists(/databases/$(database)/documents/cursos/$(curso)/aprobadas/$(uid))
+            && parte in get(/databases/$(database)/documents/cursos/$(curso)/aprobadas/$(uid)).data.partes);
     }
     function progresoDe(curso, uid) {
       return get(/databases/$(database)/documents/cursos/$(curso)/progreso/$(uid)).data;
@@ -38,7 +46,8 @@ service cloud.firestore {
         && request.resource.data.partes.keys().hasOnly([request.resource.data.ultimaParte])
         && request.resource.data.partes[request.resource.data.ultimaParte] == request.time
         && request.resource.data.inicio == request.time
-        && request.resource.data.ultimo == request.time;
+        && request.resource.data.ultimo == request.time
+        && aprobadaPorElServidor(curso, uid, request.resource.data.ultimaParte);
 
       // Cada bombillo siguiente: uno solo, nuevo, de la lista, y no antes de la espera
       allow update: if verificado() && request.auth.uid == uid
@@ -51,9 +60,17 @@ service cloud.firestore {
         && request.resource.data.ultimaParte in partes(curso)
         && request.resource.data.partes.diff(resource.data.partes).addedKeys() == [request.resource.data.ultimaParte].toSet()
         && request.resource.data.partes.diff(resource.data.partes).affectedKeys() == [request.resource.data.ultimaParte].toSet()
-        && request.resource.data.partes[request.resource.data.ultimaParte] == request.time;
+        && request.resource.data.partes[request.resource.data.ultimaParte] == request.time
+        && aprobadaPorElServidor(curso, uid, request.resource.data.ultimaParte);
 
       allow delete: if false;
+    }
+
+    // ---------- cursos/{curso}/aprobadas/{uid}: las prácticas que aprobó el servidor ----------
+    // Solo la escribe la función corregirPractica (que corrige con las respuestas privadas).
+    match /cursos/{curso}/aprobadas/{uid} {
+      allow read: if verificado() && request.auth.uid == uid;
+      allow write: if false;
     }
 
     // ---------- cursos/{curso}/emitidos/{uid}: qué código tiene cada persona en ese curso (máximo uno) ----------

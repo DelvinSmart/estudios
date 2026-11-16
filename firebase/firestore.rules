@@ -7,6 +7,7 @@ rules_version = '2';
 //   - cuentas con correo de Gmail VERIFICADO;
 //   - prender UN bombillo a la vez, de la lista oficial de ese curso, con la hora del servidor,
 //     y al menos 60 segundos después del anterior;
+//   - en las partes con práctica, solo si el servidor ya la aprobó (respuestas privadas);
 //   - nunca borrar, cambiar ni adelantar fechas;
 //   - emitir el certificado solo si el servidor ya ve TODAS las partes de ese curso.
 service cloud.firestore {
@@ -240,7 +241,8 @@ service cloud.firestore {
         '21:LECCION.md:5',
         '21:LECCION.md:6',
         '21:LECCION.md:7',
-        '21:LECCION.md:8'
+        '21:LECCION.md:8',
+        '21:LECCION.md:9'
       ] : (curso == 'python' ? [
         '36:LECCION.md:1',
         '36:LECCION.md:2',
@@ -397,7 +399,299 @@ service cloud.firestore {
         '29:LECCION.md:10'
       ] : [])))));
     }
-    function total(curso) { return (curso == 'programacion' ? 226 : (curso == 'python' ? 39 : (curso == 'seguridad' ? 26 : (curso == 'ia' ? 29 : (curso == 'agentes' ? 56 : -1))))); }
+    function total(curso) { return (curso == 'programacion' ? 227 : (curso == 'python' ? 39 : (curso == 'seguridad' ? 26 : (curso == 'ia' ? 29 : (curso == 'agentes' ? 56 : -1))))); }
+    function conPractica(curso) {
+      return (curso == 'programacion' ? [
+        '10:CLASE-GUIADA.md:1',
+        '10:CLASE-GUIADA.md:2',
+        '10:CLASE-GUIADA.md:3',
+        '10:CLASE-GUIADA.md:4',
+        '10:CLASE-GUIADA.md:5',
+        '10:CLASE-GUIADA.md:6',
+        '10:CLASE-GUIADA.md:7',
+        '10:CLASE-GUIADA.md:8',
+        '10:CLASE-GUIADA.md:9',
+        '10:CLASE-GUIADA.md:10',
+        '11:CLASE-GUIADA.md:1',
+        '11:CLASE-GUIADA.md:2',
+        '11:CLASE-GUIADA.md:3',
+        '11:CLASE-GUIADA.md:4',
+        '11:CLASE-GUIADA.md:5',
+        '11:CLASE-GUIADA.md:6',
+        '11:CLASE-GUIADA.md:7',
+        '11:CLASE-GUIADA.md:8',
+        '11:CLASE-GUIADA.md:9',
+        '11:CLASE-GUIADA.md:10',
+        '11:CLASE-GUIADA.md:11',
+        '11:CLASE-GUIADA.md:12',
+        '11:CLASE-GUIADA.md:13',
+        '11:CLASE-GUIADA.md:14',
+        '11:CLASE-GUIADA.md:15',
+        '12:CLASE-GUIADA.md:1',
+        '12:CLASE-GUIADA.md:2',
+        '12:CLASE-GUIADA.md:3',
+        '12:CLASE-GUIADA.md:4',
+        '12:CLASE-GUIADA.md:5',
+        '12:CLASE-GUIADA.md:6',
+        '12:CLASE-GUIADA.md:7',
+        '12:CLASE-GUIADA.md:8',
+        '12:CLASE-GUIADA.md:9',
+        '12:CLASE-GUIADA.md:10',
+        '12:CLASE-GUIADA.md:11',
+        '12:CLASE-GUIADA.md:12',
+        '13:CLASE-GUIADA.md:1',
+        '13:CLASE-GUIADA.md:2',
+        '13:CLASE-GUIADA.md:3',
+        '13:CLASE-GUIADA.md:4',
+        '13:CLASE-GUIADA.md:5',
+        '13:CLASE-GUIADA.md:6',
+        '13:CLASE-GUIADA.md:7',
+        '13:CLASE-GUIADA.md:8',
+        '13:CLASE-GUIADA.md:9',
+        '13:CLASE-GUIADA.md:10',
+        '13:CLASE-GUIADA.md:11',
+        '13:CLASE-GUIADA.md:12',
+        '13:CLASE-GUIADA.md:13',
+        '14:CLASE-GUIADA.md:1',
+        '14:CLASE-GUIADA.md:2',
+        '14:CLASE-GUIADA.md:3',
+        '14:CLASE-GUIADA.md:4',
+        '14:CLASE-GUIADA.md:5',
+        '14:CLASE-GUIADA.md:6',
+        '14:CLASE-GUIADA.md:7',
+        '14:CLASE-GUIADA.md:8',
+        '14:CLASE-GUIADA.md:9',
+        '14:CLASE-GUIADA.md:10',
+        '14:CLASE-GUIADA.md:11',
+        '14:CLASE-GUIADA.md:12',
+        '14:CLASE-GUIADA.md:13',
+        '15:CLASE-GUIADA.md:1',
+        '15:CLASE-GUIADA.md:2',
+        '15:CLASE-GUIADA.md:3',
+        '15:CLASE-GUIADA.md:4',
+        '15:CLASE-GUIADA.md:5',
+        '15:CLASE-GUIADA.md:6',
+        '15:CLASE-GUIADA.md:7',
+        '15:CLASE-GUIADA.md:8',
+        '16:CLASE-GUIADA.md:1',
+        '16:CLASE-GUIADA.md:2',
+        '16:CLASE-GUIADA.md:3',
+        '16:CLASE-GUIADA.md:4',
+        '16:CLASE-GUIADA.md:5',
+        '16:CLASE-GUIADA.md:6',
+        '16:CLASE-GUIADA.md:7',
+        '16:CLASE-GUIADA.md:8',
+        '16:CLASE-GUIADA.md:9',
+        '16:CLASE-GUIADA.md:10',
+        '17:CLASE-GUIADA.md:1',
+        '17:CLASE-GUIADA.md:2',
+        '17:CLASE-GUIADA.md:3',
+        '17:CLASE-GUIADA.md:4',
+        '17:CLASE-GUIADA.md:5',
+        '17:CLASE-GUIADA.md:6',
+        '17:CLASE-GUIADA.md:7',
+        '17:CLASE-GUIADA.md:8',
+        '17:CLASE-GUIADA.md:9',
+        '17:CLASE-GUIADA.md:10',
+        '18:CLASE-GUIADA.md:1',
+        '18:CLASE-GUIADA.md:2',
+        '18:CLASE-GUIADA.md:3',
+        '18:CLASE-GUIADA.md:4',
+        '18:CLASE-GUIADA.md:5',
+        '18:CLASE-GUIADA.md:6',
+        '18:CLASE-GUIADA.md:7',
+        '18:CLASE-GUIADA.md:8',
+        '18:CLASE-GUIADA.md:9',
+        '18:CLASE-GUIADA.md:10',
+        '20:CLASE-GUIADA.md:1',
+        '20:CLASE-GUIADA.md:2',
+        '20:CLASE-GUIADA.md:3',
+        '20:CLASE-GUIADA.md:4',
+        '20:CLASE-GUIADA.md:5',
+        '20:CLASE-GUIADA.md:6',
+        '20:CLASE-GUIADA.md:7',
+        '20:CLASE-GUIADA.md:8',
+        '20:CLASE-GUIADA.md:9',
+        '20:CLASE-GUIADA.md:10',
+        '20:CLASE-GUIADA.md:11',
+        '20:CLASE-GUIADA.md:12',
+        '21:LECCION.md:1',
+        '21:LECCION.md:2',
+        '21:LECCION.md:3',
+        '21:LECCION.md:4',
+        '21:LECCION.md:5',
+        '21:LECCION.md:6',
+        '21:LECCION.md:7',
+        '21:LECCION.md:8',
+        '01:CLASE-GUIADA.md:1',
+        '01:CLASE-GUIADA.md:2',
+        '01:CLASE-GUIADA.md:3',
+        '01:CLASE-GUIADA.md:4',
+        '01:CLASE-GUIADA.md:5',
+        '02:CLASE-GUIADA.md:1',
+        '02:CLASE-GUIADA.md:2',
+        '02:CLASE-GUIADA.md:3',
+        '02:CLASE-GUIADA.md:4',
+        '02:CLASE-GUIADA.md:5',
+        '02:CLASE-GUIADA.md:6',
+        '02:CLASE-GUIADA.md:7',
+        '02:CLASE-GUIADA.md:8',
+        '02:CLASE-GUIADA.md:9',
+        '02:CLASE-GUIADA.md:10',
+        '03:CLASE-GUIADA.md:1',
+        '03:CLASE-GUIADA.md:2',
+        '03:CLASE-GUIADA.md:3',
+        '03:CLASE-GUIADA.md:4',
+        '03:CLASE-GUIADA.md:5',
+        '03:CLASE-GUIADA.md:6',
+        '03:CLASE-GUIADA.md:7',
+        '03:CLASE-GUIADA.md:8',
+        '03:CLASE-GUIADA.md:9',
+        '04:CLASE-GUIADA.md:1',
+        '04:CLASE-GUIADA.md:2',
+        '04:CLASE-GUIADA.md:3',
+        '04:CLASE-GUIADA.md:4',
+        '04:CLASE-GUIADA.md:5',
+        '04:CLASE-GUIADA.md:6',
+        '04:CLASE-GUIADA.md:7',
+        '04:CLASE-GUIADA.md:8',
+        '04:CLASE-GUIADA.md:9',
+        '04:CLASE-GUIADA.md:11',
+        '05:CLASE-GUIADA.md:1',
+        '05:CLASE-GUIADA.md:2',
+        '05:CLASE-GUIADA.md:3',
+        '05:CLASE-GUIADA.md:4',
+        '05:CLASE-GUIADA.md:5',
+        '05:CLASE-GUIADA.md:6',
+        '05:CLASE-GUIADA.md:7',
+        '06:CLASE-GUIADA.md:1',
+        '06:CLASE-GUIADA.md:2',
+        '06:CLASE-GUIADA.md:3',
+        '06:CLASE-GUIADA.md:4',
+        '06:CLASE-GUIADA.md:5',
+        '06:CLASE-GUIADA.md:6',
+        '06:CLASE-GUIADA.md:7',
+        '06:CLASE-GUIADA.md:8',
+        '06:CLASE-GUIADA.md:9',
+        '06:CLASE-GUIADA.md:10',
+        '07:CLASE-GUIADA.md:1',
+        '07:CLASE-GUIADA.md:2',
+        '07:CLASE-GUIADA.md:3',
+        '07:CLASE-GUIADA.md:4',
+        '07:CLASE-GUIADA.md:5',
+        '07:CLASE-GUIADA.md:6',
+        '07:CLASE-GUIADA.md:7',
+        '07:CLASE-GUIADA.md:8',
+        '08:CLASE-GUIADA.md:1',
+        '08:CLASE-GUIADA.md:2',
+        '08:CLASE-GUIADA.md:3',
+        '08:CLASE-GUIADA.md:4',
+        '08:CLASE-GUIADA.md:5',
+        '08:CLASE-GUIADA.md:6',
+        '08:CLASE-GUIADA.md:7',
+        '08:CLASE-GUIADA.md:8',
+        '09:CLASE-GUIADA.md:1',
+        '09:CLASE-GUIADA.md:2',
+        '09:CLASE-GUIADA.md:3',
+        '09:CLASE-GUIADA.md:4',
+        '09:CLASE-GUIADA.md:5',
+        '09:CLASE-GUIADA.md:6',
+        '09:CLASE-GUIADA.md:7',
+        '09:CLASE-GUIADA.md:8',
+        '09:CLASE-GUIADA.md:9',
+        '09:CLASE-GUIADA.md:10',
+        '09:CLASE-GUIADA.md:11'
+      ] : (curso == 'python' ? [
+        '36:LECCION.md:1',
+        '36:LECCION.md:2',
+        '36:LECCION.md:3',
+        '36:LECCION.md:4',
+        '37:LECCION.md:1',
+        '37:LECCION.md:2',
+        '37:LECCION.md:3',
+        '37:LECCION.md:4',
+        '38:LECCION.md:1',
+        '38:LECCION.md:2',
+        '38:LECCION.md:3',
+        '38:LECCION.md:4',
+        '39:LECCION.md:1',
+        '39:LECCION.md:2',
+        '39:LECCION.md:3',
+        '39:LECCION.md:4',
+        '40:LECCION.md:1',
+        '40:LECCION.md:2',
+        '40:LECCION.md:3',
+        '40:LECCION.md:4',
+        '41:LECCION.md:1',
+        '41:LECCION.md:2',
+        '41:LECCION.md:3',
+        '41:LECCION.md:4',
+        '42:LECCION.md:1',
+        '42:LECCION.md:2',
+        '42:LECCION.md:3',
+        '43:LECCION.md:1',
+        '43:LECCION.md:2',
+        '43:LECCION.md:3',
+        '43:LECCION.md:4'
+      ] : (curso == 'seguridad' ? [
+        '22:LECCION.md:1',
+        '22:LECCION.md:2',
+        '22:LECCION.md:3',
+        '22:LECCION.md:4',
+        '22:LECCION.md:5',
+        '22:LECCION.md:6',
+        '22:LECCION.md:7',
+        '23:LECCION.md:1',
+        '23:LECCION.md:2',
+        '23:LECCION.md:3',
+        '23:LECCION.md:4',
+        '23:LECCION.md:5',
+        '23:LECCION.md:6',
+        '23:LECCION.md:7',
+        '23:LECCION.md:8',
+        '24:LECCION.md:1',
+        '24:LECCION.md:2',
+        '24:LECCION.md:3',
+        '24:LECCION.md:4',
+        '24:LECCION.md:5',
+        '24:LECCION.md:6',
+        '24:LECCION.md:7',
+        '24:LECCION.md:8'
+      ] : (curso == 'ia' ? [
+        '30:LECCION.md:1',
+        '30:LECCION.md:2',
+        '30:LECCION.md:3',
+        '30:LECCION.md:4',
+        '31:LECCION.md:1',
+        '31:LECCION.md:2',
+        '31:LECCION.md:3',
+        '31:LECCION.md:4',
+        '32:LECCION.md:1',
+        '32:LECCION.md:2',
+        '32:LECCION.md:3',
+        '32:LECCION.md:4',
+        '33:LECCION.md:1',
+        '33:LECCION.md:2',
+        '33:LECCION.md:3',
+        '34:LECCION.md:1',
+        '34:LECCION.md:2',
+        '34:LECCION.md:3',
+        '34:LECCION.md:4',
+        '34:LECCION.md:5',
+        '35:LECCION.md:1',
+        '35:LECCION.md:2',
+        '35:LECCION.md:3'
+      ] : (curso == 'agentes' ? [
+        '19:LECCION.md:5',
+        '19:LECCION.md:11',
+        '25:LECCION.md:6',
+        '26:LECCION.md:7',
+        '27:LECCION.md:8',
+        '28:LECCION.md:7',
+        '28:LECCION.md:14',
+        '29:LECCION.md:7'
+      ] : [])))));
+    }
     function prefijo(curso) { return (curso == 'programacion' ? 'ME' : (curso == 'python' ? 'PY' : (curso == 'seguridad' ? 'SE' : (curso == 'ia' ? 'IA' : (curso == 'agentes' ? 'AG' : '??'))))); }
     function espera() { return duration.value(60, 's'); }
 
@@ -406,6 +700,13 @@ service cloud.firestore {
       return request.auth != null
         && request.auth.token.email_verified == true
         && request.auth.token.email.lower().matches('^[^@]+@gmail[.]com$');
+    }
+    // Las partes con práctica solo se prenden si el SERVIDOR aprobó su práctica
+    // (la función corregirPractica escribe en cursos/{curso}/aprobadas/{uid}; el navegador no puede).
+    function aprobadaPorElServidor(curso, uid, parte) {
+      return !(parte in conPractica(curso))
+        || (exists(/databases/$(database)/documents/cursos/$(curso)/aprobadas/$(uid))
+            && parte in get(/databases/$(database)/documents/cursos/$(curso)/aprobadas/$(uid)).data.partes);
     }
     function progresoDe(curso, uid) {
       return get(/databases/$(database)/documents/cursos/$(curso)/progreso/$(uid)).data;
@@ -424,7 +725,8 @@ service cloud.firestore {
         && request.resource.data.partes.keys().hasOnly([request.resource.data.ultimaParte])
         && request.resource.data.partes[request.resource.data.ultimaParte] == request.time
         && request.resource.data.inicio == request.time
-        && request.resource.data.ultimo == request.time;
+        && request.resource.data.ultimo == request.time
+        && aprobadaPorElServidor(curso, uid, request.resource.data.ultimaParte);
 
       // Cada bombillo siguiente: uno solo, nuevo, de la lista, y no antes de la espera
       allow update: if verificado() && request.auth.uid == uid
@@ -437,9 +739,17 @@ service cloud.firestore {
         && request.resource.data.ultimaParte in partes(curso)
         && request.resource.data.partes.diff(resource.data.partes).addedKeys() == [request.resource.data.ultimaParte].toSet()
         && request.resource.data.partes.diff(resource.data.partes).affectedKeys() == [request.resource.data.ultimaParte].toSet()
-        && request.resource.data.partes[request.resource.data.ultimaParte] == request.time;
+        && request.resource.data.partes[request.resource.data.ultimaParte] == request.time
+        && aprobadaPorElServidor(curso, uid, request.resource.data.ultimaParte);
 
       allow delete: if false;
+    }
+
+    // ---------- cursos/{curso}/aprobadas/{uid}: las prácticas que aprobó el servidor ----------
+    // Solo la escribe la función corregirPractica (que corrige con las respuestas privadas).
+    match /cursos/{curso}/aprobadas/{uid} {
+      allow read: if verificado() && request.auth.uid == uid;
+      allow write: if false;
     }
 
     // ---------- cursos/{curso}/emitidos/{uid}: qué código tiene cada persona en ese curso (máximo uno) ----------

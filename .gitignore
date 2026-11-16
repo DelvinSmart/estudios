@@ -24,3 +24,8 @@ service-account*.json
 *.mp4
 *.mov
 *.log
+
+# Las respuestas de las prácticas: PRIVADAS (solo viajan dentro de la función de Firebase)
+firebase/funciones/respuestas.json
+# Secretos falsos para el emulador de funciones
+.secret.local

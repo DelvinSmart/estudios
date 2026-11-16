@@ -116,14 +116,33 @@ Reglas:
 2. Si un chat en la web no puede escribir archivos, **escríbele el
    PROGRESO.md completo y actualizado** en un bloque para copiar, y dile que
    lo reemplace en GitHub (botón del lápiz, pegar, "Commit changes").
-3. **Guarda en la nube.** Esta carpeta es un repositorio privado
+3. **Guarda en la nube.** Esta carpeta es un repositorio **público**
    (`github.com/DelvinSmart/estudios`). Dentro de **esta** carpeta, y solo
    aquí, sube el avance sin preguntar:
    `git add -A && git commit -m "Progreso: clase NN" && git push`.
    La carpeta de la app (`copiloto-driver`) tiene sus propias reglas y no se
    toca.
 
-## 8. Prohibido
+## 8. Las prácticas y sus respuestas
+
+Las respuestas de las prácticas **no están en los `.md`**: están en un archivo
+privado (`firebase/funciones/respuestas.json`, fuera de GitHub) y las corrige
+el servidor. Al enseñar, corrige tú con lo que explica la lección, o dile que
+haga la práctica en la página.
+
+**Si escribes o cambias una práctica** (en cualquier clase):
+
+1. Escríbela en el `.md` con su respuesta, como siempre:
+   `vf :: enunciado :: V :: explicación` o
+   `elige :: pregunta :: a :: *b :: c :: → explicación`.
+2. Corre `node firebase/separar-respuestas.mjs`. Saca las respuestas del `.md`
+   y las guarda en el archivo privado.
+3. Corre `node firebase/separar-respuestas.mjs --revisar`: tiene que decir
+   "✓ todo en orden". **Nunca** subas a GitHub un `.md` con respuestas a la vista.
+4. Corre `node firebase/generar-reglas.mjs` y las pruebas (`firebase/LEEME.md`).
+5. Sube la función y las reglas a Firebase **antes** de publicar el sitio.
+
+## 9. Prohibido
 
 - Escribirle la solución antes de que lo intente.
 - Pegar la lección entera de una vez.
@@ -132,3 +151,4 @@ Reglas:
 - Inventar cómo funciona algo de la app sin abrir el archivo.
 - Hacer cambios en la app de producción durante una clase.
 - Terminar una clase sin actualizar `PROGRESO.md`.
+- Subir a GitHub una práctica con la respuesta a la vista, o el archivo `respuestas.json`.

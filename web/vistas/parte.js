@@ -127,9 +127,18 @@ export async function vistaParte(num, doc, cual) {
         if (ponerAviso) avisar(`💡 se prendió un bombillo <span class="tenue">· ☁ en ${r.segundos} s cuenta en la nube</span>`);
         return;
       }
+      // ¿Lo rechazó porque el servidor todavía no aprobó la práctica de esta parte?
+      if (hoja.querySelector('.practica') && !(await nube.parteAprobadaEnNube(curso, id).catch(() => true))) {
+        cajaNube.innerHTML = '☁ para que cuente en la nube, aprueba la práctica de esta parte con tu cuenta abierta (el servidor la corrige)';
+        return;
+      }
       cajaNube.innerHTML = '<button class="boton" type="button">☁ reintentar en la nube</button>';
       cajaNube.querySelector('button').addEventListener('click', () => subirANube(true));
     };
+    // Cuando el servidor aprueba la práctica de una parte que ya estaba prendida aquí, se sube sola a la nube.
+    hoja.addEventListener('practica-aprobada', (ev) => {
+      if (cuentaEnNube && ev.detail?.parteAprobada && estaEntendida(id)) subirANube(false);
+    });
     // Al abrir la parte: si está prendida aquí pero no en la nube, ofrecer contarla.
     (cuentaEnNube && hayDatosDeSesion() ? nube.usuario() : Promise.resolve(null)).then(async (quien) => {
       if (!nube.cuentaLista(quien) || !estaEntendida(id)) return;
