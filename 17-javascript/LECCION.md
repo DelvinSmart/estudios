@@ -14,6 +14,8 @@ Para practicar, crea `practica/app.js` y conéctalo al final del `body` de `prac
 
 > 🌎 **En la vida real:** una variable es un frasco con etiqueta. `const` es un frasco **sellado** (el contenido no cambia); `let` es un frasco con tapa de rosca (lo puedes vaciar y volver a llenar).
 
+> 🌎 **Otro ejemplo:** Es como el marcador de un partido: el nombre del equipo no cambia (`const`), los goles sí (`let`), y el tablero que suma un gol es la función.
+
 ```js
 const app = 'Uber';          // texto: no cambia
 let viajes = 0;              // número: va a cambiar
@@ -50,6 +52,8 @@ const restar = (a, b) => a - b;   // "función flecha": lo mismo, más corto
 > - `filter` = separar solo los de Uber.
 > - `find` = buscar **el primero** que cumpla algo.
 
+> 🌎 **Otro ejemplo:** Como una lista de pasajeros: revisarlos uno por uno, hacer las tarjetas de embarque, separar los de primera clase, buscar a uno por nombre y contar el equipaje.
+
 ```js
 const viajes = [
   { app: 'Uber', valor: 18 },
@@ -83,6 +87,8 @@ const total = valores.reduce((suma, x) => suma + x, 0); // 55
 
 > 🌎 **En la vida real:** es una carta modelo con huecos: "Querido ____, tu pedido número ____ llegó". Llenas los huecos y listo.
 
+> 🌎 **Otro ejemplo:** Como un mensaje automático de WhatsApp Business: "Hola {nombre}, tu turno es el {día}".
+
 ```js
 const nombre = 'Delvin';
 const viajes = 12;
@@ -109,6 +115,8 @@ const tarjeta = `
 
 > 🌎 **En la vida real:** es pedir algo en una ferretería: "deme **el** martillo rojo" (uno solo) o "deme **todos** los tornillos de 3 cm" (varios). Primero hay que encontrar la cosa para poder usarla.
 
+> 🌎 **Otro ejemplo:** Como buscar en el teléfono "el primer contacto que se llama Ana" o "todos los contactos del trabajo".
+
 ```js
 const titulo = document.querySelector('h1');               // el PRIMER h1
 const boton = document.querySelector('#boton-tema');       // por id
@@ -126,6 +134,8 @@ const tarjetas = document.querySelectorAll('.tarjeta');    // TODAS las .tarjeta
 ## 5. Cambiar la página
 
 > 🌎 **En la vida real:** es el cartel de precios de una gasolinera con números que se cambian a mano: no construyes un cartel nuevo, cambias los números que ya están.
+
+> 🌎 **Otro ejemplo:** Es como editar un documento compartido en vivo: cambias una palabra y todos la ven al instante.
 
 ```js
 const titulo = document.querySelector('h1');
@@ -162,6 +172,8 @@ lista.appendChild(li);
 ## 6. Eventos: reaccionar a lo que hace el usuario
 
 > 🌎 **En la vida real:** es un timbre. Instalas el timbre y dices "**cuando** alguien lo toque, abre la puerta". No estás mirando la puerta todo el tiempo: el timbre te avisa.
+
+> 🌎 **Otro ejemplo:** Como el sensor de una puerta automática: espera a que alguien se acerque, y entonces se abre.
 
 ```js
 const boton = document.querySelector('#boton-tema');
@@ -205,6 +217,8 @@ formulario.addEventListener('submit', (evento) => {
 
 > 🌎 **En la vida real:** pides una pizza por teléfono. No te quedas parado mirando la puerta: sigues con tus cosas, y **cuando llega**, la recibes. Pedir algo por internet funciona igual: tarda, y el programa no se congela esperando.
 
+> 🌎 **Otro ejemplo:** Como mandar un mensaje y seguir con tu día: cuando llega la respuesta, la lees.
+
 ```js
 async function cargarEstudio() {
   const respuesta = await fetch('estudios/pastoras.json');   // pide el archivo
@@ -246,6 +260,8 @@ async function cargarEstudio() {
 
 > 🌎 **En la vida real:** es un cuaderno que el navegador guarda en un cajón **solo para esta página**. Si cierras y vuelves mañana, el cuaderno sigue ahí. Pero es de **este** navegador: en otro celular, el cuaderno está vacío.
 
+> 🌎 **Otro ejemplo:** Como la memoria de tu control remoto: recuerda el último canal, pero solo en ese televisor.
+
 ```js
 localStorage.setItem('mapa-tema', 'light');           // guardar
 const tema = localStorage.getItem('mapa-tema');       // leer ('light', o null si no hay)
@@ -265,6 +281,8 @@ const entendido = JSON.parse(localStorage.getItem('entendido') || '{}');
 ## 9. Módulos: un archivo para cada trabajo
 
 > 🌎 **En la vida real:** en un restaurante no cocina todo una sola persona. Hay quien corta, quien cocina, quien sirve. Cada uno hace lo suyo y se **pasan** las cosas. Los módulos son los cocineros: cada archivo hace un trabajo y **exporta** lo que los demás necesitan.
+
+> 🌎 **Otro ejemplo:** Como un equipo de fútbol: arquero, defensores, mediocampistas y delanteros, cada uno en su puesto, pasándose la pelota.
 
 ```js
 // web/guardado.js
@@ -298,6 +316,8 @@ Este mapa está partido así (es la arquitectura del Tema 10 en pequeño):
 ## 10. Cuando algo falla: la consola
 
 > 🌎 **En la vida real:** el tablero del carro prende una luz cuando algo anda mal. La consola del navegador es ese tablero: si algo se rompe, ahí aparece la luz roja con el motivo.
+
+> 🌎 **Otro ejemplo:** Como el mensaje de un cajero automático: "tarjeta vencida" o "saldo insuficiente" te dice exactamente qué pasó.
 
 Abre la consola: clic derecho → **Inspeccionar** → **Consola** (o `Cmd + Option + J`).
 
@@ -384,6 +404,8 @@ boton.addEventListener('click', () => {
 </details>
 
 ## Para la entrevista
+
+> 🌎 **En la vida real:** Explicar JavaScript es como explicar la electricidad de una casa: qué se enciende cuando tocas qué.
 
 > 🎤 **Entrevista:** en voz alta, con tus palabras.
 

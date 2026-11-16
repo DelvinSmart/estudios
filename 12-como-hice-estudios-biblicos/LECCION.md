@@ -14,6 +14,8 @@ Los ejemplos están simplificados para aprender. El código real puede verse un 
 >
 > La estructura tema → puntos → subpuntos → bloques es como un **libro**: el libro, sus capítulos, las secciones de cada capítulo y, dentro, los párrafos, las fotos y las citas.
 
+> 🌎 **Otro ejemplo:** Es como una plantilla de invitación de cumpleaños: el diseño es uno solo, y para cada niño solo cambias el nombre, la fecha y el lugar.
+
 **Qué es:** una página que muestra estudios bíblicos como un **mapa**. El estudio es el **tema** (por ejemplo, "¿Lenguas extrañas?"). El tema tiene **puntos** (1, 2, 3…), cada punto tiene **subpuntos** (1.1, 1.2…) y cada subpunto tiene **bloques**: texto, pasaje bíblico, subtítulo, imagen o video.
 
 **Lo más importante de toda la arquitectura:**
@@ -39,6 +41,8 @@ Los ejemplos están simplificados para aprender. El código real puede verse un 
 >
 > **Sin frameworks**: para un viaje corto al mercado vas en bicicleta, no alquilas un camión. La página es pequeña; un framework sería el camión.
 
+> 🌎 **Otro ejemplo:** En un carro: la carrocería (HTML), la pintura y el tapizado (CSS), y el motor con la electricidad (JavaScript).
+
 Este proyecto **no usa frameworks** (ni React, ni Vue). Solo las tres piezas básicas de la web:
 
 | Pieza | Qué hace | Comparación |
@@ -63,6 +67,8 @@ Este proyecto **no usa frameworks** (ni React, ni Vue). Solo las tres piezas bá
 > - `css/` = la **decoración** de la mesa.
 > - `js/` = los **cocineros**, cada uno con su tarea: uno corta, otro cocina, otro sirve.
 > - `scripts/` y `publicar.yml` = el **delivery** que lleva todo a la calle.
+
+> 🌎 **Otro ejemplo:** Como una caja de herramientas con compartimentos: los destornilladores en uno, las llaves en otro; sabes dónde está cada cosa sin revolver.
 
 Cada archivo tiene **una sola tarea**. Eso es lo contrario del "código espagueti", donde todo está mezclado.
 
@@ -118,6 +124,8 @@ que-dice-la-biblia/
 >
 > **Lo de los nombres viejos** (`temas` guarda los puntos): es como una calle que cambió de nombre, pero las cartas viejas siguen llegando con el nombre anterior. Para no perder esas cartas, el cartero sigue aceptando el nombre viejo, y alguien lo dejó anotado.
 
+> 🌎 **Otro ejemplo:** Como un formulario impreso con casilleros: "Nombre:", "Idioma:", y una lista de "Puntos" con sus renglones.
+
 **Qué es JSON:** un formato de texto para guardar datos con nombres. Llaves `{ }` para un objeto, corchetes `[ ]` para una lista.
 
 ```json
@@ -159,6 +167,8 @@ que-dice-la-biblia/
 
 > 🌎 **En la vida real:** además de la cadena de montaje: es como **preparar un café**. Primero hierves el agua (`ui.js`), después pones el café en el filtro (`estudios.js`), después tienes la taza lista (`efectos.js`) y recién ahí sirves (`mapa.js`). Si intentas servir antes de hervir el agua, no hay café. Por eso el orden de los `<script>` importa.
 
+> 🌎 **Otro ejemplo:** Como armar un sándwich: pan, manteca, jamón, queso, pan. Si pones el queso antes del pan, se te cae todo. El orden importa.
+
 Abre `estudio.html?e=lenguas-extranas`. Pasa esto, en orden:
 
 ```
@@ -192,6 +202,8 @@ estudio.html
 > 🌎 **En la vida real:** `bloqueHTML` es como la **máquina de un fotocopiador** que reconoce qué le diste: si es una hoja, la copia; si es una foto, la imprime en papel brillante; si es un video, pone un reproductor. Y la **misma** máquina se usa en la oficina (la página), en la imprenta (el PDF) y en el borrador (la vista previa). Por eso los tres salen idénticos.
 >
 > `esc()` es como poner un texto **entre comillas** en una carta, para que nadie confunda lo que alguien escribió con una orden. Si un título dice `<b>`, se muestra como texto, no como instrucción.
+
+> 🌎 **Otro ejemplo:** Es como un traductor que traduce igual en la reunión, en el contrato y en el correo: un solo traductor, tres lugares, el mismo resultado.
 
 En `js/estudios.js`, la función `bloqueHTML` mira el **tipo** de cada bloque y devuelve el HTML que le corresponde:
 
@@ -233,6 +245,8 @@ Por eso, lo que ves en la vista previa del panel es **exactamente** lo que sale 
 >
 > El **modo oscuro** es como tener la misma pintura en versión **para interior** y **para exterior**: mismo nombre, distinto brillo según la luz.
 
+> 🌎 **Otro ejemplo:** Es como los colores de un equipo de fútbol: "azul del club" se define una vez, y la camiseta, la bandera y el escudo lo usan por su nombre.
+
 **Qué es un token de color:** un **nombre** para un color, definido una sola vez. En vez de escribir `#7A3FA0` en veinte lugares, se escribe `var(--b2)`.
 
 En `css/styles.css`, arriba de todo:
@@ -271,6 +285,8 @@ Así, **un solo dato** ("morado") pinta todo ese punto, y el mismo nombre funcio
 
 > 🌎 **En la vida real:** es como un **telón de teatro**: el JavaScript es el **tramoyista** que decide **cuándo** subir el telón (cuando el actor aparece en escena, avisado por el `IntersectionObserver`, que es como el que mira por la cortina). El CSS es el **mecanismo** del telón: si sube rápido o lento, suave o de golpe. Y si alguien del público pidió "sin efectos", el telón ya está arriba desde el principio.
 
+> 🌎 **Otro ejemplo:** Como las luces de un escenario: el técnico decide cuándo se prenden; el reflector decide cómo se ve la luz.
+
 En `js/efectos.js` y al final de `css/styles.css`. Es el mismo efecto de la landing de Copiloto:
 
 ```css
@@ -294,6 +310,8 @@ En `js/efectos.js` y al final de `css/styles.css`. Es el mismo efecto de la land
 > 🌎 **En la vida real:** es como mandar un libro a una **imprenta automática**: tú entregas el manuscrito (guardas o haces `git push`), la imprenta arma el índice (`indice.json`), imprime una versión en PDF de cada capítulo y lo pone en la vidriera (GitHub Pages). En 1 o 2 minutos está a la venta.
 >
 > ¿Por qué hace falta el índice? Porque una página estática es como un **cartel pegado en la pared**: no puede ir a la bodega a mirar qué cajas hay. Alguien tiene que escribir la lista y pegarla en el cartel.
+
+> 🌎 **Otro ejemplo:** Como una revista que se imprime y se reparte sola cada vez que el editor entrega el material.
 
 La página vive en **GitHub Pages**, que es gratis. No hay servidor propio.
 
@@ -325,6 +343,8 @@ En 1 o 2 minutos, la página y los PDF están actualizados
 > La **ruta** `temas.0.puntos.1.titulo` es como una dirección: "edificio 0, piso 1, departamento título". Con un solo cartero que sabe leer direcciones, no hace falta un cartero por cada departamento.
 >
 > La **vista previa** con `postMessage` es como un **probador con espejo**: cada vez que cambias algo, alguien te pasa la prenda nueva por debajo de la cortina y el espejo te la muestra.
+
+> 🌎 **Otro ejemplo:** Es como un buzón en la calle con candado: cualquiera ve el buzón, pero solo quien tiene la llave lo abre y deja cartas.
 
 El panel (`panel.html`) **es una página pública**, pero sin la llave no puede guardar nada.
 
@@ -362,6 +382,8 @@ El panel (`panel.html`) **es una página pública**, pero sin la llave no puede 
 > - **`rangos()`**: es como decir "del 1 al 3" en vez de "1, 2 y 3" cuando dictas números de asientos.
 > - **Achicar fotos**: es como mandar una foto por WhatsApp en vez de por correo en tamaño original: se ve bien en el celular y no tarda nada en llegar.
 
+> 🌎 **Otro ejemplo:** Como el lector de códigos de barras del supermercado: reconoce el patrón y sabe qué producto es; y el escáner de documentos del celular, que convierte una foto en texto sin mandarla a ningún lado.
+
 **"Pegar desde la app Biblia"** (`panel-pegar.js`): lee el texto copiado y encuentra la referencia con una **expresión regular** (un patrón de texto):
 
 ```js
@@ -395,6 +417,8 @@ rangos(["1","2","3","5"]) // "1-3, 5"
 > - **`panel.js` de 500 líneas**: el cajón de los cubiertos que creció tanto que se dividió en varios.
 > - **Números mal leídos en fotos**: como un dictado con ruido: antes de usarlo, se relee y se corrige.
 > - **Derechos de autor**: como no fotocopiar un libro entero; se usa solo lo que el dueño permite.
+
+> 🌎 **Otro ejemplo:** Como el cuaderno de errores de un cocinero: "esta receta se quemaba a 200°, ahora va a 180°". Contar lo que salió mal enseña tanto como lo que salió bien.
 
 Explicar los errores también es parte de una entrevista.
 

@@ -16,6 +16,8 @@
 > - **Entender rápido**: un empleado nuevo sabe que los lácteos están en la heladera del fondo, como en todos los supermercados.
 > - **Trabajar en equipo**: el repositor de bebidas y el de limpieza trabajan al mismo tiempo sin chocar, porque cada uno tiene su pasillo.
 
+> 🌎 **Otro ejemplo:** Como una casa con la electricidad bien hecha: cada circuito tiene su llave en el tablero, y puedes arreglar la cocina sin dejar sin luz el dormitorio.
+
 **Comparación:** una casa se puede construir de cualquier forma, pero si los cables eléctricos pasan por dentro de las cañerías, el día que quieres cambiar una llave terminas rompiendo una pared. Una buena arquitectura pone cada cosa en su lugar, y así se puede cambiar una parte **sin romper las demás**.
 
 Una buena arquitectura logra:
@@ -35,6 +37,8 @@ Una buena arquitectura logra:
 > - **Datos** = la **despensa y los proveedores**: de dónde sale la carne y dónde se guarda.
 >
 > **La regla de oro**: la receta dice "200 g de carne", no "200 g de carne del frigorífico Pérez, de la cámara del fondo". Si cambias de proveedor o de heladera, la receta no se toca.
+
+> 🌎 **Otro ejemplo:** En un banco: la ventanilla (presentación), las reglas para dar un préstamo (negocio) y la bóveda con el sistema de cuentas (datos). Las reglas del préstamo no cambian si cambias la bóveda.
 
 Casi todas las arquitecturas dividen el código en estas **responsabilidades**:
 
@@ -57,6 +61,8 @@ Ya lo viste: la función `isImmutableEarningPlatform` (Tema 01) no sabe nada de 
 > - Afuera de todo, la calle: los edificios, la luz, internet.
 >
 > Lo de afuera cambia seguido (cambias el diseño de la ventanilla, de proveedor de internet). Lo del centro casi nunca.
+
+> 🌎 **Otro ejemplo:** Es como un país: la constitución (el centro) casi no cambia; las leyes, los ministerios y los edificios (afuera) cambian más seguido.
 
 La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos, uno dentro del otro:
 
@@ -83,6 +89,8 @@ La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos,
 > - **Adaptadores** = el **mostrador** y el **cajero**: traducen "quiero 12 pancitos" del cliente a "vender una docena" para la panadería.
 > - **Frameworks (afuera)** = el **horno** de marca X, la **caja registradora** de marca Y. Se pueden cambiar por otras marcas.
 
+> 🌎 **Otro ejemplo:** En un banco: qué es una cuenta (entidad), abrir una cuenta o transferir (caso de uso), el cajero y la app (adaptadores), y el sistema de computadoras (framework).
+
 | Capa | Qué contiene | Ejemplo en tu app |
 |---|---|---|
 | **Entidades** (centro) | Los objetos del negocio y sus reglas más básicas | Un `EarningRecord` (un ingreso), un `SanGroup` |
@@ -95,6 +103,8 @@ La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos,
 > 🌎 **En la vida real:** en un hospital, el cirujano (el centro) no necesita saber qué marca de bisturí compró la administración. Dice: "necesito **un bisturí** de tal tamaño" (la **interfaz**, el contrato). La administración (afuera) consigue uno que cumpla. Si cambian de proveedor, el cirujano opera igual.
 >
 > Eso es la **inversión de dependencias**: el de adentro dice **qué** necesita; el de afuera se encarga del **cómo**. Nunca al revés.
+
+> 🌎 **Otro ejemplo:** Es como un enchufe en la pared: el aparato depende del enchufe, pero el enchufe no sabe qué aparato le pusiste.
 
 > **El código solo puede depender hacia adentro.**
 
@@ -113,6 +123,8 @@ La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos,
 > - `events/` = el **altavoz**: "atención, ya pagó Juan".
 > - `notifications/` = los **avisos** que llegan al celular de cada socio.
 
+> 🌎 **Otro ejemplo:** Como un club deportivo bien organizado: reglamento, tesorería, archivo, secretaría, megáfono y avisos al celular de los socios.
+
 El San es la parte de tu app más parecida a Clean Architecture. Mira sus carpetas en `src/san/`:
 
 ```
@@ -130,6 +142,8 @@ src/san/
 > 🌎 **En la vida real:** es como el **contrato de un puesto de trabajo** de archivista: "tiene que saber guardar papeles, buscarlos por número y destruirlos". El contrato no dice si va a usar archivador metálico, cajas de cartón o una computadora. Dice **qué**, no **cómo**.
 >
 > `Promise` es como el **ticket de la tintorería**: te lo dan ahora, pero la ropa la recibes **después**. Guardar en internet tarda; mientras tanto, tienes el ticket.
+
+> 🌎 **Otro ejemplo:** Es como el tamaño estándar de una bombilla: cualquier marca que cumpla ese tamaño entra en tu lámpara.
 
 En `src/san/repository/SanRepository.ts`:
 
@@ -158,6 +172,8 @@ export interface SanRepository {
 > - **AsyncStorage** = el que guarda en un **cajón de tu casa** (el teléfono): para cuando no hay internet.
 > - **InMemory** = el que anota en un **papelito** que se tira al final del día: perfecto para practicar, porque cada mañana empieza limpio.
 
+> 🌎 **Otro ejemplo:** Como tres formas de guardar plata: en el banco, en una alcancía en casa, o en el bolsillo durante el día.
+
 En la misma carpeta hay **tres implementaciones**:
 
 | Archivo | Dónde guarda | Para qué |
@@ -169,6 +185,8 @@ En la misma carpeta hay **tres implementaciones**:
 ### La fábrica que elige
 
 > 🌎 **En la vida real:** es como la **agencia de empleo**: los de la tesorería solo dicen "mándenme un archivista". La agencia es la **única** que conoce a los tres y elige cuál manda. Si mañana aparece un archivista nuevo, solo se avisa a la agencia: la tesorería ni se entera.
+
+> 🌎 **Otro ejemplo:** Como la central de una cadena de pizzerías: llamas a un solo número y la central decide qué local te manda la pizza.
 
 En `SanRepositoryFactory.ts`:
 
@@ -200,6 +218,8 @@ export function createSanRepository(provider) {
 > - **Adaptadores de salida** = los **parlantes**: el televisor les manda el sonido (la base de datos, los avisos).
 >
 > **Clean vs. hexagonal**: son la misma idea con distinto dibujo, como "carro" y "auto". Clean divide más el centro; hexagonal pone el foco en los enchufes.
+
+> 🌎 **Otro ejemplo:** Como un cargador universal con puntas intercambiables: el cargador es el mismo, cambias la punta según el teléfono.
 
 La propuso **Alistair Cockburn** en 2005. Es la misma idea que Clean Architecture, dibujada distinto: el centro es un hexágono con las reglas, y alrededor se enchufan las cosas de afuera.
 
@@ -237,6 +257,8 @@ La propuso **Alistair Cockburn** en 2005. Es la misma idea que Clean Architectur
 >
 > En el San: tocas "Ya pagué" (le haces una seña al mozo) → el mozo va a la cocina ("registren el pago de Juan") → la cocina lo anota → el mozo vuelve y te muestra la cuenta actualizada.
 
+> 🌎 **Otro ejemplo:** En un hotel: el huésped (vista) le pide algo al recepcionista (controlador), que se lo pide a limpieza o cocina (modelo) y vuelve con la respuesta.
+
 Es una de las más antiguas (de los años 70) y muy usada en servidores web.
 
 | Parte | Qué hace | En tu San |
@@ -255,6 +277,8 @@ Es una de las más antiguas (de los años 70) y muy usada en servidores web.
 > - **Modelo de vista** = la **computadora del tablero**: lee los sensores, hace las cuentas ("con estos litros te quedan 120 km") y le pasa a la aguja el número ya listo. Cuando cambia el dato, la aguja se mueve sola.
 >
 > Eso es justo `useVehicleFuelLevel` (la computadora) y `VehicleFuelGauge` (la aguja).
+
+> 🌎 **Otro ejemplo:** Como un termómetro digital: el sensor mide (modelo), el chip convierte el número a grados (modelo de vista) y la pantalla solo muestra el número (vista).
 
 Es la más común en **apps móviles** (Android, iOS) y encaja bien con React.
 
@@ -277,6 +301,8 @@ Es la más común en **apps móviles** (Android, iOS) y encaja bien con React.
 >
 > **Lo que se puede mejorar**: `EarningsContext` es como un cocinero que, además de cocinar, va él mismo al proveedor a buscar la carne. Funciona, pero mezcla dos trabajos.
 
+> 🌎 **Otro ejemplo:** Como un barrio que creció con el tiempo: unas calles planificadas y otras que se fueron haciendo; funciona, y se sabe qué se podría ordenar.
+
 Tu app es una **mezcla**, como la mayoría de las apps reales:
 
 | Parte de la app | Se parece a |
@@ -294,6 +320,8 @@ Tu app es una **mezcla**, como la mayoría de las apps reales:
 ## 9. Cuidado: no exagerar
 
 > 🌎 **En la vida real:** para hacer un huevo frito no necesitas una cocina industrial con cinco ayudantes. Para un restaurante de 200 cubiertos, sí. Usa la organización que el trabajo pide: tu app pone "cocina industrial" en el San (complejo y compartido) y "sartén y listo" en lo simple.
+
+> 🌎 **Otro ejemplo:** Como usar un camión de mudanza para llevar una carta: funciona, pero es exagerado. Se elige el transporte según la carga.
 
 Más capas no siempre es mejor. En un proyecto chico, una Clean Architecture completa puede ser **demasiado**: muchos archivos para hacer algo simple. Se usa la arquitectura que el proyecto **necesita**. Tu app la usa completa donde vale la pena (el San, que es complejo y compartido entre personas) y más simple donde no.
 

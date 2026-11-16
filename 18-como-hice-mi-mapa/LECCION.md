@@ -10,6 +10,8 @@ Esta clase explica **la misma página donde la estás leyendo**: el mapa de estu
 
 > 🌎 **En la vida real:** si tienes la lista de compras en un papel **y** en el celular, tarde o temprano no coinciden: agregaste leche en una y no en la otra. Lo correcto es tener **una sola lista** y mirarla desde donde quieras.
 
+> 🌎 **Otro ejemplo:** Como el horario oficial de un colectivo: está en un solo lugar, y todas las paradas muestran ese mismo horario.
+
 Las clases ya existían como archivos `LECCION.md`. La página **no copia** ese texto: **lo lee** directamente de esos archivos cada vez que se abre. Así:
 
 - Si corriges una clase, la página se actualiza sola. No hay nada que cambiar dos veces.
@@ -25,6 +27,8 @@ A esto se le llama **una sola fuente de verdad** (*single source of truth*).
 ## 2. El mapa de archivos
 
 > 🌎 **En la vida real:** una caja de herramientas con compartimentos: los destornilladores en uno, las llaves en otro. Cada archivo de la página hace **un solo trabajo**.
+
+> 🌎 **Otro ejemplo:** Como los compartimentos de un botiquín: curitas en uno, remedios en otro, termómetro en otro.
 
 ```text
 Aprender/
@@ -51,6 +55,8 @@ Es la arquitectura del Tema 10 en pequeño: **los datos** (`cursos.js`) están s
 ## 3. Tres niveles de mapa, una sola página
 
 > 🌎 **En la vida real:** Google Maps. Ves el país; tocas una ciudad y ves sus barrios; tocas un barrio y ves sus calles. Es la misma app; lo que cambia es **cuánto te acercas**.
+
+> 🌎 **Otro ejemplo:** Como un libro con capítulos y secciones: abres el libro, eliges un capítulo y lees una sección, sin cambiar de libro.
 
 La página tiene cuatro pantallas, pero es **un solo archivo HTML**. Lo que cambia es lo que va después del `#` en la dirección:
 
@@ -176,6 +182,8 @@ escribe :: ¿Qué es un `boolean`? :: Un dato que solo puede ser true o false.
 
 > 🌎 **En la vida real:** por seguridad, un empleado no puede entrar a cualquier cajón de la oficina: necesita que alguien de recepción le alcance lo que pide. Cuando abres un archivo con doble clic, no hay recepción, y el navegador **no deja** que la página pida otros archivos.
 
+> 🌎 **Otro ejemplo:** Como una farmacia que no te deja entrar al depósito: pides en el mostrador y te traen el remedio.
+
 Si abres `index.html` con doble clic (la dirección empieza con `file://`), el navegador **bloquea** `fetch` por seguridad. La página no puede leer las lecciones y muestra un error que lo explica.
 
 La solución es abrirla con un **servidor**: un programa que entrega archivos cuando la página los pide. Para probar en tu Mac, Python ya trae uno:
@@ -202,6 +210,8 @@ En internet, el servidor es **GitHub Pages** (parte 9).
 ## 7. La letra de código y los colores
 
 > 🌎 **En la vida real:** el uniforme de un equipo: todos usan los mismos colores para que se sepa que son del mismo equipo. La página usa siempre las mismas variables para verse como un todo.
+
+> 🌎 **Otro ejemplo:** Es como la pantalla de una terminal: letras de máquina de escribir, fondo oscuro y un cursor que parpadea.
 
 **Los colores** son variables en `:root` (Tema 16, parte 6). El tema oscuro es el de siempre, como un editor de código; el claro solo cambia los valores:
 
@@ -236,6 +246,8 @@ En internet, el servidor es **GitHub Pages** (parte 9).
 
 > 🌎 **En la vida real:** en una biblioteca, el libro es de todos, pero **tu marcapáginas es tuyo**. Si otra persona lee el mismo libro, usa su propio marcapáginas: no mueve el tuyo. Cada parte que entiendes prende **un bombillo** en tu marcapáginas.
 
+> 🌎 **Otro ejemplo:** Es como una tarjeta de puntos de una cafetería: cada café sella un casillero, y es tuya; nadie más la llena por ti.
+
 Cada parte de cada clase es **un bombillo**. Se prende cuando, al terminar de leer la parte, tocas **"¿lo entendiste? márcalo"**. La pantalla **💡 Mi progreso** (`#/progreso`) muestra todos los bombillos, etapa por etapa. Los que se prendieron desde tu última visita **se encienden con una animación** al entrar.
 
 **¿Dónde se guardan?** En el `localStorage` **de tu navegador** (`web/guardado.js`, Tema 17 parte 8). Eso tiene tres consecuencias:
@@ -268,6 +280,8 @@ El id de cada bombillo usa **el nombre del archivo**, no su posición: `"15:LECC
 
 > 🌎 **En la vida real:** es pegar tu cartel en la pared de la calle en vez de tenerlo en tu cuarto. GitHub Pages es la pared: toma los archivos de tu repositorio y los muestra en internet.
 
+> 🌎 **Otro ejemplo:** Como subir una foto a un álbum público: cualquiera con el enlace la puede ver.
+
 Es igual que con **¿Qué dice la Biblia?** (Tema 12, parte 9): GitHub Pages sirve los archivos tal cual, sin servidor propio. Dos detalles propios de esta página:
 
 1. **El archivo `.nojekyll`.** Por defecto, GitHub Pages pasa los archivos por un programa llamado **Jekyll**, que convierte los `.md` en páginas HTML. Eso rompería el mapa, que necesita los `.md` **crudos**. Un archivo vacío llamado `.nojekyll` le dice "no toques nada".
@@ -285,6 +299,8 @@ Es igual que con **¿Qué dice la Biblia?** (Tema 12, parte 9): GitHub Pages sir
 ## 10. Cómo agregar una clase nueva
 
 > 🌎 **En la vida real:** agregar una parada a la ruta del autobús: pintas el cartel en la parada (la carpeta y su lección) y la agregas al mapa de la ruta (el catálogo).
+
+> 🌎 **Otro ejemplo:** Como agregar un plato nuevo al menú: escribes la receta (la clase) y lo agregas a la carta (el catálogo).
 
 1. Crea la carpeta con su lección: `20-mi-tema/LECCION.md`. Usa `#` para el título, `##` para cada parte y `###` para los subpuntos.
 2. Agrégala en `web/cursos.js`, en `CLASES`:
@@ -349,6 +365,8 @@ Es igual que con **¿Qué dice la Biblia?** (Tema 12, parte 9): GitHub Pages sir
 </details>
 
 ## Para la entrevista
+
+> 🌎 **En la vida real:** Contar cómo hiciste este mapa es como mostrar una herramienta que construiste para ti: qué problema resuelve y cómo funciona por dentro.
 
 > 🎤 **Entrevista:** cuéntalo como un proyecto tuyo, en voz alta.
 

@@ -8,6 +8,8 @@ CSS quiere decir *Cascading Style Sheets*: "hojas de estilo en cascada". Con CSS
 
 > 🌎 **En la vida real:** es una orden para el pintor: "**a todas las puertas** de la casa → **color** blanco, **manija** dorada". Primero dices **a quién**, después **qué cambiar** y **a qué valor**.
 
+> 🌎 **Otro ejemplo:** Como una orden en una fábrica de ropa: "a todas las camisas talle M: botones blancos, cuello azul".
+
 ```css
 h1 {
   color: #7ee787;
@@ -37,6 +39,8 @@ Se conecta al HTML con una línea en el `head`:
 
 > 🌎 **En la vida real:** en una empresa puedes dar una orden a **todos los empleados**, a **un equipo** (todos los de ventas) o a **una persona** con nombre y apellido. Los selectores son lo mismo.
 
+> 🌎 **Otro ejemplo:** Como los avisos de un colegio: "todos los alumnos" (etiqueta), "los de 5.º grado" (clase) o "el alumno Pedro Gómez" (id).
+
 ```css
 p { }                 /* todos los párrafos (por etiqueta) */
 .tarjeta { }          /* todos los que tienen class="tarjeta" (por clase) */
@@ -65,6 +69,8 @@ p { }                 /* todos los párrafos (por etiqueta) */
 
 > 🌎 **En la vida real:** tu mamá dice "en esta casa se cena a las 8". Tu papá dice "hoy, **tú**, cenas a las 7". Gana la orden más **específica** (la que habla de ti). Si dos órdenes son igual de específicas, gana **la última que se dijo**.
 
+> 🌎 **Otro ejemplo:** Como las reglas de un trabajo: la general de la empresa, la de tu área y la que te dio tu jefe para hoy. Gana la más específica; si empatan, la más reciente.
+
 ```css
 p { color: gray; }
 .aviso { color: orange; }
@@ -91,6 +97,8 @@ Las reglas para saber quién gana, en orden:
 ## 4. El modelo de caja
 
 > 🌎 **En la vida real:** un cuadro colgado en la pared tiene: la **foto** (el contenido), el **paspartú** blanco alrededor (el `padding`), el **marco** (el `border`) y el **espacio en la pared** hasta el próximo cuadro (el `margin`).
+
+> 🌎 **Otro ejemplo:** Como una caja de regalo: el regalo, el papel de seda (padding), la caja (border) y el espacio hasta la siguiente caja (margin).
 
 **Todo** en una página es una caja, aunque no lo parezca. Cada caja tiene cuatro capas:
 
@@ -124,6 +132,8 @@ Las reglas para saber quién gana, en orden:
 ## 5. Colores, letras y unidades
 
 > 🌎 **En la vida real:** en la tienda de pintura cada color tiene un código ("blanco hueso 0412"). Así, si se acaba la lata, compras otra exactamente igual. En CSS los colores también tienen código.
+
+> 🌎 **Otro ejemplo:** Como el código de un tinte de pelo ("7.1 rubio ceniza"), la letra de una invitación y la cinta métrica: color, letra y medidas exactas.
 
 **Colores:**
 
@@ -166,6 +176,8 @@ code { font-family: 'JetBrains Mono', monospace; }   /* letra de programador */
 
 > 🌎 **En la vida real:** en vez de decirle al pintor "verde #7ee787" en cada cuarto, le dices "pinta todo con **el verde de la casa**". Si mañana cambias de idea, cambias **qué es** "el verde de la casa" una sola vez, y toda la casa cambia.
 
+> 🌎 **Otro ejemplo:** Como el nombre de un contacto en el teléfono: si la persona cambia de número, lo actualizas una vez y todos tus mensajes le llegan.
+
 ```css
 :root {
   --fondo: #0b0f14;
@@ -201,6 +213,8 @@ Así se hace el **modo oscuro y claro** de esta página: las reglas usan solo va
 
 > 🌎 **En la vida real:** es una repisa. Pones los libros uno al lado del otro (fila) o uno encima del otro (columna), decides si van pegados a la izquierda, centrados o repartidos, y cuánto espacio dejar entre ellos.
 
+> 🌎 **Otro ejemplo:** Como gente en fila para una foto grupal: una al lado de la otra, centradas, con un pasito entre cada una.
+
 ```css
 .barra {
   display: flex;                    /* los hijos se ponen en fila */
@@ -235,6 +249,8 @@ Así se hace el **modo oscuro y claro** de esta página: las reglas usan solo va
 
 > 🌎 **En la vida real:** es un estacionamiento pintado: filas y columnas marcadas en el piso. Cada carro va en su lugar. Flexbox es una repisa (una dirección); grid es el estacionamiento (dos direcciones a la vez).
 
+> 🌎 **Otro ejemplo:** Como un tablero de ajedrez: filas y columnas fijas, y cada pieza en su casillero.
+
 ```css
 .lectura {
   display: grid;
@@ -268,6 +284,8 @@ Así se hace el **modo oscuro y claro** de esta página: las reglas usan solo va
 
 > 🌎 **En la vida real:** el agua toma la forma del vaso. Una página *responsive* toma la forma de la pantalla: en la compu, dos columnas; en el celular, una debajo de la otra.
 
+> 🌎 **Otro ejemplo:** Como un sofá cama: en la sala grande es sofá; en el cuarto chico, se transforma para entrar.
+
 ```css
 /* primero, cómo se ve en el celular */
 .lectura { display: grid; grid-template-columns: 1fr; }
@@ -297,6 +315,8 @@ img { max-width: 100%; }                         /* la imagen nunca se sale de l
 ## 10. Movimiento: transiciones y animaciones
 
 > 🌎 **En la vida real:** una puerta que se abre de golpe asusta; una que se abre suave se siente cuidada. Las transiciones son las bisagras suaves de la página.
+
+> 🌎 **Otro ejemplo:** Como las puertas automáticas del supermercado: se abren suaves, no de golpe.
 
 ```css
 .nodo {
@@ -390,6 +410,8 @@ Usa el `practica/index.html` del Tema 15 y conéctale `practica/estilos.css`. Es
 </details>
 
 ## Para la entrevista
+
+> 🌎 **En la vida real:** Explicar CSS es como explicar la decoración de un local: las reglas de colores, el espacio de cada mueble y cómo se ve en distintos tamaños.
 
 > 🎤 **Entrevista:** responde en voz alta, sin leer.
 

@@ -10,6 +10,8 @@ Toda página web del mundo, desde Google hasta tu página **¿Qué dice la Bibli
 
 > 🌎 **En la vida real:** es como las etiquetas de una mudanza. Pegas en cada caja "COCINA", "LIBROS", "FRÁGIL". La caja no cambia, pero ahora todos saben qué hay dentro y qué hacer con ella. HTML pone etiquetas al contenido: "esto es un título", "esto es un botón", "esto es una lista".
 
+> 🌎 **Otro ejemplo:** Es como el índice de un libro con los capítulos marcados: dice qué es título, qué es párrafo y qué es lista, sin decir de qué color van.
+
 **HTML** quiere decir *HyperText Markup Language*: "lenguaje para marcar texto". No es un lenguaje de programación (no hace cuentas ni toma decisiones). Es un lenguaje **para describir** qué es cada parte de la página.
 
 ```html
@@ -35,6 +37,8 @@ El navegador lee esas etiquetas y dibuja: un título grande, un párrafo y un bo
 > 🌎 **En la vida real:** piensa en un sobre de carta.
 > - La **etiqueta de apertura** `<p>` es abrir el sobre; la **de cierre** `</p>` es cerrarlo. Lo que va en medio es la carta.
 > - El **atributo** es lo que escribes por fuera del sobre: la dirección, "urgente", "frágil". No es la carta, pero dice algo sobre ella.
+
+> 🌎 **Otro ejemplo:** Como una etiqueta de precio en una tienda: rodea el producto, y en el costado tiene datos extra como código, talle y color.
 
 ```html
 <a href="estudio.html" class="tarjeta" id="primer-estudio">Abrir el estudio</a>
@@ -68,6 +72,8 @@ Tres atributos que vas a ver en todos lados:
 ## 3. El esqueleto de toda página
 
 > 🌎 **En la vida real:** es como el formulario de un documento oficial: siempre tiene la misma estructura (encabezado arriba con datos que nadie ve a simple vista, y el cuerpo con el contenido). Cambia lo que escribes, no el formato.
+
+> 🌎 **Otro ejemplo:** Como el esqueleto de una carta formal: membrete, fecha, saludo, cuerpo, despedida y firma. Siempre en el mismo orden.
 
 Toda página HTML tiene este esqueleto. Puedes copiarlo y empezar desde aquí:
 
@@ -109,6 +115,8 @@ Toda página HTML tiene este esqueleto. Puedes copiarlo y empezar desde aquí:
 
 > 🌎 **En la vida real:** un periódico tiene el titular gigante, los subtítulos, los párrafos, las palabras en negrita. Nadie lee un periódico donde todo tiene el mismo tamaño. Las etiquetas de texto le dan ese orden a la página.
 
+> 🌎 **Otro ejemplo:** Es como un menú de restaurante: "Platos principales" (título), cada plato (lista) y "¡Recomendado!" en negrita.
+
 ```html
 <h1>Copiloto Driver</h1>
 <h2>Mis ingresos</h2>
@@ -146,6 +154,8 @@ Toda página HTML tiene este esqueleto. Puedes copiarlo y empezar desde aquí:
 ## 5. Las cajas que ordenan la página (HTML semántico)
 
 > 🌎 **En la vida real:** en un supermercado los carteles dicen "Lácteos", "Panadería", "Cajas". Podrías poner todo en estantes sin cartel, pero te perderías. Las etiquetas **semánticas** son esos carteles: dicen qué es cada zona de la página.
+
+> 🌎 **Otro ejemplo:** Como las señales de un hospital: "Urgencias", "Radiología", "Salida". Sin ellas, todos los pasillos parecen iguales.
 
 "Semántico" quiere decir "que tiene significado". En vez de usar cajas genéricas para todo, usas la caja que dice qué es:
 
@@ -192,6 +202,8 @@ Toda página HTML tiene este esqueleto. Puedes copiarlo y empezar desde aquí:
 
 > 🌎 **En la vida real:** es la hoja de inscripción del gimnasio: casillas para nombre, edad, una opción para marcar el plan y, al final, el botón "Enviar". Cada casilla tiene su rótulo para saber qué escribir.
 
+> 🌎 **Otro ejemplo:** Como el formulario de un pedido de pizza por la web: dirección, tamaño, "sin cebolla" y el botón "Pedir".
+
 ```html
 <form>
   <label for="litros">Litros cargados</label>
@@ -235,6 +247,8 @@ Atributos útiles: `required` (obligatorio), `placeholder` (texto de ejemplo gri
 
 > 🌎 **En la vida real:** es un árbol genealógico. Arriba está el abuelo (`html`); sus hijos son `head` y `body`; los hijos de `body` son `header`, `main`, `footer`… Cada uno sabe quién es su padre y quiénes son sus hijos.
 
+> 🌎 **Otro ejemplo:** Como el organigrama de una empresa: el gerente arriba, los jefes de cada área y debajo sus empleados.
+
 Cuando el navegador lee el HTML, arma en la memoria un **árbol** de cajas, una dentro de otra. Ese árbol se llama **DOM** (*Document Object Model*: "el documento como objetos").
 
 ```text
@@ -262,6 +276,8 @@ Esto importa por dos razones:
 ## 8. Errores comunes y cómo encontrarlos
 
 > 🌎 **En la vida real:** abrir paréntesis y olvidar cerrarlo en una carta confunde, pero se entiende. El navegador hace lo mismo: **casi nunca da error**, adivina. Por eso un error en HTML no avisa: la página simplemente se ve rara.
+
+> 🌎 **Otro ejemplo:** Como escribir una dirección con el número mal: el cartero no te avisa; la carta simplemente no llega.
 
 | Error | Qué pasa | Cómo se arregla |
 |---|---|---|
@@ -348,6 +364,8 @@ Hazlos en `practica/index.html`. Escribe tú cada línea, sin copiar y pegar.
 </details>
 
 ## Para la entrevista
+
+> 🌎 **En la vida real:** Explicar HTML es como explicar el plano de una casa: qué es cada parte, antes de hablar de la decoración.
 
 > 🎤 **Entrevista:** practica estas respuestas en voz alta, con tus palabras. Si no te salen sin leer, vuelve a la parte.
 

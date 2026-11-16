@@ -12,6 +12,8 @@ Los ejemplos están simplificados para aprender. El código real puede verse un 
 
 > 🌎 **En la vida real:** además del restaurante con dos comedores: piensa en un **programa de radio que también se ve por YouTube**. El locutor, el guion y las noticias son los mismos; solo cambia la pantalla por donde lo sigues. Si el locutor corrige un dato, se corrige en los dos lados a la vez. Si la versión de YouTube tuviera su propio guion, tarde o temprano dirían cosas distintas, y el oyente no sabría a quién creer.
 
+> 🌎 **Otro ejemplo:** Es como un banco con app y página web: tu saldo es uno solo; las dos pantallas lo muestran igual porque leen la misma cuenta.
+
 **Qué es:** la página web de Copiloto Driver. La persona entra con **la misma cuenta del teléfono** y ve sus números en la computadora: ganancias, gastos, ganancia neta, combustible, San, Mi cartera, el Copiloto y el menú. Todo en una sola pantalla, sin bajar.
 
 **Lo más importante de toda la arquitectura:**
@@ -42,6 +44,8 @@ Los ejemplos están simplificados para aprender. El código real puede verse un 
 > - **Open-Meteo** = un vecino que te dice gratis qué tiempo hace.
 >
 > **React Native y la web** son como un mismo chef que cocina en un food truck (teléfono) y en un salón (web): sabe las mismas recetas, pero en el food truck tiene una plancha que el salón no tiene (cámara, GPS).
+
+> 🌎 **Otro ejemplo:** Como el equipo de una mudanza: cajas iguales para todo (React), el que revisa que cada mueble entre por la puerta (TypeScript), el camión (Vite), las etiquetas de cada caja (Tailwind) y el depósito de siempre (Firebase).
 
 | Tecnología | Qué es | Para qué la usa la web |
 |---|---|---|
@@ -80,6 +84,8 @@ Los ejemplos están simplificados para aprender. El código real puede verse un 
 > - `__tests__/` = el **control de calidad**.
 >
 > El recorrido: el pasillo pide mercadería al reponedor, se arma con las recetas del depósito y se pone en los estantes, que solo usan los colores de la oficina de diseño.
+
+> 🌎 **Otro ejemplo:** Como el plano de un centro comercial: cada local con su rubro, y el pasillo principal que los conecta.
 
 Cada carpeta tiene **una sola tarea**.
 
@@ -124,6 +130,8 @@ copiloto-driver/
 >
 > **La regla que se siguió**: si una receta buena estaba anotada **en el delantal** de un cocinero (escondida dentro de una pantalla), no se fotocopió para la otra sucursal: se pasó al **recetario oficial** (`src/utils`) y desde ahí la usan los dos.
 
+> 🌎 **Otro ejemplo:** Como el acceso directo del escritorio de la computadora: un ícono que abre la carpeta original, sin copiarla.
+
 En `vite.config.ts` hay un **alias** (un apodo para una carpeta):
 
 ```ts
@@ -161,6 +169,8 @@ Otros archivos compartidos de esta forma: `fuelRegisterPlan.ts` (las reglas de r
 > 🌎 **En la vida real:** la lección usa el adaptador de enchufe para viajar. Otro ejemplo: un **DJ** que lleva la misma música (el centro) a una fiesta en casa y a una discoteca. En casa la conecta a un parlante Bluetooth; en la discoteca, a la consola grande. La música no cambia; cambia el **cable**.
 >
 > **El candado**: es como el aeropuerto que no te deja subir con un líquido de más de 100 ml. Si alguien intenta meter en la web una pieza que solo funciona en el teléfono (como la cámara), lo paran en el control con un cartel claro, en vez de que la página explote a mitad de vuelo.
+
+> 🌎 **Otro ejemplo:** Como una lámpara con bombilla estándar: puedes cambiar de marca de bombilla sin cambiar la lámpara.
 
 **El problema:** los módulos del app que hablan con Firebase usan un archivo, `src/services/firebaseClient.ts`, que trae piezas **del teléfono** (por ejemplo, guardar la sesión en el teléfono). El navegador no tiene esas piezas.
 
@@ -200,6 +210,8 @@ Así es imposible que la web se rompa en silencio por usar algo del teléfono.
 > - **Seguridad**: la dirección de un edificio es **pública** (cualquiera la sabe), pero eso no te deja entrar a los departamentos: el **portero** (las reglas de Firestore) es el que protege.
 > - **El Copiloto**: la combinación de la caja fuerte (la clave de la IA) la tiene el empleado de adentro (el servidor), nunca está pegada en la vidriera (la página).
 
+> 🌎 **Otro ejemplo:** Como una planilla compartida en la nube: lo que alguien escribe en su teléfono aparece en tu computadora al instante, y para guardar se usan los mismos pasos que en la app.
+
 **Leer** (`data/useUserData.ts`): usa las funciones `subscribe…` del app (`subscribeEarningStoreCloud`, `subscribeExpenseStoreCloud`…). "Subscribe" (suscribirse) significa que Firestore **avisa cada vez que algo cambia**. Si registras una ganancia en el teléfono, la web la muestra al instante, sin recargar.
 
 **Armar** (`data/dashboardModel.ts`, `fuelModel.ts`, `walletModel.ts`…): son funciones **puras** (sin React, sin pantalla). Reciben los datos y devuelven lo que la pantalla necesita, usando los cálculos del app. Por ser puras, se pueden **probar** fácil.
@@ -234,6 +246,8 @@ Así es imposible que la web se rompa en silencio por usar algo del teléfono.
 > - `i18n.tsx` / `format.ts` = los carteles en **6 idiomas** y cómo se escribe el precio: R$ 1.234,56.
 >
 > **El candado de diseño** es el **inspector de la franquicia**: si encuentra un cartel pintado a mano con un verde "parecido", multa. Y prohíbe armar nombres por partes (`bar-${tipo}`) porque el limpiador (Tailwind) solo deja las etiquetas que ve escritas completas; las demás las tira.
+
+> 🌎 **Otro ejemplo:** Es como la paleta de un pintor: solo usa los colores que preparó; no inventa uno nuevo en cada cuadro.
 
 **La regla:** **ninguna pantalla escribe un color, un tamaño o una sombra a mano.** Todo sale de un motor, por su nombre.
 
@@ -283,6 +297,8 @@ Si se cambia ahí, cambia en toda la web.
 >
 > `styles.css` son los **muebles con nombre** que se repiten: `glass` es la vitrina de vidrio, `tile` un estante, `tile-inset` una cajita dentro del estante. Cuando se quiso que las cajitas fueran claras, se cambió **el modelo** de la cajita una vez, y cambiaron en todas las salas.
 
+> 🌎 **Otro ejemplo:** Como abreviaturas en un mensaje: "q" en vez de "que". Tailwind escribe el estilo en abreviaturas cortas pegadas a cada pieza.
+
 **Tailwind** escribe el diseño con clases cortas, directo en la pieza:
 
 ```tsx
@@ -326,6 +342,8 @@ Todas leen las variables de los motores. Por eso, cuando se pidió que los cuadr
 > **Estado (`useState`)**: es el **control remoto** del televidente: "vista detallada" o "completa", "semana" o "mes". Cambias de canal y solo cambia esa parte de la pantalla.
 >
 > **La `key`**: es como la **cédula** de una persona. Si cada vez que cambias de Semana a Mes le das al recuadro una cédula nueva, React cree que llegó **otra persona** y la hace entrar de nuevo por la puerta. La solución fue darle la cédula nueva solo al gráfico de adentro: el recuadro (la persona) se queda sentado; solo cambia lo que tiene en la mano.
+
+> 🌎 **Otro ejemplo:** Como el parte del tiempo en la tele: llegan los datos del clima, el meteorólogo los resume, y la pantalla los muestra con íconos.
 
 Mira `screens/Overview.tsx`. Sigue siempre el mismo camino:
 
@@ -375,6 +393,8 @@ Cuando la persona toca "Completa", cambia el estado y React vuelve a dibujar sol
 >
 > La prueba del ejemplo es como revisar que **la suma de las 4 semanas dé el total del mes** en tu libreta. Si no da, alguien se equivocó al copiar.
 
+> 🌎 **Otro ejemplo:** Como el control de calidad de un auto antes de salir de la fábrica: frenos, luces, motor y una vuelta completa.
+
 Antes de guardar cada cambio se corre:
 
 | Comando | Qué revisa |
@@ -412,6 +432,8 @@ Lee así: "el total del mes tiene que ser la suma de las barras". Si alguien rom
 >
 > ¿Por qué no abre con la Mac apagada? Porque la Mac es **el que atiende el mostrador**. Si se va a dormir, nadie atiende. Para estar abierto siempre, hay que alquilar un local en la calle (publicar en Firebase Hosting).
 
+> 🌎 **Otro ejemplo:** Como mostrar tu casa antes de mudarte: abres la puerta a tu familia (mismo Wi-Fi), pero no a la calle.
+
 | Para… | Comando o dirección |
 |---|---|
 | Abrirla en la Mac | `cd webapp && npm run dev` → `http://localhost:5180` |
@@ -437,6 +459,8 @@ Lee así: "el total del mes tiene que ser la suma de las barras". Si alguien rom
 > - **Historial de tanques infinito**: como un extracto bancario de 10 años en una sola hoja; ahora se ve por mes o por semana.
 > - **Gráficos pequeños**: como tres televisores chicos en la misma pared: ahora uno grande, y los otros si los pides.
 
+> 🌎 **Otro ejemplo:** Como dos relojes en la misma pared que marcan horas distintas: no sabes cuál creer; hay que dejar uno solo.
+
 | Qué pasó | Qué se decidió |
 |---|---|
 | `lucide-react` (los íconos) trajo **su propia copia de React** (19.3.1). Con dos React distintos, la página fallaba. | En `vite.config.ts` se obliga a usar **una sola React**: la del app. |
@@ -458,6 +482,8 @@ Lee así: "el total del mes tiene que ser la suma de las barras". Si alguien rom
 > La **prueba de contrato** es darles a los dos cajeros **el mismo montón de tickets** y exigir que digan exactamente el mismo número. Los tickets de prueba incluyen los difíciles: el de las 02:30 de Uber (que es "de ayer"), el ajuste (que no es venta) y el de las 23:59 del domingo (justo en el borde de la semana).
 >
 > El arreglo fue escribir **una sola forma de juntar tickets** que usan los dos cajeros. Y la prueba queda como un **auditor** que, si algún día vuelven a separarse, avisa.
+
+> 🌎 **Otro ejemplo:** Como pesar el mismo paquete en dos balanzas: si marcan distinto, una está mal, y hay que descubrir cuál.
 
 Cuando publiqué la web en LinkedIn, un ingeniero (Principal Engineer) comentó: *"yo pondría pruebas de contrato en los cálculos de ganancias y gastos, para detectar cualquier diferencia entre la web y el móvil"*.
 

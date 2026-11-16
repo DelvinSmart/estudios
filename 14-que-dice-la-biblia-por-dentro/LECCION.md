@@ -14,6 +14,8 @@ Los ejemplos están simplificados para aprender. El código real puede verse un 
 >
 > La idea que une todo es la del **molde de pan**: se mejoró **el molde** una sola vez, y todos los panes (todos los estudios) salen mejor, sin tocar uno por uno.
 
+> 🌎 **Otro ejemplo:** Como la lista de mejoras de un día en un taller: tablero, luces y radio, cada cosa con el lugar del carro donde está.
+
 En un solo día la página cambió mucho. Este es el resumen:
 
 | Qué | Dónde está |
@@ -45,6 +47,8 @@ En un solo día la página cambió mucho. Este es el resumen:
 > - **La caché**: es como cuando ya leíste el diario de la mañana y alguien te dice que salió una edición nueva: tú sigues con el viejo en la mano 10 minutos. **Cmd + Shift + R** es ir al kiosco a buscar el nuevo.
 > - **`?v=lbla12`**: es como ponerle "edición 12" en la tapa: el kiosquero ve que es otra edición y no te da la vieja.
 
+> 🌎 **Otro ejemplo:** Es como cambiar tu número de teléfono: se lo avisas a todos una vez y usas uno solo, en vez de dos líneas con desvíos. Y la caché es la foto vieja que no se actualiza hasta que deslizas para refrescar.
+
 **Qué se hizo:**
 1. El título visible pasó de "Estudios Bíblicos" a **"¿Qué dice la Biblia?"**.
 2. **El repositorio se renombró** (no se copió) de `estudios-biblicos` a `que-dice-la-biblia`. El historial se quedó entero: 30 cambios.
@@ -68,6 +72,8 @@ En un solo día la página cambió mucho. Este es el resumen:
 > 🌎 **En la vida real:** es como las reglas para usar fotos de un fotógrafo profesional: "puedes usar hasta 500, no todo el álbum, que no sean más de una cuarta parte de tu revista, y siempre con mi nombre debajo".
 >
 > Lo importante es que el crédito lo pone **la plantilla sola**, como una impresora que siempre imprime el pie de página: nadie tiene que acordarse. `esLBLA` es como el empleado que mira la etiqueta de cada foto y, si dice "LBLA", le pega el crédito.
+
+> 🌎 **Otro ejemplo:** Es como citar un libro en una tesis: puedes citar partes, con la fuente, pero no copiar el libro entero.
 
 Lo comprobé en la página oficial de **Lockman**, los dueños de la LBLA:
 - Se pueden citar **hasta 500 versículos** sin pedir permiso.
@@ -98,6 +104,8 @@ const esLBLA = ref => /\bLBLA\b/.test(ref || "");
 > - **Mostrar Bible.com adentro**: el dueño no deja que pongas su vidriera dentro de tu tienda.
 >
 > **Lo que sí**: el **buscador** es como darle al lector la **dirección exacta** de la biblioteca y el estante; **reutilizar** es usar la cita que ya habías copiado tú antes; **leer capturas** es como pasar tus propias fotos por el escáner de casa. La diferencia con el robot: con tus fotos, **tú** trajiste el libro; el robot entraría **a la casa de otro**.
+
+> 🌎 **Otro ejemplo:** Como querer una película: no se graba en el cine (prohibido); se compra o se alquila donde está permitido.
 
 **El sueño:** que la página traiga sola el texto de la LBLA. Esto es todo lo que se probó:
 
@@ -133,6 +141,8 @@ const esLBLA = ref => /\bLBLA\b/.test(ref || "");
 >
 > Dónde quedó el medidor: como el indicador de batería del celular: un número chiquito siempre a la vista, y el detalle solo si lo tocas.
 
+> 🌎 **Otro ejemplo:** Como el límite de equipaje de mano: si te pasas, no te dejan subir hasta que saques algo.
+
 Para cumplir la regla de Lockman, el panel **mide** cada estudio (`js/panel-medidor.js`):
 - **Versículos:** cuenta los de cada pasaje por su referencia ("Efesios 5:22-25" son 4).
 - **Porcentaje:** cuenta las **palabras** de los versículos y las de todo lo que escribiste (títulos, preguntas, textos, fuentes). Para que la Biblia sea como máximo el 25%, lo tuyo tiene que ser al menos 3 veces lo bíblico.
@@ -154,6 +164,8 @@ Para cumplir la regla de Lockman, el panel **mide** cada estudio (`js/panel-medi
 > - Guardarlas **en el subpunto** es como pegar el ticket de compra **dentro de la caja** del producto: si mueves la caja, el ticket se va con ella.
 > - Los **botoncitos** son como el "ver más" de una noticia: no te llenan la página.
 > - **Verificar cada link** es como el periodista que llama a la fuente antes de publicar. Así se encontró que una frase estaba atribuida al libro equivocado, como citar a un autor por algo que en realidad dijo otro.
+
+> 🌎 **Otro ejemplo:** Es como el periodista que llama a la fuente antes de publicar: si no confirma, no sale.
 
 **Qué son:** de dónde salió cada dato (un léxico, un libro, un artículo), con un resumen y su link.
 
@@ -178,6 +190,8 @@ Para cumplir la regla de Lockman, el panel **mide** cada estudio (`js/panel-medi
 > 🌎 **En la vida real:** es como la diferencia entre una **canción con derechos** (no la puedes poner en tu video) y una **música libre de derechos** (la usas tranquilo, solo pones el crédito). El NA28 es la primera; el SBLGNT, la segunda.
 >
 > Guardarlo **dentro de la página**, un archivo por libro, es como tener la **enciclopedia en tu estante**: no dependes de nadie para consultarla. "+ Griego" es como un índice que va solo a la página correcta.
+
+> 🌎 **Otro ejemplo:** Como usar música libre de derechos en un video: la usas tranquilo, solo pones el crédito del músico.
 
 **Qué texto griego se puede publicar:**
 | Texto | ¿Se puede? |
@@ -204,6 +218,8 @@ Para cumplir la regla de Lockman, el panel **mide** cada estudio (`js/panel-medi
 > Leer el tiempo del motor (`--dur-200`) es como que los dos bailarines escuchen **la misma música**: si cada uno contara los tiempos por su cuenta, terminarían desfasados.
 >
 > En el PDF todo sale abierto, porque en un papel impreso no se puede "tocar para abrir".
+
+> 🌎 **Otro ejemplo:** Como un menú de restaurante con fotos chiquitas: tocas la que te interesa y se agranda, y no se abren dos a la vez.
 
 **Antes:** cada pasaje se veía completo y ocupaba mucho.
 
@@ -235,6 +251,8 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 > **JSONP**: es como pedir una pizza diciendo "cuando llegue, toque el timbre que dice *Delvin*": el repartidor (el `<script>`) llega y toca **tu** timbre (llama a tu función) con la pizza (los datos).
 >
 > **El riesgo**: es usar la puerta de servicio de un local; funciona hoy, pero si la cambian de lugar, nadie te avisa.
+
+> 🌎 **Otro ejemplo:** Como pedir el pedido entero de una vez y que ya esté embolsado cuando llegas, en vez de esperar producto por producto.
 
 **Logos** tiene un servicio gratis, **Reftagger**, que muestra versículos en un globo. Tiene la RVR 1960 con su licencia. **No tiene la LBLA ni ninguna versión en portugués** (se probaron ARA, ARC, NVT, NAA, NTLH, ACF…).
 
@@ -268,6 +286,8 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 > **Calibrar** es como ajustar una balanza de cocina: primero creías que cada letra ocupaba 9,15; pesaste 32 cosas reales y descubriste que era 8,1. Se prefirió que sobre un poquito de tela antes que quedar corto.
 >
 > La **tapa transparente** es como poner un vidrio sobre una maqueta en un museo: aunque alguien intente tocarla (Safari), no puede moverla.
+
+> 🌎 **Otro ejemplo:** Como un costurero que calcula cuánta tela hace falta mirando el talle de otra camisa del mismo modelo.
 
 **La idea:** Lockman tiene su propia Biblia en línea, `bible.lockman.org`. Su página **sí se deja mostrar dentro de otra** (en un *iframe*: una ventana a otra página). El texto no se copia: es la página de Lockman dentro de la tuya.
 
@@ -310,6 +330,8 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 >
 > **Cómo se comprobó**: como el juego de las **7 diferencias**, pero con 3.900 elementos: se puso la página nueva al lado de la vieja y se compararon todos. 0 diferencias.
 
+> 🌎 **Otro ejemplo:** Es como el diapasón que afina toda una orquesta: una sola nota de referencia para todos.
+
 **Antes:** los colores estaban en un archivo, pero **unos 770 valores** (tamaños, espacios, tiempos, sombras) estaban escritos a mano en todos lados.
 
 **Ahora:**
@@ -331,6 +353,8 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 > - **Botón de tema**: como una lámpara que viene encendida según la luz del cuarto, pero si tú la cambias, **recuerda** tu elección en todas las habitaciones. Se carga **en el `<head>`** para que no haga un parpadeo, como prender la luz antes de abrir la puerta.
 > - **"Nuevo" que desaparece**: como la etiqueta de "no leído" de un correo: se quita cuando lo abres. En el teléfono, lo que quedó fuera de la vista todavía no cuenta como leído.
 > - **Links sin `https://`**: como un corrector que te completa "gmail" con ".com".
+
+> 🌎 **Otro ejemplo:** Como un auto con detalles de cortesía: la luz interior que se prende sola, el asiento que recuerda tu posición.
 
 | Qué | Cómo funciona |
 |---|---|
@@ -356,6 +380,8 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 > - **Calibrar con muchos datos**: no se ajusta la balanza con una sola manzana.
 > - **Cada navegador tiene sus defectos**: como cada carro tiene su mañita; hay que probar en el que maneja la persona.
 > - **GitHub falló una vez**: a veces el problema es del correo, no de tu carta: se vuelve a mandar.
+
+> 🌎 **Otro ejemplo:** Como el cuaderno de errores de una obra: cada problema con lo que se aprendió, para no repetirlo.
 
 | Qué pasó | Qué se aprendió |
 |---|---|
