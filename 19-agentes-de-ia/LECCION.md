@@ -22,11 +22,17 @@ Esta clase está basada en la guía **"Agentic design patterns"** de **Bashiri S
 
 > 🌎 **En la vida real:** ya hablas español; aprender a **leer** portugués te lleva días, no años, porque casi todo se parece. Tú ya lees JavaScript y TypeScript; leer Python es igual: cambian algunas palabras y la forma de escribir, pero las ideas son las mismas.
 
+> 🌎 **Otro ejemplo:** Es como manejar en otro país con el volante del otro lado: al principio te cuesta, pero los pedales, el freno y las reglas son las mismas.
+
 **¿Por qué Python?** Es **el lenguaje más usado en inteligencia artificial**. Las librerías de IA, los ejemplos de las empresas que hacen los modelos, los *frameworks* de agentes y la mayoría de las ofertas de trabajo de "AI engineer" lo usan. La guía original trae todo su código en Python. Por eso en esta clase **cada ejemplo está dos veces**: primero en JavaScript (lo que ya conoces) y después en **Python** (lo que te van a pedir).
 
 > 💡 **Idea:** los nombres de los ejemplos están en español para que los compares fácil con la versión en JavaScript. En un trabajo real, el código casi siempre se escribe con nombres en inglés (`run_agent` en vez de `correr_agente`), pero la estructura es la misma.
 
 ### Lo mismo, en los dos lenguajes
+
+> 🌎 **En la vida real:** Es como un diccionario de bolsillo español-portugués: "obrigado" = "gracias". Buscas la palabra que conoces y encuentras la otra.
+
+> 🌎 **Otro ejemplo:** Es como las equivalencias de una receta: "1 taza = 240 ml". La medida cambia de nombre, lo que mides es lo mismo.
 
 | Qué | JavaScript / TypeScript | Python |
 |---|---|---|
@@ -71,7 +77,13 @@ Es tu función `isImmutableEarningPlatform` del Tema 01, escrita en Python. Fíj
 
 > 🌎 **En la vida real:** la sangría es como un índice de un libro con subtítulos corridos hacia la derecha: con solo mirar cuánto está corrido un renglón, sabes de qué capítulo es. En Python, si corres mal un renglón, cambia de capítulo, y el programa hace otra cosa (o da error).
 
+> 🌎 **Otro ejemplo:** Como las sangrías de una lista de compras por sección: "Lácteos" y, corridos hacia adentro, "leche, queso". Lo corrido pertenece a la sección.
+
 ### Las tres cosas de Python que más vas a ver en IA
+
+> 🌎 **En la vida real:** Es como las tres herramientas que más usa un electricista: el multímetro (Pydantic, que revisa), las pinzas (las listas por comprensión, que transforman) y la escalera (asyncio, para hacer varias cosas a la vez).
+
+> 🌎 **Otro ejemplo:** Es como los tres botones que más usas del teléfono: llamar, mensaje y cámara. Hay muchos más, pero esos tres son de todos los días.
 
 **1. Clases con Pydantic (moldes de datos).** Sirven para describir y **validar** lo que entra y sale del modelo:
 
@@ -97,6 +109,10 @@ grandes = [v for v in valores if v > 15]    # [18, 25]
 **3. `async` / `await` y `asyncio.gather`** (el `Promise.all` de Python), para hacer varias cosas a la vez.
 
 ### Cómo correr un archivo de Python
+
+> 🌎 **En la vida real:** Es como prender un electrodoméstico nuevo: lo enchufas (instalas con pip) y aprietas el botón (corres el archivo con python3).
+
+> 🌎 **Otro ejemplo:** Es como abrir un archivo de música: le dices al reproductor cuál, y suena.
 
 Tu Mac ya trae Python. Guarda un archivo `prueba.py` y en la terminal:
 
@@ -128,11 +144,17 @@ escribe :: ¿Por qué esta clase trae los ejemplos en Python además de JavaScri
 
 > 🎙️ **El profesor:** Delvin, llegaste a la última etapa. Todo lo que aprendiste (funciones, pruebas, CI, errores, Firebase, arquitectura) se usa aquí. Un agente es un programa como cualquier otro, con una pieza nueva en el centro: un modelo que decide. Empecemos por definir bien qué es, porque la mitad de la confusión del mundo viene de palabras vagas.
 
+> 🌎 **En la vida real:** Es como aprender a manejar: antes de las maniobras difíciles, tienes que saber qué es el volante, el freno y el acelerador.
+
+> 🌎 **Otro ejemplo:** Es como empezar una obra: primero los cimientos; si están mal, todo lo de arriba se cae.
+
 Antes de elegir un patrón hay que saber exactamente qué estás construyendo. Casi toda la confusión sobre agentes viene de usar palabras vagas.
 
 ### 1.1 Qué es un agente, de verdad
 
 > 🌎 **En la vida real:** una **llamada al modelo** es una calculadora: metes algo, sale algo, una vez. Un **agente** es un mecánico: mira el carro, decide qué revisar, usa una herramienta, mira qué pasó, decide lo siguiente… y repite hasta que el carro anda o hasta que dice "esto no lo puedo arreglar".
+
+> 🌎 **Otro ejemplo:** Como la diferencia entre preguntarle la hora a alguien (una llamada) y contratar a alguien para que organice tu mudanza (un agente): el segundo decide, actúa, revisa y sigue hasta terminar.
 
 - Una **llamada a un LLM** (un modelo de lenguaje, como Claude) recibe texto y devuelve texto. Hace **una** cosa, **una** vez.
 - Un **agente** es un sistema donde el modelo **decide qué hacer después**, actúa con **herramientas**, **observa** qué pasó y **repite** hasta terminar o hasta que salta una condición para parar.
@@ -173,6 +195,8 @@ Es una **llamada al modelo**. Sería un **agente** si el modelo pudiera decidir 
 ### 1.2 Las siete piezas de un agente
 
 > 🌎 **En la vida real:** un restaurante. El **chef** decide (el modelo). La **receta y las reglas de la casa** (las instrucciones). Los **cuchillos y el horno** (las herramientas). La **comanda y la despensa** (la memoria). El **ritmo de la cocina**: tomar pedido, cocinar, revisar, servir (el ciclo). El **inspector de higiene** (los controles). Y **el local, la luz y el gas** que mantienen todo andando (el entorno de ejecución).
+
+> 🌎 **Otro ejemplo:** Como un taxi: el conductor decide (modelo), las reglas de tránsito y de la empresa (instrucciones), el GPS y la radio (herramientas), el recuerdo de los viajes del día (memoria), el ritmo de buscar pasajero-llevar-cobrar (ciclo), los límites de velocidad (controles) y el carro con su mantenimiento (entorno).
 
 Todo agente, con la herramienta que sea, tiene estas siete piezas. Si puedes dibujar estas siete cajas y explicar las flechas, entiendes agentes mejor que mucha gente que los publica.
 
@@ -262,6 +286,8 @@ def correr_agente(tarea, herramientas, max_pasos=10):
 
 > 🌎 **En la vida real:** no contratas a un arquitecto para colgar un cuadro. Cada nivel de ayuda cuesta más. Los agentes cambian **previsibilidad por capacidad**: cada paso agrega demora, costo y un lugar nuevo donde fallar.
 
+> 🌎 **Otro ejemplo:** Como elegir transporte: para ir a la esquina caminas; para cruzar la ciudad, taxi; para mudarte, camión. No usas camión para ir a la esquina.
+
 Usa **el sistema más simple que resuelva el problema**. La escalera:
 
 | Situación | Construye esto |
@@ -285,6 +311,8 @@ Si alguna respuesta es "no", **construye primero un flujo de trabajo**.
 ### 1.5 El vocabulario que vas a ver siempre
 
 > 🌎 **En la vida real:** en un taller se habla de "alineación", "balanceo", "escáner". Si no conoces las palabras, no entiendes al mecánico. Estas son las palabras del taller de agentes.
+
+> 🌎 **Otro ejemplo:** Como las palabras de un hospital: "triage", "historia clínica", "alta". Si no las conoces, no entiendes al médico.
 
 | Palabra | Qué quiere decir |
 |---|---|
@@ -317,6 +345,10 @@ escribe :: Di las tres preguntas antes de construir un agente. :: ¿Puedo defini
 ## Parte 2. Los cinco patrones principales
 
 > 🎙️ **El profesor:** estos cinco patrones son el corazón de la clase. Si en una entrevista solo puedes explicar una parte, que sea esta. Léelos de a uno por día: ReAct, planificación, reflexión, enrutamiento y multiagente.
+
+> 🌎 **En la vida real:** Son como las cinco jugadas básicas del fútbol (pase, tiro, regate, marca y contraataque): con ellas se arma casi cualquier partido.
+
+> 🌎 **Otro ejemplo:** Son como los cinco cortes básicos de un carnicero: con ellos se prepara casi todo lo que pide un cliente.
 
 Estos cinco patrones cubren **la mayoría** de los sistemas de agentes en producción. Apréndelos a fondo. Para cada uno: cómo funciona, un esqueleto de código, dónde se rompe, cómo hablar de él en una entrevista y un ejercicio.
 
@@ -835,6 +867,10 @@ elige :: En Python, ¿qué es el equivalente de `Promise.all`? :: `asyncio.run` 
 
 > 🎙️ **El profesor:** no te asustes por el número. No hace falta memorizar veinte: hace falta **reconocer el problema** y saber que existe un patrón para él. Al final está la tabla para elegir.
 
+> 🌎 **En la vida real:** Es como la caja de herramientas completa de un mecánico: los cinco patrones son el martillo y el destornillador; estos veinte son las herramientas especiales para problemas puntuales.
+
+> 🌎 **Otro ejemplo:** Es como el recetario completo después de aprender a hervir, freír y hornear: recetas para cada ocasión.
+
 Los cinco principales son los ladrillos. Estos veinte son **con qué los combinas**. Están agrupados por el problema que resuelven, para que encuentres el correcto cuando te topes con el problema.
 
 ### 3.1 Patrones de flujo de trabajo
@@ -994,6 +1030,8 @@ Consulta ─► Reescribir (¿buscar? ¿dónde?) ─► Buscar (vectores, palabr
 
 > 🌎 **En la vida real:** la tabla de "qué herramienta para qué tornillo" pegada en la pared del taller. Cuando estás frente al problema, la miras y eliges.
 
+> 🌎 **Otro ejemplo:** Como la tabla de "qué remedio para qué síntoma" de un botiquín: la miras cuando tienes el síntoma delante.
+
 Los veinticinco patrones en una tabla:
 
 | Patrón | Úsalo cuando… | Costo |
@@ -1046,11 +1084,17 @@ escribe :: ¿Qué es una persona en el ciclo (human-in-the-loop) y cuándo se us
 
 > 🎙️ **El profesor:** aquí está lo que separa un agente de demo de uno que funciona con gente real: el contexto, las herramientas, el estado, las salidas ordenadas, el modelo y los protocolos.
 
+> 🌎 **En la vida real:** Es como diseñar una cocina profesional: no alcanza con saber recetas; hay que decidir dónde va cada cosa, qué herramientas tener y cómo trabaja el cocinero.
+
+> 🌎 **Otro ejemplo:** Es como preparar a un empleado nuevo: qué le explicas, qué herramientas le das, qué tiene que recordar y en qué formato te entrega el trabajo.
+
 Los patrones son **la forma**. Esta parte es **el contenido**: las decisiones que determinan si tu agente funciona con entradas reales, y no solo en la demo.
 
 ### 4.1 Ingeniería de contexto
 
 > 🌎 **En la vida real:** antes de una reunión importante, a un gerente no le das 300 páginas: le das **una hoja** con lo esencial, los números clave y la decisión que tiene que tomar. Si le das todo, se pierde lo importante. Eso es curar el contexto.
+
+> 🌎 **Otro ejemplo:** Como el informe de un mecánico antes de una carrera: solo lo que el piloto necesita saber, no el manual entero del auto.
 
 **Ingeniería de prompts** es escribir buenas instrucciones. **Ingeniería de contexto** es decidir **todo** lo que entra en la ventana del modelo en cada paso: instrucciones, herramientas, documentos traídos, memoria, historial de la conversación, resultados de herramientas. Es **la habilidad de más impacto** en el diseño de agentes, porque el modelo solo puede razonar sobre lo que ve, y **su atención empeora a medida que la ventana se llena**.
 
@@ -1068,6 +1112,8 @@ Los patrones son **la forma**. Esta parte es **el contenido**: las decisiones qu
 ### 4.2 Diseño de herramientas
 
 > 🌎 **En la vida real:** un control remoto bien hecho tiene un botón para cada cosa, con un dibujo claro. Uno mal hecho tiene un botón que "según cuántas veces lo aprietes" hace cinco cosas distintas. Las herramientas de un agente son su control remoto.
+
+> 🌎 **Otro ejemplo:** Como los botones de un ascensor: cada uno hace una sola cosa, con un número claro, y si aprietas un piso que no existe, no pasa nada raro.
 
 Las herramientas son **la interfaz entre el modelo y el mundo**. **Muchas fallas que parecen de razonamiento son, en verdad, fallas de diseño de herramientas.** Diseña la interfaz agente-computadora con el mismo cuidado que una interfaz para personas.
 
@@ -1197,6 +1243,8 @@ def guardar_punto(estado: EstadoAgente) -> None:
 
 > 🌎 **En la vida real:** un formulario del gobierno tiene casillas: "Nombre", "Fecha (DD/MM/AAAA)", "Sexo: M / F". No te dejan escribir una carta libre, porque **una máquina** lo va a procesar. Cuando la salida del modelo la va a leer **código**, necesita casillas.
 
+> 🌎 **Otro ejemplo:** Como una planilla con columnas fijas que otra máquina va a leer: si escribes fuera de las columnas, la máquina no lo entiende.
+
 **Los agentes son programas. Los programas necesitan datos, no prosa.** Siempre que la salida del modelo alimente código (una ruta, un plan, un veredicto, una llamada a herramienta), **fuerza un esquema**:
 - Usa la salida estructurada nativa o las llamadas a herramientas para recibir JSON que cumpla el esquema.
 - **Valídalo**, y si falla, **reintenta pasándole el error** de validación.
@@ -1207,6 +1255,8 @@ def guardar_punto(estado: EstadoAgente) -> None:
 ### 4.5 Elegir el modelo
 
 > 🌎 **En la vida real:** para mover un sofá llamas a dos personas fuertes; para llevar una carta, a un mensajero en moto. No mandas al camión de mudanza a llevar una carta.
+
+> 🌎 **Otro ejemplo:** Como elegir quién atiende en un restaurante: el chef para los platos difíciles, un ayudante para pelar papas.
 
 Usa **el modelo más fuerte** para los pasos que necesitan criterio (planificar, sintetizar, razonamiento difícil) y **modelos más chicos y rápidos** para lo que no (enrutar, extraer datos, críticas simples, dar formato). **Mide con tus propias pruebas**: los rankings públicos no se trasladan bien a tu tarea. Prepárate para el cambio: envuelve las llamadas al modelo **detrás de una sola interfaz** para poder cambiar de proveedor, y vuelve a correr tus pruebas en cada actualización de modelo.
 
@@ -1223,6 +1273,8 @@ Usa **el modelo más fuerte** para los pasos que necesitan criterio (planificar,
 ### 4.6 Protocolos: MCP y A2A
 
 > 🌎 **En la vida real:** el enchufe USB-C. Antes, cada aparato tenía su cable. Ahora, un solo tipo de enchufe sirve para el celular, la compu y los auriculares. **MCP es el USB-C de las herramientas para agentes.**
+
+> 🌎 **Otro ejemplo:** Como los enchufes universales de un hotel: cualquier cargador entra, sin adaptador especial para cada uno.
 
 **MCP** (*Model Context Protocol*) es un **estándar abierto** para conectar agentes con herramientas y datos.
 - Un **servidor MCP** ofrece **herramientas**, **recursos** y **prompts**.
@@ -1245,6 +1297,8 @@ El anfitrión corre el agente. Los clientes hablan MCP. Los servidores ofrecen l
 ### 4.7 El panorama de los frameworks
 
 > 🌎 **En la vida real:** un carro automático te ahorra trabajo desde el primer día, pero si un día se traba la caja, no sabes qué pasa adentro. Un *framework* es eso: te ayuda la primera semana y te puede frenar todas las semanas siguientes.
+
+> 🌎 **Otro ejemplo:** Como comprar una casa amueblada: te mudas rápido, pero si un día quieres cambiar algo, tienes que entender cómo la armaron.
 
 Usa un *framework* cuando te da **gratis** ejecución durable, rastreo y pausas para una persona. **Sáltalo** cuando su abstracción esconde justo el ciclo que necesitas depurar. Y de cualquier forma, **construye el ciclo a mano una vez**, para saber qué está haciendo el *framework* por ti.
 
@@ -1288,11 +1342,17 @@ vf :: Nadie te contrata por conocer un framework, sino por saber por qué toma s
 
 > 🎙️ **El profesor:** ¿te acuerdas de las pruebas del Tema 02? Con agentes es lo mismo, pero más difícil: el agente no responde siempre igual y el camino importa. Aquí ves cómo se mide.
 
+> 🌎 **En la vida real:** Es como evaluar a un conductor nuevo: no basta con que llegue al destino; miras el camino que tomó, si respetó las reglas y cuánto combustible gastó.
+
+> 🌎 **Otro ejemplo:** Es como evaluar a un chef: pruebas el plato, miras cómo cocinó y cuánto gastó en ingredientes.
+
 No puedes mejorar lo que no puedes medir, y los agentes son más difíciles de medir que cualquier cosa que hayas publicado antes: **no son determinísticos**, tienen **muchos pasos**, y **el camino importa tanto como la respuesta**.
 
 ### 5.1 Por qué evaluar agentes es distinto
 
 > 🌎 **En la vida real:** en un examen de matemáticas de opción múltiple solo importa la respuesta. En un examen de manejo, **importa cómo llegaste**: si llegaste al destino pero te pasaste dos semáforos en rojo, reprobaste.
+
+> 🌎 **Otro ejemplo:** Como el examen práctico de manejo: no importa solo que llegues, sino cómo llegaste.
 
 - Una evaluación clásica de aprendizaje automático compara **una** salida con **una** etiqueta.
 - La ejecución de un agente es una **trayectoria**: decisiones, llamadas y observaciones. **Dos ejecuciones con la misma entrada pueden tomar caminos distintos y las dos estar bien.**
@@ -1302,6 +1362,8 @@ No puedes mejorar lo que no puedes medir, y los agentes son más difíciles de m
 ### 5.2 Las capas de evaluación
 
 > 🌎 **En la vida real:** en una fábrica de autos se revisa cada tornillo (unidad), cada paso de la línea de montaje (camino), el auto terminado en la pista (resultado), choques de prueba (seguridad) y después las quejas de los clientes (en línea).
+
+> 🌎 **Otro ejemplo:** Como la revisión de un avión: cada tornillo, cada sistema, el vuelo de prueba, simulacros de emergencia y lo que reportan los pasajeros.
 
 | Nivel | Qué revisa | Cómo |
 |---|---|---|
@@ -1316,6 +1378,8 @@ No puedes mejorar lo que no puedes medir, y los agentes son más difíciles de m
 ### 5.3 Un modelo como juez, bien hecho
 
 > 🌎 **En la vida real:** un jurado de un concurso de cocina. Para que sea justo: tiene una **planilla con puntos** (sabor 1–5, presentación 1–5), tiene que **justificar** cada nota, no sabe de quién es cada plato, y antes del concurso se compara con jueces expertos para ver si califica parecido.
+
+> 🌎 **Otro ejemplo:** Como un árbitro de fútbol que tiene que justificar cada tarjeta con el reglamento, y al que se evalúa comparándolo con árbitros con experiencia.
 
 - Dale al juez **criterios numerados** y un **formato de salida obligatorio**: puntaje por criterio, **pruebas citadas** de la respuesta y un veredicto final.
 - Usa un modelo **más fuerte** que el agente cuando puedas, y **siempre un prompt distinto**.
@@ -1353,6 +1417,8 @@ Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "r
 
 > 🌎 **En la vida real:** en tu app de conductor no basta con "cuánto gané". Importa cuánto gané **por hora**, cuánto gasté en combustible **por viaje**, cuántos viajes cancelé. Con agentes es igual: un solo número engaña.
 
+> 🌎 **Otro ejemplo:** Como evaluar un restaurante: no solo si la comida es rica, sino cuánto tarda, cuánto cuesta cada plato bien servido y cuántos clientes se quejan.
+
 | Métrica | Qué te dice |
 |---|---|
 | **Tasa de éxito** | Qué parte de las ejecuciones logra el objetivo. El número principal. Infórmalo **con el tamaño de la muestra**. |
@@ -1370,6 +1436,8 @@ Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "r
 
 > 🌎 **En la vida real:** un profesor arma su banco de preguntas de examen con los errores que más vio en sus alumnos. Cada año agrega las nuevas trampas en las que cayeron.
 
+> 🌎 **Otro ejemplo:** Como el banco de preguntas de un profesor que crece con cada error que ve en sus alumnos.
+
 - Empieza con **20 a 50 tareas reales o realistas** que cubran las categorías principales y **los casos límite que más miedo te dan**.
 - Incluye los resultados esperados y, si se puede, trayectorias de referencia.
 - **Hazlo crecer desde producción: cada falla que llega a un usuario se convierte en un caso de evaluación.**
@@ -1380,6 +1448,8 @@ Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "r
 ### 5.6 Rastreo y observabilidad
 
 > 🌎 **En la vida real:** la caja negra de un avión. Si algo sale mal, se puede ver segundo a segundo qué pasó, qué dijo cada piloto y qué marcaba cada instrumento. Sin la caja negra, solo puedes adivinar.
+
+> 🌎 **Otro ejemplo:** Como el historial de un viaje en una app de transporte: cada tramo, cada parada, cuánto tardó y cuánto costó.
 
 Un **rastro** (*trace*) es el registro completo de una ejecución: cada llamada al modelo con lo que entró y salió, cada llamada a herramienta con sus datos y resultados, tiempos, *tokens*, costo y errores, organizado como **tramos anidados** (*spans*). **Sin rastros estás depurando una caja negra con `console.log`.** Instrumenta desde el primer día, antes de elegir *framework*.
 
@@ -1422,11 +1492,17 @@ escribe :: ¿Qué es un rastro y por qué hay que instrumentar desde el primer d
 
 > 🎙️ **El profesor:** un agente en tu computadora no es un producto. Esta parte es el CI, las reglas de Firestore y el "probar en el teléfono real" de tus clases anteriores, aplicados a agentes.
 
+> 🌎 **En la vida real:** Es como pasar de cocinar en casa a abrir un restaurante: además de la receta, necesitas turnos, seguridad, costos y un plan si algo sale mal.
+
+> 🌎 **Otro ejemplo:** Es como pasar de manejar tu carro a dirigir una flota de taxis: hace falta organización, mantenimiento y control.
+
 Un cuaderno que funciona no es un producto. Esta parte es el trabajo de entorno, confiabilidad, seguridad y costo que convierte un agente en un sistema que puedes poner frente a usuarios **y aun así dormir tranquilo**.
 
 ### 6.1 La arquitectura de referencia
 
 > 🌎 **En la vida real:** un restaurante grande. El **mozo** toma el pedido y te da un número (la API). Los pedidos van a una **fila de comandas** (la cola). Varios **cocineros** toman comandas de la fila (los trabajadores). La **despensa** tiene llave y control (los servicios de herramientas). Hay un **cuarto aparte** para lo peligroso, como freír con mucho aceite (la caja aislada). El **cuaderno de pedidos** guarda todo (el almacén de estado). Y el **dueño** mira las cámaras (la observabilidad).
+
+> 🌎 **Otro ejemplo:** Como una empresa de delivery: la app toma pedidos, la cola los ordena, los repartidores salen, y hay central, depósito y cámaras.
 
 ```text
 Cliente (web, app, Slack, API) ─► Capa de API (autentica, valida, encola, transmite) ─► Cola (ejecuciones como trabajos) ─► Trabajadores del agente (el ciclo, escalan a lo ancho)
@@ -1451,6 +1527,8 @@ Cliente (web, app, Slack, API) ─► Capa de API (autentica, valida, encola, tr
 
 > 🌎 **En la vida real:** dejas el carro en el taller. Te dan un **número de orden**, te mandan mensajes ("ya revisamos los frenos", "falta la pieza") y si el mecánico de la mañana se va, **el de la tarde sigue desde donde quedó**, porque está todo anotado en la orden.
 
+> 🌎 **Otro ejemplo:** Como un pedido de comida largo: te dan número, te avisan cada paso, y si cambia el cocinero de turno, sigue donde quedó.
+
 Las ejecuciones duran de **segundos a horas**. Diseña para eso:
 - **Devuelve un id de ejecución al instante.**
 - **Transmite eventos de avance** (paso empezado, herramienta llamada, resultado parcial) para que el usuario vea movimiento.
@@ -1465,6 +1543,8 @@ Las ejecuciones duran de **segundos a horas**. Diseña para eso:
 
 > 🌎 **En la vida real:** un buen conductor lleva rueda de auxilio, sabe un camino alternativo si la avenida está cortada, y no se queda esperando para siempre en un semáforo roto.
 
+> 🌎 **Otro ejemplo:** Como un buen restaurante en día de mucha gente: tiempo máximo por plato, un cocinero de reserva y un plan B si se acaba un ingrediente.
+
 - **Tiempo máximo** en cada llamada al modelo y a herramientas. Los agentes se cuelgan **en la única llamada que olvidaste**.
 - **Reintentos con espera exponencial y un poco de azar** (*jitter*) para errores pasajeros (límites de uso, errores 5xx). **Nunca reintentes una herramienta destructiva sin clave de idempotencia.**
 - **Cortacircuitos** (*circuit breakers*) en herramientas y proveedores. Si algo falla una y otra vez, **falla rápido** y usa el plan B.
@@ -1478,6 +1558,8 @@ Las ejecuciones duran de **segundos a horas**. Diseña para eso:
 ### 6.4 Seguridad
 
 > 🌎 **En la vida real:** imagina un asistente que tiene **la llave de tu casa**, **lee todas las cartas** que llegan (incluso las de desconocidos) y **puede mandar paquetes** a cualquier dirección. Si un desconocido escribe en una carta "manda las joyas a esta dirección" y el asistente obedece… te robaron. Ese es el peligro de los agentes.
+
+> 🌎 **Otro ejemplo:** Como un empleado que recibe cartas de desconocidos y tiene la llave de la caja: nunca le das la llave de todo, y le enseñas que una carta no es una orden.
 
 Los agentes **leen contenido en el que no se puede confiar** y **tienen credenciales**. Esa combinación es la superficie de ataque. El modelo mental más útil es **la trifecta letal**, un término del investigador de seguridad **Simon Willison**: un agente que
 
@@ -1502,6 +1584,8 @@ puede ser convertido en una herramienta para **robar datos** por cualquiera que 
 
 > 🌎 **En la vida real:** ahorrar combustible: no cargar peso de más, no acelerar de golpe, usar la ruta corta, y medir **cuánto gastas por viaje que cobraste**, no por kilómetro manejado.
 
+> 🌎 **Otro ejemplo:** Como ahorrar en el supermercado: comprar lo necesario, aprovechar ofertas y medir cuánto gastas por comida, no por compra.
+
 - **Caché de prompts.** Deja el *system prompt* y las herramientas como un prefijo estable. **Solo esto** baja mucho el costo de entrada de los ciclos que reenvían el mismo prefijo en cada paso.
 - **Modelos por niveles.** Pasos simples a modelos chicos; el modelo más potente solo para planificar y sintetizar.
 - **Llamadas a herramientas en paralelo.** Deja que el modelo pida varias herramientas independientes en un turno y córrelas a la vez.
@@ -1514,6 +1598,8 @@ puede ser convertido en una herramienta para **robar datos** por cualquiera que 
 ### 6.6 Lanzamiento y operación
 
 > 🌎 **En la vida real:** un conductor nuevo en una empresa de transporte. Primero viaja **de acompañante** mirando (modo sombra). Después maneja **con el instructor al lado** que puede frenar (modo asistido). Después maneja solo, **pero en rutas cortas y con rastreador** (autónomo con límites). Recién con buenos resultados le dan rutas largas.
+
+> 🌎 **Otro ejemplo:** Como estrenar un servicio de delivery: primero repartos de prueba, después con supervisor, y recién después solos, con un botón para detener todo.
 
 **Lanza por etapas:**
 1. **Modo sombra.** El agente corre con tráfico real, pero sus salidas van a registros, no a usuarios. Comparas contra el sistema actual.
@@ -1548,11 +1634,17 @@ elige :: ¿Qué es un canario? :: Un error :: Probar una versión nueva en una p
 
 > 🎙️ **El profesor:** la última parte junta todo en un ejemplo real, te da la lista para publicar, las fallas más comunes y las 12 preguntas de entrevista. Es tu repaso final.
 
+> 🌎 **En la vida real:** Es como el examen final de un curso: junta todo lo que viste en un caso real.
+
+> 🌎 **Otro ejemplo:** Es como armar un rompecabezas cuando ya tienes todas las piezas: ahora ves la imagen completa.
+
 Cómo se combinan las piezas en un sistema real, qué revisar antes de publicar, y cómo convertir lo que aprendiste en respuestas de entrevista y en pruebas para tu portafolio.
 
 ### 7.1 Arquitectura de referencia: un agente de soporte
 
 > 🌎 **En la vida real:** imagina el soporte de **Copiloto Driver** atendido por un agente: responde dudas de cómo usar la app leyendo la documentación, mira la cuenta de un conductor y puede devolver dinero de una suscripción hasta cierto monto. Así se armaría con todo lo de esta clase.
+
+> 🌎 **Otro ejemplo:** Como el servicio al cliente de una aerolínea: recepción, derivación al área correcta, autorización de un supervisor para reembolsos grandes, y registro de cada llamada.
 
 El ejemplo de la guía es un agente de soporte para un producto de software. **Cada patrón principal aparece al menos una vez.**
 
@@ -1577,6 +1669,8 @@ Memoria: perfil del usuario y tickets pasados · Rastros + evaluaciones: 10% cal
 
 > 🌎 **En la vida real:** la lista que repasa un piloto antes de despegar, punto por punto, aunque haya volado mil veces.
 
+> 🌎 **Otro ejemplo:** Como la lista de un mecánico antes de entregar un carro: frenos, luces, aceite, documentos y una vuelta de prueba.
+
 | Área | Antes de publicar |
 |---|---|
 | **Diseño** | El patrón más simple que resuelve el problema, escrito y con un diagrama. "Terminado" está definido. Cada herramienta tiene un trabajo, un esquema validado y errores que enseñan. El estado tiene tipos y puntos de guardado. |
@@ -1590,6 +1684,8 @@ Memoria: perfil del usuario y tickets pasados · Rastros + evaluaciones: 10% cal
 ### 7.3 Fallas comunes y cómo se arreglan
 
 > 🌎 **En la vida real:** la tabla del manual del carro: "si la luz X se prende → causa probable → qué hacer".
+
+> 🌎 **Otro ejemplo:** Como la tabla de "si el teléfono hace esto, prueba esto otro" que trae el manual.
 
 | Síntoma | Causa probable | Arreglo |
 |---|---|---|
@@ -1606,6 +1702,8 @@ Memoria: perfil del usuario y tickets pasados · Rastros + evaluaciones: 10% cal
 ### 7.4 Las 12 preguntas de entrevista que tienes que poder responder
 
 > 🌎 **En la vida real:** las preguntas del examen teórico de manejo se repiten. Si las practicas en voz alta, el día del examen no te tiemblan las piernas.
+
+> 🌎 **Otro ejemplo:** Como las preguntas que siempre hace un cliente al contratar un servicio: practicadas, las respondes con calma.
 
 Cada pregunta con **lo que debe tener una respuesta fuerte**:
 
@@ -1625,6 +1723,8 @@ Cada pregunta con **lo que debe tener una respuesta fuerte**:
 ### 7.5 Cinco proyectos de portafolio que demuestran que sabes construir agentes
 
 > 🌎 **En la vida real:** un carpintero no consigue trabajo mostrando su diploma: muestra **las mesas que hizo**. Estos proyectos son tus mesas.
+
+> 🌎 **Otro ejemplo:** Como el portafolio de un fotógrafo: no dice "sé sacar fotos", muestra las fotos.
 
 1. **Agente investigador ReAct** con citas y revisión de apoyo. Publica los rastros.
 2. **Agente que arregla código:** lee una prueba que falla, edita el código en una caja aislada, vuelve a correr las pruebas, con un ciclo de reflexión de máximo tres intentos. Informa cuántos arregla de 20 problemas.
@@ -1722,6 +1822,8 @@ escribe :: Responde: ¿qué es MCP y por qué importa? :: Un estándar abierto p
 </details>
 
 ## Para la entrevista
+
+> 🌎 **En la vida real:** Contar qué es un agente es como explicar qué hace un buen asistente: decide, usa sus herramientas, revisa y sigue hasta terminar.
 
 > 🎤 **Entrevista:** las doce preguntas de la parte 7.4 son tu examen final. Respóndelas en voz alta, sin leer, una por día. Si alguna no te sale, vuelve a su parte.
 

@@ -14,6 +14,8 @@ Los ejemplos se simplificaron para aprender. El código real puede verse un poco
 >
 > En el ejercicio, el `while` es el camión parado en el puente: el "hola" quería cruzar a los 100 ms, pero tuvo que esperar 2 segundos.
 
+> 🌎 **Otro ejemplo:** Como una cocina con un solo cocinero: si se pone a pelar 50 kilos de papa, nadie más recibe su plato, aunque la heladera esté llena.
+
 **Qué es:** tu código de React Native corre, casi todo, en un solo hilo. Solo puede hacer una cosa a la vez.
 
 **Comparación:** es una caja de supermercado con una sola cajera. Si un cliente tarda 5 minutos, todos esperan.
@@ -41,6 +43,8 @@ while (Date.now() < fin) {}
 > - **Detector de trabas** = el sensor que avisa "el tránsito está detenido".
 > - **Perfilador** = la cámara del helicóptero de tránsito: te muestra **exactamente qué camión** está trabando la avenida.
 
+> 🌎 **Otro ejemplo:** Como encontrar por qué llegas tarde al trabajo: anotas a qué hora sales y cuánto tardas en cada tramo, y descubres que era el semáforo de la esquina, no el tránsito.
+
 **Qué es:** buscar el dato real antes de cambiar el código.
 
 | Herramienta | Qué responde |
@@ -58,6 +62,8 @@ while (Date.now() < fin) {}
 > 🌎 **En la vida real:** es como un pintor que repinta **toda la pared** cada vez que cambia algo. Si el reloj cambia cada segundo, repinta la pared 60 veces por minuto, aunque en la pared solo se vean horas y minutos.
 >
 > Lo mejor es como el cartel de "Próximo bus: 14:32": se actualiza **una vez por minuto**, justo cuando cambia el minuto. `60000 - (Date.now() % 60000)` calcula "cuántos segundos faltan para el próximo minuto en punto", como mirar el reloj a las 14:31:45 y saber que faltan 15 segundos para las 14:32.
+
+> 🌎 **Otro ejemplo:** Como un reloj de pared que alguien vuelve a pintar entero cada segundo, cuando solo la aguja de los minutos cambia una vez por minuto.
 
 **Qué es:** al cambiar el estado, React vuelve a ejecutar el componente. Si es grande, eso cuesta tiempo.
 
@@ -80,6 +86,8 @@ setTimeout(refresh, 60000 - (Date.now() % 60000));
 >
 > El problema de los objetos: es como dos **gemelos idénticos**. Se parecen en todo, pero son dos personas distintas con distinto documento. React pregunta "¿es **la misma persona**?", no "¿se parecen?". Por eso `{ a: 1 } === { a: 1 }` da `false`. La solución es comparar los **datos** (el número de la meta diaria), no la persona.
 
+> 🌎 **Otro ejemplo:** Como guardar el resultado de una cuenta difícil en un papel: si te dan el problema en una hoja nueva, aunque diga lo mismo, crees que es otro y vuelves a calcular.
+
 **Qué es:** `useMemo` guarda un cálculo y lo repite solo si cambian sus dependencias. Los objetos se comparan por referencia.
 
 ```tsx
@@ -101,6 +109,8 @@ useMemo(calcular, [goals.daily, goals.weekly]); // recalcula si cambia el valor
 > - **219.000 pasos**: es como buscar en 600 boletas, una por una, para **cada uno** de los 365 días. Mejor ordenar las boletas una vez en 365 sobres, uno por día.
 >
 > **Riesgo del caché**: el café molido hace mucho tiempo pierde sabor (se desactualiza), y si guardas demasiados frascos te llenan la cocina. **Cuándo no vale**: si moler tarda un segundo, o si cada día cambias de café, el frasco no te ahorra nada.
+
+> 🌎 **Otro ejemplo:** Como organizar la ropa: separas por tipo una vez (índice) y dejas a mano lo que usas siempre (caché), en vez de revolver el armario cada mañana.
 
 **Índice:** en vez de recorrer toda la lista cada vez, se organiza una vez y se busca directo. Es como el índice de un libro.
 
@@ -129,6 +139,8 @@ Recorrer 600 registros para 365 días son 219.000 pasos. Con índice, se recorre
 >
 > **Sabotaje (mutation testing)**: es como el banco que manda **clientes falsos** con billetes falsos para ver si los cajeros los detectan. Si nadie detecta nada, el entrenamiento no sirve. Si lo detectan, ese cajero sabe reconocer **ese** tipo de billete, no todos.
 
+> 🌎 **Otro ejemplo:** Como un juez que decide según la ley, no según lo que hizo el acusado: la prueba sale de la regla, no del código.
+
 **Qué es:** código que comprueba otro código. La lección completa es el [Tema 02](../02-pruebas-automaticas/LECCION.md); aquí solo va lo que se aprendió arreglando Copiloto.
 
 **La regla más importante:** escribe la prueba según lo que **debe** pasar, no copiando lo que el código hace hoy.
@@ -154,6 +166,8 @@ it('corrida Uber a las 02:00 cuenta en el día anterior', () => {
 >
 > El caso de Uber es como si el cajero contara "Uber" en un sobre y "uber" en otro, pero después, al sumar, metiera la plata de los dos en los dos sobres: 30 y 30 = 60, cuando en realidad solo había 30.
 
+> 🌎 **Otro ejemplo:** Como una planilla donde una persona escribió "Supermercado Bom" y otra "supermercado bom": al agrupar parecen dos tiendas.
+
 **Qué es:** dar una sola forma a los datos antes de usarlos.
 
 ```ts
@@ -173,6 +187,8 @@ new Set(records.map((r) => normalizeFiscalAppId(r.appId)));
 >
 > Los **bordes** (03:59 y 04:00) son como el último minuto antes de que cierre la caja: ahí es donde más se equivocan las cuentas.
 
+> 🌎 **Otro ejemplo:** Como el turno de un vigilante nocturno de 22:00 a 6:00: lo que pasa a las 2 de la mañana es parte de su turno de "ayer".
+
 **Qué es:** el día del negocio no siempre coincide con el del calendario. Para Uber, las 02:00 del día 5 aún pertenecen al día 4.
 
 **Prueba siempre los bordes:** 03:59 y 04:00, el fin de mes y otras zonas horarias.
@@ -183,6 +199,8 @@ new Set(records.map((r) => normalizeFiscalAppId(r.appId)));
 ## Parte 9. CI
 
 > 🌎 **En la vida real:** además del inspector de la fábrica: es como el **control de alcoholemia** en la carretera. No le importa si te sientes bien; te hace soplar a ti y a todos, siempre. La **máquina limpia** es como hacer el examen con un aparato recién calibrado, no con el tuyo de casa, que quizás marca de menos.
+
+> 🌎 **Otro ejemplo:** Como el examen de manejo en el auto de la autoescuela, no en el tuyo con tus mañas: si apruebas ahí, manejas bien en cualquiera.
 
 **Qué es:** Integración Continua. Una máquina limpia revisa cada subida. La lección completa, con el archivo de tu app explicado línea por línea, es el [Tema 04](../04-ci/LECCION.md).
 
@@ -203,6 +221,8 @@ new Set(records.map((r) => normalizeFiscalAppId(r.appId)));
 > - **Candado** = el **inspector** que visita los locales y multa al que se hizo su propio uniforme. El motor existe, pero sin inspector, alguien siempre se lo salta.
 >
 > **Ventaja de cambiar en un solo lugar**: como cambiar el precio en el sistema central y que se actualice en todas las cajas, en vez de ir caja por caja con un marcador.
+
+> 🌎 **Otro ejemplo:** Como el uniforme de una empresa: el color oficial tiene nombre, se reparte desde un solo lugar y un supervisor revisa que nadie lleve uno hecho a mano.
 
 **Token:** un nombre para un valor de diseño, como `dash.radiusLg`.
 
@@ -229,6 +249,8 @@ color: dash.formHint
 >
 > `import type` es como pedir **solo la foto** del vecino para saber cómo es, no que venga en persona: la foto desaparece al final, no crea un compromiso.
 
+> 🌎 **Otro ejemplo:** Como dos compañeros que no empiezan porque cada uno espera que el otro termine primero: se resuelve dándoles a los dos una herramienta común.
+
 **Qué es:** A importa B, y B importa A. Puede causar errores al cargar y hace el código más difícil de cambiar.
 
 **Solución común:** mover lo compartido a un tercer archivo.
@@ -253,6 +275,8 @@ Después: los dos importan vehicleOdometer
 >
 > **¿Dividir un archivo lo hace mejor?** No siempre: repartir la ropa en cinco cajones al azar no ordena nada. Cada cajón tiene que tener **un tipo** de ropa.
 
+> 🌎 **Otro ejemplo:** Como reorganizar los cajones de la cocina: los mismos cubiertos, mejor ubicados; la comida sale igual.
+
 **Qué es:** cambiar la estructura sin cambiar lo que hace el programa.
 
 **Cómo hacerlo seguro:** tener pruebas, mover sin reescribir y comparar antes y después.
@@ -270,6 +294,8 @@ Después: los dos importan vehicleOdometer
 >
 > ¿Por qué las revisiones pasaron? Porque revisaron cada mueble en la caja, pero nadie **armó la sala completa** y se sentó a comer (nadie arrancó la app).
 
+> 🌎 **Otro ejemplo:** Como un repuesto adaptado a mano para un modelo de carro: si cambias de modelo, el repuesto ya no calza.
+
 **Qué es:** las librerías también tienen errores. `patch-package` guarda un cambio y lo reaplica al instalar.
 
 **Riesgo real:** el parche depende de una versión exacta. Al actualizar Firebase dejó de aplicarse, y dos copias de `@firebase/app` rompieron el arranque.
@@ -285,6 +311,8 @@ Después: los dos importan vehicleOdometer
 > 3. **Revisa los números**: como revisar el ticket del supermercado.
 > 4. **No publiques lo que no puedas explicar**: no firmes un contrato que no leíste.
 > 5. **Para lo exacto, datos o código**: un plano de electricidad no se hace con un dibujo artístico "parecido"; cada cable tiene que ir donde dice. Por eso el mapa se hizo con código.
+
+> 🌎 **Otro ejemplo:** Como un pasante muy rápido y entusiasta: le pides el trabajo, pero revisas los números y no firmas nada que no entiendas.
 
 1. Pide medidas, no opiniones.
 2. Exige ver el resultado funcionando.
