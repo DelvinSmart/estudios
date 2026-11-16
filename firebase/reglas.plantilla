@@ -1,0 +1,87 @@
+rules_version = '2';
+
+// Reglas de seguridad del Mapa de estudios (proyecto mapa-estudios-ds).
+// ESTE ARCHIVO SE GENERA: edita reglas.plantilla y corre `node firebase/generar-reglas.mjs`.
+//
+// La idea: el navegador NO decide nada. Firestore solo acepta:
+//   - prender UN bombillo a la vez, de la lista oficial, con la hora del servidor,
+//     y al menos __ESPERA__ segundos después del anterior;
+//   - nunca borrar, cambiar ni adelantar fechas;
+//   - emitir el certificado solo si el servidor ya ve __TOTAL__ de __TOTAL__ partes.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function partes() {
+      return __PARTES__;
+    }
+    function total() { return __TOTAL__; }
+    function espera() { return duration.value(__ESPERA__, 's'); }
+    function logueado() { return request.auth != null; }
+
+    // ---------- progreso/{uid}: los bombillos de cada persona ----------
+    match /progreso/{uid} {
+      allow read: if logueado() && request.auth.uid == uid;
+
+      // El primer bombillo
+      allow create: if logueado() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['n', 'inicio', 'ultimo', 'ultimaParte', 'partes'])
+        && request.resource.data.n == 1
+        && request.resource.data.ultimaParte in partes()
+        && request.resource.data.partes.keys().hasOnly([request.resource.data.ultimaParte])
+        && request.resource.data.partes[request.resource.data.ultimaParte] == request.time
+        && request.resource.data.inicio == request.time
+        && request.resource.data.ultimo == request.time;
+
+      // Cada bombillo siguiente: uno solo, nuevo, de la lista, y no antes de la espera
+      allow update: if logueado() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['n', 'inicio', 'ultimo', 'ultimaParte', 'partes'])
+        && request.resource.data.n == resource.data.n + 1
+        && request.resource.data.n <= total()
+        && request.resource.data.inicio == resource.data.inicio
+        && request.time > resource.data.ultimo + espera()
+        && request.resource.data.ultimo == request.time
+        && request.resource.data.ultimaParte in partes()
+        && request.resource.data.partes.diff(resource.data.partes).addedKeys() == [request.resource.data.ultimaParte].toSet()
+        && request.resource.data.partes.diff(resource.data.partes).affectedKeys() == [request.resource.data.ultimaParte].toSet()
+        && request.resource.data.partes[request.resource.data.ultimaParte] == request.time;
+
+      allow delete: if false;
+    }
+
+    // ---------- certificados/{codigo}: públicos para verificar, uno por persona ----------
+    match /certificados/{codigo} {
+      // Cualquiera puede comprobar UN código; nadie puede listar todos.
+      allow get: if true;
+      allow list: if false;
+
+      allow create: if logueado()
+        && codigo.matches('^ME-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$')
+        && request.resource.data.keys().hasOnly(['uid', 'nombre', 'emitido', 'inicio', 'fin', 'partes'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.nombre is string
+        && request.resource.data.nombre.size() >= 3 && request.resource.data.nombre.size() <= 80
+        && request.resource.data.emitido == request.time
+        && request.resource.data.partes == total()
+        && get(/databases/$(database)/documents/progreso/$(request.auth.uid)).data.n == total()
+        && request.resource.data.inicio == get(/databases/$(database)/documents/progreso/$(request.auth.uid)).data.inicio
+        && request.resource.data.fin == get(/databases/$(database)/documents/progreso/$(request.auth.uid)).data.ultimo
+        && getAfter(/databases/$(database)/documents/emitidos/$(request.auth.uid)).data.codigo == codigo;
+
+      // Se puede borrar el propio (por ejemplo, para corregir el nombre y emitirlo de nuevo).
+      allow delete: if logueado() && resource.data.uid == request.auth.uid
+        && !existsAfter(/databases/$(database)/documents/emitidos/$(request.auth.uid));
+      allow update: if false;
+    }
+
+    // ---------- emitidos/{uid}: qué código tiene cada persona (máximo uno) ----------
+    match /emitidos/{uid} {
+      allow read: if logueado() && request.auth.uid == uid;
+      allow create: if logueado() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['codigo'])
+        && getAfter(/databases/$(database)/documents/certificados/$(request.resource.data.codigo)).data.uid == uid;
+      allow delete: if logueado() && request.auth.uid == uid
+        && !existsAfter(/databases/$(database)/documents/certificados/$(resource.data.codigo));
+      allow update: if false;
+    }
+  }
+}

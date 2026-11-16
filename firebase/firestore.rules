@@ -1,0 +1,317 @@
+rules_version = '2';
+
+// Reglas de seguridad del Mapa de estudios (proyecto mapa-estudios-ds).
+// ESTE ARCHIVO SE GENERA: edita reglas.plantilla y corre `node firebase/generar-reglas.mjs`.
+//
+// La idea: el navegador NO decide nada. Firestore solo acepta:
+//   - prender UN bombillo a la vez, de la lista oficial, con la hora del servidor,
+//     y al menos 60 segundos después del anterior;
+//   - nunca borrar, cambiar ni adelantar fechas;
+//   - emitir el certificado solo si el servidor ya ve 229 de 229 partes.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function partes() {
+      return [
+        '01:CLASE-GUIADA.md:1',
+        '01:CLASE-GUIADA.md:2',
+        '01:CLASE-GUIADA.md:3',
+        '01:CLASE-GUIADA.md:4',
+        '01:CLASE-GUIADA.md:5',
+        '01:CLASE-GUIADA.md:6',
+        '01:CLASE-GUIADA.md:7',
+        '02:CLASE-GUIADA.md:1',
+        '02:CLASE-GUIADA.md:2',
+        '02:CLASE-GUIADA.md:3',
+        '02:CLASE-GUIADA.md:4',
+        '02:CLASE-GUIADA.md:5',
+        '02:CLASE-GUIADA.md:6',
+        '02:CLASE-GUIADA.md:7',
+        '02:CLASE-GUIADA.md:8',
+        '02:CLASE-GUIADA.md:9',
+        '02:CLASE-GUIADA.md:10',
+        '02:CLASE-GUIADA.md:11',
+        '03:CLASE-GUIADA.md:1',
+        '03:CLASE-GUIADA.md:2',
+        '03:CLASE-GUIADA.md:3',
+        '03:CLASE-GUIADA.md:4',
+        '03:CLASE-GUIADA.md:5',
+        '03:CLASE-GUIADA.md:6',
+        '03:CLASE-GUIADA.md:7',
+        '03:CLASE-GUIADA.md:8',
+        '03:CLASE-GUIADA.md:9',
+        '03:CLASE-GUIADA.md:10',
+        '03:CLASE-GUIADA.md:11',
+        '04:CLASE-GUIADA.md:1',
+        '04:CLASE-GUIADA.md:2',
+        '04:CLASE-GUIADA.md:3',
+        '04:CLASE-GUIADA.md:4',
+        '04:CLASE-GUIADA.md:5',
+        '04:CLASE-GUIADA.md:6',
+        '04:CLASE-GUIADA.md:7',
+        '04:CLASE-GUIADA.md:8',
+        '04:CLASE-GUIADA.md:9',
+        '04:CLASE-GUIADA.md:10',
+        '04:CLASE-GUIADA.md:11',
+        '05:CLASE-GUIADA.md:1',
+        '05:CLASE-GUIADA.md:2',
+        '05:CLASE-GUIADA.md:3',
+        '05:CLASE-GUIADA.md:4',
+        '05:CLASE-GUIADA.md:5',
+        '05:CLASE-GUIADA.md:6',
+        '05:CLASE-GUIADA.md:7',
+        '05:CLASE-GUIADA.md:8',
+        '05:CLASE-GUIADA.md:9',
+        '06:CLASE-GUIADA.md:1',
+        '06:CLASE-GUIADA.md:2',
+        '06:CLASE-GUIADA.md:3',
+        '06:CLASE-GUIADA.md:4',
+        '06:CLASE-GUIADA.md:5',
+        '06:CLASE-GUIADA.md:6',
+        '06:CLASE-GUIADA.md:7',
+        '06:CLASE-GUIADA.md:8',
+        '06:CLASE-GUIADA.md:9',
+        '06:CLASE-GUIADA.md:10',
+        '06:CLASE-GUIADA.md:11',
+        '06:CLASE-GUIADA.md:12',
+        '07:CLASE-GUIADA.md:1',
+        '07:CLASE-GUIADA.md:2',
+        '07:CLASE-GUIADA.md:3',
+        '07:CLASE-GUIADA.md:4',
+        '07:CLASE-GUIADA.md:5',
+        '07:CLASE-GUIADA.md:6',
+        '07:CLASE-GUIADA.md:7',
+        '07:CLASE-GUIADA.md:8',
+        '07:CLASE-GUIADA.md:9',
+        '15:CLASE-GUIADA.md:1',
+        '15:CLASE-GUIADA.md:2',
+        '15:CLASE-GUIADA.md:3',
+        '15:CLASE-GUIADA.md:4',
+        '15:CLASE-GUIADA.md:5',
+        '15:CLASE-GUIADA.md:6',
+        '15:CLASE-GUIADA.md:7',
+        '15:CLASE-GUIADA.md:8',
+        '15:CLASE-GUIADA.md:9',
+        '15:CLASE-GUIADA.md:10',
+        '16:CLASE-GUIADA.md:1',
+        '16:CLASE-GUIADA.md:2',
+        '16:CLASE-GUIADA.md:3',
+        '16:CLASE-GUIADA.md:4',
+        '16:CLASE-GUIADA.md:5',
+        '16:CLASE-GUIADA.md:6',
+        '16:CLASE-GUIADA.md:7',
+        '16:CLASE-GUIADA.md:8',
+        '16:CLASE-GUIADA.md:9',
+        '16:CLASE-GUIADA.md:10',
+        '16:CLASE-GUIADA.md:11',
+        '16:CLASE-GUIADA.md:12',
+        '17:CLASE-GUIADA.md:1',
+        '17:CLASE-GUIADA.md:2',
+        '17:CLASE-GUIADA.md:3',
+        '17:CLASE-GUIADA.md:4',
+        '17:CLASE-GUIADA.md:5',
+        '17:CLASE-GUIADA.md:6',
+        '17:CLASE-GUIADA.md:7',
+        '17:CLASE-GUIADA.md:8',
+        '17:CLASE-GUIADA.md:9',
+        '17:CLASE-GUIADA.md:10',
+        '17:CLASE-GUIADA.md:11',
+        '17:CLASE-GUIADA.md:12',
+        '08:CLASE-GUIADA.md:1',
+        '08:CLASE-GUIADA.md:2',
+        '08:CLASE-GUIADA.md:3',
+        '08:CLASE-GUIADA.md:4',
+        '08:CLASE-GUIADA.md:5',
+        '08:CLASE-GUIADA.md:6',
+        '08:CLASE-GUIADA.md:7',
+        '08:CLASE-GUIADA.md:8',
+        '08:CLASE-GUIADA.md:9',
+        '09:CLASE-GUIADA.md:1',
+        '09:CLASE-GUIADA.md:2',
+        '09:CLASE-GUIADA.md:3',
+        '09:CLASE-GUIADA.md:4',
+        '09:CLASE-GUIADA.md:5',
+        '09:CLASE-GUIADA.md:6',
+        '09:CLASE-GUIADA.md:7',
+        '09:CLASE-GUIADA.md:8',
+        '09:CLASE-GUIADA.md:9',
+        '09:CLASE-GUIADA.md:10',
+        '09:CLASE-GUIADA.md:11',
+        '10:CLASE-GUIADA.md:1',
+        '10:CLASE-GUIADA.md:2',
+        '10:CLASE-GUIADA.md:3',
+        '10:CLASE-GUIADA.md:4',
+        '10:CLASE-GUIADA.md:5',
+        '10:CLASE-GUIADA.md:6',
+        '10:CLASE-GUIADA.md:7',
+        '10:CLASE-GUIADA.md:8',
+        '10:CLASE-GUIADA.md:9',
+        '10:CLASE-GUIADA.md:10',
+        '10:CLASE-GUIADA.md:11',
+        '11:CLASE-GUIADA.md:1',
+        '11:CLASE-GUIADA.md:2',
+        '11:CLASE-GUIADA.md:3',
+        '11:CLASE-GUIADA.md:4',
+        '11:CLASE-GUIADA.md:5',
+        '11:CLASE-GUIADA.md:6',
+        '11:CLASE-GUIADA.md:7',
+        '11:CLASE-GUIADA.md:8',
+        '11:CLASE-GUIADA.md:9',
+        '11:CLASE-GUIADA.md:10',
+        '11:CLASE-GUIADA.md:11',
+        '11:CLASE-GUIADA.md:12',
+        '11:CLASE-GUIADA.md:13',
+        '11:CLASE-GUIADA.md:14',
+        '11:CLASE-GUIADA.md:15',
+        '11:CLASE-GUIADA.md:16',
+        '12:CLASE-GUIADA.md:1',
+        '12:CLASE-GUIADA.md:2',
+        '12:CLASE-GUIADA.md:3',
+        '12:CLASE-GUIADA.md:4',
+        '12:CLASE-GUIADA.md:5',
+        '12:CLASE-GUIADA.md:6',
+        '12:CLASE-GUIADA.md:7',
+        '12:CLASE-GUIADA.md:8',
+        '12:CLASE-GUIADA.md:9',
+        '12:CLASE-GUIADA.md:10',
+        '12:CLASE-GUIADA.md:11',
+        '12:CLASE-GUIADA.md:12',
+        '12:CLASE-GUIADA.md:13',
+        '13:CLASE-GUIADA.md:1',
+        '13:CLASE-GUIADA.md:2',
+        '13:CLASE-GUIADA.md:3',
+        '13:CLASE-GUIADA.md:4',
+        '13:CLASE-GUIADA.md:5',
+        '13:CLASE-GUIADA.md:6',
+        '13:CLASE-GUIADA.md:7',
+        '13:CLASE-GUIADA.md:8',
+        '13:CLASE-GUIADA.md:9',
+        '13:CLASE-GUIADA.md:10',
+        '13:CLASE-GUIADA.md:11',
+        '13:CLASE-GUIADA.md:12',
+        '13:CLASE-GUIADA.md:13',
+        '13:CLASE-GUIADA.md:14',
+        '14:CLASE-GUIADA.md:1',
+        '14:CLASE-GUIADA.md:2',
+        '14:CLASE-GUIADA.md:3',
+        '14:CLASE-GUIADA.md:4',
+        '14:CLASE-GUIADA.md:5',
+        '14:CLASE-GUIADA.md:6',
+        '14:CLASE-GUIADA.md:7',
+        '14:CLASE-GUIADA.md:8',
+        '14:CLASE-GUIADA.md:9',
+        '14:CLASE-GUIADA.md:10',
+        '14:CLASE-GUIADA.md:11',
+        '14:CLASE-GUIADA.md:12',
+        '14:CLASE-GUIADA.md:13',
+        '14:CLASE-GUIADA.md:14',
+        '18:CLASE-GUIADA.md:1',
+        '18:CLASE-GUIADA.md:2',
+        '18:CLASE-GUIADA.md:3',
+        '18:CLASE-GUIADA.md:4',
+        '18:CLASE-GUIADA.md:5',
+        '18:CLASE-GUIADA.md:6',
+        '18:CLASE-GUIADA.md:7',
+        '18:CLASE-GUIADA.md:8',
+        '18:CLASE-GUIADA.md:9',
+        '18:CLASE-GUIADA.md:10',
+        '18:CLASE-GUIADA.md:11',
+        '18:CLASE-GUIADA.md:12',
+        '20:CLASE-GUIADA.md:1',
+        '20:CLASE-GUIADA.md:2',
+        '20:CLASE-GUIADA.md:3',
+        '20:CLASE-GUIADA.md:4',
+        '20:CLASE-GUIADA.md:5',
+        '20:CLASE-GUIADA.md:6',
+        '20:CLASE-GUIADA.md:7',
+        '20:CLASE-GUIADA.md:8',
+        '20:CLASE-GUIADA.md:9',
+        '20:CLASE-GUIADA.md:10',
+        '20:CLASE-GUIADA.md:11',
+        '20:CLASE-GUIADA.md:12',
+        '20:CLASE-GUIADA.md:13',
+        '20:CLASE-GUIADA.md:14',
+        '19:LECCION.md:1',
+        '19:LECCION.md:2',
+        '19:LECCION.md:3',
+        '19:LECCION.md:4',
+        '19:LECCION.md:5',
+        '19:LECCION.md:6',
+        '19:LECCION.md:7',
+        '19:LECCION.md:8',
+        '19:LECCION.md:9',
+        '19:LECCION.md:10',
+        '19:LECCION.md:11'
+      ];
+    }
+    function total() { return 229; }
+    function espera() { return duration.value(60, 's'); }
+    function logueado() { return request.auth != null; }
+
+    // ---------- progreso/{uid}: los bombillos de cada persona ----------
+    match /progreso/{uid} {
+      allow read: if logueado() && request.auth.uid == uid;
+
+      // El primer bombillo
+      allow create: if logueado() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['n', 'inicio', 'ultimo', 'ultimaParte', 'partes'])
+        && request.resource.data.n == 1
+        && request.resource.data.ultimaParte in partes()
+        && request.resource.data.partes.keys().hasOnly([request.resource.data.ultimaParte])
+        && request.resource.data.partes[request.resource.data.ultimaParte] == request.time
+        && request.resource.data.inicio == request.time
+        && request.resource.data.ultimo == request.time;
+
+      // Cada bombillo siguiente: uno solo, nuevo, de la lista, y no antes de la espera
+      allow update: if logueado() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['n', 'inicio', 'ultimo', 'ultimaParte', 'partes'])
+        && request.resource.data.n == resource.data.n + 1
+        && request.resource.data.n <= total()
+        && request.resource.data.inicio == resource.data.inicio
+        && request.time > resource.data.ultimo + espera()
+        && request.resource.data.ultimo == request.time
+        && request.resource.data.ultimaParte in partes()
+        && request.resource.data.partes.diff(resource.data.partes).addedKeys() == [request.resource.data.ultimaParte].toSet()
+        && request.resource.data.partes.diff(resource.data.partes).affectedKeys() == [request.resource.data.ultimaParte].toSet()
+        && request.resource.data.partes[request.resource.data.ultimaParte] == request.time;
+
+      allow delete: if false;
+    }
+
+    // ---------- certificados/{codigo}: públicos para verificar, uno por persona ----------
+    match /certificados/{codigo} {
+      // Cualquiera puede comprobar UN código; nadie puede listar todos.
+      allow get: if true;
+      allow list: if false;
+
+      allow create: if logueado()
+        && codigo.matches('^ME-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$')
+        && request.resource.data.keys().hasOnly(['uid', 'nombre', 'emitido', 'inicio', 'fin', 'partes'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.nombre is string
+        && request.resource.data.nombre.size() >= 3 && request.resource.data.nombre.size() <= 80
+        && request.resource.data.emitido == request.time
+        && request.resource.data.partes == total()
+        && get(/databases/$(database)/documents/progreso/$(request.auth.uid)).data.n == total()
+        && request.resource.data.inicio == get(/databases/$(database)/documents/progreso/$(request.auth.uid)).data.inicio
+        && request.resource.data.fin == get(/databases/$(database)/documents/progreso/$(request.auth.uid)).data.ultimo
+        && getAfter(/databases/$(database)/documents/emitidos/$(request.auth.uid)).data.codigo == codigo;
+
+      // Se puede borrar el propio (por ejemplo, para corregir el nombre y emitirlo de nuevo).
+      allow delete: if logueado() && resource.data.uid == request.auth.uid
+        && !existsAfter(/databases/$(database)/documents/emitidos/$(request.auth.uid));
+      allow update: if false;
+    }
+
+    // ---------- emitidos/{uid}: qué código tiene cada persona (máximo uno) ----------
+    match /emitidos/{uid} {
+      allow read: if logueado() && request.auth.uid == uid;
+      allow create: if logueado() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['codigo'])
+        && getAfter(/databases/$(database)/documents/certificados/$(request.resource.data.codigo)).data.uid == uid;
+      allow delete: if logueado() && request.auth.uid == uid
+        && !existsAfter(/databases/$(database)/documents/certificados/$(resource.data.codigo));
+      allow update: if false;
+    }
+  }
+}

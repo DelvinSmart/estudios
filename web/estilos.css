@@ -549,12 +549,28 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .cert-sello .s-texto { font: 700 7.6px var(--mono); letter-spacing: 0.6px; fill: var(--papel); }
 .cert-sello .s-bombillo { fill: var(--papel); }
 .cert-sello .s-base { stroke: var(--papel); stroke-width: 2.4; stroke-linecap: round; fill: none; }
-.cert-aviso { font: 400 0.9cqw/1.5 var(--sans); color: var(--tinta-suave); max-width: 90ch; margin-top: 2cqw !important; opacity: 0.85; }
+.cert-verificar { font: 500 1cqw var(--mono); color: var(--tinta-suave); margin-top: 1.6cqw !important; }
+.cert-verificar b { color: var(--acento); font-weight: 600; }
+.cert-aviso { font: 400 0.9cqw/1.5 var(--sans); color: var(--tinta-suave); max-width: 90ch; margin-top: 0.8cqw !important; opacity: 0.85; }
 
 .certificado.es-muestra .cert-hoja::after {
   content: 'MUESTRA'; inset: 0; border: 0; display: grid; place-items: center; z-index: 2;
   font: 800 14cqw var(--mono); color: rgb(168 24 60 / 0.1); transform: rotate(-16deg);
 }
+
+/* La nube (Firebase): cajita en Mi progreso, aviso bajo cada parte y la página de verificar */
+.caja-nube { margin-top: 14px; padding: 12px 14px; border: 1px dashed var(--borde-fuerte); border-radius: 12px; font-size: 0.85rem; color: var(--tenue); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.caja-nube b { color: var(--acento); }
+.caja-nube .boton { margin: 0; padding: 6px 12px; font-size: 0.8rem; }
+.nube-parte { display: block; width: 100%; font-size: 0.8rem; margin-top: 6px; }
+.nube-parte .boton { margin: 0; padding: 6px 12px; font-size: 0.8rem; }
+.cabeza .fila-codigo { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.cabeza .fila-codigo input { flex: 1 1 240px; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--borde); background: var(--fondo-2); color: var(--texto); }
+.cert-herramientas .fila-codigo .boton, .cert-herramientas .fila-codigo a.boton { display: inline-flex; align-items: center; }
+.datos-verificacion { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 18px 0; font-size: 0.9rem; }
+.datos-verificacion dt { color: var(--tenue); }
+.datos-verificacion dd { margin: 0; color: var(--texto); }
+.verificado { margin-bottom: 22px; }
 
 /* Al imprimir: solo el certificado, con su fondo oscuro, en una hoja A4 apaisada. */
 @media print {
