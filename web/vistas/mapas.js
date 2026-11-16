@@ -12,17 +12,21 @@ import { pintarMarkdown } from '../markdown.js';
 
 // ---------- pantalla 1: el mapa grande ----------
 
-export function vistaInicio() {
-  ponerMigas([{ texto: 'mapa', href: '#/' }]);
+// El mapa grande. Sin curso: todos los cursos, uno debajo de otro. Con curso (#/curso/python): solo ese.
+export function vistaInicio(soloCurso) {
+  if (soloCurso && !CURSOS[soloCurso]) soloCurso = null;
+  ponerMigas(soloCurso
+    ? [{ texto: 'mapa', href: '#/' }, { texto: `curso · ${CURSOS[soloCurso].titulo.toLowerCase()}`, corto: soloCurso }]
+    : [{ texto: 'mapa', href: '#/' }]);
   const total = Object.keys(CLASES).length;
   const hechas = Object.keys(CLASES).filter((n) => estadoClase(n) === 'hecha').length;
   const actual = claseActual();
   const totalBombillos = ORDEN.reduce((s, n) => s + (conteo[n] || 0), 0);
   const prendidosTodos = ORDEN.reduce((s, n) => s + prendidos(n), 0);
 
-  // Un mapa por curso: el de programación (sus etapas) y el de seguridad (sus clases).
-  let numEtapa = 0;
-  const mapas = Object.values(CURSOS).map((curso) => {
+  // Un mapa por curso, cada uno con su título "Curso: …".
+  const mapas = Object.values(CURSOS).filter((c) => !soloCurso || c.id === soloCurso).map((curso) => {
+    let numEtapa = 0;
     const etapas = ETAPAS.filter((e) => cursoDeEtapa(e) === curso.id);
     const clases = ordenDe(curso.id);
     const listas = clases.filter((n) => estadoClase(n) === 'hecha').length;
@@ -42,17 +46,23 @@ export function vistaInicio() {
         pie: `<span class="avance">${hechasE}/${e.clases.length} clases</span>${estado === 'actual' ? '<span class="insignia actual">▶ voy aquí</span>' : ''}`,
       };
     });
-    if (etapas.length === 1) numEtapa += 1;
-    const cabeza = curso.id === 'programacion' ? '' : `<h2 class="titulo-mapa-curso"><span class="emoji">${etapas[0].icono}</span> Curso aparte: ${escapar(curso.corto)} <span class="mono tenue">· con su propio certificado</span></h2>`;
-    return `${cabeza}${htmlMapa({ paradas, final })}`;
+    const logos = [...new Set(etapas.flatMap((e) => e.logos || []))].slice(0, 4);
+    const cabeza = `<h2 class="titulo-mapa-curso"><a href="#/curso/${curso.id}"><span class="emoji">${curso.icono}</span> Curso: ${escapar(curso.titulo)}</a>${htmlLogos(logos, 'medio')}
+      <span class="mono tenue">${listas}/${clases.length} clases</span></h2>`;
+    return `<section class="curso-mapa" id="curso-${curso.id}">${cabeza}${htmlMapa({ paradas, final })}</section>`;
   }).join('');
+  // Las pestañas para saltar de un curso a otro.
+  const pestanasCursos = `<nav class="pestanas pestanas-cursos" aria-label="Cursos">
+    <a class="pestana ${soloCurso ? '' : 'activa'}" href="#/">Todos</a>
+    ${Object.values(CURSOS).map((c) => `<a class="pestana ${soloCurso === c.id ? 'activa' : ''}" href="#/curso/${c.id}">${c.icono} ${escapar(c.titulo)}</a>`).join('')}
+  </nav>`;
 
   app.innerHTML = `
     <section class="portada cabeza-mapa"><div>
       <p class="mono comentario">// mi carrera de programación</p>
       <h1 class="titulo-grande">Mapa de <span class="acento">estudios</span></h1>
       <p class="bajada">Primero los fundamentos, después la web, los datos, la arquitectura y mis proyectos.
-        Aparte, cada uno con su certificado: Python, seguridad, IA para programadores y agentes de IA.</p>
+        Cada curso tiene su mapa y su certificado: elige uno en las pestañas o en el menú ☰.</p>
       <div class="contadores mono">
         <span><b>${ETAPAS.length}</b> etapas</span>
         <span><b>${total}</b> clases</span>
@@ -65,6 +75,7 @@ export function vistaInicio() {
       </div></div>
       ${htmlProgreso(`${hechas} de ${total} clases`, hechas / total)}
     </section>
+    ${pestanasCursos}
     ${mapas}`;
   activarMapas(app);
 }

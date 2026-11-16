@@ -147,23 +147,23 @@ export const ETAPAS = [
 // El prefijo va al comienzo del código de verificación (ME-…, SE-…).
 export const CURSOS = {
   programacion: {
-    id: 'programacion', prefijo: 'ME', corto: 'Mapa de estudios',
+    id: 'programacion', titulo: 'Programación', icono: '💻', prefijo: 'ME', corto: 'Mapa de estudios',
     nombre: 'Mapa de estudios: programación, de los fundamentos a los agentes de IA',
   },
   python: {
-    id: 'python', prefijo: 'PY', corto: 'Python',
+    id: 'python', titulo: 'Python', icono: '🐍', prefijo: 'PY', corto: 'Python',
     nombre: 'Python: de los primeros pasos a un proyecto real con pruebas',
   },
   seguridad: {
-    id: 'seguridad', prefijo: 'SE', corto: 'Seguridad',
+    id: 'seguridad', titulo: 'Seguridad', icono: '🛡️', prefijo: 'SE', corto: 'Seguridad',
     nombre: 'Seguridad: pensar como hacker, de lo básico a auditar un sistema',
   },
   ia: {
-    id: 'ia', prefijo: 'IA', corto: 'IA para programadores',
+    id: 'ia', titulo: 'IA para programadores', icono: '🧠', prefijo: 'IA', corto: 'IA para programadores',
     nombre: 'IA para programadores: trabajar con Claude, Gemini, OpenCode, Codex y Llama',
   },
   agentes: {
-    id: 'agentes', prefijo: 'AG', corto: 'Agentes de IA',
+    id: 'agentes', titulo: 'Agentes de IA', icono: '🤖', prefijo: 'AG', corto: 'Agentes de IA',
     nombre: 'Agentes de IA: patrones para diseñar, medir y publicar agentes',
   },
 };

@@ -16,6 +16,7 @@ import { CURSOS } from './cursos.js';
 import { textoPlano } from './lector.js';
 import { leerTema, guardarTema } from './guardado.js';
 import { prepararBuscador } from './buscar.js';
+import { prepararMenu } from './menu.js';
 import * as nube from './nube.js';
 import { migas, mostrarError, alRedibujar } from './pantalla.js';
 import { contarPartes } from './avance.js';
@@ -45,6 +46,7 @@ async function dibujar() {
     else if (partesRuta[0] === 'cuenta') await vistaCuenta();
     else if (partesRuta[0] === 'verificar') await vistaVerificar(partesRuta[1]);
     else if (partesRuta[0] === 'laboratorio') vistaLaboratorio();
+    else if (partesRuta[0] === 'curso') vistaInicio(partesRuta[1]);
     else if (partesRuta[0] === 'etapa') await vistaEtapa(partesRuta[1]);
     else if (partesRuta[0] === 'clase' && partesRuta[3]) await vistaParte(partesRuta[1], +partesRuta[2] || 0, partesRuta[3]);
     else if (partesRuta[0] === 'clase') await vistaClase(partesRuta[1], +partesRuta[2] || 0);
@@ -73,6 +75,7 @@ async function empezar() {
   await contarPartes();
   alRedibujar(dibujar);
   prepararBuscador();
+  prepararMenu();
   window.addEventListener('hashchange', dibujar);
   // ¿Llegó desde un enlace del correo? (…/estudios/?mode=resetPassword&oobCode=…)
   const enlace = new URLSearchParams(location.search);
