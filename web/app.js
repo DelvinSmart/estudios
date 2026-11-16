@@ -664,9 +664,21 @@ const MENSAJES_ERROR = {
   'auth/expired-action-code': 'Ese enlace expiró. Pide uno nuevo.',
   'auth/invalid-action-code': 'Ese enlace no es válido o ya se usó. Pide uno nuevo.',
   'propio/no-gmail': 'Solo se aceptan correos de Gmail (terminan en @gmail.com).',
+  'auth/operation-not-allowed': 'Esta forma de entrar todavía no está activada en Firebase (Authentication → Sign-in method).',
+  'auth/unauthorized-domain': 'Este sitio no está en los dominios autorizados de Firebase.',
+  'auth/unauthorized-continue-uri': 'Este sitio no está en los dominios autorizados de Firebase.',
+  'auth/popup-blocked': 'El navegador bloqueó la ventana de Google. Permite ventanas emergentes para este sitio.',
+  'auth/cancelled-popup-request': 'Se abrió otra ventana de Google. Vuelve a intentar.',
+  'auth/missing-password': 'Escribe tu contraseña.',
+  'auth/missing-email': 'Escribe tu correo.',
+  'auth/user-disabled': 'Esta cuenta está desactivada.',
+  'auth/admin-restricted-operation': 'Esta forma de entrar está desactivada en Firebase.',
+  'auth/configuration-not-found': 'Falta activar el inicio de sesión en Firebase (Authentication → Comenzar).',
 };
 // Los errores del formulario traen su propio mensaje; los de Firebase se traducen con la tabla.
-const mensajeDe = (e) => e?.mensaje || MENSAJES_ERROR[e?.code] || 'No se pudo completar ahora. Inténtalo de nuevo.';
+// Si es un error desconocido, se muestra su código: así se puede saber qué pasó.
+const mensajeDe = (e) => e?.mensaje || MENSAJES_ERROR[e?.code]
+  || `No se pudo completar ahora. Inténtalo de nuevo.${e?.code ? ` (código: ${e.code})` : ''}`;
 
 // El marco de todas las pantallas de la cuenta: una tarjeta con aspecto de terminal.
 function tarjetaCuenta(comando, titulo, cuerpo) {
@@ -707,7 +719,7 @@ const errorCuenta = (texto) => { const p = app.querySelector('#cuenta-error'); i
 async function intentar(boton, accion) {
   errorCuenta('');
   boton.disabled = true;
-  try { await accion(); } catch (e) { errorCuenta(mensajeDe(e)); } finally { if (document.body.contains(boton)) boton.disabled = false; }
+  try { await accion(); } catch (e) { console.warn('cuenta:', e?.code, e?.message); errorCuenta(mensajeDe(e)); } finally { if (document.body.contains(boton)) boton.disabled = false; }
 }
 
 function despuesDeEntrar() {
