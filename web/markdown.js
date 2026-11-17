@@ -4,6 +4,8 @@
 import { CLASES } from './cursos.js';
 import { crearPractica } from './practica.js';
 import { escapar } from './pantalla.js';
+import { enlazarReferencias } from './referencias.js';
+import { cursoDeClase } from './avance.js';
 
 // ---------- el Markdown convertido en página ----------
 
@@ -86,6 +88,10 @@ export function pintarMarkdown(md, carpeta, idBase = carpeta) {
     if (!/^(https?:|data:)/.test(src)) img.setAttribute('src', resolver(src, carpeta).ruta);
     img.loading = 'lazy';
   });
+
+  // "Tema 07" → enlace con el número que se ve en el mapa (el motor de referencias).
+  const numDeEsta = Object.keys(CLASES).find((n) => CLASES[n].carpeta === carpeta);
+  enlazarReferencias(caja, numDeEsta ? cursoDeClase(numDeEsta) : null);
 
   return caja;
 }

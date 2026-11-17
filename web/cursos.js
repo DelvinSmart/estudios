@@ -71,6 +71,14 @@ export const CLASES = {
   '65': { carpeta: '65-kotlin-corrutinas', titulo: 'Corrutinas', meta: 'suspend, launch, async, scope, Dispatchers y Flow', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '66': { carpeta: '66-kotlin-android-compose', titulo: 'Tu primera app Android con Compose', meta: 'Android Studio, @Composable, estado y ViewModel', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '67': { carpeta: '67-kotlin-datos-pruebas-publicar', titulo: 'Datos, pruebas y publicar', meta: 'DataStore, Room, Firebase, JUnit, AAB y React Native vs Kotlin', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '68': { carpeta: '68-node-que-es', titulo: 'Qué es Node.js', meta: 'El motor V8, el event loop, process y los módulos node:', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '69': { carpeta: '69-node-archivos', titulo: 'Archivos, carpetas y datos', meta: 'fs/promises, path, JSON, CSV y path traversal', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '70': { carpeta: '70-node-servidor-http', titulo: 'Tu primer servidor HTTP', meta: 'node:http, verbos, rutas, códigos y el cuerpo de un POST', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '71': { carpeta: '71-node-express', titulo: 'Express: rutas y middleware', meta: 'Rutas, params, middleware y errores en un solo lugar', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '72': { carpeta: '72-node-api-rest', titulo: 'Una API REST completa', meta: 'CRUD, validación, campos permitidos y CORS', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '73': { carpeta: '73-node-datos-y-seguridad', titulo: 'Base de datos y seguridad', meta: 'SQLite, parámetros, .env, tokens, límites y helmet', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '74': { carpeta: '74-node-pruebas-y-publicar', titulo: 'Pruebas y publicar', meta: 'node:test, supertest y publicar gratis en Firebase', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '75': { carpeta: '75-script-y-spa', titulo: '¿Qué es un script y qué es una SPA?', meta: 'La casa, el guion y la página que cambia sin recargar: esta misma plataforma', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '19': { carpeta: '19-agentes-de-ia', titulo: 'Qué es un agente', meta: 'Python para leer los ejemplos, las piezas y el ciclo de un agente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '25': { carpeta: '25-agentes-cinco-patrones', titulo: 'Los cinco patrones', meta: 'Herramientas (ReAct), planificación, reflexión, enrutamiento y multiagente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '26': { carpeta: '26-agentes-veinte-patrones', titulo: 'Veinte patrones más', meta: 'Flujo, razonamiento, coordinación, control, conocimiento y cómo elegir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -90,7 +98,7 @@ const ICONOS = {
   '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
   '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁',
   '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄',
-  '44': '🗺️', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪',
+  '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦',
   '21': '🎓', '22': '🔐', '23': '🕵️', '24': '🛡️',
@@ -108,6 +116,8 @@ const LOGOS_CLASE = {
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
   '35': ['claude', 'git'],
   '44': ['javascript', 'typescript', 'react', 'kotlin'],
+  '68': ['node'], '69': ['node'], '70': ['node'], '71': ['node', 'javascript'], '72': ['node', 'javascript'], '73': ['node', 'firebase'], '74': ['node', 'firebase'],
+  '75': ['html', 'css', 'javascript'],
   '45': ['javascript'], '46': ['javascript'], '47': ['javascript'], '48': ['javascript'], '49': ['javascript', 'firebase'],
   '50': ['node', 'javascript'], '51': ['typescript'], '52': ['typescript'], '53': ['typescript', 'vitest'],
   '54': ['react', 'typescript'], '55': ['react'], '56': ['react'], '57': ['expo', 'apple'], '58': ['react'], '59': ['firebase', 'react'], '60': ['expo', 'android', 'apple'],
@@ -136,7 +146,7 @@ export const ETAPAS = [
   {
     id: 'web', icono: '🌐', titulo: 'La web: HTML, CSS y JavaScript', logos: ['html', 'css', 'javascript'],
     desc: 'Las tres piezas con las que se hace cualquier página.',
-    clases: ['15', '16', '17'],
+    clases: ['15', '16', '17', '75'],
   },
   {
     id: 'backend', icono: '🔥', titulo: 'Backend y datos', logos: ['firebase', 'node'],
@@ -157,6 +167,11 @@ export const ETAPAS = [
     id: 'javascript', curso: 'javascript', icono: '🟨', titulo: 'JavaScript + TypeScript', logos: ['javascript', 'typescript', 'node', 'vitest'],
     desc: 'Un curso aparte, con su propio certificado: JavaScript de cero a completo, y después TypeScript.',
     clases: ['45', '46', '47', '48', '49', '50', '51', '52', '53'],
+  },
+  {
+    id: 'node', curso: 'node', icono: '🟩', titulo: 'Node.js', logos: ['node', 'javascript', 'firebase'],
+    desc: 'Un curso aparte, con su propio certificado: el backend con JavaScript, de los archivos a una API publicada.',
+    clases: ['68', '69', '70', '71', '72', '73', '74'],
   },
   {
     id: 'reactnative', curso: 'reactnative', icono: '📱', titulo: 'React Native', logos: ['react', 'typescript', 'expo', 'firebase'],
@@ -200,6 +215,10 @@ export const CURSOS = {
   javascript: {
     id: 'javascript', titulo: 'JavaScript + TypeScript', icono: '🟨', prefijo: 'JS', corto: 'JavaScript + TypeScript',
     nombre: 'JavaScript + TypeScript: de cero a un proyecto con pruebas',
+  },
+  node: {
+    id: 'node', titulo: 'Node.js', icono: '🟩', prefijo: 'ND', corto: 'Node.js',
+    nombre: 'Node.js: el backend con JavaScript, de los archivos a una API publicada',
   },
   reactnative: {
     id: 'reactnative', titulo: 'React Native', icono: '📱', prefijo: 'RN', corto: 'React Native',

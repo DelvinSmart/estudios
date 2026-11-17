@@ -123,6 +123,15 @@ Reglas:
    La carpeta de la app (`copiloto-driver`) tiene sus propias reglas y no se
    toca.
 
+## 7b. Nada escrito a mano: el catálogo y el motor de referencias
+
+- El orden de cursos, etapas y clases vive **solo** en `web/cursos.js`. El número que se ve (01, 02…),
+  la ruta de la barra (`~/web/12-script-y-spa`), las migas, el menú ☰ y el mapa salen de ahí.
+- Para mover una clase de lugar, se cambia **solo** `cursos.js` (y se regeneran las reglas de Firebase).
+- En las lecciones, para hablar de otra clase se escribe **"Tema NN"** o **"clase NN"** con el número de
+  su **carpeta** (que nunca cambia). El **motor de referencias** (`web/referencias.js`) lo muestra con el
+  número del mapa, lo enlaza y dice el curso si es otro. Nunca escribas a mano el número que se ve.
+
 ## 8. Las prácticas y sus respuestas
 
 Las respuestas de las prácticas **no están en los `.md`**: están en un archivo

@@ -206,7 +206,7 @@ export async function vistaVerificar(codigo) {
   };
 
   if (!codigo) {
-    pantallaAviso('🔎 Verificar un certificado', 'Escribe el código que aparece en el certificado (empieza con ME-, JS-, RN-, KT-, PY-, SE-, IA- o AG-).', formulario());
+    pantallaAviso('🔎 Verificar un certificado', 'Escribe el código que aparece en el certificado (empieza con ME-, JS-, ND-, RN-, KT-, PY-, SE-, IA- o AG-).', formulario());
     conectar();
     return;
   }

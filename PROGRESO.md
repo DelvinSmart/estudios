@@ -24,6 +24,7 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 15 HTML
 - [ ] 16 CSS
 - [ ] 17 JavaScript en la página
+- [ ] 75 ¿Qué es un script y qué es una SPA?
 - [ ] 08 Firebase por dentro
 - [ ] 09 CRUD en Node.js
 - [ ] 10 Arquitectura
@@ -45,6 +46,15 @@ dónde seguir. La IA lo actualiza al final de cada clase y lo sube a GitHub
 - [ ] 51 TypeScript: tipos e interfaces
 - [ ] 52 TypeScript: genéricos y configuración
 - [ ] 53 Un proyecto con pruebas
+
+**Curso Node.js** (certificado aparte)
+- [ ] 68 Qué es Node.js
+- [ ] 69 Archivos, carpetas y datos
+- [ ] 70 Tu primer servidor HTTP
+- [ ] 71 Express: rutas y middleware
+- [ ] 72 Una API REST completa
+- [ ] 73 Base de datos y seguridad
+- [ ] 74 Pruebas y publicar
 
 **Curso React Native** (certificado aparte)
 - [ ] 54 React: componentes y props
