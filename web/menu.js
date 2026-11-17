@@ -55,7 +55,9 @@ export function prepararMenu() {
   panel.hidden = true;
   document.body.append(fondo, panel);
 
-  const cerrar = () => { panel.hidden = true; fondo.hidden = true; boton.setAttribute('aria-expanded', 'false'); };
+  // Mientras el menú está abierto, la página de atrás no se mueve (ni con el dedo ni con la rueda).
+  const bloquearFondo = (si) => document.documentElement.classList.toggle('sin-scroll', si);
+  const cerrar = () => { panel.hidden = true; fondo.hidden = true; boton.setAttribute('aria-expanded', 'false'); bloquearFondo(false); };
   const abrir = () => {
     panel.innerHTML = `
       <div class="arbol-cabeza"><span class="mono">~/cursos</span>
@@ -65,12 +67,14 @@ export function prepararMenu() {
         <a href="#/">🗺️ mapa completo</a><a href="#/progreso">💡 mi progreso</a>
         <a href="#/certificado">🎓 certificados</a><a href="#/laboratorio">🧪 laboratorio</a></div>`;
     panel.hidden = false; fondo.hidden = false;
+    bloquearFondo(true);
     boton.setAttribute('aria-expanded', 'true');
     panel.querySelector('.aqui')?.scrollIntoView({ block: 'center' });
     panel.querySelector('[data-cerrar]').addEventListener('click', cerrar);
   };
   boton.addEventListener('click', () => (panel.hidden ? abrir() : cerrar()));
   fondo.addEventListener('click', cerrar);
+  fondo.addEventListener('touchmove', (ev) => ev.preventDefault(), { passive: false }); // iPhone: el fondo no arrastra la página
   panel.addEventListener('click', (ev) => { if (ev.target.closest('a')) cerrar(); }); // al elegir, se cierra
   document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && !panel.hidden) cerrar(); });
   window.addEventListener('hashchange', cerrar);

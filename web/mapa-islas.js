@@ -62,14 +62,15 @@ export function htmlMapa({ paradas, final, clase = '' }) {
     </div>`;
 }
 
-// La tarjeta "⭐ Tu progreso".
-export function htmlProgreso(texto, fraccion) {
+// La tarjeta "⭐ Mi progreso". Con href, toda la tarjeta lleva a esa pantalla (no hace falta otro botón).
+export function htmlProgreso(texto, fraccion, href) {
+  const etiqueta = href ? 'a' : 'div';
   return `
-    <div class="tu-progreso">
-      <p class="mono"><span>⭐</span> Tu progreso</p>
+    <${etiqueta} class="tu-progreso"${href ? ` href="${href}"` : ''}>
+      <p class="mono"><span>⭐</span> Mi progreso${href ? ' <span class="tu-progreso-ir">→</span>' : ''}</p>
       <div class="tu-progreso-barra"><span style="width:${Math.round(Math.max(0, Math.min(1, fraccion)) * 100)}%"></span></div>
       <p class="mono tenue">${texto}</p>
-    </div>`;
+    </${etiqueta}>`;
 }
 
 // ---------- acomodar las islas y dibujar el camino ----------

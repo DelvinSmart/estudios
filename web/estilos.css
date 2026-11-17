@@ -446,7 +446,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 }
 
 /* ---------- 11. Las prácticas interactivas ---------- */
-.practica { margin: 1.8em 0; padding: 16px 18px 6px; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--morado) 45%, var(--borde)); background: color-mix(in srgb, var(--morado) 6%, var(--tarjeta)); }
+.practica { margin: 1.8em 0; padding: 16px 18px; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--morado) 45%, var(--borde)); background: color-mix(in srgb, var(--morado) 6%, var(--tarjeta)); }
 .practica.aprobada { border-color: color-mix(in srgb, var(--acento) 55%, var(--borde)); background: color-mix(in srgb, var(--acento) 5%, var(--tarjeta)); }
 .practica-cabeza { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--morado); }
 .practica.aprobada .practica-cabeza { color: var(--acento); }
@@ -478,10 +478,12 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .practica-final { margin: 12px 0; font-weight: 600; }
 .practica-final.bien { color: var(--acento); }
 .practica-final.mal { color: var(--rojo); }
-.practica-pie .boton { margin: 0 0 12px; }
-.practica-pie .revisar { margin: 14px 0 6px; }
+.practica-pie { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--borde); }
+.practica-pie .boton, .practica-pie .revisar { margin: 0; }
+.practica-pie .practica-final { margin: 0; }
 .practica-pie .revisar:disabled { opacity: 0.45; cursor: not-allowed; }
-.practica-estado { margin: 4px 0 0; font-size: 0.85rem; }
+.practica-estado { margin: 0; font-size: 0.85rem; }
+.practica-estado:empty { display: none; }
 #boton-entendido:disabled { opacity: 0.5; cursor: not-allowed; border-color: var(--borde); color: var(--tenue); }
 
 /* ---------- 12. El certificado ---------- */
@@ -635,11 +637,12 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .cuenta-cuerpo .datos-verificacion { margin: 0; }
 .cabeza .cuenta-campo { margin-top: 14px; max-width: 520px; }
 .cabeza .cuenta-nota { margin-top: 10px; max-width: 70ch; }
-.curso-progreso { margin-top: 30px; padding-top: 10px; border-top: 1px solid var(--borde); }
+.curso-progreso { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--borde); }
+.curso-progreso > .barra-progreso.ancha { margin-bottom: 24px; }
 
 /* ---------- 14. El mapa de islas (inicio, etapas y clases) ---------- */
 .mapa-islas {
-  position: relative; margin: 10px 0 34px; padding: 34px 26px 40px; border-radius: 22px;
+  position: relative; margin: 14px 0 36px; padding: 34px 26px 40px; border-radius: 22px;
   border: 1px solid var(--borde);
   background:
     radial-gradient(ellipse at 15% 10%, color-mix(in srgb, var(--acento) 9%, transparent), transparent 45%),
@@ -711,17 +714,16 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .isla-check { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--acento); color: var(--sobre-acento); font-weight: 800; }
 
 /* "⭐ Tu progreso" */
-.tu-progreso { min-width: 220px; padding: 14px 18px; border-radius: 16px; background: var(--tarjeta); border: 1px solid var(--borde-fuerte); box-shadow: var(--sombra); }
+.tu-progreso { display: block; min-width: 220px; padding: 12px 16px; color: inherit; text-decoration: none !important; transition: border-color 0.2s; border-radius: 16px; background: var(--tarjeta); border: 1px solid var(--borde-fuerte); box-shadow: var(--sombra); }
 .tu-progreso p { margin: 0; font-size: 0.9rem; }
 .tu-progreso p:first-child { font-weight: 700; margin-bottom: 10px; }
-.tu-progreso-barra { height: 10px; border-radius: 99px; background: var(--borde); overflow: hidden; margin-bottom: 8px; }
-.tu-progreso-barra span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--acento), #3fb950); box-shadow: 0 0 10px color-mix(in srgb, var(--acento) 60%, transparent); }
+.tu-progreso-barra { height: 5px; border-radius: 99px; background: var(--borde); overflow: hidden; margin-bottom: 8px; }
+.tu-progreso-barra span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--acento), #3fb950); }
 .cabeza-mapa { max-width: none; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px; }
 .cabeza-mapa > :first-child { flex: 1 1 420px; }
-.titulo-mapa-curso { display: flex; align-items: center; gap: 10px; margin: 34px 0 6px; font: 700 1.15rem var(--mono); }
+.titulo-mapa-curso { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 36px 0 0; font: 700 1.15rem var(--mono); }
 
 /* Botones de volver arriba de cada parte */
-.volver-antes { margin-top: 14px; }
 .estado-cert { margin-top: 16px; padding: 16px 18px; border: 1px solid var(--borde-fuerte); border-radius: 14px; background: var(--tarjeta); display: flex; flex-direction: column; gap: 10px; max-width: 760px; }
 .estado-cert .estado-titulo { margin: 0; font: 700 1.05rem var(--mono); }
 .estado-cert .estado-texto { display: flex; flex-direction: column; gap: 10px; }
@@ -830,3 +832,62 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .arbol-ir { display: block; margin: 0 0 4px 30px; font-size: 0.78rem; color: var(--acento-2); }
 .arbol-pie { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 12px 18px; border-top: 1px solid var(--borde); margin-top: 8px; font-size: 0.82rem; }
 .arbol [hidden], .arbol-fondo[hidden], .arbol[hidden] { display: none !important; }
+
+
+/* ---------- 18. Arreglos de maquetación: ancho, barra, menú, progreso ---------- */
+/* Nada se sale por la derecha: la página mide siempre lo que mide la pantalla. */
+html, body { max-width: 100%; overflow-x: clip; }
+/* El "usuario@estudios:~/…" se encoge y corta con "…"; los iconos nunca se empujan afuera.
+   (Va con .barra > para ganarle a la regla .logo de los logos de tecnologías.) */
+.barra > .logo { display: block; flex: 1 1 auto; min-width: 0; }
+.barra-acciones { align-items: center; min-width: 0; }
+
+/* "← volver a donde estaba": arriba a la derecha, al lado de los iconos */
+.boton-volver {
+  display: inline-flex; align-items: center; justify-content: center; gap: 2px;
+  height: 38px; padding: 0 12px; border-radius: 10px; white-space: nowrap;
+  border: 1px solid color-mix(in srgb, var(--acento) 55%, var(--borde)); color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 10%, var(--tarjeta)); font-size: 0.8rem; font-weight: 600;
+}
+.boton-volver:hover { text-decoration: none; border-color: var(--acento); }
+.boton-volver[hidden] { display: none; }
+
+/* Con el menú ☰ abierto, la página de atrás queda quieta */
+html.sin-scroll, html.sin-scroll body { overflow: hidden; }
+.arbol { overscroll-behavior: contain; }
+.arbol-fondo { touch-action: none; }
+
+/* La tarjeta "Mi progreso" de la portada es un enlace */
+a.tu-progreso:hover { border-color: var(--acento); }
+.tu-progreso-ir { float: right; color: var(--acento); }
+
+/* El botón "▶ empezar / seguir" de la portada */
+.boton-seguir { flex-wrap: wrap; row-gap: 2px; }
+.boton-detalle { font-weight: 400; opacity: 0.9; }
+
+/* Mi progreso: con la cuenta abierta, la cajita entera lleva a "mi cuenta" */
+.caja-cuenta { justify-content: space-between; border-style: solid; color: var(--tenue); text-decoration: none !important; transition: border-color 0.2s; }
+.caja-cuenta:hover { border-color: var(--acento); }
+.caja-cuenta-ir { color: var(--acento); white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .boton-volver { width: 38px; padding: 0; font-size: 1.05rem; }
+  .boton-volver-texto { display: none; }
+}
+@media (max-width: 600px) {
+  .barra { gap: 8px; }
+  .barra-acciones { gap: 5px; }
+  .boton-icono, .boton-volver { width: 34px; height: 34px; border-radius: 9px; font-size: 0.95rem; }
+  .portada { padding-top: 28px; }
+  .portada .boton-seguir { padding: 9px 16px; font-size: 0.85rem; }
+  .boton-titulo { display: none; }
+  .cabeza-mapa { gap: 14px; }
+  .cabeza-mapa > :first-child { flex-basis: 100%; }
+  .tu-progreso { flex: 1 1 100%; min-width: 0; padding: 10px 14px; }
+  .tu-progreso p:first-child { margin-bottom: 8px; }
+  .curso-progreso { margin-top: 28px; padding-top: 20px; }
+  .curso-progreso > .barra-progreso.ancha { margin-bottom: 20px; }
+  .etapa-progreso { margin-bottom: 18px; }
+  .mapa-islas { margin: 12px 0 28px; }
+  .titulo-mapa-curso { margin-top: 28px; }
+}

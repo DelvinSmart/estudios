@@ -7,7 +7,6 @@
 // infinito, la caja se descarta a los 3 segundos y se crea otra.
 
 import { app, ponerMigas, escapar } from '../pantalla.js';
-import { volverAntes } from './progreso.js';
 
 const CLAVE = 'mapa-laboratorio-crud';
 
@@ -143,7 +142,6 @@ export function vistaLaboratorio() {
         <b>C</b>rear, <b>L</b>eer, <b>A</b>ctualizar y <b>B</b>orrar. Aquí lo construyes paso a paso con una lista de gastos del carro,
         en JavaScript, sin instalar nada. Es lo mismo que la clase 09 hace con un servidor en Node.js.</p>
       <div class="lab-pasos mono" id="lab-pasos"></div>
-      ${volverAntes()}
     </section>
     <div class="lab">
       <div class="lab-editor">

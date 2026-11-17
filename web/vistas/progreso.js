@@ -69,7 +69,6 @@ export async function vistaProgreso() {
         <b>"¿lo entendiste? márcalo"</b>. Cada curso tiene sus bombillos y su certificado.
         ${recien.size ? `<span class="insignia actual">+${recien.size} desde la última vez</span>` : ''}</p>
       <div class="caja-nube mono" id="caja-nube">☁ …</div>
-      ${volverAntes()}
     </section>
     ${cursos}
     <details class="intro llevar">
@@ -104,14 +103,6 @@ export async function vistaProgreso() {
   olvidarRecien();
 }
 
-// El botón "← volver a donde estaba" (la última pantalla de estudio que se abrió).
-export function volverAntes() {
-  let antes = '';
-  try { antes = sessionStorage.getItem('mapa-antes') || ''; } catch (e) { /* nada */ }
-  if (!/^#\/[\w\-/]*$/.test(antes)) return '';
-  return `<p class="volver-antes"><a class="boton" href="${antes}">← volver a donde estaba</a></p>`;
-}
-
 // La cajita de "Mi progreso": quién entró y cuántos bombillos cuentan en la nube en cada curso.
 async function pintarCajaNube(caja) {
   if (!hayDatosDeSesion()) {
@@ -127,14 +118,20 @@ async function pintarCajaNube(caja) {
         <a class="boton" href="#/entrar/verificar">verificar mi correo</a>`;
       return;
     }
-    caja.innerHTML = `☁ Entraste como <b>${escapar(quien.displayName || quien.email)}</b>
-      <a class="boton" href="#/cuenta">mi cuenta</a>`;
+    // Con la cuenta lista, la cajita entera es el acceso a "mi cuenta": una sola línea, sin botón aparte.
+    const enlace = document.createElement('a');
+    enlace.className = 'caja-nube caja-cuenta mono';
+    enlace.id = 'caja-nube';
+    enlace.href = '#/cuenta';
+    enlace.title = 'Ir a mi cuenta';
+    enlace.innerHTML = `<span>☁ Entraste como <b>${escapar(quien.displayName || quien.email)}</b></span><span class="caja-cuenta-ir">mi cuenta ›</span>`;
+    caja.replaceWith(enlace);
     for (const c of Object.values(CURSOS)) {
       const p = await nube.leerProgresoNube(c.id);
       const span = app.querySelector(`.nube-curso[data-curso="${c.id}"]`);
       if (span) span.textContent = `· ☁ ${p?.n || 0} en la nube`;
     }
   } catch (e) {
-    caja.textContent = '☁ sin conexión con la nube (tu progreso de este navegador sigue aquí)';
+    (app.querySelector('#caja-nube') || caja).textContent = '☁ sin conexión con la nube (tu progreso de este navegador sigue aquí)';
   }
 }

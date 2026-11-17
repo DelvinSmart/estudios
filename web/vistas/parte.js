@@ -6,11 +6,11 @@ import { leerArchivo, partir } from '../lector.js';
 import { idParte, estaEntendida, marcarEntendida } from '../guardado.js';
 import * as nube from '../nube.js';
 import { app, ponerMigas, avisar, enLinea, escapar, dos } from '../pantalla.js';
-import { rutaDoc, etapaDe, cursoDeClase, numeroEnCurso } from '../avance.js';
+import { rutaDoc, etapaDe, cursoDeClase, numeroEnCurso, migaEtapa, cortoClase } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
 import { ponerBarraDeVoz } from '../voz.js';
 import { hayDatosDeSesion } from '../sesion.js';
-import { vistaInicio } from './mapas.js';
+import { vistaInicio, tienePracticas } from './mapas.js';
 
 // ---------- pantalla 4: leer una parte ----------
 
@@ -18,17 +18,18 @@ export async function vistaParte(num, doc, cual) {
   const c = CLASES[num];
   if (!c || !c.docs[doc]) return vistaInicio();
   const etapa = etapaDe(num);
-  const n = ETAPAS.indexOf(etapa) + 1;
   const md = await leerArchivo(rutaDoc(num, doc));
   const { titulo, intro, partes } = partir(md);
+  // Las clases con prácticas se recorren parte por parte: "todo de corrido" vuelve a la primera parte.
+  if (cual === 'todo' && tienePracticas(md)) { location.replace(`#/clase/${num}/${doc}/1`); return; }
   const todo = cual === 'todo';
   const i = todo ? 0 : Math.min(Math.max(parseInt(cual, 10) || 1, 1), partes.length);
   const parte = partes[i - 1];
 
   ponerMigas([
     { texto: 'mapa', href: '#/' },
-    { texto: `${dos(n)}`, href: `#/etapa/${etapa.id}`, corto: etapa.id },
-    { texto: `${numeroEnCurso(num)} ${escapar(c.titulo)}`, href: `#/clase/${num}/${doc}`, corto: c.carpeta },
+    { ...migaEtapa(etapa), texto: escapar(migaEtapa(etapa).texto) },
+    { texto: `${numeroEnCurso(num)} ${escapar(c.titulo)}`, href: `#/clase/${num}/${doc}`, corto: cortoClase(num) },
     { texto: todo ? 'todo' : `parte ${dos(i)}`, corto: todo ? 'todo' : dos(i) },
   ]);
 

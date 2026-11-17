@@ -7,7 +7,7 @@ import { leerArchivo, partir } from '../lector.js';
 import { idParte, estaEntendida } from '../guardado.js';
 import { htmlMapa, htmlProgreso, activarMapas } from '../mapa-islas.js';
 import { app, ponerMigas, escapar, enLinea, dos } from '../pantalla.js';
-import { conteo, ORDEN, rutaDoc, etapaDe, cursoDeClase, ordenDe, prendidos, claseActual, estadoClase, ETIQUETA_ESTADO, numeroEnCurso } from '../avance.js';
+import { conteo, ORDEN, rutaDoc, etapaDe, cursoDeClase, ordenDe, prendidos, claseActual, estadoClase, ETIQUETA_ESTADO, numeroEnCurso, numeroEtapa, migaEtapa, cortoClase } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
 
 // ---------- pantalla 1: el mapa grande ----------
@@ -72,23 +72,24 @@ export function vistaInicio(soloCurso) {
       <div class="contadores mono">
         <span><b>${ETAPAS.length}</b> etapas</span>
         <span><b>${total}</b> clases</span>
-        <span><b>${hechas}</b> terminadas</span>
         <a class="contador-bombillos" href="#/progreso"><span class="bombillo-chico ${prendidosTodos ? 'prendido' : ''}">💡</span><b>${prendidosTodos}</b>/${totalBombillos} bombillos</a>
       </div>
-      <div class="acciones">
-        ${actual ? `<a class="boton-principal" href="#/clase/${actual}">▶ ${prendidosTodos ? 'seguir donde quedé' : 'empezar'}: clase ${numeroEnCurso(actual)}, ${escapar(CLASES[actual].titulo)}</a>` : ''}
-        <a class="boton" href="#/progreso">💡 mi progreso</a>
-      </div></div>
-      ${htmlProgreso(`${hechas} de ${total} clases`, hechas / total)}
+      ${actual ? `<div class="acciones">
+        <a class="boton-principal boton-seguir" href="#/clase/${actual}">▶ ${prendidosTodos ? 'seguir' : 'empezar'}
+          <span class="boton-detalle">clase ${numeroEnCurso(actual)}<span class="boton-titulo"> · ${escapar(CLASES[actual].titulo)}</span></span></a>
+      </div>` : ''}</div>
+      ${htmlProgreso(`${hechas} de ${total} clases terminadas`, hechas / total, '#/progreso')}
     </section>
     ${pestanasCursos}
     ${mapas}`;
   activarMapas(app);
 }
 
-function navegarEtapas(n) {
-  const antes = ETAPAS[n - 2];
-  const despues = ETAPAS[n];
+// Anterior y siguiente, solo dentro del mismo curso.
+function navegarEtapas(etapa) {
+  const lista = ETAPAS.filter((e) => cursoDeEtapa(e) === cursoDeEtapa(etapa));
+  const antes = lista[lista.indexOf(etapa) - 1];
+  const despues = lista[lista.indexOf(etapa) + 1];
   return `<nav class="pasos">
     ${antes ? `<a class="paso" href="#/etapa/${antes.id}">← ${escapar(antes.titulo)}</a>` : '<span></span>'}
     ${despues ? `<a class="paso derecha" href="#/etapa/${despues.id}">${escapar(despues.titulo)} →</a>` : '<span></span>'}
@@ -114,7 +115,9 @@ export async function vistaEtapa(id) {
   const etapa = ETAPAS.find((e) => e.id === id);
   if (!etapa) return vistaInicio();
   const n = ETAPAS.indexOf(etapa) + 1;
-  ponerMigas([{ texto: 'mapa', href: '#/' }, { texto: `${dos(n)} ${escapar(etapa.titulo)}`, corto: etapa.id }]);
+  const miga = migaEtapa(etapa, false);
+  ponerMigas([{ texto: 'mapa', href: '#/' }, { ...miga, texto: escapar(miga.texto) }]);
+  const etapasCurso = ETAPAS.filter((e) => cursoDeEtapa(e) === cursoDeEtapa(etapa));
 
   const hechas = etapa.clases.filter((num) => estadoClase(num) === 'hecha').length;
   const siguiente = ETAPAS[n];
@@ -124,13 +127,13 @@ export async function vistaEtapa(id) {
 
   app.innerHTML = `
     <section class="cabeza cabeza-mapa"><div>
-      <p class="mono comentario">// etapa ${dos(n)} de ${ETAPAS.length}</p>
+      <p class="mono comentario">// etapa ${numeroEtapa(etapa)} de ${etapasCurso.length} · curso: ${escapar(CURSOS[cursoDeEtapa(etapa)].titulo.toLowerCase())}</p>
       <h1 class="titulo-medio"><span class="emoji">${etapa.icono}</span> ${escapar(etapa.titulo)} ${htmlLogos(etapa.logos, 'medio')}</h1>
       <p class="bajada">${escapar(etapa.desc)}</p></div>
       ${htmlProgreso(`${hechas} de ${etapa.clases.length} clases`, hechas / etapa.clases.length)}
     </section>
     ${htmlMapa({ paradas: paradasDeClases(etapa), final })}
-    ${navegarEtapas(n)}`;
+    ${navegarEtapas(etapa)}`;
   activarMapas(app);
 }
 
@@ -141,15 +144,17 @@ export async function vistaClase(num, doc) {
   if (!c) return vistaInicio();
   if (!c.docs[doc]) doc = 0;
   const etapa = etapaDe(num);
-  const n = ETAPAS.indexOf(etapa) + 1;
+  const miga = migaEtapa(etapa);
   ponerMigas([
     { texto: 'mapa', href: '#/' },
-    { texto: `${dos(n)} ${escapar(etapa.titulo)}`, href: `#/etapa/${etapa.id}`, corto: etapa.id },
-    { texto: `${numeroEnCurso(num)} ${escapar(c.titulo)}`, corto: c.carpeta },
+    { ...miga, texto: escapar(miga.texto) },
+    { texto: `${numeroEnCurso(num)} ${escapar(c.titulo)}`, corto: cortoClase(num) },
   ]);
 
   const md = await leerArchivo(rutaDoc(num, doc));
   const { titulo, intro, partes } = partir(md);
+  // Si la clase tiene prácticas, se recorre parte por parte: sin "leer todo de corrido".
+  const conPracticas = tienePracticas(md);
   const listas = partes.filter((_, i) => estaEntendida(idParte(num, doc, i + 1))).length;
 
   const pestanas = c.docs.length > 1
@@ -194,7 +199,7 @@ export async function vistaClase(num, doc) {
       </div>
       <div class="acciones">
         ${partes.length ? `<a class="boton-principal" href="#/clase/${num}/${doc}/${primeraPendiente(num, doc, partes.length)}">▶ ${listas ? 'seguir' : 'empezar'}</a>` : ''}
-        <a class="boton" href="#/clase/${num}/${doc}/todo">leer todo de corrido</a>
+        ${conPracticas ? '' : `<a class="boton" href="#/clase/${num}/${doc}/todo">leer todo de corrido</a>`}
         ${num === '09' ? '<a class="boton" href="#/laboratorio">🧪 laboratorio de CRUD</a>' : ''}
       </div>
     </section>
@@ -218,13 +223,17 @@ function primeraPendiente(num, doc, total) {
   return 1;
 }
 
+// ¿El documento tiene algún bloque ```practica?
+export const tienePracticas = (md) => /^\s*```practica\b/m.test(md);
+
+// Anterior y siguiente, solo dentro del mismo curso y con el número que se ve (01, 02…).
 function navegarClases(num) {
-  const orden = ETAPAS.flatMap((e) => e.clases);
+  const orden = ordenDe(cursoDeClase(num));
   const i = orden.indexOf(num);
   const antes = orden[i - 1];
   const despues = orden[i + 1];
   return `<nav class="pasos">
-    ${antes ? `<a class="paso" href="#/clase/${antes}">← ${antes} ${escapar(CLASES[antes].titulo)}</a>` : '<span></span>'}
-    ${despues ? `<a class="paso derecha" href="#/clase/${despues}">${despues} ${escapar(CLASES[despues].titulo)} →</a>` : '<span></span>'}
+    ${antes ? `<a class="paso" href="#/clase/${antes}">← ${numeroEnCurso(antes)} ${escapar(CLASES[antes].titulo)}</a>` : '<span></span>'}
+    ${despues ? `<a class="paso derecha" href="#/clase/${despues}">${numeroEnCurso(despues)} ${escapar(CLASES[despues].titulo)} →</a>` : '<span></span>'}
   </nav>`;
 }

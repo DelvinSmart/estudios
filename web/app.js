@@ -30,12 +30,28 @@ import { vistaLaboratorio } from './vistas/laboratorio.js';
 
 // ---------- el que decide qué pantalla mostrar ----------
 
+// Las pantallas que no son del recorrido de estudio: desde ellas se puede volver a donde estabas.
+const PANTALLAS_SUELTAS = ['progreso', 'certificado', 'entrar', 'cuenta', 'verificar', 'laboratorio'];
+
+function ponerBotonVolver(mostrar) {
+  const boton = document.getElementById('boton-volver');
+  let antes = '';
+  try { antes = sessionStorage.getItem('mapa-antes') || ''; } catch (e) { /* sin almacenamiento */ }
+  const vale = /^#\/[\w\-/]*$/.test(antes);
+  boton.hidden = !mostrar;
+  boton.href = vale ? antes : '#/';
+  boton.querySelector('.boton-volver-texto').textContent = vale && antes !== '#/' ? ' volver a donde estaba' : ' volver al mapa';
+}
+
 async function dibujar() {
   const partesRuta = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
   // Recordar la última pantalla de estudio (mapa, etapa, clase o parte) para poder volver a ella.
-  if (!['progreso', 'certificado', 'entrar', 'cuenta', 'verificar'].includes(partesRuta[0])) {
+  // En las demás (progreso, cuenta, certificado…), arriba a la derecha aparece "← volver a donde estaba".
+  const fueraDelEstudio = PANTALLAS_SUELTAS.includes(partesRuta[0]);
+  if (!fueraDelEstudio) {
     try { sessionStorage.setItem('mapa-antes', location.hash || '#/'); } catch (e) { /* sin almacenamiento */ }
   }
+  ponerBotonVolver(fueraDelEstudio);
   try {
     if (partesRuta[0] === 'progreso') await vistaProgreso();
     else if (partesRuta[0] === 'certificado') {

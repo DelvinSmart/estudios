@@ -7,7 +7,6 @@ import { leerNombre, guardarNombre } from '../guardado.js';
 import * as nube from '../nube.js';
 import { app, ponerMigas, avisar, escapar, redibujar } from '../pantalla.js';
 import { ordenDe, totalPartes, prendidos } from '../avance.js';
-import { volverAntes } from './progreso.js';
 import { hayDatosDeSesion } from '../sesion.js';
 
 // ---------- pantalla 6: el certificado (uno por curso) ----------
@@ -100,7 +99,6 @@ export async function vistaCertificado(curso) {
       <h1 class="titulo-medio">🎓 Certificados</h1>
       <div class="pestanas" role="tablist">${pestanas}</div>
       <div class="estado-cert" id="estado-cert"><p class="mono tenue">// revisando…</p></div>
-      ${volverAntes()}
     </section>
     <div id="cert-dibujo">${htmlCertificado({ nombre: leerNombre() || 'Tu Nombre Completo', fecha: new Date(), codigo: 'MUESTRA', curso, total, muestra: true })}</div>`;
 

@@ -53,3 +53,22 @@ export async function contarPartes() {
     try { conteo[num] = partir(await leerArchivo(rutaDoc(num))).partes.length; } catch (e) { conteo[num] = 0; }
   }));
 }
+
+// ---------- nombres para las migas y la ruta de la barra ----------
+
+// El número de la etapa dentro de su curso (01, 02…), no su lugar en la lista de todas.
+export const numeroEtapa = (etapa) => String(ETAPAS.filter((e) => cursoDeEtapa(e) === cursoDeEtapa(etapa)).indexOf(etapa) + 1).padStart(2, '0');
+const etapaUnica = (etapa) => ETAPAS.filter((e) => cursoDeEtapa(e) === cursoDeEtapa(etapa)).length === 1;
+
+// La miga de la etapa. En un curso de una sola etapa (JavaScript, Kotlin…) la etapa ES el curso.
+export function migaEtapa(etapa, conEnlace = true) {
+  if (etapaUnica(etapa)) {
+    const curso = cursoDeEtapa(etapa);
+    return { texto: `curso · ${etapa.titulo.toLowerCase()}`, href: conEnlace ? `#/curso/${curso}` : undefined, corto: curso };
+  }
+  return { texto: `${numeroEtapa(etapa)} ${etapa.titulo}`, href: conEnlace ? `#/etapa/${etapa.id}` : undefined, corto: etapa.id };
+}
+
+// La clase en la ruta de la barra: "01-mapa-de-los-lenguajes", con su número en el curso
+// y sin el número de la carpeta (44-…), que no es el orden en que se ve.
+export const cortoClase = (num) => `${numeroEnCurso(num)}-${CLASES[num].carpeta.replace(/^\d+-/, '')}`;
