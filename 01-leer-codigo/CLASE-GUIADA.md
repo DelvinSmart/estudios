@@ -206,7 +206,51 @@ elige :: ¿Qué hace propina ?? 'todavía no se sabe'? :: Suma la propina :: Si 
 escribe :: Con tus palabras y un ejemplo tuyo: ¿por qué null no es lo mismo que 0? :: Porque 0 es una respuesta conocida (por ejemplo, el pasajero no dejó propina) y null es que todavía no hay dato (el viaje no terminó); si los confundo, las cuentas como el promedio salen mal.
 ```
 
-> 🔁 **Repaso:** el código son órdenes escritas para la computadora. Tu app está en TypeScript, que es JavaScript con tipos. Los tipos (`string`, `number`, `boolean`, `null`) dicen qué clase de dato va en cada caja, y así los errores aparecen antes de llegar al teléfono. Y `null` no es cero: es **"no hay dato"**, y TypeScript te obliga a revisarlo antes de usarlo.
+### La casilla "(opcional)" de un formulario
+
+> 🎙️ **El profesor:** piensa en una planilla que pide varios datos, y uno dice **"(opcional)"**. Si la persona lo deja en blanco, ¿qué guarda el programa? Esa es la forma más fácil de recordar `null`.
+
+Cuando alguien **no escribe nada** en una casilla opcional, el programa puede guardarlo de tres formas, según cómo esté hecho:
+
+| Cómo se guarda | Qué significa |
+|---|---|
+| `''` (texto vacío) | El formulario mandó la casilla, pero sin letras. Es lo que sale "solo" de un campo de texto. |
+| `null` | El programa guardó **"no hay dato"**, a propósito. |
+| La casilla ni aparece (`undefined`) | No se mandó: ese dato no existe en lo guardado. |
+
+**Lo correcto casi siempre es convertir el vacío en `null`**, para que quede claro que la persona **no respondió**, y no que respondió "algo vacío":
+
+```ts
+const nota = textoEscrito.trim() === '' ? null : textoEscrito.trim();
+```
+
+Y en TypeScript lo vas a ver de dos formas:
+
+```ts
+interface Gasto {
+  valor: number;          // obligatorio
+  nota: string | null;    // la casilla existe siempre, pero puede ser "nada"
+  foto?: string;          // el "?" = opcional: puede ni venir (undefined)
+}
+```
+
+**En tu app:** al registrar un gasto, la **nota** es opcional. Si no escribes nada, se guarda `null` ("no dejó nota"); si escribes "lavado completo", se guarda ese texto. Cuando la app muestra el gasto, revisa primero: si la nota es `null`, no dibuja la línea de la nota.
+
+**La regla para recordarlo:** `null` = **"pregunté y no hay respuesta"**. Una casilla opcional en blanco es `null`. Pero un **0 que la persona escribió** (por ejemplo, "propina: 0") **sí es una respuesta**: es un número.
+
+> 🌎 **En la vida real:** en la ficha del médico dice "alergias (opcional)". Si la dejas en blanco, el médico no anota "cero alergias": anota que **no se sabe**. Si escribes "ninguna", eso sí es una respuesta. Blanco es `null`; "ninguna" es un dato.
+
+> 🌎 **Otro ejemplo:** al registrarte en una app de transporte, "segundo teléfono (opcional)". Si no lo pones, la app guarda `null` y nunca intenta llamarlo. Si guardara `''`, podría intentar marcar un número vacío y fallar.
+
+```practica
+vf :: Una casilla opcional que la persona deja en blanco conviene guardarla como null
+vf :: Si la persona escribe 0 en "propina", eso es null
+elige :: En TypeScript, ¿qué significa foto?: string? :: Que es obligatoria :: Que es opcional: puede ni venir (undefined) :: Que es un número
+elige :: ¿Qué hace textoEscrito.trim() === '' ? null : textoEscrito.trim()? :: Borra el formulario :: Si la casilla quedó vacía guarda null; si no, guarda el texto limpio :: Convierte el texto en número
+escribe :: Explica con un formulario de tu vida por qué una casilla opcional en blanco es null. :: Por ejemplo, la nota de un gasto: si no escribo nada, no hay dato, entonces se guarda null; si escribo una nota, se guarda el texto. null es "pregunté y no hay respuesta".
+```
+
+> 🔁 **Repaso:** el código son órdenes escritas para la computadora. Tu app está en TypeScript, que es JavaScript con tipos. Los tipos (`string`, `number`, `boolean`, `null`) dicen qué clase de dato va en cada caja, y así los errores aparecen antes de llegar al teléfono. Y `null` no es cero: es **"no hay dato"** (como una casilla opcional en blanco), y TypeScript te obliga a revisarlo antes de usarlo.
 
 ## 2. Las cinco piezas
 
