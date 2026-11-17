@@ -16,13 +16,14 @@ const ARCHIVO = new URL('../funciones/respuestas.json', import.meta.url);
 const hay = existsSync(ARCHIVO);
 const RESPUESTAS = hay ? JSON.parse(readFileSync(ARCHIVO, 'utf8')).practicas : {};
 
-// Una práctica de programación que se corrige, única de su parte, y en la PRIMERA parte del curso
-// (el primer bombillo de un curso tiene que ser su primera parte: las partes se prenden en orden).
+// La PRIMERA parte del curso de programación (el primer bombillo de un curso tiene que ser su primera parte:
+// las partes se prenden en orden) y TODAS sus prácticas que se corrigen (una parte puede tener varias).
 const PRIMERA = listarPartes().programacion[0];
-const [ID, ENTRADA] = Object.entries(RESPUESTAS).find(([, e]) => e.curso === 'programacion' && e.parte === PRIMERA
-  && e.preguntas.some((p) => p.tipo !== 'escribe')
-  && Object.values(RESPUESTAS).filter((o) => o.parte === e.parte).length === 1) || [];
-const bien = () => Object.fromEntries(ENTRADA.preguntas.map((p, i) => [i, p.correcta]).filter(([, v]) => v !== undefined && v !== null));
+const PRACTICAS = Object.entries(RESPUESTAS)
+  .filter(([, e]) => e.parte === PRIMERA && e.preguntas.some((p) => p.tipo !== 'escribe'))
+  .sort(([a], [b]) => a.localeCompare(b, 'es', { numeric: true }));
+const [ID, ENTRADA] = PRACTICAS[0] || [];
+const bien = (entrada = ENTRADA) => Object.fromEntries(entrada.preguntas.map((p, i) => [i, p.correcta]).filter(([, v]) => v !== undefined && v !== null));
 const mal = () => { const r = bien(); const i = Object.keys(r)[0]; r[i] = typeof r[i] === 'number' ? (r[i] + 1) % 2 : (r[i] === 'V' ? 'F' : 'V'); return r; };
 
 let app; let auth; let db; let corregir;
@@ -64,14 +65,22 @@ test('de punta a punta: fallar, esperar, aprobar en el servidor y recién ahí p
   await assert.rejects(corregir({ id: ID, respuestas: bien() }), (e) => e.code === 'functions/resource-exhausted');
   await new Promise((r) => setTimeout(r, 15500));
 
-  // 4. Todo bien: aprobada, guardada en el servidor y la parte queda aprobada.
+  // 4. Todo bien: aprobada y guardada. Si la parte tiene más prácticas, todavía NO queda aprobada.
   const ok = (await corregir({ id: ID, respuestas: bien() })).data;
   assert.equal(ok.aprobada, true);
   assert.equal(ok.guardada, true);
-  assert.equal(ok.parteAprobada, true);
   assert.ok(Array.isArray(ok.explicaciones));
+  assert.equal(ok.parteAprobada, PRACTICAS.length === 1);
+  if (PRACTICAS.length > 1) await assert.rejects(setDoc(progreso, bombillo));
 
-  // 5. Ahora sí se prende el bombillo.
+  // 5. Las demás prácticas de la parte: la parte queda aprobada recién con la última.
+  for (const [k, [id, entrada]] of PRACTICAS.slice(1).entries()) {
+    const r = (await corregir({ id, respuestas: bien(entrada) })).data;
+    assert.equal(r.aprobada, true);
+    assert.equal(r.parteAprobada, k === PRACTICAS.length - 2);
+  }
+
+  // 6. Ahora sí se prende el bombillo.
   await setDoc(progreso, bombillo);
 });
 

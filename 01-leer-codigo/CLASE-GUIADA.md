@@ -82,9 +82,9 @@ Fíjate en tres detalles que confunden al principio:
 2. **Lo que está después de `//` es un comentario.** La computadora lo ignora. Es una nota para las personas que leen el código.
 3. **`string | null`** se lee **"texto o nada"**. La barra `|` significa **"o"**.
 
-> 🌎 **En la vida real:** `null` es dejar una casilla vacía **a propósito**, como poner "—" en "segundo apellido" cuando no tienes. No es un error: es la respuesta "no hay".
+> 🌎 **En la vida real:** En la planilla de un viaje: el pasajero es `string` ("Juan"), el valor es `number` (18,50), "¿pagó con tarjeta?" es `boolean` (sí o no) y la propina, si no hubo, es `null` (nada, a propósito).
 
-> 🌎 **Otro ejemplo:** En la planilla de un viaje: el pasajero es `string` ("Juan"), el valor es `number` (18,50), "¿pagó con tarjeta?" es `boolean` (sí o no) y la propina, si no hubo, es `null` (nada, a propósito).
+> 🌎 **Otro ejemplo:** Es como el tablero del carro: el nombre del modelo es texto (`string`), la velocidad es un número (`number`) y la luz del cinturón está prendida o apagada (`boolean`). Cada indicador muestra un solo tipo de dato.
 
 > ✋ **Para y piensa:** ¿de qué tipo es cada uno? `'Uber'`, `3.5`, `false`, `'false'`.
 
@@ -107,28 +107,13 @@ TypeScript te marca un **error antes de correr el programa**: dijiste que en la 
 
 </details>
 
-```practica
-escribe :: Con tus palabras: ¿qué es un `string`? Da un ejemplo. :: Un texto. Va entre comillas, por ejemplo `'Thermomac'` o `'Uber'`.
-escribe :: Con tus palabras: ¿qué es un `number`? Da un ejemplo. :: Un número, con o sin decimales, sin comillas. Por ejemplo `45` litros o `5.89` de precio.
-escribe :: Con tus palabras: ¿qué es un `boolean`? Da un ejemplo. :: Un dato que solo puede ser sí o no: `true` o `false`. Por ejemplo, si el tanque está lleno.
-escribe :: Con tus palabras: ¿qué es `null`? :: "Nada", puesto a propósito: la respuesta "no hay", como poner "—" en segundo apellido.
-vf :: `'Uber'` es un `string`
-vf :: `45` es un `string`
-vf :: `'45'` es un `number`
-vf :: `true` es un `string`
-vf :: `'false'` es un `boolean`
-vf :: `3.5` es un `number`
-vf :: `null` quiere decir que hubo un error
-vf :: En `let litros: number = 45;` el signo `=` compara si litros es igual a 45
-elige :: ¿De qué tipo es `false`? :: string :: number :: boolean :: null
-elige :: ¿Qué tipo usarías para guardar el nombre de tu empresa? :: string :: number :: boolean
-elige :: ¿Qué tipo usarías para guardar si un viaje fue cancelado o no? :: string :: number :: boolean :: null
-elige :: ¿Qué es TypeScript? :: Un lenguaje distinto que no tiene nada que ver con JavaScript :: JavaScript con tipos, que avisa los errores antes de correr el programa :: Un programa para dibujar pantallas
-```
-
 ### `null` a fondo: cero no es lo mismo que "no sé"
 
 > 🎙️ **El profesor:** `null` es el tipo que más cuesta al principio, porque parece "cero" o "vacío". No lo es. Vamos con un caso de tu trabajo que lo deja claro para siempre.
+
+**Primero, qué es:** `null` quiere decir **"nada", puesto a propósito**. No es un error ni un olvido: es la respuesta **"no hay"** o **"todavía no se sabe"**.
+
+> 🌎 **En la vida real:** `null` es dejar una casilla vacía **a propósito**, como poner "—" en "segundo apellido" cuando no tienes. No es un error: es la respuesta "no hay".
 
 **El caso: las propinas de tres viajes.**
 
@@ -196,16 +181,6 @@ Ese aviso es lo que evita que la app de Copiloto se rompa al mostrar una propina
 
 </details>
 
-```practica
-vf :: Una propina de 0 y una propina null significan lo mismo
-vf :: Si cuentas los null como si fueran 0, un promedio puede salir mal
-vf :: Con una caja number | null, TypeScript te obliga a revisar si es null antes de usarla como número
-elige :: El viaje todavía no terminó. ¿Cómo guardas su propina? :: 0 :: null :: ''
-elige :: ¿Qué promedio de propinas da [10, 0, null] si haces bien la cuenta? :: 3,33 :: 5 :: 10
-elige :: ¿Qué hace propina ?? 'todavía no se sabe'? :: Suma la propina :: Si propina es null, muestra 'todavía no se sabe' :: Borra la propina
-escribe :: Con tus palabras y un ejemplo tuyo: ¿por qué null no es lo mismo que 0? :: Porque 0 es una respuesta conocida (por ejemplo, el pasajero no dejó propina) y null es que todavía no hay dato (el viaje no terminó); si los confundo, las cuentas como el promedio salen mal.
-```
-
 ### La casilla "(opcional)" de un formulario
 
 > 🎙️ **El profesor:** piensa en una planilla que pide varios datos, y uno dice **"(opcional)"**. Si la persona lo deja en blanco, ¿qué guarda el programa? Esa es la forma más fácil de recordar `null`.
@@ -241,6 +216,37 @@ interface Gasto {
 > 🌎 **En la vida real:** en la ficha del médico dice "alergias (opcional)". Si la dejas en blanco, el médico no anota "cero alergias": anota que **no se sabe**. Si escribes "ninguna", eso sí es una respuesta. Blanco es `null`; "ninguna" es un dato.
 
 > 🌎 **Otro ejemplo:** al registrarte en una app de transporte, "segundo teléfono (opcional)". Si no lo pones, la app guarda `null` y nunca intenta llamarlo. Si guardara `''`, podría intentar marcar un número vacío y fallar.
+
+**Ahora sí, a practicar.** Ya viste todo lo de esta parte (los tipos y `null` a fondo). Responde las tres prácticas:
+
+```practica
+escribe :: Con tus palabras: ¿qué es un `string`? Da un ejemplo. :: Un texto. Va entre comillas, por ejemplo `'Thermomac'` o `'Uber'`.
+escribe :: Con tus palabras: ¿qué es un `number`? Da un ejemplo. :: Un número, con o sin decimales, sin comillas. Por ejemplo `45` litros o `5.89` de precio.
+escribe :: Con tus palabras: ¿qué es un `boolean`? Da un ejemplo. :: Un dato que solo puede ser sí o no: `true` o `false`. Por ejemplo, si el tanque está lleno.
+escribe :: Con tus palabras: ¿qué es `null`? :: "Nada", puesto a propósito: la respuesta "no hay", como poner "—" en segundo apellido.
+vf :: `'Uber'` es un `string`
+vf :: `45` es un `string`
+vf :: `'45'` es un `number`
+vf :: `true` es un `string`
+vf :: `'false'` es un `boolean`
+vf :: `3.5` es un `number`
+vf :: `null` quiere decir que hubo un error
+vf :: En `let litros: number = 45;` el signo `=` compara si litros es igual a 45
+elige :: ¿De qué tipo es `false`? :: string :: number :: boolean :: null
+elige :: ¿Qué tipo usarías para guardar el nombre de tu empresa? :: string :: number :: boolean
+elige :: ¿Qué tipo usarías para guardar si un viaje fue cancelado o no? :: string :: number :: boolean :: null
+elige :: ¿Qué es TypeScript? :: Un lenguaje distinto que no tiene nada que ver con JavaScript :: JavaScript con tipos, que avisa los errores antes de correr el programa :: Un programa para dibujar pantallas
+```
+
+```practica
+vf :: Una propina de 0 y una propina null significan lo mismo
+vf :: Si cuentas los null como si fueran 0, un promedio puede salir mal
+vf :: Con una caja number | null, TypeScript te obliga a revisar si es null antes de usarla como número
+elige :: El viaje todavía no terminó. ¿Cómo guardas su propina? :: 0 :: null :: ''
+elige :: ¿Qué promedio de propinas da [10, 0, null] si haces bien la cuenta? :: 3,33 :: 5 :: 10
+elige :: ¿Qué hace propina ?? 'todavía no se sabe'? :: Suma la propina :: Si propina es null, muestra 'todavía no se sabe' :: Borra la propina
+escribe :: Con tus palabras y un ejemplo tuyo: ¿por qué null no es lo mismo que 0? :: Porque 0 es una respuesta conocida (por ejemplo, el pasajero no dejó propina) y null es que todavía no hay dato (el viaje no terminó); si los confundo, las cuentas como el promedio salen mal.
+```
 
 ```practica
 vf :: Una casilla opcional que la persona deja en blanco conviene guardarla como null
