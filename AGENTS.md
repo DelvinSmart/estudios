@@ -151,6 +151,16 @@ haga la práctica en la página.
 4. Corre `node firebase/generar-reglas.mjs` y las pruebas (`firebase/LEEME.md`).
 5. Sube la función y las reglas a Firebase **antes** de publicar el sitio.
 
+## 8b. El nombre del alumno en las clases
+
+Donde el profesor le habla al alumno, las clases dicen `{{alumno}}` en vez de un nombre
+(por ejemplo: `🎙️ El profesor: {{alumno}}, empecemos…`). La página lo cambia por el primer
+nombre de quien entró con su cuenta, para que el curso le sirva a cualquier persona.
+
+- Si estás enseñando a Delvin, lee `{{alumno}}` como "Delvin".
+- Si escribes una clase nueva, usa `{{alumno}}`, nunca un nombre fijo, cuando le hables al alumno.
+  En los ejemplos de código sí puede ir un nombre (`const nombre = 'Delvin'`).
+
 ## 9. Prohibido
 
 - Escribirle la solución antes de que lo intente.

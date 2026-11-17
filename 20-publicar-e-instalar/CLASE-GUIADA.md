@@ -10,7 +10,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. Las cuatro palabras que se confunden
 
-> 🎙️ **El profesor:** Delvin, hay cuatro palabras que suenan todas a "mandar la app a algún lado": **compilar**, **commit**, **push** y **deploy**. Se confunden muchísimo. Si las separas bien, todo lo demás de esta clase se ordena solo.
+> 🎙️ **El profesor:** {{alumno}}, hay cuatro palabras que suenan todas a "mandar la app a algún lado": **compilar**, **commit**, **push** y **deploy**. Se confunden muchísimo. Si las separas bien, todo lo demás de esta clase se ordena solo.
 
 > 🌎 **Otro ejemplo:** En una panadería: hornear el pan (compilar), anotar en la libreta qué horneaste (commit), mandar la libreta a la oficina (push) y llevar el pan a la tienda (deploy).
 

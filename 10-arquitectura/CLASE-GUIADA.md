@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. ¿Por qué importa la arquitectura?
 
-> 🎙️ **El profesor:** Delvin, ya sabes leer código, probarlo, guardarlo, leer errores, hacer páginas y un servidor. Ahora subimos un piso: no "qué hace una línea", sino **cómo se organiza un programa entero**. Eso es la **arquitectura**: en qué partes se divide el código, qué hace cada parte y **quién puede hablar con quién**.
+> 🎙️ **El profesor:** {{alumno}}, ya sabes leer código, probarlo, guardarlo, leer errores, hacer páginas y un servidor. Ahora subimos un piso: no "qué hace una línea", sino **cómo se organiza un programa entero**. Eso es la **arquitectura**: en qué partes se divide el código, qué hace cada parte y **quién puede hablar con quién**.
 
 ¿Por qué importa? Porque un programa se puede escribir de cualquier forma… y funciona. **Hasta el día que quieres cambiar algo.**
 

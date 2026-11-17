@@ -17,7 +17,7 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { CLASES, ETAPAS, CURSOS, cursoDeEtapa, clasesDelCurso } from '../../web/cursos.js';
-import { partir } from '../../web/lector.js';
+import { partir, conAlumno } from '../../web/lector.js';
 
 const RAIZ = fileURLToPath(new URL('../../', import.meta.url));
 const HERRAMIENTAS = process.env.HERRAMIENTAS_AUDIO || path.join(RAIZ, '..', 'herramientas-audio');
@@ -33,7 +33,8 @@ const numeroEnCurso = (n) => String(clasesDelCurso(cursoDe(n)).indexOf(n) + 1).p
 
 // ---------- del Markdown al texto que se lee en voz alta ----------
 export function textoParaVoz(md, cursoActual) {
-  let t = md;
+  // Un audio sirve para todos: el saludo "{{alumno}}, …" se lee sin nombre.
+  let t = conAlumno(md, '');
   t = t.replace(/```practica[\s\S]*?```/g, '\n\nAquí hay una práctica para responder en la página.\n\n');
   t = t.replace(/```[\s\S]*?```/g, '\n\nAquí hay un ejemplo de código, en la página.\n\n');
   // "Tema 07" → el número del mapa, y el curso si es otro

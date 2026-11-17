@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. ¿Qué es Git?
 
-> 🎙️ **El profesor:** Delvin, hasta hoy los commits y los push los hacía un script o una IA por ti. Hoy vas a entender **qué pasa por dentro** y a hacerlo tú mismo. Git es una de las herramientas que **todo** programador del mundo usa todos los días; en una entrevista lo dan por sabido.
+> 🎙️ **El profesor:** {{alumno}}, hasta hoy los commits y los push los hacía un script o una IA por ti. Hoy vas a entender **qué pasa por dentro** y a hacerlo tú mismo. Git es una de las herramientas que **todo** programador del mundo usa todos los días; en una entrevista lo dan por sabido.
 
 > 🌎 **En la vida real:** Git es como el historial de versiones de un contrato en la escribanía: cada versión firmada queda guardada con su fecha, y siempre puedes ver qué cambió entre una y otra.
 
@@ -177,7 +177,7 @@ elige :: ¿En qué rama trabajas la app? :: `main` :: `feature/smart-camera` :: 
 
 ## 5. Cómo se escribe un buen mensaje
 
-> 🎙️ **El profesor:** un mensaje de commit lo vas a leer **tú mismo dentro de seis meses**, buscando por qué hiciste algo. Escríbelo para ese Delvin del futuro.
+> 🎙️ **El profesor:** un mensaje de commit lo vas a leer **tú mismo dentro de seis meses**, buscando por qué hiciste algo. Escríbelo para tu yo del futuro.
 
 > 🌎 **Otro ejemplo:** Como el asunto de un correo bien escrito: "Factura de octubre – pago atrasado por cambio de banco" dice qué y por qué; "Hola" no dice nada.
 

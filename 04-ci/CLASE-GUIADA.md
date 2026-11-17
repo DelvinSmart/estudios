@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. ¿Qué es el CI?
 
-> 🎙️ **El profesor:** Delvin, en los Temas 02 y 03 **tú** corrías las pruebas a mano. Pero ¿qué pasa el día que tienes prisa, o que te olvidas? Hoy vamos a ver al "empleado" que las corre **solo**, cada vez que subes algo, sin que se lo pidas: el **CI**.
+> 🎙️ **El profesor:** {{alumno}}, en los Temas 02 y 03 **tú** corrías las pruebas a mano. Pero ¿qué pasa el día que tienes prisa, o que te olvidas? Hoy vamos a ver al "empleado" que las corre **solo**, cada vez que subes algo, sin que se lo pidas: el **CI**.
 
 > 🌎 **En la vida real:** Es como un vigilante nocturno de un edificio: hace su ronda solo, todas las noches, aunque el dueño esté durmiendo o de viaje.
 

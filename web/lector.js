@@ -3,7 +3,20 @@
 
 const memoria = new Map();
 
-// Descarga un archivo una sola vez; las veces siguientes lo da de memoria.
+// ---------- el nombre de quien estudia ----------
+// Donde el profesor le habla al alumno, las clases dicen {{alumno}} en vez de un nombre fijo.
+// La página lo cambia por el primer nombre de quien entró con su cuenta; sin cuenta, el saludo
+// queda sin nombre ("{{alumno}}, empecemos…" → "Empecemos…"). Los audios usan siempre esa forma.
+let alumno = '';
+export function ponerAlumno(nombre) { alumno = nombre || ''; }
+export function conAlumno(md, nombre = alumno) {
+  return md
+    .replace(/\{\{alumno\}\},\s*(\S)/g, (todo, letra) => (nombre ? `${nombre}, ${letra}` : letra.toUpperCase()))
+    .replace(/\{\{alumno\}\}/g, nombre || 'tú');
+}
+
+// Descarga un archivo una sola vez; las veces siguientes lo da de memoria
+// (con el nombre del alumno ya puesto, por si entró o salió de su cuenta).
 export function leerArchivo(ruta) {
   if (!memoria.has(ruta)) {
     const promesa = fetch(ruta).then((r) => {
@@ -13,7 +26,7 @@ export function leerArchivo(ruta) {
     promesa.catch(() => memoria.delete(ruta)); // si falló, se puede volver a intentar
     memoria.set(ruta, promesa);
   }
-  return memoria.get(ruta);
+  return memoria.get(ruta).then((md) => conAlumno(md));
 }
 
 // Quita el formato Markdown para mostrar texto simple (resúmenes y búsqueda).

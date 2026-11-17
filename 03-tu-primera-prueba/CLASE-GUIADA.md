@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. Lo que vas a usar
 
-> 🎙️ **El profesor:** Delvin, en el Tema 02 **miraste** pruebas. Hoy vas a **escribir una tú**, dentro de tu app de verdad. Es pasar de ver un partido a jugarlo. Y vamos a probar algo que ya conoces: la regla del nombre de "Mi empresa".
+> 🎙️ **El profesor:** {{alumno}}, en el Tema 02 **miraste** pruebas. Hoy vas a **escribir una tú**, dentro de tu app de verdad. Es pasar de ver un partido a jugarlo. Y vamos a probar algo que ya conoces: la regla del nombre de "Mi empresa".
 
 Vas a usar tres cosas:
 

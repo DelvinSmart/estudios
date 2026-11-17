@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. Dónde vive cada cosa en la app
 
-> 🎙️ **El profesor:** Delvin, hasta hoy leíste código, escribiste una prueba y entendiste el CI. Hoy vas a **cambiar tu app con tus manos** y ver el cambio en la pantalla. Pero antes de cambiar algo, hay que saber **dónde buscarlo**. Una app grande es como una casa grande: si no sabes en qué habitación está la llave, no la encuentras.
+> 🎙️ **El profesor:** {{alumno}}, hasta hoy leíste código, escribiste una prueba y entendiste el CI. Hoy vas a **cambiar tu app con tus manos** y ver el cambio en la pantalla. Pero antes de cambiar algo, hay que saber **dónde buscarlo**. Una app grande es como una casa grande: si no sabes en qué habitación está la llave, no la encuentras.
 
 > 🌎 **En la vida real:** Es como conocer un supermercado antes de buscar algo: sabes que los lácteos están al fondo y la limpieza en el pasillo 5, así no recorres todo.
 

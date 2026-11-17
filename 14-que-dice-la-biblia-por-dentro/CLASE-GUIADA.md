@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. El mapa del día
 
-> 🎙️ **El profesor:** Delvin, esta clase es como el diario de obra de una jornada larga. Pasaron muchas cosas en un día, así que primero te doy el mapa completo, y después vamos una por una.
+> 🎙️ **El profesor:** {{alumno}}, esta clase es como el diario de obra de una jornada larga. Pasaron muchas cosas en un día, así que primero te doy el mapa completo, y después vamos una por una.
 
 | Qué | Dónde está |
 |---|---|
@@ -337,7 +337,7 @@ Tres ideas de velocidad, en orden: **quitar una espera innecesaria**, **hacer la
 
 Logos responde con **JSONP**: en vez de `fetch`, se agrega un **`<script>`** cuya dirección es la del servicio, y ese script, al cargar, **llama a una función nuestra** con los datos. La dirección es como `reftagger.bibliacdn.com/bible/rvr60/1Timothy3.2`. Se comprobó con los 66 libros (Cantares se escribe "Song").
 
-> 🌎 **En la vida real:** pedir una pizza diciendo "cuando llegue, toca el timbre que dice *Delvin*": el repartidor (el `<script>`) llega y toca **tu** timbre (llama a tu función) con la pizza (los datos).
+> 🌎 **En la vida real:** pedir una pizza diciendo "cuando llegue, toca el timbre que dice *tu nombre*": el repartidor (el `<script>`) llega y toca **tu** timbre (llama a tu función) con la pizza (los datos).
 
 > 🌎 **Otro ejemplo:** Como dejar tu número de teléfono en un mostrador: cuando llega tu pedido, te llaman a ti con los datos.
 

@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. ¿Qué es Firebase?
 
-> 🎙️ **El profesor:** Delvin, hasta ahora mirabas la app **en el teléfono**. Pero cuando un conductor registra un ingreso, ese dato no se queda solo en su teléfono: viaja a internet, se guarda, y vuelve cuando abre la app en otro aparato. Hoy bajamos al **depósito** y a la **oficina de atrás**: Firebase.
+> 🎙️ **El profesor:** {{alumno}}, hasta ahora mirabas la app **en el teléfono**. Pero cuando un conductor registra un ingreso, ese dato no se queda solo en su teléfono: viaja a internet, se guarda, y vuelve cuando abre la app en otro aparato. Hoy bajamos al **depósito** y a la **oficina de atrás**: Firebase.
 
 **Firebase** es un conjunto de servicios de Google para que una app tenga **servidor sin que tú administres un servidor**. No compras una computadora ni la mantienes encendida: Google lo hace, y tú pagas por lo que usas.
 

@@ -146,7 +146,7 @@ escribe :: ¿Por qué esta clase trae los ejemplos en Python además de JavaScri
 
 ## 1.1 Qué es un agente, de verdad
 
-> 🎙️ **El profesor:** Delvin, llegaste a la última etapa. Todo lo que aprendiste (funciones, pruebas, CI, errores, Firebase, arquitectura) se usa aquí. Un agente es un programa como cualquier otro, con una pieza nueva en el centro: un modelo que decide. Empecemos por definir bien qué es, porque la mitad de la confusión del mundo viene de palabras vagas.
+> 🎙️ **El profesor:** {{alumno}}, llegaste a la última etapa. Todo lo que aprendiste (funciones, pruebas, CI, errores, Firebase, arquitectura) se usa aquí. Un agente es un programa como cualquier otro, con una pieza nueva en el centro: un modelo que decide. Empecemos por definir bien qué es, porque la mitad de la confusión del mundo viene de palabras vagas.
 
 > 🌎 **En la vida real:** Es como aprender a manejar: antes de las maniobras difíciles, tienes que saber qué es el volante, el freno y el acelerador.
 

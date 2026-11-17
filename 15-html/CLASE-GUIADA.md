@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. Qué es HTML
 
-> 🎙️ **El profesor:** Delvin, empezamos una etapa nueva: **la web**. Tu página **¿Qué dice la Biblia?** y este mismo mapa están hechos con tres piezas: HTML, CSS y JavaScript. Hoy, la primera. Y te adelanto algo: es la más fácil de las tres.
+> 🎙️ **El profesor:** {{alumno}}, empezamos una etapa nueva: **la web**. Tu página **¿Qué dice la Biblia?** y este mismo mapa están hechos con tres piezas: HTML, CSS y JavaScript. Hoy, la primera. Y te adelanto algo: es la más fácil de las tres.
 
 > 🌎 **En la vida real:** Es como el esqueleto de un edificio en construcción: ya se ven los pisos, las paredes y las ventanas, aunque todavía no tenga pintura ni luz.
 

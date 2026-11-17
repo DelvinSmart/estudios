@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. El hilo de JavaScript
 
-> 🎙️ **El profesor:** Delvin, empecemos por el problema. Tu app, publicada en Google Play, tardaba **17,7 segundos** en mostrar el Início en un Samsung A31. Para un conductor, eso es eternidad. Para entender por qué, hay que entender **una idea**: el hilo de JavaScript.
+> 🎙️ **El profesor:** {{alumno}}, empecemos por el problema. Tu app, publicada en Google Play, tardaba **17,7 segundos** en mostrar el Início en un Samsung A31. Para un conductor, eso es eternidad. Para entender por qué, hay que entender **una idea**: el hilo de JavaScript.
 
 > 🌎 **En la vida real:** Es como una cocina con un solo cocinero: si se pone a pelar 50 kilos de papa, nadie más recibe su plato hasta que termine, aunque la heladera esté llena.
 

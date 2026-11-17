@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. ¿Qué es un CRUD?
 
-> 🎙️ **El profesor:** Delvin, hasta hoy estudiaste una tienda que ya existía. Hoy abres **tu propio puesto**, desde cero: un **servidor** pequeño, de verdad, con sus pruebas. Es la base de casi todos los sistemas del mundo, y es de lo que más preguntan en las entrevistas de backend.
+> 🎙️ **El profesor:** {{alumno}}, hasta hoy estudiaste una tienda que ya existía. Hoy abres **tu propio puesto**, desde cero: un **servidor** pequeño, de verdad, con sus pruebas. Es la base de casi todos los sistemas del mundo, y es de lo que más preguntan en las entrevistas de backend.
 
 **CRUD** son las **4 operaciones básicas** sobre datos:
 

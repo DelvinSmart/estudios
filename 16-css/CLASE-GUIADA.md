@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. Cómo se escribe una regla
 
-> 🎙️ **El profesor:** Delvin, ya tienes la casa construida con HTML. Hoy toca **decorarla**: colores, letras, espacios, dónde va cada mueble y cómo se ve en el celular. Eso es **CSS**. Y todo CSS, por grande que sea, está hecho de una sola cosa repetida mil veces: **la regla**.
+> 🎙️ **El profesor:** {{alumno}}, ya tienes la casa construida con HTML. Hoy toca **decorarla**: colores, letras, espacios, dónde va cada mueble y cómo se ve en el celular. Eso es **CSS**. Y todo CSS, por grande que sea, está hecho de una sola cosa repetida mil veces: **la regla**.
 
 **CSS** quiere decir *Cascading Style Sheets*: "hojas de estilo en **cascada**" (lo de "cascada" lo entiendes en la parte 3).
 

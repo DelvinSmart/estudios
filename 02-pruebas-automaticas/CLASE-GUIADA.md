@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. ¿Qué es una prueba?
 
-> 🎙️ **El profesor:** Delvin, hoy vamos a ver algo que separa a un programador aficionado de uno profesional: **las pruebas automáticas**. Tu app tiene más de 400. Cuando termines esta clase, vas a poder explicar en una entrevista qué son, para qué sirven y cómo se escribe una.
+> 🎙️ **El profesor:** {{alumno}}, hoy vamos a ver algo que separa a un programador aficionado de uno profesional: **las pruebas automáticas**. Tu app tiene más de 400. Cuando termines esta clase, vas a poder explicar en una entrevista qué son, para qué sirven y cómo se escribe una.
 
 > 🌎 **En la vida real:** Es como el control de calidad de una fábrica de galletas: una máquina toma una galleta de cada lote, la pesa y la compara con el peso correcto. Si no coincide, se para la línea.
 

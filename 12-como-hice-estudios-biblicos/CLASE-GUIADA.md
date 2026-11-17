@@ -10,7 +10,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. La idea en una frase
 
-> 🎙️ **El profesor:** Delvin, esta clase es especial: es **tu** proyecto, y es el ejemplo perfecto de todo lo que aprendiste en la etapa de la web. Si mañana te piden "muéstrame algo que hayas hecho con HTML, CSS y JavaScript", este es. Empecemos por la idea que lo sostiene todo.
+> 🎙️ **El profesor:** {{alumno}}, esta clase es especial: es **tu** proyecto, y es el ejemplo perfecto de todo lo que aprendiste en la etapa de la web. Si mañana te piden "muéstrame algo que hayas hecho con HTML, CSS y JavaScript", este es. Empecemos por la idea que lo sostiene todo.
 
 > 🌎 **En la vida real:** Es como una plantilla de invitación de cumpleaños: el diseño es uno solo, y para cada niño solo cambias el nombre, la fecha y el lugar.
 

@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. La regla más importante
 
-> 🎙️ **El profesor:** Delvin, los errores asustan al principio: letras rojas, palabras en inglés… Hoy vas a cambiar esa idea para siempre. **Un error no es un fracaso: es un mensaje.** El programa te está diciendo **qué** salió mal y **dónde**. Quien sabe leerlo arregla en minutos lo que otro tarda horas en adivinar.
+> 🎙️ **El profesor:** {{alumno}}, los errores asustan al principio: letras rojas, palabras en inglés… Hoy vas a cambiar esa idea para siempre. **Un error no es un fracaso: es un mensaje.** El programa te está diciendo **qué** salió mal y **dónde**. Quien sabe leerlo arregla en minutos lo que otro tarda horas en adivinar.
 
 Y antes de todo, la regla de oro, que está escrita en el documento principal de tu app (`AGENTS.md`):
 

@@ -10,7 +10,7 @@ Esta es la clase **como si yo te la estuviera dando**, para que la puedas estudi
 
 ## 1. El lenguaje: TypeScript
 
-> 🎙️ **El profesor:** Delvin, empecemos por lo más básico de todo: ¿qué es el código? El código es **una lista de órdenes escritas para una computadora**. La computadora es muy obediente pero nada inteligente: hace **exactamente** lo que dice el texto, ni más ni menos. Por eso el código se escribe con reglas muy estrictas, como un formulario oficial.
+> 🎙️ **El profesor:** {{alumno}}, empecemos por lo más básico de todo: ¿qué es el código? El código es **una lista de órdenes escritas para una computadora**. La computadora es muy obediente pero nada inteligente: hace **exactamente** lo que dice el texto, ni más ni menos. Por eso el código se escribe con reglas muy estrictas, como un formulario oficial.
 
 > 🌎 **En la vida real:** Escribir código es como dejarle una nota a alguien muy obediente pero que no piensa: si dice "compra 2 panes", compra 2, aunque la panadería esté cerrada. Por eso las órdenes tienen que ser exactas.
 

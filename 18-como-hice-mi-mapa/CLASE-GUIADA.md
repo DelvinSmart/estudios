@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. La idea: una sola fuente de verdad
 
-> 🎙️ **El profesor:** Delvin, este mapa se hizo el 16 de noviembre de 2026, con HTML, CSS y JavaScript, sin frameworks, igual que tu página de estudios. Y la primera decisión fue la más importante: **no copiar las clases**.
+> 🎙️ **El profesor:** {{alumno}}, este mapa se hizo el 16 de noviembre de 2026, con HTML, CSS y JavaScript, sin frameworks, igual que tu página de estudios. Y la primera decisión fue la más importante: **no copiar las clases**.
 
 Las clases ya existían como archivos `LECCION.md` (y ahora `CLASE-GUIADA.md`). La página **no copia** ese texto: **lo lee** directamente de esos archivos cada vez que se abre. Así:
 

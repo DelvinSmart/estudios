@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. Repaso rápido: variables, datos y funciones
 
-> 🎙️ **El profesor:** Delvin, la casa ya tiene paredes (HTML) y pintura (CSS). Hoy instalamos **la electricidad**: que al tocar un botón pase algo. Eso es **JavaScript**. Ya leíste TypeScript en el Tema 01; JavaScript es lo mismo, **sin los tipos**. Así que empezamos con un repaso corto.
+> 🎙️ **El profesor:** {{alumno}}, la casa ya tiene paredes (HTML) y pintura (CSS). Hoy instalamos **la electricidad**: que al tocar un botón pase algo. Eso es **JavaScript**. Ya leíste TypeScript en el Tema 01; JavaScript es lo mismo, **sin los tipos**. Así que empezamos con un repaso corto.
 
 > 🌎 **En la vida real:** Una variable es como una caja con etiqueta en un depósito: `const` es una caja sellada con cinta (no se cambia lo de adentro) y `let` es una caja con tapa (la puedes vaciar y volver a llenar). Una función es la máquina del depósito que empaqueta lo que le das.
 

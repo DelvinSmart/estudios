@@ -248,7 +248,7 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 > 2. **Pedir directo, todos a la vez**: mandar la lista entera por WhatsApp y que te lo preparen todo junto.
 > 3. **Adelantarlos**: que la bolsa ya esté lista en la puerta **antes** de que llegues.
 >
-> **JSONP**: es como pedir una pizza diciendo "cuando llegue, toque el timbre que dice *Delvin*": el repartidor (el `<script>`) llega y toca **tu** timbre (llama a tu función) con la pizza (los datos).
+> **JSONP**: es como pedir una pizza diciendo "cuando llegue, toque el timbre que dice *tu nombre*": el repartidor (el `<script>`) llega y toca **tu** timbre (llama a tu función) con la pizza (los datos).
 >
 > **El riesgo**: es usar la puerta de servicio de un local; funciona hoy, pero si la cambian de lugar, nadie te avisa.
 

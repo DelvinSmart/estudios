@@ -8,7 +8,7 @@ Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ningu
 
 ## 1. La idea en una frase
 
-> 🎙️ **El profesor:** Delvin, tu app vive en el teléfono. Un día quisiste que la persona pudiera ver sus números **en la computadora**, con la misma cuenta. Hacer una web es fácil… lo difícil es hacerla **sin copiar la app**. Esta clase es la historia de cómo se logró, y es de lo que más te puede lucir en una entrevista.
+> 🎙️ **El profesor:** {{alumno}}, tu app vive en el teléfono. Un día quisiste que la persona pudiera ver sus números **en la computadora**, con la misma cuenta. Hacer una web es fácil… lo difícil es hacerla **sin copiar la app**. Esta clase es la historia de cómo se logró, y es de lo que más te puede lucir en una entrevista.
 
 > 🌎 **En la vida real:** Es como un banco que tiene app y página web: tu saldo es uno solo; las dos pantallas lo muestran igual porque leen la misma cuenta.
 
