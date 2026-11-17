@@ -21,12 +21,69 @@
 
 > 🌎 **Otro ejemplo:** Es como un auto: el motor (lenguaje), el GPS que usas cuando quieres (librería), el manual de la empresa de transporte (framework) y la carretera (plataforma).
 
+### ¿Quién llama a quién? Librería y framework en código
+
+> 🎙️ **El profesor dice:** la diferencia entre librería y framework se entiende de verdad cuando la ves en código. Y es una de las preguntas más comunes en una entrevista. La clave es una sola pregunta: **¿quién llama a quién?**
+
+**Con una librería, mandas tú.** Traes la herramienta y **tú decides** cuándo usarla. Este mismo mapa de estudios usa la librería **marked**, que convierte el texto Markdown de las clases en una página:
+
+```js
+// Tú llamas a la librería, cuando tú quieres:
+const html = marked.parse('# Clase 01');   // → '<h1>Clase 01</h1>'
+```
+
+Si mañana no quieres usarla, la sacas y nada más cambia: tu código sigue siendo tuyo.
+
+**Con un framework, manda él.** Tú escribes las piezas y **el framework decide cuándo llamarlas**. Lo vas a ver en el curso de Node.js con **Express**, un framework para servidores:
+
+```js
+const app = express();
+
+// Tú escribes la función, pero NO la llamas tú:
+app.get('/gastos', (pedido, respuesta) => {
+  respuesta.json(gastos);
+});
+
+app.listen(3000);
+// Desde aquí, Express espera pedidos y LLAMA a tu función
+// cada vez que alguien pide /gastos.
+```
+
+Fíjate: en ninguna parte escribiste "ejecuta la función de `/gastos`". Eso lo hace Express, cada vez que llega un pedido. Esa idea tiene nombre: **inversión de control**. El control del programa pasa de ti al framework. También se le dice el **principio de Hollywood**: *"no nos llames, nosotros te llamamos"*.
+
+| | Librería | Framework |
+|---|---|---|
+| ¿Quién manda? | Tú | El framework |
+| ¿Qué escribes tú? | El programa entero, y llamas a la librería cuando la necesitas | Las piezas que el framework te pide (rutas, pantallas, componentes) |
+| ¿Cambiarla es fácil? | Sí, suele estar en pocos lugares | No: tu app está armada con su forma |
+| Ejemplos | marked, highlight.js, date-fns, el SDK de Firebase | Express, Next.js, Expo, Angular |
+
+**¿Y React?** Se presenta como librería, porque tú decides cómo armar tu app y la llamas para dibujar la pantalla. Pero en la práctica casi siempre se usa dentro de un framework, como Next.js en la web o Expo en el celular, que te dicen dónde va cada archivo y llaman a tus componentes.
+
+**Este mapa no usa ningún framework**, solo dos librerías: marked, para el Markdown, y highlight.js, para colorear el código. Por eso todo el control está en `web/app.js`, que decide qué pantalla mostrar.
+
+> 🌎 **En la vida real:** una librería es como un taladro: lo sacas de la caja cuando necesitas hacer un agujero, y tú decides dónde y cuándo. Un framework es como trabajar en una línea de montaje: tú pones tu pieza, pero la cinta decide cuándo te llega cada carro.
+
+> 🌎 **Otro ejemplo:** cuando trabajas con tu propio carro, tú decides a qué hora sales y qué viaje tomas: eso es usar una librería. En una app de transporte, la app te manda el viaje y tú respondes cuando te llama: eso es un framework.
+
+> 🎤 **Para la entrevista:** "Una librería la llamo yo cuando la necesito, por ejemplo date-fns para formatear una fecha. Un framework me da la estructura y llama a mi código: en Express escribo la función de una ruta y Express la ejecuta cuando llega el pedido. Eso se llama inversión de control."
+
 ```practica
 vf :: React es un lenguaje de programación
 vf :: Node.js es un lugar donde corre JavaScript fuera del navegador
 elige :: ¿Cuál de estos es un lenguaje? :: React :: Kotlin :: Expo
 elige :: ¿Qué diferencia una librería de un framework? :: Ninguna :: A la librería la llamas tú; el framework te da la estructura y llama a tu código :: El framework es más chico
 escribe :: Explica con un ejemplo la diferencia entre lenguaje y plataforma. :: El lenguaje es cómo escribo (por ejemplo JavaScript); la plataforma es dónde corre ese código (el navegador, Node.js en una computadora o un teléfono).
+```
+
+```practica
+vf :: Con una librería, eres tú quien decide cuándo llamar a su código
+vf :: En Express, tú llamas a la función de la ruta /gastos cuando llega un pedido
+elige :: En app.get('/gastos', (pedido, respuesta) => …), ¿quién ejecuta la función? :: Tú, en la línea siguiente :: Express, cada vez que llega un pedido a /gastos :: El navegador, al abrir la página
+elige :: Este mapa usa marked para convertir el Markdown en página. ¿Qué es marked? :: Un framework :: Una librería :: Un lenguaje
+elige :: ¿Cómo se llama la idea de que el framework llama a tu código? :: Programación orientada a objetos :: Inversión de control :: Recursividad
+elige :: ¿Cuál de estos es un framework? :: date-fns :: highlight.js :: Expo
+escribe :: Explica con un ejemplo tuyo la diferencia entre una librería y un framework. :: Una librería la llamo yo cuando la necesito, como marked para convertir Markdown; un framework me da la estructura y llama a mi código, como Express, que ejecuta la función de una ruta cuando llega un pedido. Es la inversión de control.
 ```
 
 ## Parte 2. JavaScript y TypeScript
