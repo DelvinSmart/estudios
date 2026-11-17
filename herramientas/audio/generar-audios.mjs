@@ -9,6 +9,7 @@
 // Rutas por defecto: ../herramientas-audio/venv/bin/piper y ../herramientas-audio/voces/es_MX-claude-high.onnx
 // Los audios van a ../estudios-audio/audio/ (otro repositorio, para no llenar este de archivos pesados).
 // Cada audio se rehace solo si cambió su texto (se guarda una huella en indice.json).
+// Si una parte desaparece (se borró, o la clase quedó más corta), su audio sobrante se borra.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -83,8 +84,17 @@ if (!existsSync(PIPER) || !existsSync(VOZ)) { console.error(`Falta Piper o la vo
 mkdirSync(SALIDA, { recursive: true });
 const archivoIndice = path.join(SALIDA, 'indice.json');
 const indice = existsSync(archivoIndice) ? JSON.parse(readFileSync(archivoIndice, 'utf8')) : {};
-let hechos = 0, iguales = 0;
+let hechos = 0, iguales = 0, borrados = 0;
 const inicio = Date.now();
+
+// Quita un audio que ya no tiene parte: su archivo y su línea en el índice.
+function borrar(id) {
+  const destino = path.join(SALIDA, indice[id].archivo);
+  if (existsSync(destino)) rmSync(destino);
+  delete indice[id];
+  borrados++;
+  console.log(`✗ ${id}  (ya no existe esa parte: audio borrado)`);
+}
 
 for (const num of clases) {
   const c = CLASES[num];
@@ -107,6 +117,21 @@ for (const num of clases) {
     console.log(`✓ ${id}  (${hechos} hechos)`);
     if (prueba) console.log(`\n--- texto leído ---\n${texto.slice(0, 1200)}…`);
   }
+  // Las partes que ya no existen (se borró una parte, o la clase quedó más corta): fuera su audio.
+  if (!prueba) {
+    for (const id of Object.keys(indice)) {
+      const [n, arch, k] = id.split(':');
+      if (n === num && (arch !== archivo || Number(k) > partes.length)) borrar(id);
+    }
+  }
   writeFileSync(archivoIndice, JSON.stringify(indice, null, 1));
 }
-console.log(`Listo: ${hechos} audios nuevos, ${iguales} sin cambios, en ${Math.round((Date.now() - inicio) / 1000)} s → ${SALIDA}`);
+// Corriendo todas: también salen las clases que ya no están en el catálogo.
+if (!prueba && !elegidas.length) {
+  for (const id of Object.keys(indice)) {
+    const n = id.split(':')[0];
+    if (!CLASES[n] || !etapaDe(n)) borrar(id);
+  }
+  writeFileSync(archivoIndice, JSON.stringify(indice, null, 1));
+}
+console.log(`Listo: ${hechos} audios nuevos, ${iguales} sin cambios, ${borrados} borrados, en ${Math.round((Date.now() - inicio) / 1000)} s → ${SALIDA}`);
