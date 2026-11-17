@@ -126,7 +126,87 @@ elige :: ¿Qué tipo usarías para guardar si un viaje fue cancelado o no? :: st
 elige :: ¿Qué es TypeScript? :: Un lenguaje distinto que no tiene nada que ver con JavaScript :: JavaScript con tipos, que avisa los errores antes de correr el programa :: Un programa para dibujar pantallas
 ```
 
-> 🔁 **Repaso:** el código son órdenes escritas para la computadora. Tu app está en TypeScript, que es JavaScript con tipos. Los tipos (`string`, `number`, `boolean`, `null`) dicen qué clase de dato va en cada caja, y así los errores aparecen antes de llegar al teléfono.
+### `null` a fondo: cero no es lo mismo que "no sé"
+
+> 🎙️ **El profesor:** `null` es el tipo que más cuesta al principio, porque parece "cero" o "vacío". No lo es. Vamos con un caso de tu trabajo que lo deja claro para siempre.
+
+**El caso: las propinas de tres viajes.**
+
+Terminas el día con tres viajes:
+
+| Viaje | ¿Qué pasó con la propina? | Cómo se guarda |
+|---|---|---|
+| 1 | El pasajero dejó R$ 10 | `10` |
+| 2 | El viaje terminó y el pasajero **no dejó** propina | `0` |
+| 3 | El viaje **todavía no terminó**: la app no sabe si habrá propina | `null` |
+
+Mira la diferencia entre el viaje 2 y el 3:
+- En el **viaje 2** sí **sabemos** la respuesta: fue **cero**. Es un número.
+- En el **viaje 3** **no sabemos** todavía. No es cero: es **"no hay dato"**. Eso es `null`.
+
+**Por qué importa: el promedio de propinas.**
+
+```ts
+const propinas: (number | null)[] = [10, 0, null];
+
+// ❌ Si tratas null como si fuera 0:
+// (10 + 0 + 0) / 3 = 3,33   → dice que ganas 3,33 por viaje. Está MAL: el viaje 3 ni terminó.
+
+// ✅ Si separas lo que sabes de lo que no sabes:
+const conocidas = propinas.filter((p) => p !== null);   // [10, 0]
+const promedio = (10 + 0) / conocidas.length;           // 5   → el promedio real de los viajes terminados
+```
+
+Si confundes `null` con `0`, **la cuenta sale mal** y tomas decisiones con un número falso. Por eso existe `null`: para decir "esto no se sabe todavía" sin inventar un número.
+
+**TypeScript te obliga a pensarlo.** Si una caja es `number | null` ("número, o nada"), TypeScript **no te deja** usarla como número sin revisar antes:
+
+```ts
+let propina: number | null = null;
+
+propina.toFixed(2);              // ❌ TypeScript avisa: "propina puede ser null"
+
+if (propina !== null) {
+  propina.toFixed(2);            // ✅ aquí adentro TypeScript ya sabe que es un número
+}
+const texto = propina ?? 'todavía no se sabe';   // ✅ si es null, muestra otra cosa
+```
+
+Ese aviso es lo que evita que la app de Copiloto se rompa al mostrar una propina que no existe.
+
+**Los cuatro "vacíos" que no son lo mismo:**
+
+| Valor | Qué significa | En el tanque del carro |
+|---|---|---|
+| `0` | Sé la respuesta y es **cero** | Medí el tanque: está **vacío** |
+| `''` (texto vacío) | Hay una caja de texto, pero **sin letras** | Escribiste el nombre del combustible… sin escribir nada |
+| `null` | **No hay dato, a propósito** | Todavía **no medí** el tanque |
+| `undefined` | **Nadie llenó** esa caja (ni siquiera con "nada") | Hay un tanque en la lista que **nadie anotó** |
+
+> 🌎 **En la vida real:** en una encuesta preguntan "¿cuántos hijos tienes?". Quien contesta **0** dio una respuesta: no tiene hijos. Quien **dejó la pregunta en blanco** no respondió: eso es `null`. Si cuentas los blancos como "cero hijos", el promedio de hijos de la encuesta sale mal.
+
+> 🌎 **Otro ejemplo:** en el tablero del carro, el indicador de combustible en **cero** te dice "el tanque está vacío". Si el indicador está **apagado porque se quemó el foco**, no sabes cuánto hay: no es "vacío", es "no sé". Llenar el tanque por las dudas o quedarte tirado depende de no confundir las dos cosas.
+
+> ✋ **Para y piensa:** en Copiloto, el kilometraje del **próximo cambio de aceite** de un carro recién registrado, que todavía no tiene ningún cambio anotado, ¿es `0` o `null`?
+
+<details>
+<summary>Ver la respuesta</summary>
+
+**`null`**. No es que el próximo cambio sea en el kilómetro cero: es que **todavía no hay dato** para calcularlo. Si pusieras `0`, la app creería que el cambio ya está vencido y te mandaría una alerta falsa.
+
+</details>
+
+```practica
+vf :: Una propina de 0 y una propina null significan lo mismo
+vf :: Si cuentas los null como si fueran 0, un promedio puede salir mal
+vf :: Con una caja number | null, TypeScript te obliga a revisar si es null antes de usarla como número
+elige :: El viaje todavía no terminó. ¿Cómo guardas su propina? :: 0 :: null :: ''
+elige :: ¿Qué promedio de propinas da [10, 0, null] si haces bien la cuenta? :: 3,33 :: 5 :: 10
+elige :: ¿Qué hace propina ?? 'todavía no se sabe'? :: Suma la propina :: Si propina es null, muestra 'todavía no se sabe' :: Borra la propina
+escribe :: Con tus palabras y un ejemplo tuyo: ¿por qué null no es lo mismo que 0? :: Porque 0 es una respuesta conocida (por ejemplo, el pasajero no dejó propina) y null es que todavía no hay dato (el viaje no terminó); si los confundo, las cuentas como el promedio salen mal.
+```
+
+> 🔁 **Repaso:** el código son órdenes escritas para la computadora. Tu app está en TypeScript, que es JavaScript con tipos. Los tipos (`string`, `number`, `boolean`, `null`) dicen qué clase de dato va en cada caja, y así los errores aparecen antes de llegar al teléfono. Y `null` no es cero: es **"no hay dato"**, y TypeScript te obliga a revisarlo antes de usarlo.
 
 ## 2. Las cinco piezas
 
