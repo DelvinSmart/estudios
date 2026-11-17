@@ -9,6 +9,7 @@ import { app, ponerMigas, avisar, enLinea, escapar, dos } from '../pantalla.js';
 import { rutaDoc, etapaDe, cursoDeClase, numeroEnCurso, migaEtapa, cortoClase, parteAnterior } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
 import { ponerBarraDeVoz } from '../voz.js';
+import { ponerBotonAudio } from '../audio.js';
 import { hayDatosDeSesion } from '../sesion.js';
 import { vistaInicio, tienePracticas } from './mapas.js';
 
@@ -78,6 +79,13 @@ export async function vistaParte(num, doc, cual) {
     hoja.appendChild(pintarMarkdown(parte.md, c.carpeta, idParte(num, doc, i)));
     // 🔊 Escuchar la parte con la voz del aparato, justo debajo del título.
     ponerBarraDeVoz(hoja, hoja.querySelector('.mini-mapa') || hoja.querySelector('.texto'));
+    // 🎧 El audio grabado (sigue sonando con la pantalla bloqueada), si esta parte ya lo tiene.
+    if (doc === 0) {
+      const lugarAudio = document.createElement('div');
+      lugarAudio.className = 'audio-parte';
+      hoja.insertBefore(lugarAudio, hoja.querySelector('.mini-mapa') || hoja.querySelector('.texto'));
+      ponerBotonAudio(lugarAudio, num, i);
+    }
 
     // El mini mapa salta a cada subtítulo de la parte.
     const subtitulos = hoja.querySelectorAll('.texto h3');

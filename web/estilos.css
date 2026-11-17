@@ -894,3 +894,18 @@ a.tu-progreso:hover { border-color: var(--acento); }
 
 /* El motor de referencias: "Tema 07" se muestra con el número del mapa y enlaza a esa clase. */
 .ref-clase { font-family: var(--mono); font-weight: 600; text-decoration: underline dotted; text-underline-offset: 3px; }
+
+/* ---------- 19. El reproductor de audio (sigue con la pantalla bloqueada) ---------- */
+.audio-parte:empty { display: none; }
+.audio-parte { margin: 0 0 10px; }
+.boton-audio { margin: 0; }
+.reproductor { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: var(--fondo-2); border-top: 1px solid var(--borde-fuerte); box-shadow: 0 -8px 24px rgb(0 0 0 / 0.3); font-size: 0.82rem; }
+.reproductor[hidden] { display: none; }
+.reproductor button { background: var(--tarjeta); color: var(--texto); border: 1px solid var(--borde); border-radius: 10px; padding: 6px 10px; font: inherit; cursor: pointer; }
+.reproductor .rep-play { background: var(--acento); color: var(--sobre-acento); border-color: var(--acento); min-width: 44px; font-weight: 800; }
+.reproductor .rep-titulo { flex: 1 1 220px; min-width: 0; color: var(--texto); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.reproductor .rep-tiempo { color: var(--tenue); }
+.reproductor select { background: var(--tarjeta); color: var(--texto); border: 1px solid var(--borde); border-radius: 8px; padding: 5px; font: inherit; }
+body.con-reproductor { padding-bottom: 90px; }
+@media (max-width: 640px) { .reproductor .rep-titulo { flex-basis: 100%; order: -1; } }
