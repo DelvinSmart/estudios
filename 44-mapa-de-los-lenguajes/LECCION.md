@@ -155,6 +155,28 @@ escribe :: Explica la diferencia entre JavaScript y TypeScript en una frase. :: 
 
 > 🌎 **Otro ejemplo:** Es como un servicio de mudanza completo: no solo el camión, también las cajas y quien las sube.
 
+### Los tres juntos: una sola frase
+
+Cuando lees que Copiloto está hecho "en TypeScript, con React Native y Expo", parece que fueran tres lenguajes peleando entre sí. **No lo son.** Son tres cosas de distinto tipo que trabajan juntas, y cada una hace un trabajo diferente:
+
+| Nombre | Qué es |
+|---|---|
+| **TypeScript** | El **lenguaje**: en lo que escribes las órdenes |
+| **React Native** | Las **piezas listas** para armar pantallas en Android y iPhone |
+| **Expo** | El **taller**: probar en el teléfono, compilar y publicar |
+
+Tres ejemplos de lo mismo, en el mismo orden (TypeScript → React Native → Expo):
+
+- **Una mesa de madera:** el idioma en que anotas las medidas → las patas, tablas y tornillos ya cortados de la ferretería → el taller con la sierra y el camión de entrega.
+- **Un carro:** el idioma del manual → el chasis y el motor ya armados → el taller con sus herramientas.
+- **Un restaurante:** el idioma de las recetas → las mesas y sillas compradas hechas → la cocina organizada donde preparas todo antes de abrir.
+
+Por eso todo cabe en una sola frase: **"Escribí las órdenes en TypeScript, con las piezas de React Native, dentro del taller de Expo."** No es hablar tres idiomas a la vez: es un idioma, unas piezas y un taller.
+
+> 🌎 **En la vida real:** decir "mi restaurante está hecho en español, con mesas prefabricadas y en una carpa" no son tres cosas que compiten: es el idioma, el mobiliario y el lugar.
+
+> 🌎 **Otro ejemplo:** Es como decir que una carta está escrita en español, con un modelo de carta y enviada por correo: una sola carta.
+
 ```practica
 vf :: React Native usa div y p igual que la web
 vf :: Con React Native, un solo código sirve para iPhone y Android
@@ -180,14 +202,65 @@ Una app nativa se escribe dos veces (una en Kotlin, otra en Swift), pero tiene a
 
 > 🌎 **Otro ejemplo:** Es como cocinar dos menús distintos para dos restaurantes o un menú que sirve en los dos.
 
+### Kotlin y Swift dentro de Copiloto
+
+Copiloto hace algo muy especial: mientras manejas con Uber o 99, **lee la oferta del viaje en la pantalla** en tiempo real y **dibuja una burbuja con la evaluación encima de la otra app**. Para eso hace falta pedirle a Android permisos profundos: leer lo que muestran otras apps y dibujar sobre ellas. TypeScript, con React Native, **no puede hacer eso por sí solo**.
+
+Por eso Copiloto tiene un **módulo nativo**, `modules/ride-overlay`:
+
+- **En Android, en Kotlin** (unos 20 archivos): `RideReaderService.kt` y `ScreenOcr.kt` leen la pantalla, `OfferParser.kt` entiende la oferta y `RideBubbleWindow.kt` dibuja la burbuja.
+- **En iPhone, en Swift**: lo mismo, con las reglas de Apple (`OfferParser.swift`, `ScreenCapture.swift`…).
+
+Es la "pieza nativa especial" de la que habla la sección anterior: **todo lo demás de la app es TypeScript**.
+
+> 🌎 **En la vida real:** la app en TypeScript es un piloto de Fórmula 1 dentro de su carro: maneja el volante, mira el mapa y decide. Pero no puede meter las manos al motor a través de la carrocería. Para eso está el mecánico (Kotlin o Swift), que vive pegado al motor del teléfono.
+
+> 🌎 **Otro ejemplo:** Es como el cocinero de un restaurante con servicio a domicilio: maneja el menú y las cuentas, pero no sale a la calle a revisar el motor de la moto. Para eso se contrata a un mecánico que sabe de motores.
+
+### ¿Cómo se hablan? El puente
+
+Los lenguajes **no se mezclan dentro del mismo archivo**. Cada uno vive en su pieza, y se hablan por un **puente**: `RideOverlayModule.kt` le ofrece funciones a la parte en TypeScript, y la app las llama como si fueran funciones normales. El módulo hace su trabajo escondido en el teléfono y le pasa la información limpia al resto de la app.
+
+> 🌎 **En la vida real:** un cocinero que solo habla español (TypeScript) y un proveedor que solo habla alemán (Kotlin) no se entienden en la misma mesa. Usan un traductor en la puerta: "dile que traiga tomates", y el traductor vuelve con los tomates.
+
+> 🌎 **Otro ejemplo:** Es como dos oficinas que hablan idiomas distintos y se mandan papeles por una ventanilla con un traductor: cada una trabaja en su idioma.
+
+### ¿Y el asistente de IA? También es TypeScript
+
+El asistente de Copiloto, el que responde preguntas y registra gastos, **no está en Python ni en Kotlin: está en TypeScript**, en dos partes:
+
+- **En la app** (`src/ai-engine/`): arma el contexto con tus datos.
+- **En el servidor** (`functions/src/aiTools.ts`, `aiToolsEarnings.ts`, `aiToolsFuel.ts`…): llama a **Gemini**, la IA de Google, y valida los datos antes de guardarlos.
+
+El Python que quizás tengas en la cabeza es de **otro proyecto**: el Agente de IA Consular & DETRAN.
+
+> 🌎 **En la vida real:** es el administrador del restaurante: recibe lo que pide el cliente, lo empaqueta bonito y lo manda a un especialista de afuera (Gemini) para que responda.
+
+> 🌎 **Otro ejemplo:** Es como la caja registradora: cobra, te dice cuánto gastaste y te da un consejo, y funciona con el mismo sistema que el resto del local.
+
 ### Tus proyectos en el mapa
+
+**Copiloto, parte por parte:**
+
+| Parte | Lenguaje |
+|---|---|
+| La app: pantallas y lógica (`src/`) | TypeScript, con React Native y Expo |
+| El servidor y el asistente de IA (`functions/`) | TypeScript, en Firebase Cloud Functions |
+| El panel web de administración (`webapp/`) | TypeScript, con React |
+| El lector de ofertas y la burbuja, en Android | Kotlin |
+| El mismo lector, en iPhone | Swift |
+
+**Más del 95 % del código de Copiloto es TypeScript.**
+
+**Todos tus proyectos:**
 
 | Proyecto | Hecho con |
 |---|---|
-| **Copiloto Driver** (la app) | React Native + TypeScript + Expo + Firebase |
+| **Copiloto Driver** (la app) | React Native + TypeScript + Expo + Firebase, más un módulo nativo en Kotlin y Swift |
 | **La web de Copiloto** | React + TypeScript + Vite + Tailwind + Firebase |
 | **Este mapa de estudios** | HTML + CSS + JavaScript + Firebase |
 | **Estudios Bíblicos** | HTML + CSS + JavaScript |
+| **El Agente de IA Consular & DETRAN** | Python + FastAPI |
 | **El CRUD de la clase 09** | JavaScript con Node.js |
 | **El resumen de la semana (Python 8)** | Python |
 
@@ -196,6 +269,17 @@ Por eso el orden de los cursos de este mapa es: **JavaScript + TypeScript** → 
 > 🌎 **En la vida real:** es como el plano de una ciudad con las líneas de metro de distintos colores: ves por dónde pasa cada una y dónde se cruzan.
 
 > 🌎 **Otro ejemplo:** Es como el árbol genealógico de una familia: ves quién viene de quién.
+
+### La prueba de fuego
+
+Si mañana quisieras agregar a Copiloto una pantalla nueva de **"Historial de viajes"**, ¿en qué lenguaje la escribirías y por qué? Piénsalo antes de abrir la respuesta.
+
+<details>
+<summary>Respuesta</summary>
+
+En **TypeScript**, con las piezas de React Native, dentro de Expo. Es una pantalla normal: una lista de viajes, textos y botones. No necesita meterse con los permisos profundos del teléfono, así que no hace falta tocar al "mecánico" (Kotlin o Swift). Solo usarías Kotlin o Swift para algo que el teléfono no deja hacer desde TypeScript, como leer la pantalla de otra app o dibujar encima de ella.
+
+</details>
 
 ```practica
 vf :: Kotlin es el lenguaje oficial para apps Android
@@ -208,6 +292,8 @@ escribe :: Un amigo te pregunta qué usas para tus apps y por qué no Kotlin. ¿
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cuál es la diferencia entre JavaScript, TypeScript, React y React Native?":** "JavaScript es el lenguaje que corre en el navegador y, con Node.js, fuera de él. TypeScript es JavaScript con tipos que se revisan antes de correr y se convierte en JavaScript. React es una librería para armar pantallas web con componentes. React Native usa React y TypeScript para hacer apps nativas de iPhone y Android con un solo código, y Expo es el framework que uso para correrla y publicarla. Kotlin y Swift son los lenguajes nativos de Android y iPhone."
+
+> 🎤 **Si te preguntan "¿en qué está hecho Copiloto?":** "Está hecho en TypeScript con React Native y Expo: un solo código para Android y iPhone. Donde necesité funciones nativas, como leer la oferta del viaje en la pantalla y dibujar una burbuja encima de otras apps, escribí un módulo nativo en Kotlin para Android y en Swift para iPhone, que se comunica con TypeScript por un puente. El servidor y el asistente de IA también son TypeScript, en Firebase Cloud Functions, y usan Gemini."
 
 > 🌎 **En la vida real:** es como explicar los roles de un equipo de obra: quién hace qué y cómo se juntan.
 
