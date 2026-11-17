@@ -79,6 +79,7 @@ export const CLASES = {
   '73': { carpeta: '73-node-datos-y-seguridad', titulo: 'Base de datos y seguridad', meta: 'SQLite, parámetros, .env, tokens, límites y helmet', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '74': { carpeta: '74-node-pruebas-y-publicar', titulo: 'Pruebas y publicar', meta: 'node:test, supertest y publicar gratis en Firebase', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '75': { carpeta: '75-script-y-spa', titulo: '¿Qué es un script y qué es una SPA?', meta: 'La casa, el guion y la página que cambia sin recargar: esta misma plataforma', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '76': { carpeta: '76-node-bff-y-microservicios', titulo: 'REST a fondo, BFF y microservicios', meta: 'Idempotencia, códigos, versiones, un BFF en Express y cuándo partir en microservicios', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '19': { carpeta: '19-agentes-de-ia', titulo: 'Qué es un agente', meta: 'Python para leer los ejemplos, las piezas y el ciclo de un agente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '25': { carpeta: '25-agentes-cinco-patrones', titulo: 'Los cinco patrones', meta: 'Herramientas (ReAct), planificación, reflexión, enrutamiento y multiagente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '26': { carpeta: '26-agentes-veinte-patrones', titulo: 'Veinte patrones más', meta: 'Flujo, razonamiento, coordinación, control, conocimiento y cómo elegir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -98,7 +99,7 @@ const ICONOS = {
   '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
   '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁',
   '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄',
-  '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪',
+  '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦',
   '21': '🎓', '22': '🔐', '23': '🕵️', '24': '🛡️',
@@ -118,6 +119,7 @@ const LOGOS_CLASE = {
   '44': ['javascript', 'typescript', 'react', 'kotlin'],
   '68': ['node'], '69': ['node'], '70': ['node'], '71': ['node', 'javascript'], '72': ['node', 'javascript'], '73': ['node', 'firebase'], '74': ['node', 'firebase'],
   '75': ['html', 'css', 'javascript'],
+  '76': ['node', 'javascript'],
   '45': ['javascript'], '46': ['javascript'], '47': ['javascript'], '48': ['javascript'], '49': ['javascript', 'firebase'],
   '50': ['node', 'javascript'], '51': ['typescript'], '52': ['typescript'], '53': ['typescript', 'vitest'],
   '54': ['react', 'typescript'], '55': ['react'], '56': ['react'], '57': ['expo', 'apple'], '58': ['react'], '59': ['firebase', 'react'], '60': ['expo', 'android', 'apple'],
@@ -171,7 +173,7 @@ export const ETAPAS = [
   {
     id: 'node', curso: 'node', icono: '🟩', titulo: 'Node.js', logos: ['node', 'javascript', 'firebase'],
     desc: 'Un curso aparte, con su propio certificado: el backend con JavaScript, de los archivos a una API publicada.',
-    clases: ['68', '69', '70', '71', '72', '73', '74'],
+    clases: ['68', '69', '70', '71', '72', '73', '74', '76'],
   },
   {
     id: 'reactnative', curso: 'reactnative', icono: '📱', titulo: 'React Native', logos: ['react', 'typescript', 'expo', 'firebase'],

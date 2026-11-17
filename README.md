@@ -46,7 +46,7 @@ explicación, los ejemplos, los ejercicios y las respuestas.
 | 24 | [Seguridad avanzada](24-seguridad-avanzada/LECCION.md) | Auditar un sistema entero, reglas de Firebase como atacante, abuso de costos, herramientas, reportes y tu camino (curso de seguridad) |
 | 44 | [El mapa de los lenguajes](44-mapa-de-los-lenguajes/LECCION.md) | La primera de Fundamentos: JavaScript, TypeScript, Node, React, React Native, Expo, Kotlin y Swift, con tus apps como ejemplo |
 | 45–53 | [JavaScript + TypeScript](45-js-variables-y-tipos/LECCION.md) | Curso aparte: variables, decisiones, funciones, arrays y objetos, asincronía, módulos, TypeScript I y II, y un proyecto con Vitest |
-| 68–74 | [Node.js](68-node-que-es/LECCION.md) | Curso aparte: qué es Node y el event loop, archivos, un servidor con node:http, Express, una API REST, base de datos y seguridad, pruebas y publicar gratis |
+| 68–74, 76 | [Node.js](68-node-que-es/LECCION.md) | Curso aparte: qué es Node y el event loop, archivos, un servidor con node:http, Express, una API REST, base de datos y seguridad, pruebas y publicar, y al final REST a fondo, BFF y microservicios gratis |
 | 75 | [¿Qué es un script y qué es una SPA?](75-script-y-spa/LECCION.md) | En La web, después de JavaScript: la casa (HTML, CSS y JavaScript), el guion y la página que cambia sin recargar, explicados con esta misma plataforma |
 | 54–60 | [React Native](54-rn-react-componentes/LECCION.md) | Curso aparte: componentes, estado, piezas y estilos, Expo, navegación, Firebase y rendimiento, publicar |
 | 61–67 | [Kotlin](61-kotlin-primeros-pasos/LECCION.md) | Curso aparte: el lenguaje, null safety, colecciones, clases, corrutinas, Jetpack Compose y publicar |
