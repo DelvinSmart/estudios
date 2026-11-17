@@ -750,7 +750,9 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .bombillo-apagado { filter: grayscale(1) brightness(0.75); opacity: 0.7; }
 
 /* ---------- 15. Escuchar en voz alta ---------- */
-.voz-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 4px 0 18px; padding: 10px 12px; border: 1px dashed var(--borde-fuerte); border-radius: 12px; font-size: 0.8rem; }
+.voz-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 14px; font-size: 0.8rem; }
+.voz-ajustes { display: inline-flex; flex-wrap: wrap; gap: 8px 12px; }
+.voz-engranaje { padding-inline: 10px !important; }
 .voz-barra .boton { margin: 0; padding: 7px 12px; font-size: 0.82rem; }
 .voz-opcion { display: inline-flex; align-items: center; gap: 6px; color: var(--tenue); }
 .voz-opcion select { max-width: 190px; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--borde); background: var(--fondo-2); color: var(--texto); font: inherit; }
@@ -897,15 +899,26 @@ a.tu-progreso:hover { border-color: var(--acento); }
 
 /* ---------- 19. El reproductor de audio (sigue con la pantalla bloqueada) ---------- */
 .audio-parte:empty { display: none; }
-.audio-parte { margin: 0 0 10px; }
-.boton-audio { margin: 0; }
+.audio-parte { margin: 0 0 14px; }
+.boton-audio { margin: 0; padding: 8px 14px; font-size: 0.85rem; }
+/* Una fila: ▶ · título · tiempo · ⋯ · ✕. En la computadora los demás controles van en la misma fila;
+   en el celular se abren con "⋯" para que el reproductor ocupe poco. */
 .reproductor { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
-  padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: var(--fondo-2); border-top: 1px solid var(--borde-fuerte); box-shadow: 0 -8px 24px rgb(0 0 0 / 0.3); font-size: 0.82rem; }
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: var(--fondo-2); border-top: 1px solid var(--borde-fuerte); box-shadow: 0 -8px 24px rgb(0 0 0 / 0.3); font-size: 0.82rem; }
+.rep-fila { display: flex; align-items: center; gap: 8px; flex: 1 1 320px; min-width: 0; }
+.rep-extra { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.reproductor .rep-mas { display: none; }
 .reproductor[hidden] { display: none; }
 .reproductor button { background: var(--tarjeta); color: var(--texto); border: 1px solid var(--borde); border-radius: 10px; padding: 6px 10px; font: inherit; cursor: pointer; }
 .reproductor .rep-play { background: var(--acento); color: var(--sobre-acento); border-color: var(--acento); min-width: 44px; font-weight: 800; }
-.reproductor .rep-titulo { flex: 1 1 220px; min-width: 0; color: var(--texto); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.reproductor .rep-tiempo { color: var(--tenue); }
+.reproductor .rep-titulo { flex: 1 1 auto; min-width: 0; color: var(--texto); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.reproductor .rep-tiempo { color: var(--tenue); white-space: nowrap; }
 .reproductor select { background: var(--tarjeta); color: var(--texto); border: 1px solid var(--borde); border-radius: 8px; padding: 5px; font: inherit; }
-body.con-reproductor { padding-bottom: 90px; }
-@media (max-width: 640px) { .reproductor .rep-titulo { flex-basis: 100%; order: -1; } }
+body.con-reproductor { padding-bottom: 70px; }
+@media (max-width: 640px) {
+  .reproductor .rep-mas { display: inline-block; }
+  .rep-extra { display: none; flex-basis: 100%; }
+  .reproductor.rep-abierto .rep-extra { display: flex; }
+  .reproductor .rep-tiempo { font-size: 0.75rem; }
+  body.con-reproductor { padding-bottom: 64px; }
+}

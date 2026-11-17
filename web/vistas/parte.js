@@ -77,15 +77,15 @@ export async function vistaParte(num, doc, cual) {
         `<a href="#" data-sub="${k}">${/^\d/.test(s) ? '' : `<span class="mono acento">${dos(i)}.${k + 1}</span> `}${enLinea(s)}</a>`).join('')}</div>`);
     }
     hoja.appendChild(pintarMarkdown(parte.md, c.carpeta, idParte(num, doc, i)));
-    // 🔊 Escuchar la parte con la voz del aparato, justo debajo del título.
-    ponerBarraDeVoz(hoja, hoja.querySelector('.mini-mapa') || hoja.querySelector('.texto'));
-    // 🎧 El audio grabado (sigue sonando con la pantalla bloqueada), si esta parte ya lo tiene.
-    if (doc === 0) {
-      const lugarAudio = document.createElement('div');
-      lugarAudio.className = 'audio-parte';
-      hoja.insertBefore(lugarAudio, hoja.querySelector('.mini-mapa') || hoja.querySelector('.texto'));
-      ponerBotonAudio(lugarAudio, num, i);
-    }
+    // Un solo botón para escuchar, justo debajo del título: el audio grabado (🎧, sigue con la pantalla
+    // bloqueada) si esta parte lo tiene; si no, o si el motor de voz está apagado, la voz del aparato (🔊).
+    const lugarAudio = document.createElement('div');
+    lugarAudio.className = 'audio-parte';
+    const antesDe = hoja.querySelector('.mini-mapa') || hoja.querySelector('.texto');
+    hoja.insertBefore(lugarAudio, antesDe);
+    (doc === 0 ? ponerBotonAudio(lugarAudio, num, i) : Promise.resolve(false)).then((grabado) => {
+      if (!grabado && document.body.contains(lugarAudio)) ponerBarraDeVoz(hoja, lugarAudio);
+    });
 
     // El mini mapa salta a cada subtítulo de la parte.
     const subtitulos = hoja.querySelectorAll('.texto h3');

@@ -23,8 +23,21 @@ let barra = null;
 function leerPref() { try { return JSON.parse(localStorage.getItem(CLAVE)) || {}; } catch (e) { return {}; } }
 function guardarPref(p) { try { localStorage.setItem(CLAVE, JSON.stringify({ ...leerPref(), ...p })); } catch (e) { /* nada */ } }
 
+// El interruptor del motor de voz: herramientas/audio/motor.json ("activo": false apaga los audios grabados).
+// Es el mismo archivo que usa el generador y la automatización de GitHub: un solo interruptor para todo.
+let motorActivo = null;
+async function motorEncendido() {
+  if (motorActivo !== null) return motorActivo;
+  try {
+    const r = await fetch('herramientas/audio/motor.json', { cache: 'no-cache' });
+    motorActivo = r.ok ? (await r.json()).activo !== false : true;
+  } catch (e) { motorActivo = true; }
+  return motorActivo;
+}
+
 async function cargarIndice() {
   if (indice) return indice;
+  if (!(await motorEncendido())) { indice = {}; return indice; }
   try {
     const r = await fetch(`${BASE}indice.json`, { cache: 'no-cache' });
     indice = r.ok ? await r.json() : {};
@@ -60,16 +73,22 @@ function armarBarra() {
   audio.preload = 'auto';
   barra = document.createElement('div');
   barra.className = 'reproductor mono';
+  // Una sola fila en el celular: ▶, el título y "⋯" (que abre el resto de los controles).
   barra.innerHTML = `
-    <button type="button" data-a="ant" aria-label="Parte anterior">⏮</button>
-    <button type="button" data-a="menos" aria-label="Atrás 15 segundos">↺15</button>
-    <button type="button" data-a="play" class="rep-play" aria-label="Reproducir o pausar">▶</button>
-    <button type="button" data-a="mas" aria-label="Adelante 15 segundos">15↻</button>
-    <button type="button" data-a="sig" aria-label="Parte siguiente">⏭</button>
-    <a class="rep-titulo" href="#/" title="Ir a esta parte"></a>
-    <span class="rep-tiempo">0:00</span>
-    <select data-a="vel" aria-label="Velocidad">${[0.8, 1, 1.2, 1.4, 1.6].map((v) => `<option value="${v}">${v}x</option>`).join('')}</select>
-    <button type="button" data-a="cerrar" aria-label="Cerrar el reproductor">✕</button>`;
+    <div class="rep-fila">
+      <button type="button" data-a="play" class="rep-play" aria-label="Reproducir o pausar">▶</button>
+      <a class="rep-titulo" href="#/" title="Ir a esta parte"></a>
+      <span class="rep-tiempo">0:00</span>
+      <button type="button" data-a="mas-controles" class="rep-mas" aria-label="Más controles" aria-expanded="false">⋯</button>
+      <button type="button" data-a="cerrar" aria-label="Cerrar el reproductor">✕</button>
+    </div>
+    <div class="rep-extra">
+      <button type="button" data-a="ant" aria-label="Parte anterior">⏮</button>
+      <button type="button" data-a="menos" aria-label="Atrás 15 segundos">↺15</button>
+      <button type="button" data-a="mas" aria-label="Adelante 15 segundos">15↻</button>
+      <button type="button" data-a="sig" aria-label="Parte siguiente">⏭</button>
+      <select data-a="vel" aria-label="Velocidad">${[0.8, 1, 1.2, 1.4, 1.6].map((v) => `<option value="${v}">${v}x</option>`).join('')}</select>
+    </div>`;
   barra.append(audio);
   document.body.append(barra);
   const vel = barra.querySelector('[data-a="vel"]');
@@ -84,6 +103,10 @@ function armarBarra() {
     if (a === 'sig') { const s = siguiente(actual); if (s) reproducir(s); }
     if (a === 'ant') { const s = anterior(actual); if (s) reproducir(s); }
     if (a === 'cerrar') { audio.pause(); barra.hidden = true; document.body.classList.remove('con-reproductor'); }
+    if (a === 'mas-controles') {
+      const abierto = barra.classList.toggle('rep-abierto');
+      ev.target.closest('button').setAttribute('aria-expanded', String(abierto));
+    }
   });
   vel.addEventListener('change', () => { audio.playbackRate = Number(vel.value); guardarPref({ velocidad: Number(vel.value) }); });
   audio.addEventListener('play', () => { barra.querySelector('.rep-play').textContent = '⏸'; });
@@ -132,13 +155,16 @@ export async function reproducir(parte, desde = 0) {
   return true;
 }
 
-// El botón "🎧 escuchar (sigue con la pantalla bloqueada)" que va en cada parte.
+// El botón "🎧 Escuchar" de cada parte (el audio grabado sigue sonando con la pantalla bloqueada).
+// Devuelve false si esta parte no tiene audio grabado (o el motor está apagado): entonces se usa la voz del aparato.
 export async function ponerBotonAudio(contenedor, num, i) {
-  if (!(await hayAudio(num, i))) return;
+  if (!(await hayAudio(num, i))) return false;
   const boton = document.createElement('button');
   boton.type = 'button';
   boton.className = 'boton boton-audio';
-  boton.textContent = '🎧 escuchar en audio (sigue con la pantalla bloqueada)';
+  boton.title = 'Sigue sonando con la pantalla bloqueada';
+  boton.textContent = '🎧 Escuchar';
   boton.addEventListener('click', () => reproducir({ num, i }));
   contenedor.prepend(boton);
+  return true;
 }

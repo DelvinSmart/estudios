@@ -1,0 +1,104 @@
+# Los audios de las clases, solos: cada vez que se sube una clase, GitHub rehace SOLO los audios
+# de las partes que cambiaron (o todos, si cambió la voz) y los publica en el repositorio estudios-audio.
+#
+# Encender / apagar:
+#   - Botón: pestaña Actions → "Audios de las clases" → ⋯ → Disable workflow (y Enable para volver).
+#   - O en una línea: node herramientas/audio/voz.mjs --apagar   (también deja de mostrarlos en la página)
+# Cambiar la voz: node herramientas/audio/voz.mjs <voz>   y subir el cambio.
+# Correrlo a mano: pestaña Actions → "Audios de las clases" → Run workflow.
+
+name: Audios de las clases
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.md'
+      - 'web/cursos.js'
+      - 'web/lector.js'
+      - 'herramientas/audio/**'
+      - '.github/workflows/audios.yml'
+  workflow_dispatch:
+
+# Una corrida por vez: si suben dos clases seguidas, la segunda espera a la primera.
+concurrency:
+  group: audios
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  audios:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340   # cambiar la voz rehace todos los audios: puede tardar un par de horas
+    steps:
+      - name: Bajar el mapa de estudios
+        uses: actions/checkout@v4
+        with:
+          path: Aprender
+
+      - name: ¿El motor de voz está encendido?
+        id: motor
+        run: node -e "const m=require('./Aprender/herramientas/audio/motor.json'); console.log('activo=' + (m.activo !== false)); console.log('voz=' + m.motor + '-' + m.voz)" >> "$GITHUB_OUTPUT"
+
+      - name: Motor apagado
+        if: steps.motor.outputs.activo != 'true'
+        run: echo 'motor.json dice "activo" false. No se genera nada.'
+
+      - name: Bajar los audios que ya existen
+        if: steps.motor.outputs.activo == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: DelvinSmart/estudios-audio
+          path: estudios-audio
+          ssh-key: ${{ secrets.AUDIO_DEPLOY_KEY }}
+
+      - if: steps.motor.outputs.activo == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - if: steps.motor.outputs.activo == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Piper y ffmpeg
+        if: steps.motor.outputs.activo == 'true'
+        run: |
+          python -m pip install --quiet piper-tts==1.8.0
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: Guardar las voces descargadas entre corridas
+        if: steps.motor.outputs.activo == 'true'
+        uses: actions/cache@v4
+        with:
+          path: voces
+          key: voz-${{ steps.motor.outputs.voz }}
+
+      - name: Generar solo los audios que cambiaron
+        if: steps.motor.outputs.activo == 'true'
+        working-directory: Aprender
+        env:
+          PIPER: piper
+          PIPER_PYTHON: python
+          PIPER_VOCES: ${{ github.workspace }}/voces
+          SALIDA_AUDIO: ${{ github.workspace }}/estudios-audio/audio
+        run: node herramientas/audio/generar-audios.mjs
+
+      # Se sube como UN solo commit nuevo que reemplaza al anterior (sin historial):
+      # así el repositorio de audios pesa siempre lo mismo y no se acerca a los límites de GitHub.
+      - name: Publicar los audios
+        if: steps.motor.outputs.activo == 'true'
+        working-directory: estudios-audio
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "Ningún audio cambió."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan audios-nuevos
+          git add -A
+          git commit -q -m "Audios de las clases (desde ${GITHUB_SHA::7})"
+          git push --force origin audios-nuevos:main
+          echo "Audios publicados."

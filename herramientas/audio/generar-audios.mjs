@@ -1,30 +1,33 @@
-// Genera un audio por cada parte de cada clase, con Piper (voz gratis que corre en tu Mac).
+// Genera un audio por cada parte de cada clase, con el MOTOR DE VOZ que diga motor.json (hoy: Piper, gratis).
 // Esos audios se pueden escuchar con la pantalla del teléfono bloqueada (la voz del navegador no).
 //
 //   node herramientas/audio/generar-audios.mjs                 todas las clases (solo lo que cambió)
 //   node herramientas/audio/generar-audios.mjs 01 44           solo esas clases (número de carpeta)
 //   node herramientas/audio/generar-audios.mjs --prueba 01 2   una sola parte, para escucharla
 //
-// Necesita (fuera del repositorio): Piper en un entorno virtual, una voz .onnx y ffmpeg.
-// Rutas por defecto: ../herramientas-audio/venv/bin/piper y ../herramientas-audio/voces/es_MX-claude-high.onnx
+// motor.json manda: "activo" (false = no se genera nada y la página no ofrece los audios),
+// "motor" (el archivo de motores/ que hace la voz) y "voz". Cambiar la voz: node herramientas/audio/voz.mjs <voz>
+// Cada motor dice qué necesita (motores/piper.mjs). También hace falta ffmpeg.
 // Los audios van a ../estudios-audio/audio/ (otro repositorio, para no llenar este de archivos pesados).
-// Cada audio se rehace solo si cambió su texto (se guarda una huella en indice.json).
+// Cada audio se rehace solo si cambió su texto o la voz (se guarda una huella en indice.json).
 // Si una parte desaparece (se borró, o la clase quedó más corta), su audio sobrante se borra.
+// En GitHub esto corre solo: .github/workflows/audios.yml
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 import { CLASES, ETAPAS, CURSOS, cursoDeEtapa, clasesDelCurso } from '../../web/cursos.js';
 import { partir, conAlumno } from '../../web/lector.js';
 
 const RAIZ = fileURLToPath(new URL('../../', import.meta.url));
-const HERRAMIENTAS = process.env.HERRAMIENTAS_AUDIO || path.join(RAIZ, '..', 'herramientas-audio');
-const PIPER = process.env.PIPER || path.join(HERRAMIENTAS, 'venv', 'bin', 'piper');
-const VOZ = process.env.VOZ || path.join(HERRAMIENTAS, 'voces', 'es_MX-claude-high.onnx');
 const SALIDA = process.env.SALIDA_AUDIO || path.join(RAIZ, '..', 'estudios-audio', 'audio');
-const KBPS = process.env.KBPS || '32';   // voz en mono: 32 kbps se escucha bien y pesa poco
+
+// ---------- el motor de voz (motor.json) ----------
+const CONFIG = JSON.parse(readFileSync(new URL('./motor.json', import.meta.url), 'utf8'));
+const VOZ = process.env.VOZ || CONFIG.voz;
+const KBPS = String(CONFIG.kbps || 32);   // voz en mono: 32 kbps se escucha bien y pesa poco
 
 // ---------- el número que se ve (el mismo motor del sitio) ----------
 const etapaDe = (n) => ETAPAS.find((e) => e.clases.includes(n));
@@ -66,21 +69,32 @@ export function textoParaVoz(md, cursoActual) {
   return t;
 }
 
-const huella = (t) => createHash('sha256').update(`${KBPS}|${path.basename(VOZ)}|${t}`).digest('hex').slice(0, 16);
+let motor = null; // se carga en el programa, después de revisar que esté activo
+const huella = (t) => createHash('sha256').update(`${KBPS}|${motor.firma(VOZ)}|${t}`).digest('hex').slice(0, 16);
 
 function hablar(texto, destino) {
   const wav = destino.replace(/\.m4a$/, '.wav');
-  execFileSync(PIPER, ['-m', VOZ, '-f', wav, '--sentence-silence', '0.35'], { input: texto, stdio: ['pipe', 'ignore', 'pipe'] });
+  motor.hablar(texto, wav, VOZ);
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', wav, '-ac', '1', '-c:a', 'aac', '-b:a', `${KBPS}k`, '-movflags', '+faststart', destino]);
   rmSync(wav);
 }
 
 // ---------- programa ----------
+// Solo corre cuando se llama directo (node generar-audios.mjs); si otro archivo lo importa, no hace nada solo.
+if (import.meta.url === pathToFileURL(process.argv[1] || '').href) await generar();
+
+async function generar() {
 const args = process.argv.slice(2);
 const prueba = args[0] === '--prueba';
 const elegidas = prueba ? [args[1]] : args.filter((a) => /^\d{2}$/.test(a));
 const clases = elegidas.length ? elegidas : Object.keys(CLASES);
-if (!existsSync(PIPER) || !existsSync(VOZ)) { console.error(`Falta Piper o la voz.\n  PIPER=${PIPER}\n  VOZ=${VOZ}`); process.exit(1); }
+if (CONFIG.activo === false) { console.log('El motor de voz está apagado (motor.json → "activo": false). No se genera nada.'); process.exit(0); }
+try {
+  motor = await import(`./motores/${CONFIG.motor}.mjs`);
+} catch (e) { console.error(`No encuentro el motor "${CONFIG.motor}" (herramientas/audio/motores/${CONFIG.motor}.mjs).`); process.exit(1); }
+if (!motor.voces.includes(VOZ)) { console.error(`El motor ${motor.nombre} no tiene la voz "${VOZ}". Voces: ${motor.voces.join(', ')}`); process.exit(1); }
+try { motor.preparar(VOZ); } catch (e) { console.error(e.message); process.exit(1); }
+console.log(`Motor: ${motor.nombre} · voz: ${VOZ}`);
 
 mkdirSync(SALIDA, { recursive: true });
 const archivoIndice = path.join(SALIDA, 'indice.json');
@@ -136,3 +150,4 @@ if (!prueba && !elegidas.length) {
   writeFileSync(archivoIndice, JSON.stringify(indice, null, 1));
 }
 console.log(`Listo: ${hechos} audios nuevos, ${iguales} sin cambios, ${borrados} borrados, en ${Math.round((Date.now() - inicio) / 1000)} s → ${SALIDA}`);
+}

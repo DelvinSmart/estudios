@@ -60,12 +60,15 @@ export async function ponerBarraDeVoz(hoja, antesDe) {
   const barra = document.createElement('div');
   barra.className = 'voz-barra mono';
   barra.innerHTML = `
-    <button class="boton" data-voz="escuchar" type="button">🔊 escuchar esta parte</button>
+    <button class="boton" data-voz="escuchar" type="button">🔊 Escuchar</button>
     <button class="boton" data-voz="pausa" type="button" hidden>⏸ pausa</button>
     <button class="boton" data-voz="parar" type="button" hidden>⏹ parar</button>
-    <label class="voz-opcion">velocidad
-      <select data-voz="velocidad">${[0.8, 1, 1.2, 1.4].map((v) => `<option value="${v}" ${Number(pref.velocidad || 1) === v ? 'selected' : ''}>${v}x</option>`).join('')}</select></label>
-    <label class="voz-opcion">voz <select data-voz="voz"><option>…</option></select></label>`;
+    <button class="boton voz-engranaje" data-voz="ajustes" type="button" aria-label="Velocidad y voz" aria-expanded="false" title="Velocidad y voz">⚙</button>
+    <span class="voz-ajustes" hidden>
+      <label class="voz-opcion">velocidad
+        <select data-voz="velocidad">${[0.8, 1, 1.2, 1.4].map((v) => `<option value="${v}" ${Number(pref.velocidad || 1) === v ? 'selected' : ''}>${v}x</option>`).join('')}</select></label>
+      <label class="voz-opcion">voz <select data-voz="voz"><option>…</option></select></label>
+    </span>`;
   hoja.insertBefore(barra, antesDe || hoja.firstChild);
 
   const boton = (n) => barra.querySelector(`[data-voz="${n}"]`);
@@ -94,7 +97,7 @@ export async function ponerBarraDeVoz(hoja, antesDe) {
   };
   const mostrar = (estado) => {
     boton('escuchar').hidden = estado !== 'quieto' && estado !== 'pausado';
-    boton('escuchar').textContent = estado === 'pausado' ? '▶ seguir' : '🔊 escuchar esta parte';
+    boton('escuchar').textContent = estado === 'pausado' ? '▶ seguir' : '🔊 Escuchar';
     boton('pausa').hidden = estado !== 'hablando';
     boton('parar').hidden = estado === 'quieto';
   };
@@ -143,6 +146,11 @@ export async function ponerBarraDeVoz(hoja, antesDe) {
     setTimeout(() => { if (leyendo && !sintetizador.speaking) ayuda.hidden = false; }, 3000);
   });
   boton('pausa').addEventListener('click', () => { sintetizador.pause(); mostrar('pausado'); });
+  boton('ajustes').addEventListener('click', () => {
+    const ajustes = barra.querySelector('.voz-ajustes');
+    ajustes.hidden = !ajustes.hidden;
+    boton('ajustes').setAttribute('aria-expanded', String(!ajustes.hidden));
+  });
   boton('parar').addEventListener('click', terminar);
   boton('velocidad').addEventListener('change', (ev) => { guardarPreferencias({ velocidad: Number(ev.target.value) }); aplicarCambio(); });
   selVoz.addEventListener('change', (ev) => { guardarPreferencias({ voz: ev.target.value }); aplicarCambio(); });
