@@ -6,7 +6,7 @@ import { leerArchivo, partir } from '../lector.js';
 import { idParte, estaEntendida, marcarEntendida } from '../guardado.js';
 import * as nube from '../nube.js';
 import { app, ponerMigas, avisar, enLinea, escapar, dos } from '../pantalla.js';
-import { rutaDoc, etapaDe, cursoDeClase, numeroEnCurso, migaEtapa, cortoClase } from '../avance.js';
+import { rutaDoc, etapaDe, cursoDeClase, numeroEnCurso, migaEtapa, cortoClase, parteAnterior } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
 import { ponerBarraDeVoz } from '../voz.js';
 import { hayDatosDeSesion } from '../sesion.js';
@@ -102,8 +102,17 @@ export async function vistaParte(num, doc, cual) {
     const ayuda = botonEntendido.nextElementSibling;
     const revisarPracticas = () => {
       const faltan = [...hoja.querySelectorAll('.practica')].filter((x) => !x.classList.contains('aprobada')).length;
-      const bloquear = faltan > 0 && !estaEntendida(id);
+      // En orden: en el documento principal, la parte anterior del curso tiene que estar marcada.
+      const previa = doc === 0 ? parteAnterior(num, i) : null;
+      const previaId = previa && idParte(previa.num, 0, previa.i);
+      const faltaPrevia = previa && !estaEntendida(previaId) && !estaEntendida(id);
+      const bloquear = (faltan > 0 && !estaEntendida(id)) || faltaPrevia;
       botonEntendido.disabled = bloquear;
+      if (faltaPrevia) {
+        const enlace = `#/clase/${previa.num}/0/${previa.i}`;
+        ayuda.innerHTML = `🔒 Primero marca la parte anterior: <a href="${enlace}">clase ${numeroEnCurso(previa.num)}, parte ${dos(previa.i)}</a>. Las partes se marcan en orden (puedes leer todo, y la práctica queda guardada).`;
+        return;
+      }
       ayuda.textContent = bloquear
         ? `🔒 Primero aprueba ${faltan === 1 ? 'la práctica' : `las ${faltan} prácticas`} de esta parte.`
         : 'Márcalo solo si lo puedes explicar en voz alta.';

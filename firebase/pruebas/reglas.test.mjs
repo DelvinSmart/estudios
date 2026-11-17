@@ -216,17 +216,53 @@ test('el curso de Python acepta sus partes y su prefijo PY', async () => {
   await assertFails(setDoc(doc(db('beto'), RUTA('beto', 'python')), primero(porCurso.programacion[0])));
 });
 
+// Deja prendidas (sin reglas) todas las partes de antes de "parte" en su curso, con una hora vieja,
+// para poder probar prender "parte" respetando el orden.
+async function llegarHasta(uid, parte, curso = 'programacion') {
+  const lista = porCurso[curso];
+  const k = lista.indexOf(parte);
+  if (k <= 0) return null;   // es la primera: se prende creando el documento
+  const viejo = Timestamp.fromDate(new Date('2026-11-01T10:00:00Z'));
+  const partes = Object.fromEntries(lista.slice(0, k).map((i) => [i, viejo]));
+  await env.withSecurityRulesDisabled((c) => setDoc(doc(c.firestore(), RUTA(uid, curso)), { n: k, inicio: viejo, ultimo: viejo, ultimaParte: lista[k - 1], partes }));
+  return k;
+}
+// Prende "parte" en orden: crea si es la primera, o suma después de las anteriores.
+async function prenderEnOrden(uid, parte, curso = 'programacion') {
+  const k = await llegarHasta(uid, parte, curso);
+  const d = db(uid);
+  if (k === null) return setDoc(doc(d, RUTA(uid, curso)), primero(parte));
+  return setDoc(doc(d, RUTA(uid, curso)), siguiente(k + 1, parte), { merge: true });
+}
+
+// ---------------- el orden de las partes ----------------
+test('el primer bombillo de un curso tiene que ser su primera parte', async () => {
+  await aprobarEnServidor('dani', 'programacion', ids.slice(0, 2));   // las prácticas aprobadas: aquí solo se prueba el orden
+  await assertFails(setDoc(doc(db('dani'), RUTA('dani')), primero(ids[1])));
+  await assertSucceeds(setDoc(doc(db('dani'), RUTA('dani')), primero(ids[0])));
+});
+test('no se puede saltar una parte: la anterior tiene que estar prendida', async () => {
+  const sin = ids.filter((i) => !CON_PRACTICA.programacion.includes(i));
+  const k = ids.indexOf(sin.find((i) => ids.indexOf(i) >= 2));
+  await llegarHasta('dani', ids[k - 1]);                       // prendidas hasta k-2: falta la k-1
+  await assertFails(setDoc(doc(db('dani'), RUTA('dani')), siguiente(k, ids[k]), { merge: true }));
+});
+test('cada curso tiene su propio orden: empezar JavaScript sin Programación vale', async () => {
+  await aprobarEnServidor('dani', 'javascript', [porCurso.javascript[0]]);
+  await assertSucceeds(setDoc(doc(db('dani'), RUTA('dani', 'javascript')), primero(porCurso.javascript[0])));
+});
+
 // ---------------- prácticas corregidas en el servidor ----------------
 test('una parte con práctica NO se prende si el servidor no aprobó la práctica', async () => {
   const parte = CON_PRACTICA.programacion[0];
-  await assertFails(setDoc(doc(db('carla'), RUTA('carla')), primero(parte)));
+  await assertFails(prenderEnOrden('carla', parte));
   await aprobarEnServidor('carla', 'programacion', [parte]);
-  await assertSucceeds(setDoc(doc(db('carla'), RUTA('carla')), primero(parte)));
+  await assertSucceeds(prenderEnOrden('carla', parte));
 });
 test('una parte sin práctica se prende sin aprobación', async () => {
   const sin = ids.find((i) => !CON_PRACTICA.programacion.includes(i));
   if (!sin) return; // si todas tuvieran práctica, no hay nada que probar
-  await assertSucceeds(setDoc(doc(db('carla'), RUTA('carla')), primero(sin)));
+  await assertSucceeds(prenderEnOrden('carla', sin));
 });
 test('nadie puede aprobarse a sí mismo una práctica (solo la función del servidor)', async () => {
   const ruta = 'cursos/programacion/aprobadas/carla';
@@ -242,5 +278,5 @@ test('cada persona solo puede leer sus propias aprobaciones', async () => {
 test('la aprobación de una parte no sirve para otra parte', async () => {
   const [a, b] = CON_PRACTICA.programacion;
   await aprobarEnServidor('carla', 'programacion', [a]);
-  await assertFails(setDoc(doc(db('carla'), RUTA('carla')), primero(b)));
+  await assertFails(prenderEnOrden('carla', b));
 });

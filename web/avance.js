@@ -72,3 +72,16 @@ export function migaEtapa(etapa, conEnlace = true) {
 // La clase en la ruta de la barra: "01-mapa-de-los-lenguajes", con su número en el curso
 // y sin el número de la carpeta (44-…), que no es el orden en que se ve.
 export const cortoClase = (num) => `${numeroEnCurso(num)}-${CLASES[num].carpeta.replace(/^\d+-/, '')}`;
+
+// ---------- el orden para marcar ----------
+
+// La parte que va justo antes en el curso (para marcar en orden), o null si es la primera del curso.
+// Solo cuenta el documento principal de cada clase (el que tiene los bombillos).
+export function parteAnterior(num, i) {
+  if (i > 1) return { num, i: i - 1 };
+  const orden = ordenDe(cursoDeClase(num));
+  for (let k = orden.indexOf(num) - 1; k >= 0; k--) {
+    if (conteo[orden[k]]) return { num: orden[k], i: conteo[orden[k]] };
+  }
+  return null;
+}

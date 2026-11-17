@@ -1,3 +1,4 @@
+import { listarPartes } from '../partes.mjs';
 // Prueba de punta a punta, con los emuladores (nada toca el proyecto real):
 // una persona crea su cuenta, falla una práctica, espera, la aprueba en el servidor
 // y recién ahí puede prender el bombillo de esa parte.
@@ -15,8 +16,10 @@ const ARCHIVO = new URL('../funciones/respuestas.json', import.meta.url);
 const hay = existsSync(ARCHIVO);
 const RESPUESTAS = hay ? JSON.parse(readFileSync(ARCHIVO, 'utf8')).practicas : {};
 
-// Una práctica de programación que se corrige, y que es la única práctica de su parte.
-const [ID, ENTRADA] = Object.entries(RESPUESTAS).find(([, e]) => e.curso === 'programacion'
+// Una práctica de programación que se corrige, única de su parte, y en la PRIMERA parte del curso
+// (el primer bombillo de un curso tiene que ser su primera parte: las partes se prenden en orden).
+const PRIMERA = listarPartes().programacion[0];
+const [ID, ENTRADA] = Object.entries(RESPUESTAS).find(([, e]) => e.curso === 'programacion' && e.parte === PRIMERA
   && e.preguntas.some((p) => p.tipo !== 'escribe')
   && Object.values(RESPUESTAS).filter((o) => o.parte === e.parte).length === 1) || [];
 const bien = () => Object.fromEntries(ENTRADA.preguntas.map((p, i) => [i, p.correcta]).filter(([, v]) => v !== undefined && v !== null));

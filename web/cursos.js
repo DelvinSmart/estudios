@@ -131,7 +131,7 @@ export const ETAPAS = [
   {
     id: 'fundamentos', icono: '🧱', titulo: 'Fundamentos', logos: ['typescript', 'git', 'jest'],
     desc: 'Leer código, probarlo, guardarlo y entender sus errores. La base de todo.',
-    clases: ['44', '01', '02', '03', '04', '05', '06', '07'],
+    clases: ['01', '44', '02', '03', '04', '05', '06', '07'],
   },
   {
     id: 'web', icono: '🌐', titulo: 'La web: HTML, CSS y JavaScript', logos: ['html', 'css', 'javascript'],

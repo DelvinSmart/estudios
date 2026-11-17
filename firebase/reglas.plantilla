@@ -5,7 +5,8 @@ rules_version = '2';
 //
 // La idea: el navegador NO decide nada. Firestore solo acepta:
 //   - cuentas con correo de Gmail VERIFICADO;
-//   - prender UN bombillo a la vez, de la lista oficial de ese curso, con la hora del servidor,
+//   - prender UN bombillo a la vez, EN ORDEN (la parte anterior del curso ya prendida),
+//     de la lista oficial de ese curso, con la hora del servidor,
 //     y al menos __ESPERA__ segundos después del anterior;
 //   - en las partes con práctica, solo si el servidor ya la aprobó (respuestas privadas);
 //   - nunca borrar, cambiar ni adelantar fechas;
@@ -14,6 +15,12 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     __FUNCIONES_CURSOS__
+    // La parte que va justo antes de "p" en su curso ('' si p es la primera del curso).
+    function anteriorDe(curso, p) {
+      let t = p.split(':');
+      return int(t[2]) > 1 ? t[0] + ':' + t[1] + ':' + string(int(t[2]) - 1)
+        : (p in inicioDeClase(curso) ? inicioDeClase(curso)[p] : '');
+    }
     function espera() { return duration.value(__ESPERA__, 's'); }
 
     // Sesión abierta, correo verificado y de Gmail.
@@ -47,6 +54,8 @@ service cloud.firestore {
         && request.resource.data.partes[request.resource.data.ultimaParte] == request.time
         && request.resource.data.inicio == request.time
         && request.resource.data.ultimo == request.time
+        // En orden: el primer bombillo de un curso es su primera parte.
+        && request.resource.data.ultimaParte == primera(curso)
         && aprobadaPorElServidor(curso, uid, request.resource.data.ultimaParte);
 
       // Cada bombillo siguiente: uno solo, nuevo, de la lista, y no antes de la espera
@@ -61,6 +70,9 @@ service cloud.firestore {
         && request.resource.data.partes.diff(resource.data.partes).addedKeys() == [request.resource.data.ultimaParte].toSet()
         && request.resource.data.partes.diff(resource.data.partes).affectedKeys() == [request.resource.data.ultimaParte].toSet()
         && request.resource.data.partes[request.resource.data.ultimaParte] == request.time
+        // En orden: la parte anterior del curso ya tiene que estar prendida.
+        && (request.resource.data.ultimaParte == primera(curso)
+            || anteriorDe(curso, request.resource.data.ultimaParte) in resource.data.partes)
         && aprobadaPorElServidor(curso, uid, request.resource.data.ultimaParte);
 
       allow delete: if false;
