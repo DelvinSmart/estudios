@@ -420,7 +420,14 @@ service cloud.firestore {
         '60:LECCION.md:1',
         '60:LECCION.md:2',
         '60:LECCION.md:3',
-        '60:LECCION.md:4'
+        '60:LECCION.md:4',
+        '88:LECCION.md:1',
+        '88:LECCION.md:2',
+        '88:LECCION.md:3',
+        '88:LECCION.md:4',
+        '88:LECCION.md:5',
+        '88:LECCION.md:6',
+        '88:LECCION.md:7'
       ] : (curso == 'kotlin' ? [
         '61:LECCION.md:1',
         '61:LECCION.md:2',
@@ -639,7 +646,7 @@ service cloud.firestore {
         '29:LECCION.md:10'
       ] : [])))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 67 : (curso == 'node' ? 40 : (curso == 'reactnative' ? 28 : (curso == 'kotlin' ? 28 : (curso == 'python' ? 39 : (curso == 'seguridad' ? 26 : (curso == 'ia' ? 62 : (curso == 'agentes' ? 56 : -1))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 67 : (curso == 'node' ? 40 : (curso == 'reactnative' ? 35 : (curso == 'kotlin' ? 28 : (curso == 'python' ? 39 : (curso == 'seguridad' ? 26 : (curso == 'ia' ? 62 : (curso == 'agentes' ? 56 : -1))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -983,7 +990,13 @@ service cloud.firestore {
         '59:LECCION.md:3',
         '60:LECCION.md:1',
         '60:LECCION.md:2',
-        '60:LECCION.md:3'
+        '60:LECCION.md:3',
+        '88:LECCION.md:1',
+        '88:LECCION.md:2',
+        '88:LECCION.md:3',
+        '88:LECCION.md:4',
+        '88:LECCION.md:5',
+        '88:LECCION.md:6'
       ] : (curso == 'kotlin' ? [
         '61:LECCION.md:1',
         '61:LECCION.md:2',
@@ -1182,7 +1195,8 @@ service cloud.firestore {
         '57:LECCION.md:1': '56:LECCION.md:4',
         '58:LECCION.md:1': '57:LECCION.md:4',
         '59:LECCION.md:1': '58:LECCION.md:4',
-        '60:LECCION.md:1': '59:LECCION.md:4'
+        '60:LECCION.md:1': '59:LECCION.md:4',
+        '88:LECCION.md:1': '60:LECCION.md:4'
       } : (curso == 'kotlin' ? {
         '62:LECCION.md:1': '61:LECCION.md:4',
         '63:LECCION.md:1': '62:LECCION.md:4',

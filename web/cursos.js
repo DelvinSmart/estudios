@@ -68,6 +68,7 @@ export const CLASES = {
   '58': { carpeta: '58-rn-navegacion-y-almacenamiento', titulo: 'Navegación y guardar en el teléfono', meta: 'React Navigation, params tipados y AsyncStorage', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '59': { carpeta: '59-rn-datos-y-rendimiento', titulo: 'Datos con Firebase y rendimiento', meta: 'onSnapshot, Context, memo y medir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '60': { carpeta: '60-rn-publicar', titulo: 'Probar y publicar la app', meta: 'Testing Library, EAS Build, AAB, tiendas y actualizaciones', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '88': { carpeta: '88-rn-proyecto-app-de-gastos', titulo: 'Proyecto final: la app de gastos', meta: 'Expo y TypeScript: motor de diseño, lógica con pruebas, AsyncStorage, FlatList y abrirla en tu iPhone', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '61': { carpeta: '61-kotlin-primeros-pasos', titulo: 'Primeros pasos', meta: 'Playground, val y var, tipos y plantillas', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '62': { carpeta: '62-kotlin-null-y-decisiones', titulo: 'Null safety, decisiones y ciclos', meta: 'String?, ?., ?:, if y when como expresiones, rangos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '63': { carpeta: '63-kotlin-funciones-y-colecciones', titulo: 'Funciones, lambdas y colecciones', meta: 'fun, lambdas, extensiones, map, filter y sumOf', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -111,7 +112,7 @@ const ICONOS = {
   '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁',
   '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄', '79': '🗒️', '78': '👥', '80': '🚀',
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
-  '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀',
+  '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦',
   '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️',
 };
@@ -134,7 +135,7 @@ const LOGOS_CLASE = {
   '87': ['node', 'javascript', 'firebase'],
   '45': ['javascript'], '46': ['javascript'], '47': ['javascript'], '48': ['javascript'], '49': ['javascript', 'firebase'],
   '50': ['node', 'javascript'], '51': ['typescript'], '52': ['typescript'], '53': ['typescript', 'vitest'], '81': ['javascript', 'html'], '82': ['javascript'], '83': ['javascript'], '84': ['javascript', 'css', 'github'],
-  '54': ['react', 'typescript'], '55': ['react'], '56': ['react'], '57': ['expo', 'apple'], '58': ['react'], '59': ['firebase', 'react'], '60': ['expo', 'android', 'apple'],
+  '54': ['react', 'typescript'], '55': ['react'], '56': ['react'], '57': ['expo', 'apple'], '58': ['react'], '59': ['firebase', 'react'], '60': ['expo', 'android', 'apple'], '88': ['react', 'typescript', 'expo'],
   '61': ['kotlin'], '62': ['kotlin'], '63': ['kotlin'], '64': ['kotlin'], '65': ['kotlin'], '66': ['compose', 'kotlin', 'android'], '67': ['androide', 'firebase', 'gradle'],
   '36': ['python'], '37': ['python'], '38': ['python'], '39': ['python'], '40': ['python', 'markdown'],
   '41': ['python', 'bash'], '42': ['python'], '43': ['python', 'github'],
@@ -190,7 +191,7 @@ export const ETAPAS = [
   {
     id: 'reactnative', curso: 'reactnative', icono: '📱', titulo: 'React Native', logos: ['react', 'typescript', 'expo', 'firebase'],
     desc: 'Un curso aparte, con su propio certificado: apps para iPhone y Android con un solo código, como Copiloto.',
-    clases: ['54', '55', '56', '57', '58', '59', '60'],
+    clases: ['54', '55', '56', '57', '58', '59', '60', '88'],
   },
   {
     id: 'kotlin', curso: 'kotlin', icono: '🤖', titulo: 'Kotlin', logos: ['kotlin', 'compose', 'androide', 'gradle'],
