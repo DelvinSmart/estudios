@@ -24,6 +24,41 @@ Sin HTML no hay casa; sin CSS es una casa en obra gris; sin JavaScript es una ca
 
 > 🌎 **Otro ejemplo:** Es como un televisor desenchufado: la pantalla está, pero no muestra nada.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La casa: estructura, pintura y electricidad
+lenguaje: html
+pide: Las tres capas en una página: la **estructura** (HTML: un `button` con `id="luz"` que dice **Prender**), la **pintura** (CSS: fondo amarillo `yellow` cuando el `body` tiene la clase `prendida`) y la **electricidad** (JavaScript: al hacer clic en el botón, se pone o se quita la clase `prendida` del `body`).
+--- código
+<style>
+  /* la pintura */
+</style>
+
+<!-- la estructura -->
+
+<script>
+  // la electricidad
+</script>
+--- pruebas
+prueba('el botón', () => igual($('#luz')?.textContent.trim(), 'Prender'));
+prueba('al hacer clic, se prende', () => { $('#luz').click(); ok(document.body.classList.contains('prendida'), 'falta poner la clase prendida'); });
+prueba('y se pinta de amarillo', () => igual(estilo('body', 'background-color'), 'rgb(255, 255, 0)'));
+prueba('otro clic la apaga', () => { $('#luz').click(); ok(!document.body.classList.contains('prendida'), 'usa classList.toggle'); });
+--- solución
+<style>
+  body.prendida { background: yellow; }
+</style>
+
+<button id="luz">Prender</button>
+
+<script>
+  document.querySelector('#luz').addEventListener('click', () => {
+    document.body.classList.toggle('prendida');
+  });
+</script>
+```
+
 ```practica
 vf :: En la analogía de la casa, el CSS son las paredes y las puertas
 vf :: El JavaScript es lo que hace que la página responda a lo que haces
@@ -63,6 +98,32 @@ Un script puede ser corto (tres líneas) o grande (miles): lo que lo hace "scrip
 > 🌎 **En la vida real:** son como los automatismos de una casa inteligente: "a las 7, abre las cortinas; si llueve, cierra las ventanas".
 
 > 🌎 **Otro ejemplo:** Es como las alarmas programadas del celular: cada una hace algo a su hora.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un script es un guion
+lenguaje: js
+pide: Un script es una lista de instrucciones que se ejecuta **en orden**. Completa `correrGuion(guion)`: cada instrucción es `['sumar', n]`, `['restar', n]` o `['duplicar']`, y empiezan en 0. Devuelve el resultado final.
+--- código
+function correrGuion(guion) {
+  // tu código aquí
+}
+--- pruebas
+prueba('en orden', () => igual(correrGuion([['sumar', 5], ['duplicar'], ['restar', 3]]), 7));
+prueba('el orden importa', () => igual(correrGuion([['duplicar'], ['sumar', 5], ['restar', 3]]), 2));
+prueba('vacío', () => igual(correrGuion([]), 0));
+--- solución
+function correrGuion(guion) {
+  let valor = 0;
+  for (const [orden, n] of guion) {
+    if (orden === 'sumar') valor += n;
+    if (orden === 'restar') valor -= n;
+    if (orden === 'duplicar') valor *= 2;
+  }
+  return valor;
+}
+```
 
 ```practica
 vf :: Script significa "guion": una lista de instrucciones que se ejecuta en orden
@@ -112,6 +173,42 @@ La barra de arriba, el menú y los estilos **nunca se vuelven a cargar**: por es
 
 > 🌎 **Otro ejemplo:** Es como pedir un libro nuevo para cada capítulo frente a pasar la página.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una SPA de tres pantallas
+lenguaje: html
+pide: Haz una SPA: la página carga **una vez** y el script cambia solo `#pantalla` según lo que va después del `#`. Escribe `pintar()`: `#/` o vacío → `Inicio`; `#/clase/06` → `Clase 06`; otro → `No encontré esa página`. Llámala al cargar y en el evento `hashchange`.
+--- código
+<nav><a href="#/">Inicio</a> <a href="#/clase/06">Git</a></nav>
+<main id="pantalla"></main>
+
+<script>
+  // tu código aquí
+</script>
+--- pruebas
+const ir = (h) => { location.hash = h; window.dispatchEvent(new HashChangeEvent('hashchange')); };
+prueba('empieza en Inicio', () => igual($('#pantalla').textContent.trim(), 'Inicio'));
+prueba('una clase', () => { ir('#/clase/06'); igual($('#pantalla').textContent.trim(), 'Clase 06'); });
+prueba('una que no existe', () => { ir('#/nada'); igual($('#pantalla').textContent.trim(), 'No encontré esa página'); });
+prueba('volver al inicio', () => { ir('#/'); igual($('#pantalla').textContent.trim(), 'Inicio'); });
+--- solución
+<nav><a href="#/">Inicio</a> <a href="#/clase/06">Git</a></nav>
+<main id="pantalla"></main>
+
+<script>
+  function pintar() {
+    const partes = location.hash.replace(/^#\/?/, '').split('/');
+    let texto = 'No encontré esa página';
+    if (partes[0] === '') texto = 'Inicio';
+    else if (partes[0] === 'clase' && partes[1]) texto = `Clase ${partes[1]}`;
+    document.querySelector('#pantalla').textContent = texto;
+  }
+  pintar();
+  window.addEventListener('hashchange', pintar);
+</script>
+```
+
 ```practica
 vf :: En una SPA, el navegador carga la página una vez y después un script cambia solo la parte del medio
 vf :: Cada vez que tocas una isla del mapa, el navegador descarga una página HTML entera nueva
@@ -148,6 +245,34 @@ Una SPA tiene sus desafíos, y este mapa los resuelve así:
 > 🌎 **En la vida real:** hasta la mejor casa necesita una cerradura en la puerta: la SPA es la casa, Firebase es la cerradura.
 
 > 🌎 **Otro ejemplo:** Es como un auto rápido: necesita buenos frenos.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Cuánto se descarga?
+lenguaje: js
+pide: En una SPA se descargan los archivos de la página **una vez**, y después solo la lección que abres. En un sitio de muchas páginas, cada página trae todo otra vez. Completa `kbSPA(base, lecciones)` y `kbMuchasPaginas(base, lecciones)`: `base` es lo que pesan HTML+CSS+JS (en KB) y `lecciones` la lista de lo que pesa cada lección abierta.
+--- código
+function kbSPA(base, lecciones) {
+  // tu código aquí
+}
+
+function kbMuchasPaginas(base, lecciones) {
+  // tu código aquí
+}
+--- pruebas
+prueba('SPA: la base una vez', () => igual(kbSPA(200, [10, 12, 8]), 230));
+prueba('muchas páginas: la base cada vez', () => igual(kbMuchasPaginas(200, [10, 12, 8]), 630));
+prueba('sin abrir nada', () => igual(kbSPA(200, []), 200));
+--- solución
+function kbSPA(base, lecciones) {
+  return base + lecciones.reduce((s, k) => s + k, 0);
+}
+
+function kbMuchasPaginas(base, lecciones) {
+  return lecciones.reduce((s, k) => s + base + k, 0) || base;
+}
+```
 
 ```practica
 vf :: Esta plataforma se puede publicar gratis en GitHub Pages porque son solo archivos

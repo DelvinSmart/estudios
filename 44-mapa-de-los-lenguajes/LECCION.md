@@ -68,6 +68,39 @@ Fíjate: en ninguna parte escribiste "ejecuta la función de `/gastos`". Eso lo 
 
 > 🎤 **Para la entrevista:** "Una librería la llamo yo cuando la necesito, por ejemplo date-fns para formatear una fecha. Un framework me da la estructura y llama a mi código: en Express escribo la función de una ruta y Express la ejecuta cuando llega el pedido. Eso se llama inversión de control."
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Lenguaje, librería, framework o plataforma?
+lenguaje: js
+pide: Completa el objeto `QUE_ES` con `'lenguaje'`, `'librería'`, `'framework'` o `'plataforma'` para cada cosa: JavaScript, TypeScript, Kotlin, Swift (lenguajes); marked, date-fns, highlight.js (librerías); React Native, Expo, Express (frameworks); Node.js, Android (plataformas).
+--- código
+const QUE_ES = {
+  JavaScript: '',
+  Kotlin: '',
+  marked: '',
+  'date-fns': '',
+  Expo: '',
+  Express: '',
+  'Node.js': '',
+  Android: '',
+};
+--- pruebas
+const bien = { JavaScript: 'lenguaje', Kotlin: 'lenguaje', marked: 'librería', 'date-fns': 'librería', Expo: 'framework', Express: 'framework', 'Node.js': 'plataforma', Android: 'plataforma' };
+for (const [k, v] of Object.entries(bien)) prueba(k, () => igual(QUE_ES[k], v));
+--- solución
+const QUE_ES = {
+  JavaScript: 'lenguaje',
+  Kotlin: 'lenguaje',
+  marked: 'librería',
+  'date-fns': 'librería',
+  Expo: 'framework',
+  Express: 'framework',
+  'Node.js': 'plataforma',
+  Android: 'plataforma',
+};
+```
+
 ```practica
 vf :: React es un lenguaje de programación
 vf :: Node.js es un lugar donde corre JavaScript fuera del navegador
@@ -116,6 +149,41 @@ gananciaNeta('300', 80);   // ❌ TypeScript avisa: '300' es texto, no número
 > 🌎 **En la vida real:** es como el corrector de un formulario online que te marca el campo en rojo antes de enviarlo.
 
 > 🌎 **Otro ejemplo:** Es como la etiqueta "frágil" en una caja: no cambia la caja, pero evita que la traten mal.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que TypeScript te avisa
+lenguaje: ts
+pide: TypeScript revisa los tipos **antes** de correr. Este código tiene dos errores: un `string` donde va un `number`, y una propiedad que no existe. Arréglalos.
+--- código
+interface Viaje {
+  app: string;
+  valor: number;
+}
+
+function total(viajes: Viaje[]): number {
+  return viajes.reduce((s, v) => s + v.valor, 0);
+}
+
+const hoy: Viaje[] = [{ app: 'Uber', valor: '12' }, { app: '99', valr: 18 }];
+const suma = total(hoy);
+--- pruebas
+prueba('la suma', () => igual(total([{ app: 'Uber', valor: 12 }, { app: '99', valor: 18 }]), 30));
+prueba('hoy suma 30', () => igual(suma, 30));
+--- solución
+interface Viaje {
+  app: string;
+  valor: number;
+}
+
+function total(viajes: Viaje[]): number {
+  return viajes.reduce((s, v) => s + v.valor, 0);
+}
+
+const hoy: Viaje[] = [{ app: 'Uber', valor: 12 }, { app: '99', valor: 18 }];
+const suma = total(hoy);
+```
 
 ```practica
 vf :: El navegador ejecuta TypeScript directamente, sin convertirlo
@@ -176,6 +244,30 @@ Por eso todo cabe en una sola frase: **"Escribí las órdenes en TypeScript, con
 > 🌎 **En la vida real:** decir "mi restaurante está hecho en español, con mesas prefabricadas y en una carpa" no son tres cosas que compiten: es el idioma, el mobiliario y el lugar.
 
 > 🌎 **Otro ejemplo:** Es como decir que una carta está escrita en español, con un modelo de carta y enviada por correo: una sola carta.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: De la web a React Native
+lenguaje: js
+pide: React Native no usa `div` ni `p`: usa sus propias piezas. Completa `aReactNative(etiqueta)`: `div` → `'View'`; `p`, `span`, `h1`, `h2` → `'Text'`; `img` → `'Image'`; `button` → `'Pressable'`; `input` → `'TextInput'`; otra → `null`.
+--- código
+function aReactNative(etiqueta) {
+  // tu código aquí
+}
+--- pruebas
+prueba('div', () => igual(aReactNative('div'), 'View'));
+prueba('textos', () => igual(['p', 'span', 'h1'].map(aReactNative), ['Text', 'Text', 'Text']));
+prueba('img', () => igual(aReactNative('img'), 'Image'));
+prueba('button', () => igual(aReactNative('button'), 'Pressable'));
+prueba('input', () => igual(aReactNative('input'), 'TextInput'));
+--- solución
+const EQUIVALE = { div: 'View', p: 'Text', span: 'Text', h1: 'Text', h2: 'Text', img: 'Image', button: 'Pressable', input: 'TextInput' };
+
+function aReactNative(etiqueta) {
+  return EQUIVALE[etiqueta] ?? null;
+}
+```
 
 ```practica
 vf :: React Native usa div y p igual que la web
@@ -280,6 +372,32 @@ Si mañana quisieras agregar a Copiloto una pantalla nueva de **"Historial de vi
 En **TypeScript**, con las piezas de React Native, dentro de Expo. Es una pantalla normal: una lista de viajes, textos y botones. No necesita meterse con los permisos profundos del teléfono, así que no hace falta tocar al "mecánico" (Kotlin o Swift). Solo usarías Kotlin o Swift para algo que el teléfono no deja hacer desde TypeScript, como leer la pantalla de otra app o dibujar encima de ella.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Con qué hago esta app?
+lenguaje: js
+pide: Completa `recomendar(pedido)`: si necesita **iPhone y Android con un solo código** → `'React Native con Expo'`; si es **solo Android** → `'Kotlin'`; si es **solo iPhone** → `'Swift'`; si es **una página** → `'HTML, CSS y JavaScript'`.
+--- código
+function recomendar(pedido) {
+  // pedido = { iphone, android, pagina }
+  // tu código aquí
+}
+--- pruebas
+prueba('las dos tiendas', () => igual(recomendar({ iphone: true, android: true }), 'React Native con Expo'));
+prueba('solo Android', () => igual(recomendar({ iphone: false, android: true }), 'Kotlin'));
+prueba('solo iPhone', () => igual(recomendar({ iphone: true, android: false }), 'Swift'));
+prueba('una página', () => igual(recomendar({ pagina: true }), 'HTML, CSS y JavaScript'));
+--- solución
+function recomendar(pedido) {
+  if (pedido.pagina) return 'HTML, CSS y JavaScript';
+  if (pedido.iphone && pedido.android) return 'React Native con Expo';
+  if (pedido.android) return 'Kotlin';
+  if (pedido.iphone) return 'Swift';
+  return null;
+}
+```
 
 ```practica
 vf :: Kotlin es el lenguaje oficial para apps Android

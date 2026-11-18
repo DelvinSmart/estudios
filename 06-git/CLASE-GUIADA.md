@@ -556,7 +556,7 @@ vf :: `git add -A` prepara todos los cambios
 ### Parte A: crear un repositorio
 
 ```bash
-cd /Volumes/SSD_Desarrollo/Developer/Aprender/06-git
+cd ~/Desktop            # el Escritorio (o cualquier carpeta tuya)
 mkdir practica
 cd practica
 git init

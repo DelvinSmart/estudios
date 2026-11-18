@@ -70,13 +70,13 @@ todos los "abre tal archivo de Copiloto".
   (TypeScript estricto, 38 pruebas, cuatro candados, reglas de Firestore probadas con el emulador, la caja en capas,
   tres idiomas y el motor de diseño; su CI de GitHub está en verde)
 - [ ] Una versión "con errores a propósito" para el curso de seguridad
-- [ ] Cambiar cada ejercicio que hoy pide abrir Copiloto (✅ clases 01 a 17; siguen las demás)
+- [x] Cambiar cada ejercicio que hoy pide abrir Copiloto (✅ todo Programación; los otros cursos se revisan con sus ejercicios)
 
 ### C. Cada curso: ejercicios en cada parte, un proyecto de principio a fin, y más clases donde falten
 
 | Curso | Proyecto de principio a fin | Lo que hay que agregar |
 |---|---|---|
-| Programación | "Gastos del carro": leer su código, escribir pruebas, CI, Git, Firebase con emulador y un CRUD | ✅ Clases 01 a 17: un ejercicio en cada parte (155; HTML y CSS con páginas que se prueban solas), la clase 03 hecha con Gastos del carro y Vitest, 04 a 07 usando Gastos del carro (CI, `npm run mostrar`, Git, errores reales), 08 con sus reglas y el emulador, y 10 con `src/caja/`. Faltan las demás clases |
+| Programación | "Gastos del carro": leer su código, escribir pruebas, CI, Git, Firebase con emulador y un CRUD | ✅ Todas las clases (23): un ejercicio en cada parte (206; HTML y CSS con páginas que se prueban solas), la clase 03 hecha con Gastos del carro y Vitest, 04 a 07 usando Gastos del carro (CI, `npm run mostrar`, Git, errores reales), 08 con sus reglas y el emulador,, 10 con `src/caja/`, y 18 y 20 con pasos que cualquiera puede hacer (bajar el sitio con git clone, publicar su propia página gratis) |
 | JavaScript + TypeScript | ✅ La web de gastos, de una carpeta vacía a GitHub Pages (clase 84) | ✅ Completo: 13 clases, un ejercicio de código en cada parte (54, probados con su solución), y las clases nuevas del DOM, errores y clases (POO), fechas y guardar |
 | Node.js | La API de gastos con Express, con pruebas, publicada | Ejercicios de cada ruta, revisión automática |
 | React Native | La app de gastos con Expo, en el teléfono | Formularios, listas, guardar datos, publicar paso a paso |

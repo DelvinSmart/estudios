@@ -100,7 +100,8 @@ Casi todo sistema es esto: Copiloto Driver registra, muestra, edita y borra ingr
 
 1. Abre esta carpeta en la terminal:
    ```bash
-   cd /Volumes/SSD_Desarrollo/Developer/Aprender/09-crud-nodejs
+   git clone https://github.com/DelvinSmart/estudios.git   # solo la primera vez
+   cd estudios/09-crud-nodejs
    ```
 2. Instala las librerías (solo la primera vez):
    ```bash

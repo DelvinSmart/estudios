@@ -234,7 +234,7 @@ Vas a practicar en una carpeta aparte, para no arriesgar la app. Escribe cada co
 
 > 🌎 **Otro ejemplo:** Como abrir una carpeta nueva en el archivador y escribirle el nombre: desde ese momento puede guardar papeles.
 ```bash
-cd /Volumes/SSD_Desarrollo/Developer/Aprender/06-git
+cd ~/Desktop            # el Escritorio (o cualquier carpeta tuya)
 mkdir practica
 cd practica
 git init

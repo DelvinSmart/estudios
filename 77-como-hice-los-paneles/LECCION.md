@@ -54,6 +54,49 @@ Todo sitio con panel tiene dos caras:
 
 > 🌎 **Otro ejemplo:** Es como un mural de anuncios de una iglesia: todos pueden leerlo, pero solo el secretario tiene la llave del vidrio para poner y quitar papeles.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Vitrina y trastienda
+lenguaje: js
+pide: Un panel es la **trastienda**: el dueño cambia lo que los demás ven en la **vitrina**. Completa `crearTienda()`: `vitrina()` devuelve los precios publicados (una copia); `panel.cambiar(nombre, precio, llave)` solo cambia si la `llave` es `'llave-del-dueño'`, y devuelve `true` o `false`.
+--- código
+function crearTienda() {
+  const precios = { lavado: 40 };
+  return {
+    vitrina() {
+      // tu código aquí
+    },
+    panel: {
+      cambiar(nombre, precio, llave) {
+        // tu código aquí
+      },
+    },
+  };
+}
+--- pruebas
+prueba('la vitrina muestra los precios', () => igual(crearTienda().vitrina(), { lavado: 40 }));
+prueba('el dueño cambia un precio', () => { const t = crearTienda(); igual(t.panel.cambiar('lavado', 45, 'llave-del-dueño'), true); igual(t.vitrina().lavado, 45); });
+prueba('sin llave, no', () => { const t = crearTienda(); igual(t.panel.cambiar('lavado', 1, 'otra'), false); igual(t.vitrina().lavado, 40); });
+prueba('cambiar la vitrina desde afuera no cambia nada', () => { const t = crearTienda(); t.vitrina().lavado = 0; igual(t.vitrina().lavado, 40); });
+--- solución
+function crearTienda() {
+  const precios = { lavado: 40 };
+  return {
+    vitrina() {
+      return { ...precios };
+    },
+    panel: {
+      cambiar(nombre, precio, llave) {
+        if (llave !== 'llave-del-dueño') return false;
+        precios[nombre] = precio;
+        return true;
+      },
+    },
+  };
+}
+```
+
 ```practica
 vf :: Un panel es una página hecha para que el dueño cambie lo que ven los demás sin abrir el código
 vf :: Un panel hace cosas que serían imposibles haciéndolas a mano en la computadora
@@ -86,6 +129,30 @@ Fíjate en algo: los dos primeros se parecen mucho, y Copiloto es distinto. No e
 > 🌎 **En la vida real:** para cambiar el menú escrito en la pizarra de un café basta con tener la tiza. Para cambiar la clave de la caja fuerte, el banco te pide documento, clave y a veces que vayas en persona.
 
 > 🌎 **Otro ejemplo:** Es como la diferencia entre la llave de tu cuarto y la llave de un banco: las dos son llaves, pero la del banco tiene alarmas, cámaras y un registro de quién entró.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las tres preguntas de todo panel
+lenguaje: js
+pide: Antes de construir un panel: ¿dónde viven los datos?, ¿cómo sabe que eres tú?, ¿quién revisa el cambio? Completa `planDePanel(datos)`: si los datos son archivos en un repositorio (`'archivos'`) → `{ guarda: 'GitHub', identidad: 'llave fine-grained', revisa: 'GitHub y el CI' }`; si están en una base de datos (`'base de datos'`) → `{ guarda: 'Firestore', identidad: 'correo y contraseña', revisa: 'una función del servidor' }`.
+--- código
+function planDePanel(datos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('este mapa (archivos)', () => igual(planDePanel('archivos'), { guarda: 'GitHub', identidad: 'llave fine-grained', revisa: 'GitHub y el CI' }));
+prueba('Copiloto (base de datos)', () => igual(planDePanel('base de datos'), { guarda: 'Firestore', identidad: 'correo y contraseña', revisa: 'una función del servidor' }));
+--- solución
+const PLANES = {
+  archivos: { guarda: 'GitHub', identidad: 'llave fine-grained', revisa: 'GitHub y el CI' },
+  'base de datos': { guarda: 'Firestore', identidad: 'correo y contraseña', revisa: 'una función del servidor' },
+};
+
+function planDePanel(datos) {
+  return PLANES[datos];
+}
+```
 
 ```practica
 vf :: Antes de construir un panel hay que decidir dónde viven los datos, cómo sabe que eres tú y quién revisa los cambios
@@ -154,6 +221,26 @@ Copiloto, en el teléfono del conductor
 |---|---|---|
 | Textos o archivos que se publican para todos | **A: GitHub** | Gratis, sencillo, y cada cambio queda guardado en el historial |
 | Datos de personas, pagos, permisos | **B: Firebase con funciones** | Un servidor revisa cada pedido y nadie toca la base de datos directo |
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Qué camino conviene?
+lenguaje: js
+pide: Completa `camino(panel)`: si el panel toca **datos de personas** (`datosDePersonas`) o **contraseñas** (`contrasenas`) → `'servidor'` (Firebase con una función que revisa). Si solo cambia **archivos públicos** → `'GitHub'` (cada cambio es un commit).
+--- código
+function camino(panel) {
+  // tu código aquí
+}
+--- pruebas
+prueba('precios públicos de un taller', () => igual(camino({ datosDePersonas: false, contrasenas: false }), 'GitHub'));
+prueba('cambiar contraseñas', () => igual(camino({ datosDePersonas: false, contrasenas: true }), 'servidor'));
+prueba('avisos a los conductores', () => igual(camino({ datosDePersonas: true, contrasenas: false }), 'servidor'));
+--- solución
+function camino(panel) {
+  return panel.datosDePersonas || panel.contrasenas ? 'servidor' : 'GitHub';
+}
+```
 
 ```practica
 vf :: En el camino de GitHub, cada cambio guardado desde el panel queda como un commit en el historial
@@ -230,6 +317,34 @@ El botón **⏏ Salir** borra la llave del aparato. Si usas un aparato prestado,
 No pasa nada. Ve la pantalla que pide la llave, y sin llave, cualquier cosa que intente, GitHub la rechaza. **Esconder la dirección no es seguridad; la llave sí.**
 
 > 🌎 **En la vida real:** todo el mundo sabe dónde está la puerta del banco. Lo que protege la plata no es esconder la puerta, sino la bóveda y el guardia.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La llave con el menor permiso
+lenguaje: js
+pide: Completa `revisarLlave(llave, hoy)`: devuelve los problemas de una llave de GitHub: `'puede tocar todos los repositorios'` si `repos` es `'todos'`; `'tiene más permisos de los necesarios'` si `permisos` tiene algo más que `'contents:write'`; `'no vence nunca'` si no tiene `vence`; `'ya venció'` si `vence < hoy`.
+--- código
+function revisarLlave(llave, hoy) {
+  // tu código aquí
+}
+--- pruebas
+const buena = { repos: ['estudios'], permisos: ['contents:write'], vence: '2027-02-01' };
+prueba('una buena llave', () => igual(revisarLlave(buena, '2026-11-18'), []));
+prueba('todos los repos', () => igual(revisarLlave({ ...buena, repos: 'todos' }, '2026-11-18'), ['puede tocar todos los repositorios']));
+prueba('demasiados permisos', () => igual(revisarLlave({ ...buena, permisos: ['contents:write', 'admin'] }, '2026-11-18'), ['tiene más permisos de los necesarios']));
+prueba('sin vencimiento', () => igual(revisarLlave({ ...buena, vence: undefined }, '2026-11-18'), ['no vence nunca']));
+prueba('vencida (un 401)', () => igual(revisarLlave({ ...buena, vence: '2026-10-01' }, '2026-11-18'), ['ya venció']));
+--- solución
+function revisarLlave(llave, hoy) {
+  const problemas = [];
+  if (llave.repos === 'todos') problemas.push('puede tocar todos los repositorios');
+  if (llave.permisos.some((p) => p !== 'contents:write')) problemas.push('tiene más permisos de los necesarios');
+  if (!llave.vence) problemas.push('no vence nunca');
+  else if (llave.vence < hoy) problemas.push('ya venció');
+  return problemas;
+}
+```
 
 ```practica
 vf :: Una llave "fine-grained" de GitHub se puede limitar a un solo repositorio y a un solo tipo de permiso
@@ -317,6 +432,43 @@ export async function guardar(ruta, texto, sha, mensaje) {
 
 > 🌎 **Otro ejemplo más:** Es como el número de versión de una receta en un restaurante: "estoy corrigiendo la versión 7". Si en la cocina ya están usando la 8, tu corrección de la 7 se revisa antes de usarla.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Guardar sin pisar cambios ajenos
+lenguaje: js
+pide: El panel manda el texto en **base64** (pasando por `TextEncoder` para que las tildes no se rompan) y el `sha` de la versión que abrió. Completa `aBase64(texto)` y `guardar(repo, ruta, texto, shaQueAbri)`: si el `sha` actual del archivo no es el que abriste, responde `{ status: 409 }` (alguien cambió el archivo); si coincide, guarda y responde `{ status: 200, sha: nuevo }` (el nuevo sha es `'sha' + (número de versión)`).
+--- código
+function aBase64(texto) {
+  // tu código aquí
+}
+
+function guardar(repo, ruta, texto, shaQueAbri) {
+  // repo[ruta] = { contenido (base64), sha, version }
+  // tu código aquí
+}
+--- pruebas
+prueba('base64 con tildes', () => igual(aBase64('canción'), 'Y2FuY2nDs24='));
+prueba('guardar bien', () => { const repo = { 'a.md': { contenido: '', sha: 'sha1', version: 1 } }; igual(guardar(repo, 'a.md', 'hola', 'sha1'), { status: 200, sha: 'sha2' }); igual(repo['a.md'].contenido, aBase64('hola')); });
+prueba('alguien guardó antes: 409', () => { const repo = { 'a.md': { contenido: '', sha: 'sha2', version: 2 } }; igual(guardar(repo, 'a.md', 'mío', 'sha1'), { status: 409 }); igual(repo['a.md'].contenido, ''); });
+--- solución
+function aBase64(texto) {
+  const bytes = new TextEncoder().encode(texto);
+  let binario = '';
+  for (const b of bytes) binario += String.fromCharCode(b);
+  return btoa(binario);
+}
+
+function guardar(repo, ruta, texto, shaQueAbri) {
+  const archivo = repo[ruta];
+  if (archivo.sha !== shaQueAbri) return { status: 409 };
+  archivo.version++;
+  archivo.sha = 'sha' + archivo.version;
+  archivo.contenido = aBase64(texto);
+  return { status: 200, sha: archivo.sha };
+}
+```
+
 ```practica
 vf :: Una API es una forma de que un programa le pida cosas a otro por internet, con pedidos conocidos
 vf :: El panel convierte el texto a bytes con TextEncoder antes de pasarlo a base64 para que los acentos y la ñ no lleguen rotos
@@ -371,6 +523,58 @@ La página pública lee esos archivos y los dibuja como un mapa. El panel lee **
 | Pasarse del límite de citas de la LBLA | El medidor no deja publicar |
 | Perder lo escrito | Borrador automático en el aparato |
 | Pisar un cambio hecho en otro lado | La huella (sha) del archivo |
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El borrador que no se pierde
+lenguaje: js
+pide: El panel de estudios guarda un **borrador** en `localStorage` mientras escribes, para no perder nada si se cierra la pestaña. Completa `crearEditor(almacen, id)`: `escribir(texto)` guarda el borrador en la clave `'borrador:' + id`; `abrir(publicado)` devuelve el borrador si existe, o el publicado si no; `publicar()` borra el borrador (con `removeItem`).
+--- código
+function crearAlmacen() {
+  const d = {};
+  return { getItem: (k) => d[k] ?? null, setItem: (k, v) => { d[k] = String(v); }, removeItem: (k) => { delete d[k]; } };
+}
+
+function crearEditor(almacen, id) {
+  return {
+    escribir(texto) {
+      // tu código aquí
+    },
+    abrir(publicado) {
+      // tu código aquí
+    },
+    publicar() {
+      // tu código aquí
+    },
+  };
+}
+--- pruebas
+prueba('sin borrador, abre lo publicado', () => igual(crearEditor(crearAlmacen(), 'bautismo').abrir('versión publicada'), 'versión publicada'));
+prueba('con borrador, abre el borrador', () => { const a = crearAlmacen(); crearEditor(a, 'bautismo').escribir('a medio escribir'); igual(crearEditor(a, 'bautismo').abrir('publicada'), 'a medio escribir'); });
+prueba('al publicar, se borra', () => { const a = crearAlmacen(); const e = crearEditor(a, 'x'); e.escribir('algo'); e.publicar(); igual(e.abrir('publicada'), 'publicada'); });
+prueba('cada estudio, su borrador', () => { const a = crearAlmacen(); crearEditor(a, 'uno').escribir('1'); igual(crearEditor(a, 'dos').abrir('p'), 'p'); });
+--- solución
+function crearAlmacen() {
+  const d = {};
+  return { getItem: (k) => d[k] ?? null, setItem: (k, v) => { d[k] = String(v); }, removeItem: (k) => { delete d[k]; } };
+}
+
+function crearEditor(almacen, id) {
+  const clave = 'borrador:' + id;
+  return {
+    escribir(texto) {
+      almacen.setItem(clave, texto);
+    },
+    abrir(publicado) {
+      return almacen.getItem(clave) ?? publicado;
+    },
+    publicar() {
+      almacen.removeItem(clave);
+    },
+  };
+}
+```
 
 ```practica
 vf :: En ¿Qué dice la Biblia?, cada estudio es un archivo .json en la carpeta estudios/
@@ -451,6 +655,36 @@ test('separar y unir devuelven cada clase exactamente igual', () => {
 6. Las reglas de Firebase **no se tocan**: el número de partes es el mismo y las prácticas son las mismas.
 
 > 🌎 **En la vida real:** es como corregir un error de ortografía en un libro ya publicado: en la reimpresión cambias esa palabra, pero el índice, el número de páginas y el código del libro siguen iguales.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que el panel de este mapa no deja hacer
+lenguaje: js
+pide: El panel de este mapa deja corregir textos, pero **no** agregar ni quitar partes (rompería los certificados) ni tocar las prácticas (las respuestas viven en el servidor). Completa `revisarCambio(antes, despues)`: compara dos textos de una clase y devuelve los problemas: `'cambió la cantidad de partes'` (cuenta las líneas que empiezan con `## `) y `'cambió una práctica'` (si el texto de los bloques que empiezan con tres comillas invertidas y `practica` no es igual).
+--- código
+const F = '`'.repeat(3);
+
+function revisarCambio(antes, despues) {
+  // tu código aquí
+}
+--- pruebas
+const antes = ['## 1. Uno', 'texto', F + 'practica', 'vf :: Git guarda fotos', F].join('\n');
+prueba('corregir un texto: bien', () => igual(revisarCambio(antes, antes.replace('texto', 'texto corregido')), []));
+prueba('agregar una parte: no', () => igual(revisarCambio(antes, antes + '\n## 2. Dos'), ['cambió la cantidad de partes']));
+prueba('cambiar una práctica: no', () => igual(revisarCambio(antes, antes.replace('fotos', 'videos')), ['cambió una práctica']));
+--- solución
+const F = '`'.repeat(3);
+
+function revisarCambio(antes, despues) {
+  const partes = (t) => t.split('\n').filter((l) => l.startsWith('## ')).length;
+  const practicas = (t) => t.split(F + 'practica').slice(1).map((b) => b.split(F)[0]).join('|');
+  const problemas = [];
+  if (partes(antes) !== partes(despues)) problemas.push('cambió la cantidad de partes');
+  if (practicas(antes) !== practicas(despues)) problemas.push('cambió una práctica');
+  return problemas;
+}
+```
 
 ```practica
 vf :: Desde el panel de este mapa se puede cambiar el texto y el título de una parte
@@ -563,6 +797,37 @@ Hay acciones que pueden hacer mucho daño si caen en malas manos, como **definir
 
 > 🌎 **Otro ejemplo:** El registro es como el libro de visitas de un edificio: no impide entrar, pero si algo pasa, se sabe quién fue y a qué hora.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: assertOwner y la lista blanca
+lenguaje: js
+pide: En el panel de Copiloto, la función del servidor revisa todo. Completa `adminUpdateAppConfig(pase, cambios, config)`: si el correo del pase no es `DUENO` → `Error('No eres el dueño.')`; si algún campo de `cambios` no está en `PERMITIDOS` (la **lista blanca**) → `Error('Campo no permitido: X')`; si todo bien, aplica los cambios a `config` y devuelve `config`.
+--- código
+const DUENO = 'dueno@ejemplo.com';
+const PERMITIDOS = ['aviso', 'versionMinima'];
+
+function adminUpdateAppConfig(pase, cambios, config) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el dueño cambia el aviso', () => igual(adminUpdateAppConfig({ correo: DUENO }, { aviso: 'Hoy hay mantenimiento' }, { aviso: '' }), { aviso: 'Hoy hay mantenimiento' }));
+prueba('otra persona: error', () => { let m = ''; try { adminUpdateAppConfig({ correo: 'otra@ejemplo.com' }, { aviso: 'x' }, {}); } catch (e) { m = e.message; } igual(m, 'No eres el dueño.'); });
+prueba('un campo fuera de la lista blanca', () => { let m = ''; const c = { aviso: '' }; try { adminUpdateAppConfig({ correo: DUENO }, { esAdmin: true }, c); } catch (e) { m = e.message; } igual(m, 'Campo no permitido: esAdmin'); igual(c, { aviso: '' }); });
+--- solución
+const DUENO = 'dueno@ejemplo.com';
+const PERMITIDOS = ['aviso', 'versionMinima'];
+
+function adminUpdateAppConfig(pase, cambios, config) {
+  if (pase?.correo !== DUENO) throw new Error('No eres el dueño.');
+  for (const campo of Object.keys(cambios)) {
+    if (!PERMITIDOS.includes(campo)) throw new Error(`Campo no permitido: ${campo}`);
+  }
+  Object.assign(config, cambios);
+  return config;
+}
+```
+
 ```practica
 vf :: En el panel de Copiloto, revisar el correo en la pantalla de entrar es suficiente para proteger los datos
 vf :: El pase (token) que manda Firebase está firmado y no se puede cambiar desde el navegador sin que se note
@@ -610,6 +875,32 @@ Ahora junta todo. Así viaja un cambio en cada panel, de punta a punta:
 > 🌎 **En la vida real:** los dos primeros son como mandar un artículo a un periódico (lo escribes, la redacción comprueba que eres tú, se imprime y se reparte). El tercero es como pedirle al banco que cambie algo de tu cuenta (te identificas, el cajero revisa y el cambio aparece en la app de todos los que usan esa cuenta).
 
 > ✋ **Pausa:** antes de seguir, intenta contar en voz alta uno de los tres viajes sin mirar las tablas.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El viaje de un cambio
+lenguaje: js
+pide: Completa `viaje(panel)`: devuelve la lista de pasos, en orden, desde que tocas Guardar hasta que se ve. Para `'mapa'`: `['panel', 'GitHub (commit)', 'GitHub Pages', 'la página']`. Para `'biblia'`: `['panel', 'GitHub (commit)', 'GitHub Actions arma el sitio', 'GitHub Pages', 'la página']`. Para `'copiloto'`: `['panel', 'función del servidor', 'Firestore', 'la app']`.
+--- código
+function viaje(panel) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el mapa', () => igual(viaje('mapa'), ['panel', 'GitHub (commit)', 'GitHub Pages', 'la página']));
+prueba('¿Qué dice la Biblia?', () => igual(viaje('biblia'), ['panel', 'GitHub (commit)', 'GitHub Actions arma el sitio', 'GitHub Pages', 'la página']));
+prueba('Copiloto', () => igual(viaje('copiloto'), ['panel', 'función del servidor', 'Firestore', 'la app']));
+--- solución
+const VIAJES = {
+  mapa: ['panel', 'GitHub (commit)', 'GitHub Pages', 'la página'],
+  biblia: ['panel', 'GitHub (commit)', 'GitHub Actions arma el sitio', 'GitHub Pages', 'la página'],
+  copiloto: ['panel', 'función del servidor', 'Firestore', 'la app'],
+};
+
+function viaje(panel) {
+  return VIAJES[panel];
+}
+```
 
 ```practica
 vf :: Corregir el texto de una parte desde el panel de este mapa no cambia nada en Firebase
@@ -700,6 +991,52 @@ Si el sitio está en GitHub Pages, se publica solo. Avísale a la persona: "Publ
 
 Entonces el camino A no alcanza. Usa el camino B: cuentas de Firebase, **funciones del servidor que revisan cada pedido** (como `assertOwner`), reglas que cierran la base de datos (`if false`) y un registro de lo que se hace. Es lo que hace Copiloto.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu propio panel de precios (sin internet)
+lenguaje: html
+pide: Haz el panel de un taller: un `form` con un `input` `#precio` (número) y un botón. Al enviar (`submit`, con `preventDefault`), **revisa** que el precio sea un número mayor que 0: si no, escribe `Precio inválido` en `#aviso` y no guarda; si sí, lo guarda en `#vitrina` como `Lavado: R$ 45` y escribe `Guardado` en `#aviso`.
+--- código
+<form>
+  <input id="precio" type="number">
+  <button>Guardar</button>
+</form>
+<p id="aviso"></p>
+<p id="vitrina">Lavado: R$ 40</p>
+
+<script>
+  // tu código aquí
+</script>
+--- pruebas
+const enviar = (v) => { $('#precio').value = v; $('form').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })); };
+prueba('guardar un precio', () => { enviar('45'); igual([$('#vitrina').textContent, $('#aviso').textContent], ['Lavado: R$ 45', 'Guardado']); });
+prueba('un precio negativo no se guarda', () => { enviar('-3'); igual([$('#vitrina').textContent, $('#aviso').textContent], ['Lavado: R$ 45', 'Precio inválido']); });
+prueba('vacío no se guarda', () => { enviar(''); igual($('#aviso').textContent, 'Precio inválido'); });
+--- solución
+<form>
+  <input id="precio" type="number">
+  <button>Guardar</button>
+</form>
+<p id="aviso"></p>
+<p id="vitrina">Lavado: R$ 40</p>
+
+<script>
+  document.querySelector('form').addEventListener('submit', (evento) => {
+    evento.preventDefault();
+    const texto = document.querySelector('#precio').value;
+    const precio = Number(texto);
+    const aviso = document.querySelector('#aviso');
+    if (texto === '' || !(precio > 0)) {
+      aviso.textContent = 'Precio inválido';
+      return;
+    }
+    document.querySelector('#vitrina').textContent = `Lavado: R$ ${precio}`;
+    aviso.textContent = 'Guardado';
+  });
+</script>
+```
+
 ```practica
 vf :: Para un panel de precios públicos de un taller, el camino de GitHub con una llave limitada es suficiente
 vf :: Si la revisión encuentra un problema, igual conviene guardar y corregirlo después
@@ -723,6 +1060,31 @@ escribe :: Escribe, en orden y con tus palabras, los pasos para hacer un panel q
 > 🌎 **En la vida real:** son los mismos errores de la seguridad de una casa: dejar la llave debajo del felpudo (la llave en el código), confiar en que nadie conoce tu calle (esconder la dirección), o darle al plomero la llave de todo el edificio (una llave con acceso a todo).
 
 > 🔁 **Repaso:** tres preguntas (dónde viven los datos, cómo sabe que eres tú, quién revisa) → dos caminos (GitHub con llave, o Firebase con funciones) → la llave limitada y guardada en el aparato → leer y guardar con huella → revisar antes de guardar → dejar que se publique solo → probarlo como atacante.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los errores más peligrosos
+lenguaje: js
+pide: Completa `revisarPanel(codigo)`: busca los errores de la tabla en el código de un panel y devuelve la lista: `'llave escrita en el código'` (si aparece `ghp_` o `github_pat_`), `'innerHTML con texto ajeno'` (si aparece `innerHTML`), y `'guarda sin revisar el sha'` (si llama a `guardar(` y no aparece la palabra `sha`).
+--- código
+function revisarPanel(codigo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un panel bien hecho', () => igual(revisarPanel("const llave = localStorage.getItem('llave');\nguardar(ruta, texto, sha);\nel.textContent = t;"), []));
+prueba('la llave en el código', () => igual(revisarPanel("const llave = 'github_pat_ABC123';"), ['llave escrita en el código']));
+prueba('innerHTML', () => igual(revisarPanel('vista.innerHTML = textoDelEstudio;'), ['innerHTML con texto ajeno']));
+prueba('sin sha', () => igual(revisarPanel('guardar(ruta, texto);'), ['guarda sin revisar el sha']));
+--- solución
+function revisarPanel(codigo) {
+  const problemas = [];
+  if (/ghp_|github_pat_/.test(codigo)) problemas.push('llave escrita en el código');
+  if (codigo.includes('innerHTML')) problemas.push('innerHTML con texto ajeno');
+  if (codigo.includes('guardar(') && !codigo.includes('sha')) problemas.push('guarda sin revisar el sha');
+  return problemas;
+}
+```
 
 ```practica
 vf :: Esconder la dirección del panel es una buena forma de protegerlo

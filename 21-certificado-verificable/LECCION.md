@@ -53,6 +53,28 @@ localStorage.setItem('mapa-entendido', JSON.stringify({ '01:CLASE-GUIADA.md:1': 
 
 > 🌎 **Otro ejemplo:** Es como la portería de un edificio: tú dices "vengo al 502", pero el portero llama al 502 antes de abrir.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El navegador miente
+lenguaje: js
+pide: Lo que está en `localStorage` lo puede cambiar cualquiera desde la consola. Completa `emitirCertificado(pedido, servidor)`: **no confíes** en `pedido.bombillos` (lo manda el navegador); usa solo `servidor.aprobadas(uid)`, que el servidor guardó. Emite (`{ ok: true }`) solo si las aprobadas llegan a `servidor.total`; si no, `{ ok: false, faltan: N }`.
+--- código
+function emitirCertificado(pedido, servidor) {
+  // tu código aquí
+}
+--- pruebas
+const servidor = { total: 10, aprobadas: (uid) => (uid === 'ana' ? 10 : 3) };
+prueba('Ana terminó', () => igual(emitirCertificado({ uid: 'ana', bombillos: 10 }, servidor), { ok: true }));
+prueba('Beto dice 10 en su navegador, pero tiene 3', () => igual(emitirCertificado({ uid: 'beto', bombillos: 10 }, servidor), { ok: false, faltan: 7 }));
+--- solución
+function emitirCertificado(pedido, servidor) {
+  const aprobadas = servidor.aprobadas(pedido.uid);
+  if (aprobadas >= servidor.total) return { ok: true };
+  return { ok: false, faltan: servidor.total - aprobadas };
+}
+```
+
 ```practica
 vf :: Lo que se guarda en localStorage lo puede cambiar la persona que usa el navegador
 vf :: Si el botón está deshabilitado en la pantalla, nadie puede hacer esa acción
@@ -115,6 +137,41 @@ Decidimos aceptar **solo correos de Gmail** y **no pedir teléfono**. Menos dato
 
 > ⚠️ **Ojo:** tampoco pedimos **CPF** para confirmar el nombre. Este sitio no tiene cómo confirmarlo con el gobierno, y guardarlo sería un riesgo enorme (es un dato protegido por la LGPD). Por eso el nombre depende de que la persona lo escriba bien, y la pantalla del certificado lo avisa claro.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Sin enumeración de cuentas
+lenguaje: js
+pide: "Olvidé mi contraseña" **nunca** dice si el correo existe: así nadie puede descubrir quién tiene cuenta. Completa `respuestaOlvide(correo, cuentas)`: siempre devuelve el mismo texto, exista o no. Y `correoValido(correo)`: tiene que ser un correo de Gmail (`@gmail.com`), sin espacios.
+--- código
+const MENSAJE = 'Si ese correo tiene cuenta, te mandamos un enlace.';
+
+function respuestaOlvide(correo, cuentas) {
+  // tu código aquí
+}
+
+function correoValido(correo) {
+  // tu código aquí
+}
+--- pruebas
+const cuentas = ['ana@gmail.com'];
+prueba('existe', () => igual(respuestaOlvide('ana@gmail.com', cuentas), MENSAJE));
+prueba('no existe: la misma respuesta', () => igual(respuestaOlvide('nadie@gmail.com', cuentas), MENSAJE));
+prueba('gmail válido', () => igual(correoValido('ana.silva@gmail.com'), true));
+prueba('otro dominio', () => igual(correoValido('ana@yahoo.com'), false));
+prueba('con espacios', () => igual(correoValido('ana @gmail.com'), false));
+--- solución
+const MENSAJE = 'Si ese correo tiene cuenta, te mandamos un enlace.';
+
+function respuestaOlvide(correo, cuentas) {
+  return MENSAJE;
+}
+
+function correoValido(correo) {
+  return /^[^\s@]+@gmail\.com$/.test(correo);
+}
+```
+
 ```practica
 vf :: Este sitio guarda las contraseñas en su propia base de datos
 vf :: Si la cuenta no tiene el correo verificado, sus bombillos no cuentan en la nube
@@ -167,6 +224,35 @@ await F.setDoc(ref, { n: actual.n + 1, ultimo: ahora, ultimaParte: id, partes: {
 > 🌎 **En la vida real:** es como escribir una dirección "Calle 5.2": el cartero puede pensar que es la calle 5, casa 2.
 
 > 🌎 **Otro ejemplo:** Es como un nombre de archivo con barra `/`: la computadora cree que es una carpeta.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Ids sin puntos
+lenguaje: js
+pide: `updateDoc` con `'partes.06:CLASE-GUIADA.md:3'` se rompe, porque el **punto** separa campos. Completa `idSeguro(id)`: cambia cada `.` por `·` (punto del medio) y cada `/` por `|`. Y `ponerParte(progreso, id)`: devuelve un objeto **nuevo** con `partes[idSeguro(id)] = true`.
+--- código
+function idSeguro(id) {
+  // tu código aquí
+}
+
+function ponerParte(progreso, id) {
+  // tu código aquí
+}
+--- pruebas
+prueba('sin puntos', () => igual(idSeguro('06:CLASE-GUIADA.md:3'), '06:CLASE-GUIADA·md:3'));
+prueba('sin barras', () => igual(idSeguro('a/b.md'), 'a|b·md'));
+prueba('agrega la parte', () => igual(ponerParte({ partes: {} }, '06:LECCION.md:1'), { partes: { '06:LECCION·md:1': true } }));
+prueba('no cambia el original', () => { const p = { partes: {} }; ponerParte(p, 'x.md'); igual(p, { partes: {} }); });
+--- solución
+function idSeguro(id) {
+  return id.replaceAll('.', '·').replaceAll('/', '|');
+}
+
+function ponerParte(progreso, id) {
+  return { ...progreso, partes: { ...progreso.partes, [idSeguro(id)]: true } };
+}
+```
 
 ```practica
 vf :: El navegador manda su propia hora para cada bombillo
@@ -234,6 +320,36 @@ El certificado se crea con dos documentos **a la vez** (un *lote*, `writeBatch`)
 
 > 🌎 **Otro ejemplo:** Es como un apretón de manos: si uno no extiende la mano, no hay apretón.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las reglas, como función
+lenguaje: js
+pide: Escribe la regla de `update` del progreso en JavaScript. `permitir(pedido)` recibe `{ auth, uid, antes, despues, ahora }`. Se permite solo si: hay sesión con correo verificado (`auth.verificado`), es el dueño (`auth.uid === uid`), solo cambió **una** parte nueva (una clave más en `partes` y ninguna otra cambiada), y pasaron al menos 60 segundos desde `antes.ultima` (`ahora - antes.ultima >= 60`).
+--- código
+function permitir(pedido) {
+  // tu código aquí
+}
+--- pruebas
+const base = { auth: { uid: 'ana', verificado: true }, uid: 'ana', antes: { partes: { a: true }, ultima: 0 }, despues: { partes: { a: true, b: true } }, ahora: 100 };
+prueba('bien', () => igual(permitir(base), true));
+prueba('sin verificar', () => igual(permitir({ ...base, auth: { uid: 'ana', verificado: false } }), false));
+prueba('otra persona', () => igual(permitir({ ...base, uid: 'beto' }), false));
+prueba('dos partes de golpe', () => igual(permitir({ ...base, despues: { partes: { a: true, b: true, c: true } } }), false));
+prueba('muy rápido', () => igual(permitir({ ...base, ahora: 30 }), false));
+prueba('borrar una parte', () => igual(permitir({ ...base, despues: { partes: { b: true } } }), false));
+--- solución
+function permitir(pedido) {
+  const { auth, uid, antes, despues, ahora } = pedido;
+  if (!auth || !auth.verificado || auth.uid !== uid) return false;
+  const viejas = Object.keys(antes.partes);
+  const nuevas = Object.keys(despues.partes);
+  const sigueTodo = viejas.every((k) => despues.partes[k] === antes.partes[k]);
+  if (!sigueTodo || nuevas.length !== viejas.length + 1) return false;
+  return ahora - antes.ultima >= 60;
+}
+```
+
 ```practica
 vf :: En las reglas, resource es el documento como quedaría después del cambio
 vf :: La espera de 60 segundos hace imposible hacer trampa
@@ -287,6 +403,49 @@ test('el primer bombillo, bien hecho, se acepta', async () => {
 
 > 🌎 **Otro ejemplo:** Es como un filtro de agua: tiene que dejar pasar el agua y atrapar la tierra; si no deja pasar nada, no sirve.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Pruebas como atacante
+lenguaje: js
+pide: Con `assertSucceeds` y `assertFails` de juguete, escribe al menos 3 pruebas para `puede(quien, accion, dueno)`: el dueño lee lo suyo (sucede), otro lee lo del dueño (falla), y sin sesión (`quien` es `null`) no lee nada (falla). Las revisiones abren trampas en la regla y tus pruebas tienen que notarlo.
+--- código
+let TRAMPA = '';
+function puede(quien, accion, dueno) {
+  if (quien === null) return TRAMPA === 'sinSesion';
+  if (TRAMPA === 'cualquiera') return true;
+  return quien === dueno;
+}
+
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const assertSucceeds = (r) => { if (!r) throw new Error('se esperaba que se permitiera'); };
+const assertFails = (r) => { if (r) throw new Error('se esperaba que se rechazara'); };
+
+// ✍️ Tus pruebas aquí:
+--- pruebas
+const correrTodas = () => misPruebas.filter((p) => { try { p.fn(); return false; } catch { return true; } }).map((p) => p.nombre);
+prueba('pasan con la regla correcta', () => { const f = correrTodas(); ok(misPruebas.length >= 3 && f.length === 0, f.length ? 'fallan: ' + f.join(' | ') : 'escribe al menos 3 pruebas'); });
+prueba('notan la trampa "cualquiera lee"', () => { TRAMPA = 'cualquiera'; const f = correrTodas(); TRAMPA = ''; ok(f.length > 0, 'falta la prueba de que otro no puede leer'); });
+prueba('notan la trampa "sin sesión"', () => { TRAMPA = 'sinSesion'; const f = correrTodas(); TRAMPA = ''; ok(f.length > 0, 'falta la prueba sin sesión'); });
+--- solución
+let TRAMPA = '';
+function puede(quien, accion, dueno) {
+  if (quien === null) return TRAMPA === 'sinSesion';
+  if (TRAMPA === 'cualquiera') return true;
+  return quien === dueno;
+}
+
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const assertSucceeds = (r) => { if (!r) throw new Error('se esperaba que se permitiera'); };
+const assertFails = (r) => { if (r) throw new Error('se esperaba que se rechazara'); };
+
+it('Ana lee lo suyo', () => assertSucceeds(puede('ana', 'leer', 'ana')));
+it('trampa: Beto lee lo de Ana', () => assertFails(puede('beto', 'leer', 'ana')));
+it('trampa: sin sesión', () => assertFails(puede(null, 'leer', 'ana')));
+```
+
 ```practica
 vf :: El emulador prueba las reglas contra la base de datos real
 vf :: Unas reglas que rechazan todo también están mal
@@ -334,6 +493,35 @@ Las reglas dejan **leer un** certificado si sabes su código (`allow get: if tru
 
 > 🌎 **Otro ejemplo:** Es como el sello de "revisado" de un mecánico: dice que lo revisó, no que el carro nunca se va a dañar.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un código que no se puede adivinar
+lenguaje: js
+pide: El código del certificado es **al azar** (no sale del nombre), con 12 letras hexadecimales y un prefijo por curso. Completa `crearCodigo(prefijo, azar)`: `azar` es una lista de 6 números de 0 a 255 (como da `crypto.getRandomValues`); cada uno se escribe con 2 letras hexadecimales en mayúsculas. Formato: `PREFIJO-XXXX-XXXX-XXXX`. Y `combinaciones()`: cuántos códigos distintos hay (16 elevado a 12).
+--- código
+function crearCodigo(prefijo, azar) {
+  // tu código aquí
+}
+
+function combinaciones() {
+  // tu código aquí
+}
+--- pruebas
+prueba('el formato', () => igual(crearCodigo('SE', [0, 255, 16, 1, 171, 205]), 'SE-00FF-1001-ABCD'));
+prueba('281 billones', () => igual(combinaciones(), 281474976710656));
+prueba('con azar de verdad, 12 letras', () => { const c = crearCodigo('PR', [...crypto.getRandomValues(new Uint8Array(6))]); ok(/^PR-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$/.test(c), c); });
+--- solución
+function crearCodigo(prefijo, azar) {
+  const hex = azar.map((n) => n.toString(16).padStart(2, '0').toUpperCase()).join('');
+  return `${prefijo}-${hex.slice(0, 4)}-${hex.slice(4, 8)}-${hex.slice(8, 12)}`;
+}
+
+function combinaciones() {
+  return 16 ** 12;
+}
+```
+
 ```practica
 vf :: El código del certificado se calcula con el nombre y la fecha
 vf :: Cualquiera puede listar todos los certificados emitidos
@@ -364,6 +552,31 @@ La configuración de Firebase en `web/nube.js` (`apiKey`, `projectId`…) **no e
 > 🌎 **En la vida real:** la dirección de tu casa no es secreta (te llegan cartas); la llave sí.
 
 > 🌎 **Otro ejemplo:** Es como el número de cuenta del banco: lo das para que te paguen; la clave del cajero, jamás.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Se puede publicar o es secreto?
+lenguaje: js
+pide: Mostrar las reglas no las debilita (corren en el servidor), y la `apiKey` web de Firebase es pública. Lo que **nunca** va al repositorio: la clave de una cuenta de servicio, un `.env` o las respuestas. Completa `puedeIrAlRepo(archivo, contenido)`.
+--- código
+function puedeIrAlRepo(archivo, contenido) {
+  // tu código aquí
+}
+--- pruebas
+prueba('las reglas', () => igual(puedeIrAlRepo('firestore.rules', "rules_version = '2';"), true));
+prueba('la configuración web', () => igual(puedeIrAlRepo('web/firebase.js', "apiKey: 'AIzaSy…', projectId: 'mapa'"), true));
+prueba('una cuenta de servicio', () => igual(puedeIrAlRepo('clave.json', '{ "type": "service_account", "private_key": "…" }'), false));
+prueba('un .env', () => igual(puedeIrAlRepo('.env', 'TOKEN=abc'), false));
+prueba('las respuestas', () => igual(puedeIrAlRepo('firebase/funciones/respuestas.json', '{}'), false));
+--- solución
+function puedeIrAlRepo(archivo, contenido) {
+  const nombre = archivo.split('/').pop();
+  if (nombre === '.env' || nombre === 'respuestas.json') return false;
+  if (contenido.includes('"private_key"')) return false;
+  return true;
+}
+```
 
 ```practica
 vf :: La apiKey de Firebase de una app web es un secreto que hay que esconder
@@ -481,6 +694,27 @@ Ser honesto con los límites también es parte de la seguridad:
 > 🌎 **En la vida real:** es como cuando el profesor arma un examen nuevo: escribe preguntas y respuestas juntas, y después separa la hoja de los alumnos de la plantilla.
 
 > 🌎 **Otro ejemplo:** Es como cargar un producto nuevo en una tienda online: le pones el precio en el sistema (privado) y la foto en la vitrina (pública).
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Corregir en el servidor sin dar la respuesta
+lenguaje: js
+pide: Las respuestas viven solo en el servidor. Completa `corregir(enviadas, correctas)`: revisa el bloque **entero**. Si todo está bien → `{ aprobada: true }`. Si no → `{ aprobada: false, mal: N }` con cuántas fallaron, **sin** decir cuáles ni cuál era la correcta. Las `null` (preguntas para escribir) no se corrigen.
+--- código
+function corregir(enviadas, correctas) {
+  // tu código aquí
+}
+--- pruebas
+prueba('todo bien', () => igual(corregir([1, 'V', 'texto'], [1, 'V', null]), { aprobada: true }));
+prueba('una mal', () => igual(corregir([0, 'V', 'texto'], [1, 'V', null]), { aprobada: false, mal: 1 }));
+prueba('no dice cuál era', () => ok(!('correctas' in corregir([0], [1])) && !JSON.stringify(corregir([0], [1])).includes('"1"'), 'no devuelvas las respuestas'));
+--- solución
+function corregir(enviadas, correctas) {
+  const mal = correctas.filter((c, i) => c !== null && enviadas[i] !== c).length;
+  return mal === 0 ? { aprobada: true } : { aprobada: false, mal };
+}
+```
 
 ```practica
 vf :: Después de este cambio, las respuestas de las prácticas ya no están en los .md que se publican en GitHub

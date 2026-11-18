@@ -50,6 +50,29 @@ En tu vida de programador, "subir" puede querer decir cinco cosas distintas:
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Dónde queda cada cosa?
+lenguaje: js
+pide: Completa `dondeQueda(accion)`: `'compilar'` → `'un archivo en tu Mac'`; `'commit'` → `'el historial de tu Mac'`; `'push'` → `'GitHub'`; `'deploy'` → `'donde la gente lo usa'`.
+--- código
+function dondeQueda(accion) {
+  // tu código aquí
+}
+--- pruebas
+prueba('compilar', () => igual(dondeQueda('compilar'), 'un archivo en tu Mac'));
+prueba('commit', () => igual(dondeQueda('commit'), 'el historial de tu Mac'));
+prueba('push', () => igual(dondeQueda('push'), 'GitHub'));
+prueba('deploy', () => igual(dondeQueda('deploy'), 'donde la gente lo usa'));
+--- solución
+const DONDE = { compilar: 'un archivo en tu Mac', commit: 'el historial de tu Mac', push: 'GitHub', deploy: 'donde la gente lo usa' };
+
+function dondeQueda(accion) {
+  return DONDE[accion];
+}
+```
+
 ```practica
 escribe :: Explica con tus palabras la diferencia entre compilar, commit, push y deploy. :: Compilar traduce el código a un archivo instalable; commit guarda una foto del proyecto en el historial de mi Mac; push sube esas fotos a GitHub; deploy entrega el resultado donde la gente lo usa (teléfono, Google Play, Firebase o Pages).
 elige :: ¿Dónde queda un commit? :: En GitHub :: En el historial de tu Mac :: En Google Play
@@ -122,6 +145,33 @@ El nombre del commit dice **qué cambió y por qué** (Tema 06, parte 5), no "ca
 `git status` siempre lo dice. Si muestra **`nothing to commit, working tree clean`** y **`Your branch is up to date with 'origin/main'`**, no hay nada sin guardar ni sin subir.
 
 > 💡 **Idea:** con tu página de estudios bíblicos esto pasa mucho: si guardaste algo desde el **panel**, el panel lo subió directo a GitHub. Si después quieres hacer push desde la Mac, primero tienes que **bajar** lo del panel. Es lo que hicimos con el `git pull`.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer git status antes de subir
+lenguaje: js
+pide: Completa `queHago(salida)` leyendo la salida de `git status`: si dice `not a git repository` → `'entrar a la carpeta del proyecto'`; si dice `rejected` → `'git pull --rebase y después git push'`; si dice `working tree clean` y `up to date` → `'nada que subir'`; si dice `Your branch is ahead` → `'git push'`; si dice `Changes not staged` o `Untracked` → `'git add, git commit y git push'`.
+--- código
+function queHago(salida) {
+  // tu código aquí
+}
+--- pruebas
+prueba('fuera del proyecto', () => igual(queHago('fatal: not a git repository'), 'entrar a la carpeta del proyecto'));
+prueba('rechazado', () => igual(queHago('! [rejected] main -> main (fetch first)'), 'git pull --rebase y después git push'));
+prueba('limpio', () => igual(queHago("Your branch is up to date with 'origin/main'.\nnothing to commit, working tree clean"), 'nada que subir'));
+prueba('commits sin subir', () => igual(queHago("Your branch is ahead of 'origin/main' by 1 commit.\nnothing to commit, working tree clean"), 'git push'));
+prueba('cambios sin guardar', () => igual(queHago('Changes not staged for commit:\n  modified: index.html'), 'git add, git commit y git push'));
+--- solución
+function queHago(salida) {
+  if (salida.includes('not a git repository')) return 'entrar a la carpeta del proyecto';
+  if (salida.includes('rejected')) return 'git pull --rebase y después git push';
+  if (salida.includes('Changes not staged') || salida.includes('Untracked')) return 'git add, git commit y git push';
+  if (salida.includes('Your branch is ahead')) return 'git push';
+  if (salida.includes('working tree clean') && salida.includes('up to date')) return 'nada que subir';
+  return 'leer la salida completa';
+}
+```
 
 ```practica
 elige :: ¿Cuál es el orden de los comandos para subir código? :: push, commit, add :: status, add, commit, push :: commit, push, add
@@ -236,6 +286,37 @@ Si publicaste y ves la versión vieja, no es que falló: GitHub Pages deja que e
 
 > 🌎 **Otro ejemplo:** Como una foto vieja en la pantalla del teléfono que no se actualiza hasta que deslizas para refrescar.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La dirección de tu página en GitHub Pages
+lenguaje: js
+pide: Completa `direccionPages(usuario, repo)`: `https://usuario.github.io/repo/` (el usuario **en minúsculas**). Si el repositorio se llama `usuario.github.io`, la dirección es solo `https://usuario.github.io/`. Y `sePuedePublicar(repo)`: con la cuenta gratis, solo si `repo.publico` es `true`.
+--- código
+function direccionPages(usuario, repo) {
+  // tu código aquí
+}
+
+function sePuedePublicar(repo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un repositorio común', () => igual(direccionPages('DelvinSmart', 'estudios'), 'https://delvinsmart.github.io/estudios/'));
+prueba('el repositorio especial', () => igual(direccionPages('Ana', 'ana.github.io'), 'https://ana.github.io/'));
+prueba('privado: no', () => igual(sePuedePublicar({ publico: false }), false));
+prueba('público: sí', () => igual(sePuedePublicar({ publico: true }), true));
+--- solución
+function direccionPages(usuario, repo) {
+  const u = usuario.toLowerCase();
+  if (repo.toLowerCase() === `${u}.github.io`) return `https://${u}.github.io/`;
+  return `https://${u}.github.io/${repo}/`;
+}
+
+function sePuedePublicar(repo) {
+  return repo.publico === true;
+}
+```
+
 ```practica
 elige :: Al tocar Publicar en el panel de estudios, ¿a dónde va el cambio primero? :: Directo a la página :: A GitHub, con tu llave; después Actions lo publica en Pages :: A Firebase
 elige :: ¿Qué diferencia hay entre cómo se publican la página de estudios y este mapa? :: Ninguna :: La de estudios pasa por GitHub Actions (arma el sitio y los PDF); el mapa se sirve tal cual desde `main` :: El mapa usa Firebase
@@ -269,6 +350,30 @@ elige :: Cambiaste los textos de un estudio. ¿Desde dónde lo subes? :: Solo de
 > 🌎 **Otro ejemplo:** Como cambiar el precio en el sistema central de una cadena de tiendas: todas las cajas lo ven al momento, sin que cada cliente haga nada.
 
 > 💡 **Idea:** si `firebase` no está instalado en la terminal, se usa `npx firebase-tools deploy ...` (como en el Tema 08): `npx` lo corre sin instalarlo.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: firebase deploy --only
+lenguaje: js
+pide: Completa `comandoDeploy(cambiados)`: según los archivos cambiados, arma `firebase deploy --only X` con solo lo que tocaste, en este orden: `firestore:rules` (si cambió `firestore.rules`), `functions` (si cambió algo en `functions/`), `hosting` (si cambió algo en `public/`). Si no hay nada, `null`.
+--- código
+function comandoDeploy(cambiados) {
+  // tu código aquí
+}
+--- pruebas
+prueba('solo las reglas', () => igual(comandoDeploy(['firestore.rules']), 'firebase deploy --only firestore:rules'));
+prueba('reglas y funciones', () => igual(comandoDeploy(['functions/src/index.ts', 'firestore.rules']), 'firebase deploy --only firestore:rules,functions'));
+prueba('nada de Firebase', () => igual(comandoDeploy(['README.md']), null));
+--- solución
+function comandoDeploy(cambiados) {
+  const partes = [];
+  if (cambiados.includes('firestore.rules')) partes.push('firestore:rules');
+  if (cambiados.some((a) => a.startsWith('functions/'))) partes.push('functions');
+  if (cambiados.some((a) => a.startsWith('public/'))) partes.push('hosting');
+  return partes.length ? `firebase deploy --only ${partes.join(',')}` : null;
+}
+```
 
 ```practica
 elige :: Cambiaste una Cloud Function. ¿Hace falta subir una versión nueva a Google Play? :: Sí, siempre :: No: se publica con `firebase deploy --only functions` y llega a todos al instante :: Solo si es lunes
@@ -312,6 +417,37 @@ ls -lh android/app/build/outputs/apk/release/app-release.apk
 ```
 
 `ls -lh` muestra el archivo con su tamaño y su fecha. Si la hora es **anterior** a tu último cambio, vas a instalar un APK **viejo** y probar algo que no es lo que arreglaste. (Es el Tema 07: verificar antes de suponer.)
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿APK o AAB? ¿Es nuevo?
+lenguaje: js
+pide: Completa `paraQue(archivo)`: `.apk` → `'instalar en el teléfono'`; `.aab` → `'subir a Google Play'`. Y `esViejo(horaDelArchivo, horaDelCambio)`: `true` si el archivo se generó **antes** del último cambio (las horas son textos `'HH:MM'` del mismo día).
+--- código
+function paraQue(archivo) {
+  // tu código aquí
+}
+
+function esViejo(horaDelArchivo, horaDelCambio) {
+  // tu código aquí
+}
+--- pruebas
+prueba('apk', () => igual(paraQue('app-release.apk'), 'instalar en el teléfono'));
+prueba('aab', () => igual(paraQue('app-release.aab'), 'subir a Google Play'));
+prueba('generado antes del cambio: viejo', () => igual(esViejo('09:15', '10:02'), true));
+prueba('generado después: nuevo', () => igual(esViejo('10:30', '10:02'), false));
+--- solución
+function paraQue(archivo) {
+  if (archivo.endsWith('.apk')) return 'instalar en el teléfono';
+  if (archivo.endsWith('.aab')) return 'subir a Google Play';
+  return null;
+}
+
+function esViejo(horaDelArchivo, horaDelCambio) {
+  return horaDelArchivo < horaDelCambio;
+}
+```
 
 ```practica
 elige :: ¿Qué archivo instalas en tu Samsung para probar? :: El AAB :: El APK :: Cualquiera
@@ -402,6 +538,33 @@ Te dice si el APK y el AAB llevan **tu** llave (✅) o no (❌). **Pásalo siemp
 Probablemente faltaba `gradle.properties` (o sus líneas), y el proyecto firmó **en silencio** con la llave de debug. Antes de subir debiste correr `./scripts/verificar-firma.sh`: te habría mostrado la ❌.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Está lista la firma?
+lenguaje: js
+pide: Para firmar la app hacen falta 4 datos en `gradle.properties` (que vive **fuera** del proyecto): `STORE_FILE`, `STORE_PASSWORD`, `KEY_ALIAS` y `KEY_PASSWORD`. Completa `revisarFirma(propiedades)`: devuelve la lista de problemas: `'falta X'` por cada dato vacío o ausente, y `'la llave está dentro del proyecto'` si `STORE_FILE` empieza con la carpeta del proyecto (`'/proyecto/'`).
+--- código
+const PIDE = ['STORE_FILE', 'STORE_PASSWORD', 'KEY_ALIAS', 'KEY_PASSWORD'];
+
+function revisarFirma(propiedades) {
+  // tu código aquí
+}
+--- pruebas
+const bien = { STORE_FILE: '/Users/ana/llaves/app.keystore', STORE_PASSWORD: 'x', KEY_ALIAS: 'app', KEY_PASSWORD: 'y' };
+prueba('todo bien', () => igual(revisarFirma(bien), []));
+prueba('falta una contraseña', () => igual(revisarFirma({ ...bien, KEY_PASSWORD: '' }), ['falta KEY_PASSWORD']));
+prueba('la llave adentro del proyecto', () => igual(revisarFirma({ ...bien, STORE_FILE: '/proyecto/android/app.keystore' }), ['la llave está dentro del proyecto']));
+--- solución
+const PIDE = ['STORE_FILE', 'STORE_PASSWORD', 'KEY_ALIAS', 'KEY_PASSWORD'];
+
+function revisarFirma(propiedades) {
+  const problemas = PIDE.filter((k) => !propiedades[k]).map((k) => `falta ${k}`);
+  if ((propiedades.STORE_FILE ?? '').startsWith('/proyecto/')) problemas.push('la llave está dentro del proyecto');
+  return problemas;
+}
+```
 
 ```practica
 escribe :: ¿Qué es la firma de una app y por qué es tan importante? :: Es la identidad de la app, hecha con una llave (keystore) y sus contraseñas; Google solo acepta actualizaciones firmadas con la misma llave, y si se pierde no se puede actualizar nunca más.
@@ -495,6 +658,46 @@ Cada vez que apagas el Wi-Fi o reinicias el Samsung, **el puerto cambia**: mira 
 
 > 🌎 **Otro ejemplo:** Como emparejar unos auriculares Bluetooth: la primera vez con código, y después se conectan solos.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer adb devices
+lenguaje: js
+pide: `adb devices` muestra una línea por aparato: el id y su estado (`device`, `unauthorized` u `offline`). Completa `aparatosListos(salida)`: los ids en estado `device`. Y `comandoInstalar(salida, apk)`: si hay **uno** listo, `adb install -r APK`; si hay varios, `adb -s ID install -r APK` con el primero; si no hay ninguno, `null`.
+--- código
+function aparatosListos(salida) {
+  // tu código aquí
+}
+
+function comandoInstalar(salida, apk) {
+  // tu código aquí
+}
+--- pruebas
+const uno = 'List of devices attached\nR58N12345\tdevice\n';
+const dos = 'List of devices attached\nR58N12345\tdevice\nemulator-5554\tdevice\nXYZ\tunauthorized\n';
+prueba('uno listo', () => igual(aparatosListos(uno), ['R58N12345']));
+prueba('el no autorizado no cuenta', () => igual(aparatosListos(dos), ['R58N12345', 'emulator-5554']));
+prueba('instalar con uno', () => igual(comandoInstalar(uno, 'app.apk'), 'adb install -r app.apk'));
+prueba('instalar con dos: elegir', () => igual(comandoInstalar(dos, 'app.apk'), 'adb -s R58N12345 install -r app.apk'));
+prueba('ninguno', () => igual(comandoInstalar('List of devices attached\n', 'app.apk'), null));
+--- solución
+function aparatosListos(salida) {
+  return salida
+    .split('\n')
+    .slice(1)
+    .map((l) => l.split('\t'))
+    .filter(([id, estado]) => id && estado === 'device')
+    .map(([id]) => id);
+}
+
+function comandoInstalar(salida, apk) {
+  const listos = aparatosListos(salida);
+  if (listos.length === 0) return null;
+  if (listos.length === 1) return `adb install -r ${apk}`;
+  return `adb -s ${listos[0]} install -r ${apk}`;
+}
+```
+
 ```practica
 elige :: ¿Qué hace `-r` en `adb install -r`? :: Borra la app :: Reinstala encima, conservando datos y sesión :: Reinicia el teléfono
 elige :: ¿Qué es `adb`? :: Un emulador :: La herramienta que habla con un teléfono Android desde la Mac :: Un tipo de archivo
@@ -557,6 +760,37 @@ La primera vez, el iPhone puede bloquear la app. Se arregla en **Ajustes → Gen
 
 > 💡 **Idea:** un error real de la guía de Copiloto: el comando de Wi-Fi estaba **mal escrito** (decía una letra suelta en vez de `./scripts/instalar-iphone.sh`), y por eso "a la IA le funcionaba y a ti no": pegabas otra cosa. Cuando algo funciona para uno y no para otro, compara **exactamente** qué corre cada uno (Tema 07).
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los 7 días del iPhone
+lenguaje: js
+pide: Con la cuenta gratis de Apple, la app instalada desde Xcode dura **7 días**. Completa `diasQueQuedan(instalada, hoy)` (fechas `'AAAA-MM-DD'`; nunca menos de 0) y `hayQueReinstalar(instalada, hoy)`.
+--- código
+function diasQueQuedan(instalada, hoy) {
+  // tu código aquí
+}
+
+function hayQueReinstalar(instalada, hoy) {
+  // tu código aquí
+}
+--- pruebas
+prueba('recién instalada', () => igual(diasQueQuedan('2026-11-18', '2026-11-18'), 7));
+prueba('hace 5 días', () => igual(diasQueQuedan('2026-11-13', '2026-11-18'), 2));
+prueba('hace 10 días: 0', () => igual(diasQueQuedan('2026-11-08', '2026-11-18'), 0));
+prueba('hay que reinstalar', () => igual(hayQueReinstalar('2026-11-11', '2026-11-18'), true));
+prueba('todavía no', () => igual(hayQueReinstalar('2026-11-12', '2026-11-18'), false));
+--- solución
+function diasQueQuedan(instalada, hoy) {
+  const pasaron = (Date.parse(hoy) - Date.parse(instalada)) / 86400000;
+  return Math.max(0, 7 - pasaron);
+}
+
+function hayQueReinstalar(instalada, hoy) {
+  return diasQueQuedan(instalada, hoy) === 0;
+}
+```
+
 ```practica
 elige :: ¿Qué comando instala en el iPhone por cable y por Wi-Fi? :: Dos distintos :: El mismo: `./scripts/instalar-iphone.sh` :: `adb install`
 elige :: La app del iPhone dice que ya no está disponible después de una semana. ¿Qué pasó? :: Se rompió :: Venció el permiso de 7 días de la cuenta gratis de Apple; se vuelve a correr el comando :: Apple la borró para siempre
@@ -582,6 +816,30 @@ El **modo Expo** es el del Tema 05: cada cambio que guardas aparece solo, en seg
 > 🌎 **En la vida real:** el simulador de manejo de la autoescuela: practicas rápido y sin riesgo, pero el examen de verdad es en la calle (tu teléfono real).
 
 > 🌎 **Otro ejemplo:** Como practicar penales en un videojuego de fútbol: rápido y sin riesgo, pero el partido de verdad es en la cancha.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Emulador o teléfono real?
+lenguaje: js
+pide: El emulador sirve para ver cambios rápido, pero **no reemplaza** al teléfono real. Completa `dondeProbar(paso)`: `'mirar un cambio de diseño'` → `'emulador'`; `'antes de publicar'`, `'la cámara'`, `'las notificaciones'` o `'el GPS'` → `'teléfono real'`.
+--- código
+const SOLO_REAL = ['antes de publicar', 'la cámara', 'las notificaciones', 'el GPS'];
+
+function dondeProbar(paso) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un cambio de diseño', () => igual(dondeProbar('mirar un cambio de diseño'), 'emulador'));
+prueba('antes de publicar', () => igual(dondeProbar('antes de publicar'), 'teléfono real'));
+prueba('la cámara', () => igual(dondeProbar('la cámara'), 'teléfono real'));
+--- solución
+const SOLO_REAL = ['antes de publicar', 'la cámara', 'las notificaciones', 'el GPS'];
+
+function dondeProbar(paso) {
+  return SOLO_REAL.includes(paso) ? 'teléfono real' : 'emulador';
+}
+```
 
 ```practica
 elige :: ¿Qué es un emulador? :: Un teléfono viejo :: Un teléfono de mentira dentro de la Mac :: Un tipo de APK
@@ -670,6 +928,27 @@ El cartón automático necesita leer la pantalla de las apps de viajes, y en And
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Subir la versión antes de cada AAB
+lenguaje: js
+pide: Google Play rechaza un AAB con un `versionCode` que ya usaste. Completa `siguienteVersion(actual, tipo)`: `actual` es `{ versionCode, version }` (version como `'1.4.2'`). Siempre suma 1 al `versionCode`; y sube la `version` según `tipo`: `'arreglo'` → la última cifra, `'novedad'` → la del medio (y la última a 0).
+--- código
+function siguienteVersion(actual, tipo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un arreglo', () => igual(siguienteVersion({ versionCode: 41, version: '1.4.2' }, 'arreglo'), { versionCode: 42, version: '1.4.3' }));
+prueba('una novedad', () => igual(siguienteVersion({ versionCode: 42, version: '1.4.3' }, 'novedad'), { versionCode: 43, version: '1.5.0' }));
+--- solución
+function siguienteVersion(actual, tipo) {
+  let [mayor, medio, menor] = actual.version.split('.').map(Number);
+  if (tipo === 'novedad') { medio++; menor = 0; } else { menor++; }
+  return { versionCode: actual.versionCode + 1, version: `${mayor}.${medio}.${menor}` };
+}
+```
+
 ```practica
 elige :: ¿Por qué hay que subir el `versionCode` antes de cada AAB? :: Por estética :: Porque Google rechaza un número de versión que ya se subió :: Porque lo pide GitHub
 elige :: ¿Qué número ve la gente en la tienda? :: `versionCode` :: `version` :: Ninguno
@@ -720,6 +999,31 @@ La app Copiloto tiene un script que hace el ciclo completo, en orden, y **se det
 
 > 🌎 **Otro ejemplo:** Como el botón de "un toque" de algunas cafeteras: muele, calienta, sirve y limpia, en orden, y se detiene si falta agua.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El script de publicar se detiene al primer error
+lenguaje: js
+pide: Un día de trabajo sigue un orden, y el script se **detiene** en el primer paso que falla. Completa `publicar(pasos)`: cada paso es `{ nombre, ok }`. Devuelve la lista de lo que hizo, como textos `'✓ nombre'`, y si uno falla, `'✗ nombre'` y no sigue.
+--- código
+function publicar(pasos) {
+  // tu código aquí
+}
+--- pruebas
+const p = (nombre, ok = true) => ({ nombre, ok });
+prueba('todo bien', () => igual(publicar([p('tipos'), p('pruebas'), p('AAB')]), ['✓ tipos', '✓ pruebas', '✓ AAB']));
+prueba('falla TypeScript: se detiene', () => igual(publicar([p('tipos', false), p('pruebas'), p('AAB')]), ['✗ tipos']));
+--- solución
+function publicar(pasos) {
+  const hecho = [];
+  for (const paso of pasos) {
+    hecho.push(`${paso.ok ? '✓' : '✗'} ${paso.nombre}`);
+    if (!paso.ok) break;
+  }
+  return hecho;
+}
+```
+
 ```practica
 escribe :: Di en orden los pasos de un día de trabajo, desde el cambio hasta Google Play. :: Cambiar el código, compilar el APK, instalarlo en el teléfono y probarlo, confirmar que está bien, commit y push, y cuando se lanza: subir versión, generar el AAB, verificar la firma y subirlo a Google Play; y firebase deploy si cambió el servidor.
 elige :: ¿Qué paso nunca se salta? :: El commit :: Probar en el teléfono y confirmar que está bien :: El deploy de Firebase
@@ -747,6 +1051,40 @@ vf :: `release.sh` genera el AAB e instala en el iPhone al mismo tiempo
 
 > 🌎 **Otro ejemplo:** Como cuando el teléfono no carga: antes de cambiarlo, pruebas otro enchufe, otro cable y si estaba bien conectado.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El error, en las últimas líneas
+lenguaje: js
+pide: Cuando la compilación falla, el error de verdad está **cerca del final**. Completa `causa(log)`: busca desde abajo la primera línea que contiene `error` o `FAILURE` (sin importar mayúsculas) y devuélvela sin espacios en las puntas; si no hay, `null`. Y `queHacer(causa)`: si incluye `signatures do not match` → `'desinstalar la app y volver a instalar'`; si incluye `database is locked` → `'cerrar la otra compilación'`; si no, `'leer el error completo'`.
+--- código
+function causa(log) {
+  // tu código aquí
+}
+
+function queHacer(causa) {
+  // tu código aquí
+}
+--- pruebas
+const log = 'Task :app:compileReleaseKotlin\nwarning: algo viejo\n> Task :app:packageRelease FAILED\nerror: database is locked\nBUILD FAILED in 2m';
+prueba('la causa', () => igual(causa(log), 'error: database is locked'));
+prueba('qué hacer', () => igual(queHacer(causa(log)), 'cerrar la otra compilación'));
+prueba('la firma', () => igual(queHacer('Failure [INSTALL_FAILED_UPDATE_INCOMPATIBLE: signatures do not match]'), 'desinstalar la app y volver a instalar'));
+prueba('sin error', () => igual(causa('BUILD SUCCESSFUL'), null));
+--- solución
+function causa(log) {
+  const lineas = log.split('\n').reverse();
+  const linea = lineas.find((l) => /error|FAILURE/i.test(l) && !/BUILD FAILED/.test(l));
+  return linea ? linea.trim() : null;
+}
+
+function queHacer(causa) {
+  if (causa.includes('signatures do not match')) return 'desinstalar la app y volver a instalar';
+  if (causa.includes('database is locked')) return 'cerrar la otra compilación';
+  return 'leer el error completo';
+}
+```
+
 ```practica
 elige :: El Samsung dice "signatures do not match". ¿Qué haces? :: Cambias la llave :: Desinstalas la app del Samsung y vuelves a correr el script :: Subes a Google Play
 elige :: Sale "No such file or directory" al correr un script. ¿Qué revisas primero? :: El código :: Que el SSD esté conectado :: GitHub
@@ -762,17 +1100,17 @@ vf :: "database is locked" suele ser porque hay dos compilaciones a la vez
 
 > 🌎 **En la vida real:** Es como la clase práctica de manejo en la calle: haces tú cada paso, con alguien al lado que te corrige.
 
-1. **Subir este mapa:** cambia una palabra en cualquier lección de `Aprender`, haz `git add -A`, `git commit -m "…"` y `git push`, y mírala publicada en dos minutos (con Cmd + Shift + R).
-2. **APK a mano:** genera el APK con `assembleRelease`, mira su hora con `ls -lh`, corre `verificar-firma.sh` e instálalo con `adb install -r`.
-3. **iPhone:** instala con `./scripts/instalar-iphone.sh`. Si ya pasaron 7 días desde la última vez, fíjate cómo renueva el permiso solo.
+1. **Tu propia página publicada (gratis):** en GitHub crea un repositorio **público** nuevo, por ejemplo `mi-pagina`. En tu Mac haz una carpeta con un `index.html` (lo del Tema 15), y súbela: `git init`, `git add -A`, `git commit -m "feat: mi primera página"`, `git branch -M main`, `git remote add origin <la dirección que te da GitHub>` y `git push -u origin main`. Después, en el repositorio: **Settings → Pages → Branch: main → Save**. En unos dos minutos está en `https://<tu-usuario>.github.io/mi-pagina/`. Cambia una palabra, haz commit y push, y mírala otra vez (con Cmd + Shift + R).
+2. **APK a mano:** con tu propia app (la calculadora del curso de React Native sirve), genera el APK con `assembleRelease`, mira su hora con `ls -lh` e instálalo con `adb install -r`. Si todavía no tienes una app, lee los comandos de las partes 5 a 7 y explica qué hace cada uno.
+3. **iPhone:** con la misma app, instálala en el iPhone desde Xcode (parte 8). Si ya pasaron 7 días desde la última vez, fíjate qué pasa y cómo se renueva.
 4. **Sin computadora:** responde: ¿qué tienes que copiar a una Mac nueva para poder seguir publicando la app?
 
 <details>
 <summary>Ver las correcciones explicadas</summary>
 
-1. Si no ves el cambio, es la caché (10 minutos). Si `push` dice `rejected`, haz `git pull --rebase` y repite.
-2. Si `verificar-firma.sh` muestra ❌, **no sigas**: falta la configuración de la llave en `~/.gradle/gradle.properties`.
-3. La primera instalación tarda unos 10 minutos; después, 2 a 4.
+1. Si la página dice 404, espera un minuto más y revisa en la pestaña **Actions** que el trabajo de Pages terminó en verde. Si no ves el cambio, es la caché (unos 10 minutos): Cmd + Shift + R. Si `push` dice `rejected`, haz `git pull --rebase` y repite. Recuerda: con la cuenta gratis, Pages solo publica repositorios **públicos**, así que nunca pongas nada privado ahí.
+2. Si el teléfono dice "signatures do not match", la app instalada tiene otra firma: desinstálala y vuelve a instalar (parte 12). En Copiloto, además, `verificar-firma.sh` revisa la llave antes de cada AAB.
+3. La primera instalación tarda unos 10 minutos; después, 2 a 4. Con la cuenta gratis de Apple, la app dura 7 días en el iPhone: después hay que instalarla otra vez.
 4. **El archivo de la llave (keystore) y `~/.gradle/gradle.properties`** (con la variable y las contraseñas), en las mismas carpetas. Y el proyecto, que se baja de GitHub con `git clone`.
 
 </details>

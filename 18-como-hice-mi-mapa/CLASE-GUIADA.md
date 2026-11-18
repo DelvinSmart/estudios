@@ -2,7 +2,7 @@
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
-**Cómo estudiarla:** abre al lado la carpeta `Aprender/web/` en VS Code. Esta clase explica **la misma página donde la estás leyendo**: cada cosa que lees, la puedes ver funcionando.
+**Cómo estudiarla:** baja una copia del sitio (`git clone https://github.com/DelvinSmart/estudios.git`) y abre al lado su carpeta `web/` en VS Code. (En mi Mac la carpeta se llama `Aprender`; en GitHub, `estudios`: es la misma.) Esta clase explica **la misma página donde la estás leyendo**: cada cosa que lees, la puedes ver funcionando.
 
 **Lo que necesitas saber antes:** Temas 15, 16 y 17 (HTML, CSS, JavaScript) y el 10 (arquitectura).
 
@@ -23,6 +23,26 @@ A esto se le llama **una sola fuente de verdad** (*single source of truth*).
 > 🌎 **Otro ejemplo:** Como el horario de un colectivo: está publicado en un solo lugar oficial, y todas las paradas muestran ese mismo horario. Si cambia, cambia en todas.
 
 > 💡 **Idea:** es la misma idea de tu página de estudios (contenido en JSON, Tema 12) y de la web de Copiloto (usa la app sin copiarla, Tema 13). Ya la viste tres veces: es una de las ideas más importantes de la ingeniería.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una sola fuente de verdad
+lenguaje: js
+pide: El texto de las clases vive **solo** en los `.md`; la página los lee cuando hace falta. Completa `titulosDeLaClase(md)`: devuelve los títulos de las partes (las líneas que empiezan con `## `), sin el `## `. Así, si cambias el `.md`, los títulos cambian solos en la página.
+--- código
+function titulosDeLaClase(md) {
+  // tu código aquí
+}
+--- pruebas
+const md = '# Git\n\nIntro\n\n## 1. ¿Qué es Git?\ntexto\n## 2. Las palabras\nmás texto';
+prueba('los títulos', () => igual(titulosDeLaClase(md), ['1. ¿Qué es Git?', '2. Las palabras']));
+prueba('el # solo es el título de la clase, no una parte', () => igual(titulosDeLaClase('# Solo título'), []));
+--- solución
+function titulosDeLaClase(md) {
+  return md.split('\n').filter((l) => l.startsWith('## ')).map((l) => l.slice(3));
+}
+```
 
 ```practica
 escribe :: ¿Qué es "una sola fuente de verdad" en este mapa? :: Que el texto de las clases está solo en los archivos .md; la página los lee cada vez, así que no hay copias que puedan quedar distintas.
@@ -65,6 +85,33 @@ Es la arquitectura del Tema 10 en pequeño: **los datos** (`cursos.js`) separado
 > 🌎 **En la vida real:** una caja de herramientas con compartimentos: cada uno, una cosa.
 
 > 🌎 **Otro ejemplo:** Como los compartimentos de un botiquín: curitas en uno, remedios en otro, termómetro en otro. Encuentras lo que buscas en segundos.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Qué archivo abro?
+lenguaje: js
+pide: Completa `archivoPara(cambio)` con el mapa de archivos: colores → `'web/estilos.css'`; mover o agregar una clase → `'web/cursos.js'`; las preguntas de práctica → `'web/practica.js'`; el buscador → `'web/buscar.js'`; el texto de una clase → `'su LECCION.md'`.
+--- código
+function archivoPara(cambio) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el verde', () => igual(archivoPara('cambiar el verde de los colores'), 'web/estilos.css'));
+prueba('mover una clase', () => igual(archivoPara('mover la clase 15 a otra etapa'), 'web/cursos.js'));
+prueba('las prácticas', () => igual(archivoPara('cómo se arman las preguntas de práctica'), 'web/practica.js'));
+prueba('el buscador', () => igual(archivoPara('que el buscador encuentre tildes'), 'web/buscar.js'));
+prueba('un texto', () => igual(archivoPara('corregir el texto de una clase'), 'su LECCION.md'));
+--- solución
+function archivoPara(cambio) {
+  if (cambio.includes('color') || cambio.includes('verde')) return 'web/estilos.css';
+  if (cambio.includes('práctica')) return 'web/practica.js';
+  if (cambio.includes('buscador')) return 'web/buscar.js';
+  if (cambio.includes('texto')) return 'su LECCION.md';
+  if (cambio.includes('clase')) return 'web/cursos.js';
+  return null;
+}
+```
 
 ```practica
 elige :: Quieres cambiar el verde de la página. ¿Qué archivo abres? :: `app.js` :: `estilos.css` :: `cursos.js`
@@ -118,6 +165,32 @@ A esto se le llama **enrutador** (*router*), y a una página así, **SPA** (*Sin
 > 🌎 **Otro ejemplo:** Como un libro con capítulos, secciones y páginas: abres el libro (etapas), eliges un capítulo (clase) y lees una sección (parte), sin cambiar de libro.
 
 > 💡 **Idea:** como cada pantalla tiene su dirección, puedes **guardar en favoritos** una parte exacta, mandársela a alguien, y el botón "atrás" del navegador funciona.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un enrutador de juguete
+lenguaje: js
+pide: La página mira lo que va después del `#` y decide qué dibujar. Completa `ruta(hash)`: `''` o `'#/'` → `{ vista: 'inicio' }`; `'#/curso/python'` → `{ vista: 'curso', curso: 'python' }`; `'#/clase/15/0/3'` → `{ vista: 'parte', clase: '15', doc: 0, parte: 3 }`; `'#/clase/15'` → `{ vista: 'clase', clase: '15' }`. Usa `split('/')`.
+--- código
+function ruta(hash) {
+  // tu código aquí
+}
+--- pruebas
+prueba('inicio', () => igual(ruta(''), { vista: 'inicio' }));
+prueba('inicio con #/', () => igual(ruta('#/'), { vista: 'inicio' }));
+prueba('un curso', () => igual(ruta('#/curso/python'), { vista: 'curso', curso: 'python' }));
+prueba('una clase', () => igual(ruta('#/clase/15'), { vista: 'clase', clase: '15' }));
+prueba('una parte', () => igual(ruta('#/clase/15/0/3'), { vista: 'parte', clase: '15', doc: 0, parte: 3 }));
+--- solución
+function ruta(hash) {
+  const [, tipo, a, b, c] = hash.replace(/^#/, '').split('/');
+  if (tipo === 'curso') return { vista: 'curso', curso: a };
+  if (tipo === 'clase' && c !== undefined) return { vista: 'parte', clase: a, doc: Number(b), parte: Number(c) };
+  if (tipo === 'clase') return { vista: 'clase', clase: a };
+  return { vista: 'inicio' };
+}
+```
 
 ```practica
 elige :: ¿Qué dirección abre la parte 2 de la primera pestaña de la clase 06? :: `#/06/2` :: `#/clase/06/0/2` :: `#/clase/2/06`
@@ -177,6 +250,35 @@ for (const l of lineas) {
 
 > 📌 **Nota:** es la misma idea del script que agregó los 270 ejemplos "🌎 En la vida real" a las clases: también saltaba los bloques de código.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Partir el Markdown sin romper el código
+lenguaje: js
+pide: Completa `partir(md)`: corta el texto en partes en cada línea que empieza con `## `, **pero no** si esa línea está dentro de un bloque de código (entre dos líneas que empiezan con tres comillas invertidas). Devuelve `[{ titulo, lineas }]`, donde `lineas` cuenta las líneas de cada parte (sin el título).
+--- código
+function partir(md) {
+  // tu código aquí
+}
+--- pruebas
+const F = '`'.repeat(3);
+const md = ['## 1. Uno', 'a', F + 'bash', '## esto es un comentario, no una parte', F, '## 2. Dos', 'b'].join('\n');
+prueba('dos partes, no tres', () => igual(partir(md).map((p) => p.titulo), ['1. Uno', '2. Dos']));
+prueba('las líneas de la primera', () => igual(partir(md)[0].lineas, 4));
+prueba('sin partes', () => igual(partir('texto suelto'), []));
+--- solución
+function partir(md) {
+  const partes = [];
+  let enCodigo = false;
+  for (const linea of md.split('\n')) {
+    if (linea.startsWith('`'.repeat(3))) enCodigo = !enCodigo;
+    if (!enCodigo && linea.startsWith('## ')) partes.push({ titulo: linea.slice(3), lineas: 0 });
+    else if (partes.length) partes.at(-1).lineas++;
+  }
+  return partes;
+}
+```
+
 ```practica
 elige :: ¿Qué hace la página con cada línea que empieza con `## `? :: La borra :: Empieza una parte nueva (una parada del mapa) :: La pone en negrita
 elige :: Si una clase no tiene ningún `##`, ¿cuántas paradas tiene su mapa? :: Una :: Ninguna: solo se ve la introducción :: Diez
@@ -224,6 +326,34 @@ El Markdown se convierte en HTML con una librería pequeña, **marked**. Despué
 
 Por eso, en un `.md` puedes escribir `> 💡 **Idea:** ...` y en la página aparece una tarjeta amarilla, **sin tocar código**.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las tarjetas de colores
+lenguaje: js
+pide: En el `.md`, una línea como `> 🌎 **En la vida real:** texto` se convierte en una tarjeta de color. Completa `tarjeta(linea)`: devuelve `<div class="tarjeta TIPO"><b>TÍTULO</b> TEXTO</div>` donde TIPO sale de `TIPOS` según el emoji, y el texto pasa por `escapar`. Si no es una tarjeta, devuelve `null`.
+--- código
+const TIPOS = { '🌎': 'vida', '💡': 'idea', '🎙️': 'profe' };
+const escapar = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+function tarjeta(linea) {
+  // tu código aquí
+}
+--- pruebas
+prueba('vida real', () => igual(tarjeta('> 🌎 **En la vida real:** Es como un mapa.'), '<div class="tarjeta vida"><b>En la vida real:</b> Es como un mapa.</div>'));
+prueba('idea, con < escapado', () => igual(tarjeta('> 💡 **Idea:** usa <p>'), '<div class="tarjeta idea"><b>Idea:</b> usa &lt;p&gt;</div>'));
+prueba('una cita normal no es tarjeta', () => igual(tarjeta('> una cita'), null));
+--- solución
+const TIPOS = { '🌎': 'vida', '💡': 'idea', '🎙️': 'profe' };
+const escapar = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+function tarjeta(linea) {
+  const m = linea.match(/^> (\S+) \*\*(.+?)\*\* (.*)$/);
+  if (!m || !TIPOS[m[1]]) return null;
+  return `<div class="tarjeta ${TIPOS[m[1]]}"><b>${escapar(m[2])}</b> ${escapar(m[3])}</div>`;
+}
+```
+
 ```practica
 elige :: ¿Qué escribes en un `.md` para que aparezca una tarjeta verde de "vida real"? :: `# 🌎` :: Una cita que empiece con 🌎: `> 🌎 **En la vida real:** ...` :: Un bloque de código
 elige :: ¿Para qué sirve `escapar`? :: Para traducir :: Para que un texto con `<` o `>` se muestre como texto y nunca se ejecute como HTML :: Para colorear
@@ -242,7 +372,8 @@ Con doble clic, la dirección empieza con **`file://`**, y el navegador **bloque
 La solución es abrirla con un **servidor**: un programa que entrega archivos cuando la página los pide. Para probar en tu Mac, Python ya trae uno:
 
 ```bash
-cd /Volumes/SSD_Desarrollo/Developer/Aprender
+git clone https://github.com/DelvinSmart/estudios.git   # solo la primera vez
+cd estudios
 python3 -m http.server 8123
 ```
 
@@ -259,6 +390,35 @@ En internet, el servidor es **GitHub Pages** (parte 9).
 > 🌎 **En la vida real:** un empleado no puede entrar a cualquier cajón de la oficina: necesita que recepción le alcance lo que pide. Con doble clic no hay recepción.
 
 > 🌎 **Otro ejemplo:** Como una farmacia que no te deja entrar al depósito: pides en el mostrador y el farmacéutico te trae el remedio.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Por qué no carga con doble clic?
+lenguaje: js
+pide: Completa `puedeLeerLecciones(direccion)`: con `file://` el navegador bloquea `fetch` → `false`; con `http://localhost…` o `https://…` → `true`. Y `comandoServidor(puerto)`: el comando de Python para encender el servidor de archivos en ese puerto.
+--- código
+function puedeLeerLecciones(direccion) {
+  // tu código aquí
+}
+
+function comandoServidor(puerto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('doble clic: no', () => igual(puedeLeerLecciones('file:///Users/ana/estudios/index.html'), false));
+prueba('servidor local: sí', () => igual(puedeLeerLecciones('http://localhost:8123/'), true));
+prueba('GitHub Pages: sí', () => igual(puedeLeerLecciones('https://delvinsmart.github.io/estudios/'), true));
+prueba('el comando', () => igual(comandoServidor(8123), 'python3 -m http.server 8123'));
+--- solución
+function puedeLeerLecciones(direccion) {
+  return direccion.startsWith('http://') || direccion.startsWith('https://');
+}
+
+function comandoServidor(puerto) {
+  return `python3 -m http.server ${puerto}`;
+}
+```
 
 ```practica
 elige :: Abres la página con doble clic y dice "No encontré…". ¿Qué pasó? :: Se borraron las clases :: Se abrió con `file://` y el navegador bloqueó `fetch`; hace falta un servidor :: Falta internet
@@ -300,6 +460,38 @@ vf :: En internet, el servidor del mapa es GitHub Pages
 - Los comentarios grises `// clase 15` imitan comentarios de código.
 
 **El camino en zigzag:** una línea punteada y cada parada con un círculo. En la compu, las paradas pares van a la derecha (`.parada:nth-child(even) { margin-left: 50%; }`); en el celular, todo en una columna (`@media`).
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los colores del tema y las paradas en zigzag
+lenguaje: html
+pide: Define en `:root` la variable `--acento: #7ee787` y úsala en `.parada` (color de la letra). Y con `:nth-child(even)`, pon las paradas **pares** a la derecha (`text-align: right`).
+--- código
+<style>
+  /* tus reglas aquí */
+</style>
+<ol>
+  <li class="parada">1. ¿Qué es Git?</li>
+  <li class="parada">2. Las palabras</li>
+  <li class="parada">3. Cómo viaja un cambio</li>
+</ol>
+--- pruebas
+prueba('la parada usa el acento', () => igual(estilo('.parada', 'color'), 'rgb(126, 231, 135)'));
+prueba('la segunda va a la derecha', () => igual(estilo('.parada:nth-child(2)', 'text-align'), 'right'));
+prueba('la primera no', () => ok(estilo('.parada:nth-child(1)', 'text-align') !== 'right', 'solo las pares'));
+--- solución
+<style>
+  :root { --acento: #7ee787; }
+  .parada { color: var(--acento); }
+  .parada:nth-child(even) { text-align: right; }
+</style>
+<ol>
+  <li class="parada">1. ¿Qué es Git?</li>
+  <li class="parada">2. Las palabras</li>
+  <li class="parada">3. Cómo viaja un cambio</li>
+</ol>
+```
 
 ```practica
 elige :: ¿Qué cambias para que el acento sea morado en el tema oscuro? :: Cada botón :: El valor de `--acento` en `:root` :: El HTML
@@ -362,6 +554,36 @@ Así **se escriben**. Pero en GitHub **no quedan así**: el script `firebase/sep
 
 `practica.js` lo hace con lo del Tema 17: lee las líneas con `split(' :: ')`, arma botones con plantillas, escucha clics con `addEventListener`, manda tus respuestas al servidor con `await` (Tema 21, Parte 8), y al aprobar guarda en `localStorage` y avisa con un evento propio (`practica-aprobada`), que `vistas/parte.js` escucha para desbloquear el botón.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer una práctica y su id
+lenguaje: js
+pide: Cada línea de un bloque de práctica tiene la forma `tipo :: pregunta :: opción :: opción…`. Completa `leerLinea(linea)`: devuelve `{ tipo, pregunta, opciones }` (sin espacios de más). Y `idDelBombillo(archivo, parte)`: `'06:CLASE-GUIADA.md:3'` para el archivo `'06-git/CLASE-GUIADA.md'` y la parte 3 (usa el nombre del archivo, no su posición).
+--- código
+function leerLinea(linea) {
+  // tu código aquí
+}
+
+function idDelBombillo(archivo, parte) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un elige', () => igual(leerLinea('elige :: ¿Qué hace git add? :: Sube :: Prepara :: Borra'), { tipo: 'elige', pregunta: '¿Qué hace git add?', opciones: ['Sube', 'Prepara', 'Borra'] }));
+prueba('un vf no tiene opciones', () => igual(leerLinea('vf :: Git guarda fotos').opciones, []));
+prueba('el id', () => igual(idDelBombillo('06-git/CLASE-GUIADA.md', 3), '06:CLASE-GUIADA.md:3'));
+--- solución
+function leerLinea(linea) {
+  const [tipo, pregunta, ...opciones] = linea.split('::').map((p) => p.trim());
+  return { tipo, pregunta, opciones };
+}
+
+function idDelBombillo(archivo, parte) {
+  const [carpeta, nombre] = archivo.split('/');
+  return `${carpeta.slice(0, 2)}:${nombre}:${parte}`;
+}
+```
+
 ```practica
 elige :: Una persona en otro país estudia hasta la parte 5 en tu página publicada. Tú vas por la 2. ¿Qué ves? :: La parte 5 :: Tus bombillos: la parte 2 :: Nada
 elige :: ¿Cómo pasas tus bombillos de la Mac al iPad? :: Se pasan solos :: Con el código de Mi progreso: copiar en uno, pegar en el otro :: Por Bluetooth
@@ -395,6 +617,33 @@ Es **honesto**: dice que lo emite el propio curso y que **no es un título ofici
 
 > 🌎 **Otro ejemplo:** Como subir una foto a un álbum público: cualquiera con el enlace la puede ver.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Se puede publicar?
+lenguaje: js
+pide: Antes de publicar en GitHub Pages: tiene que existir `.nojekyll` (si no, Jekyll convierte los `.md`) y no puede haber nada privado. Completa `revisarPublicacion(archivos)`: devuelve la lista de problemas: `'falta .nojekyll'` y uno `'privado: X'` por cada archivo que sea `.env`, termine en `.key`, o se llame `respuestas.json`.
+--- código
+function revisarPublicacion(archivos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('todo bien', () => igual(revisarPublicacion(['.nojekyll', 'index.html', 'web/app.js']), []));
+prueba('sin .nojekyll', () => igual(revisarPublicacion(['index.html']), ['falta .nojekyll']));
+prueba('las respuestas no se publican', () => igual(revisarPublicacion(['.nojekyll', 'firebase/funciones/respuestas.json']), ['privado: firebase/funciones/respuestas.json']));
+prueba('una llave', () => igual(revisarPublicacion(['.nojekyll', 'firma.key', '.env']), ['privado: firma.key', 'privado: .env']));
+--- solución
+function revisarPublicacion(archivos) {
+  const problemas = [];
+  if (!archivos.includes('.nojekyll')) problemas.push('falta .nojekyll');
+  for (const a of archivos) {
+    const nombre = a.split('/').pop();
+    if (nombre === '.env' || nombre.endsWith('.key') || nombre === 'respuestas.json') problemas.push(`privado: ${a}`);
+  }
+  return problemas;
+}
+```
+
 ```practica
 elige :: ¿Qué pasaría sin el archivo `.nojekyll`? :: Nada :: Jekyll convertiría los `.md` en HTML y el mapa no podría leerlos crudos :: La página sería más rápida
 elige :: ¿Por qué no se puede publicar `estudios` tal como está, con la cuenta gratis? :: Porque es muy grande :: Porque GitHub Pages gratis solo publica repositorios públicos, y `estudios` es privado :: Porque falta un archivo
@@ -422,6 +671,33 @@ vf :: Antes de publicar algo, hay que revisar que no tenga nada privado
 > 🌎 **En la vida real:** agregar una parada a la ruta del autobús: pintas el cartel en la parada (la carpeta y su lección) y la agregas al mapa de la ruta (el catálogo).
 
 > 🌎 **Otro ejemplo:** Como agregar un nuevo plato al menú de un restaurante: escribes la receta (la clase) y lo agregas a la carta (el catálogo).
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Por qué no aparece mi clase nueva?
+lenguaje: js
+pide: Una clase aparece en el mapa solo si está anotada en `CLASES` **y** en la lista de alguna etapa. Completa `faltaAnotar(numero, catalogo)`: devuelve `[]` si está todo, o lo que falta: `'CLASES'`, `'una etapa'`.
+--- código
+function faltaAnotar(numero, catalogo) {
+  // tu código aquí
+}
+--- pruebas
+const catalogo = {
+  CLASES: { '06': { titulo: 'Git' }, '99': { titulo: 'Nueva' } },
+  ETAPAS: [{ clases: ['01', '06'] }, { clases: ['15'] }],
+};
+prueba('la 06 está completa', () => igual(faltaAnotar('06', catalogo), []));
+prueba('la 99 no está en ninguna etapa', () => igual(faltaAnotar('99', catalogo), ['una etapa']));
+prueba('la 50 no está en ningún lado', () => igual(faltaAnotar('50', catalogo), ['CLASES', 'una etapa']));
+--- solución
+function faltaAnotar(numero, catalogo) {
+  const falta = [];
+  if (!(numero in catalogo.CLASES)) falta.push('CLASES');
+  if (!catalogo.ETAPAS.some((e) => e.clases.includes(numero))) falta.push('una etapa');
+  return falta;
+}
+```
 
 ```practica
 elige :: Agregaste la carpeta y la lección, pero la clase no aparece en el mapa. ¿Qué te faltó? :: Reiniciar la Mac :: Agregarla en `web/cursos.js` (en `CLASES` y en su etapa) :: Borrar el caché
@@ -464,6 +740,35 @@ export const ETAPAS = [{ id: 'web', titulo: 'La web: HTML, CSS y JavaScript', cl
 > 🌎 **Otro ejemplo:** Como el índice de un libro grande más el marcador: el índice te deja saltar a cualquier capítulo y el marcador te devuelve a donde estabas.
 
 > 💡 **Idea:** el menú en árbol y el mapa de islas usan **los mismos datos** (`cursos.js`). Si agregas un curso, aparece solo en los dos.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El menú en árbol
+lenguaje: js
+pide: El menú ☰ muestra Curso → Etapas → Clases. Completa `arbol(cursos, etapas, clases)`: devuelve un texto con una línea por cosa, con 2 espacios de sangría por nivel: el título del curso, cada etapa suya y, dentro, cada clase como `NN Título`.
+--- código
+function arbol(cursos, etapas, clases) {
+  // tu código aquí
+}
+--- pruebas
+const cursos = [{ id: 'prog', titulo: 'Programación', etapas: ['fund'] }];
+const etapas = { fund: { titulo: 'Fundamentos', clases: ['01', '06'] } };
+const clases = { '01': 'Leer código', '06': 'Git' };
+prueba('el árbol', () => igual(arbol(cursos, etapas, clases), 'Programación\n  Fundamentos\n    01 Leer código\n    06 Git'));
+--- solución
+function arbol(cursos, etapas, clases) {
+  const lineas = [];
+  for (const c of cursos) {
+    lineas.push(c.titulo);
+    for (const e of c.etapas) {
+      lineas.push(`  ${etapas[e].titulo}`);
+      for (const n of etapas[e].clases) lineas.push(`    ${n} ${clases[n]}`);
+    }
+  }
+  return lineas.join('\n');
+}
+```
 
 ```practica
 vf :: En este sitio, el orden de los cursos depende de cómo se llamen las carpetas
@@ -632,6 +937,37 @@ La automatización corre en el repositorio del mapa (`estudios`), pero publica e
 
 > 💡 **Idea:** cada pieza hace **una sola cosa** y se puede cambiar sin tocar las demás: el texto (las clases), la voz (el motor), el interruptor (`motor.json`), el trabajador (GitHub Actions) y el almacén (`estudios-audio`).
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Rehacer solo los audios que cambiaron
+lenguaje: js
+pide: Rehacer más de 500 audios cada vez sería lento. Cada audio guarda una **huella** del texto. Completa `huella(texto)` (una suma simple: para cada letra, `h = (h * 31 + código de la letra) % 1000000007`, empezando en 7) y `porRehacer(partes, guardadas)`: devuelve los ids de las partes cuya huella no coincide con la guardada.
+--- código
+function huella(texto) {
+  // tu código aquí
+}
+
+function porRehacer(partes, guardadas) {
+  // tu código aquí
+}
+--- pruebas
+prueba('la misma huella para el mismo texto', () => igual(huella('hola'), huella('hola')));
+prueba('otra para otro texto', () => ok(huella('hola') !== huella('holá'), 'una tilde cambia la huella'));
+prueba('solo la que cambió', () => { const partes = [{ id: 'a', texto: 'uno' }, { id: 'b', texto: 'dos nuevo' }]; igual(porRehacer(partes, { a: huella('uno'), b: huella('dos') }), ['b']); });
+prueba('una parte nueva también', () => igual(porRehacer([{ id: 'c', texto: 'x' }], {}), ['c']));
+--- solución
+function huella(texto) {
+  let h = 7;
+  for (const letra of texto) h = (h * 31 + letra.codePointAt(0)) % 1000000007;
+  return h;
+}
+
+function porRehacer(partes, guardadas) {
+  return partes.filter((p) => guardadas[p.id] !== huella(p.texto)).map((p) => p.id);
+}
+```
+
 ```practica
 vf :: El audio grabado sigue sonando con la pantalla del teléfono bloqueada
 vf :: Cada vez que se sube una clase, se rehacen los más de 500 audios
@@ -649,7 +985,7 @@ escribe :: Un amigo te pregunta cómo se hizo para que las clases de este mapa t
 
 > 🌎 **En la vida real:** Es como volver a armar el motor que desarmaste: así sabes para qué servía cada pieza.
 
-1. Abre la terminal, entra a `Aprender` y levanta el servidor de la parte 6. Abre la página.
+1. Abre la terminal, entra a tu copia (`cd estudios`) y levanta el servidor de la parte 6. Abre la página.
 2. Ábrela también con doble clic sobre `index.html`. ¿Qué mensaje sale? ¿Por qué?
 3. En `web/estilos.css`, cambia `--acento` del tema oscuro por otro color. Recarga (con **Cmd + Shift + R**, por la caché).
 4. En cualquier lección, agrega una tarjeta `> 💡 **Idea:** ...` y un bloque `practica` con una pregunta `vf`. Recarga y pruébalo.

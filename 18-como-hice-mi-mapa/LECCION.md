@@ -199,7 +199,8 @@ Si abres `index.html` con doble clic (la dirección empieza con `file://`), el n
 La solución es abrirla con un **servidor**: un programa que entrega archivos cuando la página los pide. Para probar en tu Mac, Python ya trae uno:
 
 ```bash
-cd /Volumes/SSD_Desarrollo/Developer/Aprender
+git clone https://github.com/DelvinSmart/estudios.git   # solo la primera vez
+cd estudios
 python3 -m http.server 8123
 ```
 
