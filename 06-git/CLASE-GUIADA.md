@@ -50,6 +50,49 @@ Git funciona **sin internet**: guarda la historia en tu Mac. GitHub es un lugar 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un Git de juguete: fotos del proyecto
+lenguaje: js
+pide: Un commit es una **foto** del proyecto con un mensaje. Completa `crearRepo()`: `commit(mensaje, archivos)` guarda una **copia** de los archivos (un objeto nombre → contenido) y devuelve un número de commit (1, 2, 3…); `log()` devuelve los mensajes del más nuevo al más viejo; `verFoto(n)` devuelve los archivos del commit n.
+--- código
+function crearRepo() {
+  const fotos = [];
+  return {
+    commit(mensaje, archivos) {
+      // tu código aquí
+    },
+    log() {
+      // tu código aquí
+    },
+    verFoto(n) {
+      // tu código aquí
+    },
+  };
+}
+--- pruebas
+prueba('los commits se numeran', () => { const r = crearRepo(); igual([r.commit('a', {}), r.commit('b', {})], [1, 2]); });
+prueba('log del más nuevo al más viejo', () => { const r = crearRepo(); r.commit('primera nota', {}); r.commit('segunda nota', {}); igual(r.log(), ['segunda nota', 'primera nota']); });
+prueba('una foto no cambia aunque cambies el archivo después', () => { const r = crearRepo(); const archivos = { 'notas.txt': 'hola' }; r.commit('a', archivos); archivos['notas.txt'] = 'cambiado'; igual(r.verFoto(1), { 'notas.txt': 'hola' }); });
+--- solución
+function crearRepo() {
+  const fotos = [];
+  return {
+    commit(mensaje, archivos) {
+      fotos.push({ mensaje, archivos: { ...archivos } });
+      return fotos.length;
+    },
+    log() {
+      return fotos.map((f) => f.mensaje).reverse();
+    },
+    verFoto(n) {
+      return fotos[n - 1]?.archivos;
+    },
+  };
+}
+```
+
 ```practica
 escribe :: Con tus palabras: ¿qué es Git? :: Un programa que guarda la historia del código en puntos (commits): puedo volver a uno, ver qué cambió, quién y por qué.
 escribe :: ¿Qué diferencia hay entre Git y GitHub? :: Git es un programa en mi computadora que guarda la historia; GitHub es una página en internet donde subo una copia, la comparto y corre el CI.
@@ -94,6 +137,60 @@ Las dos que más cuestan:
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Preparar (add) antes de guardar (commit)
+lenguaje: js
+pide: Con Git, solo entra al commit lo que preparaste con `git add`. Completa `crearArea()`: `cambiar(archivo)` lo marca como cambiado; `add(archivo)` lo pasa a preparado; `commit()` devuelve la lista de lo preparado y la vacía; `status()` devuelve `{ cambiados, preparados }`.
+--- código
+function crearArea() {
+  let cambiados = [];
+  let preparados = [];
+  return {
+    cambiar(archivo) {
+      // tu código aquí
+    },
+    add(archivo) {
+      // tu código aquí
+    },
+    commit() {
+      // tu código aquí
+    },
+    status() {
+      return { cambiados, preparados };
+    },
+  };
+}
+--- pruebas
+prueba('cambiar sin add: no entra al commit', () => { const a = crearArea(); a.cambiar('notas.txt'); igual(a.commit(), []); });
+prueba('add y commit', () => { const a = crearArea(); a.cambiar('notas.txt'); a.add('notas.txt'); igual(a.commit(), ['notas.txt']); });
+prueba('después del commit, todo limpio', () => { const a = crearArea(); a.cambiar('x'); a.add('x'); a.commit(); igual(a.status(), { cambiados: [], preparados: [] }); });
+prueba('status muestra lo cambiado y lo preparado', () => { const a = crearArea(); a.cambiar('a'); a.cambiar('b'); a.add('a'); igual(a.status(), { cambiados: ['b'], preparados: ['a'] }); });
+--- solución
+function crearArea() {
+  let cambiados = [];
+  let preparados = [];
+  return {
+    cambiar(archivo) {
+      if (!cambiados.includes(archivo)) cambiados = [...cambiados, archivo];
+    },
+    add(archivo) {
+      cambiados = cambiados.filter((a) => a !== archivo);
+      if (!preparados.includes(archivo)) preparados = [...preparados, archivo];
+    },
+    commit() {
+      const guardados = preparados;
+      preparados = [];
+      return guardados;
+    },
+    status() {
+      return { cambiados, preparados };
+    },
+  };
+}
+```
+
 ```practica
 elige :: ¿Qué es una rama? :: Una copia de seguridad en GitHub :: Una línea de trabajo separada, para probar sin tocar la principal :: Un error
 elige :: ¿Qué es `origin`? :: La primera versión del código :: El nombre de la copia en GitHub (el remoto) :: Una rama
@@ -133,6 +230,34 @@ escribe :: ¿Qué es el diff? :: Las diferencias entre dos versiones: qué líne
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: push y pull: tu Mac y GitHub
+lenguaje: js
+pide: Tu Mac y GitHub tienen cada uno su lista de commits. Completa `push(local, remoto)` (GitHub queda con los commits de tu Mac que le faltaban) y `pull(local, remoto)` (tu Mac recibe los que faltaban de GitHub). Los dos devuelven la lista **nueva** del que recibe, sin repetir commits y en el mismo orden.
+--- código
+function push(local, remoto) {
+  // tu código aquí
+}
+
+function pull(local, remoto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('push sube lo nuevo', () => igual(push(['a', 'b', 'c'], ['a', 'b']), ['a', 'b', 'c']));
+prueba('pull baja lo que hiciste desde el panel', () => igual(pull(['a'], ['a', 'panel']), ['a', 'panel']));
+prueba('sin nada nuevo, queda igual', () => igual(push(['a'], ['a']), ['a']));
+--- solución
+function push(local, remoto) {
+  return [...remoto, ...local.filter((c) => !remoto.includes(c))];
+}
+
+function pull(local, remoto) {
+  return [...local, ...remoto.filter((c) => !local.includes(c))];
+}
+```
+
 ```practica
 escribe :: Di los cuatro pasos por los que viaja un cambio, con su comando. :: Edito el archivo; git add lo pone en el staging; git commit lo guarda en la historia de mi Mac; git push lo sube a GitHub, donde corre el CI.
 elige :: ¿Qué comando guarda el punto en la historia de tu Mac? :: `git add` :: `git commit` :: `git push`
@@ -166,6 +291,33 @@ f333022 feat(ganhos,painel): Minha empresa, textos de como registrar e foto por 
 > 🌎 **En la vida real:** el identificador es el **número de seguimiento** de un paquete de Correios: único, y con él encuentras exactamente ese envío.
 
 > 🌎 **Otro ejemplo:** Como el número de un boleto de avión: con ese código encuentras exactamente tu vuelo, aunque haya miles ese día.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer git log --oneline
+lenguaje: js
+pide: Cada línea de `git log --oneline` es el identificador corto (hash) y el mensaje. Completa `leerLog(texto)`: devuelve una lista de `{ hash, mensaje }`, sin líneas vacías.
+--- código
+function leerLog(texto) {
+  // tu código aquí
+}
+--- pruebas
+const salida = '9f6813a Programación 01 a 03: ejercicios\nd6ea14f La entrevista en dos niveles\n\n4def164 El recorrido de cada proyecto\n';
+prueba('tres commits', () => igual(leerLog(salida).length, 3));
+prueba('el primero', () => igual(leerLog(salida)[0], { hash: '9f6813a', mensaje: 'Programación 01 a 03: ejercicios' }));
+prueba('el mensaje con espacios queda entero', () => igual(leerLog(salida)[1].mensaje, 'La entrevista en dos niveles'));
+--- solución
+function leerLog(texto) {
+  return texto
+    .split('\n')
+    .filter((l) => l.trim())
+    .map((l) => {
+      const espacio = l.indexOf(' ');
+      return { hash: l.slice(0, espacio), mensaje: l.slice(espacio + 1) };
+    });
+}
+```
 
 ```practica
 elige :: En `2ce8c04 chore(release): versionCode 93`, ¿qué es `2ce8c04`? :: El mensaje :: El identificador único del commit :: La fecha
@@ -211,6 +363,40 @@ Por qué se hizo el cambio, en 1 a 3 líneas.
 **`feat`** (algo nuevo). Por ejemplo: `feat(gastos): pantalla para registrar peajes`.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Es un buen mensaje de commit?
+lenguaje: js
+pide: Revisa un mensaje con la convención **Conventional Commits** de esta parte: `tipo(área): resumen`. El tipo tiene que ser uno de `TIPOS`, el área es opcional, el resumen no puede estar vacío ni pasar de 72 letras. Completa `revisarMensaje(mensaje)`: devuelve `[]` si está bien, o la lista de problemas: `'tipo inválido'`, `'falta el resumen'`, `'resumen muy largo'`.
+--- código
+const TIPOS = ['feat', 'fix', 'refactor', 'test', 'chore', 'docs'];
+
+function revisarMensaje(mensaje) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un buen mensaje', () => igual(revisarMensaje('fix(tanque): la barra no bajaba al registrar gasto'), []));
+prueba('sin área también vale', () => igual(revisarMensaje('docs: actualizo el README'), []));
+prueba('"cambié cosas" no sigue la forma', () => ok(revisarMensaje('cambié cosas').includes('tipo inválido')));
+prueba('un tipo que no existe', () => igual(revisarMensaje('arreglo(tanque): algo'), ['tipo inválido']));
+prueba('sin resumen', () => igual(revisarMensaje('feat(peajes): '), ['falta el resumen']));
+prueba('resumen muy largo', () => igual(revisarMensaje('feat: ' + 'a'.repeat(73)), ['resumen muy largo']));
+--- solución
+const TIPOS = ['feat', 'fix', 'refactor', 'test', 'chore', 'docs'];
+
+function revisarMensaje(mensaje) {
+  const m = mensaje.match(/^(\w+)(\([^)]*\))?:\s*(.*)$/);
+  if (!m) return ['tipo inválido'];
+  const [, tipo, , resumen] = m;
+  const problemas = [];
+  if (!TIPOS.includes(tipo)) problemas.push('tipo inválido');
+  if (!resumen.trim()) problemas.push('falta el resumen');
+  else if (resumen.length > 72) problemas.push('resumen muy largo');
+  return problemas;
+}
+```
 
 ```practica
 elige :: Arreglaste un error en el cálculo del San. ¿Qué tipo usas? :: `feat` :: `fix` :: `chore`
@@ -314,6 +500,39 @@ git switch main             # cambiarte a otra rama
 > 🌎 **En la vida real:** las ramas son los carriles de una autopista: cada uno avanza por su lado sin chocar.
 
 > 🌎 **Otro ejemplo:** Como hacer una copia de un documento para probar cambios grandes sin tocar el original; si te gusta, reemplazas el original.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cada intención, su comando
+lenguaje: js
+pide: Completa el objeto `COMANDO` con el comando de Git para cada intención: ver qué cambió (`'git status'`), ver las líneas cambiadas (`'git diff'`), preparar un archivo (`'git add'`), guardar la foto (`'git commit'`), subir a GitHub (`'git push'`), bajar lo nuevo (`'git pull'`), ver la historia (`'git log'`) y crear una rama y pasarse a ella (`'git checkout -b'`).
+--- código
+const COMANDO = {
+  verQueCambio: '',
+  verLineas: '',
+  preparar: '',
+  guardar: '',
+  subir: '',
+  bajar: '',
+  historia: '',
+  ramaNueva: '',
+};
+--- pruebas
+const correcto = { verQueCambio: 'git status', verLineas: 'git diff', preparar: 'git add', guardar: 'git commit', subir: 'git push', bajar: 'git pull', historia: 'git log', ramaNueva: 'git checkout -b' };
+for (const [k, v] of Object.entries(correcto)) prueba(k, () => igual(COMANDO[k], v));
+--- solución
+const COMANDO = {
+  verQueCambio: 'git status',
+  verLineas: 'git diff',
+  preparar: 'git add',
+  guardar: 'git commit',
+  subir: 'git push',
+  bajar: 'git pull',
+  historia: 'git log',
+  ramaNueva: 'git checkout -b',
+};
+```
 
 ```practica
 elige :: ¿Qué comando usas antes y después de todo? :: `git push` :: `git status` :: `git log`
@@ -420,6 +639,30 @@ Porque ese commit está **en la rama `experimento`**, no en `master`. Cada rama 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los colores de git status
+lenguaje: js
+pide: En `git status`, un archivo nuevo que Git no conoce sale **en rojo** como *Untracked*; uno preparado con `add` sale **en verde** (*Changes to be committed*); uno que Git ya conocía y cambiaste sin preparar, **en rojo** como *modified*. Completa `estado(archivo)` con `{ conocido, preparado, cambiado }` → `'sin seguimiento'`, `'preparado'`, `'modificado'` o `'limpio'`.
+--- código
+function estado(archivo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('nuevo, sin add', () => igual(estado({ conocido: false, preparado: false, cambiado: true }), 'sin seguimiento'));
+prueba('con add', () => igual(estado({ conocido: false, preparado: true, cambiado: true }), 'preparado'));
+prueba('conocido y cambiado, sin add', () => igual(estado({ conocido: true, preparado: false, cambiado: true }), 'modificado'));
+prueba('conocido y sin cambios', () => igual(estado({ conocido: true, preparado: false, cambiado: false }), 'limpio'));
+--- solución
+function estado(archivo) {
+  if (archivo.preparado) return 'preparado';
+  if (!archivo.conocido) return 'sin seguimiento';
+  if (archivo.cambiado) return 'modificado';
+  return 'limpio';
+}
+```
+
 ```practica
 elige :: ¿Qué hace `git init`? :: Sube la carpeta a GitHub :: Convierte la carpeta en un repositorio :: Borra la carpeta
 elige :: Un archivo nuevo aparece en rojo en `git status`. ¿Qué quiere decir? :: Que tiene un error :: Que Git lo ve pero no está preparado :: Que ya está en GitHub
@@ -443,6 +686,32 @@ escribe :: Cuenta lo que pasó en la Parte E con tus palabras. :: Creé la rama 
 > 🌎 **En la vida real:** el script era un **lavadero automático**: metías el carro y salía limpio. Ahora sabes qué pasa adentro: revisar (`status`), enjabonar (`add`), secar y poner el ticket (`commit`), sacarlo a la calle (`push`).
 
 > 🌎 **Otro ejemplo:** Como el piloto automático de un avión: hace las mismas maniobras que haría el piloto, en el mismo orden.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un script que guarda por ti, sin saltarse nada
+lenguaje: js
+pide: El script de Copiloto revisa antes de subir. Completa `guardarYSubir(proyecto)`: si hay archivos de secretos (`.env` o que terminen en `.key`) en `proyecto.cambiados`, **no sube** y devuelve `'hay secretos'`; si las pruebas no pasan (`proyecto.pruebasOk`), devuelve `'las pruebas fallan'`; si no hay nada cambiado, `'nada que subir'`; si todo bien, `'subido'`.
+--- código
+function guardarYSubir(proyecto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('todo bien: subido', () => igual(guardarYSubir({ cambiados: ['src/a.ts'], pruebasOk: true }), 'subido'));
+prueba('un .env: no sube', () => igual(guardarYSubir({ cambiados: ['.env', 'src/a.ts'], pruebasOk: true }), 'hay secretos'));
+prueba('una llave: no sube', () => igual(guardarYSubir({ cambiados: ['firma.key'], pruebasOk: true }), 'hay secretos'));
+prueba('pruebas en rojo', () => igual(guardarYSubir({ cambiados: ['src/a.ts'], pruebasOk: false }), 'las pruebas fallan'));
+prueba('nada cambiado', () => igual(guardarYSubir({ cambiados: [], pruebasOk: true }), 'nada que subir'));
+--- solución
+function guardarYSubir(proyecto) {
+  const secretos = proyecto.cambiados.filter((a) => a === '.env' || a.endsWith('/.env') || a.endsWith('.key'));
+  if (secretos.length) return 'hay secretos';
+  if (!proyecto.pruebasOk) return 'las pruebas fallan';
+  if (proyecto.cambiados.length === 0) return 'nada que subir';
+  return 'subido';
+}
+```
 
 ```practica
 escribe :: ¿Qué hace el script de guardar de Copiloto, paso a paso? :: Revisa con git status que no haya archivos prohibidos, hace git add -A, hace git commit con el mensaje y hace git push.
@@ -490,6 +759,39 @@ Nunca, por ninguna razón, se suben **claves secretas**, la **llave del keystore
 **No.** El commit anterior sigue en la historia, con la clave adentro. Hay que **cambiar la clave** (crear una nueva y anular la vieja).
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un .gitignore de juguete
+lenguaje: js
+pide: Completa `seIgnora(archivo, reglas)`: una regla que termina en `/` ignora esa **carpeta** (y todo lo de adentro, en cualquier nivel); una regla que empieza con `*` ignora los archivos que **terminan** igual (`*.log`); cualquier otra regla ignora el archivo con ese **nombre** exacto (en cualquier carpeta).
+--- código
+const reglas = ['node_modules/', '.env', '*.log', '*.key'];
+
+function seIgnora(archivo, reglas) {
+  // tu código aquí
+}
+--- pruebas
+prueba('node_modules entero', () => igual(seIgnora('node_modules/vitest/index.js', reglas), true));
+prueba('un node_modules adentro de otra carpeta', () => igual(seIgnora('firebase/funciones/node_modules/a.js', reglas), true));
+prueba('el .env', () => igual(seIgnora('.env', reglas), true));
+prueba('un .log', () => igual(seIgnora('firebase-debug.log', reglas), true));
+prueba('el código sí se sube', () => igual(seIgnora('src/utils/dinero.ts', reglas), false));
+prueba('.env.ejemplo no es .env', () => igual(seIgnora('.env.ejemplo', reglas), false));
+--- solución
+const reglas = ['node_modules/', '.env', '*.log', '*.key'];
+
+function seIgnora(archivo, reglas) {
+  const partes = archivo.split('/');
+  const nombre = partes.at(-1);
+  return reglas.some((r) => {
+    if (r.endsWith('/')) return partes.slice(0, -1).includes(r.slice(0, -1));
+    if (r.startsWith('*')) return nombre.endsWith(r.slice(1));
+    return nombre === r;
+  });
+}
+```
 
 ```practica
 elige :: ¿Para qué sirve `.gitignore`? :: Para borrar archivos :: Para decirle a Git qué archivos no guardar :: Para esconder la app
@@ -561,6 +863,36 @@ Prueba en Copiloto (**sin riesgo, solo mira**):
 git blame src/data/workAppsCatalog.ts | grep my_company
 ```
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El comando de rescate para cada susto
+lenguaje: js
+pide: Completa `rescate(susto)` con el comando para cada situación: `'cambié un archivo y quiero volver'` → `'git restore'`; `'hice add de algo que no quería'` → `'git restore --staged'`; `'el mensaje del último commit está mal'` → `'git commit --amend'`; `'quiero deshacer un commit que ya subí'` → `'git revert'`; `'quiero guardar mis cambios un momento sin commit'` → `'git stash'`.
+--- código
+function rescate(susto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('volver un archivo', () => igual(rescate('cambié un archivo y quiero volver'), 'git restore'));
+prueba('sacar del add', () => igual(rescate('hice add de algo que no quería'), 'git restore --staged'));
+prueba('arreglar el mensaje', () => igual(rescate('el mensaje del último commit está mal'), 'git commit --amend'));
+prueba('deshacer algo ya subido', () => igual(rescate('quiero deshacer un commit que ya subí'), 'git revert'));
+prueba('guardar sin commit', () => igual(rescate('quiero guardar mis cambios un momento sin commit'), 'git stash'));
+--- solución
+const RESCATES = {
+  'cambié un archivo y quiero volver': 'git restore',
+  'hice add de algo que no quería': 'git restore --staged',
+  'el mensaje del último commit está mal': 'git commit --amend',
+  'quiero deshacer un commit que ya subí': 'git revert',
+  'quiero guardar mis cambios un momento sin commit': 'git stash',
+};
+
+function rescate(susto) {
+  return RESCATES[susto];
+}
+```
+
 ```practica
 elige :: Subiste a GitHub un commit con un error. ¿Qué usas para deshacerlo? :: `git reset --hard` :: `git revert` :: `git clean -fd`
 elige :: ¿Qué hace `git stash`? :: Borra los cambios :: Guarda los cambios a un lado y deja la carpeta limpia :: Sube los cambios
@@ -574,13 +906,13 @@ escribe :: ¿Por qué se prefiere `revert` y no `reset` para algo que ya está e
 
 ## Ejercicios
 
-> 🎙️ **El profesor:** si tienes la app, hazlos en su carpeta. Las preguntas 4, 5 y 6 se responden sin computadora.
+> 🎙️ **El profesor:** hazlos en la carpeta del proyecto de práctica [Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro). Las preguntas 4, 5 y 6 se responden sin computadora.
 
 > 🌎 **En la vida real:** Es como el examen práctico de una autoescuela: sales con el instructor y haces cada maniobra tú.
 
 1. Haz la práctica completa (Partes A a F) de la parte 7.
-2. En la carpeta de la app, corre `git log --oneline -5` y explica con tus palabras qué hizo cada commit.
-3. Corre `git show 9630e4a --stat`. ¿Cuántos archivos cambió el commit de los colores del panel?
+2. En la carpeta `gastos-del-carro`, corre `git log --oneline -5` y explica con tus palabras qué hizo cada commit.
+3. Corre `git show HEAD --stat`. ¿Cuántos archivos cambió el último commit, y cuántas líneas en cada uno?
 4. ¿Qué diferencia hay entre `git commit` y `git push`?
 5. Si cambiaste un archivo pero no hiciste `git add`, ¿entra en el commit?
 6. ¿Para qué sirve una rama?
@@ -589,8 +921,8 @@ escribe :: ¿Por qué se prefiere `revert` y no `reset` para algo que ya está e
 <summary>Ver las correcciones explicadas</summary>
 
 1. Si al final `git log --oneline` muestra 3 commits (primera nota, segunda nota, experimento) y `notas.txt` en `master` tiene las tres líneas, lo hiciste bien.
-2. Lee el tipo y el área: `chore(release)` es preparar una versión; `feat(...)` es algo nuevo en esa área.
-3. **20 archivos.** (`--stat` muestra la lista de archivos cambiados y cuántas líneas en cada uno.)
+2. Lee el mensaje de cada uno: el primero creó el proyecto; los siguientes agregaron piezas para las clases (por ejemplo, la pantalla en la terminal). En Copiloto los mensajes siguen Conventional Commits: `chore(release)` es preparar una versión; `feat(...)` es algo nuevo en esa área.
+3. Depende del último commit: `--stat` muestra la lista de archivos cambiados y, al lado de cada uno, cuántas líneas se agregaron (`+`) y se quitaron (`-`). Al final dice el total.
 4. `git commit` guarda en tu Mac; `git push` sube a GitHub.
 5. **No.** Solo entra lo que está preparado con `git add`.
 6. Para trabajar en algo nuevo sin dañar la línea principal. Si sale bien, se une; si sale mal, se descarta.

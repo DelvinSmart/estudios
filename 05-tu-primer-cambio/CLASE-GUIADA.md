@@ -52,6 +52,34 @@ En **`theme/`**, donde están los colores y medidas oficiales. (Recuerda el cand
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿En qué carpeta lo busco?
+lenguaje: js
+pide: Completa `carpetaPara(queBuscas)` con la estructura de la app de esta parte: los **textos** están en `'src/i18n/locales'`, los **colores y medidas** en `'src/theme'`, las **pantallas** en `'src/screens'`, las **piezas que se repiten** en `'src/components'`, y los **cálculos** en `'src/utils'`. Cada pedido trae una de esas palabras: texto, color, medida, pantalla, pieza, cálculo.
+--- código
+function carpetaPara(queBuscas) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un texto en portugués', () => igual(carpetaPara('cambiar un texto en portugués'), 'src/i18n/locales'));
+prueba('un color', () => igual(carpetaPara('cambiar el color del botón'), 'src/theme'));
+prueba('una medida', () => igual(carpetaPara('una medida de la barra'), 'src/theme'));
+prueba('una pantalla', () => igual(carpetaPara('la pantalla de Finanzas'), 'src/screens'));
+prueba('una pieza que se repite', () => igual(carpetaPara('la pieza de la tarjeta del vehículo'), 'src/components'));
+prueba('un cálculo', () => igual(carpetaPara('el cálculo del combustible'), 'src/utils'));
+--- solución
+function carpetaPara(queBuscas) {
+  if (queBuscas.includes('texto')) return 'src/i18n/locales';
+  if (queBuscas.includes('color') || queBuscas.includes('medida')) return 'src/theme';
+  if (queBuscas.includes('pantalla')) return 'src/screens';
+  if (queBuscas.includes('pieza')) return 'src/components';
+  if (queBuscas.includes('cálculo')) return 'src/utils';
+  return 'src';
+}
+```
+
 ```practica
 elige :: ¿Dónde están las pantallas completas? :: `components/` :: `screens/` :: `utils/`
 elige :: ¿Dónde están los textos de la app? :: En cada pantalla :: En `i18n/locales/`, un archivo por idioma :: En `theme/`
@@ -81,6 +109,40 @@ Espera a que se abra la app en el simulador. **La primera vez tarda como un minu
 > 🌎 **En la vida real:** pintar una pared mirando por una ventana mágica: cada pincelada aparece al instante en la casa de verdad, sin construir la casa de nuevo.
 
 > 🌎 **Otro ejemplo:** Como probarse ropa con un espejo al lado: cada cambio lo ves al instante, sin tener que salir del probador.
+
+### 🧪 Hazlo tú (sin simulador)
+
+En el proyecto de práctica [Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro) no hace falta un simulador: el comando `npm run mostrar` dibuja la "pantalla" de la app **en la terminal**, con sus textos y su motor de diseño. Pruébalo ahora, dentro de la carpeta `gastos-del-carro`:
+
+```bash
+npm run mostrar          # en español
+npm run mostrar -- pt    # en portugués
+```
+
+Cada vez que cambies algo en las partes que siguen, vuelve a correrlo para ver el cambio.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La recarga en caliente
+lenguaje: js
+pide: En modo Expo (y con `npm run mostrar`), al **guardar** un archivo la pantalla se actualiza sola. Pero si cambias `package.json` (una librería nueva) hay que **reiniciar** todo. Completa `queHacer(archivo)`: `'nada'` si el archivo no es de la app (por ejemplo, un `.md`), `'reiniciar'` si es `package.json`, y `'se actualiza solo'` para los `.ts` y `.tsx`.
+--- código
+function queHacer(archivo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un texto de la app', () => igual(queHacer('src/i18n/locales/es.ts'), 'se actualiza solo'));
+prueba('una pantalla', () => igual(queHacer('src/screens/Inicio.tsx'), 'se actualiza solo'));
+prueba('package.json', () => igual(queHacer('package.json'), 'reiniciar'));
+prueba('el README', () => igual(queHacer('README.md'), 'nada'));
+--- solución
+function queHacer(archivo) {
+  if (archivo === 'package.json') return 'reiniciar';
+  if (/\.tsx?$/.test(archivo)) return 'se actualiza solo';
+  return 'nada';
+}
+```
 
 ```practica
 elige :: ¿Qué tiene de bueno el modo Expo? :: Publica la app en la tienda :: Cada cambio que guardas aparece solo, en segundos :: Borra los cambios
@@ -192,6 +254,45 @@ En el simulador abre **Mi vehículo → el lápiz → baja hasta Capacidad del t
 
 </details>
 
+### 🧪 Hazlo tú en Gastos del carro
+
+1. **Encuéntralo:** con **Cmd + Shift + F** busca `Todavía no anotaste`. Aparece en `src/i18n/locales/es.ts`, en la clave `sinGastos`.
+2. **El contrato:** busca `sinGastos`. Está en `src/i18n/tipos.ts` (dice que la clave existe y es un texto) y en los tres idiomas (`es.ts`, `pt.ts`, `en.ts`).
+3. **Cámbialo** en `es.ts`, por ejemplo a `'Aún no hay gastos. ¡Anota el primero!'`, y guarda.
+4. **Míralo:** `npm run mostrar`. Y después `npm run mostrar -- pt`: en portugués **no** cambió, porque cada idioma tiene su archivo.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Del archivo de idioma a la pantalla
+lenguaje: js
+pide: La pantalla pide el texto por su **clave**, y el texto sale del archivo del idioma. Completa `texto(idioma, clave)`: si el idioma no existe, usa español; si la clave no está en ese idioma, también usa español (así nunca sale un hueco en la pantalla).
+--- código
+const IDIOMAS = {
+  es: { sinGastos: 'Todavía no anotaste gastos.', tituloApp: 'Gastos del carro' },
+  pt: { sinGastos: 'Você ainda não registrou gastos.', tituloApp: 'Gastos do carro' },
+  en: { tituloApp: 'Car expenses' },
+};
+
+function texto(idioma, clave) {
+  // tu código aquí
+}
+--- pruebas
+prueba('en portugués', () => igual(texto('pt', 'sinGastos'), 'Você ainda não registrou gastos.'));
+prueba('un idioma que no existe usa español', () => igual(texto('fr', 'tituloApp'), 'Gastos del carro'));
+prueba('una clave que falta en inglés usa español', () => igual(texto('en', 'sinGastos'), 'Todavía no anotaste gastos.'));
+--- solución
+const IDIOMAS = {
+  es: { sinGastos: 'Todavía no anotaste gastos.', tituloApp: 'Gastos del carro' },
+  pt: { sinGastos: 'Você ainda não registrou gastos.', tituloApp: 'Gastos do carro' },
+  en: { tituloApp: 'Car expenses' },
+};
+
+function texto(idioma, clave) {
+  return IDIOMAS[idioma]?.[clave] ?? IDIOMAS.es[clave];
+}
+```
+
 ```practica
 elige :: ¿Qué es `tankCapacityHint`? :: El texto en español :: La clave (el nombre) del texto :: Una pantalla
 elige :: ¿Qué hace la función `t(...)`? :: Borra el texto :: Recibe una clave y devuelve el texto en el idioma del usuario :: Cambia el color
@@ -267,6 +368,37 @@ Prueba `'100%'`, y después `'60%'`. **Así se diseña:** se cambia, se mira, se
 
 </details>
 
+### 🧪 Hazlo tú en Gastos del carro
+
+1. Abre `src/tema/motor.ts`, el **motor de diseño**, y busca `barraCombustibleMaxima: 0.75` (la barra ocupa como máximo el 75 % del ancho).
+2. Cámbialo a `0.5` y guarda.
+3. `npm run mostrar`: la barra de combustible (`████░░░`) ahora es **más corta**.
+4. Prueba también `relleno: 16` → `24`: el texto se aleja más del borde. Un solo valor del motor, y cambia toda la "pantalla".
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un valor del motor, y la pieza que lo llama
+lenguaje: js
+pide: La barra de combustible mide `ancho × barraMaxima × nivel`. Completa `largoDeLaBarra(ancho, nivel, motor)` usando `motor.barraMaxima` (no escribas `0.75` a mano) y redondeando. Las pruebas cambian el motor, como hiciste en `motor.ts`, y la barra tiene que seguirlo.
+--- código
+const motor = { barraMaxima: 0.75 };
+
+function largoDeLaBarra(ancho, nivel, motor) {
+  // tu código aquí
+}
+--- pruebas
+prueba('ancho 40, tanque lleno, 75 %: 30', () => igual(largoDeLaBarra(40, 1, motor), 30));
+prueba('medio tanque: 15', () => igual(largoDeLaBarra(40, 0.5, motor), 15));
+prueba('si el motor dice 0.5, la barra sigue al motor', () => igual(largoDeLaBarra(40, 1, { barraMaxima: 0.5 }), 20));
+--- solución
+const motor = { barraMaxima: 0.75 };
+
+function largoDeLaBarra(ancho, nivel, motor) {
+  return Math.round(ancho * motor.barraMaxima * nivel);
+}
+```
+
 ```practica
 elige :: ¿Dónde está el aspecto (tamaños, colores) de una pieza? :: En el archivo de idioma :: En sus estilos (`StyleSheet.create`) :: En `types.ts`
 elige :: ¿Qué quiere decir `maxWidth: '75%'`? :: Que mide exactamente 75 píxeles :: Que ocupa como máximo el 75 % del ancho :: Que es 75 % transparente
@@ -296,6 +428,41 @@ npx tsc --noEmit -p .
 > 🌎 **En la vida real:** arrancas una página del menú en inglés. El gerente (`npx tsc`) tiene la **lista oficial** de platos (`types.ts`) y revisa que cada menú los tenga todos. Al ver que en inglés falta el plato, dice: "este menú no se puede imprimir".
 
 > 🌎 **Otro ejemplo:** Como la máquina de tickets del estacionamiento: si falta una pieza, la barrera no se levanta y te avisa que algo está mal.
+
+### 🧪 Hazlo tú en Gastos del carro
+
+1. En `src/i18n/locales/en.ts`, **borra** la línea de `sinGastos` y guarda.
+2. `npm run tipos` → TypeScript avisa: `Property 'sinGastos' is missing in type … but required in type 'Diccionario'`. El contrato (`tipos.ts`) exige la clave en todos los idiomas.
+3. `npm test` → falla la prueba **"cada idioma tiene las mismas llaves"**.
+
+Dos guardianes distintos atraparon el mismo error, antes de que llegara a una persona.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El guardián de las traducciones
+lenguaje: js
+pide: Haz tu propio guardián, como la prueba "cada idioma tiene las mismas llaves". `faltan(idiomas)` compara cada idioma con el español y devuelve un objeto con las claves que **faltan** en cada uno (solo los idiomas a los que les falta algo).
+--- código
+function faltan(idiomas) {
+  // tu código aquí
+}
+--- pruebas
+prueba('todo completo: nada falta', () => igual(faltan({ es: { a: 1, b: 2 }, pt: { a: 1, b: 2 } }), {}));
+prueba('al inglés le falta sinGastos', () => igual(faltan({ es: { tituloApp: 1, sinGastos: 2 }, en: { tituloApp: 1 } }), { en: ['sinGastos'] }));
+prueba('a dos idiomas les falta algo', () => igual(faltan({ es: { a: 1, b: 2 }, pt: { a: 1 }, en: { b: 2 } }), { pt: ['b'], en: ['a'] }));
+--- solución
+function faltan(idiomas) {
+  const claves = Object.keys(idiomas.es);
+  const resultado = {};
+  for (const [idioma, textos] of Object.entries(idiomas)) {
+    if (idioma === 'es') continue;
+    const que = claves.filter((c) => !(c in textos));
+    if (que.length) resultado[idioma] = que;
+  }
+  return resultado;
+}
+```
 
 ```practica
 elige :: ¿Qué comando avisa que falta una traducción? :: `npm test` :: `npx tsc --noEmit -p .` :: `git status`
@@ -329,6 +496,37 @@ Corre `git status` otra vez: **esos archivos ya no deben aparecer**.
 
 > 🌎 **Otro ejemplo:** Como el botón "deshacer" del Word, pero que vuelve a la última vez que guardaste: lo que escribiste después, se pierde.
 
+### 🧪 Hazlo tú en Gastos del carro
+
+```bash
+git status
+git restore src/i18n/locales/es.ts src/i18n/locales/en.ts src/tema/motor.ts
+git status
+```
+
+El segundo `git status` no debe mostrar ningún archivo: todo volvió a como estaba.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: git restore, de juguete
+lenguaje: js
+pide: `git status` muestra los archivos cambiados; `git restore archivo…` los devuelve a como estaban. Completa `restaurar(cambiados, aRestaurar)`: devuelve la lista de archivos que **siguen** cambiados después de restaurar.
+--- código
+function restaurar(cambiados, aRestaurar) {
+  // tu código aquí
+}
+--- pruebas
+const cambiados = ['src/i18n/locales/es.ts', 'src/i18n/locales/en.ts', 'src/tema/motor.ts'];
+prueba('restaurar dos deja uno', () => igual(restaurar(cambiados, ['src/i18n/locales/es.ts', 'src/i18n/locales/en.ts']), ['src/tema/motor.ts']));
+prueba('restaurar los tres deja el estado limpio', () => igual(restaurar(cambiados, cambiados), []));
+prueba('no cambia la lista original', () => { restaurar(cambiados, cambiados); igual(cambiados.length, 3); });
+--- solución
+function restaurar(cambiados, aRestaurar) {
+  return cambiados.filter((a) => !aRestaurar.includes(a));
+}
+```
+
 ```practica
 elige :: ¿Qué hace `git restore archivo`? :: Sube el archivo a GitHub :: Devuelve el archivo a como estaba, borrando los cambios :: Muestra qué cambió
 vf :: Los cambios que se borran con `git restore` se pueden recuperar fácilmente
@@ -360,6 +558,32 @@ Porque las revisiones automáticas no ven todo (Temas 02 y 04): no saben si algo
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El orden de un cambio de verdad
+lenguaje: js
+pide: Un cambio para quedarse sigue un orden: `'rama'` (trabajar aparte), `'cambio'`, `'revisiones'` (tipos y pruebas), `'probar en el teléfono'`, `'commit'`, y al final `'subir'`. Completa `enOrden(pasos)`: devuelve `true` si los pasos que recibe están en ese orden (pueden faltar algunos, pero nunca uno antes de otro que va primero).
+--- código
+const ORDEN = ['rama', 'cambio', 'revisiones', 'probar en el teléfono', 'commit', 'subir'];
+
+function enOrden(pasos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el orden completo', () => igual(enOrden(ORDEN), true));
+prueba('saltarse pasos, pero en orden', () => igual(enOrden(['rama', 'cambio', 'commit']), true));
+prueba('subir antes de las revisiones: no', () => igual(enOrden(['cambio', 'subir', 'revisiones']), false));
+prueba('commit antes del cambio: no', () => igual(enOrden(['commit', 'cambio']), false));
+--- solución
+const ORDEN = ['rama', 'cambio', 'revisiones', 'probar en el teléfono', 'commit', 'subir'];
+
+function enOrden(pasos) {
+  const posiciones = pasos.map((p) => ORDEN.indexOf(p));
+  return posiciones.every((pos, i) => i === 0 || pos > posiciones[i - 1]);
+}
+```
+
 ```practica
 escribe :: Di en orden los 5 pasos de un cambio de verdad. :: Cambiar el código, mirarlo en el simulador, correr las revisiones (tsc y npm test), probarlo en el teléfono, y recién entonces commit y push.
 elige :: ¿Qué va justo antes del commit y push? :: Cambiar el código :: Probarlo en el teléfono :: Mirarlo en el simulador
@@ -370,11 +594,11 @@ vf :: Si pasan `tsc` y `npm test`, se puede subir sin probar en el teléfono
 
 ## Ejercicios
 
-> 🎙️ **El profesor:** ahora tú solo. Este es para hacerlo en la computadora.
+> 🎙️ **El profesor:** ahora tú solo, en la computadora, con [Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro).
 
 > 🌎 **En la vida real:** Es como la segunda vez que cambias un foco: ya sabes dónde está el interruptor, y lo haces solo.
 
-1. Cambia otro texto: el título **"Registrar ingreso"**. Encuéntralo, cámbialo en español, míralo en el simulador y **deshazlo**.
+1. Cambia otro texto: el título **"Gastos del carro"**. Encuéntralo, cámbialo en español, míralo con `npm run mostrar` y **deshazlo**.
 2. Si cambias un texto solo en `es.ts`, ¿la persona que usa la app en portugués lo ve cambiado? ¿Por qué?
 3. ¿Por qué los textos no se escriben directamente en la pantalla?
 4. ¿Qué comando te avisa que falta una traducción?
@@ -382,10 +606,10 @@ vf :: Si pasan `tsc` y `npm test`, se puede subir sin probar en el teléfono
 <details>
 <summary>Ver las correcciones explicadas</summary>
 
-1. Con Cmd + Shift + F buscando `Registrar ingreso` aparece en `es.ts` más de una vez (por ejemplo `registerEarning` y `registerTitle`): son claves distintas para lugares distintos. Mira el nombre de la clave para elegir la del título. Cámbialo, guárdalo, míralo, y deshazlo con `git restore src/i18n/locales/es.ts`.
-2. **No.** Cada idioma tiene su archivo; en portugués la app lee `pt-BR.ts`.
+1. Con Cmd + Shift + F buscando `Gastos del carro` aparece en `es.ts`, en la clave `tituloApp` (y también en el README, que no es un texto de la app). Lo cambias ahí, lo ves con `npm run mostrar` y lo deshaces con `git restore src/i18n/locales/es.ts`. (En Copiloto, buscando `Registrar ingreso` aparece más de una vez, con claves distintas para lugares distintos.) Mira el nombre de la clave para elegir la del título. Cámbialo, guárdalo, míralo, y deshazlo con `git restore src/i18n/locales/es.ts`.
+2. **No.** Cada idioma tiene su archivo; en portugués se lee `pt.ts` (en Copiloto, `pt-BR.ts`).
 3. Porque la app está en **seis idiomas**: si el texto estuviera en la pantalla, solo existiría en uno.
-4. `npx tsc --noEmit -p .`, porque `types.ts` exige cada clave en los seis idiomas.
+4. TypeScript: `npm run tipos` en Gastos del carro (`npx tsc --noEmit -p .` en Copiloto), porque el contrato exige cada clave en todos los idiomas. Y en Gastos del carro también `npm test`, con la prueba "cada idioma tiene las mismas llaves".
 
 </details>
 

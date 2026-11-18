@@ -41,6 +41,33 @@ Así funciona, paso a paso:
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un CI de juguete: corre los pasos en orden
+lenguaje: js
+pide: Un CI corre una lista de pasos, **en orden**, y se **detiene en el primero que falla**. Completa `correrCI(pasos)`: cada paso es `{ nombre, correr }`, donde `correr()` devuelve `true` (pasó) o `false` (falló). Devuelve `{ verde: true, corridos: N }` si pasaron todos, o `{ verde: false, fallo: 'nombre', corridos: N }` con cuántos llegó a correr.
+--- código
+function correrCI(pasos) {
+  // tu código aquí
+}
+--- pruebas
+const paso = (nombre, ok) => ({ nombre, correr: () => ok });
+prueba('todo bien: verde', () => igual(correrCI([paso('tipos', true), paso('pruebas', true)]), { verde: true, corridos: 2 }));
+prueba('falla el segundo: rojo y se detiene', () => igual(correrCI([paso('tipos', true), paso('diseño', false), paso('pruebas', true)]), { verde: false, fallo: 'diseño', corridos: 2 }));
+prueba('sin pasos también es verde', () => igual(correrCI([]), { verde: true, corridos: 0 }));
+prueba('no corre los pasos que siguen a un fallo', () => { let corrio = false; correrCI([paso('a', false), { nombre: 'b', correr: () => { corrio = true; return true; } }]); igual(corrio, false); });
+--- solución
+function correrCI(pasos) {
+  let corridos = 0;
+  for (const p of pasos) {
+    corridos++;
+    if (!p.correr()) return { verde: false, fallo: p.nombre, corridos };
+  }
+  return { verde: true, corridos };
+}
+```
+
 ```practica
 escribe :: Con tus palabras: ¿qué es el CI? :: Una máquina en internet que, cada vez que subo código, enciende una computadora limpia, descarga el código, lo instala desde cero, corre todas las revisiones y me avisa si algo falla.
 elige :: ¿Qué quiere decir CI? :: Código Inteligente :: Integración Continua :: Control Interno
@@ -82,6 +109,28 @@ En Copiloto, la copia limpia del CI **encontró un fallo que en tu Mac no se ve�
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La máquina limpia encuentra lo que tu Mac esconde
+lenguaje: js
+pide: Tu Mac tiene herramientas instaladas de antes; la máquina del CI empieza **vacía** y solo tiene lo que dice `package.json`. Completa `faltanEnElCI(usadas, paquete)`: devuelve la lista de herramientas que el proyecto **usa** pero **no anotó** en `dependencies` ni en `devDependencies` (las que en tu Mac funcionan "de casualidad").
+--- código
+function faltanEnElCI(usadas, paquete) {
+  // tu código aquí
+}
+--- pruebas
+const paquete = { dependencies: { firebase: '^11' }, devDependencies: { vitest: '^2', typescript: '^5' } };
+prueba('todo anotado: no falta nada', () => igual(faltanEnElCI(['firebase', 'vitest'], paquete), []));
+prueba('madge no está anotado', () => igual(faltanEnElCI(['vitest', 'madge'], paquete), ['madge']));
+prueba('sin devDependencies no se rompe', () => igual(faltanEnElCI(['vitest'], { dependencies: {} }), ['vitest']));
+--- solución
+function faltanEnElCI(usadas, paquete) {
+  const anotadas = { ...(paquete.dependencies ?? {}), ...(paquete.devDependencies ?? {}) };
+  return usadas.filter((h) => !(h in anotadas));
+}
+```
+
 ```practica
 escribe :: Explica la historia del "condimento escondido" con tus palabras. :: En mi Mac había cosas instaladas de antes que tapaban un fallo; la máquina limpia del CI no las tenía, así que el fallo apareció y se pudo arreglar.
 elige :: ¿Qué razón es "puedo ver qué subida rompió algo y cuándo"? :: Confianza :: Historial :: Aviso rápido
@@ -101,6 +150,32 @@ vf :: Si todo pasa en mi Mac, seguro que pasa en cualquier computadora
    > 🌎 **En la vida real:** si la lista del aeropuerto olvidó prohibir algo, el guardia lo deja pasar.
 3. **No publica en Google Play.** Solo **revisa**. Publicar lo haces tú. (Esto es lo que confunde.)
    > 🌎 **En la vida real:** el inspector de la fábrica aprueba el carro, pero no lo lleva a la concesionaria.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que el CI puede revisar y lo que no
+lenguaje: js
+pide: El CI solo corre **comandos**: no mira la pantalla ni sabe si algo es lindo o útil. Completa `loRevisaElCI(problema)`: devuelve `true` si un comando lo puede detectar (un tipo mal puesto, una prueba que falla, un color escrito a mano, una clave secreta en el código, un archivo gigante) y `false` si hace falta una persona (que un botón se ve feo, que un texto se entiende mal, que la app es lenta en un teléfono viejo). Usa la lista `CON_COMANDO`.
+--- código
+const CON_COMANDO = ['tipo', 'prueba', 'color a mano', 'secreto', 'archivo gigante'];
+
+function loRevisaElCI(problema) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un tipo mal puesto: sí', () => igual(loRevisaElCI('un tipo mal puesto'), true));
+prueba('una prueba que falla: sí', () => igual(loRevisaElCI('una prueba que falla'), true));
+prueba('un secreto en el código: sí', () => igual(loRevisaElCI('un secreto en el código'), true));
+prueba('un botón que se ve feo: no', () => igual(loRevisaElCI('un botón que se ve feo'), false));
+prueba('un texto que se entiende mal: no', () => igual(loRevisaElCI('un texto que se entiende mal'), false));
+--- solución
+const CON_COMANDO = ['tipo', 'prueba', 'color a mano', 'secreto', 'archivo gigante'];
+
+function loRevisaElCI(problema) {
+  return CON_COMANDO.some((palabra) => problema.includes(palabra));
+}
+```
 
 ```practica
 vf :: El CI publica la app en Google Play cuando todo está en verde
@@ -146,6 +221,28 @@ Se lee: hay un `carro`; **dentro** del carro (porque está corrido hacia adentro
 
 > ⚠️ **Cuidado:** en YAML un espacio de más o de menos **cambia el significado** (o rompe el archivo). Por eso se usan siempre 2 espacios por nivel.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Lo encuentra GitHub?
+lenguaje: js
+pide: GitHub solo busca las instrucciones del CI en la carpeta `.github/workflows/`, y solo archivos `.yml` o `.yaml`. Completa `loEncuentraGitHub(ruta)`.
+--- código
+function loEncuentraGitHub(ruta) {
+  // tu código aquí
+}
+--- pruebas
+prueba('.github/workflows/ci.yml: sí', () => igual(loEncuentraGitHub('.github/workflows/ci.yml'), true));
+prueba('.github/workflows/publicar.yaml: sí', () => igual(loEncuentraGitHub('.github/workflows/publicar.yaml'), true));
+prueba('github/workflows/ci.yml (sin el punto): no', () => igual(loEncuentraGitHub('github/workflows/ci.yml'), false));
+prueba('.github/ci.yml (fuera de workflows): no', () => igual(loEncuentraGitHub('.github/ci.yml'), false));
+prueba('.github/workflows/ci.txt: no', () => igual(loEncuentraGitHub('.github/workflows/ci.txt'), false));
+--- solución
+function loEncuentraGitHub(ruta) {
+  return ruta.startsWith('.github/workflows/') && /\.ya?ml$/.test(ruta);
+}
+```
+
 ```practica
 elige :: ¿Dónde busca GitHub las instrucciones del CI? :: En `src/` :: En `.github/workflows/` :: En `package.json`
 elige :: ¿Qué formato tiene `ci.yml`? :: JSON :: YAML :: JavaScript
@@ -185,6 +282,34 @@ Dos ideas clave, más despacio:
 **No.** Los pasos van en orden y, si uno falla, los siguientes no se ejecutan. (Los **otros trabajos** sí siguen, porque corren aparte.)
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El archivo del CI, como un objeto
+lenguaje: js
+pide: El YAML del CI es "nombre: valor" con sangría, igual que un objeto de JavaScript. Escribe el objeto `ci` que corresponde a este YAML: se llama `CI`, corre en cada `push` a `main`, y tiene un trabajo `app` en `ubuntu-latest` con tres pasos: `npm ci`, `npm run tipos` y `npm test` (cada paso es `{ run: '…' }`).
+--- código
+const ci = {
+  // tu código aquí
+};
+--- pruebas
+prueba('se llama CI', () => igual(ci.name, 'CI'));
+prueba('corre en cada push a main', () => igual(ci.on, { push: { branches: ['main'] } }));
+prueba('el trabajo app corre en ubuntu', () => igual(ci.jobs?.app?.['runs-on'], 'ubuntu-latest'));
+prueba('los tres pasos en orden', () => igual(ci.jobs?.app?.steps?.map((s) => s.run), ['npm ci', 'npm run tipos', 'npm test']));
+--- solución
+const ci = {
+  name: 'CI',
+  on: { push: { branches: ['main'] } },
+  jobs: {
+    app: {
+      'runs-on': 'ubuntu-latest',
+      steps: [{ run: 'npm ci' }, { run: 'npm run tipos' }, { run: 'npm test' }],
+    },
+  },
+};
+```
 
 ```practica
 elige :: ¿Qué palabra dice CUÁNDO corre el CI? :: `jobs` :: `on` :: `run`
@@ -375,6 +500,27 @@ El trabajo **`app`**, en el paso **Candado de diseño** (`check:design`).
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Cuánto tarda? Trabajos al mismo tiempo
+lenguaje: js
+pide: Los trabajos del CI corren **al mismo tiempo**, cada uno en su máquina; los pasos de un trabajo, uno **después** del otro. Completa `duracionCI(trabajos)`: cada trabajo es una lista de duraciones de sus pasos (en segundos). El CI tarda lo que tarde **el trabajo más lento**.
+--- código
+function duracionCI(trabajos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un trabajo de 10 + 20 + 30 tarda 60', () => igual(duracionCI([[10, 20, 30]]), 60));
+prueba('dos trabajos: tarda lo del más lento', () => igual(duracionCI([[10, 20], [5, 50]]), 55));
+prueba('sin trabajos: 0', () => igual(duracionCI([]), 0));
+--- solución
+function duracionCI(trabajos) {
+  const duraciones = trabajos.map((pasos) => pasos.reduce((s, d) => s + d, 0));
+  return Math.max(0, ...duraciones);
+}
+```
+
 ```practica
 elige :: ¿Cuántos trabajos tiene hoy el CI de Copiloto? :: 3 :: 5 :: 6 :: 10
 elige :: ¿Qué hace `actions/checkout`? :: Instala Node :: Descarga tu código a la máquina limpia :: Corre las pruebas
@@ -392,7 +538,7 @@ escribe :: ¿Qué es un "ciclo" entre archivos y por qué es malo? :: Cuando el 
 
 > 🎙️ **El profesor:** todo esto lo puedes **ver**. Vamos a GitHub.
 
-1. Entra a **github.com/DelvinSmart/copiloto-driver**.
+1. Entra a **[github.com/DelvinSmart/gastos-del-carro](https://github.com/DelvinSmart/gastos-del-carro)**, el proyecto de práctica. (El de Copiloto es privado; este es público y tiene un CI con los mismos candados.)
 2. Toca la pestaña **Actions**.
 3. Ves una lista de subidas, cada una con un color:
    - ✅ **verde**: todo pasó.
@@ -411,6 +557,29 @@ gh run list --limit 5
 > 🌎 **En la vida real:** la pestaña Actions es el semáforo del lavadero de carros. `gh run list` es llamar por teléfono al lavadero para preguntar "¿cómo van los últimos 5?".
 
 > 🌎 **Otro ejemplo:** Como el historial de pedidos de una app de delivery: cada pedido con su estado (en camino, entregado, cancelado), y entras a uno para ver el detalle.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los colores de la pestaña Actions
+lenguaje: js
+pide: En la pestaña Actions, cada subida tiene un color según el estado de sus trabajos. Completa `colorDeLaSubida(estados)`: si **alguno** falló (`'fallo'`) → `'rojo'`; si no, si **alguno** sigue corriendo (`'corriendo'`) → `'amarillo'`; si todos pasaron (`'ok'`) → `'verde'`.
+--- código
+function colorDeLaSubida(estados) {
+  // tu código aquí
+}
+--- pruebas
+prueba('todos ok: verde', () => igual(colorDeLaSubida(['ok', 'ok']), 'verde'));
+prueba('uno corriendo: amarillo', () => igual(colorDeLaSubida(['ok', 'corriendo']), 'amarillo'));
+prueba('uno falló: rojo', () => igual(colorDeLaSubida(['ok', 'fallo']), 'rojo'));
+prueba('falló uno aunque otro siga corriendo: rojo', () => igual(colorDeLaSubida(['corriendo', 'fallo']), 'rojo'));
+--- solución
+function colorDeLaSubida(estados) {
+  if (estados.includes('fallo')) return 'rojo';
+  if (estados.includes('corriendo')) return 'amarillo';
+  return 'verde';
+}
+```
 
 ```practica
 elige :: ¿En qué pestaña de GitHub ves el CI? :: Code :: Actions :: Settings
@@ -461,6 +630,32 @@ Se llama CI; corre en cada push; tiene un trabajo llamado `pruebas` que corre en
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La receta de un CI desde cero, en orden
+lenguaje: js
+pide: Ordena los pasos de un CI nuevo. Completa `ordenar(pasos)` para que devuelva los pasos en el orden correcto, usando la lista `ORDEN` (que escribes tú): primero bajar el código, después instalar Node, después instalar las dependencias, después revisar los tipos, y al final las pruebas.
+--- código
+const ORDEN = [
+  // escribe aquí los 5 nombres en orden: 'checkout', 'setup-node', 'npm ci', 'tipos', 'pruebas'
+];
+
+function ordenar(pasos) {
+  return pasos.toSorted((a, b) => ORDEN.indexOf(a) - ORDEN.indexOf(b));
+}
+--- pruebas
+prueba('el orden correcto', () => igual(ordenar(['pruebas', 'npm ci', 'checkout', 'tipos', 'setup-node']), ['checkout', 'setup-node', 'npm ci', 'tipos', 'pruebas']));
+prueba('el código se baja antes que todo', () => igual(ORDEN[0], 'checkout'));
+prueba('las dependencias antes de revisar', () => ok(ORDEN.indexOf('npm ci') < ORDEN.indexOf('tipos') && ORDEN.indexOf('npm ci') >= 0, 'sin dependencias instaladas, TypeScript y las pruebas no corren'));
+--- solución
+const ORDEN = ['checkout', 'setup-node', 'npm ci', 'tipos', 'pruebas'];
+
+function ordenar(pasos) {
+  return pasos.toSorted((a, b) => ORDEN.indexOf(a) - ORDEN.indexOf(b));
+}
+```
+
 ```practica
 escribe :: ¿Cuáles son los pasos para armar un CI desde cero? :: Decidir qué revisar; que cada revisión sea un comando que funcione en la terminal; crear .github/workflows/ci.yml; escribir el trabajo mínimo (checkout, Node, npm ci, npm test); subirlo y mirar Actions; agregar revisiones de a una.
 vf :: Antes de ponerlo en el CI, el comando tiene que funcionar en mi terminal
@@ -495,6 +690,36 @@ Si todo está bien, escribe "✔ Tamaño: ningún archivo pasa de 1000 líneas" 
 
 > 🌎 **Otro ejemplo:** Como un semáforo: no sabe nada del tránsito ni de los conductores; solo muestra verde o rojo según la señal que recibe.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El CI solo entiende el código de salida
+lenguaje: js
+pide: Cada comando, al terminar, deja un **código de salida**: `0` es "todo bien" y cualquier otro número es "falló". El CI no lee los mensajes: solo mira ese número. Completa `pasoVerde(codigo)` y `ciVerde(codigos)` (verde solo si **todos** son 0).
+--- código
+function pasoVerde(codigo) {
+  // tu código aquí
+}
+
+function ciVerde(codigos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('0 es verde', () => igual(pasoVerde(0), true));
+prueba('1 es rojo', () => igual(pasoVerde(1), false));
+prueba('cualquier número distinto de 0 es rojo', () => igual(pasoVerde(127), false));
+prueba('todos 0: verde', () => igual(ciVerde([0, 0, 0]), true));
+prueba('uno distinto de 0: rojo', () => igual(ciVerde([0, 2, 0]), false));
+--- solución
+function pasoVerde(codigo) {
+  return codigo === 0;
+}
+
+function ciVerde(codigos) {
+  return codigos.every(pasoVerde);
+}
+```
+
 ```practica
 elige :: ¿Qué código de salida significa "todo bien"? :: 1 :: 0 :: 200
 vf :: El CI entiende qué es un color mal puesto
@@ -506,13 +731,13 @@ escribe :: Explica con tus palabras cómo "piensa" el CI. :: Solo mira el códig
 
 ## Ejercicios
 
-> 🎙️ **El profesor:** a la práctica. Si tienes la app, hazlos en la computadora. Si no, igual puedes responder 4, 5 y 6.
+> 🎙️ **El profesor:** a la práctica, con el proyecto de práctica [Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro) (bájalo como dice su README). Las preguntas 4, 5 y 6 se responden sin computadora.
 
 > 🌎 **En la vida real:** Es como recorrer la fábrica con el jefe y explicar con tus palabras qué hace cada máquina.
 
-1. Abre `.github/workflows/ci.yml` en Copiloto y busca los 6 trabajos. Escribe con tus palabras qué hace cada uno.
-2. Entra a la pestaña **Actions** y abre la última subida. ¿Cuánto tardó? ¿Cuál fue el trabajo más lento?
-3. En la terminal de la app, corre `npm run check:size`. ¿Qué dice?
+1. Abre `.github/workflows/ci.yml` en Gastos del carro: tiene **2 trabajos**. Escribe con tus palabras qué hace cada uno y qué revisa cada paso.
+2. Entra a la pestaña **Actions** de Gastos del carro y abre la última subida. ¿Cuánto tardó? ¿Cuál fue el trabajo más lento?
+3. En la terminal, dentro de `gastos-del-carro`, corre `npm run check:tamano`. ¿Qué dice?
 4. Si cambias un color a mano en una pantalla (`color: '#FF0000'`), ¿qué paso del CI falla?
 5. ¿Por qué se usa `npm ci` y no `npm install`?
 6. ¿Por qué el CI no puede detectar que un botón se ve feo?
@@ -520,9 +745,9 @@ escribe :: Explica con tus palabras cómo "piensa" el CI. :: Solo mira el códig
 <details>
 <summary>Ver las correcciones explicadas</summary>
 
-1. app (la app entera), carton-android (Kotlin del cartón), functions (servidor), reglas (seguridad de Firestore), panel (armar el panel web), webapp (armar y probar la web).
-2. Suele tardar unos 4 minutos. El más lento normalmente es el del cartón o el de la app, porque instalan y arman más cosas.
-3. Si todo está bien: `✔ Tamanho: nenhum arquivo passa de 1000 linhas.` ("ningún archivo pasa de 1000 líneas").
+1. **La app** (TypeScript, los cuatro candados y las pruebas) y **Las reglas de Firestore** (instala Java y prueba las reglas con el emulador). En Copiloto son 6: app, carton-android (Kotlin del cartón), functions (servidor), reglas, panel y webapp.
+2. Suele tardar uno o dos minutos. El más lento es el de **las reglas**, porque instala Java y levanta el emulador de Firebase. (El de Copiloto tarda unos 4 minutos.)
+3. Si todo está bien: `✓ ningún archivo pasa de 300 líneas`. (En Copiloto el límite es 1000 y el mensaje sale en portugués.)
 4. El **Candado de diseño** (`check:design`), en el trabajo `app`.
 5. Porque `npm ci` instala exactamente lo anotado en `package-lock.json` y falla si algo no coincide; así la máquina del CI tiene las mismas versiones que tú.
 6. Porque el CI solo corre comandos y pruebas, y ninguno mira la pantalla. Para eso se prueba en el teléfono (o con pruebas E2E, que Copiloto todavía no tiene).
