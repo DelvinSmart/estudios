@@ -69,7 +69,7 @@ todos los "abre tal archivo de Copiloto".
 - [x] Crear el repositorio y su guía para descargarlo: **[github.com/DelvinSmart/gastos-del-carro](https://github.com/DelvinSmart/gastos-del-carro)**
   (TypeScript estricto, 38 pruebas, cuatro candados, reglas de Firestore probadas con el emulador, la caja en capas,
   tres idiomas y el motor de diseño; su CI de GitHub está en verde)
-- [ ] Una versión "con errores a propósito" para el curso de seguridad
+- [x] Una versión "con errores a propósito" para el curso de seguridad: la API de gastos con usuarios y SQLite, 10 errores, sus trampas y la versión arreglada (clase 91)
 - [x] Cambiar cada ejercicio que hoy pide abrir Copiloto (✅ todo Programación; los otros cursos se revisan con sus ejercicios)
 
 ### C. Cada curso: ejercicios en cada parte, un proyecto de principio a fin, y más clases donde falten
@@ -82,7 +82,7 @@ todos los "abre tal archivo de Copiloto".
 | React Native | ✅ La app de gastos con Expo y TypeScript (clase 88): motor de diseño, lógica con pruebas, AsyncStorage, FlatList, 27 pruebas con Jest y Testing Library, y abrirla en el iPhone con Expo Go | ✅ Completo: 8 clases, un ejercicio de código en cada parte (27, probados con su solución). Probándola de verdad se encontró y arregló que el gasto más nuevo del mismo día quedaba abajo |
 | Kotlin | ✅ La app de gastos nativa en Android (clase 89): Gradle con catálogo de versiones, lógica en Kotlin puro, DataStore detrás de una interfaz, ViewModel con StateFlow, Compose, 23 pruebas con JUnit, y probada en el emulador (guardar, cerrar y abrir, borrar, girar) | ✅ Completo: 8 clases, un ejercicio de Kotlin de verdad en cada parte (27, corren en el Kotlin Playground y probados con su solución). Mirándola en el emulador se encontraron y arreglaron las barras del sistema ilegibles y un chip sin el color del motor |
 | Python | ✅ El resumen de la semana desde un CSV (clase 90): un programa de terminal que revisa cada fila y junta todos los problemas, lee planillas de Excel, argparse con código de salida, y 28 pruebas con pytest probadas rompiendo el código a propósito de 12 maneras | ✅ Completo: 9 clases, un ejercicio de Python de verdad en cada parte (37, probados en la computadora y en el navegador). El sabotaje y la terminal encontraron tres agujeros: nadie revisaba el neto, una prueba de filas vacías que no probaba nada, y las planillas de Excel (el BOM) |
-| Seguridad | Auditar la versión "con errores" del proyecto de práctica y arreglarla | ✅ Un ejercicio de código en cada parte (23, probados con su solución), siempre del lado del defensor: cerrar un IDOR, consultas con parámetros, escapar, limitar intentos, CORS con lista, el rol en el perfil, cupos de SMS, trampas que atrapan reglas rotas. Falta: el proyecto con errores a propósito; más clases |
+| Seguridad | ✅ Auditar la API de gastos con 10 errores a propósito (clase 91): una trampa por error (en rojo contra con-errores, en verde contra la arreglada), el uso normal que pasa en las dos, el informe y el XSS comprobado en el navegador | ✅ 4 clases, un ejercicio de código en cada parte (29, probados con su solución), siempre del lado del defensor. Falta: más clases (sigue siendo el curso más corto) |
 | IA para programadores | Construir una app pequeña dirigiendo a la IA: plan, reglas, pruebas, revisión | Ejercicios de pedidos y de revisión de código |
 | Agentes de IA | Un agente pequeño que corre gratis en la computadora (Ollama) | Ejercicios con el código de cada patrón |
 

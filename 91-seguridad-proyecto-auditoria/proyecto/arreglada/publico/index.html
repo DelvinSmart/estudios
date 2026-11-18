@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gastos para auditar</title>
+  <style>
+    :root { --fondo: #0f141b; --tarjeta: #18212c; --texto: #e6edf3; --tenue: #8796aa; --acento: #7ee787; --peligro: #ff7b72; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font-family: system-ui, sans-serif; }
+    main { max-width: 520px; margin: 0 auto; padding: 16px; display: grid; gap: 14px; }
+    .aviso { color: var(--peligro); font-size: 14px; }
+    form, ul { background: var(--tarjeta); border-radius: 14px; padding: 16px; display: grid; gap: 8px; margin: 0; }
+    input, button { font: inherit; padding: 8px; border-radius: 8px; border: 1px solid var(--tenue); background: var(--fondo); color: var(--texto); }
+    button { background: var(--acento); color: var(--fondo); border: 0; font-weight: 700; }
+    li { list-style: none; }
+    [hidden] { display: none !important; } /* sin esto, display: grid le gana a hidden y el formulario no se esconde */
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Gastos para auditar</h1>
+    <p class="aviso">Versión arreglada. Igual es un proyecto de práctica: corre solo en tu computadora.</p>
+    <form id="entrar">
+      <input id="usuario" placeholder="usuario (ana o beto)" autocomplete="username">
+      <input id="clave" type="password" placeholder="clave" autocomplete="current-password">
+      <button>Entrar</button>
+      <p id="mensaje" class="aviso"></p>
+    </form>
+    <form id="nuevo" hidden>
+      <input id="tipo" placeholder="tipo (lavado, peaje…)">
+      <input id="valor" type="number" step="0.01" placeholder="valor">
+      <input id="nota" placeholder="nota">
+      <button>Guardar</button>
+    </form>
+    <ul id="lista" hidden></ul>
+  </main>
+  <script type="module">
+    import { filaHtml } from './vista.mjs';
+    let token = null;
+    const $ = (s) => document.querySelector(s);
+    const pedir = (ruta, opciones = {}) =>
+      fetch(ruta, { ...opciones, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } }).then((r) => r.json());
+
+    async function dibujar() {
+      const gastos = await pedir('/gastos');
+      $('#lista').innerHTML = gastos.map(filaHtml).join('');
+    }
+
+    $('#entrar').addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const r = await pedir('/login', { method: 'POST', body: JSON.stringify({ usuario: $('#usuario').value, clave: $('#clave').value }) });
+      if (!r.token) { $('#mensaje').textContent = r.error; return; }
+      token = r.token;
+      $('#entrar').hidden = true; $('#nuevo').hidden = false; $('#lista').hidden = false;
+      dibujar();
+    });
+
+    $('#nuevo').addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      await pedir('/gastos', { method: 'POST', body: JSON.stringify({ tipo: $('#tipo').value, valor: Number($('#valor').value), nota: $('#nota').value }) });
+      dibujar();
+    });
+  </script>
+</body>
+</html>

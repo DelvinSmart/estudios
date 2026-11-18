@@ -1,0 +1,24 @@
+{
+  "name": "api-de-gastos-para-auditar",
+  "version": "1.0.0",
+  "description": "El proyecto del curso Seguridad: la API de gastos con 10 errores a propósito (con-errores/) y arreglada (arreglada/). SOLO para practicar en tu computadora: no la publiques.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "con-errores": "node --no-warnings con-errores/servidor.mjs",
+    "arreglada": "node --no-warnings arreglada/servidor.mjs",
+    "trampas": "VERSION=con-errores node --no-warnings --test test/trampas.test.mjs",
+    "trampas:arreglada": "VERSION=arreglada node --no-warnings --test test/trampas.test.mjs",
+    "uso": "VERSION=con-errores node --no-warnings --test test/uso.test.mjs && VERSION=arreglada node --no-warnings --test test/uso.test.mjs",
+    "test": "npm run uso && npm run trampas:arreglada"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.0"
+  }
+}

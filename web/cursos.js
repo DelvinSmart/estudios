@@ -39,6 +39,7 @@ export const CLASES = {
   '22': { carpeta: '22-seguridad-basica', titulo: 'Seguridad básica', meta: 'Pensar como atacante: contraseñas, secretos, phishing y el navegador', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '23': { carpeta: '23-seguridad-intermedia', titulo: 'Seguridad intermedia', meta: 'Las vulnerabilidades web más comunes y cómo se cierran', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '24': { carpeta: '24-seguridad-avanzada', titulo: 'Seguridad avanzada', meta: 'Auditar un sistema entero, como hicimos con Copiloto', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '91': { carpeta: '91-seguridad-proyecto-auditoria', titulo: 'Proyecto final: auditar una API con errores', meta: 'Una API con 10 errores a propósito: trampas, arreglos sin romper nada y el informe', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '89': { carpeta: '89-kotlin-proyecto-app-de-gastos', titulo: 'Proyecto final: la app de gastos en Android', meta: 'Gradle, lógica en Kotlin puro, DataStore, ViewModel con StateFlow, Compose y el emulador', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '36': { carpeta: '36-python-primeros-pasos', titulo: 'Primeros pasos', meta: 'Correr Python, variables, tipos, print e input', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '37': { carpeta: '37-python-decisiones-y-repeticiones', titulo: 'Decisiones y repeticiones', meta: 'La sangría, if, elif, else, for, range y while', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -116,7 +117,7 @@ const ICONOS = {
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁',
-  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️',
+  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️', '91': '🏁',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
 
@@ -127,7 +128,7 @@ const LOGOS_CLASE = {
   '12': ['html', 'css', 'javascript'], '13': ['react', 'typescript', 'vite', 'tailwind', 'firebase'], '14': ['html', 'css', 'javascript'],
   '15': ['html'], '16': ['css'], '17': ['javascript'], '18': ['html', 'css', 'javascript', 'markdown'],
   '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'], '77': ['github', 'firebase', 'react'], '85': ['firebase', 'javascript', 'github'], '86': ['javascript', 'typescript', 'react'],
-  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '25': ['python', 'javascript'], '27': ['python'],
+  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
   '35': ['claude', 'git'], '79': ['claude'], '78': ['claude', 'git'], '80': ['claude', 'ollama'],
   '44': ['javascript', 'typescript', 'react', 'kotlin'],
@@ -208,7 +209,7 @@ export const ETAPAS = [
   {
     id: 'seguridad', curso: 'seguridad', icono: '🛡️', titulo: 'Seguridad: pensar como hacker', logos: ['owasp'],
     desc: 'Un curso aparte, con su propio certificado: cómo atacan y cómo se defiende un sistema.',
-    clases: ['22', '23', '24'],
+    clases: ['22', '23', '24', '91'],
   },
   {
     id: 'ia-programadores', curso: 'ia', icono: '🧠', titulo: 'IA para programadores', logos: ['claude', 'gemini', 'ollama'],
