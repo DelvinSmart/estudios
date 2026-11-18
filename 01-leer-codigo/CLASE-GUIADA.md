@@ -219,6 +219,36 @@ interface Gasto {
 
 **Ahora sí, a practicar.** Ya viste todo lo de esta parte (los tipos y `null` a fondo). Responde las tres prácticas:
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Ponle los tipos (TypeScript te revisa)
+lenguaje: ts
+pide: Escribe los tipos que faltan: `marca` es un texto, `anio` un número, `tieneTanque` un sí o no, y `apps` una lista de textos. Después completa `precioPorLitro`, que recibe dos números y devuelve un número. Si un tipo está mal, TypeScript te dice la línea.
+--- código
+const marca = 'Toyota';
+const anio = 2017;
+const tieneTanque = true;
+const apps = ['Uber', '99'];
+
+function precioPorLitro(total, litros) {
+  // tu código aquí
+}
+--- pruebas
+const m: string = marca; const a: number = anio; const t: boolean = tieneTanque; const l: string[] = apps;
+prueba('240 reales por 40 litros son 6 por litro', () => igual(precioPorLitro(240, 40), 6));
+const r: number = precioPorLitro(1, 1);
+--- solución
+const marca: string = 'Toyota';
+const anio: number = 2017;
+const tieneTanque: boolean = true;
+const apps: string[] = ['Uber', '99'];
+
+function precioPorLitro(total: number, litros: number): number {
+  return total / litros;
+}
+```
+
 ```practica
 escribe :: Con tus palabras: ¿qué es un `string`? Da un ejemplo. :: Un texto. Va entre comillas, por ejemplo `'Thermomac'` o `'Uber'`.
 escribe :: Con tus palabras: ¿qué es un `number`? Da un ejemplo. :: Un número, con o sin decimales, sin comillas. Por ejemplo `45` litros o `5.89` de precio.
@@ -391,6 +421,31 @@ Un **objeto** guarda **varios datos de una misma cosa**, cada uno con su nombre.
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las cinco piezas en una sola función
+lenguaje: js
+pide: Usa las cinco piezas: una **constante** `MAX_PALABRAS` con 2, una **función** `cabeEnElLetrero(nombre)`, un **if**, una **lista** (la que da `split`) y un **objeto** como respuesta: `{ cabe: true/false, palabras: N }`. Cabe si tiene `MAX_PALABRAS` palabras o menos.
+--- código
+// tu código aquí
+--- pruebas
+prueba('la constante vale 2', () => igual(MAX_PALABRAS, 2));
+prueba('"Taxi Bom" cabe', () => igual(cabeEnElLetrero('Taxi Bom'), { cabe: true, palabras: 2 }));
+prueba('"Taxi Bom Ltda" no cabe', () => igual(cabeEnElLetrero('Taxi Bom Ltda'), { cabe: false, palabras: 3 }));
+prueba('"Uber" cabe', () => igual(cabeEnElLetrero('Uber'), { cabe: true, palabras: 1 }));
+--- solución
+const MAX_PALABRAS = 2;
+
+function cabeEnElLetrero(nombre) {
+  const palabras = nombre.split(' ');
+  if (palabras.length > MAX_PALABRAS) {
+    return { cabe: false, palabras: palabras.length };
+  }
+  return { cabe: true, palabras: palabras.length };
+}
+```
+
 ```practica
 escribe :: Con tus palabras: ¿qué es una función? Usa una comparación de la vida real. :: Una máquina con nombre: recibe algo, hace un trabajo y devuelve un resultado. Como una licuadora: entra fruta, sale jugo.
 escribe :: Con tus palabras: ¿para qué sirve un `if`? :: Para tomar una decisión: si la pregunta da sí (`true`), se hace lo de adentro; si da no, se salta.
@@ -407,6 +462,8 @@ vf :: `carro.modelo` lee el dato `modelo` del objeto `carro`
 > 🔁 **Repaso:** constante (un valor fijo con nombre), función (una máquina que recibe y devuelve), `if` (una decisión), lista (varios en orden) y objeto (varios datos de una cosa). Con estas cinco se arma casi todo.
 
 ## 3. Primer ejemplo real: el nombre de "Mi empresa"
+
+> 📌 **Nota:** el código de Copiloto es privado, pero todo lo que lees en esta clase está también en el proyecto de práctica **[Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro)**, con nombres en español: esta función es `normalizarNombreEmpresa` en `src/datos/aplicaciones.ts`, y la de la parte 5 es `vehiculoTieneTanque` en `src/utils/combustible.ts`. Puedes abrirlos y leerlos con la clase al lado.
 
 > 🎙️ **El profesor:** basta de ejemplos inventados. Ahora vamos a leer **código real de Copiloto**, el que corre hoy en los teléfonos. No te asustes si al principio se ve raro: vamos a ir línea por línea, y al final lo vas a poder explicar tú.
 
@@ -616,6 +673,40 @@ lo que escribió ─► limpiar espacios ─► ¿vacío? ──sí──► '' 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Escribe tú la regla de "Mi empresa"
+lenguaje: ts
+pide: Ya la leíste línea por línea. Ahora escríbela tú, **sin mirar**: `normalizarNombreEmpresa(texto)` limpia los espacios (uno solo entre palabras y ninguno en las puntas), devuelve `''` si queda vacío, y `null` si tiene más de 24 letras o más de 2 palabras. Es la misma función que está en el proyecto de práctica, en `src/datos/aplicaciones.ts`.
+--- código
+const NOMBRE_EMPRESA_MAX_PALABRAS = 2;
+const NOMBRE_EMPRESA_MAX_LETRAS = 24;
+
+function normalizarNombreEmpresa(texto: string): string | null {
+  // tu código aquí
+  return texto;
+}
+--- pruebas
+prueba('quita los espacios de las puntas', () => igual(normalizarNombreEmpresa('  Thermomac  '), 'Thermomac'));
+prueba('un solo espacio entre palabras', () => igual(normalizarNombreEmpresa('Refrigeración    Silva'), 'Refrigeración Silva'));
+prueba('vacío da vacío', () => igual(normalizarNombreEmpresa('    '), ''));
+prueba('2 palabras está bien', () => igual(normalizarNombreEmpresa('Taxi Bom'), 'Taxi Bom'));
+prueba('3 palabras es null', () => igual(normalizarNombreEmpresa('Taxi Bom Ltda'), null));
+prueba('más de 24 letras es null', () => igual(normalizarNombreEmpresa('Refrigeracionesdelnortebrasil'), null));
+--- solución
+const NOMBRE_EMPRESA_MAX_PALABRAS = 2;
+const NOMBRE_EMPRESA_MAX_LETRAS = 24;
+
+function normalizarNombreEmpresa(texto: string): string | null {
+  const limpio = texto.replace(/\s+/g, ' ').trim();
+  if (!limpio) return '';
+  if (limpio.length > NOMBRE_EMPRESA_MAX_LETRAS) return null;
+  if (limpio.split(' ').length > NOMBRE_EMPRESA_MAX_PALABRAS) return null;
+  return limpio;
+}
+```
+
 ```practica
 escribe :: Explica con tus palabras qué hace `normalizeMyCompanyName`, como si se lo contaras a otro conductor. :: Revisa y limpia el nombre que escribes para "Mi empresa": quita espacios de más; si quedó vacío usa "Mi empresa"; si pasa de 24 letras o de 2 palabras lo rechaza (`null`); si no, devuelve el nombre limpio.
 elige :: ¿Qué devuelve con `'  Uber Eats  '`? :: `null` :: `'Uber Eats'` :: `''`
@@ -748,6 +839,38 @@ Y, como es una regla de dinero, agregarías una prueba para `'deliveries'`.
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Acumulativa o independiente: el total del día
+lenguaje: js
+pide: `esPlataformaFija(id)` devuelve `true` para `'extras'`, `'viajes_particulares'` y `'mi_empresa'` (cada registro es independiente). `totalDelDia(id, registros)`: si la plataforma es fija, **suma** los registros; si es acumulativa (Uber, 99…), el total del día es **el último** registro. Sin registros, 0.
+--- código
+function esPlataformaFija(id) {
+  // tu código aquí
+}
+
+function totalDelDia(id, registros) {
+  // tu código aquí
+}
+--- pruebas
+prueba('extras es fija', () => igual(esPlataformaFija('extras'), true));
+prueba('uber no es fija', () => igual(esPlataformaFija('uber'), false));
+prueba('Uber anotó 150 y después 320: ganó 320', () => igual(totalDelDia('uber', [150, 320]), 320));
+prueba('dos viajes particulares de 50 y 30: ganó 80', () => igual(totalDelDia('viajes_particulares', [50, 30]), 80));
+prueba('sin registros, 0', () => igual(totalDelDia('uber', []), 0));
+--- solución
+function esPlataformaFija(id) {
+  return id === 'extras' || id === 'viajes_particulares' || id === 'mi_empresa';
+}
+
+function totalDelDia(id, registros) {
+  if (registros.length === 0) return 0;
+  if (esPlataformaFija(id)) return registros.reduce((s, r) => s + r, 0);
+  return registros[registros.length - 1];
+}
+```
+
 ```practica
 escribe :: ¿Qué diferencia hay entre una plataforma acumulativa y una no acumulativa? Da un ejemplo de cada una. :: En la acumulativa (Uber) se anota el total del día, que ya incluye lo anterior: no se suman los registros. En la no acumulativa (Extras) cada registro es aparte y se suma.
 elige :: ¿Qué devuelve `isImmutableEarningPlatform('uber')`? :: `true` :: `false` :: `null`
@@ -811,6 +934,48 @@ Apliquemos los cuatro pasos:
 - `'bicycle'` → `false`: la bicicleta es lo único sin tanque. Por eso, en la app, a quien anda en bicicleta no le aparece lo del combustible.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lee una función que no viste, y predice
+lenguaje: js
+pide: Esta función es del proyecto de práctica (`src/datos/aplicaciones.ts`). Aplica los cuatro pasos (comentario, firma, reglas, junto) **sin correrla**, y completa `predicciones` con lo que crees que devuelve cada llamada. Después toca **▶ probar**.
+--- código
+/** Iniciales para el circulito de cada app: "Mi empresa" → "ME", "Uber" → "UB". */
+function inicialesDe(nombre) {
+  const palabras = nombre.trim().split(/\s+/).filter(Boolean);
+  if (palabras.length === 0) return '+';
+  if (palabras.length === 1) return palabras[0].slice(0, 2).toUpperCase();
+  return `${palabras[0][0]}${palabras[1][0]}`.toUpperCase();
+}
+
+const predicciones = {
+  'Viajes particulares': '',
+  '99': '',
+  '   ': '',
+  'mi empresa nueva': '',
+};
+--- pruebas
+for (const [entrada, prediccion] of Object.entries(predicciones)) {
+  prueba(`inicialesDe(${JSON.stringify(entrada)})`, () => igual(prediccion, inicialesDe(entrada)));
+}
+--- solución
+/** Iniciales para el circulito de cada app: "Mi empresa" → "ME", "Uber" → "UB". */
+function inicialesDe(nombre) {
+  const palabras = nombre.trim().split(/\s+/).filter(Boolean);
+  if (palabras.length === 0) return '+';
+  if (palabras.length === 1) return palabras[0].slice(0, 2).toUpperCase();
+  return `${palabras[0][0]}${palabras[1][0]}`.toUpperCase();
+}
+
+const predicciones = {
+  'Viajes particulares': 'VP',   // dos palabras: la primera letra de cada una
+  '99': '99',                    // una palabra: sus dos primeras letras
+  '   ': '+',                    // sin palabras: el +
+  'mi empresa nueva': 'ME',      // solo mira las dos primeras palabras
+};
+```
 
 ```practica
 escribe :: ¿Cuáles son los cuatro pasos para leer una función que no conoces? :: 1) Leer el comentario de arriba; 2) leer la firma: qué recibe y qué devuelve; 3) leer los `if` y las comparaciones (las reglas); 4) no trabarse en un símbolo: primero la idea general.

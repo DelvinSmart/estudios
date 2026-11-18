@@ -70,13 +70,13 @@ todos los "abre tal archivo de Copiloto".
   (TypeScript estricto, 38 pruebas, cuatro candados, reglas de Firestore probadas con el emulador, la caja en capas,
   tres idiomas y el motor de diseño; su CI de GitHub está en verde)
 - [ ] Una versión "con errores a propósito" para el curso de seguridad
-- [ ] Cambiar cada ejercicio que hoy pide abrir Copiloto
+- [ ] Cambiar cada ejercicio que hoy pide abrir Copiloto (✅ clases 01, 02 y 03; siguen las demás)
 
 ### C. Cada curso: ejercicios en cada parte, un proyecto de principio a fin, y más clases donde falten
 
 | Curso | Proyecto de principio a fin | Lo que hay que agregar |
 |---|---|---|
-| Programación | "Gastos del carro": leer su código, escribir pruebas, CI, Git, Firebase con emulador y un CRUD | Ejercicios en cada clase; usar el proyecto de práctica en vez de Copiloto |
+| Programación | "Gastos del carro": leer su código, escribir pruebas, CI, Git, Firebase con emulador y un CRUD | ✅ Clases 01 a 03: un ejercicio en cada parte (16) y la clase 03 hecha con Gastos del carro y Vitest. Faltan las demás clases |
 | JavaScript + TypeScript | ✅ La web de gastos, de una carpeta vacía a GitHub Pages (clase 84) | ✅ Completo: 13 clases, un ejercicio de código en cada parte (54, probados con su solución), y las clases nuevas del DOM, errores y clases (POO), fechas y guardar |
 | Node.js | La API de gastos con Express, con pruebas, publicada | Ejercicios de cada ruta, revisión automática |
 | React Native | La app de gastos con Expo, en el teléfono | Formularios, listas, guardar datos, publicar paso a paso |

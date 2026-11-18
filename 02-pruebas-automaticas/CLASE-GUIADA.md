@@ -51,6 +51,50 @@ Si la respuesta es sí, la prueba **pasa** ✓. Si es no, la prueba **falla** �
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu primera prueba, y verla fallar
+lenguaje: js
+pide: Escribe al menos 2 pruebas para `doble` con `it` y `expect`. Las revisiones comprueban que tus pruebas **pasan** con la función correcta y que **alguna falla** si la función se rompe (si suma en vez de multiplicar).
+--- código
+let ROTA = false;
+function doble(n) {
+  return ROTA ? n + 2 : n * 2;
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+// ✍️ Tus pruebas aquí:
+--- pruebas
+const correrTodas = () => misPruebas.map((p) => { try { p.fn(); return null; } catch (e) { return p.nombre + ': ' + e.message; } }).filter(Boolean);
+prueba('escribiste al menos 2 pruebas', () => ok(misPruebas.length >= 2, `tienes ${misPruebas.length}`));
+prueba('todas pasan con la función correcta', () => { const f = correrTodas(); ok(f.length === 0, 'fallan: ' + f.join(' | ')); });
+prueba('alguna falla si la función se rompe', () => { ROTA = true; const f = correrTodas(); ROTA = false; ok(f.length > 0, 'con la función rota todas pasaron: prueba con un número que no sea 2 (doble de 2 y 2 + 2 dan lo mismo)'); });
+--- solución
+let ROTA = false;
+function doble(n) {
+  return ROTA ? n + 2 : n * 2;
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+it('el doble de 5 es 10', () => { expect(doble(5)).toBe(10); });
+it('el doble de 0 es 0', () => { expect(doble(0)).toBe(0); });
+```
+
 ```practica
 escribe :: Con tus palabras: ¿qué es una prueba automática? :: Un pequeño programa que revisa si otro programa hace lo correcto: le da datos, compara lo que sale con lo esperado, y lo hace sola cada vez que cambias algo.
 escribe :: ¿Cuál es la pregunta que hace toda prueba? :: Con estos datos, ¿el resultado es el que yo esperaba?
@@ -103,6 +147,45 @@ En Copiloto, las pruebas encontraron esto: si una cuenta tenía registros con `U
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El error de Uber y uber (sumar el doble)
+lenguaje: js
+pide: Este es el error real que encontraron las pruebas de Copiloto: `Uber` y `uber` se contaban como dos plataformas. Completa `normalizarApp(id)` (minúsculas y sin espacios en las puntas) y úsala en `totalesPorApp` para que se sumen juntas.
+--- código
+function normalizarApp(id) {
+  // tu código aquí
+  return id;
+}
+
+function totalesPorApp(registros) {
+  const totales = {};
+  for (const r of registros) {
+    const app = r.app;   // ← aquí está el problema
+    totales[app] = (totales[app] ?? 0) + r.valor;
+  }
+  return totales;
+}
+--- pruebas
+prueba('Uber y uber son la misma', () => igual(totalesPorApp([{ app: 'Uber', valor: 100 }, { app: 'uber', valor: 50 }]), { uber: 150 }));
+prueba('con espacios de más también', () => igual(totalesPorApp([{ app: ' 99 ', valor: 10 }, { app: '99', valor: 5 }]), { '99': 15 }));
+prueba('normalizarApp sola', () => igual(normalizarApp('  InDrive '), 'indrive'));
+--- solución
+function normalizarApp(id) {
+  return id.trim().toLowerCase();
+}
+
+function totalesPorApp(registros) {
+  const totales = {};
+  for (const r of registros) {
+    const app = normalizarApp(r.app);
+    totales[app] = (totales[app] ?? 0) + r.valor;
+  }
+  return totales;
+}
+```
+
 ```practica
 escribe :: Nombra al menos tres de las cinco razones para tener pruebas. :: Encontrar errores, proteger lo que ya funciona, cambiar sin miedo, dejar claras las reglas, ahorrar tiempo.
 vf :: Una prueba es como una alarma de humo: avisa, pero no apaga el fuego
@@ -140,6 +223,52 @@ elige :: ¿Por qué los errores de dinero son peligrosos? :: Porque hacen que la
 **No.** Las pruebas solo cubren lo que escribiste y casi nunca ven la pantalla. El caso del iPhone lo demuestra: todo verde, y la app no abría. Siempre se prueba también en un teléfono real.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La prueba que faltaba
+lenguaje: js
+pide: `metaCumplida(ganancia, meta)` tiene un error: con la ganancia **igual** a la meta dice que no. Las dos pruebas que ya están pasan igual: **las pruebas no ven lo que no prueban**. Agrega la prueba del caso que falta (el borde), y después arregla la función para que todas pasen.
+--- código
+function metaCumplida(ganancia, meta) {
+  return ganancia > meta;
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+it('600 con meta 500: cumplida', () => { expect(metaCumplida(600, 500)).toBe(true); });
+it('300 con meta 500: no cumplida', () => { expect(metaCumplida(300, 500)).toBe(false); });
+// ✍️ Agrega la prueba del borde aquí, y arregla la función de arriba:
+--- pruebas
+const correrTodas = () => misPruebas.map((p) => { try { p.fn(); return null; } catch (e) { return p.nombre + ': ' + e.message; } }).filter(Boolean);
+prueba('agregaste al menos una prueba', () => ok(misPruebas.length >= 3, 'falta la prueba del borde'));
+prueba('todas tus pruebas pasan', () => { const f = correrTodas(); ok(f.length === 0, 'fallan: ' + f.join(' | ')); });
+prueba('la función ya está bien: 500 con meta 500 es cumplida', () => igual(metaCumplida(500, 500), true));
+prueba('tu prueba nueva atrapa el error original', () => { const original = (g, m) => g > m; const f = misPruebas.filter((p) => { try { new Function('metaCumplida', 'expect', '(' + p.fn.toString() + ')()')(original, expect); return false; } catch (e) { return true; } }); ok(f.length > 0, 'ninguna prueba falla con la función original: prueba ganancia igual a la meta'); });
+--- solución
+function metaCumplida(ganancia, meta) {
+  return ganancia >= meta;
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+it('600 con meta 500: cumplida', () => { expect(metaCumplida(600, 500)).toBe(true); });
+it('300 con meta 500: no cumplida', () => { expect(metaCumplida(300, 500)).toBe(false); });
+it('500 con meta 500 (el borde): cumplida', () => { expect(metaCumplida(500, 500)).toBe(true); });
+```
 
 ```practica
 vf :: Si todas las pruebas pasan, la app no tiene ningún error
@@ -183,6 +312,56 @@ Dos que confunden, explicadas más despacio:
 **Exactamente 8 personas.** Con 7 está claro que sí, con 9 está claro que no; con 8 es donde se ve si la regla está bien escrita.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los casos borde de la tienda
+lenguaje: js
+pide: La tienda abre a las **8:00** y cierra a las **18:00** (a las 18:00 en punto ya está cerrada). Escribe pruebas para `abierta(hora)` que incluyan **los dos bordes**: justo 8 y justo 18. Las revisiones sabotean la regla (`>` en vez de `>=`, y `<=` en vez de `<`) y tus pruebas tienen que notarlo.
+--- código
+let SABOTAJE = '';
+function abierta(hora) {
+  const abre = SABOTAJE === 'abre' ? hora > 8 : hora >= 8;
+  const cierra = SABOTAJE === 'cierra' ? hora <= 18 : hora < 18;
+  return abre && cierra;
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+// ✍️ Tus pruebas aquí (incluye los bordes):
+--- pruebas
+const correrTodas = () => misPruebas.map((p) => { try { p.fn(); return null; } catch (e) { return p.nombre + ': ' + e.message; } }).filter(Boolean);
+prueba('todas pasan con la regla correcta', () => { const f = correrTodas(); ok(misPruebas.length >= 2 && f.length === 0, f.length ? 'fallan: ' + f.join(' | ') : 'escribe al menos 2 pruebas'); });
+prueba('notan si abre a las 8 y 1 (borde de apertura)', () => { SABOTAJE = 'abre'; const f = correrTodas(); SABOTAJE = ''; ok(f.length > 0, 'falta la prueba de las 8 en punto'); });
+prueba('notan si a las 18 sigue abierta (borde de cierre)', () => { SABOTAJE = 'cierra'; const f = correrTodas(); SABOTAJE = ''; ok(f.length > 0, 'falta la prueba de las 18 en punto'); });
+--- solución
+let SABOTAJE = '';
+function abierta(hora) {
+  const abre = SABOTAJE === 'abre' ? hora > 8 : hora >= 8;
+  const cierra = SABOTAJE === 'cierra' ? hora <= 18 : hora < 18;
+  return abre && cierra;
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+it('a las 8 en punto ya está abierta', () => { expect(abierta(8)).toBe(true); });
+it('a las 7 está cerrada', () => { expect(abierta(7)).toBe(false); });
+it('a las 18 en punto ya está cerrada', () => { expect(abierta(18)).toBe(false); });
+it('a las 12 está abierta', () => { expect(abierta(12)).toBe(true); });
+```
 
 ```practica
 elige :: ¿Qué es una regresión? :: Un error nuevo en algo que nunca funcionó :: Algo que funcionaba y se volvió a dañar :: Una prueba que pasa
@@ -255,6 +434,63 @@ Línea por línea: abre la app, toca "Registrar ingreso", escribe 100, toca "Gua
 (a) **Unitaria**: una función sola. (b) **E2E**: la app entera como usuario. (c) **Integración**: varias piezas juntas.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una prueba unitaria y una de integración
+lenguaje: js
+pide: Escribe al menos una prueba **unitaria** (de `total` sola) y una de **integración** (que use `crearCaja` y `total` **juntas**: agregar gastos y ver el total). Las revisiones rompen cada pieza por separado, y alguna prueba tiene que notarlo en cada caso.
+--- código
+let ROTO = '';
+function total(gastos) {
+  return ROTO === 'total' ? 0 : gastos.reduce((s, g) => s + g, 0);
+}
+function crearCaja() {
+  const gastos = [];
+  return { agregar: (v) => { if (ROTO !== 'agregar') gastos.push(v); }, gastos };
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+// ✍️ Tus pruebas aquí:
+--- pruebas
+const correrTodas = () => misPruebas.map((p) => { try { p.fn(); return null; } catch (e) { return p.nombre + ': ' + e.message; } }).filter(Boolean);
+prueba('todas pasan con todo bien', () => { const f = correrTodas(); ok(misPruebas.length >= 2 && f.length === 0, f.length ? 'fallan: ' + f.join(' | ') : 'escribe al menos 2 pruebas'); });
+prueba('notan si total se rompe', () => { ROTO = 'total'; const f = correrTodas(); ROTO = ''; ok(f.length > 0, 'falta una prueba unitaria de total'); });
+prueba('notan si agregar se rompe (integración)', () => { ROTO = 'agregar'; const f = correrTodas(); ROTO = ''; ok(f.length > 0, 'falta una prueba que agregue con crearCaja y mire el total'); });
+--- solución
+let ROTO = '';
+function total(gastos) {
+  return ROTO === 'total' ? 0 : gastos.reduce((s, g) => s + g, 0);
+}
+function crearCaja() {
+  const gastos = [];
+  return { agregar: (v) => { if (ROTO !== 'agregar') gastos.push(v); }, gastos };
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+it('unitaria: total de [10, 20] es 30', () => { expect(total([10, 20])).toBe(30); });
+it('integración: agregar 50 y 25 deja un total de 75', () => {
+  const caja = crearCaja();
+  caja.agregar(50);
+  caja.agregar(25);
+  expect(total(caja.gastos)).toBe(75);
+});
+```
 
 ```practica
 elige :: Probar una sola función, como `faltaParaMeta`, es una prueba… :: unitaria :: de integración :: E2E
@@ -434,6 +670,50 @@ El código es **el último** sospechoso, no el primero. Caso real de Copiloto: u
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El descuento: la función y sus tres pruebas
+lenguaje: js
+pide: Es el ejercicio del descuento, aquí mismo. Escribe `aplicarDescuento(precio, porcentaje)` y sus pruebas para **20 %, 0 % y 100 %**. Después, las revisiones corren tus pruebas contra una versión **saboteada** (con `+` en vez de `-`): tus pruebas tienen que notarlo.
+--- código
+function aplicarDescuento(precio, porcentaje) {
+  // tu código aquí
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+// ✍️ Tus pruebas aquí:
+--- pruebas
+const correrTodas = () => misPruebas.map((p) => { try { p.fn(); return null; } catch (e) { return p.nombre + ': ' + e.message; } }).filter(Boolean);
+const contra = (fnFalsa) => misPruebas.filter((p) => { try { new Function('aplicarDescuento', 'expect', '(' + p.fn.toString() + ')()')(fnFalsa, expect); return false; } catch (e) { return true; } }).length;
+prueba('100 con 20 % queda en 80', () => igual(aplicarDescuento(100, 20), 80));
+prueba('escribiste al menos 3 pruebas y pasan', () => { const f = correrTodas(); ok(misPruebas.length >= 3 && f.length === 0, f.length ? 'fallan: ' + f.join(' | ') : 'faltan pruebas: 20 %, 0 % y 100 %'); });
+prueba('tus pruebas notan el sabotaje (+ en vez de -)', () => ok(contra((p, d) => p + (p * d) / 100) > 0, 'con el + en vez del - todas pasaron'));
+--- solución
+function aplicarDescuento(precio, porcentaje) {
+  return precio - (precio * porcentaje) / 100;
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+it('100 con 20 % queda en 80', () => { expect(aplicarDescuento(100, 20)).toBe(80); });
+it('con 0 % no cambia', () => { expect(aplicarDescuento(100, 0)).toBe(100); });
+it('con 100 % queda en 0', () => { expect(aplicarDescuento(100, 100)).toBe(0); });
+```
+
 ```practica
 escribe :: Di los 8 pasos para hacer una prueba, en orden. :: Regla en palabras → pensar los casos (y calcular lo esperado) → código → pruebas → correrlas → sabotear → leer el error → corregir y repetir.
 vf :: Lo esperado se calcula corriendo el código y copiando lo que devuelve
@@ -508,6 +788,60 @@ Si alguien cambia esa función sin querer y Mi empresa empieza a acumular, **est
 
 > 🌎 **Otro ejemplo:** Como el profesor que pasa lista con la misma pregunta para tres alumnos: "¿trajo la tarea?", en vez de escribir tres preguntas iguales.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Pruebas para una función real del proyecto de práctica
+lenguaje: js
+pide: `leerCapacidad` es de **Gastos del carro** (`src/utils/combustible.ts`): convierte lo que escribe la persona en la capacidad del tanque. Escribe pruebas para: `'45'` da 45, `'45,5'` da 45.5 (con coma), `'abc'` da `null`, y `'250'` da `null` (pasa el máximo de 200). Las revisiones la sabotean y tus pruebas tienen que notarlo.
+--- código
+let SABOTAJE = '';
+function leerCapacidad(texto) {
+  const normal = SABOTAJE === 'coma' ? texto.trim() : texto.trim().replace(',', '.');
+  if (!/^\d+(\.\d+)?$/.test(normal)) return null;
+  const valor = Number(normal);
+  if (valor < 1 || valor > (SABOTAJE === 'maximo' ? 1000 : 200)) return null;
+  return Math.round(valor * 10) / 10;
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+// ✍️ Tus pruebas aquí:
+--- pruebas
+const correrTodas = () => misPruebas.map((p) => { try { p.fn(); return null; } catch (e) { return p.nombre + ': ' + e.message; } }).filter(Boolean);
+prueba('todas pasan con la función correcta', () => { const f = correrTodas(); ok(misPruebas.length >= 4 && f.length === 0, f.length ? 'fallan: ' + f.join(' | ') : 'escribe al menos 4 pruebas'); });
+prueba('notan si deja de aceptar la coma', () => { SABOTAJE = 'coma'; const f = correrTodas(); SABOTAJE = ''; ok(f.length > 0, "falta la prueba de '45,5'"); });
+prueba('notan si el máximo deja de ser 200', () => { SABOTAJE = 'maximo'; const f = correrTodas(); SABOTAJE = ''; ok(f.length > 0, "falta la prueba de '250'"); });
+--- solución
+let SABOTAJE = '';
+function leerCapacidad(texto) {
+  const normal = SABOTAJE === 'coma' ? texto.trim() : texto.trim().replace(',', '.');
+  if (!/^\d+(\.\d+)?$/.test(normal)) return null;
+  const valor = Number(normal);
+  if (valor < 1 || valor > (SABOTAJE === 'maximo' ? 1000 : 200)) return null;
+  return Math.round(valor * 10) / 10;
+}
+
+// Un mini Vitest: it, expect, toBe y toBeNull (se escriben igual que los de verdad).
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (recibido) => ({
+  toBe: (esperado) => { if (recibido !== esperado) throw new Error(`esperaba ${JSON.stringify(esperado)} y recibió ${JSON.stringify(recibido)}`); },
+  toBeNull: () => { if (recibido !== null) throw new Error(`esperaba null y recibió ${JSON.stringify(recibido)}`); },
+});
+
+it("'45' da 45", () => { expect(leerCapacidad('45')).toBe(45); });
+it("'45,5' con coma da 45.5", () => { expect(leerCapacidad('45,5')).toBe(45.5); });
+it("'abc' no es un número", () => { expect(leerCapacidad('abc')).toBeNull(); });
+it("'250' pasa el máximo", () => { expect(leerCapacidad('250')).toBeNull(); });
+```
+
 ```practica
 elige :: ¿Cuántas pruebas automáticas tiene la app Copiloto, más o menos? :: Unas 40 :: Más de 400 :: Ninguna
 elige :: ¿Qué prueba protege que nadie lea los datos de otra persona? :: `fuelLevel.test.ts` :: `firestore.rules.test.js` :: `appFiscalDay.test.ts`
@@ -535,6 +869,34 @@ escribe :: Explica qué hace la prueba de `earningSourceRules` que leímos. :: R
 
 > 🌎 **Otro ejemplo:** Como una receta de la abuela que funciona en su cocina, pero que alguien prueba en otra cocina antes de venderla en la panadería: así sabes que no dependía de su horno.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Se puede unir este cambio?
+lenguaje: js
+pide: En un equipo, un cambio (*pull request*) se une al proyecto solo si: el **CI está en verde**, lo **revisó** al menos otra persona, y si **cambió código** también **agregó pruebas**. Completa `puedeUnirse(cambio)`: devuelve `{ ok: true }` o `{ ok: false, motivo }` con el **primer** motivo que falle, en ese orden: `'El CI falló'`, `'Falta una revisión'`, `'Faltan pruebas'`.
+--- código
+function puedeUnirse(cambio) {
+  // cambio = { ciVerde, revisiones, cambioCodigo, agregoPruebas }
+  // tu código aquí
+}
+--- pruebas
+const bien = { ciVerde: true, revisiones: 1, cambioCodigo: true, agregoPruebas: true };
+prueba('todo bien: se une', () => igual(puedeUnirse(bien), { ok: true }));
+prueba('CI en rojo', () => igual(puedeUnirse({ ...bien, ciVerde: false }), { ok: false, motivo: 'El CI falló' }));
+prueba('sin revisión', () => igual(puedeUnirse({ ...bien, revisiones: 0 }), { ok: false, motivo: 'Falta una revisión' }));
+prueba('código sin pruebas', () => igual(puedeUnirse({ ...bien, agregoPruebas: false }), { ok: false, motivo: 'Faltan pruebas' }));
+prueba('si solo cambió un texto, no hacen falta pruebas', () => igual(puedeUnirse({ ...bien, cambioCodigo: false, agregoPruebas: false }), { ok: true }));
+prueba('el CI se revisa primero', () => igual(puedeUnirse({ ciVerde: false, revisiones: 0, cambioCodigo: true, agregoPruebas: false }).motivo, 'El CI falló'));
+--- solución
+function puedeUnirse(cambio) {
+  if (!cambio.ciVerde) return { ok: false, motivo: 'El CI falló' };
+  if (cambio.revisiones < 1) return { ok: false, motivo: 'Falta una revisión' };
+  if (cambio.cambioCodigo && !cambio.agregoPruebas) return { ok: false, motivo: 'Faltan pruebas' };
+  return { ok: true };
+}
+```
+
 ```practica
 escribe :: Describe los 5 pasos de un cambio en un proyecto real. :: Cambio el código, corro las pruebas en mi computadora, subo a GitHub, el CI las corre otra vez en una máquina limpia, y si algo falla me entero en minutos.
 vf :: Si las pruebas pasan en mi computadora, no hace falta el CI
@@ -552,7 +914,7 @@ elige :: ¿Dónde corre el CI las pruebas? :: En el teléfono del usuario :: En 
 1. En `ejemplo-meta`, corre `node --test` y anota cuántas pasan.
 2. Haz el sabotaje del Paso 6 y **lee el error en voz alta**: qué prueba, qué esperaba, qué recibió.
 3. **Ejercicio del descuento:** escribe tú la función `aplicarDescuento(precio, porcentaje)` y pruébala con 20 %, 0 % y 100 %. Después sabotéala cambiando el `-` por `+`.
-4. En la carpeta de la app, corre `npm test` y busca la línea `Tests:`. ¿Cuántas pasaron?
+4. En el proyecto de práctica **Gastos del carro** (bájalo como dice su [README](https://github.com/DelvinSmart/gastos-del-carro)), corre `npm test` y busca la línea `Tests`. ¿Cuántas pasaron?
 
 <details>
 <summary>Ver las correcciones explicadas</summary>
@@ -586,7 +948,7 @@ test('con 100 % de descuento queda en 0', () => {
 
 Al cambiar el `-` por `+`: con 20 % da **120** (esperaba 80) y con 100 % da **200** (esperaba 0): **fallan 2**. La de 0 % **sigue pasando**, porque sumar o restar 0 da lo mismo. La lección: **un solo caso no alcanza**; con solo la prueba del 0 %, el error pasaría inadvertido.
 
-4. Busca una línea como `Tests: 187 passed, 187 total`. El número puede ser otro si se agregaron pruebas.
+4. Busca una línea como `Tests  38 passed (38)`. El número puede ser otro si se agregaron pruebas. (Copiloto, con Jest, muestra algo como `Tests: 187 passed, 187 total`.)
 
 </details>
 
