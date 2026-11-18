@@ -59,6 +59,31 @@ while (Date.now() < fin) {}
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Cuándo salta el temporizador?
+lenguaje: js
+pide: El hilo de JavaScript hace **una cosa a la vez**. Un temporizador pedido para el milisegundo `pedido` salta cuando el hilo **queda libre**. `tareas` es la lista de lo que el hilo hace, en orden, desde el 0: cada una con su duración en ms. Completa `cuandoSalta(pedido, tareas)`: el primer momento en que el hilo está libre a partir de `pedido`.
+--- código
+function cuandoSalta(pedido, tareas) {
+  // tu código aquí
+}
+--- pruebas
+prueba('hilo libre: salta a tiempo', () => igual(cuandoSalta(100, [50]), 100));
+prueba('ordenar ciudades 4800 ms: salta tarde', () => igual(cuandoSalta(100, [4800]), 4800));
+prueba('varias tareas seguidas', () => igual(cuandoSalta(100, [80, 50, 30]), 130));
+--- solución
+function cuandoSalta(pedido, tareas) {
+  let ahora = 0;
+  for (const duracion of tareas) {
+    if (ahora >= pedido) break;
+    ahora += duracion;
+  }
+  return Math.max(pedido, ahora);
+}
+```
+
 ```practica
 escribe :: Explica con tus palabras qué es el hilo de JavaScript. :: Es donde corre el código; solo hace una cosa a la vez, así que si un cálculo tarda, no responde a toques ni temporizadores hasta terminar.
 elige :: ¿Qué indica un temporizador que salta tarde? :: Que internet está lento :: Que el hilo estaba ocupado :: Que el teléfono está sin batería
@@ -102,6 +127,31 @@ Lo que funcionó fue **medir**, con cuatro herramientas, en este orden:
 La **marca de tiempo** dice **cuándo** ocurre algo ("el Início apareció a los 17 s"). El **perfilador** dice **qué función** consume el tiempo ("`localeCompare` gastó 4,8 s").
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Medir con marcas de tiempo
+lenguaje: js
+pide: Antes de arreglar, se mide. `marcas` es una lista de `{ nombre, t }` (t en ms, en orden). Cada tramo va de una marca a la siguiente y se llama como la marca donde **empieza**. Completa `elMasLento(marcas)`: devuelve `{ tramo, ms }` del tramo que más tardó.
+--- código
+function elMasLento(marcas) {
+  // tu código aquí
+}
+--- pruebas
+const marcas = [{ nombre: 'inicio', t: 0 }, { nombre: 'fuentes', t: 300 }, { nombre: 'ciudades', t: 500 }, { nombre: 'pantalla', t: 5300 }, { nombre: 'fin', t: 5700 }];
+prueba('las ciudades', () => igual(elMasLento(marcas), { tramo: 'ciudades', ms: 4800 }));
+prueba('dos marcas', () => igual(elMasLento([{ nombre: 'a', t: 10 }, { nombre: 'b', t: 25 }]), { tramo: 'a', ms: 15 }));
+--- solución
+function elMasLento(marcas) {
+  let peor = null;
+  for (let i = 0; i < marcas.length - 1; i++) {
+    const ms = marcas[i + 1].t - marcas[i].t;
+    if (!peor || ms > peor.ms) peor = { tramo: marcas[i].nombre, ms };
+  }
+  return peor;
+}
+```
 
 ```practica
 elige :: ¿Por qué el primer arreglo del splash no sirvió? :: Porque tenía un error de tipeo :: Porque se actuó sobre una suposición falsa, sin medir :: Porque el teléfono era viejo
@@ -152,6 +202,35 @@ Si son las 14:31:45, faltan 15 segundos: espera 15.000 ms, y actualiza justo a l
 
 > 🌎 **Otro ejemplo:** Como un reloj de pared que alguien vuelve a pintar entero cada segundo, cuando solo la aguja de los minutos cambia una vez por minuto.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un reloj que se actualiza una vez por minuto
+lenguaje: js
+pide: El reloj redibujaba la pantalla cada segundo. El arreglo: esperar justo hasta **el próximo minuto**. Completa `msHastaElProximoMinuto(ahora)` (ahora en ms) y `redibujosPorHora(cadaMs)`.
+--- código
+function msHastaElProximoMinuto(ahora) {
+  // tu código aquí
+}
+
+function redibujosPorHora(cadaMs) {
+  // tu código aquí
+}
+--- pruebas
+prueba('a los 45 s del minuto faltan 15 000 ms', () => igual(msHastaElProximoMinuto(45000), 15000));
+prueba('en el segundo 0 falta un minuto entero', () => igual(msHastaElProximoMinuto(120000), 60000));
+prueba('cada segundo: 3600 redibujos por hora', () => igual(redibujosPorHora(1000), 3600));
+prueba('cada minuto: 60', () => igual(redibujosPorHora(60000), 60));
+--- solución
+function msHastaElProximoMinuto(ahora) {
+  return 60000 - (ahora % 60000);
+}
+
+function redibujosPorHora(cadaMs) {
+  return 3600000 / cadaMs;
+}
+```
+
 ```practica
 elige :: ¿Cuál fue la causa que más tardó al abrir? :: El reloj :: Ordenar 254 ciudades con `localeCompare` (4,8 s) :: El formateador
 elige :: ¿Qué hace React cuando cambia el estado? :: Nada :: Vuelve a dibujar el componente :: Recarga la app
@@ -195,6 +274,45 @@ useMemo(calcular, [goals.daily, goals.weekly]); // recalcula si cambia el valor
 **`true`**: `b` no es un objeto nuevo, es **el mismo** objeto con otro nombre (la misma persona con dos apodos).
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un useMemo de juguete
+lenguaje: js
+pide: `useMemo` repite el cálculo solo si **alguna dependencia cambió** (comparando con `===`). Completa `crearMemo(calcular)`: devuelve una función `(deps) => resultado` que recuerda las dependencias de la última vez. Cuenta cuántas veces se calculó en `veces`.
+--- código
+function crearMemo(calcular) {
+  let ultimas = null;
+  let resultado;
+  const memo = (deps) => {
+    // tu código aquí
+  };
+  memo.veces = 0;
+  return memo;
+}
+--- pruebas
+prueba('mismas dependencias: calcula una sola vez', () => { const m = crearMemo(() => 1); m([10, 20]); m([10, 20]); igual(m.veces, 1); });
+prueba('cambia una: recalcula', () => { const m = crearMemo(() => 1); m([10, 20]); m([10, 21]); igual(m.veces, 2); });
+prueba('un objeto nuevo cada vez: recalcula siempre (el error del gráfico)', () => { const m = crearMemo(() => 1); m([{ daily: 1 }]); m([{ daily: 1 }]); igual(m.veces, 2); });
+prueba('devuelve el resultado', () => { const m = crearMemo(() => 365); igual(m([1]), 365); });
+--- solución
+function crearMemo(calcular) {
+  let ultimas = null;
+  let resultado;
+  const memo = (deps) => {
+    const cambio = !ultimas || deps.length !== ultimas.length || deps.some((d, i) => d !== ultimas[i]);
+    if (cambio) {
+      resultado = calcular();
+      ultimas = deps;
+      memo.veces++;
+    }
+    return resultado;
+  };
+  memo.veces = 0;
+  return memo;
+}
+```
 
 ```practica
 elige :: ¿Qué da `{ a: 1 } === { a: 1 }`? :: `true` :: `false` :: Error
@@ -275,6 +393,37 @@ function agruparPorCategoria(gastos) {
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un índice por día
+lenguaje: js
+pide: Recorrer 600 registros para cada uno de 365 días son 219 000 pasos. Con un **índice** se recorre una sola vez. Completa `indicePorDia(registros)`: devuelve un `Map` de fecha → suma de valores. Y `totalDe(indice, fecha)`: el total de ese día o 0.
+--- código
+function indicePorDia(registros) {
+  // tu código aquí
+}
+
+function totalDe(indice, fecha) {
+  // tu código aquí
+}
+--- pruebas
+const regs = [{ fecha: '2026-11-01', valor: 50 }, { fecha: '2026-11-01', valor: 30 }, { fecha: '2026-11-02', valor: 10 }];
+prueba('suma por día', () => igual(totalDe(indicePorDia(regs), '2026-11-01'), 80));
+prueba('un día sin registros', () => igual(totalDe(indicePorDia(regs), '2026-11-09'), 0));
+prueba('es un Map', () => ok(indicePorDia(regs) instanceof Map, 'devuelve un Map'));
+--- solución
+function indicePorDia(registros) {
+  const indice = new Map();
+  for (const r of registros) indice.set(r.fecha, (indice.get(r.fecha) ?? 0) + r.valor);
+  return indice;
+}
+
+function totalDe(indice, fecha) {
+  return indice.get(fecha) ?? 0;
+}
+```
+
 ```practica
 elige :: ¿Qué es un índice? :: Una prueba :: Organizar los datos una vez para buscar directo después :: Un tipo de error
 elige :: ¿Qué hace `map.get(clave)`? :: Guarda un valor :: Busca el valor de esa clave :: Borra todo
@@ -322,6 +471,47 @@ Y lo mejor: las pruebas encontraron **dos errores reales** que nadie había vist
 
 > 🌎 **Otro ejemplo:** Como un simulacro de evacuación con humo falso: si todos salen bien, el plan sirve para ese tipo de emergencia, no para todas.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Pruebas que atrapan mutantes
+lenguaje: js
+pide: Se metieron errores a propósito (*mutation testing*) para ver si las pruebas los notan. Escribe pruebas para `promedio` con el mini Vitest: el promedio de `[10, 20]` es 15, el de `[5]` es 5, y el de `[]` es 0. Las revisiones meten mutantes y tus pruebas tienen que matarlos.
+--- código
+let MUTANTE = '';
+function promedio(valores) {
+  if (valores.length === 0) return MUTANTE === 'vacio' ? NaN : 0;
+  const suma = valores.reduce((s, v) => s + v, 0);
+  return MUTANTE === 'division' ? suma / (valores.length + 1) : suma / valores.length;
+}
+
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (real) => ({ toBe: (esperado) => { if (!Object.is(real, esperado)) throw new Error(`esperaba ${esperado} y recibió ${real}`); } });
+
+// ✍️ Tus pruebas aquí:
+--- pruebas
+const correrTodas = () => misPruebas.filter((p) => { try { p.fn(); return false; } catch { return true; } }).map((p) => p.nombre);
+prueba('pasan con la función correcta', () => { const f = correrTodas(); ok(misPruebas.length >= 3 && f.length === 0, f.length ? 'fallan: ' + f.join(' | ') : 'escribe al menos 3 pruebas'); });
+prueba('matan el mutante de la división', () => { MUTANTE = 'division'; const f = correrTodas(); MUTANTE = ''; ok(f.length > 0, 'falta probar un promedio de verdad'); });
+prueba('matan el mutante de la lista vacía', () => { MUTANTE = 'vacio'; const f = correrTodas(); MUTANTE = ''; ok(f.length > 0, 'falta la prueba de []'); });
+--- solución
+let MUTANTE = '';
+function promedio(valores) {
+  if (valores.length === 0) return MUTANTE === 'vacio' ? NaN : 0;
+  const suma = valores.reduce((s, v) => s + v, 0);
+  return MUTANTE === 'division' ? suma / (valores.length + 1) : suma / valores.length;
+}
+
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (real) => ({ toBe: (esperado) => { if (!Object.is(real, esperado)) throw new Error(`esperaba ${esperado} y recibió ${real}`); } });
+
+it('promedio de 10 y 20', () => { expect(promedio([10, 20])).toBe(15); });
+it('promedio de uno solo', () => { expect(promedio([5])).toBe(5); });
+it('lista vacía da 0', () => { expect(promedio([])).toBe(0); });
+```
+
 ```practica
 escribe :: ¿Cuál es la regla más importante al escribir una prueba? :: Escribirla según lo que debe pasar (la regla del negocio), no copiando lo que el código hace hoy.
 elige :: ¿Cuántos errores a propósito se metieron, y cuántos detectaron las pruebas? :: 19 y 10 :: 19 y 19 :: 92 y 92
@@ -363,6 +553,31 @@ El `Set` veía **3** plataformas, y cada una sumaba los 30 de `uber`: **90**, en
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Uber y uber son la misma
+lenguaje: js
+pide: El error real: `'Uber'` y `'uber'` se contaban como dos plataformas. **Normaliza** antes de juntar: sin espacios en las puntas y en minúsculas. Completa `totalPorPlataforma(registros)`: devuelve un objeto plataforma normalizada → suma.
+--- código
+function totalPorPlataforma(registros) {
+  // tu código aquí
+}
+--- pruebas
+prueba('Uber y uber juntos', () => igual(totalPorPlataforma([{ app: 'Uber', valor: 20 }, { app: 'uber', valor: 10 }]), { uber: 30 }));
+prueba('con espacios', () => igual(totalPorPlataforma([{ app: ' 99 ', valor: 5 }, { app: '99', valor: 5 }]), { '99': 10 }));
+prueba('dos plataformas distintas', () => igual(Object.keys(totalPorPlataforma([{ app: 'Uber', valor: 1 }, { app: 'InDrive', valor: 1 }])).length, 2));
+--- solución
+function totalPorPlataforma(registros) {
+  const total = {};
+  for (const r of registros) {
+    const app = r.app.trim().toLowerCase();
+    total[app] = (total[app] ?? 0) + r.valor;
+  }
+  return total;
+}
+```
+
 ```practica
 escribe :: ¿Qué es normalizar datos? :: Dar una sola forma a los datos antes de usarlos, por ejemplo escribir siempre "uber" en minúsculas.
 elige :: ¿Qué es un `Set`? :: Una lista ordenada :: Una lista sin repetidos :: Un número
@@ -388,6 +603,32 @@ El **día del negocio** no siempre coincide con el del calendario. Para **Uber**
 
 > 💡 **Idea:** ¿te acuerdas de la prueba que el Tema 02 dice que se configura con `TZ=America/Sao_Paulo`? Es por esto: las fechas dependen de la zona horaria.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El día fiscal de Uber
+lenguaje: js
+pide: Para Uber el día **cierra a las 04:00**: un viaje a las 02:00 del día 5 cuenta en el día 4. Completa `diaFiscal(fechaHora)` para textos como `'2026-11-05T02:00'`: devuelve la fecha `'AAAA-MM-DD'` del día fiscal. Cuidado con los **bordes**: 03:59 y 04:00, el primer día del mes y el primero del año. (Usa `Date.UTC` para no depender de la zona horaria.)
+--- código
+function diaFiscal(fechaHora) {
+  // tu código aquí
+}
+--- pruebas
+prueba('02:00 del 5: día 4', () => igual(diaFiscal('2026-11-05T02:00'), '2026-11-04'));
+prueba('03:59: todavía el día anterior', () => igual(diaFiscal('2026-11-05T03:59'), '2026-11-04'));
+prueba('04:00: ya es el día 5', () => igual(diaFiscal('2026-11-05T04:00'), '2026-11-05'));
+prueba('cambio de mes', () => igual(diaFiscal('2026-12-01T01:00'), '2026-11-30'));
+prueba('cambio de año', () => igual(diaFiscal('2027-01-01T03:00'), '2026-12-31'));
+--- solución
+function diaFiscal(fechaHora) {
+  const [fecha, hora] = fechaHora.split('T');
+  const [a, m, d] = fecha.split('-').map(Number);
+  const [h, min] = hora.split(':').map(Number);
+  const ms = Date.UTC(a, m - 1, d, h, min) - 4 * 60 * 60 * 1000;
+  return new Date(ms).toISOString().slice(0, 10);
+}
+```
+
 ```practica
 elige :: Para Uber, ¿a qué hora cierra el día? :: A medianoche :: A las 04:00 :: A las 06:00
 elige :: Un viaje de Uber a las 02:00 del día 5, ¿en qué día cuenta? :: Día 5 :: Día 4 :: Día 6
@@ -408,6 +649,27 @@ Cada subida a GitHub empezó a revisar sola tipos, diseño, secretos y pruebas. 
 > 🌎 **Otro ejemplo:** Como el examen de manejo: lo haces en el auto de la autoescuela, no en el tuyo con tus mañas; si apruebas ahí, manejas bien en cualquiera.
 
 **Lo que el CI no puede detectar:** lo que no revisa. Por ejemplo, cómo se ve una pantalla o si la app abre en un teléfono real (parte 13 lo demuestra).
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que tu Mac perdona y el CI no
+lenguaje: js
+pide: La Mac no distingue mayúsculas en los nombres de archivo; la máquina del CI (Linux) **sí**. Completa `importsRotosEnLinux(imports, archivos)`: devuelve los imports que en la Mac funcionan (coinciden sin mirar mayúsculas) pero que en Linux **no** existen tal cual.
+--- código
+function importsRotosEnLinux(imports, archivos) {
+  // tu código aquí
+}
+--- pruebas
+const archivos = ['src/utils/fuelLevel.ts', 'src/utils/dinero.ts'];
+prueba('fuellevel con minúscula se rompe en el CI', () => igual(importsRotosEnLinux(['src/utils/fuellevel.ts', 'src/utils/dinero.ts'], archivos), ['src/utils/fuellevel.ts']));
+prueba('todo bien escrito: nada', () => igual(importsRotosEnLinux(archivos, archivos), []));
+prueba('uno que no existe en ningún lado no es de este tipo', () => igual(importsRotosEnLinux(['src/x.ts'], archivos), []));
+--- solución
+function importsRotosEnLinux(imports, archivos) {
+  return imports.filter((i) => !archivos.includes(i) && archivos.some((a) => a.toLowerCase() === i.toLowerCase()));
+}
+```
 
 ```practica
 vf :: El CI encontró un fallo que en la Mac no se veía
@@ -439,6 +701,26 @@ color: dash.formHint
 
 > 🌎 **Otro ejemplo:** Como el uniforme de una empresa: el color oficial tiene nombre (token), la empresa los reparte desde un solo lugar (motor) y un supervisor revisa que nadie lleve uno hecho a mano (candado).
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El candado de los colores
+lenguaje: js
+pide: El motor tiene los tokens; el candado no deja escribir colores a mano. Completa `colorASueltos(codigo)`: devuelve la lista de colores escritos a mano (`#` seguido de 3 o 6 letras/números hexadecimales) que aparecen en el código. Las líneas que usan tokens (`colores.acento`) no cuentan.
+--- código
+function colorASueltos(codigo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un color a mano', () => igual(colorASueltos("const s = { color: '#7ee787' };"), ['#7ee787']));
+prueba('dos, uno corto', () => igual(colorASueltos("a: '#fff', b: '#ff7b72'"), ['#fff', '#ff7b72']));
+prueba('con tokens: nada', () => igual(colorASueltos('const s = { color: colores.acento };'), []));
+--- solución
+function colorASueltos(codigo) {
+  return codigo.match(/#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g) ?? [];
+}
+```
+
 ```practica
 elige :: ¿Qué es un token de diseño? :: Una contraseña :: Un nombre para un valor de diseño, como `dash.formHint` :: Un botón
 elige :: ¿Qué es `Touchable` en Copiloto? :: Un token :: Un motor: controla el toque en toda la app :: Un candado
@@ -468,6 +750,36 @@ Después: los dos importan vehicleOdometer
 
 > 🌎 **Otro ejemplo:** Como dos compañeros que no pueden empezar su tarea porque cada uno espera que el otro termine primero: se resuelve dándoles a los dos una herramienta común.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Encontrar un ciclo entre archivos
+lenguaje: js
+pide: Un ciclo es cuando A importa a B y B (directa o indirectamente) importa a A. Completa `hayCiclo(grafo)`: `grafo` dice qué importa cada archivo. Devuelve `true` si hay algún ciclo.
+--- código
+function hayCiclo(grafo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('A → B → A', () => igual(hayCiclo({ A: ['B'], B: ['A'] }), true));
+prueba('A → B → C → A', () => igual(hayCiclo({ A: ['B'], B: ['C'], C: ['A'] }), true));
+prueba('sin ciclo', () => igual(hayCiclo({ A: ['B', 'C'], B: ['C'], C: [] }), false));
+prueba('lo compartido movido a un tercero', () => igual(hayCiclo({ A: ['compartido'], B: ['compartido'], compartido: [] }), false));
+--- solución
+function hayCiclo(grafo) {
+  const estado = {}; // 1 = visitando, 2 = listo
+  const visitar = (n) => {
+    if (estado[n] === 1) return true;
+    if (estado[n] === 2) return false;
+    estado[n] = 1;
+    for (const m of grafo[n] ?? []) if (visitar(m)) return true;
+    estado[n] = 2;
+    return false;
+  };
+  return Object.keys(grafo).some(visitar);
+}
+```
+
 ```practica
 escribe :: ¿Qué es un ciclo entre archivos? :: Cuando A importa a B y B importa a A; puede romper la carga y hace el código difícil de cambiar.
 elige :: ¿Cómo se rompe un ciclo normalmente? :: Borrando los dos archivos :: Moviendo lo compartido a un tercer archivo :: Juntando todo en uno
@@ -495,6 +807,43 @@ Una herramienta que se usó: el **hook propio**, una función `useAlgo` que agru
 > 🌎 **Otro ejemplo:** Como reorganizar los cajones de la cocina: los mismos cubiertos, solo mejor ubicados; la comida sale igual.
 
 **¿Dividir un archivo garantiza que sea mejor?** **No.** Un archivo grande puede dividirse mal. Importa que **cada parte tenga una responsabilidad clara** (Tema 10). Repartir la ropa en cinco cajones al azar no ordena nada.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Refactorizar sin cambiar lo que hace
+lenguaje: js
+pide: `resumenViejo` funciona pero está enredado. Escribe `resumenNuevo` más claro (usa `filter`, `reduce` o lo que quieras) que dé **exactamente** el mismo resultado. Las pruebas comparan las dos con muchos datos: eso es refactorizar con red.
+--- código
+function resumenViejo(gastos) {
+  var t = 0; var n = 0; var mayor = null;
+  for (var i = 0; i < gastos.length; i++) { if (gastos[i].valor > 0) { t = t + gastos[i].valor; n = n + 1; if (mayor === null || gastos[i].valor > mayor) { mayor = gastos[i].valor; } } }
+  return { total: t, cantidad: n, mayor: mayor };
+}
+
+function resumenNuevo(gastos) {
+  // tu código aquí
+}
+--- pruebas
+const casos = [[], [{ valor: 10 }], [{ valor: 10 }, { valor: -5 }, { valor: 30 }], [{ valor: 0 }], [{ valor: 7 }, { valor: 7 }]];
+casos.forEach((c, i) => prueba('caso ' + (i + 1), () => igual(resumenNuevo(c), resumenViejo(c))));
+prueba('100 casos al azar', () => { for (let k = 0; k < 100; k++) { const c = Array.from({ length: k % 7 }, () => ({ valor: Math.round(Math.random() * 100 - 30) })); igual(resumenNuevo(c), resumenViejo(c)); } });
+--- solución
+function resumenViejo(gastos) {
+  var t = 0; var n = 0; var mayor = null;
+  for (var i = 0; i < gastos.length; i++) { if (gastos[i].valor > 0) { t = t + gastos[i].valor; n = n + 1; if (mayor === null || gastos[i].valor > mayor) { mayor = gastos[i].valor; } } }
+  return { total: t, cantidad: n, mayor: mayor };
+}
+
+function resumenNuevo(gastos) {
+  const validos = gastos.map((g) => g.valor).filter((v) => v > 0);
+  return {
+    total: validos.reduce((s, v) => s + v, 0),
+    cantidad: validos.length,
+    mayor: validos.length ? Math.max(...validos) : null,
+  };
+}
+```
 
 ```practica
 escribe :: ¿Qué es refactorizar? :: Cambiar la estructura del código sin cambiar lo que hace el programa.
@@ -525,6 +874,32 @@ Las librerías también tienen errores. Para el problema de Firestore (parte 3) 
 
 > 🌎 **Otro ejemplo:** Como un repuesto adaptado a mano para un modelo de carro: si cambias de modelo, el repuesto ya no calza, y te quedas con dos piezas que chocan.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿El parche todavía se aplica?
+lenguaje: js
+pide: `patch-package` guarda parches con el nombre `libreria+version.patch`. Si se actualiza la librería, el parche **deja de aplicarse**: eso rompió la vc89. Completa `parchesHuerfanos(parches, instaladas)`: devuelve los parches cuya versión ya no es la instalada (o cuya librería ya no está).
+--- código
+function parchesHuerfanos(parches, instaladas) {
+  // tu código aquí
+}
+--- pruebas
+const instaladas = { 'react-native-maps': '1.20.1', expo: '52.0.4' };
+prueba('versión igual: se aplica', () => igual(parchesHuerfanos(['expo+52.0.4.patch'], instaladas), []));
+prueba('se actualizó: huérfano', () => igual(parchesHuerfanos(['react-native-maps+1.18.0.patch'], instaladas), ['react-native-maps+1.18.0.patch']));
+prueba('librería con @ en el nombre', () => igual(parchesHuerfanos(['@firebase+app+0.9.0.patch'], { '@firebase/app': '0.9.0' }), []));
+--- solución
+function parchesHuerfanos(parches, instaladas) {
+  return parches.filter((p) => {
+    const partes = p.replace(/\.patch$/, '').split('+');
+    const version = partes.pop();
+    const nombre = partes.join('/');
+    return instaladas[nombre] !== version;
+  });
+}
+```
+
 ```practica
 elige :: ¿Qué hace `patch-package`? :: Borra librerías :: Guarda un cambio a una librería y lo reaplica al instalar :: Publica la app
 elige :: ¿Por qué se rompió la vc89? :: Por un error de tipeo :: El parche dejó de aplicarse al actualizar y quedaron dos copias de `@firebase/app` :: Porque el iPhone era viejo
@@ -551,6 +926,36 @@ escribe :: ¿Cuál es la lección de la vc89? :: Compilar no es funcionar: aunqu
 > 🌎 **Otro ejemplo:** Como un pasante muy rápido y entusiasta: le pides el trabajo, pero revisas los números, pruebas que funcione y no firmas nada que no entiendas.
 
 > 💡 **Idea:** estas cinco reglas son las mismas de la clase 19 (agentes): verificar, medir, y una persona en el ciclo.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Pedir medidas, no opiniones
+lenguaje: js
+pide: Una regla para trabajar con IA: si dice "ya está más rápido", pide **el número**. Completa `mejora(antes, despues)`: devuelve el porcentaje que bajó el tiempo, redondeado (de 17,7 s a 6,3 s bajó 64 %). Y `aceptar(reporte)`: `true` solo si el reporte trae `antes` y `despues` como números **y** `probadoEnTelefono` es `true`.
+--- código
+function mejora(antes, despues) {
+  // tu código aquí
+}
+
+function aceptar(reporte) {
+  // tu código aquí
+}
+--- pruebas
+prueba('17,7 → 6,3: 64 %', () => igual(mejora(17.7, 6.3), 64));
+prueba('sin cambio: 0', () => igual(mejora(5, 5), 0));
+prueba('"ya quedó" sin números: no', () => igual(aceptar({ mensaje: 'ya quedó, está rápido' }), false));
+prueba('con números pero sin probar en el teléfono: no', () => igual(aceptar({ antes: 17.7, despues: 6.3 }), false));
+prueba('con números y probado: sí', () => igual(aceptar({ antes: 17.7, despues: 6.3, probadoEnTelefono: true }), true));
+--- solución
+function mejora(antes, despues) {
+  return Math.round(((antes - despues) / antes) * 100);
+}
+
+function aceptar(reporte) {
+  return typeof reporte.antes === 'number' && typeof reporte.despues === 'number' && reporte.probadoEnTelefono === true;
+}
+```
 
 ```practica
 escribe :: Di las cinco reglas para trabajar con IA. :: Pedir medidas, no opiniones; exigir ver el resultado funcionando; revisar los números; no publicar lo que no puedo explicar; y para lo exacto, usar datos o código.

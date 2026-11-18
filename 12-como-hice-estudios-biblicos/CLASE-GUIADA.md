@@ -42,6 +42,34 @@ Tema (el estudio)  →  Puntos (1, 2, 3…)  →  Subpuntos (1.1, 1.2…)  →  
 
 > 💡 **Idea:** este mapa de estudios hace exactamente lo mismo con tus `LECCION.md` (Tema 18): "una sola fuente de verdad".
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Contar temas, puntos y subpuntos
+lenguaje: js
+pide: Un estudio (el **tema**) tiene **puntos**, y cada punto tiene **subpuntos**. Completa `contar(estudio)`: devuelve `{ puntos, subpuntos, bloques }` sumando todo (cada subpunto tiene una lista `bloques`).
+--- código
+function contar(estudio) {
+  // tu código aquí
+}
+--- pruebas
+const estudio = { titulo: '¿Lenguas extrañas?', puntos: [
+  { titulo: 'Qué dice', subpuntos: [{ bloques: [1, 2] }, { bloques: [3] }] },
+  { titulo: 'Para hoy', subpuntos: [{ bloques: [4, 5, 6] }] },
+] };
+prueba('cuenta todo', () => igual(contar(estudio), { puntos: 2, subpuntos: 3, bloques: 6 }));
+prueba('un estudio vacío', () => igual(contar({ puntos: [] }), { puntos: 0, subpuntos: 0, bloques: 0 }));
+--- solución
+function contar(estudio) {
+  const subpuntos = estudio.puntos.flatMap((p) => p.subpuntos);
+  return {
+    puntos: estudio.puntos.length,
+    subpuntos: subpuntos.length,
+    bloques: subpuntos.reduce((s, sp) => s + sp.bloques.length, 0),
+  };
+}
+```
+
 ```practica
 escribe :: Explica con tus palabras qué es un tema, un punto y un subpunto en este proyecto. :: El tema es el estudio completo; los puntos son los números grandes (1, 2, 3); los subpuntos son 1.1, 1.2… y tienen el contenido en bloques.
 escribe :: ¿Por qué se separa el contenido del código? :: Para que una sola plantilla sirva para todos los estudios: si mejoro el código, mejoran todos a la vez.
@@ -69,6 +97,32 @@ elige :: Un bloque puede ser… :: Solo texto :: Texto, pasaje, subtítulo, imag
 > 🌎 **Otro ejemplo:** Como armar un puesto en la feria con una mesa y un toldo, en vez de construir un local: para lo que vendes, alcanza y sobra.
 
 > 💡 **Idea:** la web de Copiloto (Tema 13) sí usa React. ¿Contradicción? No: esa web es grande y comparte código con la app. **Se elige la herramienta según el tamaño del trabajo** (Tema 10, parte 9).
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: HTML, CSS o JavaScript
+lenguaje: js
+pide: Completa `queArchivo(cambio)`: si el cambio es de **cómo se ve** (color, tamaño, letra, espacio) → `'css'`; si es de **qué hace** (botón que hace algo, al tocar, guardar) → `'js'`; si es de **qué hay** (agregar un título, un párrafo) → `'html'`.
+--- código
+function queArchivo(cambio) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el color de los botones', () => igual(queArchivo('cambiar el color de los botones'), 'css'));
+prueba('el tamaño de la letra', () => igual(queArchivo('agrandar el tamaño de la letra'), 'css'));
+prueba('que un botón haga algo', () => igual(queArchivo('que al tocar el botón se abra el PDF'), 'js'));
+prueba('un título nuevo', () => igual(queArchivo('agregar un título arriba'), 'html'));
+--- solución
+const COMO_SE_VE = ['color', 'tamaño', 'letra', 'espacio'];
+const QUE_HACE = ['al tocar', 'haga', 'guardar'];
+
+function queArchivo(cambio) {
+  if (COMO_SE_VE.some((p) => cambio.includes(p))) return 'css';
+  if (QUE_HACE.some((p) => cambio.includes(p))) return 'js';
+  return 'html';
+}
+```
 
 ```practica
 elige :: Para cambiar el color de los botones, ¿qué tipo de archivo abres? :: HTML :: CSS :: JSON
@@ -120,6 +174,37 @@ que-dice-la-biblia/
 > 🌎 **Otro ejemplo:** Como una caja de herramientas con compartimentos: los destornilladores en uno, las llaves en otro; sabes dónde está cada cosa sin revolver.
 
 > 📌 **Nota:** después del 13/11 se agregaron más archivos (por ejemplo `biblia.js`, `tema.js`, `panel-ia.js`, `panel-medidor.js`); los ves en el Tema 14. La idea es la misma: uno por tarea.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El mapa de archivos
+lenguaje: js
+pide: Completa `rutaDelEstudio(id)` (los estudios viven en `estudios/<id>.json`) y `archivoQue(trabajo)` con: dibujar el mapa → `'mapa.js'`, guardar en GitHub → `'github.js'`, armar el PDF → `'pdf.js'`, los efectos → `'efectos.js'`.
+--- código
+function rutaDelEstudio(id) {
+  // tu código aquí
+}
+
+function archivoQue(trabajo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('la ruta del estudio', () => igual(rutaDelEstudio('lenguas-extranas'), 'estudios/lenguas-extranas.json'));
+prueba('dibujar el mapa', () => igual(archivoQue('dibujar el mapa'), 'mapa.js'));
+prueba('guardar en GitHub', () => igual(archivoQue('guardar en GitHub'), 'github.js'));
+prueba('el PDF', () => igual(archivoQue('armar el PDF'), 'pdf.js'));
+--- solución
+function rutaDelEstudio(id) {
+  return `estudios/${id}.json`;
+}
+
+const QUE = { 'dibujar el mapa': 'mapa.js', 'guardar en GitHub': 'github.js', 'armar el PDF': 'pdf.js', 'los efectos': 'efectos.js' };
+
+function archivoQue(trabajo) {
+  return QUE[trabajo];
+}
+```
 
 ```practica
 elige :: ¿Dónde está el texto del estudio "¿Lenguas extrañas?"? :: En `estudio.html` :: En `estudios/lenguas-extranas.json` :: En `css/styles.css`
@@ -175,6 +260,35 @@ Leámoslo:
 
 > 🌎 **Otro ejemplo:** Como un formulario impreso con casilleros: "Nombre:", "Idioma:", y una lista de "Puntos" con sus renglones.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Revisar el JSON de un estudio
+lenguaje: js
+pide: Completa `problemas(estudio)`: revisa los bloques de todos los subpuntos y devuelve una lista de textos con lo que falta. Un bloque `'pasaje'` necesita `referencia` y `versiculos`; un `'texto'` necesita `texto`. El mensaje es `'punto P, subpunto S, bloque B: falta X'` (contando desde 1).
+--- código
+function problemas(estudio) {
+  // tu código aquí
+}
+--- pruebas
+const bien = { puntos: [{ subpuntos: [{ bloques: [{ tipo: 'texto', texto: 'Hola' }, { tipo: 'pasaje', referencia: '1 Co 14', versiculos: ['2'] }] }] }] };
+prueba('todo bien', () => igual(problemas(bien), []));
+prueba('un pasaje sin versículos', () => igual(problemas({ puntos: [{ subpuntos: [{ bloques: [{ tipo: 'pasaje', referencia: '1 Co 14' }] }] }] }), ['punto 1, subpunto 1, bloque 1: falta versiculos']));
+prueba('un texto vacío en el segundo punto', () => igual(problemas({ puntos: [{ subpuntos: [] }, { subpuntos: [{ bloques: [{ tipo: 'texto' }] }] }] }), ['punto 2, subpunto 1, bloque 1: falta texto']));
+--- solución
+const PIDE = { pasaje: ['referencia', 'versiculos'], texto: ['texto'] };
+
+function problemas(estudio) {
+  const lista = [];
+  estudio.puntos.forEach((p, i) => p.subpuntos.forEach((sp, j) => sp.bloques.forEach((b, k) => {
+    for (const campo of PIDE[b.tipo] ?? []) {
+      if (b[campo] === undefined) lista.push(`punto ${i + 1}, subpunto ${j + 1}, bloque ${k + 1}: falta ${campo}`);
+    }
+  })));
+  return lista;
+}
+```
+
 ```practica
 elige :: ¿Qué campo hace que aparezca el botón ES | PT? :: `idioma` :: `otro_idioma` :: `titulo`
 elige :: Un bloque con `"tipo": "pasaje"`, ¿qué dos campos más trae? :: `texto` y `color` :: `referencia` y `versiculos` :: `titulo` y `nuevo`
@@ -213,6 +327,37 @@ estudio.html
 > 💡 **Idea:** este mapa de estudios usa **módulos** (`import`/`export`, Tema 17 parte 9), que resuelven el orden solos. La página de estudios usa el orden de los `<script>`: es la forma más simple, y funciona bien en una página chica.
 
 **Ejercicio:** abre `estudio.html`, busca las etiquetas `<script>` al final, anota el orden y explica por qué es ese.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El orden de los scripts
+lenguaje: js
+pide: Cada archivo usa funciones que crea otro: si se carga antes, sale `cargarEstudio is not defined`. Completa `primerError(orden, usa, crea)`: recorre los scripts en orden; devuelve el primer error `'X is not defined'` (X es la función que se usa antes de ser creada), o `null` si el orden está bien.
+--- código
+const CREA = { 'estudios.js': ['cargarEstudio'], 'ui.js': ['bloqueHTML'], 'mapa.js': [] };
+const USA = { 'estudios.js': [], 'ui.js': [], 'mapa.js': ['cargarEstudio', 'bloqueHTML'] };
+
+function primerError(orden, usa, crea) {
+  // tu código aquí
+}
+--- pruebas
+prueba('buen orden', () => igual(primerError(['estudios.js', 'ui.js', 'mapa.js'], USA, CREA), null));
+prueba('mapa.js primero', () => igual(primerError(['mapa.js', 'estudios.js', 'ui.js'], USA, CREA), 'cargarEstudio is not defined'));
+prueba('falta ui.js antes', () => igual(primerError(['estudios.js', 'mapa.js', 'ui.js'], USA, CREA), 'bloqueHTML is not defined'));
+--- solución
+const CREA = { 'estudios.js': ['cargarEstudio'], 'ui.js': ['bloqueHTML'], 'mapa.js': [] };
+const USA = { 'estudios.js': [], 'ui.js': [], 'mapa.js': ['cargarEstudio', 'bloqueHTML'] };
+
+function primerError(orden, usa, crea) {
+  const existe = new Set();
+  for (const archivo of orden) {
+    for (const f of usa[archivo]) if (!existe.has(f)) return `${f} is not defined`;
+    for (const f of crea[archivo]) existe.add(f);
+  }
+  return null;
+}
+```
 
 ```practica
 elige :: ¿Por qué importa el orden de los `<script>`? :: Por estética :: Porque cada archivo usa funciones que crean los anteriores :: No importa
@@ -265,6 +410,35 @@ Por eso, lo que ves en la vista previa del panel es **exactamente** lo que sale 
 
 > 🌎 **Otro ejemplo:** Como poner entre comillas lo que alguien dijo en un acta: queda claro que es una cita, no una orden del que escribe el acta.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: esc(): que el texto no rompa el HTML
+lenguaje: js
+pide: Lo que escribe una persona puede traer `<`, `>`, `&` o comillas, y romper la página (o algo peor). Completa `esc(texto)`: cambia `&` por `&amp;`, `<` por `&lt;`, `>` por `&gt;` y `"` por `&quot;`. Después úsala en `bloqueHTML`.
+--- código
+function esc(texto) {
+  // tu código aquí
+}
+
+function bloqueHTML(bloque) {
+  return `<p class="bloque">${bloque.texto}</p>`;
+}
+--- pruebas
+prueba('un texto normal queda igual', () => igual(esc('Hola, hermanos'), 'Hola, hermanos'));
+prueba('las etiquetas no pasan', () => igual(esc('<script>'), '&lt;script&gt;'));
+prueba('el & primero', () => igual(esc('a & <b>'), 'a &amp; &lt;b&gt;'));
+prueba('bloqueHTML usa esc', () => igual(bloqueHTML({ texto: '<img onerror=x>' }), '<p class="bloque">&lt;img onerror=x&gt;</p>'));
+--- solución
+function esc(texto) {
+  return String(texto).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function bloqueHTML(bloque) {
+  return `<p class="bloque">${esc(bloque.texto)}</p>`;
+}
+```
+
 ```practica
 elige :: ¿Cuántos lugares usan la misma función para dibujar los bloques? :: 1 :: 2 :: 3
 elige :: Para agregar un tipo de bloque nuevo y que se vea en la página, el PDF y la vista previa, ¿cuántos archivos tocas como mínimo? :: Tres :: Uno: `js/estudios.js` (y el CSS si quieres un estilo especial) :: Ninguno
@@ -316,6 +490,31 @@ Así, **un solo dato** ("morado") pinta todo ese punto, y funciona en modo claro
 
 > 🌎 **Otro ejemplo:** Como pedir "el color del equipo" en una tienda de camisetas: el vendedor lo busca en el catálogo y lo usa en el número, el nombre y el escudo.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Del nombre del color al token
+lenguaje: js
+pide: El JSON dice `"morado"`; la página usa el token `var(--morado)` y lo pasa a `--c`, el color del punto. Completa `estiloDelPunto(color)`: devuelve `'--c: var(--morado)'`. Si el color no está en `TOKENS`, usa `'azul'`.
+--- código
+const TOKENS = ['morado', 'azul', 'verde', 'naranja'];
+
+function estiloDelPunto(color) {
+  // tu código aquí
+}
+--- pruebas
+prueba('morado', () => igual(estiloDelPunto('morado'), '--c: var(--morado)'));
+prueba('verde', () => igual(estiloDelPunto('verde'), '--c: var(--verde)'));
+prueba('uno que no existe: azul', () => igual(estiloDelPunto('fucsia'), '--c: var(--azul)'));
+--- solución
+const TOKENS = ['morado', 'azul', 'verde', 'naranja'];
+
+function estiloDelPunto(color) {
+  const token = TOKENS.includes(color) ? color : 'azul';
+  return `--c: var(--${token})`;
+}
+```
+
 ```practica
 elige :: Si quiero que todos los morados sean un poco más oscuros, ¿cuántas líneas cambio? :: Una por cada estudio :: Dos: la del modo claro y la del modo oscuro (y la del PDF si también) :: Ninguna
 elige :: ¿Qué es `--c`? :: Un color fijo :: El color del punto actual, que usa todo lo de adentro :: Una clase
@@ -345,6 +544,27 @@ En `js/efectos.js` y al final de `css/styles.css` (es el mismo efecto de la land
 > 🌎 **En la vida real:** un telón de teatro: el JavaScript es el tramoyista que decide **cuándo** subirlo (avisado por el que mira por la cortina, el `IntersectionObserver`); el CSS es el **mecanismo** del telón.
 
 > 🌎 **Otro ejemplo:** Como las luces de un escenario: el técnico decide cuándo se prenden; el reflector decide cómo se ve la luz.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Decidir cuándo aparece
+lenguaje: js
+pide: JavaScript decide **cuándo** (pone la clase), CSS dibuja **cómo**. Completa `claseDeEntrada(elemento)`: si la persona pidió reducir movimiento (`reducir: true`) → `'visible'` desde el principio; si no, `'visible'` cuando el elemento está en pantalla (`enPantalla: true`) y `'escondido'` si todavía no.
+--- código
+function claseDeEntrada(elemento) {
+  // tu código aquí
+}
+--- pruebas
+prueba('fuera de pantalla: escondido', () => igual(claseDeEntrada({ enPantalla: false, reducir: false }), 'escondido'));
+prueba('entra en pantalla: visible', () => igual(claseDeEntrada({ enPantalla: true, reducir: false }), 'visible'));
+prueba('reducir movimiento: visible siempre', () => igual(claseDeEntrada({ enPantalla: false, reducir: true }), 'visible'));
+--- solución
+function claseDeEntrada(elemento) {
+  if (elemento.reducir) return 'visible';
+  return elemento.enPantalla ? 'visible' : 'escondido';
+}
+```
 
 ```practica
 elige :: En el efecto de entrada, ¿qué hace JavaScript? :: Dibuja la animación :: Decide cuándo (pone y quita clases) :: Nada
@@ -378,6 +598,33 @@ Es un **CI** como el del Tema 04, pero en vez de solo revisar, **publica**: eso 
 > 🌎 **En la vida real:** una imprenta automática: entregas el manuscrito, la imprenta arma el índice, imprime un PDF de cada capítulo y lo pone en la vidriera. Y una página estática es un cartel pegado en la pared: no puede ir a la bodega a ver qué cajas hay; alguien tiene que escribir la lista.
 
 > 🌎 **Otro ejemplo:** Como una revista que se imprime y se reparte sola cada vez que el editor entrega el material: el editor no tiene que llevarla a los kioscos.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Armar el indice.json
+lenguaje: js
+pide: Una página estática no puede "mirar" qué archivos hay en una carpeta; por eso GitHub Actions arma un `indice.json`. Completa `armarIndice(archivos)`: recibe `{ nombre, contenido }` (el contenido es el JSON del estudio, ya como objeto) y devuelve una lista `{ id, titulo }` ordenada por título. Solo cuentan los `.json` de `estudios/`.
+--- código
+function armarIndice(archivos) {
+  // tu código aquí
+}
+--- pruebas
+const archivos = [
+  { nombre: 'estudios/lenguas-extranas.json', contenido: { titulo: '¿Lenguas extrañas?' } },
+  { nombre: 'estudios/bautismo.json', contenido: { titulo: 'El bautismo' } },
+  { nombre: 'README.md', contenido: null },
+];
+prueba('el índice', () => igual(armarIndice(archivos), [{ id: 'lenguas-extranas', titulo: '¿Lenguas extrañas?' }, { id: 'bautismo', titulo: 'El bautismo' }]));
+prueba('sin estudios', () => igual(armarIndice([]), []));
+--- solución
+function armarIndice(archivos) {
+  return archivos
+    .filter((a) => a.nombre.startsWith('estudios/') && a.nombre.endsWith('.json'))
+    .map((a) => ({ id: a.nombre.slice('estudios/'.length, -'.json'.length), titulo: a.contenido.titulo }))
+    .sort((x, y) => x.titulo.localeCompare(y.titulo, 'es'));
+}
+```
 
 ```practica
 elige :: ¿Dónde vive la página? :: En un servidor propio :: En GitHub Pages :: En Firebase
@@ -442,6 +689,37 @@ Es la página real del estudio (`estudio.html?vista=1`) dentro de un cuadro (un 
 
 > 🌎 **Otro ejemplo:** Como una vidriera con un empleado detrás: cada vez que cambias el precio en la libreta, él actualiza el cartel de la vidriera.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cambiar un dato por su ruta
+lenguaje: js
+pide: El panel guarda cada cambio con una ruta como `temas.2.puntos.0.bloques.1.texto`. Completa `leer(objeto, ruta)` y `cambiar(objeto, ruta, valor)` (cambia el dato en su lugar). Los pedazos que son números son posiciones de una lista.
+--- código
+function leer(objeto, ruta) {
+  // tu código aquí
+}
+
+function cambiar(objeto, ruta, valor) {
+  // tu código aquí
+}
+--- pruebas
+const nuevo = () => ({ temas: [{}, {}, { puntos: [{ bloques: [{ texto: 'a' }, { texto: 'b' }] }] }] });
+prueba('leer', () => igual(leer(nuevo(), 'temas.2.puntos.0.bloques.1.texto'), 'b'));
+prueba('cambiar', () => { const o = nuevo(); cambiar(o, 'temas.2.puntos.0.bloques.1.texto', 'nuevo'); igual(o.temas[2].puntos[0].bloques[1].texto, 'nuevo'); });
+prueba('leer algo que no existe da undefined', () => igual(leer(nuevo(), 'temas.9.puntos'), undefined));
+--- solución
+function leer(objeto, ruta) {
+  return ruta.split('.').reduce((o, k) => (o == null ? undefined : o[k]), objeto);
+}
+
+function cambiar(objeto, ruta, valor) {
+  const partes = ruta.split('.');
+  const ultima = partes.pop();
+  leer(objeto, partes.join('.'))[ultima] = valor;
+}
+```
+
 ```practica
 elige :: ¿Puede otra persona guardar cambios si abre el panel? :: Sí, es público :: No: sin una llave válida, GitHub rechaza cualquier cambio :: Solo de noche
 elige :: ¿Dónde se guarda la llave? :: En GitHub :: Solo en el aparato (`localStorage`) :: En el JSON del estudio
@@ -499,6 +777,34 @@ Antes de subir, la foto se achica con un **`<canvas>`** (un lienzo para dibujar 
 
 > 🌎 **Otro ejemplo:** Como comprimir un archivo antes de mandarlo por correo: llega rápido y no llena la casilla.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: rangos(): versículos seguidos, juntos
+lenguaje: js
+pide: Completa `rangos(versiculos)`: recibe números como texto, en cualquier orden, y junta los seguidos: `["2","3","4","10"]` → `'2-4, 10'`. Sin repetidos.
+--- código
+function rangos(versiculos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el ejemplo de la clase', () => igual(rangos(['2', '3', '4', '10']), '2-4, 10'));
+prueba('uno solo', () => igual(rangos(['7']), '7'));
+prueba('desordenados y repetidos', () => igual(rangos(['5', '1', '2', '2', '6']), '1-2, 5-6'));
+prueba('ninguno', () => igual(rangos([]), ''));
+--- solución
+function rangos(versiculos) {
+  const n = [...new Set(versiculos.map(Number))].sort((a, b) => a - b);
+  const partes = [];
+  for (let i = 0; i < n.length; i++) {
+    const inicio = n[i];
+    while (n[i + 1] === n[i] + 1) i++;
+    partes.push(inicio === n[i] ? `${inicio}` : `${inicio}-${n[i]}`);
+  }
+  return partes.join(', ');
+}
+```
+
 ```practica
 elige :: ¿Qué devuelve `rangos(["2","3","4","10"])`? :: "2, 3, 4, 10" :: "2-4, 10" :: "2-10"
 elige :: ¿Por qué se achican las fotos antes de subirlas? :: Para que se vean más feas :: Para que la página cargue rápido y el repositorio no se llene :: Porque GitHub lo exige
@@ -522,6 +828,42 @@ elige :: ¿Qué es OCR? :: Un formato de imagen :: Reconocer texto en una imagen
 | `panel.js` llegó a **casi 500 líneas** | Se **dividió en archivos** por tarea | El cajón de cubiertos que creció demasiado |
 | Los numeritos de versículo en las fotos **salen mal leídos** | El panel muestra la lista **para revisar y corregir** | Un dictado con ruido: se relee |
 | La LBLA tiene **derechos de autor** | No se copia de internet: se pega desde la app o se lee de una foto | No fotocopiar un libro entero |
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Dividir un archivo por responsabilidad
+lenguaje: js
+pide: Una decisión para no hacer espagueti: dividir `panel.js` en archivos por tarea. Completa `dividir(funciones)`: cada función va al archivo según su prefijo: `guardar…`/`subir…` → `'panel-github.js'`; `dibujar…`/`mostrar…` → `'panel-vista.js'`; `foto…`/`ocr…` → `'panel-fotos.js'`; el resto → `'panel.js'`. Devuelve un objeto archivo → lista de funciones.
+--- código
+function dividir(funciones) {
+  // tu código aquí
+}
+--- pruebas
+const fns = ['guardarEstudio', 'dibujarPunto', 'fotoAchicar', 'iniciar', 'subirImagen', 'ocrLeer', 'mostrarAviso'];
+prueba('cada una a su archivo', () => igual(dividir(fns), {
+  'panel-github.js': ['guardarEstudio', 'subirImagen'],
+  'panel-vista.js': ['dibujarPunto', 'mostrarAviso'],
+  'panel-fotos.js': ['fotoAchicar', 'ocrLeer'],
+  'panel.js': ['iniciar'],
+}));
+--- solución
+const REGLAS = [
+  [['guardar', 'subir'], 'panel-github.js'],
+  [['dibujar', 'mostrar'], 'panel-vista.js'],
+  [['foto', 'ocr'], 'panel-fotos.js'],
+];
+
+function dividir(funciones) {
+  const resultado = {};
+  for (const f of funciones) {
+    const regla = REGLAS.find(([prefijos]) => prefijos.some((p) => f.startsWith(p)));
+    const archivo = regla ? regla[1] : 'panel.js';
+    (resultado[archivo] ??= []).push(f);
+  }
+  return resultado;
+}
+```
 
 ```practica
 escribe :: Nombra una decisión que se tomó para que el código no fuera espagueti. :: Dividir panel.js en archivos por tarea; o separar el contenido (JSON) del código; o usar una sola función para la página, el PDF y la vista previa; o los colores como tokens.
