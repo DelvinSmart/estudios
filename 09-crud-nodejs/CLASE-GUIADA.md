@@ -25,6 +25,34 @@ Casi todo sistema es esto: el banco con tus cuentas, la farmacia con sus remedio
 
 > 🌎 **Otro ejemplo:** Como el inventario de una tienda: agregar productos nuevos, ver qué hay, corregir un precio y sacar lo que ya no se vende.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cada acción, su letra y su verbo
+lenguaje: js
+pide: Completa `crud(accion)`: devuelve `{ letra, verbo }` para cada acción: `'crear'` → C y POST, `'leer'` → R y GET, `'actualizar'` → U y PUT, `'borrar'` → D y DELETE.
+--- código
+function crud(accion) {
+  // tu código aquí
+}
+--- pruebas
+prueba('crear', () => igual(crud('crear'), { letra: 'C', verbo: 'POST' }));
+prueba('leer', () => igual(crud('leer'), { letra: 'R', verbo: 'GET' }));
+prueba('actualizar', () => igual(crud('actualizar'), { letra: 'U', verbo: 'PUT' }));
+prueba('borrar', () => igual(crud('borrar'), { letra: 'D', verbo: 'DELETE' }));
+--- solución
+const TABLA = {
+  crear: { letra: 'C', verbo: 'POST' },
+  leer: { letra: 'R', verbo: 'GET' },
+  actualizar: { letra: 'U', verbo: 'PUT' },
+  borrar: { letra: 'D', verbo: 'DELETE' },
+};
+
+function crud(accion) {
+  return TABLA[accion];
+}
+```
+
 ```practica
 escribe :: ¿Qué es un CRUD? :: Las cuatro operaciones básicas sobre datos: crear, leer, actualizar y borrar (POST, GET, PUT y DELETE).
 elige :: ¿Qué verbo HTTP se usa para crear? :: `GET` :: `POST` :: `DELETE`
@@ -59,6 +87,28 @@ vf :: Editar un ingreso en Copiloto es una operación de actualizar (U)
 
 El servidor es un mesero: la **petición** es tu pedido ("tráeme la lista de gastos"); la **respuesta** es el plato; y el **código** de respuesta es lo que dice el mesero: "aquí está" (200), "no tenemos eso" (404), "su pedido no se entiende" (400).
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Desarmar una petición HTTP
+lenguaje: js
+pide: Una petición tiene un **verbo**, una **ruta** y, a veces, **datos**. Completa `leerPeticion(texto)` para textos como `'POST /gastos {"descripcion":"Agua","monto":5}'`: devuelve `{ verbo, ruta, datos }`, con `datos` ya convertido a objeto (o `null` si no vienen).
+--- código
+function leerPeticion(texto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('con datos', () => igual(leerPeticion('POST /gastos {"descripcion":"Agua","monto":5}'), { verbo: 'POST', ruta: '/gastos', datos: { descripcion: 'Agua', monto: 5 } }));
+prueba('sin datos', () => igual(leerPeticion('GET /gastos/7'), { verbo: 'GET', ruta: '/gastos/7', datos: null }));
+prueba('datos con espacios adentro', () => igual(leerPeticion('PUT /gastos/1 {"descripcion": "Agua mineral", "monto": 6}').datos.descripcion, 'Agua mineral'));
+--- solución
+function leerPeticion(texto) {
+  const [verbo, ruta, ...resto] = texto.split(' ');
+  const json = resto.join(' ');
+  return { verbo, ruta, datos: json ? JSON.parse(json) : null };
+}
+```
+
 ```practica
 elige :: ¿Qué es Node.js? :: Un navegador :: El programa que ejecuta JavaScript fuera del navegador :: Una base de datos
 elige :: ¿Qué es una API? :: Un archivo :: El conjunto de rutas que ofrece un servidor :: Un error
@@ -85,6 +135,33 @@ escribe :: ¿Qué tiene una petición HTTP? :: Un verbo (GET, POST…), una ruta
 
 **¿Por qué `app.js` y `server.js` están separados?** Para poder **probar la app sin abrir la puerta al público**: la prueba arranca el servidor en un puerto libre, prueba, y lo apaga. Separar responsabilidades: lo ves a fondo en el Tema 10.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un archivo, un trabajo
+lenguaje: js
+pide: Completa `archivoPara(tarea)` con la tabla de esta parte: reglas de validación → `'src/validar.js'`; las rutas del CRUD → `'src/app.js'`; encender el servidor en un puerto → `'src/server.js'`; probar una regla sola → `'test/validar.test.js'`; probar el ciclo completo → `'test/gastos.test.js'`. Cada tarea trae una palabra clave: `regla`, `ruta`, `puerto`, `unitaria`, `ciclo`.
+--- código
+function archivoPara(tarea) {
+  // tu código aquí
+}
+--- pruebas
+prueba('una regla nueva', () => igual(archivoPara('una regla nueva del monto'), 'src/validar.js'));
+prueba('una ruta nueva', () => igual(archivoPara('una ruta nueva: GET /gastos/total'), 'src/app.js'));
+prueba('cambiar el puerto', () => igual(archivoPara('cambiar el puerto a 4000'), 'src/server.js'));
+prueba('una prueba unitaria', () => igual(archivoPara('una prueba unitaria del monto 0'), 'test/validar.test.js'));
+prueba('el ciclo completo', () => igual(archivoPara('probar el ciclo completo crear, leer y borrar'), 'test/gastos.test.js'));
+--- solución
+function archivoPara(tarea) {
+  if (tarea.includes('unitaria')) return 'test/validar.test.js';
+  if (tarea.includes('ciclo')) return 'test/gastos.test.js';
+  if (tarea.includes('regla')) return 'src/validar.js';
+  if (tarea.includes('ruta')) return 'src/app.js';
+  if (tarea.includes('puerto')) return 'src/server.js';
+  return null;
+}
+```
+
 ```practica
 elige :: ¿Qué archivo tiene las reglas de validación? :: `app.js` :: `validar.js` :: `server.js`
 elige :: ¿Qué archivo enciende el servidor en el puerto 3000? :: `app.js` :: `validar.js` :: `server.js`
@@ -98,13 +175,16 @@ vf :: `app.js` y `server.js` están separados para poder probar la app sin abrir
 
 > 🎙️ **El profesor:** a la terminal.
 
+El proyecto está en la carpeta `09-crud-nodejs` del repositorio público de este sitio. Bájalo una sola vez:
+
 ```bash
-cd /Volumes/SSD_Desarrollo/Developer/Aprender/09-crud-nodejs
+git clone https://github.com/DelvinSmart/estudios.git
+cd estudios/09-crud-nodejs
 npm install
 npm start
 ```
 
-1. `cd` → entrar a la carpeta.
+1. `git clone` → bajar la copia; `cd` → entrar a la carpeta.
 2. `npm install` → instalar las librerías (Express). **Solo la primera vez.**
 3. `npm start` → encender el servidor.
 
@@ -113,6 +193,29 @@ Debe decir: **`Servidor listo en http://localhost:3000`**. El servidor **queda e
 > 🌎 **En la vida real:** entrar al local, comprar los utensilios la primera vez, y abrir la puerta con el cartel de "abierto". Ctrl + C es cerrar la persiana.
 
 > 🌎 **Otro ejemplo:** Como encender una computadora nueva: la primera vez instalas los programas; después solo la prendes.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer los scripts de package.json
+lenguaje: js
+pide: `npm start` y `npm test` funcionan porque `package.json` tiene una sección `scripts`. Completa `queCorre(paquete, comando)`: para `'npm start'` y `'npm test'` busca `scripts.start` y `scripts.test`; para `'npm run algo'`, busca `scripts.algo`. Si no existe, devuelve `'Missing script: "algo"'` (el error real de npm).
+--- código
+function queCorre(paquete, comando) {
+  // tu código aquí
+}
+--- pruebas
+const paquete = { scripts: { start: 'node src/server.js', test: 'node --test', 'test:watch': 'node --test --watch' } };
+prueba('npm start', () => igual(queCorre(paquete, 'npm start'), 'node src/server.js'));
+prueba('npm test', () => igual(queCorre(paquete, 'npm test'), 'node --test'));
+prueba('npm run test:watch', () => igual(queCorre(paquete, 'npm run test:watch'), 'node --test --watch'));
+prueba('un script que no existe', () => igual(queCorre(paquete, 'npm run mostrar'), 'Missing script: "mostrar"'));
+--- solución
+function queCorre(paquete, comando) {
+  const nombre = comando.startsWith('npm run ') ? comando.slice('npm run '.length) : comando.slice('npm '.length);
+  return paquete.scripts?.[nombre] ?? `Missing script: "${nombre}"`;
+}
+```
 
 ```practica
 elige :: ¿Qué hace `npm install`? :: Enciende el servidor :: Instala las librerías (solo la primera vez) :: Corre las pruebas
@@ -173,6 +276,30 @@ Respuesta: `{"errores":["El monto debe ser un número mayor que 0."]}`
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Arma el comando curl
+lenguaje: js
+pide: Completa `armarCurl(verbo, ruta, datos)`: devuelve el comando para la terminal. Con `GET` **no** se pone `-X` (es el verbo por defecto). Con otros verbos, `-X VERBO`. Si hay datos, se agregan `-H 'Content-Type: application/json' -d '…'` con los datos en JSON. El servidor está en `http://localhost:3000`.
+--- código
+function armarCurl(verbo, ruta, datos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('GET sin -X', () => igual(armarCurl('GET', '/gastos'), 'curl http://localhost:3000/gastos'));
+prueba('DELETE', () => igual(armarCurl('DELETE', '/gastos/1'), 'curl -X DELETE http://localhost:3000/gastos/1'));
+prueba('POST con datos', () => igual(armarCurl('POST', '/gastos', { descripcion: 'Agua', monto: 5 }), `curl -X POST http://localhost:3000/gastos -H 'Content-Type: application/json' -d '{"descripcion":"Agua","monto":5}'`));
+--- solución
+function armarCurl(verbo, ruta, datos) {
+  let comando = 'curl';
+  if (verbo !== 'GET') comando += ` -X ${verbo}`;
+  comando += ` http://localhost:3000${ruta}`;
+  if (datos) comando += ` -H 'Content-Type: application/json' -d '${JSON.stringify(datos)}'`;
+  return comando;
+}
+```
+
 ```practica
 elige :: En `curl -X PUT ...`, ¿qué es `-X PUT`? :: Los datos :: El verbo :: La ruta
 elige :: En `curl`, ¿qué es `-d '{...}'`? :: El verbo :: Los datos que mando :: El puerto
@@ -198,6 +325,42 @@ vf :: Para probar con `curl` hace falta otra terminal, porque la primera tiene e
 **La regla fácil:** **2xx** = bien; **4xx** = se equivocó **quien pide**; **5xx** = se equivocó **el servidor**.
 
 > 🌎 **En la vida real:** 200 "aquí tiene"; 201 "listo, ya lo anoté"; 204 "hecho" (y no te trae nada); 400 "no entendí su pedido"; 404 "ese plato no existe"; 500 "se nos quemó la cocina".
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los códigos de respuesta
+lenguaje: js
+pide: Completa `quienSeEquivoco(codigo)`: 2xx → `'nadie'`, 4xx → `'quien pide'`, 5xx → `'el servidor'`. Y `codigoPara(caso)`: `'creado'` → 201, `'borrado'` → 204, `'datos inválidos'` → 400, `'no existe'` → 404, `'bien'` → 200.
+--- código
+function quienSeEquivoco(codigo) {
+  // tu código aquí
+}
+
+function codigoPara(caso) {
+  // tu código aquí
+}
+--- pruebas
+prueba('201: nadie', () => igual(quienSeEquivoco(201), 'nadie'));
+prueba('404: quien pide', () => igual(quienSeEquivoco(404), 'quien pide'));
+prueba('500: el servidor', () => igual(quienSeEquivoco(500), 'el servidor'));
+prueba('crear bien: 201', () => igual(codigoPara('creado'), 201));
+prueba('borrar: 204', () => igual(codigoPara('borrado'), 204));
+prueba('monto negativo: 400', () => igual(codigoPara('datos inválidos'), 400));
+prueba('id que no existe: 404', () => igual(codigoPara('no existe'), 404));
+--- solución
+function quienSeEquivoco(codigo) {
+  if (codigo >= 500) return 'el servidor';
+  if (codigo >= 400) return 'quien pide';
+  return 'nadie';
+}
+
+const CODIGOS = { bien: 200, creado: 201, borrado: 204, 'datos inválidos': 400, 'no existe': 404 };
+
+function codigoPara(caso) {
+  return CODIGOS[caso];
+}
+```
 
 ```practica
 elige :: Pides un gasto con un id que no existe. ¿Qué código recibes? :: 400 :: 404 :: 500
@@ -251,6 +414,61 @@ El gasto recibe el id **3**, y `siguienteId` queda en **4**. `x++` usa el valor 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las rutas del CRUD, sin servidor
+lenguaje: js
+pide: Haz el CRUD de esta parte como funciones, sin Express. Cada una devuelve `{ status, body }` como haría la ruta. Completa `crear` (valida: descripción no vacía y monto > 0; si falla → 400 con `{ errores }`), `verUno` (404 si no existe) y `borrar` (204 si existía, 404 si no). Ojo: `id` llega como **texto**, igual que `req.params.id`.
+--- código
+function crearAPI() {
+  let gastos = [];
+  let siguienteId = 1;
+  return {
+    crear(datos) {
+      // tu código aquí
+    },
+    verUno(id) {
+      // tu código aquí
+    },
+    borrar(id) {
+      // tu código aquí
+    },
+  };
+}
+--- pruebas
+prueba('crear bien: 201 con id', () => { const api = crearAPI(); igual(api.crear({ descripcion: 'Agua', monto: 5 }), { status: 201, body: { id: 1, descripcion: 'Agua', monto: 5 } }); });
+prueba('crear mal: 400', () => { const api = crearAPI(); igual(api.crear({ descripcion: '', monto: 5 }).status, 400); });
+prueba('ver uno con el id como texto', () => { const api = crearAPI(); api.crear({ descripcion: 'Agua', monto: 5 }); igual(api.verUno('1'), { status: 200, body: { id: 1, descripcion: 'Agua', monto: 5 } }); });
+prueba('ver uno que no existe: 404', () => { const api = crearAPI(); igual(api.verUno('9').status, 404); });
+prueba('borrar: 204 y después 404', () => { const api = crearAPI(); api.crear({ descripcion: 'Agua', monto: 5 }); igual(api.borrar('1').status, 204); igual(api.verUno('1').status, 404); });
+--- solución
+function crearAPI() {
+  let gastos = [];
+  let siguienteId = 1;
+  return {
+    crear(datos) {
+      const errores = [];
+      if (typeof datos.descripcion !== 'string' || !datos.descripcion.trim()) errores.push('La descripción es obligatoria.');
+      if (typeof datos.monto !== 'number' || datos.monto <= 0) errores.push('El monto debe ser un número mayor que 0.');
+      if (errores.length) return { status: 400, body: { errores } };
+      const gasto = { id: siguienteId++, descripcion: datos.descripcion.trim(), monto: datos.monto };
+      gastos.push(gasto);
+      return { status: 201, body: gasto };
+    },
+    verUno(id) {
+      const gasto = gastos.find((g) => g.id === Number(id));
+      return gasto ? { status: 200, body: gasto } : { status: 404, body: { error: 'Gasto no encontrado.' } };
+    },
+    borrar(id) {
+      if (!gastos.some((g) => g.id === Number(id))) return { status: 404, body: { error: 'Gasto no encontrado.' } };
+      gastos = gastos.filter((g) => g.id !== Number(id));
+      return { status: 204, body: null };
+    },
+  };
+}
+```
+
 ```practica
 elige :: ¿Qué es `req.body`? :: Lo que responde el servidor :: Los datos que llegan en la petición :: El número de la ruta
 elige :: En `/gastos/7`, ¿qué es `req.params.id`? :: El número 7 :: El texto "7" :: Un error
@@ -291,6 +509,44 @@ Es una **función pura**: con los mismos datos, da siempre el mismo resultado, y
 
 > 🌎 **Otro ejemplo:** Como la balanza del aeropuerto: revisa el peso y el tamaño de la maleta y te da una lista de problemas, vacía si todo está bien.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una regla nueva en validarGasto
+lenguaje: js
+pide: Esta es la `validarGasto` del proyecto. Agrega una regla: la descripción no puede pasar de **40 letras** (después de quitar los espacios de las puntas). El error es `'La descripción tiene más de 40 letras.'`. Las reglas viejas tienen que seguir igual.
+--- código
+function validarGasto(datos) {
+  const errores = [];
+  if (typeof datos.descripcion !== 'string' || datos.descripcion.trim() === '') {
+    errores.push('La descripción es obligatoria.');
+  }
+  if (typeof datos.monto !== 'number' || !Number.isFinite(datos.monto) || datos.monto <= 0) {
+    errores.push('El monto debe ser un número mayor que 0.');
+  }
+  return errores;
+}
+--- pruebas
+prueba('todo bien: lista vacía', () => igual(validarGasto({ descripcion: 'Agua', monto: 5 }), []));
+prueba('41 letras: error', () => igual(validarGasto({ descripcion: 'a'.repeat(41), monto: 5 }), ['La descripción tiene más de 40 letras.']));
+prueba('40 letras justas: bien (caso de borde)', () => igual(validarGasto({ descripcion: 'a'.repeat(40), monto: 5 }), []));
+prueba('los espacios de las puntas no cuentan', () => igual(validarGasto({ descripcion: '  ' + 'a'.repeat(40) + '  ', monto: 5 }), []));
+prueba('las reglas viejas siguen', () => igual(validarGasto({ descripcion: '', monto: 0 }).length, 2));
+--- solución
+function validarGasto(datos) {
+  const errores = [];
+  if (typeof datos.descripcion !== 'string' || datos.descripcion.trim() === '') {
+    errores.push('La descripción es obligatoria.');
+  } else if (datos.descripcion.trim().length > 40) {
+    errores.push('La descripción tiene más de 40 letras.');
+  }
+  if (typeof datos.monto !== 'number' || !Number.isFinite(datos.monto) || datos.monto <= 0) {
+    errores.push('El monto debe ser un número mayor que 0.');
+  }
+  return errores;
+}
+```
+
 ```practica
 elige :: ¿Qué devuelve `validarGasto` si todo está bien? :: `true` :: Una lista vacía `[]` :: `null`
 elige :: `validarGasto({ descripcion: 'Agua', monto: 0 })` devuelve… :: `[]` :: Una lista con un error del monto :: Una lista con dos errores
@@ -330,6 +586,48 @@ Es exactamente el Tema 02: **los errores viven en los bordes**, y **un sabotaje 
 > 🌎 **En la vida real:** un guardia que revisa que no entren menores de 18: comprobó a uno de 15 y a uno de 30, pero nunca a uno de **justo 18**.
 
 > 🌎 **Otro ejemplo:** Como un control de alcoholemia que revisó a quien tomó mucho y a quien no tomó nada, pero nunca a quien está justo en el límite permitido.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Pruebas que atrapan el sabotaje del borde
+lenguaje: js
+pide: El sabotaje de esta parte cambia `monto <= 0` por `monto < 0`, y **nada falla** porque falta la prueba del borde. Escribe pruebas para `validarGasto` con el mini Vitest (`it` y `expect(...).toBe(...)`): que un monto de 5 da 0 errores, que un monto **0** da 1 error, y que un monto -1 da 1 error. Las revisiones sabotean la función y tus pruebas tienen que notarlo.
+--- código
+let SABOTAJE = false;
+function validarGasto(datos) {
+  const errores = [];
+  if (!datos.descripcion) errores.push('La descripción es obligatoria.');
+  if (SABOTAJE ? datos.monto < 0 : datos.monto <= 0) errores.push('El monto debe ser un número mayor que 0.');
+  return errores;
+}
+
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (real) => ({ toBe: (esperado) => { if (real !== esperado) throw new Error(`esperaba ${esperado} y recibió ${real}`); } });
+
+// ✍️ Tus pruebas aquí (usa .length para contar errores):
+--- pruebas
+const correrTodas = () => misPruebas.filter((p) => { try { p.fn(); return false; } catch { return true; } }).map((p) => p.nombre);
+prueba('todas pasan con la función correcta', () => { const f = correrTodas(); ok(misPruebas.length >= 3 && f.length === 0, f.length ? 'fallan: ' + f.join(' | ') : 'escribe al menos 3 pruebas'); });
+prueba('notan el sabotaje "< 0"', () => { SABOTAJE = true; const f = correrTodas(); SABOTAJE = false; ok(f.length > 0, 'falta la prueba del monto 0 (el borde)'); });
+--- solución
+let SABOTAJE = false;
+function validarGasto(datos) {
+  const errores = [];
+  if (!datos.descripcion) errores.push('La descripción es obligatoria.');
+  if (SABOTAJE ? datos.monto < 0 : datos.monto <= 0) errores.push('El monto debe ser un número mayor que 0.');
+  return errores;
+}
+
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const expect = (real) => ({ toBe: (esperado) => { if (real !== esperado) throw new Error(`esperaba ${esperado} y recibió ${real}`); } });
+
+it('un monto de 5 es válido', () => { expect(validarGasto({ descripcion: 'Agua', monto: 5 }).length).toBe(0); });
+it('el monto 0 no es válido (el borde)', () => { expect(validarGasto({ descripcion: 'Agua', monto: 0 }).length).toBe(1); });
+it('un monto negativo no es válido', () => { expect(validarGasto({ descripcion: 'Agua', monto: -1 }).length).toBe(1); });
+```
 
 ```practica
 vf :: Con el sabotaje `< 0`, alguna prueba falla
@@ -525,6 +823,45 @@ function crearRepositorioArchivo(archivo) {
 Y `crearApp(repositorio)` usa solo esas cuatro funciones. Mañana haces `crearRepositorioSqlite()` con las **mismas cuatro funciones**, y las rutas **no cambian ni una línea**. Eso es lo que el Tema 10 llama **inversión de dependencias**.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El orden de las rutas importa
+lenguaje: js
+pide: Express revisa las rutas **en orden** y usa la primera que encaja. `:id` encaja con cualquier cosa, también con `total`. Completa `buscarRuta(rutas, verbo, camino)`: devuelve el `nombre` de la primera ruta que encaja (un pedazo que empieza con `:` encaja con cualquier texto). Después **ordena** la lista `RUTAS` para que `GET /gastos/total` llegue a su ruta.
+--- código
+const RUTAS = [
+  { verbo: 'GET', patron: '/gastos/:id', nombre: 'verUno' },
+  { verbo: 'GET', patron: '/gastos/total', nombre: 'total' },
+  { verbo: 'GET', patron: '/gastos', nombre: 'listar' },
+];
+
+function buscarRuta(rutas, verbo, camino) {
+  // tu código aquí
+}
+--- pruebas
+prueba('/gastos lista', () => igual(buscarRuta(RUTAS, 'GET', '/gastos'), 'listar'));
+prueba('/gastos/7 ve uno', () => igual(buscarRuta(RUTAS, 'GET', '/gastos/7'), 'verUno'));
+prueba('/gastos/total llega al total', () => igual(buscarRuta(RUTAS, 'GET', '/gastos/total'), 'total'));
+prueba('el verbo también cuenta', () => igual(buscarRuta(RUTAS, 'DELETE', '/gastos/7'), null));
+--- solución
+const RUTAS = [
+  { verbo: 'GET', patron: '/gastos/total', nombre: 'total' },
+  { verbo: 'GET', patron: '/gastos/:id', nombre: 'verUno' },
+  { verbo: 'GET', patron: '/gastos', nombre: 'listar' },
+];
+
+function buscarRuta(rutas, verbo, camino) {
+  const partes = camino.split('/');
+  const ruta = rutas.find((r) => {
+    if (r.verbo !== verbo) return false;
+    const patron = r.patron.split('/');
+    return patron.length === partes.length && patron.every((p, i) => p.startsWith(':') || p === partes[i]);
+  });
+  return ruta ? ruta.nombre : null;
+}
+```
 
 ```practica
 elige :: ¿Por qué `GET /gastos/total` va antes que `GET /gastos/:id`? :: Por orden alfabético :: Porque Express revisa las rutas en orden y `:id` tomaría "total" como un id :: Porque es más corta

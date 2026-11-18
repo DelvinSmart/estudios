@@ -18,6 +18,32 @@ A esto se le llama **backend** (la parte de atrás: datos, seguridad, lógica en
 
 > 🌎 **Otro ejemplo:** Como usar la luz de la compañía eléctrica en vez de comprar un generador: no lo mantienes tú, pagas según lo que gastas, y si consumes más, la compañía lo da.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Frente o backend?
+lenguaje: js
+pide: El **frente** es lo que corre en el teléfono (pantallas, botones); el **backend** es lo que vive en la nube (datos, seguridad, código del servidor). Completa `donde(tarea)`: `'backend'` si la tarea habla de guardar datos, revisar permisos, una clave secreta o el servidor; `'frente'` en los demás casos. Usa la lista `PISTAS_BACKEND`.
+--- código
+const PISTAS_BACKEND = ['guardar', 'permiso', 'clave secreta', 'servidor'];
+
+function donde(tarea) {
+  // tu código aquí
+}
+--- pruebas
+prueba('guardar un gasto en la nube', () => igual(donde('guardar un gasto en la nube'), 'backend'));
+prueba('revisar el permiso de lectura', () => igual(donde('revisar el permiso de lectura'), 'backend'));
+prueba('usar la clave secreta de la IA', () => igual(donde('usar la clave secreta de la IA'), 'backend'));
+prueba('dibujar el botón de agregar', () => igual(donde('dibujar el botón de agregar'), 'frente'));
+prueba('mostrar la barra de combustible', () => igual(donde('mostrar la barra de combustible'), 'frente'));
+--- solución
+const PISTAS_BACKEND = ['guardar', 'permiso', 'clave secreta', 'servidor'];
+
+function donde(tarea) {
+  return PISTAS_BACKEND.some((p) => tarea.includes(p)) ? 'backend' : 'frente';
+}
+```
+
 ```practica
 escribe :: Con tus palabras: ¿qué es Firebase? :: Un conjunto de servicios de Google que le da a la app un servidor (datos, inicio de sesión, funciones) sin que yo tenga que administrar computadoras; pago por lo que uso.
 elige :: ¿Qué es el backend? :: Las pantallas de la app :: La parte de atrás: datos, seguridad y lógica en la nube :: El teléfono
@@ -52,6 +78,33 @@ El **`uid`** (*user id*) es importantísimo: es un código único que Firebase l
 En **Cloud Functions** (el servidor). La clave nunca va en la app (lo ves en la parte 5).
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cada cosa, a su pieza de Firebase
+lenguaje: js
+pide: Completa el objeto `PIEZA` con la pieza de Firebase que se encarga de cada cosa: saber quién es la persona (`'Authentication'`), guardar ingresos y gastos (`'Firestore'`), guardar fotos (`'Storage'`), código del servidor (`'Cloud Functions'`) y publicar el panel web (`'Hosting'`).
+--- código
+const PIEZA = {
+  quienEs: '',
+  ingresosYGastos: '',
+  fotos: '',
+  codigoDelServidor: '',
+  panelWeb: '',
+};
+--- pruebas
+const bien = { quienEs: 'Authentication', ingresosYGastos: 'Firestore', fotos: 'Storage', codigoDelServidor: 'Cloud Functions', panelWeb: 'Hosting' };
+for (const [k, v] of Object.entries(bien)) prueba(k, () => igual(PIEZA[k], v));
+--- solución
+const PIEZA = {
+  quienEs: 'Authentication',
+  ingresosYGastos: 'Firestore',
+  fotos: 'Storage',
+  codigoDelServidor: 'Cloud Functions',
+  panelWeb: 'Hosting',
+};
+```
 
 ```practica
 elige :: ¿Qué pieza sabe quién es cada persona? :: Firestore :: Authentication :: Hosting
@@ -133,6 +186,39 @@ Es un **documento** en `users/{uid}/earnings/{id}`. Fíjate: es JSON, como en el
 En `users/{tu uid}/personalExpenses/{id}`: un documento nuevo en la subcolección de gastos personales, dentro de tu documento de usuario.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer una ruta de Firestore
+lenguaje: js
+pide: En Firestore, una ruta alterna **colección / documento / colección / documento**. Completa `leerRuta(ruta)`: devuelve la lista de pares `{ coleccion, documento }`. Y `dueno(ruta)`: si empieza con `usuarios/`, devuelve el `uid` (el documento que sigue); si no, `null`.
+--- código
+function leerRuta(ruta) {
+  // tu código aquí
+}
+
+function dueno(ruta) {
+  // tu código aquí
+}
+--- pruebas
+prueba('dos niveles', () => igual(leerRuta('usuarios/ana123/gastos/g1'), [{ coleccion: 'usuarios', documento: 'ana123' }, { coleccion: 'gastos', documento: 'g1' }]));
+prueba('un nivel', () => igual(leerRuta('grupos/san7'), [{ coleccion: 'grupos', documento: 'san7' }]));
+prueba('el dueño de un gasto', () => igual(dueno('usuarios/ana123/gastos/g1'), 'ana123'));
+prueba('un grupo compartido no tiene dueño único', () => igual(dueno('grupos/san7'), null));
+--- solución
+function leerRuta(ruta) {
+  const partes = ruta.split('/');
+  const pares = [];
+  for (let i = 0; i < partes.length; i += 2) pares.push({ coleccion: partes[i], documento: partes[i + 1] });
+  return pares;
+}
+
+function dueno(ruta) {
+  const [primero] = leerRuta(ruta);
+  return primero.coleccion === 'usuarios' ? primero.documento : null;
+}
+```
 
 ```practica
 elige :: En Firestore, ¿qué es una colección? :: Un dato suelto :: Un grupo de documentos del mismo tipo :: Una contraseña
@@ -220,6 +306,41 @@ Porque alguien puede saltarse la app y pedirle los datos **directamente** a Fire
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un portero de juguete, como firestore.rules
+lenguaje: js
+pide: Escribe las reglas de Gastos del carro en JavaScript. `puede(pedido)` recibe `{ auth, ruta, accion, datos }`: `auth` es `null` (sin sesión) o `{ uid }`. Solo se permite en `usuarios/{uid}/gastos/{id}` y solo si quien pide **es el dueño**. Para `crear`, además, `datos.valor` tiene que ser un número mayor que 0 y `datos` no puede tener campos fuera de `tipo`, `valor` y `fecha`. Todo lo demás: `false`.
+--- código
+function puede(pedido) {
+  // tu código aquí
+}
+--- pruebas
+const ana = { uid: 'ana' };
+const gasto = { tipo: 'peaje', valor: 12, fecha: '2026-11-18' };
+prueba('Ana lee su gasto', () => igual(puede({ auth: ana, ruta: 'usuarios/ana/gastos/g1', accion: 'leer' }), true));
+prueba('trampa: Beto lee el gasto de Ana', () => igual(puede({ auth: { uid: 'beto' }, ruta: 'usuarios/ana/gastos/g1', accion: 'leer' }), false));
+prueba('trampa: sin sesión', () => igual(puede({ auth: null, ruta: 'usuarios/ana/gastos/g1', accion: 'leer' }), false));
+prueba('Ana crea un gasto válido', () => igual(puede({ auth: ana, ruta: 'usuarios/ana/gastos/g2', accion: 'crear', datos: gasto }), true));
+prueba('trampa: un valor negativo', () => igual(puede({ auth: ana, ruta: 'usuarios/ana/gastos/g2', accion: 'crear', datos: { ...gasto, valor: -5 } }), false));
+prueba('trampa: un campo de más', () => igual(puede({ auth: ana, ruta: 'usuarios/ana/gastos/g2', accion: 'crear', datos: { ...gasto, admin: true } }), false));
+prueba('trampa: fuera de usuarios/', () => igual(puede({ auth: ana, ruta: 'config/general', accion: 'leer' }), false));
+--- solución
+function puede(pedido) {
+  const partes = pedido.ruta.split('/');
+  if (partes.length !== 4 || partes[0] !== 'usuarios' || partes[2] !== 'gastos') return false;
+  const esDueno = pedido.auth !== null && pedido.auth.uid === partes[1];
+  if (!esDueno) return false;
+  if (pedido.accion === 'crear') {
+    const d = pedido.datos ?? {};
+    const soloEstos = Object.keys(d).every((k) => ['tipo', 'valor', 'fecha'].includes(k));
+    return soloEstos && typeof d.valor === 'number' && d.valor > 0;
+  }
+  return true;
+}
+```
+
 ```practica
 escribe :: Con tus palabras: ¿para qué sirven las reglas de seguridad de Firestore? :: Para decidir en el servidor quién puede leer o escribir cada dato, porque cualquiera puede intentar acceder a la base sin usar la app.
 elige :: En `request.auth.uid == userId`, ¿qué se compara? :: La contraseña :: El id de quien pide con el id del departamento (la carpeta) :: El correo
@@ -288,6 +409,40 @@ npx firebase-tools deploy --only functions --project copiloto-driver-ia
 
 > 🌎 **Otro ejemplo:** Como actualizar el menú de una cadena de restaurantes: imprimirlo en la oficina no alcanza; hay que mandarlo a los locales.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: assertOwner: el servidor también revisa
+lenguaje: js
+pide: En Cloud Functions, el código corre con **poder de administrador** y no pasa por las reglas: por eso cada función revisa a mano quién la llama. Completa `assertOwner(contexto, uid)`: si no hay sesión, lanza un `Error('Inicia sesión.')`; si el uid de quien llama no es el pedido, lanza `Error('No es tuyo.')`; si todo bien, no hace nada. Después úsala en `borrarGasto`.
+--- código
+function assertOwner(contexto, uid) {
+  // tu código aquí
+}
+
+function borrarGasto(contexto, uid, id, base) {
+  // revisa primero, y después borra
+  delete base[uid][id];
+  return 'borrado';
+}
+--- pruebas
+const nuevaBase = () => ({ ana: { g1: { valor: 10 } } });
+prueba('Ana borra su gasto', () => { const b = nuevaBase(); igual(borrarGasto({ auth: { uid: 'ana' } }, 'ana', 'g1', b), 'borrado'); igual(b.ana.g1, undefined); });
+prueba('sin sesión: error', () => { let msg = ''; try { borrarGasto({ auth: null }, 'ana', 'g1', nuevaBase()); } catch (e) { msg = e.message; } igual(msg, 'Inicia sesión.'); });
+prueba('Beto no borra lo de Ana, y el gasto sigue ahí', () => { const b = nuevaBase(); let msg = ''; try { borrarGasto({ auth: { uid: 'beto' } }, 'ana', 'g1', b); } catch (e) { msg = e.message; } igual(msg, 'No es tuyo.'); igual(b.ana.g1, { valor: 10 }); });
+--- solución
+function assertOwner(contexto, uid) {
+  if (!contexto.auth) throw new Error('Inicia sesión.');
+  if (contexto.auth.uid !== uid) throw new Error('No es tuyo.');
+}
+
+function borrarGasto(contexto, uid, id, base) {
+  assertOwner(contexto, uid);
+  delete base[uid][id];
+  return 'borrado';
+}
+```
+
 ```practica
 elige :: ¿Por qué la clave de Gemini está en el servidor y no en la app? :: Porque la app es lenta :: Porque todo lo que está en la app se puede extraer :: Porque Google lo exige
 elige :: ¿Qué hace `assertOwner(...)`? :: Agrega un color :: Revisa que quien llama sea el dueño, y si no, corta :: Publica la función
@@ -323,6 +478,48 @@ Firestore **rechaza** la escritura con "Missing or insufficient permissions", y 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La pantalla que escucha
+lenguaje: js
+pide: La pantalla del Inicio se actualiza sola porque **escucha** los cambios de Firestore. Completa `crearColeccion()`: `escuchar(fn)` guarda a quien escucha y le avisa **enseguida** con la lista actual; `agregar(dato)` guarda el dato y avisa a **todos** los que escuchan con la lista nueva. `escuchar` devuelve una función para **dejar de escuchar**.
+--- código
+function crearColeccion() {
+  const datos = [];
+  let oyentes = [];
+  return {
+    escuchar(fn) {
+      // tu código aquí
+    },
+    agregar(dato) {
+      // tu código aquí
+    },
+  };
+}
+--- pruebas
+prueba('avisa enseguida con lo que hay', () => { const c = crearColeccion(); let visto = null; c.escuchar((l) => (visto = l)); igual(visto, []); });
+prueba('al agregar, la pantalla recibe la lista nueva', () => { const c = crearColeccion(); let visto = null; c.escuchar((l) => (visto = l)); c.agregar(50); c.agregar(30); igual(visto, [50, 30]); });
+prueba('avisa a todos', () => { const c = crearColeccion(); let a = 0, b = 0; c.escuchar(() => a++); c.escuchar(() => b++); c.agregar(1); igual([a, b], [2, 2]); });
+prueba('dejar de escuchar', () => { const c = crearColeccion(); let n = 0; const dejar = c.escuchar(() => n++); dejar(); c.agregar(1); igual(n, 1); });
+--- solución
+function crearColeccion() {
+  const datos = [];
+  let oyentes = [];
+  return {
+    escuchar(fn) {
+      oyentes.push(fn);
+      fn([...datos]);
+      return () => { oyentes = oyentes.filter((o) => o !== fn); };
+    },
+    agregar(dato) {
+      datos.push(dato);
+      for (const o of oyentes) o([...datos]);
+    },
+  };
+}
+```
+
 ```practica
 escribe :: Cuenta en orden el camino de un ingreso desde la pantalla hasta el Copiloto. :: La pantalla arma el ingreso; el contexto decide cómo se cuenta; el servicio lo escribe en users/{uid}/earnings; las reglas revisan el uid; Firestore lo guarda y avisa; el Inicio se actualiza solo; el Copiloto recibe el evento y actualiza su memoria.
 elige :: ¿Qué pieza decide si el ingreso es acumulativo? :: La pantalla :: El contexto (`EarningsContext`) :: Las reglas
@@ -345,6 +542,28 @@ vf :: La pantalla del Inicio se actualiza sola porque escucha los cambios de Fir
 
 > 💡 **Idea:** ¿y la configuración de Firebase que sí está en la app (el nombre del proyecto, etc.)? Esa es **pública por diseño**: no es un secreto. Lo que protege los datos no es esconder esa configuración, sino **las reglas**. Esto lo vas a ver otra vez en el Tema 13.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Es un secreto o es público?
+lenguaje: js
+pide: La configuración de Firebase en la app (`apiKey` que empieza con `AIza`, `projectId`, `authDomain`) es **pública por diseño**. Un **secreto** es otra cosa: claves que empiezan con `sk_`, una cuenta de servicio (un texto con `"private_key"`), o un `.env`. Completa `esSecreto(texto)`.
+--- código
+function esSecreto(texto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('la apiKey de Firebase en la app: pública', () => igual(esSecreto("apiKey: 'AIzaSyB-ejemplo'"), false));
+prueba('el projectId: público', () => igual(esSecreto("projectId: 'gastos-del-carro'"), false));
+prueba('una clave sk_: secreto', () => igual(esSecreto('STRIPE=sk_live_abc123'), true));
+prueba('una cuenta de servicio: secreto', () => igual(esSecreto('{ "type": "service_account", "private_key": "-----BEGIN" }'), true));
+prueba('un .env: secreto', () => igual(esSecreto('.env'), true));
+--- solución
+function esSecreto(texto) {
+  return /sk_\w+/.test(texto) || texto.includes('"private_key"') || texto.trim() === '.env';
+}
+```
+
 ```practica
 vf :: La cuenta de servicio de Firebase se guarda dentro del proyecto, para tenerla a mano
 vf :: La configuración pública de Firebase en la app no es un secreto; lo que protege son las reglas
@@ -355,21 +574,16 @@ escribe :: Di las tres reglas de seguridad de esta parte. :: Nunca claves secret
 
 ## Ejercicios
 
-> 🎙️ **El profesor:** solo mirar, **nunca tocar** producción. Si no tienes acceso a la app o a la consola, responde 4 y 5.
+> 🎙️ **El profesor:** los tres primeros los haces en **Gastos del carro**, que tiene sus propias reglas de Firestore y sus pruebas "como atacante". Nada de esto toca datos de verdad: las pruebas corren en un **emulador**, una copia de Firestore que vive en tu computadora y se borra al terminar.
 
 > 🌎 **En la vida real:** Es como hacer una visita guiada al edificio con el plano en la mano, mirando cada cerradura, sin tocar nada.
 
-1. Abre `firestore.rules` y busca la regla de `expenses`. Explica con tus palabras quién puede leer los gastos.
-2. Busca la regla de `billing`. ¿Por qué la app no puede escribir la suscripción?
-3. En la consola de Firebase (console.firebase.google.com → proyecto `copiloto-driver-ia` → Firestore), busca **tu** documento en `users`. Mira tus `settings/main` **sin cambiar nada**. ¿Encuentras tus vehículos?
+1. En Gastos del carro, abre `firebase/firestore.rules` y busca `match /usuarios/{uid}/gastos/{gastoId}`. Explica con tus palabras quién puede leer los gastos.
+2. Mira la función `gastoValido`. Di tres gastos que las reglas **rechazan** aunque los mande la persona dueña.
+3. Corre `npm run test:reglas` (necesita [Java](https://adoptium.net), gratis). Lee los nombres de las pruebas: cada "trampa" es un ataque que **tiene que fallar**. Después, en las reglas, cambia `esDueno(uid)` por `conSesion()` en la línea de `allow read, delete`, corre otra vez y mira qué pruebas se ponen en rojo. Al final, `git restore firebase/firestore.rules`.
 4. ¿Por qué la clave de Gemini está en el servidor y no en la app?
 5. Si mañana alguien quiere leer los ingresos de otra persona desde una app falsa, ¿qué lo detiene?
-
-<details>
-<summary>Ver las correcciones explicadas</summary>
-
-1. La regla de `expenses` es igual a la de `earnings`: solo **la persona dueña** de esa carpeta, con sesión iniciada.
-2. La regla dice:
+6. En Copiloto, la suscripción (`billing`) tiene esta regla. ¿Por qué la app no puede escribirla?
 
 ```text
 match /users/{userId}/billing/{docId} {
@@ -378,11 +592,15 @@ match /users/{userId}/billing/{docId} {
 }
 ```
 
-La persona **puede leer** su suscripción, pero **nadie** la escribe desde la app. Si la app pudiera, cualquiera se daría el plan pago gratis. Solo la escribe el servidor, después de confirmar el pago (`revenueCatWebhook`).
+<details>
+<summary>Ver las correcciones explicadas</summary>
 
-3. Dentro de `settings/main` hay una lista con tus vehículos (marca, modelo, color…). Solo mirar.
+1. `allow read, delete: if esDueno(uid)`: solo **la persona dueña** de esa carpeta (`usuarios/{uid}`), con sesión iniciada. Es la misma idea que en Copiloto con `users/{userId}/expenses`.
+2. Por ejemplo: un valor negativo o de más de 100 000, un tipo inventado (`'casino'`), una fecha que no es `AAAA-MM-DD`, o un campo de más como `admin: true`. Por eso `gastoValido` usa `hasOnly`: **solo** esos tres campos.
+3. Las 9 pruebas pasan: las trampas fallan como deben. Con `conSesion()`, **cualquiera con sesión** lee y borra los gastos de otro: se ponen en rojo dos pruebas, "trampa: Beto lee el gasto de Ana" y "Ana borra su gasto; Beto no puede" (`2 failed | 7 passed`). Esa es la diferencia entre "tiene sesión" y "es el dueño".
 4. Porque todo lo que está en la app se puede extraer: una clave en la app es una clave pública.
 5. **Las reglas de seguridad**: el `uid` de quien pide no coincide con el de la carpeta, y Firestore lo rechaza en el servidor.
+6. La persona **puede leer** su suscripción, pero **nadie** la escribe desde la app (`allow write: if false`). Si la app pudiera, cualquiera se daría el plan pago gratis. Solo la escribe el servidor, después de confirmar el pago.
 
 </details>
 
