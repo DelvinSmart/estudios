@@ -1,4 +1,4 @@
-# Clase guiada 09: CRUD en Node.js (la tarea grande)
+# CRUD en Node.js (la tarea grande)
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después. El código está en esta misma carpeta: `src/` y `test/`.
 

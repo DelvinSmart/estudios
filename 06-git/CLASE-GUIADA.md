@@ -1,4 +1,4 @@
-# Clase guiada 06: Git
+# Git
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) tiene además la **chuleta completa** de comandos para tener a mano.
 

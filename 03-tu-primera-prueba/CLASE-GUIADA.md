@@ -1,4 +1,4 @@
-# Clase guiada 03: Mi primera prueba
+# Mi primera prueba
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 

@@ -1,4 +1,4 @@
-# Clase guiada 14: ¿Qué dice la Biblia? por dentro
+# ¿Qué dice la Biblia? por dentro
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. La [lección](LECCION.md) es el resumen, y [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md) tiene las frases cortas.
 

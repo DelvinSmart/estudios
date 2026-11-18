@@ -1,4 +1,4 @@
-# Clase guiada 12: Cómo hice Estudios Bíblicos
+# Cómo hice Estudios Bíblicos
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. La [lección](LECCION.md) es el resumen para repasar, y [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md) te da las frases cortas.
 

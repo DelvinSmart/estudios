@@ -1,4 +1,4 @@
-# Clase guiada 11: Cómo arreglé Copiloto
+# Cómo arreglé Copiloto
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. Junta la [guía de estudio](GUIA-DE-ESTUDIO.md) y el [informe](INFORME.md) en una sola clase, contada como historia.
 

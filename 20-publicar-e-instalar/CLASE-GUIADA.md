@@ -1,4 +1,4 @@
-# Clase guiada 20: Publicar e instalar
+# Publicar e instalar
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) tiene la chuleta de comandos para tener a mano.
 

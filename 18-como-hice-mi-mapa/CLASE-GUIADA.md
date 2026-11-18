@@ -1,4 +1,4 @@
-# Clase guiada 18: Cómo hice mi mapa de estudios
+# Cómo hice mi mapa de estudios
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 

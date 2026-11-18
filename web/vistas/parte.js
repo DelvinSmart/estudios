@@ -43,7 +43,6 @@ export async function vistaParte(num, doc, cual) {
   app.innerHTML = `
     <div class="lectura">
       <aside class="indice">
-        <p class="mono comentario">// ${escapar(c.docs[doc].titulo.toLowerCase())}</p>
         <a class="indice-clase" href="#/clase/${num}/${doc}">${numeroEnCurso(num)} · ${enLinea(titulo || c.titulo)}</a>
         <nav>${indice}</nav>
       </aside>

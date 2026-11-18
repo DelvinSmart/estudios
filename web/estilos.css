@@ -24,6 +24,10 @@
   --sombra: 0 10px 30px rgb(0 0 0 / 0.35);
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  /* Espacios, como en Copiloto: --hueco entre bloques; --relleno dentro de los recuadros (igual a los dos lados). */
+  --hueco: 14px;
+  --hueco-doble: 28px;
+  --relleno: 18px;
   color-scheme: dark;
 }
 
@@ -74,7 +78,7 @@ a:hover { text-decoration: underline; }
 .centro { text-align: center; }
 .emoji { font-family: system-ui; }
 .comentario { color: var(--tenue); font-size: 0.85rem; margin: 0 0 0.4rem; }
-.app { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px 64px; flex: 1; }
+.app { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px var(--hueco-doble); flex: 1; }
 .cargando { font-family: var(--mono); color: var(--tenue); padding: 40px 0; }
 .cargando::after { content: '▋'; animation: parpadeo 1s steps(1) infinite; margin-left: 4px; }
 :focus-visible { outline: 2px solid var(--acento-2); outline-offset: 3px; border-radius: 6px; }
@@ -117,8 +121,8 @@ a:hover { text-decoration: underline; }
 .migas .sep { opacity: 0.5; }
 
 .pie {
-  display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: center;
-  padding: 24px; border-top: 1px solid var(--borde);
+  display: flex; flex-wrap: wrap; gap: 4px 24px; justify-content: center;
+  padding: var(--hueco) 16px; border-top: 1px solid var(--borde);
   font-size: 0.78rem; color: var(--tenue);
 }
 
@@ -217,7 +221,7 @@ a:hover { text-decoration: underline; }
 .intro summary { cursor: pointer; padding: 12px 0; color: var(--tenue); font-size: 0.85rem; }
 .intro[open] summary { border-bottom: 1px solid var(--borde); margin-bottom: 6px; }
 
-.pasos { display: flex; justify-content: space-between; gap: 12px; margin-top: 34px; flex-wrap: wrap; }
+.pasos { display: flex; justify-content: space-between; gap: 8px; margin-top: var(--hueco); flex-wrap: wrap; }
 .paso {
   flex: 1 1 260px; max-width: 48%;
   padding: 14px 18px; border-radius: 14px; border: 1px solid var(--borde); background: var(--tarjeta);
@@ -231,7 +235,7 @@ a:hover { text-decoration: underline; }
 .error p:first-child { color: var(--rojo); }
 
 /* ---------- 5. Lectura: índice al lado y la hoja ---------- */
-.lectura { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 40px; padding-top: 26px; }
+.lectura { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 40px; padding-top: var(--hueco-doble); }
 .indice { position: sticky; top: 84px; align-self: start; max-height: calc(100vh - 110px); overflow: auto; padding-right: 6px; }
 .indice-clase { display: block; font: 700 0.95rem/1.4 var(--mono); color: var(--texto); margin-bottom: 14px; }
 .indice nav { display: flex; flex-direction: column; gap: 2px; border-left: 1px solid var(--borde); }
@@ -242,23 +246,25 @@ a:hover { text-decoration: underline; }
 .indice nav a code { font-size: 0.85em; background: none; padding: 0; }
 .hoja { max-width: 780px; min-width: 0; animation: entrar 0.4s ease both; }
 .titulo-parte { font: 800 1.55rem/1.25 var(--mono); letter-spacing: -0.01em; margin: 48px 0 14px; padding-top: 18px; border-top: 1px solid var(--borde); }
-.titulo-parte.grande { font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin-top: 0; padding-top: 0; border: 0; }
+.titulo-parte.grande { font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin: 0 0 var(--hueco); padding-top: 0; border: 0; }
 .mini-mapa { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 26px; }
 .mini-mapa a { padding: 7px 12px; border-radius: 10px; border: 1px solid var(--borde); background: var(--tarjeta); color: var(--texto); font-size: 0.85rem; line-height: 1.35; }
 .mini-mapa a:hover { text-decoration: none; border-color: var(--acento); }
 .mini-mapa code { background: none; padding: 0; font-size: 0.9em; }
-.entendido { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 40px; padding-top: 22px; border-top: 1px dashed var(--borde-fuerte); font-size: 0.9rem; }
+.entendido { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: var(--hueco-doble); padding: var(--relleno); border-radius: 14px; border: 1px solid var(--borde); background: var(--tarjeta); font-size: 0.9rem; }
 .entendido .boton { margin-top: 0; }
+.entendido .nube-parte:empty { display: none; }
 
 /* ---------- 6. El texto de las lecciones ---------- */
 .texto > :first-child { margin-top: 0; }
 .texto h1, .texto h2, .texto h3, .texto h4 { font-family: var(--mono); line-height: 1.3; letter-spacing: -0.01em; }
 .texto h1 { font-size: 1.7rem; }
-.texto h2 { font-size: 1.35rem; margin-top: 2.2em; }
-.texto h3 { font-size: 1.12rem; margin: 2em 0 0.6em; color: var(--acento-2); scroll-margin-top: 90px; }
+.texto h2 { font-size: 1.3rem; margin: var(--hueco-doble) 0 var(--hueco); }
+.texto h3 { font-size: 1rem; margin: var(--hueco-doble) 0 var(--hueco); color: var(--acento-2); scroll-margin-top: 90px; }
 .texto h3::before { content: '### '; color: var(--tenue); font-weight: 400; }
 .texto h4 { font-size: 1rem; color: var(--morado); }
 .texto p, .texto li { max-width: 72ch; }
+.texto p, .texto ul, .texto ol { margin: var(--hueco) 0; }
 .texto strong { color: color-mix(in srgb, var(--texto) 100%, white 10%); font-weight: 600; }
 .texto ul, .texto ol { padding-left: 1.4em; }
 .texto li { margin: 0.25em 0; }
@@ -275,7 +281,7 @@ a:hover { text-decoration: underline; }
 }
 
 /* El bloque de código parece una ventana de editor. */
-.codigo { margin: 1.4em 0; border-radius: 14px; overflow: hidden; border: 1px solid #263140; background: var(--codigo-fondo); box-shadow: var(--sombra); }
+.codigo { margin: var(--hueco) 0; border-radius: 14px; overflow: hidden; border: 1px solid #263140; background: var(--codigo-fondo); box-shadow: var(--sombra); }
 .codigo-barra { display: flex; align-items: center; gap: 12px; padding: 9px 14px; background: #121922; border-bottom: 1px solid #263140; }
 .codigo-barra .puntos { display: inline-flex; gap: 6px; }
 .codigo-barra .puntos i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
@@ -292,7 +298,7 @@ a:hover { text-decoration: underline; }
 
 /* Las tarjetas de aviso: 🌎 vida real, 💡 idea, ⚠️ cuidado, 🎤 entrevista, 📌 nota. */
 .texto blockquote {
-  margin: 1.3em 0; padding: 14px 18px; border-radius: 12px;
+  margin: var(--hueco) 0; padding: var(--hueco) var(--relleno); border-radius: 12px;
   border: 1px solid var(--borde); border-left: 4px solid var(--borde-fuerte);
   background: var(--fondo-2); color: var(--texto);
 }
@@ -309,7 +315,7 @@ a:hover { text-decoration: underline; }
 .aviso.repaso { --color: var(--acento); border-style: dashed !important; }
 .aviso > p:first-child strong:first-of-type { color: var(--color); font-family: var(--mono); font-size: 0.9em; }
 
-.tabla { overflow-x: auto; margin: 1.3em 0; border: 1px solid var(--borde); border-radius: 12px; }
+.tabla { overflow-x: auto; margin: var(--hueco) 0; border: 1px solid var(--borde); border-radius: 12px; }
 .tabla table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
 .tabla th { font: 700 0.8rem var(--mono); text-align: left; color: var(--acento); background: var(--fondo-2); }
 .tabla th, .tabla td { padding: 10px 14px; border-bottom: 1px solid var(--borde); vertical-align: top; line-height: 1.5; }
@@ -348,13 +354,15 @@ a:hover { text-decoration: underline; }
 
 /* ---------- 9. Celular ---------- */
 @media (max-width: 899px) {
-  .lectura { grid-template-columns: 1fr; gap: 10px; padding-top: 14px; }
+  .lectura { grid-template-columns: 1fr; gap: var(--hueco); padding-top: var(--hueco); }
+  .indice-clase { margin-bottom: 0; }
   .indice { position: static; max-height: none; overflow: visible; padding: 0; }
   .indice nav { display: none; }
 }
 @media (max-width: 600px) {
   body { font-size: 16px; }
-  .app { padding: 0 16px 48px; }
+  :root { --relleno: 16px; }
+  .app { padding: 0 16px var(--hueco-doble); }
   .barra { padding: 10px 16px; }
   .migas { padding: 14px 16px 0; }
   .logo .prompt { display: none; }
@@ -367,6 +375,9 @@ a:hover { text-decoration: underline; }
   .nodo-grande .nodo-num { min-width: 44px; height: 44px; font-size: 1.05rem; }
   .flecha { display: none; }
   .paso { max-width: 100%; }
+  /* Abajo de la parte: anterior y siguiente lado a lado, cada uno la mitad, con el título en dos líneas como máximo. */
+  .pasos:not(.pasos-arriba) { flex-wrap: nowrap; }
+  .pasos:not(.pasos-arriba) .paso { flex: 1 1 0; min-width: 0; padding: 10px 12px; font-size: 0.8rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .codigo pre { padding: 14px; }
   .codigo pre code { font-size: 0.8rem; }
 }
@@ -446,17 +457,25 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 }
 
 /* ---------- 11. Las prácticas interactivas ---------- */
-.practica { margin: 1.8em 0; padding: 16px 18px; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--morado) 45%, var(--borde)); background: color-mix(in srgb, var(--morado) 6%, var(--tarjeta)); }
+.practica { margin: var(--hueco) 0; padding: var(--relleno); border-radius: 16px; border: 1px solid color-mix(in srgb, var(--morado) 45%, var(--borde)); background: color-mix(in srgb, var(--morado) 6%, var(--tarjeta)); }
 .practica.aprobada { border-color: color-mix(in srgb, var(--acento) 55%, var(--borde)); background: color-mix(in srgb, var(--acento) 5%, var(--tarjeta)); }
 .practica-cabeza { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--morado); }
 .practica.aprobada .practica-cabeza { color: var(--acento); }
 .practica-regla { font-size: 0.88rem; margin: 6px 0 10px; }
 .practica-lista { list-style: none; counter-reset: preg; padding: 0; margin: 0; }
-.pregunta { counter-increment: preg; position: relative; padding: 12px 0 12px 34px; border-top: 1px dashed var(--borde); }
-.pregunta::before { content: counter(preg); position: absolute; left: 0; top: 13px; width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; font: 700 0.75rem var(--mono); background: var(--fondo-2); border: 1px solid var(--borde); color: var(--tenue); }
+/* La pregunta: el número y el enunciado en la misma fila; lo demás (opciones, cuadro de texto) ocupa todo el ancho, desde el borde. */
+.pregunta { counter-increment: preg; display: flex; flex-wrap: wrap; align-items: flex-start; column-gap: 10px; padding: var(--hueco) 0; border-top: 1px dashed var(--borde); }
+.pregunta > * { flex: 1 1 100%; min-width: 0; }
+.pregunta > .enunciado { flex: 1 1 0; }
+.pregunta::before { content: counter(preg); flex: none; margin-top: 1px; width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; font: 700 0.75rem var(--mono); background: var(--fondo-2); border: 1px solid var(--borde); color: var(--tenue); }
 .pregunta.bien::before { content: '✓'; background: var(--acento); color: var(--sobre-acento); border-color: var(--acento); }
 .pregunta.mal::before { content: '✗'; background: var(--rojo); color: #fff; border-color: var(--rojo); }
-.enunciado { margin: 0 0 8px; }
+.enunciado { margin: 0 0 10px; }
+/* Dentro del texto de la clase, las listas y párrafos generales no tocan la práctica (antes la corrían a la derecha). */
+.texto .practica-lista { padding: 0; margin: 0; }
+.texto .practica .enunciado { margin: 0 0 10px; }
+.texto .practica .practica-regla { margin: 6px 0 10px; }
+.texto .practica p { max-width: none; }
 .pregunta .opciones { display: flex; flex-wrap: wrap; gap: 8px; }
 .pregunta .opciones button { padding: 8px 14px; border-radius: 10px; border: 1px solid var(--borde-fuerte); background: var(--tarjeta); color: var(--texto); font: 600 0.88rem var(--mono); cursor: pointer; }
 .pregunta .opciones button:hover:not(:disabled) { border-color: var(--morado); color: var(--morado); }
@@ -478,7 +497,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .practica-final { margin: 12px 0; font-weight: 600; }
 .practica-final.bien { color: var(--acento); }
 .practica-final.mal { color: var(--rojo); }
-.practica-pie { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--borde); }
+.practica-pie { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; margin-top: 0; padding-top: var(--hueco); border-top: 1px dashed var(--borde); }
 .practica-pie .boton, .practica-pie .revisar { margin: 0; }
 .practica-pie .practica-final { margin: 0; }
 .practica-pie .revisar:disabled { opacity: 0.45; cursor: not-allowed; }
@@ -731,7 +750,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .estado-cert .acciones { margin: 0; }
 .estado-cert .acciones .boton, .estado-cert .acciones .boton-principal { margin-top: 0; }
 .nota-muestra { margin: 0 0 10px; text-align: center; font-size: 0.82rem; }
-.pasos-arriba { margin: 0 0 18px; padding: 0 0 12px; border-bottom: 1px dashed var(--borde); flex-wrap: nowrap; align-items: stretch; gap: 8px; }
+.pasos-arriba { margin: 0 0 var(--hueco); flex-wrap: nowrap; align-items: stretch; gap: 8px; }
 /* Arriba de cada parte: volver, anterior y siguiente son el mismo botón, del tamaño de su texto y en una sola fila. */
 .pasos-arriba .paso { flex: 0 0 auto; max-width: none; padding: 10px 14px; text-align: center; white-space: nowrap; }
 .pasos-lados { display: flex; gap: 8px; margin-left: auto; }
@@ -908,7 +927,7 @@ a.tu-progreso:hover { border-color: var(--acento); }
 
 /* ---------- 19. El reproductor de audio (sigue con la pantalla bloqueada) ---------- */
 .audio-parte:empty { display: none; }
-.audio-parte { margin: 0 0 14px; }
+.audio-parte { margin: 0 0 var(--hueco); }
 .boton-audio { margin: 0; padding: 8px 14px; font-size: 0.85rem; }
 /* Una fila: ▶ · título · tiempo · ⋯ · ✕. En la computadora los demás controles van en la misma fila;
    en el celular se abren con "⋯" para que el reproductor ocupe poco. */

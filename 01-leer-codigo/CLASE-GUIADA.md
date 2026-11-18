@@ -1,4 +1,4 @@
-# Clase guiada 01: Leer código
+# Leer código
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. La [lección](LECCION.md) es el resumen para repasar.
 

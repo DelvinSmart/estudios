@@ -1,4 +1,4 @@
-# Clase guiada 13: Cómo hice la web de Copiloto Driver
+# Cómo hice la web de Copiloto Driver
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. La [lección](LECCION.md) es el resumen, y [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md) tiene las frases cortas.
 

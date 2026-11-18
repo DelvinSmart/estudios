@@ -1,4 +1,4 @@
-# Clase guiada 05: Mi primer cambio
+# Mi primer cambio
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 

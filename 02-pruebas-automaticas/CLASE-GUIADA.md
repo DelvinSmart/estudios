@@ -1,4 +1,4 @@
-# Clase guiada 02: Pruebas automáticas
+# Pruebas automáticas
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
