@@ -127,6 +127,36 @@ de iPhone (y Kotlin en la de Android): se cuenta cómo encajan.
   con una lista de comprobación; y los ejercicios cortos con un sitio gratuito para correr Swift en línea)
 - [ ] El curso en el mapa, con su certificado (eso cambia las reglas de Firebase: se suben antes de publicar)
 
+### H. El recorrido de cada proyecto, de punta a punta (✅ clase 85)
+
+Poder explicar **cada proyecto** desde que la persona hace algo hasta que sale el resultado: por qué piezas pasa el dato,
+qué decide cada una y dónde queda guardado. Con una versión corta (30 segundos, con tus palabras) y una larga (para la
+entrevista), y ejemplos de la vida real.
+
+- [x] Copiloto (la app): registrar una ganancia, de la pantalla a la nube y de vuelta al resumen
+- [x] Copiloto (la IA): una pregunta al Copiloto, del teléfono al modelo y de vuelta
+- [x] ¿Qué dice la Biblia?: un estudio, del panel del autor a la pantalla del lector y al PDF
+- [x] Mapa de estudios: una práctica, del toque del alumno al bombillo y al certificado
+
+### I. Curso de IA: el pedido completo, la duda y las fuentes (✅ IA 2, parte 5)
+
+- [x] El **prompt completo** (objetivo, contexto, qué es "terminado", límites y formato), con el ejemplo real de
+  "¿de verdad alguien aprende con esto?"
+- [x] **Pedir una crítica honesta** ("sembrar la duda"): la IA tiende a darte la razón (complacencia)
+- [x] **Pedir fuentes** y comprobarlas: la IA a veces inventa (alucina), incluso las fuentes
+- [x] Usar **otra IA** (Gemini) para preguntas de "cómo funciona", y guardar los tokens del agente de código para el trabajo
+
+### J. La entrevista en dos niveles: Recursos Humanos y el líder técnico
+
+En una entrevista primero se habla con **Recursos Humanos** (RH) y después con el **líder técnico**.
+Con RH: explicar con tus palabras, de la mejor forma, con algunos términos bien usados.
+Con el líder técnico: responder la definición técnica precisa ("un array es una estructura de datos que guarda
+valores en orden, cada uno con su posición").
+
+- [ ] Cómo es cada etapa y qué buscan en cada una
+- [ ] Un glosario con cada término en dos versiones: con tus palabras (para RH) y la definición técnica (para el líder técnico)
+- [ ] Prácticas para entrenar las dos versiones, y simulacros de entrevista con una IA
+
 ### E. El panel
 
 - [x] El panel muestra los ejercicios en la vista previa

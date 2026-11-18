@@ -177,9 +177,94 @@ elige :: Gemini te devuelve un pedido que dice "usa React". Tu sitio es HTML y J
 escribe :: Escribe lo que le dirías a Gemini para que te prepare un pedido. :: Quiero pedirle a una IA de código que agregue un botón para volver al mapa arriba de cada parte de mi sitio; escríbeme un pedido claro con contexto, tarea, límites y cómo se ve terminado, y pregúntame lo que falte.
 ```
 
+## Parte 5. El pedido completo, la duda y las fuentes
+
+La IA responde **exactamente lo que preguntaste**, no lo que querías saber. Si el pedido está incompleto, la respuesta también lo va a estar, aunque la IA sepa mucho más.
+
+### Una historia real: la pregunta que cambió todo
+
+Construyendo este mapa de estudios, se le pidió muchas veces a la IA: "agrega una clase de esto", "agrega ejercicios de aquello". La IA lo hacía, y bien. Pero un día la pregunta fue otra:
+
+> "¿De verdad alguien que no sabe nada aprendería con esto? ¿Podría construir una app como las mías? Sé sincero."
+
+La respuesta fue honesta: **todavía no**. Faltaban ejercicios donde el alumno escriba código, proyectos de principio a fin, y había ejercicios que nadie más podía hacer. De esa sola pregunta salió el plan para mejorar **todos** los cursos.
+
+¿Qué cambió? Los pedidos anteriores eran **incompletos**: decían qué agregar, pero no **para qué** ni **cómo saber si estaba bien**. La pregunta nueva sí: tenía el objetivo (que alguien aprenda de verdad), el criterio (poder construir una app) y pedía sinceridad.
+
+> 🌎 **En la vida real:** si al arquitecto le dices "agrégale un cuarto a la casa", te agrega un cuarto. Si le dices "somos cinco y la casa se nos queda chica, ¿qué nos conviene?", te puede decir que el problema es la cocina, no los cuartos.
+
+> 🌎 **Otro ejemplo:** Es como preguntarle al médico "¿me da algo para la tos?" en vez de "tengo tos hace tres semanas, ¿qué puede ser?". La primera pregunta te da un jarabe; la segunda, un diagnóstico.
+
+### El prompt completo
+
+Lo que tú llamas "un comando completo", en el mundo de la IA se llama un **prompt completo**. Tiene cinco piezas (las primeras cuatro ya las viste en la Parte 1; la quinta es la que más se olvida):
+
+| Pieza | La pregunta | Ejemplo |
+|---|---|---|
+| **El objetivo** | ¿Para qué lo quiero? | "Quiero que una persona que no sabe nada pueda construir una app con este curso" |
+| **El contexto** | ¿Qué hay hoy? | "El curso tiene 9 clases con explicaciones y prácticas de elegir" |
+| **Qué es "terminado"** | ¿Cómo sé que está bien? | "Que al final pueda hacer una app de gastos desde cero, sola" |
+| **Los límites** | ¿Qué no se vale? | "Solo herramientas gratis" |
+| **El formato** | ¿Cómo quiero la respuesta? | "Primero un sí o no, después qué falta, en una lista" |
+
+### Sembrar la duda: pedir una crítica honesta
+
+Las IA tienen una tendencia conocida: **darte la razón**. Si preguntas "¿está bien esto?", suelen decir que sí. A eso se le llama **complacencia** (en inglés, *sycophancy*). Para sacarle la verdad, hay que **pedirle que busque los problemas**:
+
+```text
+Revisa esto como si fueras alguien que quiere encontrarle fallas.
+¿Qué le falta? ¿Qué está mal? ¿Qué no funcionaría con una persona real?
+Sé sincero aunque la respuesta no me guste.
+```
+
+Cuando la IA tiene que buscar el problema, **lo busca**, y casi siempre lo encuentra. Es lo que tú llamas "sembrar la duda".
+
+> 🌎 **En la vida real:** si le preguntas a un amigo "¿me queda bien la camisa?", te dice que sí. Si le dices "voy a una entrevista importante, dime con toda sinceridad qué cambiarías", te dice la verdad.
+
+> 🌎 **Otro ejemplo:** Es como el inspector de una obra: si va a "aprobar", aprueba; si va a "buscar fallas", las encuentra.
+
+### Pedir las fuentes: la IA a veces inventa
+
+Una IA puede **inventar** con toda seguridad: una función que no existe, un dato equivocado, un precio viejo. A eso se le llama **alucinar** (clase 30). Por eso, cuando algo importa, **pide la fuente**:
+
+```text
+¿De dónde sacaste esa información? Dame el enlace a la documentación oficial.
+Si no estás seguro, dímelo.
+```
+
+Y **comprueba** la fuente, porque la IA también puede inventar enlaces. Abre el enlace y busca la frase. Si la herramienta puede buscar en internet, pídele que busque en vez de responder de memoria.
+
+> 🌎 **En la vida real:** si alguien te dice "lo dijo el noticiero", le preguntas "¿cuál?, ¿cuándo?". Un dato con fuente se puede revisar; un "me dijeron" no.
+
+> 🌎 **Otro ejemplo:** Es como el mecánico que te muestra la pieza rota en vez de solo decirte "estaba mala".
+
+### Cada pregunta a la IA que conviene
+
+No todas las preguntas tienen que ir a la misma IA:
+
+| Tipo de pregunta | A quién | Por qué |
+|---|---|---|
+| "¿Cómo funciona X?", "explícame Y", preparar un pedido | Una IA de chat (por ejemplo, **Gemini**) | Es para aprender: no necesita tu proyecto, y no gasta los tokens del agente de código |
+| "Cambia esto en mi proyecto", "busca este error" | El agente de código (por ejemplo, **Claude Code**) | Necesita leer y cambiar tus archivos |
+
+Así **ahorras tokens**: cada pregunta de "cómo funciona" que haces en la conversación del agente de código se suma a su contexto y encarece cada mensaje siguiente (clase 30 y la de los agentes). Y de paso, si las dos IA dicen lo mismo, tienes más confianza; si dicen distinto, **ahí** hay que revisar la fuente.
+
+> 🌎 **En la vida real:** al mecánico de confianza no le preguntas qué es un carburador: eso lo buscas en un libro o le preguntas a un amigo. Al mecánico le llevas el carro.
+
+> 🌎 **Otro ejemplo:** Es como pedir una segunda opinión médica: si los dos médicos coinciden, tranquilo; si no, se piden más exámenes.
+
+```practica
+vf :: Si el pedido es incompleto, la respuesta de la IA también tiende a serlo, aunque la IA sepa más
+vf :: Si le preguntas a la IA "¿está bien esto?", lo normal es que te diga con detalle todo lo que está mal
+vf :: Una IA también puede inventar un enlace de "fuente", por eso hay que abrirlo y comprobarlo
+elige :: ¿Qué pieza del prompt completo es la que más se olvida y más cambia la respuesta? :: El saludo :: El objetivo y qué es "terminado" :: El idioma
+elige :: Quieres entender qué es un closure mientras trabajas en tu proyecto con Claude Code. ¿Qué conviene? :: Preguntarlo en la misma conversación del proyecto :: Preguntarlo en una IA de chat aparte, como Gemini :: No preguntarlo
+escribe :: Escribe un prompt completo (objetivo, contexto, terminado, límites y formato) y una pregunta para pedir una crítica honesta sobre algo tuyo. :: Por ejemplo: "Objetivo: que mi app de gastos sirva a conductores que no saben de tecnología. Contexto: hoy tiene un formulario y una lista. Terminado: que alguien la use sin ayuda la primera vez. Límites: sin pagar nada. Formato: una lista de lo que falta, de lo más grave a lo menos." Y: "Revísala como alguien que quiere encontrarle fallas; sé sincero aunque no me guste."
+```
+
 ## Para la entrevista
 
-> 🎤 **Si te preguntan "¿cómo le pides cosas a la IA?":** "Con contexto, tarea, límites y cómo se ve terminado. Si es un error, pego el mensaje completo, qué esperaba y qué ya probé. Para algo grande pido primero un plan y trabajo en cambios chicos que reviso uno por uno. Y a veces preparo el pedido con otra IA para ordenarlo, pero siempre lo leo antes de mandarlo."
+> 🎤 **Si te preguntan "¿cómo le pides cosas a la IA?":** "Con contexto, tarea, límites y cómo se ve terminado. Si es un error, pego el mensaje completo, qué esperaba y qué ya probé. Para algo grande pido primero un plan y trabajo en cambios chicos que reviso uno por uno. Y a veces preparo el pedido con otra IA para ordenarlo, pero siempre lo leo antes de mandarlo. Cuando algo importa, pido una crítica honesta en vez de "¿está bien?", y pido la fuente y la compruebo, porque la IA a veces inventa. Las preguntas de aprender las hago en una IA de chat, para no gastar los tokens del agente de código."
 
 > 🌎 **En la vida real:** es como explicar cómo das instrucciones a un equipo: claras, con límites y con una forma de comprobar el resultado.
 
