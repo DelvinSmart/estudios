@@ -86,6 +86,43 @@ En React, `map` convierte una lista de datos en una lista de componentes:
 
 > 🌎 **Otro ejemplo:** Es como un molde que hace una galleta por cada porción de masa.
 
+Ahora escribes tú. Toca **▶ probar**: cada prueba se pone en verde cuando tu función hace lo que se pide.
+
+```ejercicio
+titulo: El total y los viajes caros
+lenguaje: js
+pide: Completa las dos funciones. `total(viajes)` devuelve la suma de todos los valores (usa `reduce`). `caros(viajes, minimo)` devuelve solo los viajes cuyo valor es **mayor o igual** que `minimo` (usa `filter`).
+--- código
+function total(viajes) {
+  // tu código aquí
+}
+
+function caros(viajes, minimo) {
+  // tu código aquí
+}
+
+const viajes = [
+  { app: 'Uber', valor: 18.5 },
+  { app: '99', valor: 42 },
+  { app: 'Uber', valor: 35 },
+];
+console.log(total(viajes));
+console.log(caros(viajes, 30));
+--- pruebas
+prueba('total de tres viajes es 95.5', () => igual(total([{ valor: 18.5 }, { valor: 42 }, { valor: 35 }]), 95.5));
+prueba('total sin viajes es 0', () => igual(total([]), 0));
+prueba('caros deja los de 30 o más', () => igual(caros([{ valor: 18.5 }, { valor: 42 }, { valor: 30 }], 30), [{ valor: 42 }, { valor: 30 }]));
+prueba('caros no cambia el array original', () => { const v = [{ valor: 10 }, { valor: 50 }]; caros(v, 20); igual(v.length, 2); });
+--- solución
+function total(viajes) {
+  return viajes.reduce((suma, v) => suma + v.valor, 0);
+}
+
+function caros(viajes, minimo) {
+  return viajes.filter((v) => v.valor >= minimo);
+}
+```
+
 ```practica
 vf :: map devuelve un array nuevo del mismo largo
 vf :: find devuelve todos los elementos que cumplen la condición

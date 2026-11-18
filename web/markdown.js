@@ -3,6 +3,7 @@
 
 import { CLASES } from './cursos.js';
 import { crearPractica } from './practica.js';
+import { crearEjercicio } from './ejercicio.js';
 import { escapar } from './pantalla.js';
 import { enlazarReferencias } from './referencias.js';
 import { cursoDeClase } from './avance.js';
@@ -39,12 +40,18 @@ export function pintarMarkdown(md, carpeta, idBase = carpeta) {
 
   // Los bloques de código: colores, etiqueta del lenguaje y botón de copiar.
   let practicas = 0;
+  let ejercicios = 0;
   caja.querySelectorAll('pre > code').forEach((code) => {
     const pre = code.parentElement;
     const lenguaje = (code.className.match(/language-(\S+)/) || [])[1] || 'texto';
     // Un bloque ```practica no es código: es un ejercicio interactivo.
     if (lenguaje === 'practica') {
       pre.replaceWith(crearPractica(code.textContent, `${idBase}:practica${++practicas}`));
+      return;
+    }
+    // Un bloque ```ejercicio es código que escribe el alumno, con pruebas que se corren en una caja aislada.
+    if (lenguaje === 'ejercicio') {
+      pre.replaceWith(crearEjercicio(code.textContent, `${idBase}:ejercicio${++ejercicios}`));
       return;
     }
     if (window.hljs && lenguaje !== 'texto') {

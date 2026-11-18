@@ -239,6 +239,39 @@ Atributos útiles: `required` (obligatorio), `placeholder` (texto de ejemplo gri
 
 > 📌 **Nota:** el `type` del `input` importa mucho en el celular. `type="number"` abre el teclado numérico; `type="email"` abre uno con `@`. Es lo mismo que hace Copiloto cuando registras litros.
 
+Ahora armas tú un formulario. Toca **▶ probar**: las pruebas miran la página que escribiste.
+
+```ejercicio
+titulo: El formulario de carga de combustible
+lenguaje: html
+pide: Arma un `form` con un campo de **litros** (`input` de tipo `number`, con `id="litros"`, obligatorio) y su `label` unido con `for`, y un `button` que diga **Guardar**. Dale al botón un fondo verde con CSS.
+--- código
+<style>
+  /* el estilo del botón va aquí */
+</style>
+
+<form>
+  <!-- tu formulario aquí -->
+</form>
+--- pruebas
+prueba('hay un form', () => ok($('form'), 'no encontré <form>'));
+prueba('el campo litros es un número', () => igual($('#litros')?.type, 'number'));
+prueba('el campo litros es obligatorio', () => ok($('#litros')?.required, 'falta el atributo required'));
+prueba('el label está unido al campo', () => ok($('label[for="litros"]'), 'falta <label for="litros">'));
+prueba('el botón dice Guardar', () => igual($('form button')?.textContent.trim(), 'Guardar'));
+prueba('el botón tiene fondo verde', () => { const c = estilo('form button', 'background-color').match(/\d+/g).map(Number); ok(c[1] > c[0] && c[1] > c[2], 'el fondo no es verde: ' + estilo('form button', 'background-color')); });
+--- solución
+<style>
+  button { background: #1a7f37; color: white; padding: 8px 14px; border: 0; border-radius: 8px; }
+</style>
+
+<form>
+  <label for="litros">Litros</label>
+  <input id="litros" type="number" required>
+  <button>Guardar</button>
+</form>
+```
+
 **Preguntas**
 11. ¿Qué pasa si tocas un `label` que tiene `for="litros"`?
 12. ¿Qué `type` usarías para que el usuario escriba su correo?

@@ -986,3 +986,30 @@ body.con-reproductor { padding-bottom: 70px; }
 .estado-cert, .estado-cert .estado-texto { gap: var(--hueco); }
 .cuenta-pantalla { padding: var(--hueco-doble) 0; }
 .cuenta-cuerpo { padding: var(--relleno); gap: var(--hueco); }
+
+/* ---------- 11. Ejercicios de código (web/ejercicio.js) ---------- */
+.ejercicio { margin: var(--hueco) 0; padding: var(--relleno); border-radius: 16px; border: 1px solid color-mix(in srgb, var(--acento-2) 45%, var(--borde)); background: color-mix(in srgb, var(--acento-2) 5%, var(--tarjeta)); display: flex; flex-direction: column; gap: var(--hueco); }
+.ejercicio.resuelto { border-color: color-mix(in srgb, var(--acento) 55%, var(--borde)); background: color-mix(in srgb, var(--acento) 5%, var(--tarjeta)); }
+.ejercicio-cabeza { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--acento-2); }
+.ejercicio.resuelto .ejercicio-cabeza { color: var(--acento); }
+.texto .ejercicio p { margin: 0; max-width: none; }
+.ejercicio-titulo { font: 700 1rem/1.4 var(--mono); }
+.ejercicio-pide { color: var(--texto); }
+.ejercicio-codigo { width: 100%; min-height: 120px; resize: vertical; padding: 12px 14px; border-radius: 12px; border: 1px solid #263140; background: var(--codigo-fondo); color: #d8e0ea; font: 400 0.85rem/1.6 var(--mono); tab-size: 2; white-space: pre; overflow-x: auto; }
+.ejercicio-codigo:focus { outline: 2px solid color-mix(in srgb, var(--acento-2) 55%, transparent); }
+.ejercicio-botones { display: flex; flex-wrap: wrap; gap: 8px; }
+.ejercicio-botones .boton, .ejercicio-botones .boton-principal { margin: 0; }
+.ejercicio-botones button:disabled { opacity: 0.45; cursor: not-allowed; }
+.ejercicio-resultado:empty { display: none; }
+.ejercicio-resultado { display: flex; flex-direction: column; gap: 8px; }
+.ejercicio-cuenta { margin: 0; font-weight: 700; color: var(--amarillo); }
+.ejercicio-cuenta.bien { color: var(--acento); }
+.ejercicio-error { margin: 0; color: var(--rojo); font: 0.85rem var(--mono); }
+.ejercicio-pruebas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; }
+.texto .ejercicio-pruebas { padding: 0; margin: 0; }
+.ejercicio-pruebas li span { display: inline-block; width: 1.2em; font-weight: 800; }
+.ejercicio-pruebas li.bien span { color: var(--acento); }
+.ejercicio-pruebas li.mal span { color: var(--rojo); }
+.ejercicio-pruebas small { display: block; margin-left: 1.2em; color: var(--tenue); font: 0.8rem var(--mono); }
+.ejercicio-consola, .ejercicio-solucion { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--codigo-fondo); color: #d8e0ea; font: 0.8rem/1.5 var(--mono); white-space: pre-wrap; overflow-x: auto; }
+.ejercicio-vista { width: 100%; min-height: 160px; border: 1px solid var(--borde); border-radius: 12px; background: #fff; }

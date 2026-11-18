@@ -252,6 +252,11 @@ function pintarVista(caja, md, carpeta) {
     if (code.className.includes('language-practica')) {
       const n = code.textContent.trim().split('\n').filter(Boolean).length;
       code.parentElement.outerHTML = `<p class="panel-nota">🔒 Práctica (${n} ${n === 1 ? 'pregunta' : 'preguntas'}) · en la página es interactiva</p>`;
+    } else if (code.className.includes('language-ejercicio')) {
+      // Un ejercicio de código: aquí se muestra su título; en la página se escribe y se prueba.
+      const titulo = (code.textContent.match(/^t[ií]tulo:\s*(.*)$/mi) || [])[1] || 'ejercicio';
+      const pruebas = (code.textContent.match(/^\s*prueba\(/gm) || []).length;
+      code.parentElement.outerHTML = `<p class="panel-nota">🧩 Ejercicio de código: ${esc(titulo)} (${pruebas} ${pruebas === 1 ? 'prueba' : 'pruebas'}) · en la página se escribe y se prueba</p>`;
     } else if (window.hljs) {
       try { window.hljs.highlightElement(code); } catch (e) {}
     }
