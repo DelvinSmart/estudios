@@ -56,7 +56,7 @@ en el aparato y deja ver la solución después de intentarlo.
 - [x] HTML y CSS (las pruebas miran la página que armó el alumno)
 - [x] TypeScript (el compilador oficial dentro de la caja: revisa los tipos en modo estricto y explica los errores comunes en español)
 - [ ] Python (Pyodide: Python dentro del navegador)
-- [ ] Kotlin (Kotlin Playground: corre en los servidores gratuitos de JetBrains; la revisión es por la salida)
+- [x] Kotlin (Kotlin Playground: corre en los servidores gratuitos de JetBrains; la revisión es por la salida; los errores del compilador, explicados en español; `web/ejercicio-kotlin.js`, con sus pruebas en `herramientas/`)
 - [ ] React Native (Snack de Expo para ver la app; la revisión es una lista de comprobación)
 - [x] El panel muestra los ejercicios en la vista previa y no los rompe
 
@@ -80,7 +80,7 @@ todos los "abre tal archivo de Copiloto".
 | JavaScript + TypeScript | ✅ La web de gastos, de una carpeta vacía a GitHub Pages (clase 84) | ✅ Completo: 13 clases, un ejercicio de código en cada parte (54, probados con su solución), y las clases nuevas del DOM, errores y clases (POO), fechas y guardar |
 | Node.js | ✅ La API de gastos con Express (clase 87): 32 pruebas, tres almacenes (memoria, archivo y Firestore) y cómo publicarla | ✅ Completo: 9 clases, un ejercicio de código en cada parte (31, probados con su solución). Probándola con curl se encontraron y arreglaron dos errores: dos gastos a la vez se pisaban y aceptaba el 31 de febrero |
 | React Native | ✅ La app de gastos con Expo y TypeScript (clase 88): motor de diseño, lógica con pruebas, AsyncStorage, FlatList, 27 pruebas con Jest y Testing Library, y abrirla en el iPhone con Expo Go | ✅ Completo: 8 clases, un ejercicio de código en cada parte (27, probados con su solución). Probándola de verdad se encontró y arregló que el gasto más nuevo del mismo día quedaba abajo |
-| Kotlin | La app de gastos con Jetpack Compose | Ejercicios del lenguaje en el Playground |
+| Kotlin | La app de gastos con Jetpack Compose | ✅ Un ejercicio de Kotlin de verdad en cada parte (21, corren en el Kotlin Playground y probados con su solución); en Android (Compose, Room, JUnit) son modelos en Kotlin puro, porque el Playground no tiene Android. Falta: el proyecto final |
 | Python | El resumen semanal de un conductor desde un CSV, con pytest | Ejercicios en cada parte con Pyodide |
 | Seguridad | Auditar la versión "con errores" del proyecto de práctica y arreglarla | Más clases: es el curso más corto |
 | IA para programadores | Construir una app pequeña dirigiendo a la IA: plan, reglas, pruebas, revisión | Ejercicios de pedidos y de revisión de código |

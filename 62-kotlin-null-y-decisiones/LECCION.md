@@ -38,6 +38,32 @@ val seguro = apodo!!.length          // "confía en mí": si es null, la app se 
 
 > 🌎 **Otro ejemplo:** `!!` es como saltar en paracaídas sin revisar si está bien doblado.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ?. y ?: sin que nada se caiga
+lenguaje: kotlin
+pide: Completa tres funciones **sin usar `!!`**. `mostrarApodo(apodo)` devuelve el apodo o `"sin apodo"` si es null. `largoDelApodo(apodo)` devuelve cuántas letras tiene, o `0` si es null. `primeraLetra(nombre)` devuelve la primera letra, o null si el nombre es null o está vacío (pista: `firstOrNull()`).
+--- código
+fun mostrarApodo(apodo: String?): String = TODO()
+
+fun largoDelApodo(apodo: String?): Int = TODO()
+
+fun primeraLetra(nombre: String?): Char? = TODO()
+--- pruebas
+prueba("con apodo") { igual(mostrarApodo("Del"), "Del") }
+prueba("sin apodo") { igual(mostrarApodo(null), "sin apodo") }
+prueba("el largo, también con null") { igual(listOf(largoDelApodo("Del"), largoDelApodo(null)), listOf(3, 0)) }
+prueba("la primera letra") { igual(primeraLetra("Delvin"), 'D') }
+prueba("null o vacío: null") { igual(listOf(primeraLetra(null), primeraLetra("")), listOf(null, null)) }
+--- solución
+fun mostrarApodo(apodo: String?): String = apodo ?: "sin apodo"
+
+fun largoDelApodo(apodo: String?): Int = apodo?.length ?: 0
+
+fun primeraLetra(nombre: String?): Char? = nombre?.firstOrNull()
+```
+
 ```practica
 vf :: En Kotlin, una variable de tipo String no puede ser null
 vf :: El operador !! es la forma más segura de usar un valor que puede ser null
@@ -87,6 +113,34 @@ val nivel = when {
 
 > 🌎 **Otro ejemplo:** Es como la tabla de precios de un estacionamiento por horas.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: when que devuelve un valor
+lenguaje: kotlin
+pide: Completa con `when`. `nivel(ganancia)`: 300 o más → `"excelente"`; 150 o más → `"bien"`; si no, `"flojo"`. `tarifa(app)`: `"Uber"` → 1.9; `"99"` → 1.8; `"InDrive"` u `"Otra"` → 1.7 (en la misma rama, con coma); cualquier otra → 2.0.
+--- código
+fun nivel(ganancia: Double): String = TODO()
+
+fun tarifa(app: String): Double = TODO()
+--- pruebas
+prueba("los niveles y sus bordes") { igual(listOf(300.0, 299.9, 150.0, 149.0).map { nivel(it) }, listOf("excelente", "bien", "bien", "flojo")) }
+prueba("las tarifas") { igual(listOf("Uber", "99", "InDrive", "Otra", "Taxi").map { tarifa(it) }, listOf(1.9, 1.8, 1.7, 1.7, 2.0)) }
+--- solución
+fun nivel(ganancia: Double): String = when {
+    ganancia >= 300 -> "excelente"
+    ganancia >= 150 -> "bien"
+    else -> "flojo"
+}
+
+fun tarifa(app: String): Double = when (app) {
+    "Uber" -> 1.9
+    "99" -> 1.8
+    "InDrive", "Otra" -> 1.7
+    else -> 2.0
+}
+```
+
 ```practica
 vf :: En Kotlin, if puede devolver un valor
 vf :: En un when de Kotlin hace falta break en cada caso
@@ -131,6 +185,37 @@ while (ahorro < 1000) {
 > 🌎 **En la vida real:** es como llenar un balde con un vaso: repites mientras no esté lleno.
 
 > 🌎 **Otro ejemplo:** Es como esperar el bus: mientras no llegue, sigues esperando.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Rangos y while
+lenguaje: kotlin
+pide: Completa `kilometrajes(hasta, paso)`: la lista de 0 hasta `hasta` (incluido), de `paso` en `paso` (pista: `(0..hasta step paso).toList()`). Y `mesesParaAhorrar(meta, porMes)`: con un `while`, cuántos meses ahorrando `porMes` hacen falta para llegar **al menos** a la meta.
+--- código
+fun kilometrajes(hasta: Int, paso: Int): List<Int> = TODO()
+
+fun mesesParaAhorrar(meta: Double, porMes: Double): Int {
+    TODO()
+}
+--- pruebas
+prueba("de 250 en 250") { igual(kilometrajes(1000, 250), listOf(0, 250, 500, 750, 1000)) }
+prueba("el último no siempre entra") { igual(kilometrajes(10, 4), listOf(0, 4, 8)) }
+prueba("ahorrar 1000 de a 150") { igual(mesesParaAhorrar(1000.0, 150.0), 7) }
+prueba("justo en el borde") { igual(mesesParaAhorrar(300.0, 150.0), 2) }
+--- solución
+fun kilometrajes(hasta: Int, paso: Int): List<Int> = (0..hasta step paso).toList()
+
+fun mesesParaAhorrar(meta: Double, porMes: Double): Int {
+    var ahorro = 0.0
+    var meses = 0
+    while (ahorro < meta) {
+        ahorro += porMes
+        meses++
+    }
+    return meses
+}
+```
 
 ```practica
 vf :: 1..7 incluye el 7

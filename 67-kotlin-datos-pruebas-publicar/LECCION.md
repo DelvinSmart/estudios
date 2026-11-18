@@ -37,6 +37,57 @@ Las consultas con parámetros evitan la inyección SQL (Tema 23). Para los secre
 
 > 🌎 **Otro ejemplo:** Es como pasar de una libreta a una planilla con filtros.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un DAO de juguete, como Room
+lenguaje: kotlin
+pide: Completa `GastoDao`, que guarda en memoria lo que Room guardaría en la base. `insertar(g)`: si el id es `0`, le pone el siguiente número (1, 2, 3…, como `autoGenerate`) y devuelve el gasto guardado con su id. `todos()`: la lista ordenada por id de mayor a menor (como `ORDER BY id DESC`). `delTipo(tipo)`: solo los de ese tipo, en el mismo orden.
+--- código
+data class GastoEntidad(val id: Int = 0, val tipo: String, val valor: Double)
+
+class GastoDao {
+    private val filas = mutableListOf<GastoEntidad>()
+    private var siguienteId = 1
+
+    fun insertar(g: GastoEntidad): GastoEntidad = TODO()
+    fun todos(): List<GastoEntidad> = TODO()
+    fun delTipo(tipo: String): List<GastoEntidad> = TODO()
+}
+--- pruebas
+prueba("el id se genera solo") {
+    val dao = GastoDao()
+    igual(dao.insertar(GastoEntidad(tipo = "lavado", valor = 30.0)).id, 1)
+    igual(dao.insertar(GastoEntidad(tipo = "peaje", valor = 5.0)).id, 2)
+}
+prueba("lo más nuevo primero") {
+    val dao = GastoDao()
+    dao.insertar(GastoEntidad(tipo = "lavado", valor = 30.0)); dao.insertar(GastoEntidad(tipo = "peaje", valor = 5.0))
+    igual(dao.todos().map { it.id }, listOf(2, 1))
+}
+prueba("filtrar por tipo") {
+    val dao = GastoDao()
+    dao.insertar(GastoEntidad(tipo = "peaje", valor = 5.0)); dao.insertar(GastoEntidad(tipo = "lavado", valor = 30.0)); dao.insertar(GastoEntidad(tipo = "peaje", valor = 7.0))
+    igual(dao.delTipo("peaje").map { it.valor }, listOf(7.0, 5.0))
+}
+--- solución
+data class GastoEntidad(val id: Int = 0, val tipo: String, val valor: Double)
+
+class GastoDao {
+    private val filas = mutableListOf<GastoEntidad>()
+    private var siguienteId = 1
+
+    fun insertar(g: GastoEntidad): GastoEntidad {
+        val guardado = if (g.id == 0) g.copy(id = siguienteId++) else g
+        filas.add(guardado)
+        return guardado
+    }
+
+    fun todos(): List<GastoEntidad> = filas.sortedByDescending { it.id }
+    fun delTipo(tipo: String): List<GastoEntidad> = todos().filter { it.tipo == tipo }
+}
+```
+
 ```practica
 vf :: Room es una base de datos SQL local para el teléfono
 vf :: DataStore está pensado para guardar miles de registros con consultas complejas
@@ -81,6 +132,30 @@ Corren con Gradle (`./gradlew test`) o con el ▶ verde al lado de la prueba en 
 
 > 🌎 **Otro ejemplo:** Es como probar la balanza con un peso conocido.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: assertEquals con margen
+lenguaje: kotlin
+pide: En JUnit, los decimales se comparan con un **margen**: `assertEquals(42.5, total, 0.001)`. Completa `casiIgual(a, b, margen)`: `true` si la diferencia entre los dos es menor o igual que el margen (pista: `Math.abs`). Y `sumaLosGastos(gastos)`: la suma de los valores. Mira la última prueba: `0.1 + 0.2` no da `0.3` exacto.
+--- código
+data class Gasto(val tipo: String, val valor: Double)
+
+fun casiIgual(a: Double, b: Double, margen: Double = 0.001): Boolean = TODO()
+
+fun sumaLosGastos(gastos: List<Gasto>): Double = TODO()
+--- pruebas
+prueba("suma los gastos") { ok(casiIgual(sumaLosGastos(listOf(Gasto("lavado", 30.0), Gasto("peaje", 12.5))), 42.5), "30 + 12,5 es 42,5") }
+prueba("lejos no es casi igual") { igual(casiIgual(42.5, 43.0), false) }
+prueba("0.1 + 0.2 no es 0.3 exacto, pero sí casi") { igual(0.1 + 0.2 == 0.3, false); igual(casiIgual(0.1 + 0.2, 0.3), true) }
+--- solución
+data class Gasto(val tipo: String, val valor: Double)
+
+fun casiIgual(a: Double, b: Double, margen: Double = 0.001): Boolean = Math.abs(a - b) <= margen
+
+fun sumaLosGastos(gastos: List<Gasto>): Double = gastos.sumOf { it.valor }
+```
+
 ```practica
 vf :: En Android, las reglas de seguridad de Firebase siguen protegiendo los datos en el servidor
 vf :: assertEquals con Double conviene sin margen de error
@@ -120,6 +195,34 @@ Saber los dos te deja escribir un módulo nativo en Kotlin para tu app de React 
 > 🌎 **En la vida real:** es como saber manejar auto y moto: eliges según el viaje.
 
 > 🌎 **Otro ejemplo:** Es como hablar portugués y español: según con quién conversas.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La versión siguiente y qué usar
+lenguaje: kotlin
+pide: Completa `siguienteVersion(versionCode, versionName)`: devuelve el `versionCode` más 1 y el `versionName` con el último número más 1 (`"1.2.9"` → `"1.2.10"`). Y `queUsar(dosTiendas, muchoNativo)`: si la app no va a las dos tiendas → `"Kotlin"`; si va a las dos pero tiene mucho trabajo nativo → `"Kotlin y Swift"`; si no → `"React Native"`.
+--- código
+fun siguienteVersion(versionCode: Int, versionName: String): Pair<Int, String> = TODO()
+
+fun queUsar(dosTiendas: Boolean, muchoNativo: Boolean): String = TODO()
+--- pruebas
+prueba("la versión siguiente") { igual(siguienteVersion(89, "1.2.3"), 90 to "1.2.4") }
+prueba("el 9 pasa a 10, no a 0") { igual(siguienteVersion(5, "1.2.9"), 6 to "1.2.10") }
+prueba("qué usar") { igual(listOf(queUsar(false, false), queUsar(true, true), queUsar(true, false)), listOf("Kotlin", "Kotlin y Swift", "React Native")) }
+--- solución
+fun siguienteVersion(versionCode: Int, versionName: String): Pair<Int, String> {
+    val partes = versionName.split(".").toMutableList()
+    partes[partes.size - 1] = (partes.last().toInt() + 1).toString()
+    return (versionCode + 1) to partes.joinToString(".")
+}
+
+fun queUsar(dosTiendas: Boolean, muchoNativo: Boolean): String = when {
+    !dosTiendas -> "Kotlin"
+    muchoNativo -> "Kotlin y Swift"
+    else -> "React Native"
+}
+```
 
 ```practica
 vf :: Con Kotlin nativo, la app de iPhone necesita escribirse aparte en Swift

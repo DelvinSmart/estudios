@@ -31,6 +31,23 @@ Una función que no devuelve nada devuelve `Unit` (como `void`).
 
 > 🌎 **Otro ejemplo:** Es como el control del aire: arranca en 23 grados y cambias lo que quieres.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Valores por defecto y argumentos con nombre
+lenguaje: kotlin
+pide: Completa `precioViaje(km, tarifaKm, minimo)`: el precio es `km * tarifaKm`, pero nunca menos que el mínimo (pista: `maxOf`). Fíjate en las pruebas: se llama con menos argumentos (usa los valores por defecto) y con argumentos **con nombre**.
+--- código
+fun precioViaje(km: Double, tarifaKm: Double = 1.8, minimo: Double = 8.0): Double = TODO()
+--- pruebas
+prueba("un viaje corto paga el mínimo") { igual(precioViaje(2.0), 8.0) }
+prueba("un viaje largo") { igual(precioViaje(10.0), 18.0) }
+prueba("con otra tarifa, por su nombre") { igual(precioViaje(10.0, tarifaKm = 2.5), 25.0) }
+prueba("con otro mínimo, saltando la tarifa") { igual(precioViaje(1.0, minimo = 5.0), 5.0) }
+--- solución
+fun precioViaje(km: Double, tarifaKm: Double = 1.8, minimo: Double = 8.0): Double = maxOf(km * tarifaKm, minimo)
+```
+
 ```practica
 vf :: En Kotlin una función se declara con fun
 vf :: Unit en Kotlin significa que la función devuelve un número entero
@@ -73,6 +90,31 @@ fun Double.enReales(): String = "R$ %.2f".format(this)
 > 🌎 **En la vida real:** es como ponerle un accesorio a una herramienta que ya tenías.
 
 > 🌎 **Otro ejemplo:** Es como agregar un botón de atajo a tu celular.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lambdas y funciones de extensión
+lenguaje: kotlin
+pide: Completa tres cosas. `doble`: una lambda que recibe un `Int` y devuelve el doble. `List<Double>.mayoresQue(minimo)`: una extensión que devuelve los valores mayores que el mínimo (con `filter` e `it`). `Double.enReales()`: una extensión que devuelve `"R$ 250,50"` para `250.5` (pista: `"%.2f".format(java.util.Locale.US, this)` da `"250.50"`; después cambia el punto por coma).
+--- código
+val doble: (Int) -> Int = { n -> TODO() }
+
+fun List<Double>.mayoresQue(minimo: Double): List<Double> = TODO()
+
+fun Double.enReales(): String = TODO()
+--- pruebas
+prueba("la lambda") { igual(doble(4), 8) }
+prueba("la extensión de la lista") { igual(listOf(18.5, 22.0, 9.75).mayoresQue(10.0), listOf(18.5, 22.0)) }
+prueba("la extensión del número") { igual(250.5.enReales(), "R$ 250,50") }
+prueba("con centavos") { igual(9.75.enReales(), "R$ 9,75") }
+--- solución
+val doble: (Int) -> Int = { n -> n * 2 }
+
+fun List<Double>.mayoresQue(minimo: Double): List<Double> = filter { it > minimo }
+
+fun Double.enReales(): String = "R$ " + "%.2f".format(java.util.Locale.US, this).replace('.', ',')
+```
 
 ```practica
 vf :: En Kotlin, it es el nombre del parámetro cuando la lambda tiene uno solo
@@ -121,6 +163,33 @@ val caro = viajes.firstOrNull { it.valor > 40 }
 > 🌎 **En la vida real:** son las mismas herramientas de la cocina que ya usabas (clase 48), con otro mango.
 
 > 🌎 **Otro ejemplo:** Es como el cierre de caja: filtrar, sumar y agrupar.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: groupBy, sumOf y firstOrNull
+lenguaje: kotlin
+pide: Con la `data class Viaje` que ya está, completa `totalPorApp(viajes)`: un mapa con cuánto se ganó en cada app (pista: `groupBy { it.app }` y después `mapValues { (_, lista) -> lista.sumOf { it.valor } }`). Y `primeroCaro(viajes, minimo)`: el primer viaje que vale **más** que el mínimo, o null.
+--- código
+data class Viaje(val app: String, val valor: Double)
+
+fun totalPorApp(viajes: List<Viaje>): Map<String, Double> = TODO()
+
+fun primeroCaro(viajes: List<Viaje>, minimo: Double): Viaje? = TODO()
+--- pruebas
+val viajes = listOf(Viaje("Uber", 32.5), Viaje("99", 18.0), Viaje("Uber", 45.0))
+prueba("el total por app") { igual(totalPorApp(viajes), mapOf("Uber" to 77.5, "99" to 18.0)) }
+prueba("sin viajes, un mapa vacío") { igual(totalPorApp(listOf()), mapOf<String, Double>()) }
+prueba("el primero caro") { igual(primeroCaro(viajes, 40.0), Viaje("Uber", 45.0)) }
+prueba("ninguno tan caro") { igual(primeroCaro(viajes, 100.0), null) }
+--- solución
+data class Viaje(val app: String, val valor: Double)
+
+fun totalPorApp(viajes: List<Viaje>): Map<String, Double> =
+    viajes.groupBy { it.app }.mapValues { (_, lista) -> lista.sumOf { it.valor } }
+
+fun primeroCaro(viajes: List<Viaje>, minimo: Double): Viaje? = viajes.firstOrNull { it.valor > minimo }
+```
 
 ```practica
 vf :: listOf crea una lista que no se puede modificar

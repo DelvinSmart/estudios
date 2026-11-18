@@ -40,6 +40,32 @@ La **Activity** es la ventana de la app; `setContent` pone adentro tu pantalla d
 
 > 🌎 **Otro ejemplo:** Es como el escenario y la obra.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer el build.gradle.kts
+lenguaje: kotlin
+pide: El `build.gradle.kts` dice qué librerías usa la app, en líneas como `implementation("androidx.compose.ui:ui:1.7.5")`. Completa `librerias(gradle)`: devuelve el nombre de cada librería (`grupo:nombre`, **sin** la versión) de las líneas `implementation(...)`, en orden. Ignora las de `testImplementation`. Pista: `lines()`, `trim()`, `startsWith` y `substringAfter` / `substringBefore`.
+--- código
+fun librerias(gradle: String): List<String> = TODO()
+--- pruebas
+val gradle = """
+    dependencies {
+        implementation("androidx.core:core-ktx:1.15.0")
+        implementation("androidx.compose.material3:material3:1.3.1")
+        testImplementation("junit:junit:4.13.2")
+    }
+""".trimIndent()
+prueba("las librerías, sin versión") { igual(librerias(gradle), listOf("androidx.core:core-ktx", "androidx.compose.material3:material3")) }
+prueba("sin dependencias") { igual(librerias("plugins { }"), listOf<String>()) }
+--- solución
+fun librerias(gradle: String): List<String> =
+    gradle.lines()
+        .map { it.trim() }
+        .filter { it.startsWith("implementation(\"") }
+        .map { it.substringAfter("\"").substringBefore("\"").substringBeforeLast(":") }
+```
+
 ```practica
 vf :: Android Studio trae un emulador para probar sin un teléfono Android
 vf :: Gradle es el lenguaje de las pantallas de Android
@@ -118,6 +144,47 @@ Como `FlatList`: solo dibuja lo que se ve, y la `key` es el id.
 
 > 🌎 **Otro ejemplo:** Es como una vitrina que muestra pocos productos a la vez.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El estado que vuelve a dibujar, como mutableStateOf
+lenguaje: kotlin
+pide: Compose vuelve a dibujar cuando cambia el estado, pero **solo si cambió de verdad**. Completa la clase `Estado`: tiene un `valor` con un **setter propio** que, si el valor nuevo es distinto del que había, lo guarda y llama a `alCambiar()`; si es igual, no hace nada. Pista: dentro del `set`, el valor guardado se llama `field`.
+--- código
+class Estado<T>(inicial: T, private val alCambiar: () -> Unit) {
+    var valor: T = inicial
+        set(nuevo) {
+            TODO()
+        }
+}
+--- pruebas
+prueba("un cambio vuelve a dibujar") {
+    var dibujos = 0
+    val viajes = Estado(0) { dibujos++ }
+    viajes.valor = viajes.valor + 1
+    igual(viajes.valor, 1)
+    igual(dibujos, 1)
+}
+prueba("el mismo valor no vuelve a dibujar") {
+    var dibujos = 0
+    val app = Estado("Uber") { dibujos++ }
+    app.valor = "Uber"
+    app.valor = "99"
+    app.valor = "99"
+    igual(dibujos, 1)
+}
+--- solución
+class Estado<T>(inicial: T, private val alCambiar: () -> Unit) {
+    var valor: T = inicial
+        set(nuevo) {
+            if (nuevo != field) {
+                field = nuevo
+                alCambiar()
+            }
+        }
+}
+```
+
 ```practica
 vf :: Un @Composable de Compose es como un componente de React
 vf :: En Compose, el estilo se escribe con un objeto style igual que en React Native
@@ -162,6 +229,64 @@ Junta todo el curso: la **sealed** (clase 64), las **corrutinas** y el scope (65
 > 🌎 **En la vida real:** el ViewModel es la cocina; la pantalla es el mozo que lleva lo que sale.
 
 > 🌎 **Otro ejemplo:** Es como el cerebro y la cara: uno piensa, la otra muestra.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un ViewModel con StateFlow
+lenguaje: kotlin
+pide: Completa `cargar()` del ViewModel: pide la lista al repositorio y pone el estado en `Pantalla.Lista(...)`; si el repositorio lanza un error, pone `Pantalla.Error("No se pudo cargar")`. El estado empieza en `Cargando`. Pista: `_estado.value = try { … } catch (e: Exception) { … }`.
+--- código
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+sealed interface Pantalla {
+    data object Cargando : Pantalla
+    data class Lista(val gastos: List<String>) : Pantalla
+    data class Error(val mensaje: String) : Pantalla
+}
+
+interface Repositorio { suspend fun listar(): List<String> }
+
+class GastosViewModel(private val repo: Repositorio) {
+    private val _estado = MutableStateFlow<Pantalla>(Pantalla.Cargando)
+    val estado: StateFlow<Pantalla> = _estado
+
+    suspend fun cargar() {
+        TODO()
+    }
+}
+--- pruebas
+val bueno = object : Repositorio { override suspend fun listar() = listOf("lavado", "peaje") }
+val roto = object : Repositorio { override suspend fun listar(): List<String> = throw IllegalStateException("sin internet") }
+prueba("empieza cargando") { igual(GastosViewModel(bueno).estado.value, Pantalla.Cargando) }
+prueba("después, la lista") { runBlocking { val vm = GastosViewModel(bueno); vm.cargar(); igual(vm.estado.value, Pantalla.Lista(listOf("lavado", "peaje"))) } }
+prueba("si falla, el error (sin cerrar la app)") { runBlocking { val vm = GastosViewModel(roto); vm.cargar(); igual(vm.estado.value, Pantalla.Error("No se pudo cargar")) } }
+--- solución
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+sealed interface Pantalla {
+    data object Cargando : Pantalla
+    data class Lista(val gastos: List<String>) : Pantalla
+    data class Error(val mensaje: String) : Pantalla
+}
+
+interface Repositorio { suspend fun listar(): List<String> }
+
+class GastosViewModel(private val repo: Repositorio) {
+    private val _estado = MutableStateFlow<Pantalla>(Pantalla.Cargando)
+    val estado: StateFlow<Pantalla> = _estado
+
+    suspend fun cargar() {
+        _estado.value = try {
+            Pantalla.Lista(repo.listar())
+        } catch (e: Exception) {
+            Pantalla.Error("No se pudo cargar")
+        }
+    }
+}
+```
 
 ```practica
 vf :: El ViewModel sobrevive cuando se gira el teléfono

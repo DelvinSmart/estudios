@@ -43,6 +43,40 @@ fun main() = runBlocking {
 
 > 🌎 **Otro ejemplo:** Es como un simulador que pausa el tiempo.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Funciones suspend
+lenguaje: kotlin
+pide: Completa `leerGastos()`: espera 200 milisegundos con `delay(200)` (como si fuera internet) y devuelve la lista `listOf(30.0, 12.5)`. Después `totalDeGastos()`, que llama a `leerGastos()` **sin await** (en Kotlin no hace falta) y devuelve la suma. En las pruebas se usa `runBlocking`, que solo se usa en pruebas y ejemplos.
+--- código
+import kotlinx.coroutines.*
+
+suspend fun leerGastos(): List<Double> {
+    TODO()
+}
+
+suspend fun totalDeGastos(): Double = TODO()
+--- pruebas
+prueba("el total") { runBlocking { igual(totalDeGastos(), 42.5) } }
+prueba("de verdad espera (como internet)") {
+    runBlocking {
+        val inicio = System.currentTimeMillis()
+        leerGastos()
+        ok(System.currentTimeMillis() - inicio >= 200, "leerGastos tiene que esperar 200 ms con delay")
+    }
+}
+--- solución
+import kotlinx.coroutines.*
+
+suspend fun leerGastos(): List<Double> {
+    delay(200)
+    return listOf(30.0, 12.5)
+}
+
+suspend fun totalDeGastos(): Double = leerGastos().sum()
+```
+
 ```practica
 vf :: Una función suspend puede pausar sin congelar el hilo de la pantalla
 vf :: En Kotlin hay que escribir await para llamar una función suspend
@@ -88,6 +122,42 @@ Toda corrutina vive dentro de un **scope**. En Android, `viewModelScope` cancela
 
 > 🌎 **Otro ejemplo:** Es como al terminar el turno: se cierran todos los pedidos abiertos.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Dos pedidos en paralelo, como Promise.all
+lenguaje: kotlin
+pide: `leerCarro()` y `leerGastos()` tardan 400 ms cada una. Completa `cargarTodo()`: devuelve el carro y el total de gastos, pidiendo los dos **a la vez** con `coroutineScope` y dos `async`, y después `await()`. Si los pides uno detrás del otro, tarda 800 ms y la última prueba falla.
+--- código
+import kotlinx.coroutines.*
+
+suspend fun leerCarro(): String { delay(400); return "Corolla" }
+suspend fun leerGastos(): List<Double> { delay(400); return listOf(30.0, 12.5) }
+
+suspend fun cargarTodo(): Pair<String, Double> = TODO()
+--- pruebas
+prueba("trae los dos") { runBlocking { igual(cargarTodo(), "Corolla" to 42.5) } }
+prueba("en paralelo: menos de 700 ms") {
+    runBlocking {
+        val inicio = System.currentTimeMillis()
+        cargarTodo()
+        val tardo = System.currentTimeMillis() - inicio
+        ok(tardo < 700, "tardó $tardo ms: los dos pedidos tienen que ir a la vez")
+    }
+}
+--- solución
+import kotlinx.coroutines.*
+
+suspend fun leerCarro(): String { delay(400); return "Corolla" }
+suspend fun leerGastos(): List<Double> { delay(400); return listOf(30.0, 12.5) }
+
+suspend fun cargarTodo(): Pair<String, Double> = coroutineScope {
+    val carro = async { leerCarro() }
+    val gastos = async { leerGastos() }
+    carro.await() to gastos.await().sum()
+}
+```
+
 ```practica
 vf :: viewModelScope cancela las corrutinas cuando la pantalla se cierra
 vf :: launch devuelve un resultado que se obtiene con await
@@ -132,6 +202,46 @@ En Android se usa `StateFlow` para el estado de una pantalla (próxima clase).
 > 🌎 **En la vida real:** es como estar suscrito a un canal: cada noticia nueva llega sola.
 
 > 🌎 **Otro ejemplo:** Es como el marcador en vivo de un partido.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un Flow: datos que siguen llegando
+lenguaje: kotlin
+pide: Completa `gastosDelDia()`: un `flow { … }` que emite (`emit`) cada valor de la lista `listOf(30.0, 12.5, 150.0)`, uno por uno. Y `totalAcumulado(f)`: junta (`collect`) todos los valores que llegan y devuelve, en una lista, el total **después de cada uno** (como una pantalla que se actualiza con cada dato).
+--- código
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun gastosDelDia(): Flow<Double> = flow {
+    TODO()
+}
+
+suspend fun totalAcumulado(f: Flow<Double>): List<Double> {
+    TODO()
+}
+--- pruebas
+prueba("emite los tres") { runBlocking { igual(gastosDelDia().toList(), listOf(30.0, 12.5, 150.0)) } }
+prueba("el total después de cada uno") { runBlocking { igual(totalAcumulado(gastosDelDia()), listOf(30.0, 42.5, 192.5)) } }
+prueba("un flow vacío") { runBlocking { igual(totalAcumulado(emptyFlow()), listOf<Double>()) } }
+--- solución
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun gastosDelDia(): Flow<Double> = flow {
+    for (v in listOf(30.0, 12.5, 150.0)) emit(v)
+}
+
+suspend fun totalAcumulado(f: Flow<Double>): List<Double> {
+    val totales = mutableListOf<Double>()
+    var total = 0.0
+    f.collect { v ->
+        total += v
+        totales.add(total)
+    }
+    return totales
+}
+```
 
 ```practica
 vf :: Dispatchers.IO es para red, archivos y base de datos

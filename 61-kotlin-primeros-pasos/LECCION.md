@@ -12,7 +12,7 @@
 
 ### Kotlin Playground
 
-En **https://play.kotlinlang.org** escribes Kotlin en el navegador y lo corres con un botón. Es oficial y gratis: úsalo para todos los ejercicios de las clases 61 a 65.
+En **https://play.kotlinlang.org** escribes Kotlin en el navegador y lo corres con un botón. Es oficial y gratis, y es el que usan los ejercicios de este curso: cuando tocas **▶ probar**, tu código viaja a ese mismo Playground, se compila y se corre allá, y las pruebas se leen de lo que imprime. Por eso tarda unos segundos y necesita internet. Úsalo también por tu cuenta para probar ideas sueltas.
 
 ```kotlin
 fun main() {
@@ -33,6 +33,30 @@ Para apps de Android (clases 66 y 67) se usa **Android Studio**, gratis, para Ma
 > 🌎 **En la vida real:** es el taller completo, con todas las herramientas y un carro de prueba.
 
 > 🌎 **Otro ejemplo:** Es como pasar del simulador a la pista de entrenamiento.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu primer programa en Kotlin
+lenguaje: kotlin
+pide: Completa dos funciones. `saludo(nombre)` devuelve `"Hola, Delvin"` para `"Delvin"`. `presentacion(nombre, app)` devuelve `"Soy Delvin y manejo en Uber"`. Cambia cada `TODO()` por tu código (no escribas `fun main`: la pone el mapa). Puedes usar `println` para mirar valores: sale debajo de las pruebas.
+--- código
+fun saludo(nombre: String): String {
+    return TODO()
+}
+
+fun presentacion(nombre: String, app: String): String = TODO()
+--- pruebas
+prueba("el saludo") { igual(saludo("Delvin"), "Hola, Delvin") }
+prueba("otro nombre") { igual(saludo("Ana"), "Hola, Ana") }
+prueba("la presentación") { igual(presentacion("Delvin", "Uber"), "Soy Delvin y manejo en Uber") }
+--- solución
+fun saludo(nombre: String): String {
+    return "Hola, $nombre"
+}
+
+fun presentacion(nombre: String, app: String): String = "Soy $nombre y manejo en $app"
+```
 
 ```practica
 vf :: El Kotlin Playground permite correr Kotlin en el navegador gratis
@@ -76,6 +100,29 @@ Kotlin es **estáticamente tipado** como TypeScript, pero aquí los tipos se rev
 > 🌎 **En la vida real:** es como las etiquetas de los frascos, pero pegadas con pegamento: no se pueden despegar.
 
 > 🌎 **Otro ejemplo:** Es como el control de seguridad de un aeropuerto: no hay forma de saltarlo.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: val para lo que no cambia, var para lo que sí
+lenguaje: kotlin
+pide: Completa `kmAlFinal(kmInicial, recorridos)`: empieza con el kilometraje del carro y le suma cada recorrido de la lista. Usa un `var` para el total que va cambiando (y `val` para todo lo demás). Pista: `for (r in recorridos) { … }`.
+--- código
+fun kmAlFinal(kmInicial: Int, recorridos: List<Int>): Int {
+    TODO()
+}
+--- pruebas
+prueba("un día de trabajo") { igual(kmAlFinal(84800, listOf(120, 85, 115)), 85120) }
+prueba("sin recorridos, el mismo") { igual(kmAlFinal(84800, listOf()), 84800) }
+--- solución
+fun kmAlFinal(kmInicial: Int, recorridos: List<Int>): Int {
+    var km = kmInicial
+    for (r in recorridos) {
+        km += r
+    }
+    return km
+}
+```
 
 ```practica
 vf :: val en Kotlin es como const en JavaScript
@@ -121,6 +168,30 @@ println("El nombre tiene ${nombre.length} letras")
 > 🌎 **En la vida real:** es como la carta modelo con huecos.
 
 > 🌎 **Otro ejemplo:** Es como el cartel del bus que cambia el destino.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Int, Double y las plantillas de texto
+lenguaje: kotlin
+pide: Completa `promedioPorViaje(ganancia, viajes)`: los dos son `Int`, pero el promedio tiene decimales. Ojo: `7 / 2` da `3` en Kotlin (división entera); convierte antes con `.toDouble()`. Y `resumen(viajes, ganancia)` devuelve `"Hoy hice 12 viajes y gané R$ 250.5"` usando una plantilla con `$`.
+--- código
+fun promedioPorViaje(ganancia: Int, viajes: Int): Double {
+    TODO()
+}
+
+fun resumen(viajes: Int, ganancia: Double): String = TODO()
+--- pruebas
+prueba("con decimales, no división entera") { igual(promedioPorViaje(7, 2), 3.5) }
+prueba("un promedio exacto") { igual(promedioPorViaje(250, 10), 25.0) }
+prueba("el resumen") { igual(resumen(12, 250.5), "Hoy hice 12 viajes y gané R$ 250.5") }
+--- solución
+fun promedioPorViaje(ganancia: Int, viajes: Int): Double {
+    return ganancia.toDouble() / viajes
+}
+
+fun resumen(viajes: Int, ganancia: Double): String = "Hoy hice $viajes viajes y gané R$ $ganancia"
+```
 
 ```practica
 vf :: En Kotlin, 7 / 2 da 3 porque los dos son Int
