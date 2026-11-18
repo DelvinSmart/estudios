@@ -75,7 +75,7 @@ const huella = (t) => createHash('sha256').update(`${KBPS}|${motor.firma(VOZ)}|$
 function hablar(texto, destino) {
   const wav = destino.replace(/\.m4a$/, '.wav');
   motor.hablar(texto, wav, VOZ);
-  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', wav, '-ac', '1', '-c:a', 'aac', '-b:a', `${KBPS}k`, '-movflags', '+faststart', destino]);
+  execFileSync(process.env.FFMPEG || 'ffmpeg', ['-y', '-loglevel', 'error', '-i', wav, '-ac', '1', '-c:a', 'aac', '-b:a', `${KBPS}k`, '-movflags', '+faststart', destino]);
   rmSync(wav);
 }
 

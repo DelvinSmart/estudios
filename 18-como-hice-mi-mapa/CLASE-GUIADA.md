@@ -476,6 +476,173 @@ escribe :: Responde con tus palabras la pregunta del amigo: ¿cómo organizaste 
 
 > 🔁 **Repaso:** catálogo (`cursos.js`) → direcciones (`#/curso/…`) → carga bajo demanda → mapa, pestañas, menú ☰, migas y buscador.
 
+## 12. Escuchar las clases: el motor de voz y los audios automáticos
+
+> 🎙️ **El profesor:** cada parte de este mapa se puede **escuchar**, incluso con el teléfono bloqueado en el bolsillo. Y los audios se hacen **solos**: subes una clase y, minutos después, ya tiene su audio. Esta parte explica cómo, pieza por pieza. Ninguna cuesta dinero.
+
+### Dos formas de escuchar
+
+| | La voz del aparato | El audio grabado |
+|---|---|---|
+| **Qué es** | El navegador lee el texto con la voz que trae el teléfono (`web/voz.js`, la *Web Speech API*) | Un archivo `.m4a` por parte, grabado antes con **Piper** |
+| **Con la pantalla bloqueada** | Se corta | Sigue sonando, con los controles en la pantalla de bloqueo |
+| **Cuándo se usa** | Cuando la parte no tiene audio grabado, o los audios están apagados | Cuando la parte ya tiene su audio |
+
+En cada parte hay **un solo botón**: **🎧 Escuchar** si existe el audio grabado, o **🔊 Escuchar** con la voz del aparato si no (la ⚙ guarda la velocidad y la voz). El reproductor de abajo es una sola fila; el resto de los controles se abre con **⋯**.
+
+> 🌎 **En la vida real:** la voz del aparato es como un amigo que te lee el libro en voz alta: lo hace al momento, pero si se va, se acaba. El audio grabado es un audiolibro: lo escuchas donde quieras.
+
+> 🌎 **Otro ejemplo:** Es como la radio en vivo frente a un podcast descargado: la radio se corta en el túnel; el podcast sigue sonando.
+
+> 🌎 **Otro ejemplo más:** Es como pedirle la dirección a alguien en la calle frente a tenerla guardada en el GPS del carro: lo segundo funciona aunque no haya nadie cerca.
+
+### Cómo se hace un audio: cuatro pasos
+
+El programa `herramientas/audio/generar-audios.mjs` hace, por cada parte:
+
+1. **Lee la clase** y la divide en sus partes (`##`), con la misma función que usa la página (`partir`).
+2. **Prepara el texto para el oído:** cambia los bloques de código por *"aquí hay un ejemplo de código, en la página"*, las prácticas por *"aquí hay una práctica"*, y quita emojis y símbolos.
+3. **Piper lo convierte en voz:** un programa gratuito que corre en la computadora (sin internet) y escribe un archivo `.wav`.
+4. **ffmpeg lo achica:** lo pasa a `.m4a` a 32 kbps (una voz se oye bien así y pesa diez veces menos).
+
+```js
+function hablar(texto, destino) {
+  motor.hablar(texto, wav, VOZ);                                     // paso 3: el texto se vuelve voz
+  execFileSync(FFMPEG, ['-i', wav, '-c:a', 'aac', '-b:a', '32k', destino]);   // paso 4: se achica
+}
+```
+
+> 🌎 **En la vida real:** es como una fábrica de jugos: llega la fruta (la clase), se lava y se pela (se prepara el texto), se exprime (Piper) y se envasa en botellas chicas (ffmpeg).
+
+> 🌎 **Otro ejemplo:** Es como pasar una receta escrita a un video de cocina: no lees en voz alta las cantidades en gramos de la tabla, dices "aquí están las medidas, míralas en la pantalla".
+
+> 🌎 **Otro ejemplo más:** Es como mandar un mensaje de voz por WhatsApp: grabas (Piper) y la app lo comprime antes de enviarlo (ffmpeg).
+
+### La huella: rehacer solo lo que cambió
+
+Hay más de 500 partes. Rehacerlas todas cada vez sería lentísimo. Por eso cada audio guarda una **huella**: un código corto que sale del texto de la parte, la voz y la calidad.
+
+```js
+const huella = (t) => createHash('sha256').update(`${KBPS}|${motor.firma(VOZ)}|${t}`).digest('hex').slice(0, 16);
+```
+
+Las huellas se guardan en `audio/indice.json`. Si la huella de una parte es la misma que la guardada, ese audio **no se toca**. Si cambió una coma, o cambió la voz, la huella cambia y el audio se rehace. Si una parte desaparece, su audio se borra.
+
+> 🌎 **En la vida real:** es como el inventario de una tienda: solo vuelves a pedir lo que se terminó o lo que cambió de modelo, no toda la mercadería.
+
+> 🌎 **Otro ejemplo:** Es como el sello de la revisión técnica del carro: si el sello sigue vigente, no lo vuelves a llevar.
+
+> 🌎 **Otro ejemplo más:** Es como la lista de compras: tachas lo que ya tienes en la nevera y compras solo lo que falta.
+
+### El motor de voz: una pieza que se cambia
+
+La voz no está escrita en el programa. Todo sale de **un archivo** de cinco líneas, `herramientas/audio/motor.json`:
+
+```json
+{ "activo": true, "motor": "piper", "voz": "es_AR-daniela-high", "kbps": 32 }
+```
+
+- **`motor`** dice qué archivo de `herramientas/audio/motores/` hace la voz. Hoy es `piper.mjs`. Para conectar otro programa de voz, se copia `motores/plantilla.mjs`, se llenan sus cinco cosas (`nombre`, `voces`, `preparar`, `hablar`, `firma`) y se cambia esa línea. Nada más se toca.
+- **`voz`** es la voz de ese motor. Se maneja con **un comando**:
+
+| Para… | Comando |
+|---|---|
+| Ver el motor, la voz y las voces que hay | `node herramientas/audio/voz.mjs` |
+| Cambiar la voz | `node herramientas/audio/voz.mjs es_AR-daniela-high` |
+| Escuchar una voz antes de elegirla | `node herramientas/audio/voz.mjs --probar es_AR-daniela-high` |
+| Una muestra de cada voz | `node herramientas/audio/voz.mjs --probar-todas` |
+
+Como la voz es parte de la huella, **cambiarla rehace todos los audios** con la voz nueva, solos.
+
+> 🌎 **En la vida real:** es como una lámpara con bombillo de rosca: si quieres otra luz, cambias el bombillo; no cambias la lámpara ni la instalación de la casa.
+
+> 🌎 **Otro ejemplo:** Es como cambiar de operadora del celular: sacas el chip y pones otro. El teléfono, tus fotos y tus apps siguen iguales.
+
+> 🌎 **Otro ejemplo más:** Es como cargar gasolina en otra estación: el carro es el mismo, solo cambia de dónde sale el combustible. La estación es el motor de voz; el carro es el mapa.
+
+### El interruptor
+
+`"activo": false` en `motor.json` apaga todo con **una sola línea**: el generador no hace nada, la automatización no publica nada y la página deja de ofrecer los audios grabados (vuelve a la voz del aparato). Se cambia con `node herramientas/audio/voz.mjs --apagar` y `--encender`. Y en GitHub hay además un botón: **Actions → "Audios de las clases" → ⋯ → Disable workflow**.
+
+> 🌎 **En la vida real:** es como el breaker de la casa: bajas una palanca y se apaga ese circuito entero, sin desconectar aparato por aparato.
+
+> 🌎 **Otro ejemplo:** Es como la llave de paso del agua: la cierras en un solo lugar y no sale agua por ninguna llave de la casa.
+
+> 🌎 **Otro ejemplo más:** Es como el modo avión del teléfono: un toque y se cortan todas las conexiones; otro toque y vuelven.
+
+### La automatización: GitHub Actions
+
+**GitHub Actions** es una computadora que GitHub presta **gratis** (en repositorios públicos) para correr tareas cuando pasa algo en el repositorio. La receta está en `.github/workflows/audios.yml`:
+
+- **Cuándo corre:** cada vez que se sube un cambio a una clase (`**/*.md`), al catálogo (`web/cursos.js`) o al motor de voz (`herramientas/audio/**`). También a mano, con **Run workflow**.
+- **Qué hace:** baja el mapa y los audios que ya existen, revisa el interruptor, prepara Piper y ffmpeg, corre el mismo `generar-audios.mjs` (que rehace solo lo que cambió) y publica los audios en el repositorio `estudios-audio`.
+- **Una corrida por vez:** si subes dos clases seguidas, la segunda espera a la primera (`concurrency`).
+- **Para ver cómo va:** pestaña **Actions** → la corrida → el paso *"Generar solo los audios que cambiaron"*, donde cada línea `✓ … (N hechos)` es un audio listo.
+
+> 🌎 **En la vida real:** es como la lavadora automática: pones la ropa, eliges el programa y te vas; ella sabe cuándo echar el agua, cuándo enjuagar y cuándo centrifugar.
+
+> 🌎 **Otro ejemplo:** Es como un empleado del turno de noche: dejas el pedido en la mesa y a la mañana siguiente está hecho, sin que tú estés.
+
+> 🌎 **Otro ejemplo más:** Es como pedir un viaje en una app de transporte: tú solo lo pides, y el sistema hace todo lo demás (busca el conductor, calcula la ruta, cobra).
+
+### Que sea rápido: guardar lo instalado
+
+Cada corrida empieza en una computadora **vacía**. Al principio, instalar ffmpeg y Piper podía tardar **hasta 10 minutos y medio** (otras veces, medio minuto: dependía de cómo estuviera GitHub ese día), aunque hubiera un solo audio para hacer. La solución: instalar los dos juntos en una carpeta (`~/programas-voz`) y **guardarla entre corridas** con una **caché** (`actions/cache`). La primera vez se instala; las siguientes se recupera en segundos, siempre. Lo mismo pasa con la voz descargada.
+
+| Con la voz de México (`es_MX-claude-high`) | Tu Mac | GitHub |
+|---|---|---|
+| Cada audio | unos 14 segundos | unos 5 segundos |
+| Preparación | nada (ya está instalado) | la primera vez, minutos; después, segundos |
+| No necesita tu computadora | — | ✓ |
+
+**La voz también cambia el tiempo.** No todas las voces tardan lo mismo: con el mismo texto, `es_MX-claude-high` tarda unos 12 segundos y `es_AR-daniela-high`, unos 68 (su modelo es casi el doble de grande: 114 MB contra 63 MB). Gracias a la huella, eso solo se nota al **cambiar de voz**, que rehace todo. Con Daniela, en GitHub:
+
+| Qué cambias | Partes que se rehacen | Tiempo aproximado |
+|---|---|---|
+| Una frase en una parte | 1 | unos 30 segundos |
+| Una clase con 3 partes cambiadas | 3 | 1 a 2 minutos |
+| Una clase nueva de 5 partes | 5 | 2 a 3 minutos |
+| Cambiar de voz | todas (unas 520) | casi 4 horas |
+
+> 🌎 **En la vida real:** es como dejar la caja de herramientas en el maletero del carro en vez de ir a comprarlas cada vez que algo se daña.
+
+> 🌎 **Otro ejemplo:** Es como el *mise en place* de una cocina: los ingredientes cortados y listos desde temprano, para que cada plato salga rápido.
+
+> 🌎 **Otro ejemplo más:** Es como guardar una dirección en el GPS: la primera vez la escribes completa; las siguientes la eliges de la lista.
+
+### Que el repositorio no crezca
+
+Git guarda la **historia** de todo. Con 500 audios (unos 240 MB) rehechos varias veces, el repositorio de audios crecería sin parar y podría acercarse a los límites de GitHub (se recomienda menos de 1 GB por repositorio). Por eso la automatización publica los audios como **un solo commit nuevo que reemplaza al anterior** (`git checkout --orphan` y `git push --force`): el repositorio de audios **no guarda historial** y pesa siempre lo mismo. Las clases, que sí importan, siguen con toda su historia en el repositorio del mapa.
+
+> 🌎 **En la vida real:** es como una pizarra: escribes lo de hoy y borras lo de ayer. Un cuaderno, en cambio, se llena hoja por hoja hasta que no te cabe en la mochila.
+
+> 🌎 **Otro ejemplo:** Es como el periódico del día en la entrada de un edificio: cada mañana ponen el nuevo y se llevan el viejo; no se acumulan.
+
+> 🌎 **Otro ejemplo más:** Es como la foto de perfil de WhatsApp: cuando pones una nueva, la vieja no queda colgada al lado.
+
+### La llave: permiso solo para lo necesario
+
+La automatización corre en el repositorio del mapa (`estudios`), pero publica en **otro** (`estudios-audio`). Para eso usa una **deploy key**: una llave que **solo abre `estudios-audio`**, guardada como **secreto** (`AUDIO_DEPLOY_KEY`) que nadie puede leer, ni siquiera viendo el código. Si un día se pierde o se desconfía de ella, se borra en *Settings → Deploy keys* y se crea otra.
+
+> 🌎 **En la vida real:** es como la tarjeta de un hotel: abre solo tu habitación, no todo el edificio.
+
+> 🌎 **Otro ejemplo:** Es como la llave que le dejas al portero solo para el depósito: puede guardar los paquetes, pero no entrar a tu apartamento.
+
+> 🌎 **Otro ejemplo más:** Es como la clave del wifi de invitados: la usan las visitas, pero no les da acceso a tu computadora.
+
+> 💡 **Idea:** cada pieza hace **una sola cosa** y se puede cambiar sin tocar las demás: el texto (las clases), la voz (el motor), el interruptor (`motor.json`), el trabajador (GitHub Actions) y el almacén (`estudios-audio`).
+
+```practica
+vf :: El audio grabado sigue sonando con la pantalla del teléfono bloqueada
+vf :: Cada vez que se sube una clase, se rehacen los más de 500 audios
+elige :: ¿Qué hace ffmpeg en los audios? :: Convierte el texto en voz :: Achica el .wav de Piper a un .m4a liviano :: Sube los audios a GitHub
+elige :: Quieres probar otra voz. ¿Qué cambias? :: El código del generador :: Una línea: node herramientas/audio/voz.mjs y el nombre de la voz (o "voz" en motor.json) :: Todas las clases
+elige :: ¿Por qué el repositorio de audios no crece aunque se rehagan los audios? :: Porque los audios no pesan nada :: Porque cada publicación reemplaza a la anterior, sin guardar historial :: Porque GitHub los borra solos
+escribe :: Un amigo te pregunta cómo hiciste para que tus clases tengan audio sin pagar nada. ¿Qué le dices? :: Uso Piper, una voz gratis que corre en la computadora, y ffmpeg para achicar los audios. Un programa lee cada parte, la prepara para el oído y graba el audio, pero solo rehace los que cambiaron (con una huella). GitHub Actions lo corre solo cada vez que subo una clase y publica los audios en otro repositorio, sin historial para que no crezca. La voz y un interruptor para apagarlo están en un solo archivo, motor.json.
+```
+
+> 🔁 **Repaso:** dos formas de escuchar → cuatro pasos (leer, preparar, Piper, ffmpeg) → huella → motor y voz en `motor.json` → interruptor → GitHub Actions → caché → sin historial → llave solo para lo necesario.
+
 ## Ejercicios
 
 > 🎙️ **El profesor:** después de desarmar el motor, el aprendiz lo vuelve a armar.

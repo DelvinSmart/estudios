@@ -37,7 +37,7 @@ function muestra(voz) {
   const wav = path.join(MUESTRAS, `${voz}.wav`);
   const m4a = path.join(MUESTRAS, `${voz}.m4a`);
   motor.hablar(texto, wav, voz);
-  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', wav, '-ac', '1', '-c:a', 'aac', '-b:a', '48k', m4a]);
+  execFileSync(process.env.FFMPEG || 'ffmpeg', ['-y', '-loglevel', 'error', '-i', wav, '-ac', '1', '-c:a', 'aac', '-b:a', '48k', m4a]);
   rmSync(wav);
   console.log(`🎧 ${m4a}`);
 }

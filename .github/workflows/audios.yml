@@ -60,16 +60,34 @@ jobs:
           node-version: 22
 
       - if: steps.motor.outputs.activo == 'true'
+        id: python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Instalar Piper y ffmpeg
+      # Piper y ffmpeg viven juntos en una carpeta de Python (~/programas-voz) que se GUARDA entre corridas:
+      # solo la primera vez se instalan (unos minutos); las demás se recuperan en segundos.
+      # ffmpeg viene del paquete imageio-ffmpeg (un ffmpeg listo), así no hace falta el instalador de Ubuntu, que es lento.
+      - name: Recuperar Piper y ffmpeg ya instalados
+        if: steps.motor.outputs.activo == 'true'
+        id: programas
+        uses: actions/cache@v4
+        with:
+          path: ~/programas-voz
+          key: programas-voz-${{ runner.os }}-py${{ steps.python.outputs.python-version }}-piper1.8.0-imageio0.5.1
+
+      - name: Instalar Piper y ffmpeg (solo si no estaban guardados)
+        if: steps.motor.outputs.activo == 'true' && steps.programas.outputs.cache-hit != 'true'
+        run: |
+          python -m venv ~/programas-voz
+          ~/programas-voz/bin/pip install --quiet piper-tts==1.8.0 imageio-ffmpeg==0.5.1
+
+      - name: Dejar Piper y ffmpeg a mano
         if: steps.motor.outputs.activo == 'true'
         run: |
-          python -m pip install --quiet piper-tts==1.8.0
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
+          echo "$HOME/programas-voz/bin" >> "$GITHUB_PATH"
+          echo "PIPER_PYTHON=$HOME/programas-voz/bin/python" >> "$GITHUB_ENV"
+          echo "FFMPEG=$(~/programas-voz/bin/python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" >> "$GITHUB_ENV"
 
       - name: Guardar las voces descargadas entre corridas
         if: steps.motor.outputs.activo == 'true'
@@ -83,7 +101,6 @@ jobs:
         working-directory: Aprender
         env:
           PIPER: piper
-          PIPER_PYTHON: python
           PIPER_VOCES: ${{ github.workspace }}/voces
           SALIDA_AUDIO: ${{ github.workspace }}/estudios-audio/audio
         run: node herramientas/audio/generar-audios.mjs
