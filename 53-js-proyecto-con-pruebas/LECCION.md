@@ -39,6 +39,32 @@ gastos-del-carro/
 
 > 🌎 **Otro ejemplo:** Es como las secciones de un supermercado.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El package.json del proyecto
+lenguaje: js
+pide: Completa el objeto `paquete` como queda el `package.json` de esta parte: con `"type": "module"`, un script `test` que corra `vitest run`, y `typescript` y `vitest` en `devDependencies` (las versiones pueden ser cualquiera que empiece con `^`).
+--- código
+const paquete = {
+  name: 'gastos-del-carro',
+  // tu código aquí
+};
+--- pruebas
+prueba('usa módulos (type: module)', () => igual(paquete.type, 'module'));
+prueba('npm test corre vitest', () => igual(paquete.scripts?.test, 'vitest run'));
+prueba('vitest es de desarrollo', () => ok(String(paquete.devDependencies?.vitest).startsWith('^'), 'falta vitest en devDependencies'));
+prueba('typescript es de desarrollo', () => ok(String(paquete.devDependencies?.typescript).startsWith('^'), 'falta typescript en devDependencies'));
+prueba('no van en dependencies', () => ok(!paquete.dependencies?.vitest && !paquete.dependencies?.typescript, 'vitest y typescript no se necesitan para que la app funcione'));
+--- solución
+const paquete = {
+  name: 'gastos-del-carro',
+  type: 'module',
+  scripts: { test: 'vitest run' },
+  devDependencies: { typescript: '^5.4.0', vitest: '^2.1.0' },
+};
+```
+
 ```practica
 vf :: npx tsc --init crea el archivo tsconfig.json
 vf :: vitest se instala como dependencia de la app final, no de desarrollo
@@ -120,6 +146,55 @@ export function porTipo(gastos: Gasto[]): Partial<Record<TipoGasto, number>> {
 
 > 🌎 **Otro ejemplo:** Es como el cierre de caja por tipo de producto.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El almacén de gastos
+lenguaje: ts
+pide: Escribe `crearAlmacen()` como en esta parte: guarda los gastos **adentro** (closure) y devuelve `crear`, `listar` y `borrar`. `crear` rechaza un valor de 0 o menos con un error, y pone el `id` (1, 2, 3…). No cambies la lista: crea una nueva cada vez.
+--- código
+interface Gasto { id: number; tipo: string; valor: number; }
+
+function crearAlmacen() {
+  // tu código aquí
+  return {
+    crear(datos: Omit<Gasto, 'id'>): Gasto { throw new Error('falta escribir crear'); },
+    listar(): Gasto[] { return []; },
+    borrar(id: number): boolean { return false; },
+  };
+}
+--- pruebas
+prueba('crear pone id 1 y 2', () => { const a = crearAlmacen(); igual([a.crear({ tipo: 'x', valor: 1 }).id, a.crear({ tipo: 'y', valor: 2 }).id], [1, 2]); });
+prueba('listar devuelve lo creado', () => { const a = crearAlmacen(); a.crear({ tipo: 'lavado', valor: 30 }); igual(a.listar(), [{ tipo: 'lavado', valor: 30, id: 1 }]); });
+prueba('valor 0 da error', () => { const a = crearAlmacen(); let fallo = false; try { a.crear({ tipo: 'x', valor: 0 }); } catch (e) { fallo = true; } ok(fallo, 'tenía que lanzar un error'); });
+prueba('borrar quita y devuelve true', () => { const a = crearAlmacen(); const g = a.crear({ tipo: 'x', valor: 5 }); igual([a.borrar(g.id), a.listar().length], [true, 0]); });
+prueba('borrar algo que no existe da false', () => igual(crearAlmacen().borrar(99), false));
+prueba('dos almacenes no se mezclan', () => { const a = crearAlmacen(); const b = crearAlmacen(); a.crear({ tipo: 'x', valor: 1 }); igual(b.listar().length, 0); });
+--- solución
+interface Gasto { id: number; tipo: string; valor: number; }
+
+function crearAlmacen() {
+  let gastos: Gasto[] = [];
+  let siguienteId = 1;
+  return {
+    crear(datos: Omit<Gasto, 'id'>): Gasto {
+      if (!(datos.valor > 0)) throw new Error('El valor tiene que ser mayor que 0');
+      const nuevo = { ...datos, id: siguienteId++ };
+      gastos = [...gastos, nuevo];
+      return nuevo;
+    },
+    listar(): Gasto[] {
+      return gastos;
+    },
+    borrar(id: number): boolean {
+      const antes = gastos.length;
+      gastos = gastos.filter((g) => g.id !== id);
+      return gastos.length < antes;
+    },
+  };
+}
+```
+
 ```practica
 vf :: El almacén guarda los gastos en una variable que solo sus funciones pueden cambiar
 vf :: actualizar cambia el objeto original con gastos[i].valor = ...
@@ -194,6 +269,37 @@ it('una lista vacía da 0', () => expect(totalGastos([])).toBe(0));
 
 > 🌎 **Otro ejemplo:** Es como pesar algo conocido para comprobar que la balanza está bien.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Haz pasar las pruebas (como en un equipo de verdad)
+lenguaje: ts
+pide: Las **pruebas ya están escritas** (léelas: dicen qué tiene que hacer `porTipo`). Escribe la función hasta que todas pasen: devuelve la suma de los gastos **por tipo**, redondeada a dos decimales. Así se trabaja muchas veces: primero la prueba, después el código.
+--- código
+interface Gasto { tipo: 'combustible' | 'lavado' | 'peaje'; valor: number; }
+
+function porTipo(gastos: Gasto[]): Partial<Record<Gasto['tipo'], number>> {
+  // tu código aquí
+  return {};
+}
+--- pruebas
+const g: Gasto[] = [{ tipo: 'combustible', valor: 150 }, { tipo: 'combustible', valor: 50.25 }, { tipo: 'lavado', valor: 0.1 }, { tipo: 'lavado', valor: 0.2 }];
+prueba('suma el combustible', () => igual(porTipo(g).combustible, 200.25));
+prueba('0.1 + 0.2 de lavado da 0.3 (redondeado)', () => igual(porTipo(g).lavado, 0.3));
+prueba('un tipo sin gastos no aparece', () => igual(porTipo(g).peaje, undefined));
+prueba('sin gastos da un objeto vacío', () => igual(porTipo([]), {}));
+--- solución
+interface Gasto { tipo: 'combustible' | 'lavado' | 'peaje'; valor: number; }
+
+function porTipo(gastos: Gasto[]): Partial<Record<Gasto['tipo'], number>> {
+  const r: Partial<Record<Gasto['tipo'], number>> = {};
+  for (const g of gastos) {
+    r[g.tipo] = Math.round(((r[g.tipo] ?? 0) + g.valor) * 100) / 100;
+  }
+  return r;
+}
+```
+
 ```practica
 vf :: beforeEach corre antes de cada prueba
 vf :: toThrow comprueba que una función devuelve un número
@@ -234,6 +340,36 @@ Con su `README`, sus pruebas pasando y, si quieres, el CI corriendo `npm test` e
 > 🌎 **En la vida real:** es como un trabajo con firma y certificado de calidad.
 
 > 🌎 **Otro ejemplo:** Es como un músico que sube su demo bien grabada.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La lógica separada de la pantalla
+lenguaje: ts
+pide: Antes de dibujar una pantalla en React, se prepara lo que va a mostrar con una función **pura** (sin pantalla, fácil de probar). Completa `filasParaPantalla`: por cada gasto, una fila con el `texto` del tipo con mayúscula inicial y el `valor` como `'R$ 150.00'`.
+--- código
+interface Gasto { tipo: string; valor: number; }
+interface Fila { texto: string; valor: string; }
+
+function filasParaPantalla(gastos: Gasto[]): Fila[] {
+  // tu código aquí
+  return [];
+}
+--- pruebas
+prueba('una fila por gasto', () => igual(filasParaPantalla([{ tipo: 'lavado', valor: 30 }, { tipo: 'peaje', valor: 8.5 }]).length, 2));
+prueba('el texto con mayúscula', () => igual(filasParaPantalla([{ tipo: 'combustible', valor: 150 }])[0].texto, 'Combustible'));
+prueba('el valor con R$ y dos decimales', () => igual(filasParaPantalla([{ tipo: 'peaje', valor: 8.5 }])[0].valor, 'R$ 8.50'));
+--- solución
+interface Gasto { tipo: string; valor: number; }
+interface Fila { texto: string; valor: string; }
+
+function filasParaPantalla(gastos: Gasto[]): Fila[] {
+  return gastos.map((g) => ({
+    texto: g.tipo[0].toUpperCase() + g.tipo.slice(1),
+    valor: `R$ ${g.valor.toFixed(2)}`,
+  }));
+}
+```
 
 ```practica
 vf :: La lógica separada de la pantalla se puede usar en React, React Native o Node

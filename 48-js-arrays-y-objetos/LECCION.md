@@ -39,6 +39,44 @@ const ordenados = viajes.toSorted((a, b) => a - b);
 
 > 🌎 **Otro ejemplo:** Es como guardar la receta original y anotar los cambios en otra hoja.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Arrays sin cambiar el original
+lenguaje: js
+pide: `ultimo(viajes)` devuelve el último viaje (usa `.at(-1)`). `agregar(viajes, valor)` devuelve una lista **nueva** con el valor al final (usa `...`). `ordenar(viajes)` devuelve una lista nueva de menor a mayor (usa `toSorted`). Ninguna puede cambiar la lista que recibe.
+--- código
+function ultimo(viajes) {
+  // tu código aquí
+}
+
+function agregar(viajes, valor) {
+  // tu código aquí
+}
+
+function ordenar(viajes) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el último de [18.5, 22, 9.75] es 9.75', () => igual(ultimo([18.5, 22, 9.75]), 9.75));
+prueba('agregar 30 al final', () => igual(agregar([18.5, 22], 30), [18.5, 22, 30]));
+prueba('agregar no cambia el original', () => { const v = [1]; agregar(v, 2); igual(v, [1]); });
+prueba('ordenar de menor a mayor', () => igual(ordenar([22, 9.75, 18.5]), [9.75, 18.5, 22]));
+prueba('ordenar no cambia el original', () => { const v = [3, 1, 2]; ordenar(v); igual(v, [3, 1, 2]); });
+--- solución
+function ultimo(viajes) {
+  return viajes.at(-1);
+}
+
+function agregar(viajes, valor) {
+  return [...viajes, valor];
+}
+
+function ordenar(viajes) {
+  return viajes.toSorted((a, b) => a - b);
+}
+```
+
 ```practica
 vf :: viajes.at(-1) devuelve el último elemento
 vf :: sort() devuelve una copia ordenada y deja el original igual
@@ -167,6 +205,35 @@ const [cuenta, setCuenta] = useState(0);          // lo que verás en React
 
 > 🌎 **Otro ejemplo:** Es como leer de una factura solo el total y la fecha.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Objetos: copiar con un cambio y desestructurar
+lenguaje: js
+pide: `actualizarKm(carro, km)` devuelve una **copia** del carro con el nuevo kilometraje (usa `...`), sin tocar el original. `descripcion(carro)` saca `marca` y `modelo` con **desestructuración** y devuelve `'Toyota Corolla'`.
+--- código
+function actualizarKm(carro, km) {
+  // tu código aquí
+}
+
+function descripcion(carro) {
+  // tu código aquí
+}
+--- pruebas
+prueba('cambia el km en la copia', () => igual(actualizarKm({ marca: 'Toyota', km: 85000 }, 85320), { marca: 'Toyota', km: 85320 }));
+prueba('no cambia el original', () => { const c = { km: 1 }; actualizarKm(c, 2); igual(c.km, 1); });
+prueba('descripción de un Toyota Corolla', () => igual(descripcion({ marca: 'Toyota', modelo: 'Corolla', km: 1 }), 'Toyota Corolla'));
+--- solución
+function actualizarKm(carro, km) {
+  return { ...carro, km };
+}
+
+function descripcion(carro) {
+  const { marca, modelo } = carro;
+  return `${marca} ${modelo}`;
+}
+```
+
 ```practica
 vf :: { ...carro, km: 85320 } cambia el objeto carro original
 vf :: const { marca } = carro saca la propiedad marca en una variable
@@ -194,6 +261,39 @@ JSON.parse('esto no es json');                                  // SyntaxError �
 > 🌎 **En la vida real:** es como meter una carta en un sobre para mandarla (stringify) y abrirla al recibirla (parse).
 
 > 🌎 **Otro ejemplo:** Es como empacar una mudanza en cajas y desempacar al llegar.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Guardar y leer JSON sin romperse
+lenguaje: js
+pide: `guardar(gasto)` convierte el objeto en texto JSON. `leer(texto)` lo vuelve a convertir en objeto; pero si el texto **no es JSON válido**, en vez de romperse devuelve `null` (usa `try` y `catch`).
+--- código
+function guardar(gasto) {
+  // tu código aquí
+}
+
+function leer(texto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('guardar da un texto', () => igual(guardar({ app: 'Uber', valor: 32.5 }), '{"app":"Uber","valor":32.5}'));
+prueba('leer devuelve el objeto', () => igual(leer('{"app":"99","valor":18}'), { app: '99', valor: 18 }));
+prueba('ida y vuelta da lo mismo', () => igual(leer(guardar({ a: [1, 2] })), { a: [1, 2] }));
+prueba('un texto roto da null, sin error', () => igual(leer('esto no es json'), null));
+--- solución
+function guardar(gasto) {
+  return JSON.stringify(gasto);
+}
+
+function leer(texto) {
+  try {
+    return JSON.parse(texto);
+  } catch (e) {
+    return null;
+  }
+}
+```
 
 ```practica
 vf :: JSON.stringify convierte un objeto en texto

@@ -24,6 +24,34 @@ console.log('2. sigo con otra cosa');
 
 > 🌎 **Otro ejemplo:** Es como dejar la ropa en la tintorería: no te quedas ahí sentado.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿En qué orden salen los mensajes?
+lenguaje: js
+pide: Mira el código de abajo **sin correrlo**. Completa `enOrden()` para que devuelva los tres mensajes **en el orden en que aparecen** en la consola. Después toca **▶ probar**: verás la consola y si acertaste.
+--- código
+console.log('A: pido el dato');
+setTimeout(() => console.log('C: llegó el dato'), 0);
+console.log('B: sigo con otra cosa');
+
+function enOrden() {
+  // devuelve una lista con 'A', 'B' y 'C' en el orden en que salen
+  return [];
+}
+--- pruebas
+prueba('el orden es el correcto', () => igual(enOrden(), ['A', 'B', 'C']));
+--- solución
+console.log('A: pido el dato');
+setTimeout(() => console.log('C: llegó el dato'), 0);
+console.log('B: sigo con otra cosa');
+
+function enOrden() {
+  // Aunque el setTimeout espera 0 ms, su función va a la fila y corre DESPUÉS de todo lo de ahora.
+  return ['A', 'B', 'C'];
+}
+```
+
 ```practica
 vf :: JavaScript hace una sola cosa a la vez
 vf :: Si JavaScript esperara parado a internet, la pantalla seguiría respondiendo normal
@@ -64,6 +92,42 @@ const [carro, gastos] = await Promise.all([leerCarro(), leerGastos()]);   // esp
 > 🌎 **En la vida real:** es como poner a cocinar el arroz y la carne al mismo tiempo en vez de uno después del otro.
 
 > 🌎 **Otro ejemplo:** Es como pedir dos deliveries a la vez.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Hacer y juntar promesas
+lenguaje: js
+pide: `esperar(ms)` devuelve una **promesa** que se cumple con `'listo'` después de `ms` milisegundos (usa `new Promise` y `setTimeout`). `totalDeAmbos()` pide las dos lecturas **a la vez** con `Promise.all` y devuelve la suma.
+--- código
+function esperar(ms) {
+  // tu código aquí
+}
+
+// Dos lecturas de mentira que tardan un poquito (como si vinieran de internet).
+const leerGasolina = () => new Promise((r) => setTimeout(() => r(150), 30));
+const leerLavado = () => new Promise((r) => setTimeout(() => r(30), 30));
+
+function totalDeAmbos() {
+  // tu código aquí
+}
+--- pruebas
+prueba('esperar devuelve una promesa', () => ok(esperar(1) instanceof Promise, 'no devuelve una Promise'));
+prueba("esperar se cumple con 'listo'", async () => igual(await esperar(10), 'listo'));
+prueba('esperar de verdad espera', async () => { const t = Date.now(); await esperar(60); ok(Date.now() - t >= 50, 'no esperó'); });
+prueba('el total de ambos es 180', async () => igual(await totalDeAmbos(), 180));
+--- solución
+function esperar(ms) {
+  return new Promise((resolve) => setTimeout(() => resolve('listo'), ms));
+}
+
+const leerGasolina = () => new Promise((r) => setTimeout(() => r(150), 30));
+const leerLavado = () => new Promise((r) => setTimeout(() => r(30), 30));
+
+function totalDeAmbos() {
+  return Promise.all([leerGasolina(), leerLavado()]).then(([a, b]) => a + b);
+}
+```
 
 ```practica
 vf :: Una promesa puede estar pendiente, cumplida o rechazada
@@ -113,6 +177,31 @@ Una función `async` **siempre devuelve una promesa**.
 
 > 🌎 **Otro ejemplo:** No revisar `ok` es como aceptar un paquete sin ver que vino roto.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: async, await y cuando algo falla
+lenguaje: js
+pide: `leerTotal(leer)` recibe una función `leer` que devuelve una promesa con una lista de gastos. Con `async` y `await`, devuelve la suma de los valores. Si `leer` **falla**, no se rompe: devuelve `0` (usa `try` y `catch`).
+--- código
+async function leerTotal(leer) {
+  // tu código aquí
+}
+--- pruebas
+prueba('suma lo que llega', async () => igual(await leerTotal(async () => [{ valor: 100 }, { valor: 50 }]), 150));
+prueba('lista vacía da 0', async () => igual(await leerTotal(async () => []), 0));
+prueba('si falla da 0 (sin romperse)', async () => igual(await leerTotal(async () => { throw new Error('sin internet'); }), 0));
+--- solución
+async function leerTotal(leer) {
+  try {
+    const gastos = await leer();
+    return gastos.reduce((s, g) => s + g.valor, 0);
+  } catch (e) {
+    return 0;
+  }
+}
+```
+
 ```practica
 vf :: Una función async siempre devuelve una promesa
 vf :: fetch lanza un error cuando el servidor responde 404
@@ -149,6 +238,27 @@ Mientras esperas, muestra algo ("conectando…"); cuando falla, di qué pasó y 
 > 🌎 **En la vida real:** es como el cartel "estamos preparando su pedido" en una pizzería.
 
 > 🌎 **Otro ejemplo:** Es como el aviso del GPS: "recalculando ruta".
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Guardar y después contar (como en Firebase)
+lenguaje: js
+pide: `guardarYContar(db, gasto)` primero **espera** a que `db.guardar(gasto)` termine, y después devuelve lo que da `db.contar()`. Las dos devuelven promesas. Si no esperas a guardar, la cuenta sale vieja.
+--- código
+async function guardarYContar(db, gasto) {
+  // tu código aquí
+}
+--- pruebas
+const crearDb = () => { const datos = []; return { guardar: (g) => new Promise((r) => setTimeout(() => { datos.push(g); r(); }, 20)), contar: async () => datos.length }; };
+prueba('después de guardar uno, hay 1', async () => igual(await guardarYContar(crearDb(), { valor: 10 }), 1));
+prueba('guardar dos veces da 2', async () => { const db = crearDb(); await guardarYContar(db, { valor: 1 }); igual(await guardarYContar(db, { valor: 2 }), 2); });
+--- solución
+async function guardarYContar(db, gasto) {
+  await db.guardar(gasto);
+  return await db.contar();
+}
+```
 
 ```practica
 vf :: Las operaciones de Firebase devuelven promesas

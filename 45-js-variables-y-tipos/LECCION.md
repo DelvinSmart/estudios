@@ -39,6 +39,30 @@ Y también tienes el **laboratorio de CRUD** de este sitio (`#/laboratorio`), qu
 
 > 🌎 **Otro ejemplo:** Es como hablar por teléfono (consola) o mandar una carta (archivo).
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu primera función
+lenguaje: js
+pide: Completa `largo(texto)` para que devuelva **cuántas letras** tiene el texto (usa `.length`). Debajo, `console.log` muestra el resultado: lo vas a ver después de tocar **▶ probar**.
+--- código
+function largo(texto) {
+  // tu código aquí
+}
+
+console.log(largo('Hola, mundo'));
+--- pruebas
+prueba("largo('hola') es 4", () => igual(largo('hola'), 4));
+prueba("largo('Uber') es 4", () => igual(largo('Uber'), 4));
+prueba('un texto vacío tiene 0 letras', () => igual(largo(''), 0));
+--- solución
+function largo(texto) {
+  return texto.length;
+}
+
+console.log(largo('Hola, mundo'));
+```
+
 ```practica
 vf :: JavaScript se puede probar en la consola del navegador
 vf :: Para correr un archivo .js en la terminal se usa python3 archivo.js
@@ -75,6 +99,34 @@ En JavaScript los nombres van en **camelCase**: `gananciaTotal`, `numeroDeViajes
 > 🌎 **En la vida real:** es como la ortografía de cada idioma: en Python `ganancia_total`, en JavaScript `gananciaTotal`.
 
 > 🌎 **Otro ejemplo:** Es como las costumbres de cada país para escribir la fecha.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: const o let
+lenguaje: js
+pide: Este código se rompe con el error **"Assignment to constant variable"** (tócale **▶ probar** para verlo). Arréglalo cambiando **una sola palabra**: la variable que cambia no puede ser `const`.
+--- código
+function contarViajes(veces) {
+  const viajes = 0;
+  for (let i = 0; i < veces; i++) {
+    viajes += 1;
+  }
+  return viajes;
+}
+--- pruebas
+prueba('3 viajes son 3', () => igual(contarViajes(3), 3));
+prueba('0 viajes son 0', () => igual(contarViajes(0), 0));
+prueba('10 viajes son 10', () => igual(contarViajes(10), 10));
+--- solución
+function contarViajes(veces) {
+  let viajes = 0;
+  for (let i = 0; i < veces; i++) {
+    viajes += 1;
+  }
+  return viajes;
+}
+```
 
 ```practica
 vf :: Una variable con const se puede volver a asignar
@@ -127,6 +179,30 @@ console.log(`Hoy hice ${viajes} viajes y gané R$ ${ganancia.toFixed(2)}`);
 
 > 🌎 **Otro ejemplo:** Es como el cartel del bus donde cambia solo el destino.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El resumen del día, con una plantilla
+lenguaje: js
+pide: Completa `resumenDia(viajes, ganancia)` para que devuelva exactamente `Hoy hice 12 viajes y gané R$ 250.50`. Usa una plantilla con comillas invertidas (`` ` ``) y `toFixed(2)` para que el dinero tenga siempre dos decimales.
+--- código
+function resumenDia(viajes, ganancia) {
+  // tu código aquí
+}
+
+console.log(resumenDia(12, 250.5));
+--- pruebas
+prueba('12 viajes y 250.5', () => igual(resumenDia(12, 250.5), 'Hoy hice 12 viajes y gané R$ 250.50'));
+prueba('3 viajes y 90', () => igual(resumenDia(3, 90), 'Hoy hice 3 viajes y gané R$ 90.00'));
+prueba('devuelve un texto (string)', () => igual(typeof resumenDia(1, 1), 'string'));
+--- solución
+function resumenDia(viajes, ganancia) {
+  return `Hoy hice ${viajes} viajes y gané R$ ${ganancia.toFixed(2)}`;
+}
+
+console.log(resumenDia(12, 250.5));
+```
+
 ```practica
 vf :: En JavaScript, enteros y decimales son el mismo tipo number
 vf :: 0.1 + 0.2 da exactamente 0.3 en JavaScript
@@ -170,6 +246,30 @@ Number.isNaN(Number('abc'))   // true → así revisas si salió mal
 > 🌎 **En la vida real:** es como cambiar dólares por reales en la casa de cambio, a propósito y sabiendo cuánto da.
 
 > 🌎 **Otro ejemplo:** Es como pasar una receta de tazas a gramos antes de pesar.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Convertir lo que escribe el usuario
+lenguaje: js
+pide: Lo que una persona escribe en un campo llega como **texto**. Completa `aNumero(texto)`: devuelve el número (usa `Number`), pero si el texto está vacío o no es un número, devuelve `null`. Para revisar, usa `Number.isNaN`.
+--- código
+function aNumero(texto) {
+  // tu código aquí
+}
+--- pruebas
+prueba("'30' da 30 (número, no texto)", () => igual(aNumero('30'), 30));
+prueba("'12.5' da 12.5", () => igual(aNumero('12.5'), 12.5));
+prueba("'abc' da null", () => igual(aNumero('abc'), null));
+prueba('un texto vacío da null', () => igual(aNumero(''), null));
+prueba('solo espacios da null', () => igual(aNumero('   '), null));
+--- solución
+function aNumero(texto) {
+  if (texto.trim() === '') return null;
+  const n = Number(texto);
+  return Number.isNaN(n) ? null : n;
+}
+```
 
 ```practica
 vf :: '5' === 5 da true

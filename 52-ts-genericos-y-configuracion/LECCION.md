@@ -38,6 +38,37 @@ const mapa = new Map<string, number>();                // llaves texto, valores 
 
 > 🌎 **Otro ejemplo:** Es como los frascos con tapa de color según lo que guardan.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una función para cualquier tipo (genéricos)
+lenguaje: ts
+pide: Escribe `primero<T>` y `ultimo<T>`: reciben una lista de **cualquier** tipo y devuelven su primer o último elemento (o `undefined` si está vacía). Con `<T>`, TypeScript sabe que de una lista de números sale un número, y de una de textos, un texto.
+--- código
+function primero(lista) {
+  // tu código aquí
+}
+
+function ultimo(lista) {
+  // tu código aquí
+}
+--- pruebas
+prueba('primero de [150, 30] es 150', () => igual(primero([150, 30]), 150));
+prueba("último de ['Uber', '99'] es '99'", () => igual(ultimo(['Uber', '99']), '99'));
+prueba('de una lista vacía sale undefined', () => igual(primero([]), undefined));
+const n: number | undefined = primero([1, 2]);
+// @ts-expect-error  de una lista de números NO sale un texto
+const s: string | undefined = primero([1, 2]);
+--- solución
+function primero<T>(lista: T[]): T | undefined {
+  return lista[0];
+}
+
+function ultimo<T>(lista: T[]): T | undefined {
+  return lista[lista.length - 1];
+}
+```
+
 ```practica
 vf :: Un genérico permite escribir una función para cualquier tipo sin perder cuál es
 vf :: En useState<Gasto[]>([]), el estado puede guardar cualquier cosa
@@ -83,6 +114,47 @@ Así el CRUD del laboratorio tendría tipos: `actualizar(id: string, cambios: Pa
 > 🌎 **En la vida real:** son como versiones de un mismo formulario: completo, resumido, sin campos internos.
 
 > 🌎 **Otro ejemplo:** Es como recortar una foto: el original, solo las caras, sin el fondo.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: unknown con cuidado y Partial
+lenguaje: ts
+pide: `esGasto(dato: unknown)` revisa **de verdad** que el dato sea un objeto con `tipo` (texto) y `valor` (número); el `dato is Gasto` le enseña a TypeScript qué hay adentro después del `if`. `actualizar(g, cambios)` devuelve una copia con los cambios (`Partial<Gasto>`: cualquier campo, todos opcionales).
+--- código
+interface Gasto { tipo: string; valor: number; }
+
+function esGasto(dato: unknown): dato is Gasto {
+  // tu código aquí
+  return false;
+}
+
+function actualizar(g: Gasto, cambios: Partial<Gasto>): Gasto {
+  // tu código aquí
+}
+--- pruebas
+prueba('un gasto bien hecho pasa', () => igual(esGasto({ tipo: 'lavado', valor: 30 }), true));
+prueba('un texto no es un gasto', () => igual(esGasto('hola'), false));
+prueba('null no es un gasto', () => igual(esGasto(null), false));
+prueba('valor en texto no pasa', () => igual(esGasto({ tipo: 'x', valor: '30' }), false));
+prueba('actualizar cambia solo el valor', () => igual(actualizar({ tipo: 'lavado', valor: 30 }, { valor: 35 }), { tipo: 'lavado', valor: 35 }));
+const dato: unknown = JSON.parse('{"tipo":"peaje","valor":8}');
+if (esGasto(dato)) { const v: number = dato.valor; }
+--- solución
+interface Gasto { tipo: string; valor: number; }
+
+function esGasto(dato: unknown): dato is Gasto {
+  return (
+    typeof dato === 'object' && dato !== null &&
+    'tipo' in dato && typeof dato.tipo === 'string' &&
+    'valor' in dato && typeof dato.valor === 'number'
+  );
+}
+
+function actualizar(g: Gasto, cambios: Partial<Gasto>): Gasto {
+  return { ...g, ...cambios };
+}
+```
 
 ```practica
 vf :: any apaga los avisos de TypeScript para esa variable
@@ -131,6 +203,32 @@ En Copiloto, el CI corre la revisión de tipos en cada subida (Tema 04).
 
 > 🌎 **Otro ejemplo:** Es como pasar el corrector a todo el documento antes de imprimir.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El modo estricto te avisa de un undefined
+lenguaje: ts
+pide: Toca **▶ probar**: TypeScript (en modo estricto, como en el `tsconfig.json` de esta parte) avisa que `g` **puede no existir** (`find` devuelve `undefined` si no encuentra). Arréglalo sin `!` ni `as`: si no está, devuelve `0`.
+--- código
+interface Gasto { id: string; valor: number; }
+
+function valorDe(gastos: Gasto[], id: string): number {
+  const g = gastos.find((x) => x.id === id);
+  return g.valor;
+}
+--- pruebas
+const lista: Gasto[] = [{ id: 'a', valor: 150 }, { id: 'b', valor: 30 }];
+prueba('encuentra el valor de b', () => igual(valorDe(lista, 'b'), 30));
+prueba('si no existe, da 0 (sin error)', () => igual(valorDe(lista, 'z'), 0));
+--- solución
+interface Gasto { id: string; valor: number; }
+
+function valorDe(gastos: Gasto[], id: string): number {
+  const g = gastos.find((x) => x.id === id);
+  return g?.valor ?? 0;
+}
+```
+
 ```practica
 vf :: Con strict activado, TypeScript obliga a revisar si algo puede ser null antes de usarlo
 vf :: tsc --noEmit genera los archivos JavaScript en la carpeta del proyecto
@@ -168,6 +266,37 @@ Se leen igual que en el Tema 07: **qué** pasó, **dónde** (archivo y línea) y
 > 🌎 **En la vida real:** es como poner cinta sobre la luz del aceite del tablero: la luz no se ve, el problema sigue.
 
 > 🌎 **Otro ejemplo:** Es como firmar "yo me hago responsable" sin revisar.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Arregla los tres errores
+lenguaje: ts
+pide: Este código tiene **tres** errores de TypeScript, de los de la tabla de esta parte. Toca **▶ probar**, lee cada mensaje (qué pasó, en qué línea, qué esperaba) y arréglalos uno por uno. Sin `as` ni `!`.
+--- código
+interface Gasto { tipo: string; valor: number; }
+
+function sumar(gastos: Gasto[]): number {
+  let total: number = '0';
+  for (const g of gastos) total += g.valr;
+  return total;
+}
+
+const resultado = sumar({ tipo: 'lavado', valor: 30 });
+--- pruebas
+prueba('suma dos gastos', () => igual(sumar([{ tipo: 'a', valor: 10 }, { tipo: 'b', valor: 5 }]), 15));
+prueba('sin gastos da 0', () => igual(sumar([]), 0));
+--- solución
+interface Gasto { tipo: string; valor: number; }
+
+function sumar(gastos: Gasto[]): number {
+  let total: number = 0;                    // 1) era un texto: '0'
+  for (const g of gastos) total += g.valor; // 2) "valr" no existe: era valor
+  return total;
+}
+
+const resultado = sumar([{ tipo: 'lavado', valor: 30 }]); // 3) sumar recibe una LISTA
+```
 
 ```practica
 vf :: Object is possibly 'undefined' significa que hay que revisar si existe antes de usarlo

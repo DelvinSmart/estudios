@@ -32,6 +32,42 @@ Con llaves: las exportaciones con nombre. Sin llaves: la `default`. Este mapa es
 
 > 🌎 **Otro ejemplo:** Es como una biblioteca: sacas el libro que necesitas, no toda la biblioteca.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que se exporta y lo que no
+lenguaje: js
+pide: Aquí no hay archivos separados, así que un **objeto** hace de módulo. Completa `crearModuloCalculos()`: devuelve un objeto con lo que se **exporta**, `gananciaNeta` y `IMPUESTO` (0.15). La ayuda `redondear` es **privada**: se usa adentro, pero no se exporta.
+--- código
+function crearModuloCalculos() {
+  const redondear = (n) => Math.round(n * 100) / 100;   // privada: no se exporta
+  const IMPUESTO = 0.15;
+
+  function gananciaNeta(bruto, gastos) {
+    return redondear(bruto - gastos - bruto * IMPUESTO);
+  }
+
+  // devuelve solo lo que se exporta
+  return {};
+}
+--- pruebas
+prueba('exporta gananciaNeta', () => igual(typeof crearModuloCalculos().gananciaNeta, 'function'));
+prueba('exporta IMPUESTO = 0.15', () => igual(crearModuloCalculos().IMPUESTO, 0.15));
+prueba('redondear NO se exporta', () => igual(crearModuloCalculos().redondear, undefined));
+prueba('gananciaNeta(200, 50) es 120', () => igual(crearModuloCalculos().gananciaNeta(200, 50), 120));
+--- solución
+function crearModuloCalculos() {
+  const redondear = (n) => Math.round(n * 100) / 100;
+  const IMPUESTO = 0.15;
+
+  function gananciaNeta(bruto, gastos) {
+    return redondear(bruto - gastos - bruto * IMPUESTO);
+  }
+
+  return { gananciaNeta, IMPUESTO };
+}
+```
+
 ```practica
 vf :: Para importar una exportación con nombre se usan llaves
 vf :: Un archivo puede tener varias exportaciones default
@@ -68,6 +104,48 @@ Revisa que el nombre sea exacto y el paquete conocido (Temas 23 e IA 5): hay paq
 > 🌎 **En la vida real:** compras repuestos en la tienda oficial, no en un puesto con la marca mal escrita.
 
 > 🌎 **Otro ejemplo:** Es como descargar apps solo de la tienda oficial.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer un package.json
+lenguaje: js
+pide: `paquete` es un `package.json` ya leído. `dependencias(pkg)` devuelve los nombres de lo que la app **necesita para funcionar** (`dependencies`). `soloDesarrollo(pkg, nombre)` dice si un paquete está solo en `devDependencies`. Usa `Object.keys`. Si falta alguna de las dos listas, no se rompe.
+--- código
+const paquete = {
+  name: 'gastos-del-carro',
+  dependencies: { 'date-fns': '^3.6.0', firebase: '^11.0.0' },
+  devDependencies: { vitest: '^2.1.0', typescript: '^5.4.0' },
+};
+
+function dependencias(pkg) {
+  // tu código aquí
+}
+
+function soloDesarrollo(pkg, nombre) {
+  // tu código aquí
+}
+--- pruebas
+prueba('las dependencias de la app', () => igual(dependencias(paquete), ['date-fns', 'firebase']));
+prueba('vitest es solo de desarrollo', () => igual(soloDesarrollo(paquete, 'vitest'), true));
+prueba('firebase no es solo de desarrollo', () => igual(soloDesarrollo(paquete, 'firebase'), false));
+prueba('sin dependencies da una lista vacía', () => igual(dependencias({ name: 'x' }), []));
+prueba('sin devDependencies da false', () => igual(soloDesarrollo({ name: 'x' }, 'vitest'), false));
+--- solución
+const paquete = {
+  name: 'gastos-del-carro',
+  dependencies: { 'date-fns': '^3.6.0', firebase: '^11.0.0' },
+  devDependencies: { vitest: '^2.1.0', typescript: '^5.4.0' },
+};
+
+function dependencias(pkg) {
+  return Object.keys(pkg.dependencies ?? {});
+}
+
+function soloDesarrollo(pkg, nombre) {
+  return nombre in (pkg.devDependencies ?? {});
+}
+```
 
 ```practica
 vf :: La carpeta node_modules se sube a GitHub
@@ -119,6 +197,27 @@ const texto = readFileSync('notas.txt', 'utf8');
 
 > 🌎 **Otro ejemplo:** Es como un músico que toca en vivo y también graba en estudio.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Qué comando escribo?
+lenguaje: js
+pide: `comandoPara(script)` devuelve lo que se escribe en la terminal para correr un script de `package.json`: `test` y `start` no necesitan `run` (`'npm test'`); los demás sí (`'npm run dev'`).
+--- código
+function comandoPara(script) {
+  // tu código aquí
+}
+--- pruebas
+prueba('test → npm test', () => igual(comandoPara('test'), 'npm test'));
+prueba('start → npm start', () => igual(comandoPara('start'), 'npm start'));
+prueba('dev → npm run dev', () => igual(comandoPara('dev'), 'npm run dev'));
+prueba('build → npm run build', () => igual(comandoPara('build'), 'npm run build'));
+--- solución
+function comandoPara(script) {
+  return script === 'test' || script === 'start' ? `npm ${script}` : `npm run ${script}`;
+}
+```
+
 ```practica
 vf :: npm test corre el script "test" del package.json
 vf :: Node.js solo sirve para hacer páginas web en el navegador
@@ -151,6 +250,32 @@ Es la idea de la clase 10 (arquitectura): separar **datos**, **lógica** y **pan
 > 🌎 **En la vida real:** es como separar el depósito, la cocina y el salón en un restaurante.
 
 > 🌎 **Otro ejemplo:** Es como los cajones de una oficina: facturas, contratos y correspondencia.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿En qué carpeta va?
+lenguaje: js
+pide: Completa `carpetaPara(descripcion)` con la estructura de esta parte: si el archivo **lee o guarda datos**, va en `'src/datos'`; si **calcula**, en `'src/logica'`; si **dibuja** algo en la pantalla, en `'src/pantallas'`; si **prueba** algo, en `'tests'`. Cada descripción trae una de esas palabras: lee, guarda, calcula, dibuja, prueba.
+--- código
+function carpetaPara(descripcion) {
+  // tu código aquí
+}
+--- pruebas
+prueba('guarda los gastos en Firebase', () => igual(carpetaPara('guarda los gastos en Firebase'), 'src/datos'));
+prueba('lee los viajes de la API', () => igual(carpetaPara('lee los viajes de la API'), 'src/datos'));
+prueba('calcula la ganancia neta', () => igual(carpetaPara('calcula la ganancia neta'), 'src/logica'));
+prueba('dibuja la lista de gastos', () => igual(carpetaPara('dibuja la lista de gastos'), 'src/pantallas'));
+prueba('prueba el cálculo del total', () => igual(carpetaPara('prueba el cálculo del total'), 'tests'));
+--- solución
+function carpetaPara(descripcion) {
+  if (descripcion.includes('prueba')) return 'tests';
+  if (descripcion.includes('lee') || descripcion.includes('guarda')) return 'src/datos';
+  if (descripcion.includes('calcula')) return 'src/logica';
+  if (descripcion.includes('dibuja')) return 'src/pantallas';
+  return 'src';
+}
+```
 
 ```practica
 vf :: Separar datos, lógica y pantallas hace que un cambio en uno rompa menos a los otros

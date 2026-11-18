@@ -41,6 +41,30 @@ Se lee: "¿condición? valor si sí : valor si no". Muy usado en React para most
 
 > 🌎 **Otro ejemplo:** Es como responder un sí o no con una sola palabra.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Llegaste a la meta?
+lenguaje: js
+pide: Completa `estadoMeta(ganancia)`: con **250 o más** devuelve `'Meta cumplida'`; con **150 o más**, `'Cerca de la meta'`; si no, `'Día flojo'`. Ojo con el orden de los `if`.
+--- código
+function estadoMeta(ganancia) {
+  // tu código aquí
+}
+--- pruebas
+prueba('300 es meta cumplida', () => igual(estadoMeta(300), 'Meta cumplida'));
+prueba('250 justo también', () => igual(estadoMeta(250), 'Meta cumplida'));
+prueba('180 es cerca', () => igual(estadoMeta(180), 'Cerca de la meta'));
+prueba('150 justo es cerca', () => igual(estadoMeta(150), 'Cerca de la meta'));
+prueba('90 es día flojo', () => igual(estadoMeta(90), 'Día flojo'));
+--- solución
+function estadoMeta(ganancia) {
+  if (ganancia >= 250) return 'Meta cumplida';
+  if (ganancia >= 150) return 'Cerca de la meta';
+  return 'Día flojo';
+}
+```
+
 ```practica
 vf :: En JavaScript los bloques del if se marcan con llaves
 vf :: El ternario sirve para elegir entre tres o más valores en una sola parte
@@ -86,6 +110,37 @@ const ciudad = usuario?.direccion?.ciudad;   // si algo en el camino no existe, 
 > 🌎 **En la vida real:** es como preguntar "¿hay alguien en casa? ¿y está en la cocina?" sin tumbar la puerta.
 
 > 🌎 **Otro ejemplo:** Es como revisar si hay sobre antes de buscar la carta adentro.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: || o ?? (la trampa del cero)
+lenguaje: js
+pide: Completa las dos funciones. `nombreVisible(usuario)` devuelve el nombre, o `'Invitado'` si no hay usuario o el nombre está vacío (usa `?.` y `||`). `propinaDe(viaje)` devuelve la propina, o `0` si no existe; pero si la propina **es 0**, tiene que devolver 0 (usa `??`).
+--- código
+function nombreVisible(usuario) {
+  // tu código aquí
+}
+
+function propinaDe(viaje) {
+  // tu código aquí
+}
+--- pruebas
+prueba('con nombre lo muestra', () => igual(nombreVisible({ nombre: 'Ana' }), 'Ana'));
+prueba('nombre vacío da Invitado', () => igual(nombreVisible({ nombre: '' }), 'Invitado'));
+prueba('sin usuario da Invitado (sin error)', () => igual(nombreVisible(undefined), 'Invitado'));
+prueba('propina de 5 es 5', () => igual(propinaDe({ propina: 5 }), 5));
+prueba('propina de 0 se respeta', () => igual(propinaDe({ propina: 0 }), 0));
+prueba('sin propina da 0', () => igual(propinaDe({}), 0));
+--- solución
+function nombreVisible(usuario) {
+  return usuario?.nombre || 'Invitado';
+}
+
+function propinaDe(viaje) {
+  return viaje.propina ?? 0;
+}
+```
 
 ```practica
 vf :: En JavaScript, un array vacío [] cuenta como falso
@@ -135,6 +190,46 @@ while (ahorro < 1000) {
 
 > 🌎 **Otro ejemplo:** Es como llenar un balde con un vaso: repites mientras no esté lleno.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Ciclos: el total y el ahorro
+lenguaje: js
+pide: `total(ganancias)` suma todas las ganancias con un `for...of`. `mesesParaAhorrar(meta, porMes)` cuenta cuántos meses hacen falta para llegar a la meta ahorrando lo mismo cada mes (usa `while`).
+--- código
+function total(ganancias) {
+  // tu código aquí
+}
+
+function mesesParaAhorrar(meta, porMes) {
+  // tu código aquí
+}
+--- pruebas
+prueba('total de [120, 95, 180, 210] es 605', () => igual(total([120, 95, 180, 210]), 605));
+prueba('total de [] es 0', () => igual(total([]), 0));
+prueba('1000 ahorrando 150 son 7 meses', () => igual(mesesParaAhorrar(1000, 150), 7));
+prueba('300 ahorrando 100 son 3 meses', () => igual(mesesParaAhorrar(300, 100), 3));
+prueba('meta 0 son 0 meses', () => igual(mesesParaAhorrar(0, 100), 0));
+--- solución
+function total(ganancias) {
+  let suma = 0;
+  for (const g of ganancias) {
+    suma += g;
+  }
+  return suma;
+}
+
+function mesesParaAhorrar(meta, porMes) {
+  let ahorro = 0;
+  let meses = 0;
+  while (ahorro < meta) {
+    ahorro += porMes;
+    meses++;
+  }
+  return meses;
+}
+```
+
 ```practica
 vf :: for...of recorre los elementos de un array uno por uno
 vf :: break pasa a la siguiente vuelta del ciclo
@@ -169,6 +264,36 @@ Si no usas `return`, cada `case` necesita `break`, o sigue de largo al siguiente
 > 🌎 **En la vida real:** olvidar el `break` es como una tobogán sin freno: sigues bajando al siguiente caso.
 
 > 🌎 **Otro ejemplo:** El objeto es como una tabla de precios pegada en la pared: buscas y listo.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La tarifa de cada app
+lenguaje: js
+pide: Completa `tarifaPorApp(app)` con un `switch`: Uber cobra **1.9** por km, 99 cobra **1.8**, InDrive cobra **1.7**, y cualquier otra, **2.0**.
+--- código
+function tarifaPorApp(app) {
+  // tu código aquí
+}
+--- pruebas
+prueba('Uber es 1.9', () => igual(tarifaPorApp('Uber'), 1.9));
+prueba('99 es 1.8', () => igual(tarifaPorApp('99'), 1.8));
+prueba('InDrive es 1.7', () => igual(tarifaPorApp('InDrive'), 1.7));
+prueba('otra app es 2.0', () => igual(tarifaPorApp('Lyft'), 2));
+--- solución
+function tarifaPorApp(app) {
+  switch (app) {
+    case 'Uber':
+      return 1.9;
+    case '99':
+      return 1.8;
+    case 'InDrive':
+      return 1.7;
+    default:
+      return 2.0;
+  }
+}
+```
 
 ```practica
 vf :: En un switch sin return, olvidar break hace que siga al siguiente caso

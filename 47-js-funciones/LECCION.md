@@ -40,6 +40,33 @@ const doble = (n) => { return n * 2; };   // con llaves, return explícito
 
 > 🌎 **Otro ejemplo:** Es como el cajero que te da el ticket: sin ticket, no te llevas nada.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una declaración y una flecha
+lenguaje: js
+pide: Escribe `gananciaNeta(bruto, gastos)` como **declaración** (`function`) y `porcentaje` como **función flecha** guardada en una `const`: devuelve qué porcentaje es `parte` de `total`, redondeado sin decimales (`Math.round`).
+--- código
+function gananciaNeta(bruto, gastos) {
+  // tu código aquí
+}
+
+const porcentaje = (parte, total) => {
+  // tu código aquí
+};
+--- pruebas
+prueba('300 de bruto y 80 de gastos dejan 220', () => igual(gananciaNeta(300, 80), 220));
+prueba('sin gastos queda todo', () => igual(gananciaNeta(150, 0), 150));
+prueba('50 de 200 es 25 %', () => igual(porcentaje(50, 200), 25));
+prueba('1 de 3 es 33 %', () => igual(porcentaje(1, 3), 33));
+--- solución
+function gananciaNeta(bruto, gastos) {
+  return bruto - gastos;
+}
+
+const porcentaje = (parte, total) => Math.round((parte / total) * 100);
+```
+
 ```practica
 vf :: Una función sin return devuelve undefined
 vf :: Una función flecha con llaves devuelve el valor sin escribir return
@@ -84,6 +111,37 @@ total(10, 20, 30);   // 60
 > 🌎 **En la vida real:** es como una bolsa donde echas todas las monedas que tengas.
 
 > 🌎 **Otro ejemplo:** Es como una lista de invitados abierta.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Valores por defecto y ...resto
+lenguaje: js
+pide: `precioViaje(km, tarifaKm, minimo)`: si no te dan la tarifa, usa **1.8**; si no te dan el mínimo, **8**; el precio nunca baja del mínimo (`Math.max`). `total(...montos)` suma cuantos montos le pasen.
+--- código
+function precioViaje(km, tarifaKm, minimo) {
+  // tu código aquí
+}
+
+function total(...montos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('10 km con la tarifa normal son 18', () => igual(precioViaje(10), 18));
+prueba('3 km no bajan del mínimo de 8', () => igual(precioViaje(3), 8));
+prueba('10 km a 2.5 son 25', () => igual(precioViaje(10, 2.5), 25));
+prueba('2 km con mínimo 12 son 12', () => igual(precioViaje(2, 1.8, 12), 12));
+prueba('total(10, 20, 30) es 60', () => igual(total(10, 20, 30), 60));
+prueba('total() sin nada es 0', () => igual(total(), 0));
+--- solución
+function precioViaje(km, tarifaKm = 1.8, minimo = 8) {
+  return Math.max(km * tarifaKm, minimo);
+}
+
+function total(...montos) {
+  return montos.reduce((s, m) => s + m, 0);
+}
+```
 
 ```practica
 vf :: Un parámetro con valor por defecto se puede omitir
@@ -137,6 +195,30 @@ Los *hooks* de React (como `useState`) se apoyan en esta idea.
 
 > 🌎 **Otro ejemplo:** Es como un cuaderno personal que viaja contigo.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un contador que recuerda (closure)
+lenguaje: js
+pide: Completa `crearContador()`: devuelve una función que, cada vez que la llamas, suma 1 y devuelve la cuenta. Dos contadores distintos no se mezclan.
+--- código
+function crearContador() {
+  // tu código aquí
+}
+--- pruebas
+prueba('cuenta 1, 2, 3', () => { const c = crearContador(); igual([c(), c(), c()], [1, 2, 3]); });
+prueba('dos contadores no se mezclan', () => { const a = crearContador(); const b = crearContador(); a(); a(); igual(b(), 1); });
+prueba('devuelve una función', () => igual(typeof crearContador(), 'function'));
+--- solución
+function crearContador() {
+  let cuenta = 0;
+  return () => {
+    cuenta += 1;
+    return cuenta;
+  };
+}
+```
+
 ```practica
 vf :: Una variable const creada dentro de un if se puede usar afuera del if
 vf :: Un closure recuerda las variables de la función donde fue creado
@@ -177,6 +259,43 @@ Una función **pura** solo usa sus parámetros y solo devuelve, sin cambiar nada
 > 🌎 **En la vida real:** es como una calculadora: misma cuenta, mismo resultado.
 
 > 🌎 **Otro ejemplo:** Es como una receta exacta: mismos ingredientes, misma torta.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Funciones que reciben funciones
+lenguaje: js
+pide: Sin usar `map` ni `filter`, escribe tu propia versión con un `for...of`: `aplicarATodos(lista, fn)` devuelve una lista nueva con `fn` aplicada a cada elemento; `contarSi(lista, condicion)` cuenta cuántos cumplen la condición.
+--- código
+function aplicarATodos(lista, fn) {
+  // tu código aquí
+}
+
+function contarSi(lista, condicion) {
+  // tu código aquí
+}
+--- pruebas
+prueba('duplicar [1, 2, 3]', () => igual(aplicarATodos([1, 2, 3], (n) => n * 2), [2, 4, 6]));
+prueba('no cambia la lista original', () => { const l = [1, 2]; aplicarATodos(l, (n) => n + 1); igual(l, [1, 2]); });
+prueba('cuántos viajes pasan de 20', () => igual(contarSi([18.5, 22, 9.75, 40], (v) => v > 20), 2));
+prueba('lista vacía cuenta 0', () => igual(contarSi([], () => true), 0));
+--- solución
+function aplicarATodos(lista, fn) {
+  const nueva = [];
+  for (const x of lista) {
+    nueva.push(fn(x));
+  }
+  return nueva;
+}
+
+function contarSi(lista, condicion) {
+  let cuenta = 0;
+  for (const x of lista) {
+    if (condicion(x)) cuenta++;
+  }
+  return cuenta;
+}
+```
 
 ```practica
 vf :: Un callback es una función que se pasa a otra para que la llame después

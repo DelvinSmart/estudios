@@ -54,7 +54,7 @@ en el aparato y deja ver la solución después de intentarlo.
 
 - [x] JavaScript
 - [x] HTML y CSS (las pruebas miran la página que armó el alumno)
-- [ ] TypeScript (el compilador de TypeScript dentro de la caja)
+- [x] TypeScript (el compilador oficial dentro de la caja: revisa los tipos en modo estricto y explica los errores comunes en español)
 - [ ] Python (Pyodide: Python dentro del navegador)
 - [ ] Kotlin (Kotlin Playground: corre en los servidores gratuitos de JetBrains; la revisión es por la salida)
 - [ ] React Native (Snack de Expo para ver la app; la revisión es una lista de comprobación)
@@ -75,7 +75,7 @@ todos los "abre tal archivo de Copiloto".
 | Curso | Proyecto de principio a fin | Lo que hay que agregar |
 |---|---|---|
 | Programación | "Gastos del carro": leer su código, escribir pruebas, CI, Git, Firebase con emulador y un CRUD | Ejercicios en cada clase; usar el proyecto de práctica en vez de Copiloto |
-| JavaScript + TypeScript | Una web de gastos en el navegador, con pruebas | El DOM, errores, clases y objetos, fechas, guardar en el navegador |
+| JavaScript + TypeScript | Una web de gastos en el navegador, con pruebas | ✅ Un ejercicio de código en cada parte (36, probados con su solución). Falta: el DOM, errores, clases y objetos, fechas, guardar en el navegador, y el proyecto |
 | Node.js | La API de gastos con Express, con pruebas, publicada | Ejercicios de cada ruta, revisión automática |
 | React Native | La app de gastos con Expo, en el teléfono | Formularios, listas, guardar datos, publicar paso a paso |
 | Kotlin | La app de gastos con Jetpack Compose | Ejercicios del lenguaje en el Playground |
@@ -96,6 +96,35 @@ Cómo se construye un motor (colores, formas, efectos, separaciones), dónde se 
 - [ ] Qué es la **programación orientada a objetos**, en qué se parece y en qué no a un motor de diseño
   (Python y Kotlin ya tienen su clase de clases y objetos; a JavaScript le falta)
 
+### F. El proyecto estrella: una calculadora, de la idea al teléfono
+
+Un proyecto **de principio a fin**, paso a paso ("mira esto, ahora haz esto, este código es para esto"),
+hecho de la mejor forma y sin código espagueti:
+
+- **Lenguaje:** React Native con TypeScript y Expo. Con **un solo código** sale la app para Android (Samsung)
+  y para iPhone, igual que Copiloto. Todo gratis.
+- **Diseño primero:** el plano de la pantalla, el sistema de diseño (motores de color, forma, efectos y
+  separaciones, con el estilo de las pantallas de Copiloto) y cómo cada botón "llama" a esos motores.
+- **La lógica separada de la pantalla:** las cuentas en su propio archivo, con pruebas, antes de dibujar nada.
+- **Probarla en el teléfono:** con Expo Go (gratis) en el Samsung y en el iPhone.
+- **Instalarla como app de verdad:** en Android, un archivo para instalar; en el iPhone, desde la Mac con Xcode
+  y una cuenta gratuita de Apple (la app dura 7 días y se vuelve a instalar; publicar en la App Store sí cuesta,
+  y eso se explica pero no se hace).
+
+- [ ] Las clases de la calculadora (curso de React Native)
+- [ ] La misma calculadora en Kotlin (Android) y en Swift (iPhone), para comparar
+
+### G. Un curso nuevo: Swift, el lenguaje del iPhone
+
+Desde cero y completo, con el mismo molde que los demás: el lenguaje, SwiftUI para las pantallas, datos,
+pruebas, el sistema de diseño, instalar en el iPhone y la calculadora. Copiloto ya usa Swift en su pieza
+de iPhone (y Kotlin en la de Android): se cuenta cómo encajan.
+
+- [ ] Plan de clases del curso de Swift
+- [ ] Las clases, con ejercicios (Swift no corre en el navegador: se practica en Xcode, gratis en la Mac,
+  con una lista de comprobación; y los ejercicios cortos con un sitio gratuito para correr Swift en línea)
+- [ ] El curso en el mapa, con su certificado (eso cambia las reglas de Firebase: se suben antes de publicar)
+
 ### E. El panel
 
 - [x] El panel muestra los ejercicios en la vista previa
@@ -108,5 +137,7 @@ Cómo se construye un motor (colores, formas, efectos, separaciones), dónde se 
 3. B: el proyecto de práctica público.
 4. Los demás cursos, uno por uno, con el mismo molde.
 5. D: la clase del sistema de diseño en cada curso.
+6. F: la calculadora, de la idea al teléfono.
+7. G: el curso de Swift, desde cero.
 
 Cada paso se prueba en el teléfono y en la computadora antes de publicarlo.

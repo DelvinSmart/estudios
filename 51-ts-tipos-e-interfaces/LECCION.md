@@ -40,6 +40,27 @@ Regla: anota los **parámetros** de las funciones y los datos de afuera (APIs, F
 
 > 🌎 **Otro ejemplo:** Es como reconocer una moneda por su forma sin leer el valor.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Ponle tipos (TypeScript revisa)
+lenguaje: ts
+pide: En TypeScript estricto, un parámetro sin tipo es un error. Escribe los tipos que faltan en `promedio` (recibe una lista de números y devuelve un número) y completa la función. Si un tipo está mal, TypeScript te dice en qué línea.
+--- código
+function promedio(valores) {
+  // tu código aquí
+}
+--- pruebas
+prueba('promedio de 10, 20 y 30 es 20', () => igual(promedio([10, 20, 30]), 20));
+prueba('promedio de una lista vacía es 0', () => igual(promedio([]), 0));
+const resultado: number = promedio([1, 2]);
+--- solución
+function promedio(valores: number[]): number {
+  if (valores.length === 0) return 0;
+  return valores.reduce((s, v) => s + v, 0) / valores.length;
+}
+```
+
 ```practica
 vf :: TypeScript puede adivinar el tipo de una variable a partir de su valor
 vf :: En TypeScript hay que anotar el tipo de absolutamente todas las variables
@@ -83,6 +104,35 @@ function mostrarId(id: string | number) {
 > 🌎 **En la vida real:** antes de cargar un carro, preguntas si es nafta o diésel.
 
 > 🌎 **Otro ejemplo:** Es como revisar si una llamada es del trabajo o personal antes de contestar.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Solo esas tres apps (uniones y literales)
+lenguaje: ts
+pide: Crea `type App` para que **solo** acepte `'Uber'`, `'99'` o `'InDrive'`. Después completa `comision(app: App)`: Uber 25 %, 99 20 %, InDrive 10 % (devuelve 0.25, 0.2 o 0.1). Una de las pruebas intenta pasarle `'Lyft'`: TypeScript tiene que **rechazarlo**.
+--- código
+type App = string;   // cámbialo: solo tres textos
+
+function comision(app: App): number {
+  // tu código aquí
+  return 0;
+}
+--- pruebas
+prueba('Uber cobra 25 %', () => igual(comision('Uber'), 0.25));
+prueba('99 cobra 20 %', () => igual(comision('99'), 0.2));
+prueba('InDrive cobra 10 %', () => igual(comision('InDrive'), 0.1));
+// @ts-expect-error  'Lyft' no está en la lista: TypeScript tiene que marcar error aquí
+comision('Lyft');
+--- solución
+type App = 'Uber' | '99' | 'InDrive';
+
+function comision(app: App): number {
+  if (app === 'Uber') return 0.25;
+  if (app === '99') return 0.2;
+  return 0.1;
+}
+```
 
 ```practica
 vf :: type App = 'Uber' | '99' solo acepta esos dos textos
@@ -131,6 +181,40 @@ interface CarroDeApp extends Vehiculo { apps: string[]; }
 
 > 🌎 **Otro ejemplo:** Es como un modelo de carro con un paquete de extras.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu primera interface
+lenguaje: ts
+pide: Escribe la `interface Gasto` con: `id` (texto), `tipo` (solo `'combustible'`, `'lavado'` o `'peaje'`), `valor` (número) y `nota` (texto **opcional**). Después completa `crearGasto`. Las pruebas comprueban que un tipo inventado (`'pizza'`) sea rechazado.
+--- código
+interface Gasto {
+  // tu código aquí
+}
+
+function crearGasto(id: string, tipo: Gasto['tipo'], valor: number): Gasto {
+  // tu código aquí
+}
+--- pruebas
+prueba('crea el gasto con sus datos', () => igual(crearGasto('a1', 'lavado', 30), { id: 'a1', tipo: 'lavado', valor: 30 }));
+const conNota: Gasto = { id: 'b', tipo: 'peaje', valor: 8, nota: 'ida al aeropuerto' };
+const sinNota: Gasto = { id: 'c', tipo: 'combustible', valor: 150 };
+// @ts-expect-error  'pizza' no es un tipo de gasto
+const malo: Gasto = { id: 'd', tipo: 'pizza', valor: 1 };
+prueba('la nota es opcional', () => ok(conNota.nota && !sinNota.nota));
+--- solución
+interface Gasto {
+  id: string;
+  tipo: 'combustible' | 'lavado' | 'peaje';
+  valor: number;
+  nota?: string;
+}
+
+function crearGasto(id: string, tipo: Gasto['tipo'], valor: number): Gasto {
+  return { id, tipo, valor };
+}
+```
+
 ```practica
 vf :: En una interfaz, nota?: string significa que nota puede no estar
 vf :: Una propiedad readonly se puede cambiar después de crear el objeto
@@ -176,6 +260,43 @@ En React, así se tipan las funciones que se pasan como props.
 > 🌎 **En la vida real:** es como decir "necesito un electricista certificado", no "cualquier persona".
 
 > 🌎 **Otro ejemplo:** Es como el tipo de enchufe que acepta un aparato.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tipar funciones (también las async)
+lenguaje: ts
+pide: Completa `totalDe` (recibe `Gasto[]` y devuelve `number`) y `leerGastos`, una función `async` que devuelve `Promise<Gasto[]>` con los dos gastos de ejemplo. Escribe los tipos de retorno.
+--- código
+interface Gasto { tipo: string; valor: number; }
+
+const ejemplo: Gasto[] = [{ tipo: 'combustible', valor: 150 }, { tipo: 'lavado', valor: 30 }];
+
+function totalDe(gastos) {
+  // tu código aquí
+}
+
+async function leerGastos() {
+  // tu código aquí
+}
+--- pruebas
+prueba('total de los ejemplos es 180', () => igual(totalDe(ejemplo), 180));
+prueba('leerGastos devuelve los dos gastos', async () => igual((await leerGastos()).length, 2));
+prueba('y su total es 180', async () => igual(totalDe(await leerGastos()), 180));
+const t: number = totalDe([]);
+--- solución
+interface Gasto { tipo: string; valor: number; }
+
+const ejemplo: Gasto[] = [{ tipo: 'combustible', valor: 150 }, { tipo: 'lavado', valor: 30 }];
+
+function totalDe(gastos: Gasto[]): number {
+  return gastos.reduce((s, g) => s + g.valor, 0);
+}
+
+async function leerGastos(): Promise<Gasto[]> {
+  return ejemplo;
+}
+```
 
 ```practica
 vf :: Una función async que devuelve un Gasto[] se tipa como Promise<Gasto[]>
