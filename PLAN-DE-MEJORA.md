@@ -66,7 +66,9 @@ Un repositorio aparte, público: **"Gastos del carro"**, una app pequeña con la
 (TypeScript, pruebas, CI, Firebase con emulador, una pantalla en React Native, una API en Node). Reemplaza
 todos los "abre tal archivo de Copiloto".
 
-- [ ] Crear el repositorio y su guía para descargarlo
+- [x] Crear el repositorio y su guía para descargarlo: **[github.com/DelvinSmart/gastos-del-carro](https://github.com/DelvinSmart/gastos-del-carro)**
+  (TypeScript estricto, 38 pruebas, cuatro candados, reglas de Firestore probadas con el emulador, la caja en capas,
+  tres idiomas y el motor de diseño; su CI de GitHub está en verde)
 - [ ] Una versión "con errores a propósito" para el curso de seguridad
 - [ ] Cambiar cada ejercicio que hoy pide abrir Copiloto
 
