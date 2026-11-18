@@ -32,6 +32,41 @@ El tiempo no se pierde escribiendo código (eso lo hace rápido la IA): se pierd
 
 > 🌎 **Otro ejemplo:** Es como cocinar sin leer la receta: terminas yendo tres veces al mercado.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El flujo en siete pasos, sin saltarse ninguno
+lenguaje: js
+pide: Completa `siguiente(hechos)`: el primer paso de `PASOS` que todavía no está en `hechos` (o `'listo'` si están todos). Y `puedoPublicar(hechos)`: `true` solo si están hechos **todos** los pasos anteriores a publicar; y si no, devuelve la lista de los que faltan (en orden), para que se vea qué te saltaste.
+--- código
+const PASOS = ['idea', 'pedido', 'plan', 'cambio chico', 'revisión', 'guardar', 'publicar'];
+
+function siguiente(hechos) {
+  // tu código aquí
+}
+
+function puedoPublicar(hechos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('al empezar', () => igual(siguiente([]), 'idea'));
+prueba('en el medio', () => igual(siguiente(['idea', 'pedido', 'plan']), 'cambio chico'));
+prueba('todo hecho', () => igual(siguiente(PASOS), 'listo'));
+prueba('se puede publicar', () => igual(puedoPublicar(['idea', 'pedido', 'plan', 'cambio chico', 'revisión', 'guardar']), true));
+prueba('se saltó la revisión', () => igual(puedoPublicar(['idea', 'pedido', 'cambio chico', 'guardar']), ['plan', 'revisión']));
+--- solución
+const PASOS = ['idea', 'pedido', 'plan', 'cambio chico', 'revisión', 'guardar', 'publicar'];
+
+function siguiente(hechos) {
+  return PASOS.find((p) => !hechos.includes(p)) ?? 'listo';
+}
+
+function puedoPublicar(hechos) {
+  const faltan = PASOS.slice(0, -1).filter((p) => !hechos.includes(p));
+  return faltan.length === 0 ? true : faltan;
+}
+```
+
 ```practica
 vf :: El tiempo se pierde sobre todo escribiendo código
 vf :: Después de publicar hay que comprobar que lo publicado funciona
@@ -66,6 +101,54 @@ La IA escribió el código, las pruebas y las clases. **Tú** decidiste qué se 
 > 🌎 **En la vida real:** el arquitecto no pone ladrillos, pero sin él la casa no tiene sentido.
 
 > 🌎 **Otro ejemplo:** Es como un director de cine: no actúa, pero decide cada toma.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los pasos del certificado, en orden
+lenguaje: js
+pide: Cada paso dice qué **necesita** que esté hecho antes. Completa `problemasDeOrden(pasos)`: recorre los pasos en el orden dado y devuelve un aviso `'X antes de Y'` cada vez que un paso aparece **antes** de algo que necesita (Y es lo que necesita). Y `ordenar(pasos)`: un orden que respete todo, eligiendo siempre, de los que ya se pueden hacer, el que venía primero en la lista.
+--- código
+function problemasDeOrden(pasos) {
+  // tu código aquí
+}
+
+function ordenar(pasos) {
+  // tu código aquí
+}
+--- pruebas
+const pasos = [
+  { nombre: 'certificado', necesita: ['progreso'] },
+  { nombre: 'reglas', necesita: [] },
+  { nombre: 'verificar', necesita: ['certificado'] },
+  { nombre: 'progreso', necesita: ['reglas'] },
+];
+prueba('los avisos', () => igual(problemasDeOrden(pasos), ['certificado antes de progreso']));
+prueba('el orden bueno', () => igual(ordenar(pasos).map((p) => p.nombre), ['reglas', 'progreso', 'certificado', 'verificar']));
+prueba('un orden bueno no tiene avisos', () => igual(problemasDeOrden(ordenar(pasos)), []));
+--- solución
+function problemasDeOrden(pasos) {
+  const avisos = [];
+  pasos.forEach((p, i) => {
+    for (const n of p.necesita) {
+      const donde = pasos.findIndex((x) => x.nombre === n);
+      if (donde > i) avisos.push(`${p.nombre} antes de ${n}`);
+    }
+  });
+  return avisos;
+}
+
+function ordenar(pasos) {
+  const hechos = [];
+  const quedan = [...pasos];
+  while (quedan.length) {
+    const i = quedan.findIndex((p) => p.necesita.every((n) => hechos.some((h) => h.nombre === n)));
+    if (i === -1) break;
+    hechos.push(quedan.splice(i, 1)[0]);
+  }
+  return hechos;
+}
+```
 
 ```practica
 vf :: En el certificado verificable, cada trampa se convirtió en una prueba automática
@@ -104,6 +187,35 @@ Programación primero (los fundamentos que te faltan), **seguridad** en paralelo
 > 🌎 **En la vida real:** es como un plan de entrenamiento: poco y constante gana a mucho y de vez en cuando.
 
 > 🌎 **Otro ejemplo:** Es como ahorrar: un poco cada mes llega más lejos que un esfuerzo grande una vez.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Que la IA te haga preguntas
+lenguaje: js
+pide: Para aprender de verdad, pídele a la IA que te pregunte. Hazlo tú con código: `preguntas(codigo)` busca cada `function nombre(` en el código y devuelve, por cada una, `'¿Qué hace nombre y qué devuelve?'`. Y si el código tiene un `try`, agrega al final `'¿Qué pasa si algo falla adentro del try?'`.
+--- código
+function preguntas(codigo) {
+  // tu código aquí
+}
+--- pruebas
+const codigo = `function total(gastos) {
+  return gastos.reduce((s, g) => s + g.valor, 0);
+}
+function guardar(lista) {
+  try { localStorage.setItem('gastos', JSON.stringify(lista)); } catch (e) { return false; }
+  return true;
+}`;
+prueba('una pregunta por función, y la del try', () => igual(preguntas(codigo), ['¿Qué hace total y qué devuelve?', '¿Qué hace guardar y qué devuelve?', '¿Qué pasa si algo falla adentro del try?']));
+prueba('sin try', () => igual(preguntas('function a() { return 1; }'), ['¿Qué hace a y qué devuelve?']));
+prueba('sin funciones', () => igual(preguntas('const x = 1;'), []));
+--- solución
+function preguntas(codigo) {
+  const lista = [...codigo.matchAll(/function\s+(\w+)\s*\(/g)].map((m) => `¿Qué hace ${m[1]} y qué devuelve?`);
+  if (/\btry\b/.test(codigo)) lista.push('¿Qué pasa si algo falla adentro del try?');
+  return lista;
+}
+```
 
 ```practica
 vf :: Si la IA hace el código, ya no hace falta entender programación

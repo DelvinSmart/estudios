@@ -34,6 +34,42 @@ En la web, **Gemini** te sirve para conversar, investigar y **preparar pedidos**
 
 > 🌎 **Otro ejemplo:** Es como un asistente que prepara la agenda de la reunión para que la reunión sea corta.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cada herramienta lee su archivo de reglas
+lenguaje: js
+pide: Completa `archivoDe(herramienta)`: `'claude code'` → `'CLAUDE.md'`; `'gemini cli'` → `'GEMINI.md'`; `'opencode'` y `'codex'` → `'AGENTS.md'` (sin importar mayúsculas); otra → `'AGENTS.md'` (el formato abierto). Y `faltan(existentes, herramientas)`: los archivos de reglas que necesitan esas herramientas y **no** están en el proyecto, sin repetir, en el orden en que aparecen.
+--- código
+function archivoDe(herramienta) {
+  // tu código aquí
+}
+
+function faltan(existentes, herramientas) {
+  // tu código aquí
+}
+--- pruebas
+prueba('cada una con el suyo', () => igual(['Claude Code', 'Gemini CLI', 'OpenCode', 'Codex', 'otra'].map(archivoDe), ['CLAUDE.md', 'GEMINI.md', 'AGENTS.md', 'AGENTS.md', 'AGENTS.md']));
+prueba('lo que falta, sin repetir', () => igual(faltan(['CLAUDE.md'], ['Claude Code', 'OpenCode', 'Codex', 'Gemini CLI']), ['AGENTS.md', 'GEMINI.md']));
+prueba('nada falta', () => igual(faltan(['AGENTS.md', 'CLAUDE.md', 'GEMINI.md'], ['OpenCode', 'Gemini CLI']), []));
+--- solución
+function archivoDe(herramienta) {
+  const h = herramienta.toLowerCase();
+  if (h === 'claude code') return 'CLAUDE.md';
+  if (h === 'gemini cli') return 'GEMINI.md';
+  return 'AGENTS.md';
+}
+
+function faltan(existentes, herramientas) {
+  const necesarios = [];
+  for (const h of herramientas) {
+    const a = archivoDe(h);
+    if (!existentes.includes(a) && !necesarios.includes(a)) necesarios.push(a);
+  }
+  return necesarios;
+}
+```
+
 ```practica
 vf :: OpenCode se puede conectar con distintos proveedores de modelos
 vf :: Solo Claude Code puede leer un archivo de reglas del proyecto
@@ -69,6 +105,45 @@ Para textos con datos que no pueden salir de tu computadora, para practicar sin 
 > 🌎 **En la vida real:** para hervir agua usas la cocina de casa; para un banquete de 100 personas, contratas un catering.
 
 > 🌎 **Otro ejemplo:** Es como arreglar un botón tú mismo y llevar el traje completo a la sastrería.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Qué modelos tienes y cuáles caben
+lenguaje: js
+pide: Completa `leerLista(salida)`: lee la salida de `ollama list` (la primera línea son los títulos) y devuelve `{ nombre, gb }` por modelo, con el tamaño como número (la columna `SIZE` viene como `2.0 GB`). Y `caben(modelos, memoriaGb)`: los nombres de los que pesan **menos de la mitad** de la memoria de tu computadora (para que la Mac siga andando mientras el modelo trabaja).
+--- código
+function leerLista(salida) {
+  // tu código aquí
+}
+
+function caben(modelos, memoriaGb) {
+  // tu código aquí
+}
+--- pruebas
+const salida = `NAME              ID              SIZE      MODIFIED
+llama3.2:latest   a80c4f17acd5    2.0 GB    3 days ago
+llama3.1:8b       46e0c10c039e    4.9 GB    2 weeks ago
+llama3.3:70b      a6eb4748fd29    42 GB     1 month ago`;
+prueba('lee la lista', () => igual(leerLista(salida), [{ nombre: 'llama3.2:latest', gb: 2 }, { nombre: 'llama3.1:8b', gb: 4.9 }, { nombre: 'llama3.3:70b', gb: 42 }]));
+prueba('en una Mac de 16 GB', () => igual(caben(leerLista(salida), 16), ['llama3.2:latest', 'llama3.1:8b']));
+prueba('en una de 8 GB', () => igual(caben(leerLista(salida), 8), ['llama3.2:latest']));
+--- solución
+function leerLista(salida) {
+  return salida
+    .split('\n')
+    .slice(1)
+    .filter((l) => l.trim())
+    .map((l) => {
+      const c = l.trim().split(/\s+/);
+      return { nombre: c[0], gb: Number(c[2]) };
+    });
+}
+
+function caben(modelos, memoriaGb) {
+  return modelos.filter((m) => m.gb < memoriaGb / 2).map((m) => m.nombre);
+}
+```
 
 ```practica
 vf :: Con Ollama, el modelo corre en tu computadora y funciona sin internet
@@ -113,6 +188,40 @@ Dos agentes trabajando al mismo tiempo **en los mismos archivos** se pisan. Si u
 > 🌎 **En la vida real:** dos pintores en la misma pared, cada uno con un color, terminan en un desastre.
 
 > 🌎 **Otro ejemplo:** Es como dos personas editando el mismo documento sin avisarse: uno borra lo que el otro escribió.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La herramienta para cada tarea, y no pisarse
+lenguaje: js
+pide: Completa `elegir(tarea)` con la tabla de la lección: `datosPrivados` → `'Llama con Ollama'`; `sinLimite` (se te acabó el plan) → `'OpenCode con un modelo gratis'`; `paralelo` → `'Codex en la nube u otra sesión'`; `soloPensar` → `'Gemini o Claude en el chat'`; si no, `'Claude Code'` (revisa en ese orden). Y `sePisan(a, b)`: los archivos que tocan **los dos** agentes a la vez (si hay alguno, uno tiene que esperar o ir en otra rama).
+--- código
+function elegir(tarea) {
+  // tu código aquí
+}
+
+function sePisan(a, b) {
+  // tu código aquí
+}
+--- pruebas
+prueba('lo de siempre', () => igual(elegir({}), 'Claude Code'));
+prueba('datos privados primero', () => igual(elegir({ datosPrivados: true, paralelo: true }), 'Llama con Ollama'));
+prueba('las demás', () => igual([elegir({ sinLimite: true }), elegir({ paralelo: true }), elegir({ soloPensar: true })], ['OpenCode con un modelo gratis', 'Codex en la nube u otra sesión', 'Gemini o Claude en el chat']));
+prueba('se pisan en un archivo', () => igual(sePisan(['web/app.js', 'web/estilos.css'], ['web/estilos.css', 'README.md']), ['web/estilos.css']));
+prueba('cada uno en lo suyo', () => igual(sePisan(['a.js'], ['b.js']), []));
+--- solución
+function elegir(tarea) {
+  if (tarea.datosPrivados) return 'Llama con Ollama';
+  if (tarea.sinLimite) return 'OpenCode con un modelo gratis';
+  if (tarea.paralelo) return 'Codex en la nube u otra sesión';
+  if (tarea.soloPensar) return 'Gemini o Claude en el chat';
+  return 'Claude Code';
+}
+
+function sePisan(a, b) {
+  return a.filter((archivo) => b.includes(archivo));
+}
+```
 
 ```practica
 vf :: Si dominas el método (reglas, pedido claro, diff, pruebas, commits), cambiar de herramienta es fácil

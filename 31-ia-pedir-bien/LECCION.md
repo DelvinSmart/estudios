@@ -40,6 +40,43 @@ Si quieres un estilo, muéstralo: "escríbelo como esta otra función" o "los te
 
 > 🌎 **Otro ejemplo:** Es como enseñarle a alguien a hacer arepas haciendo una delante de él.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las cuatro piezas de un buen pedido
+lenguaje: js
+pide: Completa `queFalta(pedido)`: revisa las piezas `contexto`, `tarea`, `limites` y `terminado`, y devuelve las que faltan o están en blanco. Además, si la `tarea` existe pero **no empieza** con uno de los verbos de `VERBOS` (sin importar mayúsculas), agrega `'tarea sin verbo claro'`. Y `armar(pedido)`: las cuatro piezas en ese orden, una por línea.
+--- código
+const VERBOS = ['agrega', 'corrige', 'explica', 'revisa', 'encuentra', 'cambia'];
+
+function queFalta(pedido) {
+  // tu código aquí
+}
+
+function armar(pedido) {
+  // tu código aquí
+}
+--- pruebas
+const bueno = { contexto: 'En mi sitio, en web/vistas/cuenta.js', tarea: 'Corrige el error al crear cuenta', limites: 'No cambies el diseño', terminado: 'Crear cuenta con un Gmail funciona' };
+prueba('completo', () => igual(queFalta(bueno), []));
+prueba('"arregla el login"', () => igual(queFalta({ tarea: 'arregla el login' }), ['contexto', 'limites', 'terminado', 'tarea sin verbo claro']));
+prueba('en blanco cuenta como falta', () => igual(queFalta({ ...bueno, limites: '   ' }), ['limites']));
+prueba('armado', () => igual(armar(bueno).split('\n'), [bueno.contexto, bueno.tarea, bueno.limites, bueno.terminado]));
+--- solución
+const VERBOS = ['agrega', 'corrige', 'explica', 'revisa', 'encuentra', 'cambia'];
+
+function queFalta(pedido) {
+  const faltan = ['contexto', 'tarea', 'limites', 'terminado'].filter((p) => !String(pedido[p] ?? '').trim());
+  const tarea = String(pedido.tarea ?? '').trim().toLowerCase();
+  if (tarea && !VERBOS.some((v) => tarea.startsWith(v))) faltan.push('tarea sin verbo claro');
+  return faltan;
+}
+
+function armar(pedido) {
+  return [pedido.contexto, pedido.tarea, pedido.limites, pedido.terminado].join('\n');
+}
+```
+
 ```practica
 vf :: "Arregla el login" es un buen pedido porque es corto
 vf :: Mostrar un ejemplo del estilo que quieres ayuda a la IA
@@ -78,6 +115,35 @@ En Claude Code, OpenCode o Codex no hace falta pegar el código: la herramienta 
 
 > 🌎 **Otro ejemplo:** Es como darle a alguien la página del libro y no solo el título.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El error completo y las tres frases
+lenguaje: js
+pide: Completa `errorCompleto(texto)`: `true` si el texto trae el **nombre** del error (una palabra que termina en `Error`, seguida de `:`) **y** dónde pasó (algo como `archivo.js:12`). Y `pedidoDeError({ error, paso, esperaba, probe })`: el pedido en cuatro líneas: `Error: …`, `Qué pasó: …`, `Qué esperaba: …`, `Ya probé: …`; si `probe` está vacío, `Ya probé: nada todavía`.
+--- código
+function errorCompleto(texto) {
+  // tu código aquí
+}
+
+function pedidoDeError({ error, paso, esperaba, probe }) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un error con todo', () => igual(errorCompleto('TypeError: Cannot read properties of undefined\n    at guardar (web/vistas/cuenta.js:42:7)'), true));
+prueba('"no funciona" no es un error', () => igual(errorCompleto('no funciona el botón'), false));
+prueba('sin dónde, tampoco', () => igual(errorCompleto('TypeError: x is undefined'), false));
+prueba('el pedido', () => igual(pedidoDeError({ error: 'TypeError en cuenta.js:42', paso: 'toqué Crear cuenta', esperaba: 'entrar al mapa', probe: '' }), 'Error: TypeError en cuenta.js:42\nQué pasó: toqué Crear cuenta\nQué esperaba: entrar al mapa\nYa probé: nada todavía'));
+--- solución
+function errorCompleto(texto) {
+  return /\b\w*Error:/.test(texto) && /\w+\.\w+:\d+/.test(texto);
+}
+
+function pedidoDeError({ error, paso, esperaba, probe }) {
+  return [`Error: ${error}`, `Qué pasó: ${paso}`, `Qué esperaba: ${esperaba}`, `Ya probé: ${probe || 'nada todavía'}`].join('\n');
+}
+```
+
 ```practica
 vf :: Para un error, basta con decir "sale un error"
 vf :: Decir qué ya intentaste evita que la IA te proponga lo mismo
@@ -115,6 +181,37 @@ Si la respuesta no es lo que querías, di **qué está mal y por qué**: "el bot
 > 🌎 **En la vida real:** en la peluquería dices "un poco más corto atrás", no te vas y buscas otro peluquero.
 
 > 🌎 **Otro ejemplo:** Es como corregir a un GPS: "no, por la autopista no", y recalcula.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Pedazos chicos que se puedan revisar
+lenguaje: js
+pide: Completa `esChico(cambio)`: `true` si toca como mucho 3 archivos y cambia como mucho 200 líneas. Y `enPedazos(pasos, maximo)`: agrupa los pasos (en su orden) en commits de hasta `maximo` pasos cada uno.
+--- código
+function esChico(cambio) {
+  // tu código aquí
+}
+
+function enPedazos(pasos, maximo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('chico', () => igual(esChico({ archivos: 2, lineas: 80 }), true));
+prueba('los bordes', () => igual([esChico({ archivos: 3, lineas: 200 }), esChico({ archivos: 4, lineas: 10 }), esChico({ archivos: 1, lineas: 201 })], [true, false, false]));
+prueba('en pedazos de 2', () => igual(enPedazos(['reglas', 'progreso', 'certificado', 'verificar', 'login'], 2), [['reglas', 'progreso'], ['certificado', 'verificar'], ['login']]));
+prueba('sin pasos', () => igual(enPedazos([], 3), []));
+--- solución
+function esChico(cambio) {
+  return cambio.archivos <= 3 && cambio.lineas <= 200;
+}
+
+function enPedazos(pasos, maximo) {
+  const grupos = [];
+  for (let i = 0; i < pasos.length; i += maximo) grupos.push(pasos.slice(i, i + maximo));
+  return grupos;
+}
+```
 
 ```practica
 vf :: Para algo grande, conviene pedir primero el plan y aprobarlo
@@ -168,6 +265,42 @@ Terminado cuando: …    (cómo lo compruebo)
 > 🌎 **En la vida real:** es como el formulario del médico: siempre las mismas preguntas, así no se olvida ninguna.
 
 > 🌎 **Otro ejemplo:** Es como la lista del supermercado con secciones: no se te olvida nada.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Rellenar tu plantilla de pedidos
+lenguaje: js
+pide: Tu plantilla tiene líneas como `Quiero: …`. Completa `rellenar(plantilla, datos)`: en cada línea con `…`, cambia el `…` por `datos[etiqueta]` (la etiqueta es lo que va antes de `:`, en minúsculas y sin tildes: `Dónde` → `donde`). Si no hay dato, deja el `…`. Devuelve `{ texto, faltan }`, con `faltan` = las etiquetas sin dato, como están escritas.
+--- código
+function rellenar(plantilla, datos) {
+  // tu código aquí
+}
+--- pruebas
+const plantilla = 'Proyecto: …\nDónde: …\nQuiero: …\nNo hagas: …\nTerminado cuando: …';
+const datos = { proyecto: 'Mapa de estudios (HTML, CSS y JS)', donde: 'web/vistas/parte.js', quiero: 'Agrega un botón de imprimir', 'no hagas': 'No agregues librerías' };
+prueba('rellena lo que hay', () => igual(rellenar(plantilla, datos).texto.split('\n').slice(0, 4), ['Proyecto: Mapa de estudios (HTML, CSS y JS)', 'Dónde: web/vistas/parte.js', 'Quiero: Agrega un botón de imprimir', 'No hagas: No agregues librerías']));
+prueba('y avisa lo que falta', () => igual(rellenar(plantilla, datos).faltan, ['Terminado cuando']));
+prueba('lo que falta queda con …', () => igual(rellenar(plantilla, datos).texto.split('\n')[4], 'Terminado cuando: …'));
+--- solución
+function rellenar(plantilla, datos) {
+  const faltan = [];
+  const texto = plantilla
+    .split('\n')
+    .map((linea) => {
+      if (!linea.includes('…')) return linea;
+      const etiqueta = linea.split(':')[0].trim();
+      const llave = etiqueta.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+      if (!datos[llave]) {
+        faltan.push(etiqueta);
+        return linea;
+      }
+      return linea.replace('…', datos[llave]);
+    })
+    .join('\n');
+  return { texto, faltan };
+}
+```
 
 ```practica
 vf :: Usar una IA para escribir el pedido de otra se llama meta-prompting
@@ -252,6 +385,37 @@ Así **ahorras tokens**: cada pregunta de "cómo funciona" que haces en la conve
 > 🌎 **En la vida real:** al mecánico de confianza no le preguntas qué es un carburador: eso lo buscas en un libro o le preguntas a un amigo. Al mecánico le llevas el carro.
 
 > 🌎 **Otro ejemplo:** Es como pedir una segunda opinión médica: si los dos médicos coinciden, tranquilo; si no, se piden más exámenes.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: A quién preguntar, y sembrar la duda
+lenguaje: js
+pide: Completa `aQuien(pregunta)`: si pide **cambiar algo del proyecto** (tiene `cambia`, `agrega`, `corrige`, `en mi proyecto` o `este error`) → `'agente de código'`; si es para **aprender** (`cómo funciona`, `explícame`, `qué es`) → `'chat'`; si no, `'chat'`. Revisa primero lo del agente, en minúsculas. Y `conDuda(pregunta)`: agrega al final, en otra línea, `'Busca fallas como si quisieras rechazarlo, y dime de dónde sacas cada dato.'`.
+--- código
+function aQuien(pregunta) {
+  // tu código aquí
+}
+
+function conDuda(pregunta) {
+  // tu código aquí
+}
+--- pruebas
+prueba('para aprender, al chat', () => igual([aQuien('¿Cómo funciona onSnapshot?'), aQuien('Explícame qué es un token')], ['chat', 'chat']));
+prueba('para cambiar el proyecto, al agente', () => igual([aQuien('Corrige este error en cuenta.js'), aQuien('Agrega un botón en mi proyecto')], ['agente de código', 'agente de código']));
+prueba('sin pistas, al chat', () => igual(aQuien('¿Qué opinas de mi idea?'), 'chat'));
+prueba('sembrar la duda', () => igual(conDuda('¿Está bien este curso?'), '¿Está bien este curso?\nBusca fallas como si quisieras rechazarlo, y dime de dónde sacas cada dato.'));
+--- solución
+function aQuien(pregunta) {
+  const p = pregunta.toLowerCase();
+  if (['cambia', 'agrega', 'corrige', 'en mi proyecto', 'este error'].some((x) => p.includes(x))) return 'agente de código';
+  return 'chat';
+}
+
+function conDuda(pregunta) {
+  return `${pregunta}\nBusca fallas como si quisieras rechazarlo, y dime de dónde sacas cada dato.`;
+}
+```
 
 ```practica
 vf :: Si el pedido es incompleto, la respuesta de la IA también tiende a serlo, aunque la IA sepa más

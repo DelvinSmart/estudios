@@ -33,6 +33,63 @@ Los modelos **más grandes** razonan mejor pero son más lentos y caros; los **c
 
 > 🌎 **Otro ejemplo:** Es como los médicos: el general para casi todo, el especialista para lo difícil (y cuesta más).
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un modelo de lenguaje de juguete
+lenguaje: js
+pide: Un modelo predice el **siguiente pedazo** de texto. Hazlo en chiquito: `contarSiguientes(texto)` devuelve, para cada palabra (en minúsculas), cuántas veces la siguió cada otra palabra. `siguiente(conteos, palabra)` devuelve la que más veces la siguió (si empatan, la que apareció primero), o `null`. `completar(conteos, inicio, n)` agrega hasta `n` palabras, una por una.
+--- código
+function contarSiguientes(texto) {
+  // tu código aquí
+}
+
+function siguiente(conteos, palabra) {
+  // tu código aquí
+}
+
+function completar(conteos, inicio, n) {
+  // tu código aquí
+}
+--- pruebas
+const texto = 'el carro necesita aceite. el carro necesita lavado. el carro está limpio. el viaje fue largo';
+const conteos = contarSiguientes(texto);
+prueba('cuenta lo que sigue', () => igual(conteos.carro, { necesita: 2, 'está': 1 }));
+prueba('la más probable', () => igual([siguiente(conteos, 'el'), siguiente(conteos, 'carro')], ['carro', 'necesita']));
+prueba('una palabra sin nada después', () => igual(siguiente(conteos, 'largo'), null));
+prueba('completar una frase', () => igual(completar(conteos, 'el', 3), 'el carro necesita aceite.'));
+--- solución
+function contarSiguientes(texto) {
+  const palabras = texto.toLowerCase().split(/\s+/).filter(Boolean);
+  const conteos = {};
+  for (let i = 0; i < palabras.length - 1; i++) {
+    const a = palabras[i];
+    const b = palabras[i + 1];
+    conteos[a] = conteos[a] || {};
+    conteos[a][b] = (conteos[a][b] || 0) + 1;
+  }
+  return conteos;
+}
+
+function siguiente(conteos, palabra) {
+  const opciones = conteos[palabra];
+  if (!opciones) return null;
+  let mejor = null;
+  for (const [p, n] of Object.entries(opciones)) if (mejor === null || n > opciones[mejor]) mejor = p;
+  return mejor;
+}
+
+function completar(conteos, inicio, n) {
+  const frase = [inicio];
+  for (let i = 0; i < n; i++) {
+    const p = siguiente(conteos, frase[frase.length - 1]);
+    if (p === null) break;
+    frase.push(p);
+  }
+  return frase.join(' ');
+}
+```
+
 ```practica
 vf :: Un modelo de lenguaje predice cuál pedazo de texto sigue, una y otra vez
 vf :: Claude, Gemini y Llama son el mismo modelo con distinto nombre
@@ -71,6 +128,36 @@ Cada modelo aprendió con datos hasta cierta fecha. Lo que salió después (una 
 
 > 🌎 **Otro ejemplo:** Es como un mapa impreso del año pasado: sirve, pero no tiene la calle nueva.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Atrapar lo que la IA inventó
+lenguaje: js
+pide: La IA te propone usar unas funciones de una librería. Completa `inventadas(propuestas, api)`: devuelve las que **no existen** en la lista real `api` (las alucinaciones). Y `puedeNoSaberlo(corteDelModelo, salioEl)`: `true` si eso salió **después** de la fecha de corte del modelo (fechas ISO): ahí hay que darle la documentación.
+--- código
+function inventadas(propuestas, api) {
+  // tu código aquí
+}
+
+function puedeNoSaberlo(corteDelModelo, salioEl) {
+  // tu código aquí
+}
+--- pruebas
+const api = ['getDoc', 'setDoc', 'updateDoc', 'onSnapshot', 'query', 'where'];
+prueba('todo existe', () => igual(inventadas(['getDoc', 'onSnapshot'], api), []));
+prueba('dos inventadas', () => igual(inventadas(['getDoc', 'getDocsWhere', 'setDoc', 'saveDocument'], api), ['getDocsWhere', 'saveDocument']));
+prueba('algo nuevo, que puede no saber', () => igual(puedeNoSaberlo('2025-01-01', '2025-06-10'), true));
+prueba('algo viejo, que sí conoce', () => igual(puedeNoSaberlo('2025-01-01', '2023-03-01'), false));
+--- solución
+function inventadas(propuestas, api) {
+  return propuestas.filter((f) => !api.includes(f));
+}
+
+function puedeNoSaberlo(corteDelModelo, salioEl) {
+  return salioEl > corteDelModelo;
+}
+```
+
 ```practica
 vf :: Si el modelo responde muy seguro, la respuesta es correcta
 vf :: Una alucinación es cuando el modelo inventa algo que no existe
@@ -108,6 +195,46 @@ Más contexto no siempre es mejor: es mejor el **correcto**. Dale el archivo que
 > 🌎 **En la vida real:** al médico le llevas los exámenes de ese problema, no todos los papeles de tu vida.
 
 > 🌎 **Otro ejemplo:** Es como pedir direcciones: "estoy en la esquina de la panadería" ayuda más que contarle tu día entero.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Que la conversación quepa en la ventana
+lenguaje: js
+pide: Completa `tokensDe(texto)`: una estimación, un token cada 4 letras, hacia arriba (`Math.ceil`). Y `recortar(mensajes, ventana)`: el primer mensaje (las instrucciones) se queda **siempre**; después agrega los **más recientes** que todavía quepan, sin pasarse de la ventana, y devuélvelos en su orden original.
+--- código
+function tokensDe(texto) {
+  // tu código aquí
+}
+
+function recortar(mensajes, ventana) {
+  // tu código aquí
+}
+--- pruebas
+prueba('los tokens', () => igual([tokensDe(''), tokensDe('hola'), tokensDe('hola mundo')], [0, 1, 3]));
+const m = ['reglas!!', 'aaaa', 'bbbbbbbb', 'cccc', 'dddd'];
+prueba('todo cabe', () => igual(recortar(m, 100), m));
+prueba('las reglas y lo más reciente', () => igual(recortar(m, 5), ['reglas!!', 'cccc', 'dddd']));
+prueba('si no cabe ni lo último, solo las reglas', () => igual(recortar(['reglas!!', 'x'.repeat(40)], 3), ['reglas!!']));
+--- solución
+function tokensDe(texto) {
+  return Math.ceil(texto.length / 4);
+}
+
+function recortar(mensajes, ventana) {
+  if (mensajes.length === 0) return [];
+  const [reglas, ...resto] = mensajes;
+  let usados = tokensDe(reglas);
+  const elegidos = [];
+  for (let i = resto.length - 1; i >= 0; i--) {
+    const t = tokensDe(resto[i]);
+    if (usados + t > ventana) break;
+    usados += t;
+    elegidos.unshift(resto[i]);
+  }
+  return [reglas, ...elegidos];
+}
+```
 
 ```practica
 vf :: Los modelos leen el texto en tokens, no letra por letra
@@ -150,6 +277,30 @@ ollama run llama3.2      # descarga el modelo la primera vez y abre un chat en l
 > 🌎 **En la vida real:** es como cocinar en casa en vez de pedir delivery: más privado y sin depender de nadie, pero tu cocina es más chica que la del restaurante.
 
 > 🌎 **Otro ejemplo:** Es como una enciclopedia en papel: no necesita internet, pero no tiene todo lo último.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Limpiar el texto antes de pegarlo
+lenguaje: js
+pide: Antes de pegarle un registro o una configuración a una IA, se quita lo privado. Completa `limpiar(texto)`: cambia los correos por `[correo]`, las claves que empiezan con `sk_` (y siguen letras, números o `_`) por `[clave]`, y lo que va después de `password=` o `password:` (hasta el espacio) por `[oculto]`.
+--- código
+function limpiar(texto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un correo', () => igual(limpiar('falló el login de ana.prueba@gmail.com'), 'falló el login de [correo]'));
+prueba('una clave', () => igual(limpiar('STRIPE=sk_live_51Hx9abc end'), 'STRIPE=[clave] end'));
+prueba('una contraseña', () => igual(limpiar('DB password=s3gura! host=local'), 'DB password=[oculto] host=local'));
+prueba('lo demás queda igual', () => igual(limpiar('TypeError: x is undefined at app.js:12'), 'TypeError: x is undefined at app.js:12'));
+--- solución
+function limpiar(texto) {
+  return texto
+    .replace(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g, '[correo]')
+    .replace(/sk_\w+/g, '[clave]')
+    .replace(/(password\s*[=:]\s*)\S+/gi, '$1[oculto]');
+}
+```
 
 ```practica
 vf :: Es buena idea pegar el archivo .env en el chat para que la IA entienda la configuración

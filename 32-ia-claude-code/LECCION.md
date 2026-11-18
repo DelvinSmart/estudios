@@ -34,6 +34,34 @@ Como puede tocar archivos y correr comandos, Claude Code **pide permiso** para l
 
 > 🌎 **Otro ejemplo:** Es como un empleado nuevo: al principio revisas todo; con el tiempo le das más confianza, pero los pagos grandes los apruebas tú.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Qué pregunta el agente antes de hacer
+lenguaje: js
+pide: Completa `decision(accion, modo)`. Las acciones son `'leer'`, `'editar'`, `'correr pruebas'` o una **irreversible** (`'push'`, `'publicar'`, `'borrar'`). Los modos: `'preguntar todo'`, `'aceptar ediciones'`, `'automático'`. Leer nunca pregunta (`'hacer'`). Lo irreversible **siempre** es `'preguntar'`, sea cual sea el modo. Editar: `'hacer'` salvo en `'preguntar todo'`. Correr pruebas: `'hacer'` solo en `'automático'`.
+--- código
+const IRREVERSIBLES = ['push', 'publicar', 'borrar'];
+
+function decision(accion, modo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('leer, siempre', () => igual(['preguntar todo', 'aceptar ediciones', 'automático'].map((m) => decision('leer', m)), ['hacer', 'hacer', 'hacer']));
+prueba('lo irreversible, siempre pregunta', () => igual(IRREVERSIBLES.map((a) => decision(a, 'automático')), ['preguntar', 'preguntar', 'preguntar']));
+prueba('editar', () => igual(['preguntar todo', 'aceptar ediciones', 'automático'].map((m) => decision('editar', m)), ['preguntar', 'hacer', 'hacer']));
+prueba('correr pruebas', () => igual(['preguntar todo', 'aceptar ediciones', 'automático'].map((m) => decision('correr pruebas', m)), ['preguntar', 'preguntar', 'hacer']));
+--- solución
+const IRREVERSIBLES = ['push', 'publicar', 'borrar'];
+
+function decision(accion, modo) {
+  if (accion === 'leer') return 'hacer';
+  if (IRREVERSIBLES.includes(accion)) return 'preguntar';
+  if (accion === 'editar') return modo === 'preguntar todo' ? 'preguntar' : 'hacer';
+  return modo === 'automático' ? 'hacer' : 'preguntar';
+}
+```
+
 ```practica
 vf :: Claude Code puede leer tu proyecto, editar archivos y correr comandos
 vf :: En el chat de Claude los cambios se aplican solos en tus archivos
@@ -72,6 +100,34 @@ Un archivo `CLAUDE.md` en la raíz del proyecto que Claude Code **lee al empezar
 > 🌎 **En la vida real:** en el manual del empleado va dónde está la caja; la combinación, no.
 
 > 🌎 **Otro ejemplo:** Es como el cartel de la casa de veraneo: "la llave del gas se cierra al salir", no "la llave de la puerta está bajo el tapete".
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Revisar un CLAUDE.md
+lenguaje: js
+pide: Completa `revisarReglas(texto)`: devuelve la lista de problemas del archivo de reglas, en este orden: `'falta ## Comandos'` y `'falta ## Reglas'` si no tiene esos títulos; y `'tiene un secreto en la línea N'` por cada línea con algo como `sk_`, `PRIVATE KEY` o `password=` con un valor pegado, como `password=abc` (los secretos nunca van ahí: el archivo se sube y lo lee la IA).
+--- código
+function revisarReglas(texto) {
+  // tu código aquí
+}
+--- pruebas
+const bueno = '# Mi proyecto\n## Comandos\nnpm test\n## Reglas\n- No escribir en Firebase real';
+prueba('un archivo bueno', () => igual(revisarReglas(bueno), []));
+prueba('le faltan secciones', () => igual(revisarReglas('# Mi proyecto\nnpm test'), ['falta ## Comandos', 'falta ## Reglas']));
+prueba('con un secreto', () => igual(revisarReglas(bueno + '\nLa clave de Stripe es sk_live_123abc'), ['tiene un secreto en la línea 6']));
+prueba('"password=" sin valor no es un secreto', () => igual(revisarReglas(bueno + '\nNunca escribas password= en el código'), []));
+--- solución
+function revisarReglas(texto) {
+  const problemas = [];
+  if (!/^## Comandos/m.test(texto)) problemas.push('falta ## Comandos');
+  if (!/^## Reglas/m.test(texto)) problemas.push('falta ## Reglas');
+  texto.split('\n').forEach((linea, i) => {
+    if (/sk_\w+|PRIVATE KEY|password=\S/.test(linea)) problemas.push(`tiene un secreto en la línea ${i + 1}`);
+  });
+  return problemas;
+}
+```
 
 ```practica
 vf :: Claude Code lee CLAUDE.md al empezar a trabajar en el proyecto
@@ -116,6 +172,41 @@ Cuando un cambio está bien, **commit** (Tema 06). Si el siguiente sale mal, vue
 
 > 🌎 **Otro ejemplo:** Es como sacar fotos de cada paso al desarmar algo: después sabes cómo volver a armarlo.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Tocó solo lo que pediste?
+lenguaje: js
+pide: Completa `archivosDelDiff(stat)`: lee la salida de `git diff --stat` y devuelve los archivos que cambiaron (lo de antes del `|`, sin espacios), sin la última línea de resumen. Y `tocoDeMas(stat, pedidos)`: los archivos que cambiaron y **no** estaban en la lista de lo pedido.
+--- código
+function archivosDelDiff(stat) {
+  // tu código aquí
+}
+
+function tocoDeMas(stat, pedidos) {
+  // tu código aquí
+}
+--- pruebas
+const stat = ` web/vistas/cuenta.js  | 12 ++++++------
+ web/estilos.css        | 40 ++++++++++++++++++++++++++++++++++++++++
+ package.json           |  1 +
+ 3 files changed, 47 insertions(+), 6 deletions(-)`;
+prueba('los archivos', () => igual(archivosDelDiff(stat), ['web/vistas/cuenta.js', 'web/estilos.css', 'package.json']));
+prueba('lo que tocó de más', () => igual(tocoDeMas(stat, ['web/vistas/cuenta.js']), ['web/estilos.css', 'package.json']));
+prueba('nada de más', () => igual(tocoDeMas(' a.js | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)', ['a.js']), []));
+--- solución
+function archivosDelDiff(stat) {
+  return stat
+    .split('\n')
+    .filter((linea) => linea.includes('|'))
+    .map((linea) => linea.split('|')[0].trim());
+}
+
+function tocoDeMas(stat, pedidos) {
+  return archivosDelDiff(stat).filter((a) => !pedidos.includes(a));
+}
+```
+
 ```practica
 vf :: Si Claude Code dice que terminó, no hace falta revisar nada
 vf :: git diff muestra qué líneas cambiaron
@@ -153,6 +244,36 @@ Para buscar mucho o revisar algo grande, Claude Code puede lanzar **subagentes**
 > 🌎 **En la vida real:** es como los enchufes estándar: cualquier aparato se conecta a cualquier pared.
 
 > 🌎 **Otro ejemplo:** Es como el USB: un mismo conector para el mouse, la memoria o la impresora.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una sesión por tarea, y el subagente que resume
+lenguaje: js
+pide: Completa `otraSesion(temaActual, pedido)`: `true` si el pedido es de **otro** tema (el `pedido.tema` es distinto del actual) y no es una corrección (`pedido.esCorreccion` no es `true`). Y `loQueVuelve(resultados)`: lo que un subagente le devuelve al principal después de buscar en muchos archivos: solo `{ revisados, conProblemas }`, con la cantidad de archivos y la lista de los que tienen `problemas > 0`, no todo el detalle.
+--- código
+function otraSesion(temaActual, pedido) {
+  // tu código aquí
+}
+
+function loQueVuelve(resultados) {
+  // tu código aquí
+}
+--- pruebas
+prueba('lo mismo, sigue', () => igual(otraSesion('login', { tema: 'login' }), false));
+prueba('una corrección, sigue aunque cambie de palabra', () => igual(otraSesion('login', { tema: 'botón', esCorreccion: true }), false));
+prueba('otra cosa, otra sesión', () => igual(otraSesion('login', { tema: 'audios' }), true));
+const resultados = [{ archivo: 'a.js', problemas: 0, detalle: 'x'.repeat(500) }, { archivo: 'b.js', problemas: 2, detalle: 'y'.repeat(500) }, { archivo: 'c.js', problemas: 1, detalle: '' }];
+prueba('vuelve solo el resumen', () => igual(loQueVuelve(resultados), { revisados: 3, conProblemas: ['b.js', 'c.js'] }));
+--- solución
+function otraSesion(temaActual, pedido) {
+  return pedido.tema !== temaActual && pedido.esCorreccion !== true;
+}
+
+function loQueVuelve(resultados) {
+  return { revisados: resultados.length, conProblemas: resultados.filter((r) => r.problemas > 0).map((r) => r.archivo) };
+}
+```
 
 ```practica
 vf :: Conviene hacer una tarea por sesión para mantener el contexto limpio
