@@ -34,6 +34,39 @@ npx expo start
 
 > 🌎 **Otro ejemplo:** Es como el DNI de la app.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Revisar el app.json antes de empezar
+lenguaje: js
+pide: Completa `problemasDe(config)`, que revisa un `app.json` de Expo (`config.expo`). Devuelve la lista de problemas, en este orden: `'Falta el nombre'` si no hay `name`; `'La versión tiene que ser como 1.0.0'` si `version` no tiene la forma número.número.número; `'El paquete de Android no es válido'` si `android.package` no es como `com.delvin.gastos` (dos o más pedazos separados por punto, cada uno empieza con letra minúscula y sigue con minúsculas, números o `_`).
+--- código
+function problemasDe(config) {
+  const problemas = [];
+  // tu código aquí
+  return problemas;
+}
+--- pruebas
+const bien = { expo: { name: 'Mis gastos', version: '1.0.0', android: { package: 'com.delvin.gastos' } } };
+prueba('todo bien', () => igual(problemasDe(bien), []));
+prueba('sin nombre', () => igual(problemasDe({ expo: { ...bien.expo, name: '' } }), ['Falta el nombre']));
+prueba('versión mal escrita', () => igual(problemasDe({ expo: { ...bien.expo, version: '1.0' } }), ['La versión tiene que ser como 1.0.0']));
+prueba('paquetes que no valen', () => {
+  for (const p of ['gastos', 'com.Delvin.gastos', 'com.delvin-app.gastos', '1com.delvin']) {
+    igual(problemasDe({ expo: { ...bien.expo, android: { package: p } } }), ['El paquete de Android no es válido']);
+  }
+});
+--- solución
+function problemasDe(config) {
+  const problemas = [];
+  const { name, version, android } = config.expo;
+  if (!name) problemas.push('Falta el nombre');
+  if (!/^\d+\.\d+\.\d+$/.test(version ?? '')) problemas.push('La versión tiene que ser como 1.0.0');
+  if (!/^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$/.test(android?.package ?? '')) problemas.push('El paquete de Android no es válido');
+  return problemas;
+}
+```
+
 ```practica
 vf :: npx expo start levanta el servidor de desarrollo y muestra un código QR
 vf :: Para empezar con Expo hay que pagar una cuenta de Apple
@@ -69,6 +102,38 @@ Expo Go trae un conjunto fijo de piezas nativas. Si tu app necesita una pieza na
 
 > 🌎 **Otro ejemplo:** Es como una cocina de prueba con utensilios estándar.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Alcanza Expo Go?
+lenguaje: js
+pide: Completa dos funciones. `faltanEnExpoGo(modulos, incluidos)` devuelve los módulos nativos de tu app que **no** trae Expo Go (en el mismo orden). `comoAbrir(modulos, incluidos, redDeOficina)` devuelve el comando: si falta algún módulo, `'npx expo run:ios'` (un development build); si no, `'npx expo start --tunnel'` cuando la red no deja conectar, o `'npx expo start'`.
+--- código
+function faltanEnExpoGo(modulos, incluidos) {
+  // tu código aquí
+}
+
+function comoAbrir(modulos, incluidos, redDeOficina) {
+  // tu código aquí
+}
+--- pruebas
+const expoGo = ['expo-camera', 'expo-location', 'expo-secure-store'];
+prueba('todo viene en Expo Go', () => igual(faltanEnExpoGo(['expo-camera', 'expo-location'], expoGo), []));
+prueba('falta uno', () => igual(faltanEnExpoGo(['expo-camera', 'mi-modulo-nativo'], expoGo), ['mi-modulo-nativo']));
+prueba('en casa', () => igual(comoAbrir(['expo-camera'], expoGo, false), 'npx expo start'));
+prueba('en la red de la oficina', () => igual(comoAbrir(['expo-camera'], expoGo, true), 'npx expo start --tunnel'));
+prueba('con un módulo propio: development build', () => igual(comoAbrir(['mi-modulo-nativo'], expoGo, false), 'npx expo run:ios'));
+--- solución
+function faltanEnExpoGo(modulos, incluidos) {
+  return modulos.filter((m) => !incluidos.includes(m));
+}
+
+function comoAbrir(modulos, incluidos, redDeOficina) {
+  if (faltanEnExpoGo(modulos, incluidos).length > 0) return 'npx expo run:ios';
+  return redDeOficina ? 'npx expo start --tunnel' : 'npx expo start';
+}
+```
+
 ```practica
 vf :: Con Fast Refresh, al guardar el código la app del teléfono se actualiza sola
 vf :: Expo Go puede usar cualquier pieza nativa que agregues a tu proyecto
@@ -98,6 +163,41 @@ Copia en Snack el `ContadorDeViajes` (clase 55) y agrégale un botón "reiniciar
 > 🌎 **En la vida real:** es como el primer ejercicio del gimnasio: corto, pero completo.
 
 > 🌎 **Otro ejemplo:** Es como tocar tu primera canción entera, aunque sea simple.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El contador de viajes, con reiniciar
+lenguaje: js
+pide: Es el ejercicio de Snack, pero con la lógica sola. Completa `crearContador()`: devuelve `{ sumar(), reiniciar(), texto() }`. `texto()` es `'Viajes hoy: N'`, y cuando pasas de **10** viajes (11 o más) agrega `' · ¡Buen día!'`. `reiniciar()` vuelve a 0.
+--- código
+function crearContador() {
+  let viajes = 0;
+  return {
+    // tu código aquí
+  };
+}
+--- pruebas
+prueba('empieza en 0', () => igual(crearContador().texto(), 'Viajes hoy: 0'));
+prueba('suma de a uno', () => { const c = crearContador(); c.sumar(); c.sumar(); igual(c.texto(), 'Viajes hoy: 2'); });
+prueba('10 todavía no; 11 sí', () => {
+  const c = crearContador();
+  for (let i = 0; i < 10; i++) c.sumar();
+  igual(c.texto(), 'Viajes hoy: 10');
+  c.sumar();
+  igual(c.texto(), 'Viajes hoy: 11 · ¡Buen día!');
+});
+prueba('reiniciar', () => { const c = crearContador(); c.sumar(); c.reiniciar(); igual(c.texto(), 'Viajes hoy: 0'); });
+--- solución
+function crearContador() {
+  let viajes = 0;
+  return {
+    sumar() { viajes += 1; },
+    reiniciar() { viajes = 0; },
+    texto() { return `Viajes hoy: ${viajes}` + (viajes > 10 ? ' · ¡Buen día!' : ''); },
+  };
+}
+```
 
 ```practica
 vf :: Expo Snack permite escribir React Native en el navegador sin instalar nada

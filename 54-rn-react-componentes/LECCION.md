@@ -46,6 +46,37 @@ La pantalla de inicio de Copiloto está hecha así: muchas piezas chicas, cada u
 
 > 🌎 **Otro ejemplo:** Es como una orquesta: cada músico es un componente y la sinfonía es la pantalla.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que hace React con tus componentes
+lenguaje: js
+pide: Un elemento es `{ tipo, props, hijos }`. Completa `dibujar(el)`, que lo convierte en texto como lo haría React: si `el` es un texto o un número, devuélvelo como texto; si `tipo` es una **función** (un componente), llámala con `{ ...props, children: hijos }` y dibuja lo que devuelve; si es `'Text'`, une sus hijos dibujados sin espacio; si es `'View'`, únelos con un salto de línea (`'\n'`).
+--- código
+const h = (tipo, props = {}, ...hijos) => ({ tipo, props, hijos });
+
+function dibujar(el) {
+  // tu código aquí
+}
+--- pruebas
+function Saludo({ nombre }) { return h('Text', {}, 'Hola, ', nombre, ' 👋'); }
+function Viajes({ cantidad }) { return h('Text', {}, 'Viajes hoy: ', cantidad); }
+function Inicio() { return h('View', {}, h(Saludo, { nombre: 'Delvin' }), h(Viajes, { cantidad: 3 })); }
+prueba('un Text', () => igual(dibujar(h('Text', {}, 'Mis gastos')), 'Mis gastos'));
+prueba('un componente con props', () => igual(dibujar(h(Saludo, { nombre: 'Ana' })), 'Hola, Ana 👋'));
+prueba('un número se dibuja como texto', () => igual(dibujar(h(Viajes, { cantidad: 7 })), 'Viajes hoy: 7'));
+prueba('componentes dentro de componentes', () => igual(dibujar(h(Inicio)), 'Hola, Delvin 👋\nViajes hoy: 3'));
+--- solución
+const h = (tipo, props = {}, ...hijos) => ({ tipo, props, hijos });
+
+function dibujar(el) {
+  if (typeof el === 'string' || typeof el === 'number') return String(el);
+  if (typeof el.tipo === 'function') return dibujar(el.tipo({ ...el.props, children: el.hijos }));
+  const partes = el.hijos.map(dibujar);
+  return el.tipo === 'View' ? partes.join('\n') : partes.join('');
+}
+```
+
 ```practica
 vf :: Un componente de React es una función que devuelve lo que se dibuja
 vf :: Un componente se puede llamar saludo con minúscula sin problema
@@ -95,6 +126,34 @@ function ResumenDelDia({ ganancia, viajes }: { ganancia: number; viajes: number 
 
 > 🌎 **Otro ejemplo:** Es como la placa de cada carro en un estacionamiento.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El resumen del día, con && y map
+lenguaje: js
+pide: Completa `lineasDelResumen({ ganancia, viajes, gastos })`: devuelve las líneas que mostraría la pantalla, en orden. Siempre `'Viajes: N'` y `'Ganancia: R$ X'` (con `toFixed(2)`). Si la ganancia es **250 o más**, agrega `'🎉 ¡Meta cumplida!'` (como el `&&` de JSX). Después, si no hay gastos, `'Todavía no hay gastos'`; si hay, una línea `'tipo: R$ X'` por gasto (como el `map`).
+--- código
+function lineasDelResumen({ ganancia, viajes, gastos }) {
+  const lineas = [];
+  // tu código aquí
+  return lineas;
+}
+--- pruebas
+prueba('un día normal, sin gastos', () => igual(lineasDelResumen({ ganancia: 120, viajes: 8, gastos: [] }), ['Viajes: 8', 'Ganancia: R$ 120.00', 'Todavía no hay gastos']));
+prueba('la meta, justo en el borde', () => igual(lineasDelResumen({ ganancia: 250, viajes: 15, gastos: [] })[2], '🎉 ¡Meta cumplida!'));
+prueba('con gastos, uno por línea', () => igual(lineasDelResumen({ ganancia: 90.5, viajes: 5, gastos: [{ id: 1, tipo: 'lavado', valor: 30 }, { id: 2, tipo: 'peaje', valor: 5.4 }] }), ['Viajes: 5', 'Ganancia: R$ 90.50', 'lavado: R$ 30.00', 'peaje: R$ 5.40']));
+--- solución
+function lineasDelResumen({ ganancia, viajes, gastos }) {
+  const lineas = [];
+  lineas.push(`Viajes: ${viajes}`);
+  lineas.push(`Ganancia: R$ ${ganancia.toFixed(2)}`);
+  if (ganancia >= 250) lineas.push('🎉 ¡Meta cumplida!');
+  if (gastos.length === 0) lineas.push('Todavía no hay gastos');
+  else lineas.push(...gastos.map((g) => `${g.tipo}: R$ ${g.valor.toFixed(2)}`));
+  return lineas;
+}
+```
+
 ```practica
 vf :: En JSX, el código JavaScript va entre llaves
 vf :: Un componente puede devolver dos elementos sueltos sin envolverlos
@@ -143,6 +202,44 @@ Este es el flujo de React: **los datos bajan** por props de padre a hijo, y **lo
 > 🌎 **En la vida real:** es como una empresa: las órdenes bajan del jefe y los informes suben.
 
 > 🌎 **Otro ejemplo:** Es como un río con un teléfono: el agua baja, las llamadas suben.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los datos bajan, los avisos suben
+lenguaje: js
+pide: Completa dos funciones. `crearTarjeta({ tipo, valor, alTocar })` devuelve `{ texto, tocar }`: `texto` es `'tipo · R$ X'` (con `toFixed(2)`) y `tocar()` llama a `alTocar` **solo si existe** (es opcional). `crearLista(gastos, alElegir)` (el padre) devuelve una tarjeta por gasto, y al tocar una le avisa al padre con `alElegir(id)` de ese gasto.
+--- código
+function crearTarjeta({ tipo, valor, alTocar }) {
+  // tu código aquí
+}
+
+function crearLista(gastos, alElegir) {
+  // tu código aquí
+}
+--- pruebas
+const gastos = [{ id: 1, tipo: 'lavado', valor: 30 }, { id: 2, tipo: 'peaje', valor: 5 }];
+prueba('el texto de la tarjeta', () => igual(crearTarjeta({ tipo: 'lavado', valor: 30 }).texto, 'lavado · R$ 30.00'));
+prueba('sin alTocar no se rompe', () => { crearTarjeta({ tipo: 'peaje', valor: 5 }).tocar(); });
+prueba('el aviso sube al padre con el id', () => {
+  const elegidos = [];
+  const lista = crearLista(gastos, (id) => elegidos.push(id));
+  lista[1].tocar();
+  igual(elegidos, [2]);
+});
+prueba('una tarjeta por gasto', () => igual(crearLista(gastos, () => {}).map((t) => t.texto), ['lavado · R$ 30.00', 'peaje · R$ 5.00']));
+--- solución
+function crearTarjeta({ tipo, valor, alTocar }) {
+  return {
+    texto: `${tipo} · R$ ${valor.toFixed(2)}`,
+    tocar() { if (alTocar) alTocar(); },
+  };
+}
+
+function crearLista(gastos, alElegir) {
+  return gastos.map((g) => crearTarjeta({ tipo: g.tipo, valor: g.valor, alTocar: () => alElegir(g.id) }));
+}
+```
 
 ```practica
 vf :: Un componente puede cambiar las props que recibe

@@ -55,6 +55,36 @@ const Pila = createNativeStackNavigator();
 
 > 🌎 **Otro ejemplo:** Es como las páginas de un libro: avanzas y retrocedes.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una pila de pantallas de juguete
+lenguaje: js
+pide: Completa `crearPila(inicial)`: devuelve `{ navigate(nombre, params), goBack(), actual(), cuantas() }`. La pila empieza con la pantalla `inicial` (sin params). `navigate` pone una pantalla nueva **encima**; `goBack` saca la de arriba, pero **nunca** la primera; `actual()` devuelve `{ nombre, params }` de la de arriba; `cuantas()`, cuántas hay.
+--- código
+function crearPila(inicial) {
+  const pantallas = [{ nombre: inicial, params: undefined }];
+  return {
+    // tu código aquí
+  };
+}
+--- pruebas
+prueba('empieza en la inicial', () => igual(crearPila('ListaGastos').actual(), { nombre: 'ListaGastos' }));
+prueba('ir al detalle con su id', () => { const p = crearPila('ListaGastos'); p.navigate('DetalleGasto', { id: 3 }); igual(p.actual(), { nombre: 'DetalleGasto', params: { id: 3 } }); igual(p.cuantas(), 2); });
+prueba('volver', () => { const p = crearPila('ListaGastos'); p.navigate('DetalleGasto', { id: 3 }); p.goBack(); igual(p.actual().nombre, 'ListaGastos'); });
+prueba('la primera no se saca', () => { const p = crearPila('ListaGastos'); p.goBack(); p.goBack(); igual(p.cuantas(), 1); });
+--- solución
+function crearPila(inicial) {
+  const pantallas = [{ nombre: inicial, params: undefined }];
+  return {
+    navigate(nombre, params) { pantallas.push({ nombre, params }); },
+    goBack() { if (pantallas.length > 1) pantallas.pop(); },
+    actual() { return pantallas[pantallas.length - 1]; },
+    cuantas() { return pantallas.length; },
+  };
+}
+```
+
 ```practica
 vf :: Copiloto usa React Navigation con pestañas abajo y pilas de pantallas
 vf :: native-stack usa transiciones dibujadas por JavaScript, distintas a las del teléfono
@@ -101,6 +131,31 @@ Manda **solo el id**, no el objeto entero: la pantalla de detalle lo busca. Así
 
 > 🌎 **Otro ejemplo:** Es como el marcador de un libro que te abre en la página justa.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Del enlace a la pantalla
+lenguaje: js
+pide: Completa `pantallaDeEnlace(url)`, como el `linking` de React Navigation. `gastos://inicio` → `{ pantalla: 'Inicio' }`; `gastos://gasto/7` → `{ pantalla: 'DetalleGasto', params: { id: 7 } }` (el id como **número**, solo enteros de 1 para arriba). Cualquier otra cosa → `null`. Fíjate que solo viaja el **id**: la pantalla busca el gasto.
+--- código
+function pantallaDeEnlace(url) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el inicio', () => igual(pantallaDeEnlace('gastos://inicio'), { pantalla: 'Inicio' }));
+prueba('un gasto', () => igual(pantallaDeEnlace('gastos://gasto/7'), { pantalla: 'DetalleGasto', params: { id: 7 } }));
+prueba('un id que no es número', () => igual(pantallaDeEnlace('gastos://gasto/abc'), null));
+prueba('otra app', () => igual(pantallaDeEnlace('otraapp://gasto/7'), null));
+prueba('una pantalla que no existe', () => igual(pantallaDeEnlace('gastos://perfil'), null));
+--- solución
+function pantallaDeEnlace(url) {
+  if (url === 'gastos://inicio') return { pantalla: 'Inicio' };
+  const m = url.match(/^gastos:\/\/gasto\/(\d+)$/);
+  if (!m || Number(m[1]) < 1) return null;
+  return { pantalla: 'DetalleGasto', params: { id: Number(m[1]) } };
+}
+```
+
 ```practica
 vf :: Conviene mandar a la pantalla de detalle solo el id, no el objeto entero
 vf :: Con TypeScript no se pueden tipar los params de las rutas
@@ -143,6 +198,50 @@ Es **asíncrono** (clase 49) y solo guarda **texto** (por eso `JSON.stringify`, 
 > 🌎 **En la vida real:** en la guantera dejas el manual del carro, no tus documentos de identidad.
 
 > 🌎 **Otro ejemplo:** Es como una nota en la nevera frente a una caja fuerte.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Guardar en el teléfono, con cuidado
+lenguaje: js
+pide: `almacen` es como AsyncStorage: `await almacen.getItem(clave)` y `await almacen.setItem(clave, texto)`, y **solo guarda texto**. Completa `guardarJSON(almacen, clave, valor)`, que lo guarda como JSON, pero **lanza** un `Error('Eso va en SecureStore')` si la clave tiene `token` o `clave` (no está cifrado). Y `leerJSON(almacen, clave, porDefecto)`, que devuelve el valor, o `porDefecto` si no hay nada o si el texto guardado está roto.
+--- código
+async function guardarJSON(almacen, clave, valor) {
+  // tu código aquí
+}
+
+async function leerJSON(almacen, clave, porDefecto) {
+  // tu código aquí
+}
+--- pruebas
+function almacenDePrueba() {
+  const datos = {};
+  return { async getItem(k) { return k in datos ? datos[k] : null; }, async setItem(k, v) { if (typeof v !== 'string') throw new Error('solo texto'); datos[k] = v; } };
+}
+prueba('guarda y lee un objeto', async () => { const a = almacenDePrueba(); await guardarJSON(a, 'tema', { oscuro: true }); igual(await leerJSON(a, 'tema', null), { oscuro: true }); });
+prueba('sin nada guardado', async () => igual(await leerJSON(almacenDePrueba(), 'tema', { oscuro: false }), { oscuro: false }));
+prueba('texto roto: el valor por defecto', async () => { const a = almacenDePrueba(); await a.setItem('tema', '{roto'); igual(await leerJSON(a, 'tema', 'nada'), 'nada'); });
+prueba('un token no va aquí', async () => {
+  let mensaje = null;
+  try { await guardarJSON(almacenDePrueba(), 'tokenDeSesion', 'abc'); } catch (e) { mensaje = e.message; }
+  igual(mensaje, 'Eso va en SecureStore');
+});
+--- solución
+async function guardarJSON(almacen, clave, valor) {
+  if (/token|clave/i.test(clave)) throw new Error('Eso va en SecureStore');
+  await almacen.setItem(clave, JSON.stringify(valor));
+}
+
+async function leerJSON(almacen, clave, porDefecto) {
+  const texto = await almacen.getItem(clave);
+  if (texto === null) return porDefecto;
+  try {
+    return JSON.parse(texto);
+  } catch {
+    return porDefecto;
+  }
+}
+```
 
 ```practica
 vf :: AsyncStorage guarda datos que siguen ahí al cerrar la app

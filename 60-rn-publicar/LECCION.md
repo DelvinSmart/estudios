@@ -28,6 +28,46 @@ Se prueba **como lo usa una persona**: buscar el texto, tocar, ver el resultado.
 
 > 🌎 **Otro ejemplo:** Es como el cliente misterioso que prueba la atención de una tienda.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una Testing Library de juguete
+lenguaje: js
+pide: Se prueba **como lo usa una persona**: buscar un texto y tocar. Un árbol es `{ tipo, props, hijos }` y los hijos pueden ser textos. Completa `tocarTexto(arbol, texto)`: busca el `Text` que tiene ese texto y llama al `onPress` del `Pressable` **más cercano que lo envuelve**. Si no encuentra el texto, lanza `Error('No encontré "texto"')`; si lo encuentra pero no hay nada que tocar, `Error('"texto" no se puede tocar')`.
+--- código
+function tocarTexto(arbol, texto) {
+  // tu código aquí
+}
+--- pruebas
+const t = (tipo, props, ...hijos) => ({ tipo, props, hijos });
+let viajes = 0;
+const pantalla = t('View', {},
+  t('Text', {}, 'Viajes hoy'),
+  t('Pressable', { onPress: () => { viajes++; } }, t('View', {}, t('Text', {}, '+1 viaje'))),
+  t('Pressable', { onPress: () => { viajes = 0; } }, t('Text', {}, 'reiniciar')));
+prueba('tocar suma un viaje', () => { viajes = 0; tocarTexto(pantalla, '+1 viaje'); tocarTexto(pantalla, '+1 viaje'); igual(viajes, 2); });
+prueba('el botón más cercano', () => { viajes = 5; tocarTexto(pantalla, 'reiniciar'); igual(viajes, 0); });
+prueba('un texto que no existe', () => { let m = null; try { tocarTexto(pantalla, 'borrar'); } catch (e) { m = e.message; } igual(m, 'No encontré "borrar"'); });
+prueba('un texto que no se toca', () => { let m = null; try { tocarTexto(pantalla, 'Viajes hoy'); } catch (e) { m = e.message; } igual(m, '"Viajes hoy" no se puede tocar'); });
+--- solución
+function tocarTexto(arbol, texto) {
+  function buscar(nodo, boton) {
+    if (typeof nodo === 'string') return null;
+    const cerca = nodo.tipo === 'Pressable' ? nodo : boton;
+    if (nodo.tipo === 'Text' && nodo.hijos.join('') === texto) return { boton: cerca };
+    for (const hijo of nodo.hijos) {
+      const r = buscar(hijo, cerca);
+      if (r) return r;
+    }
+    return null;
+  }
+  const encontrado = buscar(arbol, null);
+  if (!encontrado) throw new Error(`No encontré "${texto}"`);
+  if (!encontrado.boton) throw new Error(`"${texto}" no se puede tocar`);
+  encontrado.boton.props.onPress();
+}
+```
+
 ```practica
 vf :: Testing Library prueba los componentes como los usa una persona: buscar, tocar y ver
 vf :: fireEvent.press toca un botón de verdad en tu teléfono
@@ -67,6 +107,46 @@ eas build --platform ios --profile production
 
 > 🌎 **Otro ejemplo:** Es como la llave de tu casa: si la pierdes, no puedes entrar a cambiar nada.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Subir la versión antes de cada build
+lenguaje: js
+pide: Completa `queArchivo(destino)`: `'google-play'` → `'AAB'`; `'mi-telefono'` → `'APK'`; otro → `null`. Y `subirVersion(config)`: devuelve una **copia** del `app.json` con `expo.android.versionCode` sumado en 1 y `expo.ios.buildNumber` (que es **texto**) sumado en 1. No cambies el original.
+--- código
+function queArchivo(destino) {
+  // tu código aquí
+}
+
+function subirVersion(config) {
+  // tu código aquí
+}
+--- pruebas
+const config = { expo: { name: 'Mis gastos', version: '1.2.0', android: { package: 'com.delvin.gastos', versionCode: 89 }, ios: { buildNumber: '41' } } };
+prueba('qué archivo va a cada lugar', () => igual(['google-play', 'mi-telefono', 'otro'].map(queArchivo), ['AAB', 'APK', null]));
+prueba('sube los dos números', () => { const n = subirVersion(config); igual(n.expo.android.versionCode, 90); igual(n.expo.ios.buildNumber, '42'); });
+prueba('no toca el original', () => { subirVersion(config); igual(config.expo.android.versionCode, 89); igual(config.expo.ios.buildNumber, '41'); });
+prueba('lo demás queda igual', () => igual(subirVersion(config).expo.android.package, 'com.delvin.gastos'));
+--- solución
+function queArchivo(destino) {
+  if (destino === 'google-play') return 'AAB';
+  if (destino === 'mi-telefono') return 'APK';
+  return null;
+}
+
+function subirVersion(config) {
+  const { expo } = config;
+  return {
+    ...config,
+    expo: {
+      ...expo,
+      android: { ...expo.android, versionCode: expo.android.versionCode + 1 },
+      ios: { ...expo.ios, buildNumber: String(Number(expo.ios.buildNumber) + 1) },
+    },
+  };
+}
+```
+
 ```practica
 vf :: A Google Play se sube un AAB
 vf :: Si pierdes la llave de firma, puedes seguir actualizando la app normal
@@ -101,6 +181,32 @@ escribe :: ¿Qué diferencia hay entre un AAB y un APK? :: El AAB es el paquete 
 > 🌎 **En la vida real:** cambiar el menú del día (JavaScript) es rápido; remodelar la cocina (nativo) necesita permiso de obra.
 
 > 🌎 **Otro ejemplo:** Es como actualizar los precios de una vitrina frente a cambiar la vitrina.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Actualización por aire o build nuevo?
+lenguaje: js
+pide: Completa `comoActualizar(archivos)` con la lista de archivos que cambiaste. Si alguno es **nativo**, devuelve `'build nuevo'`: `app.json`, `package.json`, `eas.json`, o algo dentro de `ios/` o `android/`. Si no (solo pantallas y lógica en JavaScript o TypeScript), `'EAS Update'`. Si la lista está vacía, `'nada que publicar'`.
+--- código
+function comoActualizar(archivos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('solo pantallas', () => igual(comoActualizar(['src/screens/Inicio.tsx', 'src/logica/total.ts']), 'EAS Update'));
+prueba('un permiso nuevo en app.json', () => igual(comoActualizar(['src/screens/Inicio.tsx', 'app.json']), 'build nuevo'));
+prueba('una librería nueva', () => igual(comoActualizar(['package.json']), 'build nuevo'));
+prueba('algo nativo de Android', () => igual(comoActualizar(['android/app/build.gradle']), 'build nuevo'));
+prueba('un archivo que se llama parecido no engaña', () => igual(comoActualizar(['src/android/colores.ts']), 'EAS Update'));
+prueba('nada', () => igual(comoActualizar([]), 'nada que publicar'));
+--- solución
+function comoActualizar(archivos) {
+  if (archivos.length === 0) return 'nada que publicar';
+  const nativos = ['app.json', 'package.json', 'eas.json'];
+  const esNativo = (a) => nativos.includes(a) || a.startsWith('ios/') || a.startsWith('android/');
+  return archivos.some(esNativo) ? 'build nuevo' : 'EAS Update';
+}
+```
 
 ```practica
 vf :: Para probar la app en tu propio iPhone no hace falta publicarla

@@ -39,6 +39,37 @@ Firestore guarda una copia local: la app sigue mostrando los datos y manda los c
 
 > 🌎 **Otro ejemplo:** Es como un mensaje de WhatsApp con un solo tilde: enviado, pero no llegó todavía.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: De la foto de Firestore a la lista
+lenguaje: js
+pide: `onSnapshot` te entrega una **foto** con `docs`; cada documento tiene `id`, `data()` y `metadata.hasPendingWrites` (verdadero si ese cambio **todavía no llegó** a la nube). Completa `aGastos(foto)`: devuelve `{ id, ...datos, pendiente }` de cada documento. Y `aviso(gastos)`: `'Todo guardado en la nube'` si ninguno está pendiente, o `'N sin guardar todavía'`.
+--- código
+function aGastos(foto) {
+  // tu código aquí
+}
+
+function aviso(gastos) {
+  // tu código aquí
+}
+--- pruebas
+const doc = (id, datos, pendiente) => ({ id, data: () => datos, metadata: { hasPendingWrites: pendiente } });
+const foto = { docs: [doc('a1', { tipo: 'lavado', valor: 30 }, false), doc('b2', { tipo: 'peaje', valor: 5 }, true)] };
+prueba('arma cada gasto con su id', () => igual(aGastos(foto), [{ id: 'a1', tipo: 'lavado', valor: 30, pendiente: false }, { id: 'b2', tipo: 'peaje', valor: 5, pendiente: true }]));
+prueba('el aviso con uno pendiente', () => igual(aviso(aGastos(foto)), '1 sin guardar todavía'));
+prueba('todo guardado', () => igual(aviso(aGastos({ docs: [doc('a1', { tipo: 'lavado', valor: 30 }, false)] })), 'Todo guardado en la nube'));
+--- solución
+function aGastos(foto) {
+  return foto.docs.map((d) => ({ id: d.id, ...d.data(), pendiente: d.metadata.hasPendingWrites }));
+}
+
+function aviso(gastos) {
+  const n = gastos.filter((g) => g.pendiente).length;
+  return n === 0 ? 'Todo guardado en la nube' : `${n} sin guardar todavía`;
+}
+```
+
 ```practica
 vf :: onSnapshot avisa cada vez que cambian los datos en Firestore
 vf :: Si no se cancela onSnapshot al salir de la pantalla, no pasa nada
@@ -72,6 +103,50 @@ Copiloto tiene sus contextos en `src/context` (por ejemplo, la cuenta del usuari
 > 🌎 **En la vida real:** es como el wifi de la casa: todos los cuartos lo reciben sin cables.
 
 > 🌎 **Otro ejemplo:** Es como la hora oficial: todos los relojes la toman de la misma fuente.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un Context de juguete
+lenguaje: js
+pide: Completa `crearContexto(porDefecto)`: devuelve `{ Proveedor(valor, dibujarHijos), usar() }`. `usar()` devuelve el valor del **Proveedor más cercano** que está dibujando, o `porDefecto` si no hay ninguno. `Proveedor` pone su valor, llama a `dibujarHijos()`, **quita** su valor (aunque falle) y devuelve lo que devolvió `dibujarHijos`. Pista: una pila.
+--- código
+function crearContexto(porDefecto) {
+  const pila = [];
+  return {
+    Proveedor(valor, dibujarHijos) {
+      // tu código aquí
+    },
+    usar() {
+      // tu código aquí
+    },
+  };
+}
+--- pruebas
+const Sesion = crearContexto({ uid: null });
+const Pantalla = () => `uid: ${Sesion.usar().uid}`;
+prueba('sin proveedor: el valor por defecto', () => igual(Pantalla(), 'uid: null'));
+prueba('con proveedor, sin pasar props', () => igual(Sesion.Proveedor({ uid: 'ana' }, () => Pantalla()), 'uid: ana'));
+prueba('el más cercano gana', () => igual(Sesion.Proveedor({ uid: 'ana' }, () => [Pantalla(), Sesion.Proveedor({ uid: 'beto' }, Pantalla), Pantalla()]), ['uid: ana', 'uid: beto', 'uid: ana']));
+prueba('al terminar, se quita', () => { try { Sesion.Proveedor({ uid: 'ana' }, () => { throw new Error('x'); }); } catch (e) {} igual(Pantalla(), 'uid: null'); });
+--- solución
+function crearContexto(porDefecto) {
+  const pila = [];
+  return {
+    Proveedor(valor, dibujarHijos) {
+      pila.push(valor);
+      try {
+        return dibujarHijos();
+      } finally {
+        pila.pop();
+      }
+    },
+    usar() {
+      return pila.length ? pila[pila.length - 1] : porDefecto;
+    },
+  };
+}
+```
 
 ```practica
 vf :: Context permite compartir datos entre muchas pantallas sin pasar props por cada nivel
@@ -111,6 +186,64 @@ No adivines: mide con el perfilador (en Copiloto se usó el de **Hermes**, el mo
 > 🌎 **En la vida real:** antes de cambiar piezas, el mecánico conecta el escáner y ve qué falla.
 
 > 🌎 **Otro ejemplo:** Es como un médico que pide análisis antes de recetar.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: React.memo de juguete
+lenguaje: js
+pide: Completa `iguales(a, b)` (comparación **superficial**: mismas claves y cada valor igual con `Object.is`) y `memo(componente)`: devuelve una función que recibe `props` y solo vuelve a llamar al componente si las props **no** son iguales a las de la vez anterior; si son iguales, devuelve el resultado guardado.
+--- código
+function iguales(a, b) {
+  // tu código aquí
+}
+
+function memo(componente) {
+  let propsAntes = null;
+  let resultado;
+  return function (props) {
+    // tu código aquí
+  };
+}
+--- pruebas
+prueba('comparación superficial', () => {
+  igual(iguales({ tipo: 'lavado', valor: 30 }, { tipo: 'lavado', valor: 30 }), true);
+  igual(iguales({ tipo: 'lavado' }, { tipo: 'lavado', valor: 30 }), false);
+  igual(iguales({ g: { id: 1 } }, { g: { id: 1 } }), false);
+});
+prueba('mismas props: no vuelve a dibujar', () => {
+  let dibujos = 0;
+  const Tarjeta = memo(({ tipo }) => { dibujos++; return tipo; });
+  Tarjeta({ tipo: 'lavado' }); Tarjeta({ tipo: 'lavado' }); Tarjeta({ tipo: 'peaje' });
+  igual(dibujos, 2);
+});
+prueba('una función nueva en cada dibujo rompe el memo (por eso useCallback)', () => {
+  let dibujos = 0;
+  const Boton = memo(() => { dibujos++; });
+  Boton({ alTocar: () => {} }); Boton({ alTocar: () => {} });
+  igual(dibujos, 2);
+  const misma = () => {};
+  Boton({ alTocar: misma }); Boton({ alTocar: misma });
+  igual(dibujos, 3);
+});
+--- solución
+function iguales(a, b) {
+  const ka = Object.keys(a);
+  const kb = Object.keys(b);
+  return ka.length === kb.length && ka.every((k) => Object.is(a[k], b[k]));
+}
+
+function memo(componente) {
+  let propsAntes = null;
+  let resultado;
+  return function (props) {
+    if (propsAntes && iguales(propsAntes, props)) return resultado;
+    propsAntes = props;
+    resultado = componente(props);
+    return resultado;
+  };
+}
+```
 
 ```practica
 vf :: Un cambio de estado arriba vuelve a dibujar todo lo que está debajo

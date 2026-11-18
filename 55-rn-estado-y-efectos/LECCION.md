@@ -48,6 +48,43 @@ setGastos((antes) => [...antes, nuevo]);   // ✅ mejor: usa el valor anterior s
 
 > 🌎 **Otro ejemplo:** Es como corregir un documento compartido sin guardar: nadie ve el cambio.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cambiar el estado sin tocar el original
+lenguaje: js
+pide: React solo se entera de un cambio si le das un array **nuevo**. Completa tres funciones que **nunca** cambian la lista que reciben: `agregar(lista, gasto)` la devuelve con el gasto al final; `quitar(lista, id)` sin ese gasto; `cambiarValor(lista, id, valor)` con ese gasto con el valor nuevo (un objeto nuevo, los demás iguales).
+--- código
+function agregar(lista, gasto) {
+  // tu código aquí
+}
+
+function quitar(lista, id) {
+  // tu código aquí
+}
+
+function cambiarValor(lista, id, valor) {
+  // tu código aquí
+}
+--- pruebas
+const base = () => [{ id: 1, tipo: 'lavado', valor: 30 }, { id: 2, tipo: 'peaje', valor: 5 }];
+prueba('agregar', () => { const l = base(); const n = agregar(l, { id: 3, tipo: 'otro', valor: 9 }); igual(n.length, 3); igual(l.length, 2); ok(n !== l, 'tiene que ser un array nuevo'); });
+prueba('quitar', () => { const l = base(); igual(quitar(l, 1), [{ id: 2, tipo: 'peaje', valor: 5 }]); igual(l.length, 2); });
+prueba('cambiar el valor', () => { const l = base(); const n = cambiarValor(l, 2, 7); igual(n[1].valor, 7); igual(l[1].valor, 5); ok(n[1] !== l[1], 'el gasto cambiado es un objeto nuevo'); ok(n[0] === l[0], 'los demás quedan iguales'); });
+--- solución
+function agregar(lista, gasto) {
+  return [...lista, gasto];
+}
+
+function quitar(lista, id) {
+  return lista.filter((g) => g.id !== id);
+}
+
+function cambiarValor(lista, id, valor) {
+  return lista.map((g) => (g.id === id ? { ...g, valor } : g));
+}
+```
+
 ```practica
 vf :: Al llamar setViajes, React vuelve a dibujar el componente
 vf :: Hacer gastos.push(nuevo) actualiza la pantalla correctamente
@@ -88,6 +125,29 @@ El `TextInput` muestra lo que hay en el estado y cada cambio actualiza el estado
 
 > 🌎 **Otro ejemplo:** Es como el formulario del banco que marca en rojo el campo mal llenado.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El formulario controlado
+lenguaje: js
+pide: Completa `estadoDelFormulario(texto)`, la cuenta que hace el formulario cada vez que cambia el texto. Devuelve `{ valor, valido, mensaje }`: `valor` es el número (cambia la coma por punto, como se escribe en Brasil); `valido` es `true` si el valor es mayor que 0; `mensaje` es `'Escribe un valor mayor que 0'` si no es válido **y** el texto no está vacío; si no, `null`.
+--- código
+function estadoDelFormulario(texto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('con coma, como en Brasil', () => igual(estadoDelFormulario('12,50'), { valor: 12.5, valido: true, mensaje: null }));
+prueba('vacío: no molesta todavía', () => igual(estadoDelFormulario(''), { valor: 0, valido: false, mensaje: null }));
+prueba('cero no vale', () => igual(estadoDelFormulario('0').mensaje, 'Escribe un valor mayor que 0'));
+prueba('letras no valen', () => igual(estadoDelFormulario('abc').valido, false));
+--- solución
+function estadoDelFormulario(texto) {
+  const valor = Number(texto.replace(',', '.'));
+  const valido = valor > 0;
+  return { valor, valido, mensaje: !valido && texto !== '' ? 'Escribe un valor mayor que 0' : null };
+}
+```
+
 ```practica
 vf :: En un componente controlado, el TextInput muestra el valor guardado en el estado
 vf :: Si el botón está deshabilitado en la app, ya no hace falta validar en el servidor
@@ -126,6 +186,65 @@ Los *hooks* (`useState`, `useEffect`…) se llaman **siempre arriba** del compon
 > 🌎 **En la vida real:** es como el orden de los pasos en un avión antes de despegar: siempre el mismo, sin saltarse ninguno.
 
 > 🌎 **Otro ejemplo:** Es como los botones de un ascensor: siempre en el mismo lugar.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un useEffect de juguete
+lenguaje: js
+pide: Completa `crearEfectos()`. Devuelve `{ correr(efecto, deps), desmontar() }`. React llama `correr` en **cada dibujo**. El efecto corre la primera vez, y después solo si alguna dependencia cambió (compáralas con `Object.is`). Antes de volver a correrlo, llama a la **limpieza** que devolvió la vez anterior (si devolvió una). `desmontar()` llama a la última limpieza.
+--- código
+function crearEfectos() {
+  let depsAntes = null;
+  let limpiar = null;
+  return {
+    correr(efecto, deps) {
+      // tu código aquí
+    },
+    desmontar() {
+      // tu código aquí
+    },
+  };
+}
+--- pruebas
+prueba('con [] corre una sola vez', () => {
+  const e = crearEfectos(); let veces = 0;
+  for (let i = 0; i < 3; i++) e.correr(() => { veces++; }, []);
+  igual(veces, 1);
+});
+prueba('con [mes] corre cuando cambia el mes, y limpia antes', () => {
+  const e = crearEfectos(); const pasos = [];
+  const efecto = (mes) => () => { pasos.push('pido ' + mes); return () => pasos.push('dejo ' + mes); };
+  e.correr(efecto('enero'), ['enero']);
+  e.correr(efecto('enero'), ['enero']);
+  e.correr(efecto('febrero'), ['febrero']);
+  igual(pasos, ['pido enero', 'dejo enero', 'pido febrero']);
+});
+prueba('al desmontar, limpia', () => {
+  const e = crearEfectos(); const pasos = [];
+  e.correr(() => () => pasos.push('limpio'), []);
+  e.desmontar();
+  igual(pasos, ['limpio']);
+});
+--- solución
+function crearEfectos() {
+  let depsAntes = null;
+  let limpiar = null;
+  return {
+    correr(efecto, deps) {
+      const cambio = depsAntes === null || deps.some((d, i) => !Object.is(d, depsAntes[i]));
+      if (!cambio) return;
+      if (limpiar) limpiar();
+      limpiar = efecto() || null;
+      depsAntes = deps;
+    },
+    desmontar() {
+      if (limpiar) limpiar();
+      limpiar = null;
+    },
+  };
+}
+```
 
 ```practica
 vf :: useEffect con [] como dependencias corre solo la primera vez

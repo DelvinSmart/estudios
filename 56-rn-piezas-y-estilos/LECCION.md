@@ -44,6 +44,30 @@ Estas piezas se convierten en piezas **nativas** de iOS y Android: por eso la ap
 
 > 🌎 **Otro ejemplo:** Es como una vitrina que muestra unos pocos productos a la vez, aunque el depósito tenga miles.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Todo texto dentro de un Text
+lenguaje: js
+pide: En React Native, un texto suelto dentro de un `View` rompe la app ("Text strings must be rendered within a <Text> component"). Un árbol es `{ tipo, hijos }`, y los hijos pueden ser árboles o textos. Completa `textosSueltos(arbol)`: devuelve la lista de textos que **no** están dentro de un `Text` (vacía si está todo bien).
+--- código
+function textosSueltos(arbol, dentroDeText = false) {
+  // tu código aquí
+}
+--- pruebas
+const t = (tipo, ...hijos) => ({ tipo, hijos });
+prueba('todo bien', () => igual(textosSueltos(t('View', t('Text', 'Mis gastos'), t('Pressable', t('Text', 'Guardar')))), []));
+prueba('un texto suelto en un View', () => igual(textosSueltos(t('View', 'Hola', t('Text', 'bien'))), ['Hola']));
+prueba('suelto dentro de un botón', () => igual(textosSueltos(t('View', t('Pressable', 'Guardar'))), ['Guardar']));
+prueba('un Text dentro de otro Text está bien', () => igual(textosSueltos(t('Text', 'R$ ', t('Text', '30'))), []));
+--- solución
+function textosSueltos(arbol, dentroDeText = false) {
+  if (typeof arbol === 'string') return dentroDeText ? [] : [arbol];
+  const adentro = dentroDeText || arbol.tipo === 'Text';
+  return arbol.hijos.flatMap((hijo) => textosSueltos(hijo, adentro));
+}
+```
+
 ```practica
 vf :: En React Native todo texto tiene que ir dentro de un componente Text
 vf :: FlatList dibuja todos los elementos de la lista aunque no se vean
@@ -94,6 +118,38 @@ Copiloto no escribe colores sueltos: usa un **tema** (`src/theme`) con sus color
 
 > 🌎 **Otro ejemplo:** Es como el uniforme de una empresa: los colores están definidos una vez.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Juntar estilos y la dirección por defecto
+lenguaje: js
+pide: En React Native se escribe `style={[estilos.tarjeta, activo && estilos.activa]}`. Completa `juntar(estilo)`: si es un array, junta todos sus objetos en uno (el de más a la derecha gana) e **ignora** lo falso (`false`, `null`, `undefined`); si es un objeto, devuelve una copia; si es falso, `{}`. Después, `direccion(estilo)` devuelve `flexDirection` del estilo juntado, o `'column'` si no tiene (el valor por defecto en el teléfono).
+--- código
+function juntar(estilo) {
+  // tu código aquí
+}
+
+function direccion(estilo) {
+  // tu código aquí
+}
+--- pruebas
+const estilos = { tarjeta: { padding: 16, color: '#fff' }, activa: { color: '#7ee787' }, fila: { flexDirection: 'row' } };
+prueba('el de la derecha gana', () => igual(juntar([estilos.tarjeta, estilos.activa]), { padding: 16, color: '#7ee787' }));
+prueba('lo falso se ignora', () => igual(juntar([estilos.tarjeta, false, null, undefined]), { padding: 16, color: '#fff' }));
+prueba('arrays dentro de arrays', () => igual(juntar([estilos.tarjeta, [estilos.fila, estilos.activa]]), { padding: 16, color: '#7ee787', flexDirection: 'row' }));
+prueba('en el teléfono, columna por defecto', () => { igual(direccion(estilos.tarjeta), 'column'); igual(direccion([estilos.tarjeta, estilos.fila]), 'row'); });
+--- solución
+function juntar(estilo) {
+  if (!estilo) return {};
+  if (Array.isArray(estilo)) return estilo.reduce((todo, e) => ({ ...todo, ...juntar(e) }), {});
+  return { ...estilo };
+}
+
+function direccion(estilo) {
+  return juntar(estilo).flexDirection ?? 'column';
+}
+```
+
 ```practica
 vf :: En React Native los estilos se escriben como objetos de JavaScript
 vf :: En React Native, flexDirection es row por defecto, igual que en la web
@@ -125,6 +181,37 @@ El iPhone tiene la **isla** o muesca arriba y la barra de inicio abajo. Con `Saf
 > 🌎 **En la vida real:** es como un asiento de carro que se ajusta a cada conductor.
 
 > 🌎 **Otro ejemplo:** Es como una camiseta elástica: le queda bien a varios tamaños.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Pantallas de todos los tamaños
+lenguaje: js
+pide: Completa dos funciones. `columnasPara(ancho)` decide cuántas columnas de tarjetas mostrar según el ancho que da `useWindowDimensions()`: menos de 600 → 1; menos de 900 → 2; si no, 3. `altoUtil(alto, bordes)` devuelve el alto que queda para el contenido, restando los bordes seguros de arriba y de abajo (`bordes.top` y `bordes.bottom`, la isla y la barra de inicio).
+--- código
+function columnasPara(ancho) {
+  // tu código aquí
+}
+
+function altoUtil(alto, bordes) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un teléfono', () => igual(columnasPara(390), 1));
+prueba('los bordes de 600 y 900', () => igual([599, 600, 899, 900].map(columnasPara), [1, 2, 2, 3]));
+prueba('una tablet', () => igual(columnasPara(1024), 3));
+prueba('el iPhone con isla', () => igual(altoUtil(844, { top: 47, bottom: 34, left: 0, right: 0 }), 763));
+--- solución
+function columnasPara(ancho) {
+  if (ancho < 600) return 1;
+  if (ancho < 900) return 2;
+  return 3;
+}
+
+function altoUtil(alto, bordes) {
+  return alto - bordes.top - bordes.bottom;
+}
+```
 
 ```practica
 vf :: SafeAreaView evita que el contenido quede tapado por la muesca o la barra de inicio
