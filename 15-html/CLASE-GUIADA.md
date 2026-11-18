@@ -51,6 +51,22 @@ El navegador lee esas **etiquetas** y dibuja: un **título** grande (`h1`), un *
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu primera página
+lenguaje: html
+pide: Escribe un título principal `h1` que diga **Mis estudios** y un párrafo `p` que diga **Aprendo HTML**.
+--- código
+<!-- tu HTML aquí -->
+--- pruebas
+prueba('hay un h1 que dice Mis estudios', () => igual($('h1')?.textContent.trim(), 'Mis estudios'));
+prueba('hay un párrafo que dice Aprendo HTML', () => igual($('p')?.textContent.trim(), 'Aprendo HTML'));
+--- solución
+<h1>Mis estudios</h1>
+<p>Aprendo HTML</p>
+```
+
 ```practica
 escribe :: Con tus palabras: ¿qué es HTML? :: El lenguaje que describe la estructura de una página: qué es cada parte (un título, un párrafo, un botón). No calcula ni decide.
 vf :: HTML es un lenguaje de programación que puede hacer cuentas
@@ -114,6 +130,27 @@ La etiqueta es **`img`**; los atributos son **`src`** y **`alt`**. **No tiene ci
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Etiquetas, atributos, id y class
+lenguaje: html
+pide: Haz un enlace `a` que diga **Abrir** y lleve a `estudio.html`, con `id="principal"`. Después, dos párrafos con la misma `class="nota"`. Y una imagen `img` con `src="logo.png"` y un `alt` que la describa (sin etiqueta de cierre).
+--- código
+<!-- tu HTML aquí -->
+--- pruebas
+prueba('el enlace lleva a estudio.html', () => igual($('a')?.getAttribute('href'), 'estudio.html'));
+prueba('el enlace dice Abrir', () => igual($('a')?.textContent.trim(), 'Abrir'));
+prueba('el enlace tiene id="principal"', () => ok($('a#principal'), 'falta id="principal" en el enlace'));
+prueba('dos párrafos con class="nota"', () => igual(document.querySelectorAll('p.nota').length, 2));
+prueba('la imagen tiene alt', () => ok($('img[src="logo.png"]')?.alt.trim(), 'falta el alt de la imagen'));
+--- solución
+<a id="principal" href="estudio.html">Abrir</a>
+<p class="nota">Primera nota</p>
+<p class="nota">Segunda nota</p>
+<img src="logo.png" alt="Logo de Mis estudios">
+```
+
 ```practica
 elige :: En `<a href="estudio.html">Abrir</a>`, ¿qué es `href="estudio.html"`? :: El contenido :: Un atributo :: La etiqueta de cierre
 elige :: ¿Cómo se reconoce una etiqueta de cierre? :: Tiene comillas :: Tiene una barra `/` :: Tiene un número
@@ -176,6 +213,34 @@ Sin `charset="utf-8"`, el navegador no sabe cómo leer las letras especiales, y 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El esqueleto de la página
+lenguaje: js
+pide: Completa `revisarEsqueleto(html)`: devuelve la lista de lo que **falta** en el texto de una página, revisando en este orden: `'doctype'` (`<!doctype html>`, sin importar mayúsculas), `'charset'` (`<meta charset="utf-8">`), `'viewport'` (`name="viewport"`), `'title'` (`<title>`).
+--- código
+function revisarEsqueleto(html) {
+  // tu código aquí
+}
+--- pruebas
+const completa = '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Mapa</title></head><body></body></html>';
+prueba('completa: no falta nada', () => igual(revisarEsqueleto(completa), []));
+prueba('sin viewport', () => igual(revisarEsqueleto(completa.replace('name="viewport"', '')), ['viewport']));
+prueba('sin nada', () => igual(revisarEsqueleto('<p>hola</p>'), ['doctype', 'charset', 'viewport', 'title']));
+--- solución
+function revisarEsqueleto(html) {
+  const bajo = html.toLowerCase();
+  const pide = [
+    ['doctype', '<!doctype html>'],
+    ['charset', '<meta charset="utf-8">'],
+    ['viewport', 'name="viewport"'],
+    ['title', '<title>'],
+  ];
+  return pide.filter(([, texto]) => !bajo.includes(texto)).map(([nombre]) => nombre);
+}
+```
+
 ```practica
 elige :: ¿En qué parte va lo que el usuario ve? :: `head` :: `body` :: `title`
 elige :: ¿Qué línea hace que las tildes y la ñ se vean bien? :: `<title>` :: `<meta charset="utf-8">` :: `<link>`
@@ -225,6 +290,36 @@ escribe :: ¿Para qué sirve `<meta name="viewport">`? :: Para que en el celular
 > ⚠️ **Cuidado:** no elijas `h3` "porque se ve más chico". El número dice **qué tan importante** es el título, no su tamaño. El tamaño lo decide el CSS.
 
 **Prueba ahora:** escribe en tu práctica una lista `ul` con tres apps y una `ol` con los pasos para registrar un viaje.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una receta con sus listas
+lenguaje: html
+pide: Arma una receta: un `h1` con el nombre, un `h2` **Ingredientes** con una lista **sin orden** (`ul`) de 3 cosas, y un `h2` **Pasos** con una lista **numerada** (`ol`) de 3 pasos. Marca con `strong` la palabra **importante** en algún paso.
+--- código
+<!-- tu receta aquí -->
+--- pruebas
+prueba('un solo h1', () => igual(document.querySelectorAll('h1').length, 1));
+prueba('los ingredientes en ul con 3', () => igual(document.querySelectorAll('ul > li').length, 3));
+prueba('los pasos en ol con 3', () => igual(document.querySelectorAll('ol > li').length, 3));
+prueba('dos h2', () => igual([...document.querySelectorAll('h2')].map((h) => h.textContent.trim()), ['Ingredientes', 'Pasos']));
+prueba('strong con importante', () => igual($('ol strong')?.textContent.trim(), 'importante'));
+--- solución
+<h1>Arroz con huevo</h1>
+<h2>Ingredientes</h2>
+<ul>
+  <li>Arroz</li>
+  <li>Huevo</li>
+  <li>Sal</li>
+</ul>
+<h2>Pasos</h2>
+<ol>
+  <li>Cocinar el arroz.</li>
+  <li>Freír el huevo. Lo <strong>importante</strong>: el aceite caliente.</li>
+  <li>Servir.</li>
+</ol>
+```
 
 ```practica
 elige :: Para los pasos de una receta, ¿qué lista usas? :: `ul` :: `ol` :: `li`
@@ -282,6 +377,35 @@ elige :: `<strong>` sirve para… :: Hacer un enlace :: Marcar algo importante (
 
 > 💡 **Idea:** este mapa usa `header` (la barra de arriba), `nav` (las migas), `main` (el mapa) y `footer` (el pie). Abre `index.html` de la carpeta `Aprender` y búscalas.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las cajas con significado
+lenguaje: html
+pide: Arma la página de estudios con HTML semántico: un `header` con un `nav` (dos enlaces), un `main` con dos `article` (cada uno con su `h2`), y un `footer`. Nada de `div`.
+--- código
+<!-- tu página aquí -->
+--- pruebas
+prueba('header con nav', () => ok($('header nav'), 'falta un nav dentro del header'));
+prueba('el nav tiene dos enlaces', () => igual(document.querySelectorAll('nav a').length, 2));
+prueba('un solo main', () => igual(document.querySelectorAll('main').length, 1));
+prueba('dos article con h2 en main', () => igual(document.querySelectorAll('main article h2').length, 2));
+prueba('hay footer', () => ok($('footer'), 'falta el footer'));
+prueba('sin div', () => igual(document.querySelectorAll('div').length, 0));
+--- solución
+<header>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="estudios.html">Estudios</a>
+  </nav>
+</header>
+<main>
+  <article><h2>¿Lenguas extrañas?</h2><p>…</p></article>
+  <article><h2>El bautismo</h2><p>…</p></article>
+</main>
+<footer>Hecho con HTML</footer>
+```
+
 ```practica
 escribe :: Con tus palabras: ¿qué es el HTML semántico y por qué importa? :: Usar la etiqueta que dice qué es cada cosa (header, nav, main, article, footer) en vez de div para todo; ayuda a los lectores de pantalla, a Google y a entender el código.
 elige :: Una tarjeta de un estudio bíblico, ¿qué etiqueta es mejor? :: `div` :: `article` :: `span`
@@ -336,6 +460,39 @@ Atributos útiles: `required` (obligatorio), `placeholder` (texto de ejemplo gri
 
 > 📌 **Nota:** el `type` del `input` importa mucho en el celular: `type="number"` abre el teclado de números; `type="email"`, uno con `@`.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El formulario de un gasto
+lenguaje: html
+pide: Arma un `form` con: un `select` con `id="app"` y tres `option` (Uber, 99, InDrive) con su `label`; un `input` de tipo `number` con `id="valor"`, obligatorio, con `label`; un `input` de tipo `email` con `id="correo"`; y un `button` **Guardar**.
+--- código
+<form>
+  <!-- tu formulario aquí -->
+</form>
+--- pruebas
+prueba('select con 3 opciones', () => igual(document.querySelectorAll('select#app option').length, 3));
+prueba('label del select', () => ok($('label[for="app"]'), 'falta <label for="app">'));
+prueba('valor es number y obligatorio', () => ok($('#valor')?.type === 'number' && $('#valor').required, 'valor tiene que ser number y required'));
+prueba('label del valor', () => ok($('label[for="valor"]'), 'falta <label for="valor">'));
+prueba('correo es email', () => igual($('#correo')?.type, 'email'));
+prueba('el botón', () => igual($('form button')?.textContent.trim(), 'Guardar'));
+--- solución
+<form>
+  <label for="app">Aplicación</label>
+  <select id="app">
+    <option>Uber</option>
+    <option>99</option>
+    <option>InDrive</option>
+  </select>
+  <label for="valor">Valor</label>
+  <input id="valor" type="number" required>
+  <label for="correo">Correo</label>
+  <input id="correo" type="email">
+  <button>Guardar</button>
+</form>
+```
+
 ```practica
 elige :: ¿Qué pasa si tocas un `label` con `for="litros"`? :: Se borra la casilla :: Se activa la casilla con `id="litros"` :: Se envía el formulario
 elige :: ¿Qué `type` usarías para pedir un correo? :: `text` :: `email` :: `number`
@@ -374,6 +531,40 @@ Ese árbol se llama **DOM** (*Document Object Model*: "el documento como objetos
 
 > 💡 **Idea:** en el navegador, clic derecho sobre cualquier cosa → **Inspeccionar**. Ves el árbol real de la página. Prueba con esta misma página.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer el árbol del DOM
+lenguaje: html
+pide: El HTML ya está. Escribe un `<script>` que recorra el DOM y escriba en el `p` con `id="resultado"` el nombre (en minúsculas) del **padre** del `h1`, y cuántos hijos tiene `main` (por ejemplo `header · 2`). Usa `parentElement` y `children`.
+--- código
+<header><h1>Mis estudios</h1></header>
+<main>
+  <article>Uno</article>
+  <article>Dos</article>
+</main>
+<p id="resultado"></p>
+
+<script>
+  // tu código aquí
+</script>
+--- pruebas
+prueba('padre del h1 y cantidad de hijos de main', () => igual($('#resultado').textContent.trim(), 'header · 2'));
+--- solución
+<header><h1>Mis estudios</h1></header>
+<main>
+  <article>Uno</article>
+  <article>Dos</article>
+</main>
+<p id="resultado"></p>
+
+<script>
+  const padre = document.querySelector('h1').parentElement.tagName.toLowerCase();
+  const hijos = document.querySelector('main').children.length;
+  document.querySelector('#resultado').textContent = `${padre} · ${hijos}`;
+</script>
+```
+
 ```practica
 escribe :: ¿Qué es el DOM? :: El árbol de cajas que arma el navegador al leer el HTML; CSS lo usa para pintar y JavaScript lo cambia para cambiar la página.
 elige :: En el árbol de arriba, ¿quién es el padre de `h1`? :: `body` :: `header` :: `main`
@@ -409,6 +600,39 @@ vf :: Con "Inspeccionar" del navegador puedes ver el DOM real de una página
 El disco de la Mac **no distingue** mayúsculas, así que la encuentra. GitHub Pages **sí** distingue: busca `foto.png`, no existe, y la imagen no aparece. Hay que escribir exactamente `Foto.PNG` (o renombrar el archivo).
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un revisor de etiquetas mal cerradas
+lenguaje: js
+pide: HTML no muestra error rojo: si cierras mal, el navegador "adivina". Haz tu propio revisor: `bienCerrado(html)` devuelve `true` si cada etiqueta que abre se cierra **en el orden correcto**. Ignora las que no se cierran (`img`, `br`, `input`, `meta`).
+--- código
+const SOLAS = ['img', 'br', 'input', 'meta'];
+
+function bienCerrado(html) {
+  // tu código aquí
+}
+--- pruebas
+prueba('bien', () => igual(bienCerrado('<strong><em>hola</em></strong>'), true));
+prueba('cruzado', () => igual(bienCerrado('<strong><em>hola</strong></em>'), false));
+prueba('falta cerrar', () => igual(bienCerrado('<p>hola'), false));
+prueba('una imagen no se cierra', () => igual(bienCerrado('<p><img src="a.png">texto</p>'), true));
+prueba('con atributos', () => igual(bienCerrado('<a href="x.html" class="b">ir</a>'), true));
+--- solución
+const SOLAS = ['img', 'br', 'input', 'meta'];
+
+function bienCerrado(html) {
+  const pila = [];
+  for (const [, cierre, nombre] of html.matchAll(/<(\/?)([a-zA-Z0-9]+)[^>]*>/g)) {
+    const n = nombre.toLowerCase();
+    if (SOLAS.includes(n)) continue;
+    if (!cierre) pila.push(n);
+    else if (pila.pop() !== n) return false;
+  }
+  return pila.length === 0;
+}
+```
 
 ```practica
 vf :: HTML muestra un mensaje de error rojo cuando te equivocas

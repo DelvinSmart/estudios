@@ -31,6 +31,35 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 > 📌 **Nota:** después del 15/11 siguieron los cambios (por ejemplo, una tarjeta "Reglas para la IA" en el panel y la portada a todo el ancho). La idea de fondo es la misma.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cambiar en la plantilla, no en cada estudio
+lenguaje: js
+pide: Los estudios son datos; la plantilla los dibuja. Aquí cada estudio trae su propio HTML de pasaje, y cambiar el diseño obliga a tocar todos. Completa `pasajeHTML(pasaje)` (la plantilla: `<blockquote class="pasaje"><cite>REF</cite>TEXTO</blockquote>`) y `dibujarTodos(estudios)`, que usa la plantilla para el pasaje de cada estudio.
+--- código
+function pasajeHTML(pasaje) {
+  // tu código aquí
+}
+
+function dibujarTodos(estudios) {
+  // tu código aquí
+}
+--- pruebas
+const estudios = [{ pasaje: { ref: '1 Co 14:2', texto: 'Porque el que habla en lenguas…' } }, { pasaje: { ref: 'Ef 5:22', texto: 'Las casadas…' } }];
+prueba('la plantilla', () => igual(pasajeHTML(estudios[0].pasaje), '<blockquote class="pasaje"><cite>1 Co 14:2</cite>Porque el que habla en lenguas…</blockquote>'));
+prueba('todos con la misma plantilla', () => igual(dibujarTodos(estudios).length, 2));
+prueba('el segundo también', () => igual(dibujarTodos(estudios)[1], '<blockquote class="pasaje"><cite>Ef 5:22</cite>Las casadas…</blockquote>'));
+--- solución
+function pasajeHTML(pasaje) {
+  return `<blockquote class="pasaje"><cite>${pasaje.ref}</cite>${pasaje.texto}</blockquote>`;
+}
+
+function dibujarTodos(estudios) {
+  return estudios.map((e) => pasajeHTML(e.pasaje));
+}
+```
+
 ```practica
 elige :: Si se cambia cómo se ven los pasajes, ¿hay que editar cada estudio? :: Sí, uno por uno :: No: se cambia la plantilla y todos se ven igual :: Solo los nuevos
 elige :: ¿En qué archivo está la Reina-Valera? :: `mapa.js` :: `rvr.js` :: `tema.js`
@@ -82,6 +111,26 @@ GitHub Pages le dice al navegador que guarde cada página **10 minutos** (`cache
 
 > 💡 **Idea:** este mismo mapa tuvo el problema de la caché cuando lo probamos (el CSS viejo seguía cargado). Es un problema de todos los días en la web.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Romper el caché con ?v=
+lenguaje: js
+pide: El navegador guarda `styles.css` y a veces muestra la versión vieja. El truco: cambiar el `?v=` cada vez que se publica. Completa `conVersion(html, version)`: a cada `href="algo.css"` o `src="algo.js"` le pone (o le reemplaza) `?v=version`.
+--- código
+function conVersion(html, version) {
+  // tu código aquí
+}
+--- pruebas
+prueba('pone la versión', () => igual(conVersion('<link href="styles.css">', 'lbla12'), '<link href="styles.css?v=lbla12">'));
+prueba('reemplaza la vieja', () => igual(conVersion('<script src="mapa.js?v=lbla11"></script>', 'lbla12'), '<script src="mapa.js?v=lbla12"></script>'));
+prueba('las imágenes no', () => igual(conVersion('<img src="foto.png">', 'x'), '<img src="foto.png">'));
+--- solución
+function conVersion(html, version) {
+  return html.replace(/(href|src)="([^"?]+\.(css|js))(\?v=[^"]*)?"/g, (_, attr, archivo) => `${attr}="${archivo}?v=${version}"`);
+}
+```
+
 ```practica
 elige :: ¿Qué diferencia hay entre renombrar un repositorio y copiarlo? :: Ninguna :: Renombrar mantiene el mismo repositorio con su historial; copiar crea otro :: Copiar mantiene el historial
 elige :: ¿Por qué a veces la página se veía vieja aunque estaba publicada? :: Porque GitHub falló :: Porque el navegador guarda las páginas 10 minutos (caché) :: Porque el JSON estaba mal
@@ -120,6 +169,26 @@ Leída: "`esLBLA` recibe una referencia y devuelve **sí** si contiene la palabr
 > 🌎 **En la vida real:** las reglas para usar fotos de un fotógrafo: "hasta 500, no todo el álbum, no más de un cuarto de tu revista, y siempre con mi nombre". Y una impresora que **siempre** imprime el pie de página.
 
 > 🌎 **Otro ejemplo:** Como una imprenta que siempre pone el pie de página con el copyright: el autor no tiene que acordarse.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Lleva el aviso de la LBLA?
+lenguaje: js
+pide: La página pone sola el aviso de derechos cuando un pasaje es de la LBLA: lo sabe porque la referencia **termina en `LBLA`**. Completa `necesitaAviso(estudio)`: `true` si algún pasaje de algún bloque tiene una referencia así. Ojo: algunos pasajes no tienen referencia (usa `ref || ''`).
+--- código
+function necesitaAviso(estudio) {
+  // tu código aquí
+}
+--- pruebas
+prueba('con un pasaje LBLA', () => igual(necesitaAviso({ bloques: [{ tipo: 'pasaje', ref: '1 Ti 2:11-14 LBLA' }] }), true));
+prueba('solo Reina-Valera', () => igual(necesitaAviso({ bloques: [{ tipo: 'pasaje', ref: 'Ef 5:22 RVR1960' }] }), false));
+prueba('un pasaje sin referencia no rompe', () => igual(necesitaAviso({ bloques: [{ tipo: 'pasaje' }, { tipo: 'texto' }] }), false));
+--- solución
+function necesitaAviso(estudio) {
+  return estudio.bloques.some((b) => (b.ref || '').trim().endsWith('LBLA'));
+}
+```
 
 ```practica
 escribe :: ¿Cuántos versículos de la LBLA se pueden citar y con qué condiciones? :: Hasta 500, sin citar un libro completo, sin pasar del 25% del texto del estudio, y con el aviso completo y el link a LBLA.com.
@@ -165,6 +234,30 @@ Dos palabras importantes:
 
 > 💡 **Idea:** esta es la misma regla que sigo yo contigo: no copio texto con derechos de páginas web, y no "invento" lo que tiene que ser exacto (Tema 11, parte 14; Tema 19).
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La dirección exacta en Bible.com
+lenguaje: js
+pide: El buscador arma la dirección sola: `bible.com/bible/89/1TI.2.11-14.LBLA` (89 es la LBLA). Completa `enlaceBible(libro, capitulo, desde, hasta)` usando `CODIGOS` para el código del libro. Si `desde` y `hasta` son iguales, va un solo número.
+--- código
+const CODIGOS = { '1 Timoteo': '1TI', 'Efesios': 'EPH', '1 Corintios': '1CO' };
+
+function enlaceBible(libro, capitulo, desde, hasta) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un rango', () => igual(enlaceBible('1 Timoteo', 2, 11, 14), 'https://www.bible.com/bible/89/1TI.2.11-14.LBLA'));
+prueba('un solo versículo', () => igual(enlaceBible('Efesios', 5, 22, 22), 'https://www.bible.com/bible/89/EPH.5.22.LBLA'));
+--- solución
+const CODIGOS = { '1 Timoteo': '1TI', 'Efesios': 'EPH', '1 Corintios': '1CO' };
+
+function enlaceBible(libro, capitulo, desde, hasta) {
+  const versos = desde === hasta ? `${desde}` : `${desde}-${hasta}`;
+  return `https://www.bible.com/bible/89/${CODIGOS[libro]}.${capitulo}.${versos}.LBLA`;
+}
+```
+
 ```practica
 elige :: ¿Por qué no sirve que una IA escriba los versículos? :: Porque es lenta :: Porque escribe lo que le suena: puede cambiar palabras o mezclar versiones :: Porque es cara
 escribe :: ¿Qué es scraping y por qué no se hizo? :: Sacar el texto de una página con un programa; Lockman lo prohíbe por escrito y además el navegador no deja leer otras páginas (CORS).
@@ -203,6 +296,39 @@ vf :: Con una foto tuya, eres tú quien trae el texto, igual que al pegarlo
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El medidor de citas
+lenguaje: js
+pide: La LBLA deja citar hasta **500 versículos**, y la Biblia no puede pasar del **25 %** del estudio. Completa `contarVersiculos(ref)` (`'Efesios 5:22-25'` son 4; `'Juan 3:16'` es 1) y `medir(refs, palabrasBiblia, palabrasTotal)`: devuelve `{ versiculos, porcentaje, puedePublicar }` (porcentaje entero).
+--- código
+function contarVersiculos(ref) {
+  // tu código aquí
+}
+
+function medir(refs, palabrasBiblia, palabrasTotal) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un rango', () => igual(contarVersiculos('Efesios 5:22-25'), 4));
+prueba('uno solo', () => igual(contarVersiculos('Juan 3:16'), 1));
+prueba('dentro del límite', () => igual(medir(['Efesios 5:22-25', 'Juan 3:16'], 200, 1000), { versiculos: 5, porcentaje: 20, puedePublicar: true }));
+prueba('más del 25 %: no publica', () => igual(medir(['Juan 3:16'], 300, 1000).puedePublicar, false));
+--- solución
+function contarVersiculos(ref) {
+  const versos = ref.split(':')[1];
+  const [desde, hasta] = versos.split('-').map(Number);
+  return hasta ? hasta - desde + 1 : 1;
+}
+
+function medir(refs, palabrasBiblia, palabrasTotal) {
+  const versiculos = refs.reduce((s, r) => s + contarVersiculos(r), 0);
+  const porcentaje = Math.round((palabrasBiblia / palabrasTotal) * 100);
+  return { versiculos, porcentaje, puedePublicar: versiculos <= 500 && porcentaje <= 25 };
+}
+```
+
 ```practica
 escribe :: ¿Qué dos cosas mide el medidor? :: Cuántos versículos hay (máximo 500) y qué porcentaje del estudio es texto bíblico (máximo 25%).
 elige :: ¿Cuántos versículos son "Efesios 5:22-25"? :: 3 :: 4 :: 25
@@ -238,6 +364,34 @@ Se pusieron **34 fuentes** en Lenguas extrañas, y **cada link se abrió** para 
 
 Es el Tema 07 otra vez: **verificar antes de afirmar**.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las fuentes viajan con su subpunto
+lenguaje: js
+pide: Las fuentes se guardan **dentro del subpunto** que las usa, para que nunca se separen. Completa `todasLasFuentes(estudio)`: junta las fuentes de todos los subpuntos, **sin repetir** el mismo `url`, en el orden en que aparecen.
+--- código
+function todasLasFuentes(estudio) {
+  // tu código aquí
+}
+--- pruebas
+const estudio = { puntos: [
+  { subpuntos: [{ fuentes: [{ titulo: 'A', url: 'https://a' }] }, { fuentes: [] }] },
+  { subpuntos: [{ fuentes: [{ titulo: 'B', url: 'https://b' }, { titulo: 'A otra vez', url: 'https://a' }] }] },
+] };
+prueba('sin repetir', () => igual(todasLasFuentes(estudio).map((f) => f.url), ['https://a', 'https://b']));
+prueba('sin fuentes', () => igual(todasLasFuentes({ puntos: [] }), []));
+--- solución
+function todasLasFuentes(estudio) {
+  const vistas = new Set();
+  const lista = [];
+  for (const p of estudio.puntos) for (const sp of p.subpuntos) for (const f of sp.fuentes ?? []) {
+    if (!vistas.has(f.url)) { vistas.add(f.url); lista.push(f); }
+  }
+  return lista;
+}
+```
+
 ```practica
 elige :: ¿Por qué las fuentes se guardan en el subpunto y no en una lista aparte? :: Porque es más corto :: Para que, si mueves el subpunto, sus fuentes se vayan con él :: Porque GitHub lo pide
 elige :: ¿Qué error se encontró al revisar las fuentes? :: Un link roto :: Una frase atribuida al libro equivocado (era del Sefer HaYashar) :: Un versículo mal copiado
@@ -266,6 +420,38 @@ vf :: Se abrió cada link de las fuentes antes de publicarlas
 > 🌎 **En la vida real:** una canción con derechos (NA28) contra una música libre de derechos (SBLGNT). Y tenerlo dentro de la página es tener la enciclopedia en tu estante.
 
 > 🌎 **Otro ejemplo:** Como usar música libre de derechos en un video: la usas tranquilo, solo pones el crédito del músico.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Buscar en el griego guardado en la página
+lenguaje: js
+pide: El SBLGNT vive dentro de la página: un JSON por libro, con capítulo → versículo → texto. Completa `griego(libro, ref)` para referencias como `'14:2'` o `'14:2-3'`: devuelve los textos de esos versículos unidos con un espacio, o `null` si falta alguno.
+--- código
+const SBLGNT = { '1CO': { '14': { '1': 'Διώκετε τὴν ἀγάπην,', '2': 'ὁ γὰρ λαλῶν γλώσσῃ', '3': 'ὁ δὲ προφητεύων' } } };
+
+function griego(libro, ref) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un versículo', () => igual(griego('1CO', '14:2'), 'ὁ γὰρ λαλῶν γλώσσῃ'));
+prueba('un rango', () => igual(griego('1CO', '14:2-3'), 'ὁ γὰρ λαλῶν γλώσσῃ ὁ δὲ προφητεύων'));
+prueba('uno que no está', () => igual(griego('1CO', '14:9'), null));
+--- solución
+const SBLGNT = { '1CO': { '14': { '1': 'Διώκετε τὴν ἀγάπην,', '2': 'ὁ γὰρ λαλῶν γλώσσῃ', '3': 'ὁ δὲ προφητεύων' } } };
+
+function griego(libro, ref) {
+  const [cap, versos] = ref.split(':');
+  const [desde, hasta = desde] = versos.split('-').map(Number);
+  const textos = [];
+  for (let v = desde; v <= hasta; v++) {
+    const t = SBLGNT[libro]?.[cap]?.[String(v)];
+    if (t === undefined) return null;
+    textos.push(t);
+  }
+  return textos.join(' ');
+}
+```
 
 ```practica
 elige :: ¿Por qué se usó el SBLGNT y no el Nestlé-Aland? :: Porque es más nuevo :: Porque el SBLGNT tiene licencia libre (CC BY 4.0) y el NA28 tiene derechos :: Porque es más corto
@@ -305,6 +491,42 @@ Leída: "si hay recuadros abiertos, espera lo que dura el cierre y después mues
 
 **En el PDF** los pasajes salen **completos**, porque en papel no se puede tocar nada.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un solo recuadro abierto
+lenguaje: js
+pide: Si hay un recuadro abierto y tocas otro botón, el abierto se cierra y se abre el nuevo; si tocas el mismo, se cierra. Completa `crearRecuadros()` con `tocar(id)` y `abierto()` (el id abierto o `null`).
+--- código
+function crearRecuadros() {
+  let actual = null;
+  return {
+    tocar(id) {
+      // tu código aquí
+    },
+    abierto() {
+      return actual;
+    },
+  };
+}
+--- pruebas
+prueba('abre uno', () => { const r = crearRecuadros(); r.tocar('LBLA'); igual(r.abierto(), 'LBLA'); });
+prueba('otro cierra el anterior', () => { const r = crearRecuadros(); r.tocar('LBLA'); r.tocar('griego'); igual(r.abierto(), 'griego'); });
+prueba('el mismo lo cierra', () => { const r = crearRecuadros(); r.tocar('LBLA'); r.tocar('LBLA'); igual(r.abierto(), null); });
+--- solución
+function crearRecuadros() {
+  let actual = null;
+  return {
+    tocar(id) {
+      actual = actual === id ? null : id;
+    },
+    abierto() {
+      return actual;
+    },
+  };
+}
+```
+
 ```practica
 elige :: Hay un recuadro abierto y tocas otro botón. ¿Qué pasa? :: Se abren los dos :: El abierto se va con su efecto y después entra el nuevo :: No pasa nada
 elige :: ¿Por qué el tiempo de espera se lee del motor y no se escribe en el JS? :: Por estética :: Para que el JS espere exactamente lo que dura el efecto en el CSS, sin valores a mano :: Porque es más rápido
@@ -342,6 +564,43 @@ Logos responde con **JSONP**: en vez de `fetch`, se agrega un **`<script>`** cuy
 > 🌎 **Otro ejemplo:** Como dejar tu número de teléfono en un mostrador: cuando llega tu pedido, te llaman a ti con los datos.
 
 **El riesgo:** ese servicio **no está documentado** para usarse así. Si Logos lo cambia, el botón dejaría de cargar. Es bueno decirlo en voz alta: es una **deuda técnica conocida**.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Guardar lo que ya se trajo
+lenguaje: js
+pide: La Reina-Valera tardaba porque se pedía cada vez. Completa `crearLector(traer)`: `leer(ref)` llama a `traer(ref)` solo la **primera** vez para cada referencia; las siguientes devuelve lo guardado. Cuenta los pedidos en `pedidos`.
+--- código
+function crearLector(traer) {
+  const guardado = new Map();
+  const lector = {
+    pedidos: 0,
+    leer(ref) {
+      // tu código aquí
+    },
+  };
+  return lector;
+}
+--- pruebas
+prueba('trae la primera vez', () => { const l = crearLector((r) => 'texto de ' + r); igual(l.leer('Jn 3:16'), 'texto de Jn 3:16'); });
+prueba('la segunda vez no pide', () => { const l = crearLector((r) => r); l.leer('a'); l.leer('a'); l.leer('b'); igual(l.pedidos, 2); });
+--- solución
+function crearLector(traer) {
+  const guardado = new Map();
+  const lector = {
+    pedidos: 0,
+    leer(ref) {
+      if (!guardado.has(ref)) {
+        guardado.set(ref, traer(ref));
+        lector.pedidos++;
+      }
+      return guardado.get(ref);
+    },
+  };
+  return lector;
+}
+```
 
 ```practica
 escribe :: ¿Por qué tardaba antes y por qué ahora es casi instantáneo? :: Antes pasaba por el globo de Logos, que espera a propósito, y de a un versículo; ahora se piden directo, todos a la vez, y se adelantan al abrir el subpunto.
@@ -404,6 +663,44 @@ Porque **no se puede leer** el texto de Lockman (CORS), pero **sí** tenemos el 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Calibrar con datos reales
+lenguaje: js
+pide: Para saber cuánto mide el pasaje dentro del iframe de Lockman se **calibró** con medidas reales: cada línea mide 31 px, más 4 px de margen. Completa `alto(lineas)` y `lineasDe(texto, anchoPx)`: con letras de 8,1 px de ancho, cuántas líneas ocupa el texto (redondeando hacia arriba, mínimo 1).
+--- código
+const ALTO_LINEA = 31;
+const MARGEN = 4;
+const ANCHO_LETRA = 8.1;
+
+function alto(lineas) {
+  // tu código aquí
+}
+
+function lineasDe(texto, anchoPx) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un versículo de 2 líneas mide 66 px', () => igual(alto(2), 66));
+prueba('100 letras en 405 px son 2 líneas', () => igual(lineasDe('a'.repeat(100), 405), 2));
+prueba('un texto corto, 1 línea', () => igual(lineasDe('Jesús lloró.', 405), 1));
+prueba('vacío: 1 línea', () => igual(lineasDe('', 405), 1));
+--- solución
+const ALTO_LINEA = 31;
+const MARGEN = 4;
+const ANCHO_LETRA = 8.1;
+
+function alto(lineas) {
+  return lineas * ALTO_LINEA + MARGEN;
+}
+
+function lineasDe(texto, anchoPx) {
+  const porLinea = Math.floor(anchoPx / ANCHO_LETRA);
+  return Math.max(1, Math.ceil(texto.length / porLinea));
+}
+```
+
 ```practica
 elige :: ¿Qué es un iframe? :: Una imagen :: Una ventana a otra página, dentro de la tuya :: Un tipo de letra
 elige :: ¿Por qué no se puede leer lo que hay dentro del iframe de Lockman? :: Porque está vacío :: Porque el navegador lo bloquea: es de otro dueño (CORS) :: Porque es una foto
@@ -437,6 +734,37 @@ Se comparó la página nueva con la publicada, **elemento por elemento**: más d
 
 > 🌎 **Otro ejemplo:** Como comparar dos fotos de una sala antes y después de reorganizar el mueble: si no se movió nada, la foto es idéntica.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El candado del CSS
+lenguaje: js
+pide: El candado busca valores escritos a mano fuera del motor. Completa `revisarCSS(css)`: devuelve las líneas (sin espacios en las puntas) que tienen un color `#…` o un número con `px`, **excepto** las que definen una variable (empiezan con `--`) y las de `@media`, que no pueden usar variables.
+--- código
+function revisarCSS(css) {
+  // tu código aquí
+}
+--- pruebas
+const css = `:root {
+  --morado: #6f42c1;
+  --hueco: 14px;
+}
+.punto { color: var(--morado); }
+.titulo { margin: 12px; }
+.nota { color: #333; }
+@media (max-width: 600px) { }`;
+prueba('encuentra los sueltos', () => igual(revisarCSS(css), ['.titulo { margin: 12px; }', '.nota { color: #333; }']));
+prueba('todo con variables: nada', () => igual(revisarCSS('.a { gap: var(--hueco); }'), []));
+--- solución
+function revisarCSS(css) {
+  return css
+    .split('\n')
+    .map((l) => l.trim())
+    .filter((l) => !l.startsWith('--') && !l.startsWith('@media'))
+    .filter((l) => /#[0-9a-fA-F]{3,6}\b|\d+px/.test(l));
+}
+```
+
 ```practica
 elige :: ¿Qué hace el candado y cuándo se ejecuta? :: Borra colores al publicar :: Busca valores escritos a mano fuera del motor antes de armar el sitio; si encuentra uno, no publica :: Cambia los colores de noche
 elige :: ¿Cómo se comprobó que el cambio no movió nada del diseño? :: A ojo :: Comparando más de 3.900 elementos de la página nueva con la publicada: 0 diferencias :: Preguntando a un usuario
@@ -461,6 +789,29 @@ vf :: Los `@media` pueden usar variables CSS
 > 🌎 **En la vida real:** prender la luz antes de abrir la puerta. Y "nuevo" es la etiqueta de "no leído" de un correo: se quita cuando lo abres.
 
 > 🌎 **Otro ejemplo:** Como un auto con detalles de cortesía: la luz interior que se prende sola, el asiento que recuerda tu posición y el aviso de puerta abierta.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El "nuevo" que se quita
+lenguaje: js
+pide: Un estudio se marca **nuevo** si se publicó hace 14 días o menos, y la persona no lo abrió. Completa `esNuevo(estudio, hoy, abiertos)`: las fechas son textos `'AAAA-MM-DD'` y `abiertos` es la lista de ids que la persona ya abrió (guardada en `localStorage`).
+--- código
+function esNuevo(estudio, hoy, abiertos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('publicado hace 3 días', () => igual(esNuevo({ id: 'a', fecha: '2026-11-15' }, '2026-11-18', []), true));
+prueba('ya lo abrió', () => igual(esNuevo({ id: 'a', fecha: '2026-11-15' }, '2026-11-18', ['a']), false));
+prueba('hace 14 días justos: todavía', () => igual(esNuevo({ id: 'a', fecha: '2026-11-04' }, '2026-11-18', []), true));
+prueba('hace 15 días: ya no', () => igual(esNuevo({ id: 'a', fecha: '2026-11-03' }, '2026-11-18', []), false));
+--- solución
+function esNuevo(estudio, hoy, abiertos) {
+  if (abiertos.includes(estudio.id)) return false;
+  const dias = (Date.parse(hoy) - Date.parse(estudio.fecha)) / 86400000;
+  return dias <= 14;
+}
+```
 
 ```practica
 elige :: ¿Dónde se guarda el tema que escoge la persona? :: En GitHub :: En su aparato (`localStorage`) :: En el JSON
@@ -492,6 +843,27 @@ vf :: Se generan dos PDF por estudio: claro y oscuro
 > 🌎 **En la vida real:** poder usar una canción no quiere decir que alguien te mande el archivo; antes de mandar a alguien a una tienda, asegúrate de que está abierta; una camisa puede quedar bien de frente y mal de costado; no se ajusta la balanza con una sola manzana.
 
 > 🌎 **Otro ejemplo:** Como el cuaderno de errores de una obra: cada problema con lo que se aprendió, para no repetirlo.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Medir en vez de suponer
+lenguaje: js
+pide: Se suponía que cada letra medía 7 px, pero al medir salió 8,1. Completa `calibrar(medidas)`: recibe pares `{ letras, ancho }` medidos de verdad y devuelve el ancho promedio de una letra, con un decimal.
+--- código
+function calibrar(medidas) {
+  // tu código aquí
+}
+--- pruebas
+prueba('con medidas reales', () => igual(calibrar([{ letras: 10, ancho: 81 }, { letras: 20, ancho: 162 }]), 8.1));
+prueba('redondea a un decimal', () => igual(calibrar([{ letras: 3, ancho: 25 }]), 8.3));
+--- solución
+function calibrar(medidas) {
+  const letras = medidas.reduce((s, m) => s + m.letras, 0);
+  const ancho = medidas.reduce((s, m) => s + m.ancho, 0);
+  return Math.round((ancho / letras) * 10) / 10;
+}
+```
 
 ```practica
 escribe :: Nombra dos cosas que se aprendieron midiendo en vez de suponer. :: Que el ancho de letra era 8,1 y no 9,15; que el tiempo se perdía en la espera del globo de Logos y no en la red; o que Lockman cambia de diseño desde 645 px.

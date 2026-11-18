@@ -35,6 +35,27 @@ Leída: **"a todos los `h1`: color verde, tamaño de letra 32 píxeles"**.
 
 **Prueba ahora:** escribe esa regla en tu `estilos.css`, guarda y recarga. Tu título se pone verde.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu primera regla
+lenguaje: html
+pide: Escribe una regla de CSS que deje los párrafos (`p`) en color **azul** (`blue`) y sin margen (`margin: 0`).
+--- código
+<style>
+  /* tu regla aquí */
+</style>
+<p>Hola</p>
+--- pruebas
+prueba('el párrafo es azul', () => igual(estilo('p', 'color'), 'rgb(0, 0, 255)'));
+prueba('sin margen', () => igual(estilo('p', 'margin-top'), '0px'));
+--- solución
+<style>
+  p { color: blue; margin: 0; }
+</style>
+<p>Hola</p>
+```
+
 ```practica
 elige :: En `p { margin: 0; }`, ¿cuál es el selector? :: `margin` :: `p` :: `0`
 elige :: En `p { margin: 0; }`, ¿cuál es la propiedad? :: `p` :: `margin` :: `0`
@@ -84,6 +105,37 @@ Todos los **enlaces (`a`) que están dentro de un `nav`**. Los enlaces de otras 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los selectores
+lenguaje: html
+pide: Sin tocar el HTML: pon en **rojo** (`red`) el elemento con `id="portada"`, en negrita (`font-weight: 700`) todo lo que tenga `class="aviso"`, y en verde (`green`) solo los `h2` que están **dentro** de `.tarjeta`.
+--- código
+<style>
+  /* tus reglas aquí */
+</style>
+<h1 id="portada">Mis estudios</h1>
+<p class="aviso">Nuevo</p>
+<h2>Afuera</h2>
+<div class="tarjeta"><h2>Adentro</h2></div>
+--- pruebas
+prueba('#portada en rojo', () => igual(estilo('#portada', 'color'), 'rgb(255, 0, 0)'));
+prueba('.aviso en negrita', () => igual(estilo('.aviso', 'font-weight'), '700'));
+prueba('el h2 de la tarjeta en verde', () => igual(estilo('.tarjeta h2', 'color'), 'rgb(0, 128, 0)'));
+prueba('el h2 de afuera no', () => ok(estilo('body > h2', 'color') !== 'rgb(0, 128, 0)', 'pintaste todos los h2'));
+--- solución
+<style>
+  #portada { color: red; }
+  .aviso { font-weight: 700; }
+  .tarjeta h2 { color: green; }
+</style>
+<h1 id="portada">Mis estudios</h1>
+<p class="aviso">Nuevo</p>
+<h2>Afuera</h2>
+<div class="tarjeta"><h2>Adentro</h2></div>
+```
+
 ```practica
 elige :: ¿Cómo se seleccionan todos los elementos con `class="aviso"`? :: `aviso` :: `.aviso` :: `#aviso`
 elige :: ¿Cómo se selecciona el elemento con `id="portada"`? :: `.portada` :: `#portada` :: `portada`
@@ -129,6 +181,45 @@ Las reglas para saber quién gana, en orden:
 Las dos reglas de `p` tienen la **misma especificidad** (son etiquetas), así que gana **la de más abajo**: `color: black`.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Quién gana la pelea?
+lenguaje: js
+pide: Completa `especificidad(selector)`: devuelve `[ids, clases, etiquetas]` para selectores sencillos (separados por espacios; `:hover` cuenta como clase). Y `gana(a, b)`: el selector que gana; si empatan, gana **b** (el de más abajo).
+--- código
+function especificidad(selector) {
+  // tu código aquí
+}
+
+function gana(a, b) {
+  // tu código aquí
+}
+--- pruebas
+prueba('p', () => igual(especificidad('p'), [0, 0, 1]));
+prueba('.tarjeta h2', () => igual(especificidad('.tarjeta h2'), [0, 1, 1]));
+prueba('#portada .boton:hover', () => igual(especificidad('#portada .boton:hover'), [1, 2, 0]));
+prueba('la clase le gana a la etiqueta', () => igual(gana('.nota', 'p'), '.nota'));
+prueba('empate: gana el de más abajo', () => igual(gana('.boton', '.otro'), '.otro'));
+prueba('el id le gana a muchas clases', () => igual(gana('#a', '.b.c.d'), '#a'));
+--- solución
+function especificidad(selector) {
+  const ids = (selector.match(/#[\w-]+/g) ?? []).length;
+  const clases = (selector.match(/\.[\w-]+|:[\w-]+/g) ?? []).length;
+  const etiquetas = selector.split(/\s+/).filter((p) => /^[a-zA-Z]/.test(p)).length;
+  return [ids, clases, etiquetas];
+}
+
+function gana(a, b) {
+  const ea = especificidad(a);
+  const eb = especificidad(b);
+  for (let i = 0; i < 3; i++) {
+    if (ea[i] !== eb[i]) return ea[i] > eb[i] ? a : b;
+  }
+  return b;
+}
+```
 
 ```practica
 elige :: Un párrafo con `class="nota"`. Hay `p { color: red }` y `.nota { color: blue }`. ¿De qué color se ve? :: Rojo :: Azul :: Negro
@@ -189,6 +280,41 @@ Sin ella, si dices `width: 300px` y `padding: 20px`, la caja mide en verdad **34
 </details>
 
 **Prueba ahora:** dale a tus `article` del Tema 15 un `padding`, un `border` y un `border-radius`. Ya parecen tarjetas.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una tarjeta con el modelo de caja
+lenguaje: html
+pide: Haz que `.tarjeta` mida **300px** de ancho **contando** el relleno y el borde (`box-sizing: border-box`), con `padding: 20px`, un borde de 1px y esquinas redondeadas de 14px. Separa las dos tarjetas con `margin-bottom: 14px`.
+--- código
+<style>
+  .tarjeta {
+    /* tu código aquí */
+  }
+</style>
+<div class="tarjeta">Uno</div>
+<div class="tarjeta">Dos</div>
+--- pruebas
+prueba('mide 300px contando relleno y borde', () => ok(estilo('.tarjeta', 'box-sizing') === 'border-box' && estilo('.tarjeta', 'width') === '300px', 'falta width: 300px con box-sizing: border-box'));
+prueba('relleno de 20px', () => igual(estilo('.tarjeta', 'padding-left'), '20px'));
+prueba('esquinas redondeadas', () => igual(estilo('.tarjeta', 'border-top-left-radius'), '14px'));
+prueba('separadas 14px', () => igual(estilo('.tarjeta', 'margin-bottom'), '14px'));
+prueba('con borde de 1px', () => igual(estilo('.tarjeta', 'border-top-width'), '1px'));
+--- solución
+<style>
+  .tarjeta {
+    box-sizing: border-box;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #8796aa;
+    border-radius: 14px;
+    margin-bottom: 14px;
+  }
+</style>
+<div class="tarjeta">Uno</div>
+<div class="tarjeta">Dos</div>
+```
 
 ```practica
 elige :: Para separar dos tarjetas entre sí, ¿qué usas? :: `padding` :: `margin` :: `border`
@@ -257,6 +383,32 @@ code { font-family: 'JetBrains Mono', monospace; }   /* letra de programador */
 | `%` | Porcentaje del padre | Anchos |
 | `vw` / `vh` | Porcentaje del ancho / alto de la pantalla | Portadas a pantalla completa |
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Colores, letras y unidades
+lenguaje: html
+pide: Al `body` dale fondo negro (`#000`), letra `monospace` y tamaño de letra de `2rem`. Al `.sombra`, un fondo negro con **50 % de transparencia** (`rgb(0 0 0 / 0.5)`).
+--- código
+<style>
+  /* tus reglas aquí */
+</style>
+<p>Hola</p>
+<div class="sombra">sombra</div>
+--- pruebas
+prueba('fondo negro', () => igual(estilo('body', 'background-color'), 'rgb(0, 0, 0)'));
+prueba('letra monoespaciada', () => ok(estilo('body', 'font-family').includes('monospace'), 'falta monospace'));
+prueba('2rem = 32px', () => igual(estilo('p', 'font-size'), '32px'));
+prueba('negro al 50 %', () => igual(estilo('.sombra', 'background-color'), 'rgba(0, 0, 0, 0.5)'));
+--- solución
+<style>
+  body { background: #000; color: #fff; font-family: monospace; font-size: 2rem; }
+  .sombra { background: rgb(0 0 0 / 0.5); }
+</style>
+<p>Hola</p>
+<div class="sombra">sombra</div>
+```
+
 ```practica
 elige :: ¿Qué pasa con `font-family: 'Letra Que No Existe', sans-serif`? :: Da error :: Usa la siguiente de la lista, `sans-serif` :: No muestra texto
 elige :: ¿Qué propiedad cambia el color de fondo? :: `color` :: `background` :: `border`
@@ -313,6 +465,32 @@ Se lee: "cuando el `<html>` tenga `data-theme="light"`, las variables valen esto
 
 > 💡 **Idea:** el botón ◐ de esta página hace exactamente eso. Y tu página **¿Qué dice la Biblia?** usa la misma idea en su motor de diseño (Temas 12 y 14).
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tokens y modo claro
+lenguaje: html
+pide: Crea en `:root` las variables `--fondo: #0f141b` y `--acento: #7ee787`, y úsalas en `body` (fondo) y `.boton` (color de la letra). Después, cuando `<html>` tenga `data-theme="light"`, cambia **solo el valor** de `--fondo` a `#ffffff`.
+--- código
+<style>
+  /* tus variables y reglas aquí */
+</style>
+<button class="boton">Guardar</button>
+--- pruebas
+prueba('el fondo sale de la variable', () => igual(estilo('body', 'background-color'), 'rgb(15, 20, 27)'));
+prueba('el botón usa el acento', () => igual(estilo('.boton', 'color'), 'rgb(126, 231, 135)'));
+prueba('modo claro cambia el fondo', () => { document.documentElement.dataset.theme = 'light'; const c = estilo('body', 'background-color'); delete document.documentElement.dataset.theme; igual(c, 'rgb(255, 255, 255)'); });
+prueba('usas var(--fondo), no el color a mano', () => ok([...document.styleSheets[0].cssRules].some((r) => r.cssText.includes('var(--fondo)')), 'el body tiene que usar var(--fondo)'));
+--- solución
+<style>
+  :root { --fondo: #0f141b; --acento: #7ee787; }
+  :root[data-theme="light"] { --fondo: #ffffff; }
+  body { background: var(--fondo); }
+  .boton { color: var(--acento); }
+</style>
+<button class="boton">Guardar</button>
+```
+
 ```practica
 escribe :: ¿Qué ventaja tiene usar `var(--acento)` en vez de escribir `#7ee787` en 20 lugares? :: Que el color se cambia en un solo lugar y toda la página se actualiza.
 elige :: ¿Cómo se crea una variable en CSS? :: `$acento: verde;` :: `--acento: verde;` :: `var acento = verde;`
@@ -366,6 +544,37 @@ En la caja (el padre): `display: flex; justify-content: center; align-items: cen
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una fila con Flexbox
+lenguaje: html
+pide: Pon las etiquetas de `.fila` **en fila**, con `gap: 8px`, que **bajen de línea** si no caben (`flex-wrap`), y centradas verticalmente. En `.barra`, reparte los dos botones uno en cada punta (`space-between`).
+--- código
+<style>
+  .fila { /* aquí */ }
+  .barra { /* aquí */ }
+  .fila span { width: 120px; }
+</style>
+<div class="fila" style="width: 300px"><span>Uber</span><span>99</span><span>InDrive</span></div>
+<div class="barra" style="width: 300px"><button>Atrás</button><button>Seguir</button></div>
+--- pruebas
+prueba('fila en flex', () => igual(estilo('.fila', 'display'), 'flex'));
+prueba('gap de 8px', () => igual(estilo('.fila', 'column-gap'), '8px'));
+prueba('baja de línea si no cabe', () => igual(estilo('.fila', 'flex-wrap'), 'wrap'));
+prueba('centradas verticalmente', () => igual(estilo('.fila', 'align-items'), 'center'));
+prueba('la barra en flex', () => igual(estilo('.barra', 'display'), 'flex'));
+prueba('botones en las puntas', () => igual(estilo('.barra', 'justify-content'), 'space-between'));
+--- solución
+<style>
+  .fila { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .barra { display: flex; justify-content: space-between; }
+  .fila span { width: 120px; }
+</style>
+<div class="fila" style="width: 300px"><span>Uber</span><span>99</span><span>InDrive</span></div>
+<div class="barra" style="width: 300px"><button>Atrás</button><button>Seguir</button></div>
+```
+
 ```practica
 elige :: ¿Dónde se escribe `display: flex`? :: En cada hijo :: En el padre :: En el `body` siempre
 elige :: Tienes 10 etiquetas en fila y no caben en el celular. ¿Qué agregas? :: `gap` :: `flex-wrap: wrap` :: `flex-direction: row`
@@ -408,6 +617,30 @@ vf :: `gap` agrega espacio entre los hijos
 
 > 💡 **Idea:** cuando lees una parte de una clase en esta página, el índice a la izquierda y el texto a la derecha son `.lectura`.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una galería con Grid
+lenguaje: html
+pide: Haz que `.galeria` sea una cuadrícula de **3 columnas iguales** (`repeat(3, 1fr)`) con `gap: 10px`. Mide 320px de ancho: con 2 huecos de 10px, cada foto mide 100px.
+--- código
+<style>
+  .galeria { width: 320px; /* aquí */ }
+  .galeria div { height: 40px; background: #8796aa; }
+</style>
+<div class="galeria"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+--- pruebas
+prueba('es grid', () => igual(estilo('.galeria', 'display'), 'grid'));
+prueba('3 columnas iguales', () => { const c = estilo('.galeria', 'grid-template-columns'); ok(c === 'repeat(3, 1fr)' || c === '100px 100px 100px', 'se esperaban 3 columnas de 1fr y salió: ' + c); });
+prueba('gap de 10px', () => igual(estilo('.galeria', 'column-gap'), '10px'));
+--- solución
+<style>
+  .galeria { width: 320px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .galeria div { height: 40px; background: #8796aa; }
+</style>
+<div class="galeria"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+```
+
 ```practica
 elige :: ¿Qué hace `grid-template-columns: 1fr 1fr 1fr 1fr`? :: Una columna :: Cuatro columnas del mismo ancho :: Cuatro filas
 elige :: Para una galería de fotos en filas y columnas, ¿qué usas? :: Flexbox :: Grid :: Ninguno
@@ -448,6 +681,38 @@ img { max-width: 100%; }                         /* la imagen nunca se sale de l
 
 > 💡 **Idea:** en la compu, el mapa de esta página va en zigzag; en el celular, recto. Ábrela en tu celular y compara.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Responsive: una columna en el celular
+lenguaje: js
+pide: Completa `columnas(ancho)` como si fuera este CSS *mobile first*: por defecto **1** columna; desde `min-width: 600px`, **2**; desde `min-width: 1024px`, **3**. Y `reglaQueAplica(ancho)`: `'base'`, `'600'` o `'1024'`.
+--- código
+function reglaQueAplica(ancho) {
+  // tu código aquí
+}
+
+function columnas(ancho) {
+  // tu código aquí
+}
+--- pruebas
+prueba('celular', () => igual(columnas(375), 1));
+prueba('tablet', () => igual(columnas(768), 2));
+prueba('justo 600', () => igual(columnas(600), 2));
+prueba('laptop', () => igual(columnas(1280), 3));
+prueba('la regla del celular', () => igual(reglaQueAplica(375), 'base'));
+--- solución
+function reglaQueAplica(ancho) {
+  if (ancho >= 1024) return '1024';
+  if (ancho >= 600) return '600';
+  return 'base';
+}
+
+function columnas(ancho) {
+  return { base: 1, '600': 2, '1024': 3 }[reglaQueAplica(ancho)];
+}
+```
+
 ```practica
 elige :: ¿Qué quiere decir `@media (max-width: 600px)`? :: Que la página mide 600px :: Que esas reglas se aplican solo si la pantalla mide 600px o menos :: Que la letra mide 600px
 elige :: ¿Qué es *mobile first*? :: Hacer solo la versión de celular :: Diseñar primero para el celular y después agrandar :: Publicar primero en la tienda
@@ -485,6 +750,37 @@ escribe :: ¿Qué es una página responsive? :: Una página que se adapta al tam
 > 🌎 **Otro ejemplo:** Como las puertas automáticas del supermercado: se abren suaves, no de golpe, y eso se siente cuidado.
 
 > ⚠️ **Cuidado:** a algunas personas el movimiento les marea. Por eso se respeta su preferencia: `@media (prefers-reduced-motion: reduce) { * { animation: none; } }`.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Movimiento que respeta a quien pide menos
+lenguaje: html
+pide: Dale al `.boton` una transición de `background-color` de `0.2s`, y define una animación `@keyframes aparecer` (de `opacity: 0` a `opacity: 1`) para `.tarjeta`, de `0.4s`. Dentro de `@media (prefers-reduced-motion: reduce)`, quita la animación (`animation: none`).
+--- código
+<style>
+  /* tus reglas aquí */
+</style>
+<button class="boton">Guardar</button>
+<div class="tarjeta">Hola</div>
+--- pruebas
+prueba('transición del fondo', () => ok(estilo('.boton', 'transition-property').includes('background-color'), 'falta transition: background-color'));
+prueba('dura 0.2s', () => igual(estilo('.boton', 'transition-duration'), '0.2s'));
+prueba('la tarjeta usa aparecer', () => ok(estilo('.tarjeta', 'animation-name') === 'aparecer' || matchMedia('(prefers-reduced-motion: reduce)').matches, 'falta animation: aparecer'));
+prueba('existe @keyframes aparecer', () => ok([...document.styleSheets[0].cssRules].some((r) => r.name === 'aparecer'), 'falta @keyframes aparecer'));
+prueba('respeta reducir movimiento', () => ok([...document.styleSheets[0].cssRules].some((r) => r.media && r.media.mediaText.includes('prefers-reduced-motion') && [...r.cssRules].some((x) => x.style?.animationName === 'none')), 'falta el @media que pone animation: none'));
+--- solución
+<style>
+  .boton { transition: background-color 0.2s; }
+  @keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
+  .tarjeta { animation: aparecer 0.4s; }
+  @media (prefers-reduced-motion: reduce) {
+    .tarjeta { animation: none; }
+  }
+</style>
+<button class="boton">Guardar</button>
+<div class="tarjeta">Hola</div>
+```
 
 ```practica
 elige :: ¿Qué diferencia hay entre `transition` y `animation`? :: Ninguna :: `transition` suaviza el cambio entre dos estados; `animation` corre una secuencia propia con `@keyframes` :: `animation` es solo para imágenes

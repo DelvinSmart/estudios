@@ -53,6 +53,22 @@ La **función flecha** `(a, b) => a - b` se lee: "recibe `a` y `b`, y devuelve `
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Repaso: un objeto y una función
+lenguaje: js
+pide: Crea un objeto `carro` con `marca: 'Toyota'`, `modelo: 'Etios'` y `anio: 2018`, y una función flecha `edad(carro, hoy)` que devuelva cuántos años tiene.
+--- código
+// tu código aquí
+--- pruebas
+prueba('el objeto', () => igual(carro, { marca: 'Toyota', modelo: 'Etios', anio: 2018 }));
+prueba('la edad en 2026', () => igual(edad(carro, 2026), 8));
+--- solución
+const carro = { marca: 'Toyota', modelo: 'Etios', anio: 2018 };
+const edad = (carro, hoy) => hoy - carro.anio;
+```
+
 ```practica
 elige :: ¿Qué usas para un valor que va a cambiar? :: `const` :: `let` :: `function`
 elige :: ¿Cómo lees el año del objeto `carro`? :: `carro[anio]` :: `carro.anio` :: `anio.carro`
@@ -109,6 +125,41 @@ El `reduce` es el más difícil. Léelo así: empieza con `suma = 0`; para cada 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: map, filter y reduce
+lenguaje: js
+pide: Con la lista `viajes`, completa: `caros` (los viajes de **más de 15**, con `filter`), `valores` (solo los valores, con `map`), `total` (la suma, con `reduce`) y `primeroDe99` (el primer viaje de la app `'99'`, con `find`).
+--- código
+const viajes = [
+  { app: 'Uber', valor: 12 },
+  { app: '99', valor: 18 },
+  { app: 'Uber', valor: 25 },
+];
+
+const caros = [];
+const valores = [];
+const total = 0;
+const primeroDe99 = undefined;
+--- pruebas
+prueba('caros', () => igual(caros, [{ app: '99', valor: 18 }, { app: 'Uber', valor: 25 }]));
+prueba('valores', () => igual(valores, [12, 18, 25]));
+prueba('total', () => igual(total, 55));
+prueba('primero de 99', () => igual(primeroDe99, { app: '99', valor: 18 }));
+--- solución
+const viajes = [
+  { app: 'Uber', valor: 12 },
+  { app: '99', valor: 18 },
+  { app: 'Uber', valor: 25 },
+];
+
+const caros = viajes.filter((v) => v.valor > 15);
+const valores = viajes.map((v) => v.valor);
+const total = viajes.reduce((s, v) => s + v.valor, 0);
+const primeroDe99 = viajes.find((v) => v.app === '99');
+```
+
 ```practica
 elige :: Para quedarte solo con los viajes de más de 15, ¿qué usas? :: `map` :: `filter` :: `reduce`
 elige :: Para convertir cada viaje en su valor, ¿qué usas? :: `filter` :: `map` :: `find`
@@ -147,6 +198,26 @@ const tarjeta = `
 
 > 🌎 **Otro ejemplo:** Como un mensaje automático de WhatsApp Business: "Hola {nombre}, tu turno es el {día}". La plantilla es la misma, y los datos cambian para cada cliente.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Textos con plantilla
+lenguaje: js
+pide: Reescribe `resumen` con una **plantilla** (comillas invertidas y `${...}`), sin usar `+`. Tiene que dar exactamente lo mismo.
+--- código
+function resumen(nombre, total, viajes) {
+  return 'Hola, ' + nombre + '. Hoy hiciste ' + viajes + ' viajes y ganaste R$ ' + total.toFixed(2) + '.';
+}
+--- pruebas
+prueba('el texto', () => igual(resumen('Ana', 55, 3), 'Hola, Ana. Hoy hiciste 3 viajes y ganaste R$ 55.00.'));
+prueba('sin +', () => ok(!resumen.toString().includes('+'), 'todavía hay un +'));
+prueba('con plantilla', () => ok(resumen.toString().includes('${'), 'usa ${...}'));
+--- solución
+function resumen(nombre, total, viajes) {
+  return `Hola, ${nombre}. Hoy hiciste ${viajes} viajes y ganaste R$ ${total.toFixed(2)}.`;
+}
+```
+
 ```practica
 elige :: Reescribe `'Total: ' + total + ' reales'` con plantilla :: `'Total: ${total} reales'` :: `` `Total: ${total} reales` `` :: `"Total: total reales"`
 vf :: Con comillas simples `'...'` también funciona `${...}`
@@ -173,6 +244,38 @@ const tarjetas = document.querySelectorAll('.tarjeta');    // TODAS las .tarjeta
 > 🌎 **En la vida real:** pedir en una ferretería "deme **el** martillo rojo" (uno) o "deme **todos** los tornillos de 3 cm" (varios). Primero hay que encontrar la cosa para usarla.
 
 > 🌎 **Otro ejemplo:** Como buscar en el teléfono "el primer contacto que se llama Ana" o "todos los contactos del trabajo".
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Encontrar cajas
+lenguaje: html
+pide: En el `<script>`, encuentra el elemento con `id="buscador"` y escribe en el `#resultado` cuántas `.tarjeta` hay y si existe algo con `class="vacio"` (`querySelector` devuelve `null` si no lo encuentra). El texto: `3 tarjetas · vacio: no`.
+--- código
+<input id="buscador">
+<article class="tarjeta">A</article>
+<article class="tarjeta">B</article>
+<article class="tarjeta">C</article>
+<p id="resultado"></p>
+
+<script>
+  // tu código aquí
+</script>
+--- pruebas
+prueba('el resultado', () => igual($('#resultado').textContent.trim(), '3 tarjetas · vacio: no'));
+--- solución
+<input id="buscador">
+<article class="tarjeta">A</article>
+<article class="tarjeta">B</article>
+<article class="tarjeta">C</article>
+<p id="resultado"></p>
+
+<script>
+  const tarjetas = document.querySelectorAll('.tarjeta');
+  const vacio = document.querySelector('.vacio');
+  document.querySelector('#resultado').textContent = `${tarjetas.length} tarjetas · vacio: ${vacio === null ? 'no' : 'sí'}`;
+</script>
+```
 
 ```practica
 elige :: ¿Cómo encuentras el elemento con `id="buscador"`? :: `document.querySelector('buscador')` :: `document.querySelector('#buscador')` :: `document.querySelector('.buscador')`
@@ -228,6 +331,37 @@ lista.appendChild(li);
 > 🌎 **En la vida real:** el cartel de precios de la gasolinera con números que se cambian a mano: no construyes un cartel nuevo, cambias los números.
 
 > 🌎 **Otro ejemplo:** Como agregar una línea nueva a la lista del supermercado que está pegada en la heladera: la lista sigue ahí, con un renglón más.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cambiar la página sin peligro
+lenguaje: html
+pide: En el `<script>`: muestra el comentario de la persona dentro de `#comentario` **como texto** (`textContent`, nunca `innerHTML`), agrégale la clase `activo` a `.tarjeta` con `classList`, y pon el tema claro con `document.documentElement.dataset.theme = 'light'`.
+--- código
+<p id="comentario"></p>
+<div class="tarjeta">Tarjeta</div>
+
+<script>
+  const deLaPersona = '<img src=x onerror="alert(1)">';
+  // tu código aquí
+</script>
+--- pruebas
+prueba('el comentario sale como texto', () => igual($('#comentario').textContent, '<img src=x onerror="alert(1)">'));
+prueba('no se creó ninguna imagen', () => igual(document.querySelectorAll('#comentario img').length, 0));
+prueba('la tarjeta está activa', () => ok($('.tarjeta').classList.contains('activo'), 'falta la clase activo'));
+prueba('tema claro', () => igual(document.documentElement.dataset.theme, 'light'));
+--- solución
+<p id="comentario"></p>
+<div class="tarjeta">Tarjeta</div>
+
+<script>
+  const deLaPersona = '<img src=x onerror="alert(1)">';
+  document.querySelector('#comentario').textContent = deLaPersona;
+  document.querySelector('.tarjeta').classList.add('activo');
+  document.documentElement.dataset.theme = 'light';
+</script>
+```
 
 ```practica
 elige :: ¿Qué línea agrega la clase `activo` si no la tiene, y la quita si la tiene? :: `classList.add('activo')` :: `classList.toggle('activo')` :: `classList.remove('activo')`
@@ -289,6 +423,53 @@ formulario.addEventListener('submit', (evento) => {
 **`input`**: se dispara cada vez que cambia lo escrito.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un buscador que filtra tarjetas
+lenguaje: html
+pide: Con el evento `input` de `#buscar`, esconde (con `hidden = true`) las tarjetas cuyo nombre **no incluye** lo escrito, sin importar mayúsculas. Y con `submit` del `form`, evita que la página se recargue (`preventDefault`) y escribe `buscado` en `#estado`.
+--- código
+<form>
+  <input id="buscar">
+</form>
+<article class="tarjeta">Lenguas extrañas</article>
+<article class="tarjeta">El bautismo</article>
+<article class="tarjeta">La santa cena</article>
+<p id="estado"></p>
+
+<script>
+  // tu código aquí
+</script>
+--- pruebas
+const escribir = (t) => { $('#buscar').value = t; $('#buscar').dispatchEvent(new Event('input', { bubbles: true })); };
+const visibles = () => [...document.querySelectorAll('.tarjeta')].filter((t) => !t.hidden).map((t) => t.textContent);
+prueba('filtra', () => { escribir('BAUT'); igual(visibles(), ['El bautismo']); });
+prueba('vacío muestra todas', () => { escribir(''); igual(visibles().length, 3); });
+prueba('submit no recarga', () => { const ev = new Event('submit', { bubbles: true, cancelable: true }); $('form').dispatchEvent(ev); ok(ev.defaultPrevented, 'falta preventDefault'); igual($('#estado').textContent, 'buscado'); });
+--- solución
+<form>
+  <input id="buscar">
+</form>
+<article class="tarjeta">Lenguas extrañas</article>
+<article class="tarjeta">El bautismo</article>
+<article class="tarjeta">La santa cena</article>
+<p id="estado"></p>
+
+<script>
+  document.querySelector('#buscar').addEventListener('input', (evento) => {
+    const texto = evento.target.value.toLowerCase();
+    for (const t of document.querySelectorAll('.tarjeta')) {
+      t.hidden = !t.textContent.toLowerCase().includes(texto);
+    }
+  });
+  document.querySelector('form').addEventListener('submit', (evento) => {
+    evento.preventDefault();
+    document.querySelector('#estado').textContent = 'buscado';
+  });
+</script>
+```
 
 ```practica
 elige :: ¿Qué hace `addEventListener('click', fn)`? :: Ejecuta `fn` ahora :: Ejecuta `fn` cada vez que hagan clic :: Borra el botón
@@ -360,6 +541,40 @@ Tienes **la promesa** (el recibo), no el archivo: los datos todavía no llegaron
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: fetch, async y await (con un servidor de mentira)
+lenguaje: js
+pide: `fetchDeMentira(url)` se porta como `fetch`: devuelve una promesa con `{ ok, json() }`. Completa la función `async` `cargarEstudio(id)`: pide `estudios/<id>.json`, y si `ok` es `false` lanza `Error('No encontré el estudio')`; si no, devuelve el **título** del JSON.
+--- código
+const ARCHIVOS = { 'estudios/bautismo.json': '{"titulo":"El bautismo","puntos":[]}' };
+const fetchDeMentira = (url) => new Promise((listo) => setTimeout(() => listo({
+  ok: url in ARCHIVOS,
+  json: async () => JSON.parse(ARCHIVOS[url]),
+}), 10));
+
+async function cargarEstudio(id) {
+  // tu código aquí
+}
+--- pruebas
+prueba('trae el título', async () => igual(await cargarEstudio('bautismo'), 'El bautismo'));
+prueba('uno que no existe', async () => { let m = ''; try { await cargarEstudio('nada'); } catch (e) { m = e.message; } igual(m, 'No encontré el estudio'); });
+--- solución
+const ARCHIVOS = { 'estudios/bautismo.json': '{"titulo":"El bautismo","puntos":[]}' };
+const fetchDeMentira = (url) => new Promise((listo) => setTimeout(() => listo({
+  ok: url in ARCHIVOS,
+  json: async () => JSON.parse(ARCHIVOS[url]),
+}), 10));
+
+async function cargarEstudio(id) {
+  const respuesta = await fetchDeMentira(`estudios/${id}.json`);
+  if (!respuesta.ok) throw new Error('No encontré el estudio');
+  const estudio = await respuesta.json();
+  return estudio.titulo;
+}
+```
+
 ```practica
 escribe :: ¿Qué es una promesa? :: Un valor que todavía no llegó, como el recibo de un pedido: representa algo que va a llegar después, como la respuesta de fetch.
 elige :: ¿Para qué sirve `await`? :: Para cancelar el pedido :: Para esperar a que llegue el resultado sin congelar la página :: Para enviar datos
@@ -394,6 +609,47 @@ const entendido = JSON.parse(localStorage.getItem('entendido') || '{}');
 > 🌎 **Otro ejemplo:** Como la memoria de tu control remoto: recuerda el último canal que viste, pero solo en ese televisor.
 
 > ⚠️ **Cuidado:** en modo privado o con algunas configuraciones, `localStorage` da error. Por eso este mapa lo envuelve en `try { ... } catch { ... }`: si no se puede guardar, la página sigue funcionando. Míralo en `web/guardado.js`.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Guardar el progreso
+lenguaje: js
+pide: `localStorage` solo guarda **texto**. Completa `marcarEntendida(almacen, parte)` (agrega la parte a la lista guardada en la clave `'entendidas'`, sin repetir) y `entendidas(almacen)` (la lista, o `[]` si no hay nada). Usa `JSON.stringify` y `JSON.parse`. `almacen` se porta como `localStorage`.
+--- código
+function crearAlmacen() {
+  const datos = {};
+  return { getItem: (k) => (k in datos ? datos[k] : null), setItem: (k, v) => { datos[k] = String(v); } };
+}
+
+function entendidas(almacen) {
+  // tu código aquí
+}
+
+function marcarEntendida(almacen, parte) {
+  // tu código aquí
+}
+--- pruebas
+prueba('al principio, vacío', () => igual(entendidas(crearAlmacen()), []));
+prueba('marcar dos', () => { const a = crearAlmacen(); marcarEntendida(a, '15.1'); marcarEntendida(a, '15.2'); igual(entendidas(a), ['15.1', '15.2']); });
+prueba('sin repetir', () => { const a = crearAlmacen(); marcarEntendida(a, '15.1'); marcarEntendida(a, '15.1'); igual(entendidas(a), ['15.1']); });
+prueba('se guarda como texto', () => { const a = crearAlmacen(); marcarEntendida(a, 'x'); igual(a.getItem('entendidas'), '["x"]'); });
+--- solución
+function crearAlmacen() {
+  const datos = {};
+  return { getItem: (k) => (k in datos ? datos[k] : null), setItem: (k, v) => { datos[k] = String(v); } };
+}
+
+function entendidas(almacen) {
+  return JSON.parse(almacen.getItem('entendidas') ?? '[]');
+}
+
+function marcarEntendida(almacen, parte) {
+  const lista = entendidas(almacen);
+  if (!lista.includes(parte)) lista.push(parte);
+  almacen.setItem('entendidas', JSON.stringify(lista));
+}
+```
 
 ```practica
 elige :: Marcas una parte como entendida en tu Mac. ¿Aparece en tu iPad? :: Sí, siempre :: No: `localStorage` es de cada navegador :: Solo si es de día
@@ -440,6 +696,40 @@ Este mapa está repartido así (es la arquitectura del Tema 10 en pequeño):
 
 > 🌎 **Otro ejemplo:** Como un equipo de fútbol: arquero, defensores, mediocampistas y delanteros; cada uno con su puesto, y se pasan la pelota.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Módulos: qué exporta cada archivo
+lenguaje: js
+pide: Completa `exportados(codigo)`: devuelve los nombres que un archivo **exporta** (`export function x`, `export const x`, `export class x`), en orden. Y `quienExporta(archivos, nombre)`: el nombre del archivo que exporta ese nombre, o `null`.
+--- código
+function exportados(codigo) {
+  // tu código aquí
+}
+
+function quienExporta(archivos, nombre) {
+  // tu código aquí
+}
+--- pruebas
+const archivos = {
+  'web/cursos.js': 'export const CLASES = {};\nexport const CURSOS = [];',
+  'web/markdown.js': 'import { crearEjercicio } from "./ejercicio.js";\nexport function aHTML(md) {}',
+  'web/ejercicio.js': 'export function leerEjercicio() {}\nexport function crearEjercicio() {}\nfunction interna() {}',
+};
+prueba('los de cursos.js', () => igual(exportados(archivos['web/cursos.js']), ['CLASES', 'CURSOS']));
+prueba('una función interna no se exporta', () => igual(exportados(archivos['web/ejercicio.js']), ['leerEjercicio', 'crearEjercicio']));
+prueba('¿dónde está CLASES?', () => igual(quienExporta(archivos, 'CLASES'), 'web/cursos.js'));
+prueba('uno que no existe', () => igual(quienExporta(archivos, 'nada'), null));
+--- solución
+function exportados(codigo) {
+  return [...codigo.matchAll(/export\s+(?:async\s+)?(?:function|const|let|class)\s+(\w+)/g)].map((m) => m[1]);
+}
+
+function quienExporta(archivos, nombre) {
+  return Object.keys(archivos).find((a) => exportados(archivos[a]).includes(nombre)) ?? null;
+}
+```
+
 ```practica
 elige :: Para agregar una clase nueva al mapa, ¿qué archivo abres? :: `web/app.js` :: `web/cursos.js` :: `web/guardado.js`
 elige :: ¿Qué hay que poner en el `<script>` para usar `import`? :: `type="text"` :: `type="module"` :: Nada
@@ -476,6 +766,35 @@ Abre la consola: clic derecho → **Inspeccionar** → **Consola** (o `Cmd + Opt
 Que el **selector** esté bien escrito y que esa caja **exista** en el HTML. Y que el `<script>` esté **al final del `body`** (o sea `type="module"`), para que corra después de que exista la caja.
 
 </details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Qué quiere decir este error de la consola?
+lenguaje: js
+pide: Completa `queSignifica(error)` con la causa más común: `Cannot read properties of null` → `'querySelector no encontró el elemento'`; `Unexpected token` → `'error al escribir el código'`; `Failed to fetch` → `'no se pudo traer el archivo'`; `is not defined` → `'el nombre no existe'`; otro → `'leer el mensaje completo'`.
+--- código
+function queSignifica(error) {
+  // tu código aquí
+}
+--- pruebas
+prueba('null', () => igual(queSignifica("TypeError: Cannot read properties of null (reading 'addEventListener')"), 'querySelector no encontró el elemento'));
+prueba('token', () => igual(queSignifica("SyntaxError: Unexpected token '}'"), 'error al escribir el código'));
+prueba('fetch', () => igual(queSignifica('TypeError: Failed to fetch'), 'no se pudo traer el archivo'));
+prueba('not defined', () => igual(queSignifica('ReferenceError: cargarEstudio is not defined'), 'el nombre no existe'));
+prueba('otro', () => igual(queSignifica('RangeError: Invalid array length'), 'leer el mensaje completo'));
+--- solución
+const CAUSAS = [
+  ['Cannot read properties of null', 'querySelector no encontró el elemento'],
+  ['Unexpected token', 'error al escribir el código'],
+  ['Failed to fetch', 'no se pudo traer el archivo'],
+  ['is not defined', 'el nombre no existe'],
+];
+
+function queSignifica(error) {
+  return CAUSAS.find(([texto]) => error.includes(texto))?.[1] ?? 'leer el mensaje completo';
+}
+```
 
 ```practica
 elige :: `Cannot read properties of null` casi siempre quiere decir… :: Que falta internet :: Que `querySelector` no encontró la caja :: Que el CSS está mal
