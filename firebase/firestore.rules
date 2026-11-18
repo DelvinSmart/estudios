@@ -299,6 +299,21 @@ service cloud.firestore {
         '50:LECCION.md:3',
         '50:LECCION.md:4',
         '50:LECCION.md:5',
+        '81:LECCION.md:1',
+        '81:LECCION.md:2',
+        '81:LECCION.md:3',
+        '81:LECCION.md:4',
+        '81:LECCION.md:5',
+        '82:LECCION.md:1',
+        '82:LECCION.md:2',
+        '82:LECCION.md:3',
+        '82:LECCION.md:4',
+        '82:LECCION.md:5',
+        '83:LECCION.md:1',
+        '83:LECCION.md:2',
+        '83:LECCION.md:3',
+        '83:LECCION.md:4',
+        '83:LECCION.md:5',
         '51:LECCION.md:1',
         '51:LECCION.md:2',
         '51:LECCION.md:3',
@@ -313,7 +328,14 @@ service cloud.firestore {
         '53:LECCION.md:2',
         '53:LECCION.md:3',
         '53:LECCION.md:4',
-        '53:LECCION.md:5'
+        '53:LECCION.md:5',
+        '84:LECCION.md:1',
+        '84:LECCION.md:2',
+        '84:LECCION.md:3',
+        '84:LECCION.md:4',
+        '84:LECCION.md:5',
+        '84:LECCION.md:6',
+        '84:LECCION.md:7'
       ] : (curso == 'node' ? [
         '68:LECCION.md:1',
         '68:LECCION.md:2',
@@ -594,7 +616,7 @@ service cloud.firestore {
         '29:LECCION.md:10'
       ] : [])))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 251 : (curso == 'javascript' ? 45 : (curso == 'node' ? 33 : (curso == 'reactnative' ? 28 : (curso == 'kotlin' ? 28 : (curso == 'python' ? 39 : (curso == 'seguridad' ? 26 : (curso == 'ia' ? 61 : (curso == 'agentes' ? 56 : -1))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 251 : (curso == 'javascript' ? 67 : (curso == 'node' ? 33 : (curso == 'reactnative' ? 28 : (curso == 'kotlin' ? 28 : (curso == 'python' ? 39 : (curso == 'seguridad' ? 26 : (curso == 'ia' ? 61 : (curso == 'agentes' ? 56 : -1))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -853,7 +875,25 @@ service cloud.firestore {
         '53:LECCION.md:1',
         '53:LECCION.md:2',
         '53:LECCION.md:3',
-        '53:LECCION.md:4'
+        '53:LECCION.md:4',
+        '81:LECCION.md:1',
+        '81:LECCION.md:2',
+        '81:LECCION.md:3',
+        '81:LECCION.md:4',
+        '82:LECCION.md:1',
+        '82:LECCION.md:2',
+        '82:LECCION.md:3',
+        '82:LECCION.md:4',
+        '83:LECCION.md:1',
+        '83:LECCION.md:2',
+        '83:LECCION.md:3',
+        '83:LECCION.md:4',
+        '84:LECCION.md:1',
+        '84:LECCION.md:2',
+        '84:LECCION.md:3',
+        '84:LECCION.md:4',
+        '84:LECCION.md:5',
+        '84:LECCION.md:6'
       ] : (curso == 'node' ? [
         '68:LECCION.md:1',
         '68:LECCION.md:2',
@@ -1075,9 +1115,13 @@ service cloud.firestore {
         '48:LECCION.md:1': '47:LECCION.md:5',
         '49:LECCION.md:1': '48:LECCION.md:5',
         '50:LECCION.md:1': '49:LECCION.md:5',
-        '51:LECCION.md:1': '50:LECCION.md:5',
+        '81:LECCION.md:1': '50:LECCION.md:5',
+        '82:LECCION.md:1': '81:LECCION.md:5',
+        '83:LECCION.md:1': '82:LECCION.md:5',
+        '51:LECCION.md:1': '83:LECCION.md:5',
         '52:LECCION.md:1': '51:LECCION.md:5',
-        '53:LECCION.md:1': '52:LECCION.md:5'
+        '53:LECCION.md:1': '52:LECCION.md:5',
+        '84:LECCION.md:1': '53:LECCION.md:5'
       } : (curso == 'node' ? {
         '69:LECCION.md:1': '68:LECCION.md:4',
         '70:LECCION.md:1': '69:LECCION.md:4',

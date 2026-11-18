@@ -1,4 +1,4 @@
-# JavaScript + TypeScript 9: un proyecto con pruebas
+# JavaScript + TypeScript 12: un proyecto con pruebas
 
 > 🌎 **En la vida real:** después del curso de manejo viene el primer viaje solo. Esta clase junta todo en un proyecto chico pero real, en TypeScript, con sus pruebas.
 

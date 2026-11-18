@@ -75,7 +75,7 @@ todos los "abre tal archivo de Copiloto".
 | Curso | Proyecto de principio a fin | Lo que hay que agregar |
 |---|---|---|
 | Programación | "Gastos del carro": leer su código, escribir pruebas, CI, Git, Firebase con emulador y un CRUD | Ejercicios en cada clase; usar el proyecto de práctica en vez de Copiloto |
-| JavaScript + TypeScript | Una web de gastos en el navegador, con pruebas | ✅ Un ejercicio de código en cada parte (36, probados con su solución). Falta: el DOM, errores, clases y objetos, fechas, guardar en el navegador, y el proyecto |
+| JavaScript + TypeScript | ✅ La web de gastos, de una carpeta vacía a GitHub Pages (clase 84) | ✅ Completo: 13 clases, un ejercicio de código en cada parte (54, probados con su solución), y las clases nuevas del DOM, errores y clases (POO), fechas y guardar |
 | Node.js | La API de gastos con Express, con pruebas, publicada | Ejercicios de cada ruta, revisión automática |
 | React Native | La app de gastos con Expo, en el teléfono | Formularios, listas, guardar datos, publicar paso a paso |
 | Kotlin | La app de gastos con Jetpack Compose | Ejercicios del lenguaje en el Playground |
@@ -93,8 +93,8 @@ Cómo se construye un motor (colores, formas, efectos, separaciones), dónde se 
 - [ ] React Native: un archivo de tema, como `dash.*` de Copiloto
 - [ ] Kotlin: el tema de Jetpack Compose
 - [ ] Python y Node (sin pantallas): la misma idea con la configuración en un solo lugar
-- [ ] Qué es la **programación orientada a objetos**, en qué se parece y en qué no a un motor de diseño
-  (Python y Kotlin ya tienen su clase de clases y objetos; a JavaScript le falta)
+- [x] CSS dentro de JavaScript: el motor de la web de gastos (clase 84) y cómo lo llama cada elemento
+- [x] Qué es la **programación orientada a objetos**, en qué se parece y en qué no a un motor de diseño (clase 82)
 
 ### F. El proyecto estrella: una calculadora, de la idea al teléfono
 

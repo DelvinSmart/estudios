@@ -169,7 +169,9 @@ window.addEventListener('message', (ev) => {
 function correrEnCaja(ej, codigo) {
   return new Promise((listo) => {
     const caja = document.createElement('iframe');
-    caja.setAttribute('sandbox', 'allow-scripts');
+    // En html, allow-forms deja que el alumno toque "enviar" en su propia página (sin preventDefault, solo se recarga la caja).
+    // Nunca allow-same-origin: la caja sigue sin poder leer el sitio.
+    caja.setAttribute('sandbox', ej.lenguaje === 'html' ? 'allow-scripts allow-forms' : 'allow-scripts');
     caja.className = ej.lenguaje === 'html' ? 'ejercicio-vista' : 'lab-caja';
     caja.title = 'caja aislada donde corre tu código';
     let terminado = false;
