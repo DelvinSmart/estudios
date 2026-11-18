@@ -950,3 +950,39 @@ body.con-reproductor { padding-bottom: 70px; }
   .reproductor .rep-tiempo { font-size: 0.75rem; }
   body.con-reproductor { padding-bottom: 64px; }
 }
+
+/* ---------- 10. Espacios: una sola regla para todas las pantallas ----------
+   Como en Copiloto: --hueco (14 px) entre bloques, --hueco-doble (28 px) entre secciones,
+   --relleno igual a los dos lados dentro de los recuadros. La etiqueta gris (// …) va pegada a su título.
+   Va al final para mandar sobre los valores sueltos de arriba. */
+.portada, .cabeza { padding: var(--hueco-doble) 0 var(--hueco); }
+.portada > :last-child, .cabeza > :last-child { margin-bottom: 0; }
+.titulo-grande, .titulo-medio, .bajada { margin: 0 0 var(--hueco); }
+.comentario { margin: 0 0 6px; }
+.contadores { margin: 0 0 var(--hueco); }
+.barra-progreso + .acciones { margin-top: var(--hueco); }
+.fila-progreso { margin: var(--hueco) 0; }
+.pestanas { margin: var(--hueco) 0; }
+.pestanas-cursos { margin: 0 0 var(--hueco); }
+.cabeza-mapa { gap: var(--hueco); }
+.titulo-mapa-curso { margin: var(--hueco-doble) 0 0; }
+.mapa-islas { margin: var(--hueco) 0 var(--hueco-doble); }
+.curso-mapa:last-child .mapa-islas, .mapa-islas:last-child { margin-bottom: 0; }
+.curso-progreso { margin-top: var(--hueco-doble); padding-top: var(--hueco-doble); }
+.curso-progreso > .barra-progreso.ancha { margin-bottom: var(--hueco); }
+.gran-cuenta { margin: 0 0 var(--hueco); }
+.etapa-progreso { margin: 0 0 var(--hueco); padding: var(--relleno); }
+.etapa-progreso h2 { margin: 0 0 var(--hueco); }
+.caja-nube { margin-top: var(--hueco); }
+.estado-cert { margin-top: var(--hueco); padding: var(--relleno); }
+.cabeza .cuenta-campo, .cabeza .fila-codigo { margin-top: var(--hueco); }
+.lab { gap: var(--hueco); margin-bottom: 0; }
+.lab-resultado { gap: 8px; }
+.certificado { margin-bottom: 0; }
+.intro { margin: 0 0 var(--hueco); }
+.mapa-islas { margin-top: var(--hueco); }
+.curso-progreso .centro, .curso-progreso p.centro { margin: var(--hueco) 0 0; }
+.curso-progreso + .intro, .intro.llevar { margin-top: var(--hueco-doble); }
+.estado-cert, .estado-cert .estado-texto { gap: var(--hueco); }
+.cuenta-pantalla { padding: var(--hueco-doble) 0; }
+.cuenta-cuerpo { padding: var(--relleno); gap: var(--hueco); }
