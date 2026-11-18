@@ -33,6 +33,33 @@ En Brasil, entrar sin permiso en un aparato ajeno es delito (**Ley 12.737/2012**
 
 > 🌎 **Otro ejemplo:** Es como un periodista y un espía: los dos buscan información, pero uno pide permiso y cita la fuente.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Puedo probar este sistema?
+lenguaje: js
+pide: Completa `puedoProbar(sistema, hoy)`. Devuelve `true` **solo** si: el sistema es tuyo (`dueno === 'yo'`), o es un laboratorio hecho para eso (`laboratorio: true`), o tienes **permiso por escrito** (`permiso` con `porEscrito: true`) y **todavía no venció** (`permiso.hasta >= hoy`, fechas ISO). Las buenas intenciones no cuentan: `intencion` no cambia nada.
+--- código
+function puedoProbar(sistema, hoy) {
+  // tu código aquí
+}
+--- pruebas
+const hoy = '2026-11-18';
+prueba('lo tuyo, sí', () => igual(puedoProbar({ dueno: 'yo' }, hoy), true));
+prueba('un laboratorio, sí', () => igual(puedoProbar({ dueno: 'OWASP', laboratorio: true }, hoy), true));
+prueba('con permiso escrito vigente, sí', () => igual(puedoProbar({ dueno: 'cliente', permiso: { porEscrito: true, hasta: '2026-12-01' } }, hoy), true));
+prueba('permiso de palabra, no', () => igual(puedoProbar({ dueno: 'cliente', permiso: { porEscrito: false, hasta: '2026-12-01' } }, hoy), false));
+prueba('permiso vencido, no', () => igual(puedoProbar({ dueno: 'cliente', permiso: { porEscrito: true, hasta: '2026-11-17' } }, hoy), false));
+prueba('"con buena intención", tampoco (sombrero gris)', () => igual(puedoProbar({ dueno: 'otro', intencion: 'buena' }, hoy), false));
+--- solución
+function puedoProbar(sistema, hoy) {
+  if (sistema.dueno === 'yo') return true;
+  if (sistema.laboratorio === true) return true;
+  const p = sistema.permiso;
+  return Boolean(p && p.porEscrito === true && p.hasta >= hoy);
+}
+```
+
 ```practica
 vf :: Saber una técnica de ataque te da permiso para probarla en cualquier sitio
 vf :: En Brasil, entrar sin permiso en un aparato ajeno es delito
@@ -67,6 +94,32 @@ En este sitio: **qué** = que el certificado sea real; **quién** = alguien que 
 > 🌎 **En la vida real:** un joyero y una panadería no ponen la misma seguridad: depende de qué cuidan y de quién podría robar.
 
 > 🌎 **Otro ejemplo:** Es como planear un viaje: piensas qué podría salir mal (lluvia, robo, retraso) y llevas lo que necesitas para cada cosa.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El modelo de amenazas: para cada "cómo", una defensa
+lenguaje: js
+pide: Completa `defensaPara(como)`: recibe cómo atacaría alguien y devuelve la defensa que va **en el servidor**. Si el texto menciona `consola` o `localStorage` → `'reglas del servidor'`; `api` → `'revisar la sesión y el dueño en el servidor'`; `contraseña` o `clave` → `'limitar intentos'`; si no reconoces nada → `'pensar la defensa antes de publicar'`. Compara en minúsculas.
+--- código
+function defensaPara(como) {
+  // tu código aquí
+}
+--- pruebas
+prueba('cambiar el progreso desde la consola', () => igual(defensaPara('Cambiar el progreso desde la Consola'), 'reglas del servidor'));
+prueba('editar localStorage', () => igual(defensaPara('editar localStorage para tener el certificado'), 'reglas del servidor'));
+prueba('llamar a la API directo', () => igual(defensaPara('llamar a la API directo con otro id'), 'revisar la sesión y el dueño en el servidor'));
+prueba('adivinar contraseñas', () => igual(defensaPara('un robot que prueba contraseñas'), 'limitar intentos'));
+prueba('algo nuevo', () => igual(defensaPara('subir una foto gigante'), 'pensar la defensa antes de publicar'));
+--- solución
+function defensaPara(como) {
+  const t = como.toLowerCase();
+  if (t.includes('consola') || t.includes('localstorage')) return 'reglas del servidor';
+  if (t.includes('api')) return 'revisar la sesión y el dueño en el servidor';
+  if (t.includes('contraseña') || t.includes('clave')) return 'limitar intentos';
+  return 'pensar la defensa antes de publicar';
+}
+```
 
 ```practica
 vf :: Cada función nueva que agregas aumenta la superficie de ataque
@@ -117,6 +170,41 @@ huella = hashlib.scrypt(b"mi-clave-larga", salt=sal, n=2**14, r=8, p=1)
 
 > 🌎 **Otro ejemplo:** Es como el cajero automático: necesitas la tarjeta **y** el PIN; con uno solo no alcanza.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Cuánto tarda la fuerza bruta?
+lenguaje: js
+pide: Completa `combinaciones(largo, simbolos)`: cuántas claves posibles hay (`simbolos` elevado a `largo`, con `**`). Y `fuerza(clave, comunes)`: `'débil'` si tiene menos de 8 letras, si está en la lista de `comunes` (sin importar mayúsculas) o si son **solo números**; `'fuerte'` si tiene 12 o más y no es débil; si no, `'media'`.
+--- código
+function combinaciones(largo, simbolos) {
+  // tu código aquí
+}
+
+function fuerza(clave, comunes) {
+  // tu código aquí
+}
+--- pruebas
+const comunes = ['123456', 'senha123', 'flamengo123', 'password'];
+prueba('4 números: 10.000', () => igual(combinaciones(4, 10), 10000));
+prueba('crece muy rápido con el largo', () => ok(combinaciones(12, 62) > combinaciones(8, 62) * 1e6, '12 letras tiene que ser muchísimo más que 8'));
+prueba('corta, débil', () => igual(fuerza('a1b2', comunes), 'débil'));
+prueba('de las más usadas, débil', () => igual(fuerza('Flamengo123', comunes), 'débil'));
+prueba('solo números, débil aunque sea larga', () => igual(fuerza('19901231', comunes), 'débil'));
+prueba('media y fuerte', () => igual([fuerza('carro-azul', comunes), fuerza('tres-palabras-largas', comunes)], ['media', 'fuerte']));
+--- solución
+function combinaciones(largo, simbolos) {
+  return simbolos ** largo;
+}
+
+function fuerza(clave, comunes) {
+  const comun = comunes.map((c) => c.toLowerCase()).includes(clave.toLowerCase());
+  if (clave.length < 8 || comun || /^\d+$/.test(clave)) return 'débil';
+  if (clave.length >= 12) return 'fuerte';
+  return 'media';
+}
+```
+
 ```practica
 vf :: Un sistema bien hecho guarda tu contraseña tal cual para compararla
 vf :: Reusar la misma contraseña en varios sitios es peligroso
@@ -164,6 +252,38 @@ Si subiste un secreto a GitHub, **borrar el archivo no alcanza**: queda en el hi
 
 > 🌎 **Otro ejemplo:** Es como una tarjeta robada: no esperas a ver si la usan; la bloqueas y pides otra.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Buscar secretos antes de subir
+lenguaje: js
+pide: Completa `buscarSecretos(texto)`: revisa un archivo línea por línea y devuelve los **números de línea** (desde 1) que parecen tener un secreto: una clave de pago (`sk_live_`), una clave de AWS (`AKIA` seguido de 16 letras mayúsculas o números), una llave privada (`PRIVATE KEY`), o `password=`/`password:` con algo escrito después. La `apiKey` de Firebase (empieza con `AIza`) **no** es secreta: no la marques.
+--- código
+function buscarSecretos(texto) {
+  // tu código aquí
+}
+--- pruebas
+const archivo = [
+  "const firebase = { apiKey: 'AIzaSyB1234567890abcdefghijklmnop' };",
+  "const stripe = 'sk_live_51Hx9abcdefghijklmnop';",
+  '# password=',
+  'DB_PASSWORD: password=s3gura!',
+  'aws = AKIAABCDEFGHIJKLMNOP',
+  '-----BEGIN PRIVATE KEY-----',
+].join('\n');
+prueba('encuentra los secretos', () => igual(buscarSecretos(archivo), [2, 4, 5, 6]));
+prueba('la configuración de Firebase no es un secreto', () => ok(!buscarSecretos(archivo).includes(1), 'la línea 1 es pública: la seguridad está en las reglas'));
+prueba('un archivo limpio', () => igual(buscarSecretos('const total = 10;\nconsole.log(total);'), []));
+--- solución
+function buscarSecretos(texto) {
+  const patrones = [/sk_live_/, /AKIA[A-Z0-9]{16}/, /PRIVATE KEY/, /password\s*[=:]\s*\S+/i];
+  return texto
+    .split('\n')
+    .map((linea, i) => (patrones.some((p) => p.test(linea)) ? i + 1 : null))
+    .filter((n) => n !== null);
+}
+```
+
 ```practica
 vf :: La apiKey de la configuración web de Firebase es un secreto
 vf :: Si subiste una clave a GitHub, basta con borrar el archivo en el siguiente commit
@@ -193,6 +313,42 @@ El dominio es lo que va justo antes de la primera `/`. `accounts.google.com` es 
 > 🌎 **En la vida real:** es como leer el remitente de una carta: "Banco do Brasil" escrito a mano en un sobre sin sello no es el banco.
 
 > 🌎 **Otro ejemplo:** Es como una camiseta "Adibas": de lejos parece la marca, de cerca no.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El dominio de verdad
+lenguaje: js
+pide: Completa `dominioReal(direccion)`: devuelve el dominio que manda en una dirección, con `new URL(direccion).hostname`. Para `.com.br` y otros de dos pedazos (`'com.br', 'org.br', 'gov.br'`), son las **tres** últimas partes; si no, las **dos** últimas. Y `esDe(direccion, dominio)`: `true` solo si el dominio real es ese. Fíjate en el truco del `@`: todo lo de antes de la arroba no es el sitio.
+--- código
+const DOS_PEDAZOS = ['com.br', 'org.br', 'gov.br'];
+
+function dominioReal(direccion) {
+  // tu código aquí
+}
+
+function esDe(direccion, dominio) {
+  // tu código aquí
+}
+--- pruebas
+prueba('Google de verdad', () => igual(dominioReal('https://accounts.google.com/login'), 'google.com'));
+prueba('el que se disfraza de Google', () => igual(dominioReal('https://accounts.google.com.verificar-cuenta.xyz/login'), 'verificar-cuenta.xyz'));
+prueba('el truco de la arroba', () => igual(dominioReal('https://www.nubank.com.br@pague-ya.top/pix'), 'pague-ya.top'));
+prueba('un .com.br', () => igual(dominioReal('https://app.nubank.com.br/'), 'nubank.com.br'));
+prueba('esDe', () => igual([esDe('https://accounts.google.com/', 'google.com'), esDe('https://google.com.verificar-cuenta.xyz', 'google.com')], [true, false]));
+--- solución
+const DOS_PEDAZOS = ['com.br', 'org.br', 'gov.br'];
+
+function dominioReal(direccion) {
+  const partes = new URL(direccion).hostname.split('.');
+  const ultimasDos = partes.slice(-2).join('.');
+  return DOS_PEDAZOS.includes(ultimasDos) ? partes.slice(-3).join('.') : ultimasDos;
+}
+
+function esDe(direccion, dominio) {
+  return dominioReal(direccion) === dominio;
+}
+```
 
 ```practica
 vf :: En la dirección accounts.google.com.ofertas.xyz, el dominio real es Google
@@ -230,6 +386,36 @@ Validar en la pantalla (campos obligatorios, botones bloqueados) es para **ayuda
 
 > 🌎 **Otro ejemplo:** Es como el "solo para mayores de 18" de un sitio: un clic en "sí, tengo 18" no comprueba nada.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El precio lo pone el servidor
+lenguaje: js
+pide: La página manda el pedido con precios, y cualquiera puede cambiarlos desde las herramientas de desarrollador. Completa `totalDelServidor(pedido, catalogo)`: **ignora** el precio que mandó la página y usa el del `catalogo`. Si un producto no está en el catálogo, o la cantidad no es un entero de 1 a 10, lanza `Error('Pedido inválido')`. Devuelve el total redondeado a 2 decimales.
+--- código
+function totalDelServidor(pedido, catalogo) {
+  // tu código aquí
+}
+--- pruebas
+const catalogo = { lavado: 30, aceite: 120.5, peaje: 5.4 };
+prueba('un pedido normal', () => igual(totalDelServidor([{ producto: 'lavado', cantidad: 2, precio: 30 }], catalogo), 60));
+prueba('el precio cambiado en la consola se ignora', () => igual(totalDelServidor([{ producto: 'aceite', cantidad: 1, precio: 0.01 }], catalogo), 120.5));
+const lanza = (fn) => { try { fn(); return 'no lanzó'; } catch (e) { return e.message; } };
+prueba('un producto inventado', () => igual(lanza(() => totalDelServidor([{ producto: 'gratis', cantidad: 1 }], catalogo)), 'Pedido inválido'));
+prueba('cantidades raras', () => igual([0, -1, 2.5, 11].map((cantidad) => lanza(() => totalDelServidor([{ producto: 'peaje', cantidad }], catalogo))), Array(4).fill('Pedido inválido')));
+--- solución
+function totalDelServidor(pedido, catalogo) {
+  let total = 0;
+  for (const linea of pedido) {
+    const precio = catalogo[linea.producto];
+    const cantidadValida = Number.isInteger(linea.cantidad) && linea.cantidad >= 1 && linea.cantidad <= 10;
+    if (precio === undefined || !cantidadValida) throw new Error('Pedido inválido');
+    total += precio * linea.cantidad;
+  }
+  return Math.round(total * 100) / 100;
+}
+```
+
 ```practica
 vf :: Quitar el disabled de un botón desde las herramientas del navegador es fácil
 vf :: Si la app revisa un límite en la pantalla, ya no hace falta revisarlo en el servidor
@@ -259,6 +445,36 @@ En un Wi-Fi abierto (aeropuerto, café), alguien en la misma red puede ver qué 
 > 🌎 **En la vida real:** hablar de tu clave del banco en voz alta en un bus lleno: aunque nadie parezca escuchar, alguien puede.
 
 > 🌎 **Otro ejemplo:** Es como un cajero automático en una calle oscura: funciona igual, pero es más fácil que alguien mire.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: HTTPS de punta a punta
+lenguaje: js
+pide: Completa `esSegura(direccion)`: `true` si la dirección usa `https:` (con `new URL`). Y `recursosInseguros(pagina, recursos)`: si la página es `https`, devuelve los recursos que se cargan por `http:` (el navegador los bloquea o avisa, y rompen el candado); si la página no es `https`, devuelve **todos** (nada está protegido).
+--- código
+function esSegura(direccion) {
+  // tu código aquí
+}
+
+function recursosInseguros(pagina, recursos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('https sí, http no', () => igual([esSegura('https://delvinsmart.github.io'), esSegura('http://delvinsmart.github.io')], [true, false]));
+const recursos = ['https://cdn.jsdelivr.net/a.js', 'http://imagenes.ejemplo.com/logo.png', '/estilos.css'];
+prueba('en una página https, los http', () => igual(recursosInseguros('https://mi-sitio.com/', recursos), ['http://imagenes.ejemplo.com/logo.png']));
+prueba('en una página http, todo es inseguro', () => igual(recursosInseguros('http://mi-sitio.com/', recursos).length, 3));
+--- solución
+function esSegura(direccion) {
+  return new URL(direccion).protocol === 'https:';
+}
+
+function recursosInseguros(pagina, recursos) {
+  if (!esSegura(pagina)) return [...recursos];
+  return recursos.filter((r) => new URL(r, pagina).protocol === 'http:');
+}
+```
 
 ```practica
 vf :: El candado de HTTPS garantiza que el sitio es honesto

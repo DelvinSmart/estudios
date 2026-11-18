@@ -49,6 +49,32 @@ Cada hallazgo lleva una **severidad**: **crítica, alta, media, baja o informati
 
 > 🌎 **Otro ejemplo:** Es como la lista de arreglos de una casa: el techo que se cae va antes que la pintura.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La severidad de cada hallazgo
+lenguaje: js
+pide: Completa `severidad(dano, facil)`. `dano` es `'todos'` (afecta a todos los usuarios), `'otro'` (a otro usuario), `'costos'` (gasta tu dinero), `'propio'` (solo se salta algo de la propia cuenta) o `'ninguno'`. `facil` es `true` si cualquiera lo explota sin trabajo. Tabla: `todos` → `'crítica'` si es fácil, si no `'alta'`; `otro` → `'alta'`; `costos` → `'media'`; `propio` → `'baja'`; `ninguno` → `'informativa'`.
+--- código
+function severidad(dano, facil) {
+  // tu código aquí
+}
+--- pruebas
+prueba('cualquiera lee los datos de todos', () => igual(severidad('todos', true), 'crítica'));
+prueba('lo mismo, pero difícil', () => igual(severidad('todos', false), 'alta'));
+prueba('cambiar datos de otro', () => igual(severidad('otro', true), 'alta'));
+prueba('abusar de una función que cuesta', () => igual(severidad('costos', true), 'media'));
+prueba('lo propio y lo informativo', () => igual([severidad('propio', true), severidad('ninguno', false)], ['baja', 'informativa']));
+--- solución
+function severidad(dano, facil) {
+  if (dano === 'todos') return facil ? 'crítica' : 'alta';
+  if (dano === 'otro') return 'alta';
+  if (dano === 'costos') return 'media';
+  if (dano === 'propio') return 'baja';
+  return 'informativa';
+}
+```
+
 ```practica
 vf :: Una auditoría empieza buscando fallas en producción sin plan
 vf :: La severidad depende de qué tan fácil es explotar la falla y cuánto daño hace
@@ -95,6 +121,36 @@ allow update: if request.auth.uid == uid
 
 > 🌎 **Otro ejemplo:** Es como un carnet de socio donde el socio puede escribir "VIP" con su propio lápiz.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El error del rol en el perfil
+lenguaje: js
+pide: Esta regla deja que el dueño actualice su perfil **entero**, así que puede mandarse `rol: 'admin'`. Arregla `puedeActualizar(sesionUid, uidDelDoc, antes, despues)` como la regla buena: tiene que ser el dueño **y** los campos que cambiaron (los que tienen distinto valor entre `antes` y `despues`, o que aparecen o desaparecen) tienen que estar todos en `['nombre', 'foto']`.
+--- código
+const EDITABLES = ['nombre', 'foto'];
+
+function puedeActualizar(sesionUid, uidDelDoc, antes, despues) {
+  return sesionUid === uidDelDoc;
+}
+--- pruebas
+const perfil = { nombre: 'Ana', foto: 'a.png', rol: 'usuario' };
+prueba('cambiar su nombre, sí', () => igual(puedeActualizar('ana', 'ana', perfil, { ...perfil, nombre: 'Ana Paula' }), true));
+prueba('volverse admin, no', () => igual(puedeActualizar('ana', 'ana', perfil, { ...perfil, rol: 'admin' }), false));
+prueba('agregarse un campo nuevo, no', () => igual(puedeActualizar('ana', 'ana', perfil, { ...perfil, saldo: 99999 }), false));
+prueba('borrar el rol, no', () => { const { rol, ...sinRol } = perfil; igual(puedeActualizar('ana', 'ana', perfil, sinRol), false); });
+prueba('el perfil de otro, no', () => igual(puedeActualizar('beto', 'ana', perfil, { ...perfil, nombre: 'X' }), false));
+--- solución
+const EDITABLES = ['nombre', 'foto'];
+
+function puedeActualizar(sesionUid, uidDelDoc, antes, despues) {
+  if (sesionUid !== uidDelDoc) return false;
+  const llaves = new Set([...Object.keys(antes), ...Object.keys(despues)]);
+  const cambiaron = [...llaves].filter((k) => JSON.stringify(antes[k]) !== JSON.stringify(despues[k]));
+  return cambiaron.every((k) => EDITABLES.includes(k));
+}
+```
+
 ```practica
 vf :: allow write: if request.auth != null deja que cualquier persona con cuenta escriba en todo ese lugar
 vf :: Si el dueño puede actualizar su perfil sin limitar campos, podría cambiarse el rol
@@ -129,6 +185,35 @@ Defensas, en capas:
 > 🌎 **En la vida real:** es como un club que, además de tu carnet, mira que llegues en el bus oficial del club.
 
 > 🌎 **Otro ejemplo:** Es como un cajero que solo acepta tarjetas del propio banco.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un cupo para los SMS que cuestan
+lenguaje: js
+pide: Mandar un SMS cuesta. Completa `crearCupo({ porDestino, globalPorDia })`: devuelve `enviar(destino, dia)`, que dice `true` si se puede mandar y lo cuenta. Se niega (`false`) si ese destino ya recibió `porDestino` mensajes ese día, o si en total ya se mandaron `globalPorDia` ese día. Un día nuevo empieza de cero. Un intento negado **no** cuenta.
+--- código
+function crearCupo({ porDestino, globalPorDia }) {
+  // tu código aquí
+}
+--- pruebas
+prueba('por destino', () => { const enviar = crearCupo({ porDestino: 2, globalPorDia: 100 }); igual([enviar('+5547999', '2026-11-18'), enviar('+5547999', '2026-11-18'), enviar('+5547999', '2026-11-18')], [true, true, false]); });
+prueba('un robot con muchos números choca con el global', () => { const enviar = crearCupo({ porDestino: 2, globalPorDia: 3 }); igual(['a', 'b', 'c', 'd'].map((n) => enviar(n, '2026-11-18')), [true, true, true, false]); });
+prueba('un día nuevo, de cero', () => { const enviar = crearCupo({ porDestino: 1, globalPorDia: 1 }); enviar('a', '2026-11-18'); igual(enviar('a', '2026-11-19'), true); });
+prueba('lo negado no gasta el cupo de otros', () => { const enviar = crearCupo({ porDestino: 1, globalPorDia: 2 }); enviar('a', 'd'); enviar('a', 'd'); enviar('a', 'd'); igual(enviar('b', 'd'), true); });
+--- solución
+function crearCupo({ porDestino, globalPorDia }) {
+  const cuentas = new Map();
+  return function enviar(destino, dia) {
+    const deDestino = cuentas.get(`${dia}|${destino}`) || 0;
+    const delDia = cuentas.get(dia) || 0;
+    if (deDestino >= porDestino || delDia >= globalPorDia) return false;
+    cuentas.set(`${dia}|${destino}`, deDestino + 1);
+    cuentas.set(dia, delDia + 1);
+    return true;
+  };
+}
+```
 
 ```practica
 vf :: Una función que manda SMS sin límites puede generar costos y molestar a terceros
@@ -166,6 +251,39 @@ Las pruebas de reglas se pueden correr en el **CI** (Tema 04) en cada push: si u
 > 🌎 **En la vida real:** es como el detector de metales del aeropuerto: revisa a todos, todo el tiempo, sin cansarse.
 
 > 🌎 **Otro ejemplo:** Es como el corrector ortográfico: revisa cada palabra que escribes sin que se lo pidas.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Trampas que atrapan una regla rota
+lenguaje: js
+pide: La regla `puedeLeer(sesion, doc)` deja leer un gasto solo a su dueño con sesión. Escribe tus **trampas** en `TRAMPAS`: casos `{ sesion, doc, deja }` donde `deja` es lo que la regla buena tiene que contestar. Las pruebas corren tus trampas contra la regla buena (todas tienen que pasar) y contra **tres reglas rotas**: una que deja a cualquiera con sesión, una que deja sin sesión, y una que compara al revés (deja a todos menos al dueño). Cada regla rota tiene que fallar en **alguna** trampa.
+--- código
+function puedeLeer(sesion, doc) {
+  return sesion !== null && sesion.uid === doc.dueno;
+}
+
+const TRAMPAS = [
+  { sesion: { uid: 'ana' }, doc: { dueno: 'ana' }, deja: true },
+  // tus trampas aquí
+];
+--- pruebas
+const fallaAlguna = (regla) => TRAMPAS.some((t) => { try { return regla(t.sesion, t.doc) !== t.deja; } catch (e) { return true; } });
+prueba('con la regla buena, tus trampas pasan', () => ok(!fallaAlguna(puedeLeer), 'alguna trampa dice mal lo que tiene que pasar'));
+prueba('atrapan "cualquiera con sesión"', () => ok(fallaAlguna((s) => s !== null), 'falta una trampa: otro usuario con sesión'));
+prueba('atrapan "sin sesión"', () => ok(fallaAlguna((s, d) => s === null || s.uid === d.dueno), 'falta una trampa: sin sesión (null)'));
+prueba('atrapan la comparación al revés', () => ok(fallaAlguna((s, d) => s !== null && s.uid !== d.dueno), 'con la que ya está debería bastar: ¿la borraste?'));
+--- solución
+function puedeLeer(sesion, doc) {
+  return sesion !== null && sesion.uid === doc.dueno;
+}
+
+const TRAMPAS = [
+  { sesion: { uid: 'ana' }, doc: { dueno: 'ana' }, deja: true },
+  { sesion: { uid: 'beto' }, doc: { dueno: 'ana' }, deja: false },
+  { sesion: null, doc: { dueno: 'ana' }, deja: false },
+];
+```
 
 ```practica
 vf :: Una falla corregida no necesita prueba porque ya está arreglada
@@ -208,6 +326,44 @@ escribe :: Convierte esta falla en una prueba: "un usuario puede cambiarse el ro
 
 > 🌎 **Otro ejemplo:** Es como un simulador de manejo con lluvia y nieve: practicas lo difícil en un lugar seguro.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El inventario de puertas abiertas de TU servidor
+lenguaje: js
+pide: Corriste un escaneo de puertos contra **tu** servidor y tienes su salida. Completa `puertosAbiertos(salida)`: de las líneas como `22/tcp   open   ssh`, devuelve `{ puerto, servicio }` (el puerto como número) solo de las que dicen `open`. Y `sorpresas(abiertos, esperados)`: los puertos abiertos que **no** esperabas (lo que hay que revisar o cerrar).
+--- código
+function puertosAbiertos(salida) {
+  // tu código aquí
+}
+
+function sorpresas(abiertos, esperados) {
+  // tu código aquí
+}
+--- pruebas
+const salida = `PORT     STATE    SERVICE
+22/tcp   open     ssh
+80/tcp   open     http
+443/tcp  open     https
+3306/tcp open     mysql
+8080/tcp filtered http-proxy`;
+prueba('los abiertos', () => igual(puertosAbiertos(salida), [{ puerto: 22, servicio: 'ssh' }, { puerto: 80, servicio: 'http' }, { puerto: 443, servicio: 'https' }, { puerto: 3306, servicio: 'mysql' }]));
+prueba('la base de datos no tenía que verse desde afuera', () => igual(sorpresas(puertosAbiertos(salida), [22, 80, 443]), [{ puerto: 3306, servicio: 'mysql' }]));
+prueba('sin sorpresas', () => igual(sorpresas([{ puerto: 443, servicio: 'https' }], [80, 443]), []));
+--- solución
+function puertosAbiertos(salida) {
+  return salida
+    .split('\n')
+    .map((l) => l.trim().split(/\s+/))
+    .filter((c) => /^\d+\/tcp$/.test(c[0]) && c[1] === 'open')
+    .map((c) => ({ puerto: Number(c[0].split('/')[0]), servicio: c[2] }));
+}
+
+function sorpresas(abiertos, esperados) {
+  return abiertos.filter((a) => !esperados.includes(a.puerto));
+}
+```
+
 ```practica
 vf :: Usar Burp Suite contra el sitio de tu banco para "probar" está bien si no robas nada
 vf :: Un proxy como Burp o ZAP permite cambiar una petición y reenviarla
@@ -245,6 +401,43 @@ Si encuentras una falla en un sistema ajeno **dentro de un programa permitido**,
 > 🌎 **En la vida real:** es como encontrar una billetera: la devuelves al dueño, no publicas su contenido.
 
 > 🌎 **Otro ejemplo:** Es como el periodista que avisa a la autoridad antes de publicar una noticia que pondría gente en peligro.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un hallazgo bien escrito
+lenguaje: js
+pide: Completa `queFalta(hallazgo)`: devuelve, en el orden de `PARTES`, las partes que faltan o están vacías (texto en blanco). Y `ordenarPorSeveridad(hallazgos)`: una lista **nueva** de la más grave a la menos grave (`crítica`, `alta`, `media`, `baja`, `informativa`); los de la misma severidad, en el orden en que venían.
+--- código
+const PARTES = ['titulo', 'severidad', 'categoria', 'donde', 'descripcion', 'comoSeExplota', 'correccion'];
+const ORDEN = ['crítica', 'alta', 'media', 'baja', 'informativa'];
+
+function queFalta(hallazgo) {
+  // tu código aquí
+}
+
+function ordenarPorSeveridad(hallazgos) {
+  // tu código aquí
+}
+--- pruebas
+const completo = { titulo: 'IDOR en facturas', severidad: 'alta', categoria: 'Control de acceso roto', donde: 'api/facturas.js:12', descripcion: 'Devuelve cualquier factura', comoSeExplota: 'Cambiar el id en la dirección', correccion: 'Comparar el dueño con la sesión' };
+prueba('completo', () => igual(queFalta(completo), []));
+prueba('le falta dónde y cómo se arregla', () => igual(queFalta({ ...completo, donde: '  ', correccion: undefined }), ['donde', 'correccion']));
+const lista = [{ t: 'a', severidad: 'baja' }, { t: 'b', severidad: 'crítica' }, { t: 'c', severidad: 'alta' }, { t: 'd', severidad: 'baja' }];
+prueba('de la más grave a la menos', () => igual(ordenarPorSeveridad(lista).map((h) => h.t), ['b', 'c', 'a', 'd']));
+prueba('no cambia la lista original', () => { ordenarPorSeveridad(lista); igual(lista.map((h) => h.t), ['a', 'b', 'c', 'd']); });
+--- solución
+const PARTES = ['titulo', 'severidad', 'categoria', 'donde', 'descripcion', 'comoSeExplota', 'correccion'];
+const ORDEN = ['crítica', 'alta', 'media', 'baja', 'informativa'];
+
+function queFalta(hallazgo) {
+  return PARTES.filter((p) => !String(hallazgo[p] ?? '').trim());
+}
+
+function ordenarPorSeveridad(hallazgos) {
+  return [...hallazgos].sort((a, b) => ORDEN.indexOf(a.severidad) - ORDEN.indexOf(b.severidad));
+}
+```
 
 ```practica
 vf :: Al encontrar una falla en un programa de bug bounty, lo correcto es publicarla primero en redes
@@ -284,6 +477,39 @@ La **LGPD** (Brasil) y leyes parecidas piden recoger **solo los datos necesarios
 
 > 🌎 **Otro ejemplo:** Es como vaciar los bolsillos de la ropa antes de donarla: no regalas lo que no querías dar.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un registro sin datos sensibles
+lenguaje: js
+pide: Completa `limpiarRegistro(evento)`: devuelve una **copia** del evento lista para guardar. Los campos `password`, `token` y `cpf` se cambian por `'[oculto]'`. El `correo` se deja con la primera letra y el dominio: `'d***@gmail.com'`. Lo demás queda igual. No cambies el evento original.
+--- código
+const OCULTAR = ['password', 'token', 'cpf'];
+
+function limpiarRegistro(evento) {
+  // tu código aquí
+}
+--- pruebas
+const evento = { tipo: 'login_fallido', correo: 'delvin@gmail.com', password: 'clave123', ip: '10.0.0.7', hora: '2026-11-18T10:00:00Z' };
+prueba('la clave nunca se guarda', () => igual(limpiarRegistro(evento).password, '[oculto]'));
+prueba('el correo, a medias', () => igual(limpiarRegistro(evento).correo, 'd***@gmail.com'));
+prueba('lo demás queda igual', () => igual([limpiarRegistro(evento).tipo, limpiarRegistro(evento).ip], ['login_fallido', '10.0.0.7']));
+prueba('token y CPF también', () => igual(limpiarRegistro({ token: 'eyJhbGciOi', cpf: '123.456.789-00' }), { token: '[oculto]', cpf: '[oculto]' }));
+prueba('no cambia el original', () => { limpiarRegistro(evento); igual(evento.password, 'clave123'); });
+--- solución
+const OCULTAR = ['password', 'token', 'cpf'];
+
+function limpiarRegistro(evento) {
+  const limpio = { ...evento };
+  for (const campo of OCULTAR) if (campo in limpio) limpio[campo] = '[oculto]';
+  if (typeof limpio.correo === 'string' && limpio.correo.includes('@')) {
+    const [usuario, dominio] = limpio.correo.split('@');
+    limpio.correo = `${usuario[0]}***@${dominio}`;
+  }
+  return limpio;
+}
+```
+
 ```practica
 vf :: Defensa en profundidad significa poner una sola defensa muy fuerte
 vf :: Los registros deben guardar las contraseñas para investigar ataques
@@ -322,6 +548,41 @@ escribe :: Enumera las capas de seguridad del certificado de este mapa. :: Cuent
 > 🌎 **En la vida real:** es como un músico: el diploma ayuda, pero lo que convence es escucharlo tocar.
 
 > 🌎 **Otro ejemplo:** Es como un chef: el curso cuenta, pero el plato que sirves es la prueba.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El próximo paso de tu camino
+lenguaje: js
+pide: Completa `siguientePaso(hechos)`: devuelve el primer paso de `CAMINO` que todavía no está en `hechos`, o `'¡Camino completo! Sigue con CTF y tu portafolio'` si ya están todos. Y `portafolio(items)`: cuenta cuántos hay de cada tipo (`'informe'`, `'write-up'`, `'prueba'`) en un objeto, con los tres siempre presentes (en 0 si no hay).
+--- código
+const CAMINO = ['redes', 'linux', 'web', 'laboratorios', 'automatizar'];
+
+function siguientePaso(hechos) {
+  // tu código aquí
+}
+
+function portafolio(items) {
+  // tu código aquí
+}
+--- pruebas
+prueba('al empezar', () => igual(siguientePaso([]), 'redes'));
+prueba('en el medio, aunque estén desordenados', () => igual(siguientePaso(['linux', 'redes', 'laboratorios']), 'web'));
+prueba('todo hecho', () => igual(siguientePaso(CAMINO), '¡Camino completo! Sigue con CTF y tu portafolio'));
+prueba('el portafolio', () => igual(portafolio([{ tipo: 'informe' }, { tipo: 'write-up' }, { tipo: 'write-up' }]), { informe: 1, 'write-up': 2, prueba: 0 }));
+--- solución
+const CAMINO = ['redes', 'linux', 'web', 'laboratorios', 'automatizar'];
+
+function siguientePaso(hechos) {
+  return CAMINO.find((p) => !hechos.includes(p)) ?? '¡Camino completo! Sigue con CTF y tu portafolio';
+}
+
+function portafolio(items) {
+  const cuenta = { informe: 0, 'write-up': 0, prueba: 0 };
+  for (const item of items) if (item.tipo in cuenta) cuenta[item.tipo] += 1;
+  return cuenta;
+}
+```
 
 ```practica
 vf :: Para trabajar en seguridad conviene aprender redes y Linux
