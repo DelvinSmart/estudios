@@ -99,6 +99,7 @@ export const CLASES = {
   '35': { carpeta: '35-ia-tu-flujo', titulo: 'Tu flujo de trabajo', meta: 'De la idea a lo publicado, y seguir aprendiendo de verdad', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '79': { carpeta: '79-ia-planificar', titulo: 'El plano y la estructura', meta: 'Planificar antes de programar, las puertas y ventanas que la IA olvida, y cómo evitar el código espagueti', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '85': { carpeta: '85-recorrido-de-cada-proyecto', titulo: 'El recorrido de cada proyecto', meta: 'De punta a punta: Copiloto (app e IA), ¿Qué dice la Biblia? y este mapa, en 30 segundos y en detalle', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '86': { carpeta: '86-la-entrevista', titulo: 'La entrevista: RH y líder técnico', meta: 'Tu historia con tus palabras, cada término en dos versiones (glosario) y el simulacro', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '78': { carpeta: '78-ia-varios-agentes', titulo: 'Uno o varios agentes, y dirigirlos', meta: 'Varios agentes sin pisarse, gastar menos tokens, subagentes, tu propio vigilante y la persona como director', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '80': { carpeta: '80-ia-maximo-provecho', titulo: 'Sacarle el máximo provecho', meta: 'Aprender mientras construyes, convertir lo repetitivo en herramientas y lo que no se delega', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
 };
@@ -111,7 +112,7 @@ const ICONOS = {
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦',
-  '21': '🎓', '77': '🎛️', '85': '🛤️', '22': '🔐', '23': '🕵️', '24': '🛡️',
+  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
 
@@ -121,7 +122,7 @@ const LOGOS_CLASE = {
   '06': ['git', 'github'], '08': ['firebase'], '09': ['node', 'javascript'], '11': ['react', 'typescript', 'firebase'],
   '12': ['html', 'css', 'javascript'], '13': ['react', 'typescript', 'vite', 'tailwind', 'firebase'], '14': ['html', 'css', 'javascript'],
   '15': ['html'], '16': ['css'], '17': ['javascript'], '18': ['html', 'css', 'javascript', 'markdown'],
-  '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'], '77': ['github', 'firebase', 'react'], '85': ['firebase', 'javascript', 'github'],
+  '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'], '77': ['github', 'firebase', 'react'], '85': ['firebase', 'javascript', 'github'], '86': ['javascript', 'typescript', 'react'],
   '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '25': ['python', 'javascript'], '27': ['python'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
   '35': ['claude', 'git'], '79': ['claude'], '78': ['claude', 'git'], '80': ['claude', 'ollama'],
@@ -172,7 +173,7 @@ export const ETAPAS = [
   {
     id: 'proyectos', icono: '🚀', titulo: 'Mis proyectos por dentro', logos: ['react', 'firebase', 'github'],
     desc: 'Todo lo anterior, aplicado a lo que yo construí.',
-    clases: ['12', '13', '14', '18', '20', '21', '77', '85'],
+    clases: ['12', '13', '14', '18', '20', '21', '77', '85', '86'],
   },
   {
     id: 'javascript', curso: 'javascript', icono: '🟨', titulo: 'JavaScript + TypeScript', logos: ['javascript', 'typescript', 'node', 'vitest'],

@@ -146,16 +146,16 @@ entrevista), y ejemplos de la vida real.
 - [x] **Pedir fuentes** y comprobarlas: la IA a veces inventa (alucina), incluso las fuentes
 - [x] Usar **otra IA** (Gemini) para preguntas de "cómo funciona", y guardar los tokens del agente de código para el trabajo
 
-### J. La entrevista en dos niveles: Recursos Humanos y el líder técnico
+### J. La entrevista en dos niveles: Recursos Humanos y el líder técnico (✅ clase 86)
 
 En una entrevista primero se habla con **Recursos Humanos** (RH) y después con el **líder técnico**.
 Con RH: explicar con tus palabras, de la mejor forma, con algunos términos bien usados.
 Con el líder técnico: responder la definición técnica precisa ("un array es una estructura de datos que guarda
 valores en orden, cada uno con su posición").
 
-- [ ] Cómo es cada etapa y qué buscan en cada una
-- [ ] Un glosario con cada término en dos versiones: con tus palabras (para RH) y la definición técnica (para el líder técnico)
-- [ ] Prácticas para entrenar las dos versiones, y simulacros de entrevista con una IA
+- [x] Cómo es cada etapa y qué buscan en cada una
+- [x] Un glosario con cada término en dos versiones: con tus palabras (para RH) y la definición técnica (para el líder técnico)
+- [x] Prácticas para entrenar las dos versiones, y simulacros de entrevista con una IA
 
 ### E. El panel
 
