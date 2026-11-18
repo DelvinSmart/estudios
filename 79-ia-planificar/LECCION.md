@@ -29,6 +29,35 @@ Con la IA, construir es rápido y barato. Eso tiene una trampa: como hacer cosas
 
 > 🌎 **En la vida real:** la IA es como un albañil rapidísimo: si le dices "hazme una pared", te hace una pared perfecta en una hora. Pero si no le dijiste dónde, la puede hacer en medio de la sala.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cuánto cuesta cambiar según cuándo
+lenguaje: js
+pide: Un cambio cuesta más mientras más avanzado está el trabajo. Completa `costoDe(cuando)`: en el `'papel'` cuesta 1, en el `'codigo'` cuesta 10, ya `'publicado'` cuesta 100. Y `costoTotal(cambios)`: la suma de lo que costaron todos los cambios de una lista como `['papel', 'codigo']`.
+--- código
+function costoDe(cuando) {
+  // tu código aquí
+}
+
+function costoTotal(cambios) {
+  // tu código aquí
+}
+--- pruebas
+prueba('cada momento', () => igual(['papel', 'codigo', 'publicado'].map(costoDe), [1, 10, 100]));
+prueba('con plan: los cambios se hacen en el papel', () => igual(costoTotal(['papel', 'papel', 'papel', 'codigo']), 13));
+prueba('sin plan: se descubren tarde', () => igual(costoTotal(['codigo', 'publicado', 'publicado', 'codigo']), 220));
+prueba('sin cambios', () => igual(costoTotal([]), 0));
+--- solución
+function costoDe(cuando) {
+  return { papel: 1, codigo: 10, publicado: 100 }[cuando];
+}
+
+function costoTotal(cambios) {
+  return cambios.reduce((s, c) => s + costoDe(c), 0);
+}
+```
+
 ```practica
 vf :: Planificar es decidir qué quieres y cómo lo vas a hacer antes de hacerlo
 vf :: Como la IA escribe código rápido, cambiar de idea a mitad de camino no cuesta nada
@@ -72,6 +101,35 @@ Antes de escribir una sola línea del panel de clases, la IA:
 
 Ese plan es lo que evitó que el panel rompiera los certificados.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Partir una clase en sus partes
+lenguaje: js
+pide: La página del mapa salió rápido porque cada clase ya tenía su forma: un título `#` y partes con `##`. Completa `partir(md)`: devuelve `{ titulo, partes }`, con el título (lo que sigue al `# ` de la primera línea) y una parte por cada línea que empieza con `## `: `{ titulo, texto }`, donde `texto` es todo lo que hay hasta la próxima `## `, sin espacios al principio ni al final.
+--- código
+function partir(md) {
+  // tu código aquí
+}
+--- pruebas
+const md = '# Python 1: primeros pasos\nIntro.\n## Parte 1. Correr Python\nEl intérprete.\n\n## Parte 2. Variables\nnombre = "Delvin"\n### Un subtítulo\nmás texto';
+prueba('el título', () => igual(partir(md).titulo, 'Python 1: primeros pasos'));
+prueba('las partes', () => igual(partir(md).partes.map((p) => p.titulo), ['Parte 1. Correr Python', 'Parte 2. Variables']));
+prueba('el texto de cada una (los ### quedan adentro)', () => igual(partir(md).partes[1].texto, 'nombre = "Delvin"\n### Un subtítulo\nmás texto'));
+prueba('una clase sin partes', () => igual(partir('# Solo título').partes, []));
+--- solución
+function partir(md) {
+  const lineas = md.split('\n');
+  const titulo = lineas[0].replace(/^# /, '');
+  const partes = [];
+  for (const linea of lineas.slice(1)) {
+    if (linea.startsWith('## ')) partes.push({ titulo: linea.slice(3), lineas: [] });
+    else if (partes.length) partes[partes.length - 1].lineas.push(linea);
+  }
+  return { titulo, partes: partes.map((p) => ({ titulo: p.titulo, texto: p.lineas.join('\n').trim() })) };
+}
+```
+
 ```practica
 vf :: El mapa de estudios empezó como una carpeta de lecciones en .md, antes de tener página web
 vf :: La página web del mapa tuvo que inventar cómo dividir cada clase en partes
@@ -112,6 +170,59 @@ Con esa hoja, el pedido a la IA deja de ser "hazme una app de gastos" y pasa a s
 
 > 🌎 **Otro ejemplo:** La pieza 8 es como la lista de chequeo de un piloto antes de despegar: no es "me parece que está bien", es una lista de cosas que se comprueban una por una.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las ocho piezas del plan
+lenguaje: js
+pide: Completa `queFaltaAlPlan(plan)`: revisa las ocho piezas de `PIEZAS` y devuelve el **texto** de las que faltan o están vacías (un texto en blanco o una lista vacía). Y `listo(plan)`: `true` solo si no falta ninguna.
+--- código
+const PIEZAS = [
+  ['problema', 'El problema'],
+  ['hace', 'Lo que tiene que hacer'],
+  ['noVa', 'Lo que NO va (por ahora)'],
+  ['datos', 'Los datos'],
+  ['pantallas', 'Las pantallas'],
+  ['piezas', 'Las piezas y cómo se conectan'],
+  ['orden', 'El orden'],
+  ['terminado', 'Cómo sé que funciona'],
+];
+
+function queFaltaAlPlan(plan) {
+  // tu código aquí
+}
+
+function listo(plan) {
+  // tu código aquí
+}
+--- pruebas
+const plan = { problema: 'No sé cuánto gasto por semana', hace: ['anotar', 'total semanal'], noVa: ['gráficos'], datos: 'tipo, valor, fecha', pantallas: ['lista', 'formulario'], piezas: 'lista, formulario y suma', orden: ['suma', 'formulario', 'lista'], terminado: '3 de esta semana y 1 de la pasada: suma 3' };
+prueba('un plan completo', () => igual([queFaltaAlPlan(plan), listo(plan)], [[], true]));
+prueba('lo que se olvida: lo que NO va y cómo sé que funciona', () => igual(queFaltaAlPlan({ ...plan, noVa: [], terminado: ' ' }), ['Lo que NO va (por ahora)', 'Cómo sé que funciona']));
+prueba('"hazme una app de gastos"', () => igual(queFaltaAlPlan({ hace: ['una app de gastos'] }).length, 7));
+--- solución
+const PIEZAS = [
+  ['problema', 'El problema'],
+  ['hace', 'Lo que tiene que hacer'],
+  ['noVa', 'Lo que NO va (por ahora)'],
+  ['datos', 'Los datos'],
+  ['pantallas', 'Las pantallas'],
+  ['piezas', 'Las piezas y cómo se conectan'],
+  ['orden', 'El orden'],
+  ['terminado', 'Cómo sé que funciona'],
+];
+
+const vacio = (v) => v === undefined || v === null || (Array.isArray(v) ? v.length === 0 : !String(v).trim());
+
+function queFaltaAlPlan(plan) {
+  return PIEZAS.filter(([llave]) => vacio(plan[llave])).map(([, texto]) => texto);
+}
+
+function listo(plan) {
+  return queFaltaAlPlan(plan).length === 0;
+}
+```
+
 ```practica
 vf :: Un buen plan dice también lo que NO se va a hacer por ahora
 vf :: El plan de un programa tiene que ser un documento larguísimo para servir
@@ -136,6 +247,31 @@ No necesitas programas especiales. Un **bosquejo** se hace en una hoja de papel 
 > 🌎 **En la vida real:** antes de una boda hay una lista de invitados (requisitos), un dibujo de cómo van las mesas (bosquejo), la decisión de quién se encarga de la comida, la música y las flores (arquitectura) y un cronograma del día (hoja de ruta).
 
 > 🌎 **Otro ejemplo:** Es como armar un viaje en grupo: qué queremos conocer (requisitos), el mapa con los puntos marcados (bosquejo), quién maneja, quién reserva y quién lleva la plata (arquitectura), y el itinerario día por día (hoja de ruta).
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Requisitos, bosquejo, arquitectura u hoja de ruta
+lenguaje: js
+pide: Completa `queEs(texto)`: si habla de un **orden** o etapas (`primero`, `después`, `etapa`) → `'hoja de ruta'`; de **piezas** que se conectan (`se conecta`, `habla con`, `capa`) → `'arquitectura'`; de un **dibujo** de pantallas (`dibujo`, `rectángulo`, `pantalla`) → `'bosquejo'`; si no → `'requisitos'`. Revisa en ese orden, en minúsculas.
+--- código
+function queEs(texto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el orden', () => igual(queEs('Primero la suma con pruebas, después el formulario'), 'hoja de ruta'));
+prueba('las piezas', () => igual(queEs('La pantalla habla con el repositorio, que se conecta a Firebase'), 'arquitectura'));
+prueba('el dibujo', () => igual(queEs('Un dibujo con un rectángulo para la lista y un botón +'), 'bosquejo'));
+prueba('lo que tiene que hacer', () => igual(queEs('Anotar un gasto y ver el total de la semana, sin gráficos'), 'requisitos'));
+--- solución
+function queEs(texto) {
+  const t = texto.toLowerCase();
+  if (['primero', 'después', 'etapa'].some((p) => t.includes(p))) return 'hoja de ruta';
+  if (['se conecta', 'habla con', 'capa'].some((p) => t.includes(p))) return 'arquitectura';
+  if (['dibujo', 'rectángulo', 'pantalla'].some((p) => t.includes(p))) return 'bosquejo';
+  return 'requisitos';
+}
+```
 
 ```practica
 vf :: Un bosquejo de pantallas se puede hacer a mano, con rectángulos y flechas
@@ -184,6 +320,35 @@ Eso trae tres ventajas:
 
 La IA propone; **tú** decides el problema, lo que no va, el orden y qué es "terminado". Es lo mismo que viste en la clase de los agentes: la IA agiliza, la persona dirige.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El plan, guardado en un archivo
+lenguaje: js
+pide: Un plan que solo está en la conversación se pierde. Completa `aMarkdown(plan)`: arma el `PLAN.md` con un título `# Plan` y una sección `## N. Pieza` por cada pieza de `PIEZAS` (N desde 1). Si el valor es una lista, cada elemento va como `- elemento`; si es texto, va tal cual; si falta, `_(falta)_`. Entre secciones, una línea en blanco.
+--- código
+const PIEZAS = [['problema', 'El problema'], ['hace', 'Lo que tiene que hacer'], ['noVa', 'Lo que NO va (por ahora)']];
+
+function aMarkdown(plan) {
+  // tu código aquí
+}
+--- pruebas
+const plan = { problema: 'No sé cuánto gasto por semana', hace: ['anotar un gasto', 'ver el total'] };
+prueba('el archivo', () => igual(aMarkdown(plan), '# Plan\n\n## 1. El problema\nNo sé cuánto gasto por semana\n\n## 2. Lo que tiene que hacer\n- anotar un gasto\n- ver el total\n\n## 3. Lo que NO va (por ahora)\n_(falta)_'));
+prueba('un plan vacío: todo dice que falta', () => igual(aMarkdown({}).split('_(falta)_').length - 1, 3));
+--- solución
+const PIEZAS = [['problema', 'El problema'], ['hace', 'Lo que tiene que hacer'], ['noVa', 'Lo que NO va (por ahora)']];
+
+function aMarkdown(plan) {
+  const secciones = PIEZAS.map(([llave, titulo], i) => {
+    const v = plan[llave];
+    const cuerpo = v === undefined ? '_(falta)_' : Array.isArray(v) ? v.map((x) => `- ${x}`).join('\n') : v;
+    return `## ${i + 1}. ${titulo}\n${cuerpo}`;
+  });
+  return ['# Plan', ...secciones].join('\n\n');
+}
+```
+
 ```practica
 vf :: Pedirle a la IA que te haga preguntas antes de proponer nada ayuda a armar un mejor plan
 vf :: En el modo plan de Claude Code, la IA cambia los archivos mientras te muestra el plan
@@ -210,6 +375,34 @@ Ejemplo real: el plan del panel era "editar las clases". Al revisar, apareció a
 > 🌎 **Otro ejemplo:** Es como el GPS cuando una calle está cerrada: recalcula la ruta. No te deja manejando contra la pared, pero tampoco cambia el destino.
 
 > 🔁 **Repaso:** primero el plano, después los ladrillos → con la IA, más todavía, porque construye rápido lo que le dices → el mapa salió fácil porque la carpeta ya era su plano → las ocho piezas, incluida "lo que no va" y "cómo sé que funciona" → la IA te pregunta, te da opciones, planifica sin tocar nada y revisa tu plan, pero tú decides → el plan va en un archivo → si cambia, que sea una decisión.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cambiar el plan como una decisión
+lenguaje: js
+pide: Completa `cambiarPlan(plan, cambio)`: devuelve un plan **nuevo** con el cambio aplicado (`cambio.pieza` toma el valor `cambio.valor`) y con una entrada más en `historial`: `{ fecha, pieza, motivo }`. Si el cambio no trae `motivo`, lanza `Error('Un cambio de plan necesita su motivo')`: así es una decisión, no un accidente. No cambies el plan original.
+--- código
+function cambiarPlan(plan, cambio) {
+  // tu código aquí
+}
+--- pruebas
+const plan = { hace: ['editar las clases'], historial: [] };
+const cambio = { fecha: '2026-11-16', pieza: 'hace', valor: ['editar el texto', 'no agregar partes'], motivo: 'las reglas del certificado cuentan las partes' };
+prueba('aplica el cambio', () => igual(cambiarPlan(plan, cambio).hace, ['editar el texto', 'no agregar partes']));
+prueba('y lo anota', () => igual(cambiarPlan(plan, cambio).historial, [{ fecha: '2026-11-16', pieza: 'hace', motivo: 'las reglas del certificado cuentan las partes' }]));
+prueba('no toca el original', () => { cambiarPlan(plan, cambio); igual([plan.hace, plan.historial], [['editar las clases'], []]); });
+prueba('sin motivo, no', () => { let m = null; try { cambiarPlan(plan, { ...cambio, motivo: '' }); } catch (e) { m = e.message; } igual(m, 'Un cambio de plan necesita su motivo'); });
+--- solución
+function cambiarPlan(plan, cambio) {
+  if (!cambio.motivo) throw new Error('Un cambio de plan necesita su motivo');
+  return {
+    ...plan,
+    [cambio.pieza]: cambio.valor,
+    historial: [...(plan.historial || []), { fecha: cambio.fecha, pieza: cambio.pieza, motivo: cambio.motivo }],
+  };
+}
+```
 
 ```practica
 vf :: Un plan se puede cambiar mientras construyes, siempre que sea una decisión y quede anotada
@@ -261,6 +454,41 @@ cómo se ve en el celular. Para cada uno, dime qué decidiste.
 
 Y al revisar, pregunta: "¿Qué pasa si…?". La IA es muy buena encontrando puertas que faltan **cuando se lo pides**.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las puertas y ventanas que faltan
+lenguaje: js
+pide: Completa `puertasQueFaltan(plan)`: `plan.casos` es un objeto con lo que decidiste para cada caso. Devuelve, en el orden de `PUERTAS`, los que no tienen decisión (no están o están en blanco). Y `pedido(faltan)`: `'Además del camino normal, cubre: ' + los que faltan unidos con ', ' + '. Para cada uno, dime qué decidiste.'` (o `''` si no falta nada).
+--- código
+const PUERTAS = ['vacío', 'cargando', 'error', 'sin internet', 'sin permiso', 'datos raros', 'dos veces', 'deshacer', 'pantallas chicas', 'seguridad'];
+
+function puertasQueFaltan(plan) {
+  // tu código aquí
+}
+
+function pedido(faltan) {
+  // tu código aquí
+}
+--- pruebas
+const plan = { casos: { vacío: 'Todavía no anotaste gastos', error: 'No se guardó: prueba otra vez', 'pantallas chicas': 'una columna', cargando: ' ' } };
+prueba('las que faltan, en orden', () => igual(puertasQueFaltan(plan), ['cargando', 'sin internet', 'sin permiso', 'datos raros', 'dos veces', 'deshacer', 'seguridad']));
+prueba('el pedido', () => igual(pedido(['sin internet', 'dos veces']), 'Además del camino normal, cubre: sin internet, dos veces. Para cada uno, dime qué decidiste.'));
+prueba('nada que pedir', () => igual(pedido([]), ''));
+--- solución
+const PUERTAS = ['vacío', 'cargando', 'error', 'sin internet', 'sin permiso', 'datos raros', 'dos veces', 'deshacer', 'pantallas chicas', 'seguridad'];
+
+function puertasQueFaltan(plan) {
+  const casos = plan.casos || {};
+  return PUERTAS.filter((p) => !String(casos[p] ?? '').trim());
+}
+
+function pedido(faltan) {
+  if (faltan.length === 0) return '';
+  return `Además del camino normal, cubre: ${faltan.join(', ')}. Para cada uno, dime qué decidiste.`;
+}
+```
+
 ```practica
 vf :: La IA suele construir bien el camino feliz y olvidar los casos que nadie dice porque parecen obvios
 vf :: Qué se ve cuando la lista está vacía es un detalle sin importancia que no hace falta planificar
@@ -294,6 +522,39 @@ La IA no es descuidada: trabaja **pedido por pedido**. Y cada pedido, si no hay 
 Este desorden acumulado tiene nombre: **deuda técnica**. Como una deuda de verdad: cada atajo de hoy se paga después, con intereses. El día que quieras agregar algo, te cuesta el triple.
 
 > 🌎 **En la vida real:** la deuda técnica es como no lavar los platos después de cada comida: un día no pasa nada; a la semana, para cocinar algo tienes que lavar primero una montaña.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Encontrar los valores escritos a mano
+lenguaje: js
+pide: El espagueti empieza con valores repetidos por todas partes. Completa `coloresRepetidos(css, minimo)`: busca los colores `#` de 3 o 6 letras (en minúsculas) y devuelve los que aparecen `minimo` veces o más, de mayor a menor cantidad, como `{ color, veces }` (si empatan, el que apareció primero). Son los candidatos a vivir en un motor.
+--- código
+function coloresRepetidos(css, minimo) {
+  // tu código aquí
+}
+--- pruebas
+const css = `.tarjeta { background: #18212C; color: #e6edf3; }
+.boton { background: #7ee787; color: #0f141b; }
+.titulo { color: #e6edf3; }
+.precio { color: #7EE787; }
+.nota { color: #E6EDF3; border-color: #fff; }`;
+prueba('los que se repiten, sin importar mayúsculas', () => igual(coloresRepetidos(css, 2), [{ color: '#e6edf3', veces: 3 }, { color: '#7ee787', veces: 2 }]));
+prueba('con un mínimo más alto', () => igual(coloresRepetidos(css, 3), [{ color: '#e6edf3', veces: 3 }]));
+prueba('un CSS que ya usa el motor', () => igual(coloresRepetidos('.a { color: var(--texto); }', 2), []));
+--- solución
+function coloresRepetidos(css, minimo) {
+  const cuenta = new Map();
+  for (const m of css.matchAll(/#([0-9a-f]{6}|[0-9a-f]{3})\b/gi)) {
+    const c = m[0].toLowerCase();
+    cuenta.set(c, (cuenta.get(c) || 0) + 1);
+  }
+  return [...cuenta.entries()]
+    .filter(([, n]) => n >= minimo)
+    .sort((a, b) => b[1] - a[1])
+    .map(([color, veces]) => ({ color, veces }));
+}
+```
 
 ```practica
 vf :: El código espagueti puede funcionar, pero cada cambio rompe algo en otro lado
@@ -363,6 +624,44 @@ Con pruebas, se puede **refactorizar**: ordenar el código por dentro sin cambia
 
 > 🌎 **En la vida real:** es como sacarle una foto al cuarto antes de reorganizar los muebles: al terminar comparas y sabes si se perdió algo.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Dos candados: tamaño y ciclos
+lenguaje: js
+pide: Completa `archivosGrandes(archivos, maximo)`: los nombres de los archivos con más líneas que el máximo (como `check:size`). Y `hayCiclo(dependencias)`, como `check:cycles`: `dependencias` dice de qué archivos depende cada uno (`{ 'a.js': ['b.js'] }`). Devuelve `true` si siguiendo las flechas se puede volver a un archivo por donde ya pasaste.
+--- código
+function archivosGrandes(archivos, maximo) {
+  // tu código aquí
+}
+
+function hayCiclo(dependencias) {
+  // tu código aquí
+}
+--- pruebas
+prueba('archivos grandes', () => igual(archivosGrandes([{ nombre: 'panel.js', lineas: 3100 }, { nombre: 'motor.js', lineas: 120 }, { nombre: 'app.js', lineas: 1000 }], 1000), ['panel.js']));
+prueba('sin ciclos', () => igual(hayCiclo({ 'pantalla.js': ['logica.js', 'datos.js'], 'datos.js': ['logica.js'], 'logica.js': [] }), false));
+prueba('un ciclo de dos', () => igual(hayCiclo({ 'a.js': ['b.js'], 'b.js': ['a.js'] }), true));
+prueba('un ciclo largo, escondido', () => igual(hayCiclo({ 'a.js': ['b.js'], 'b.js': ['c.js'], 'c.js': ['d.js'], 'd.js': ['b.js'], 'e.js': [] }), true));
+--- solución
+function archivosGrandes(archivos, maximo) {
+  return archivos.filter((a) => a.lineas > maximo).map((a) => a.nombre);
+}
+
+function hayCiclo(dependencias) {
+  const estado = {}; // undefined = sin visitar, 1 = en el camino, 2 = terminado
+  const visitar = (archivo) => {
+    if (estado[archivo] === 1) return true;
+    if (estado[archivo] === 2) return false;
+    estado[archivo] = 1;
+    for (const dep of dependencias[archivo] || []) if (visitar(dep)) return true;
+    estado[archivo] = 2;
+    return false;
+  };
+  return Object.keys(dependencias).some(visitar);
+}
+```
+
 ```practica
 vf :: Una sola fuente de verdad quiere decir que cada dato vive en un solo lugar y todo lo demás lo lee de ahí
 vf :: Si existe un motor de diseño, no hace falta un candado, porque todos lo van a usar
@@ -390,6 +689,30 @@ La IA puede escribir código muy ordenado: **si se lo pides y le pones reglas**.
 > 🎙️ **El profesor dice:** {{alumno}}, la IA es como un equipo de obreros muy rápidos. Si les das un plano (Partes 1 a 6), una lista de puertas y ventanas (Parte 7) y un reglamento con inspector (Partes 9 y 10), te construyen una casa firme. Sin eso, te construyen rapidísimo una casa sin puertas, con los cables enredados. La diferencia no la pone la IA: la pones tú.
 
 > 🔁 **Repaso:** el plano antes de los ladrillos → las puertas y ventanas en el plan (vacío, cargando, error, sin internet, sin permiso, datos raros, dos veces, deshacer, celular, seguridad) → el espagueti nace de los parches → se evita con una fuente de verdad, piezas de una sola tarea, motores, candados y pruebas → a la IA se le piden reglas escritas, reutilizar, piezas chicas, pruebas y arreglar la causa, nunca saltarse el candado.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cuando el candado falla, arreglar la causa
+lenguaje: js
+pide: El CI falló y la IA propone un arreglo. Completa `revisarArreglo(cambio)`: `cambio` dice qué hizo (`borraPruebas`, `desactivaCandado`, `agregaIgnorar` como `// eslint-disable` o `skip`, `cambiaCodigo`). Devuelve `'rechazar: …'` con el motivo si borra pruebas (`'borra pruebas'`), desactiva un candado (`'desactiva un candado'`) o agrega algo para ignorar el error (`'esconde el error'`), revisando en ese orden. Si solo cambia el código, `'aceptar'`.
+--- código
+function revisarArreglo(cambio) {
+  // tu código aquí
+}
+--- pruebas
+prueba('arreglar la causa', () => igual(revisarArreglo({ cambiaCodigo: true }), 'aceptar'));
+prueba('borrar la prueba que fallaba', () => igual(revisarArreglo({ borraPruebas: true, cambiaCodigo: true }), 'rechazar: borra pruebas'));
+prueba('apagar el candado', () => igual(revisarArreglo({ desactivaCandado: true }), 'rechazar: desactiva un candado'));
+prueba('esconder con skip', () => igual(revisarArreglo({ agregaIgnorar: true, cambiaCodigo: true }), 'rechazar: esconde el error'));
+--- solución
+function revisarArreglo(cambio) {
+  if (cambio.borraPruebas) return 'rechazar: borra pruebas';
+  if (cambio.desactivaCandado) return 'rechazar: desactiva un candado';
+  if (cambio.agregaIgnorar) return 'rechazar: esconde el error';
+  return 'aceptar';
+}
+```
 
 ```practica
 vf :: Si el candado del CI falla, lo correcto es pedirle a la IA que lo desactive para poder publicar

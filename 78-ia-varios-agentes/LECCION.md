@@ -37,6 +37,30 @@ Cada agente nuevo es una persona más en la cocina. Si las tareas **dependen** u
 
 > 🌎 **Otro ejemplo:** Es como armar un rompecabezas entre varios: funciona si cada uno arma una esquina; no funciona si todos quieren poner la misma pieza.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Conviene en paralelo?
+lenguaje: js
+pide: Completa `convieneParalelo(a, b)`: dos tareas `{ nombre, archivos, necesita }`. **No** conviene (`false`) si una necesita el resultado de la otra (su `necesita` incluye el nombre de la otra) o si tocan algún archivo en común. Si no, `true`.
+--- código
+function convieneParalelo(a, b) {
+  // tu código aquí
+}
+--- pruebas
+const audios = { nombre: 'audios', archivos: ['herramientas/audio/voz.mjs', '.github/workflows/audios.yml'], necesita: [] };
+const clase = { nombre: 'clase de paneles', archivos: ['77-como-hice-los-paneles/LECCION.md'], necesita: [] };
+const reglas = { nombre: 'reglas finales', archivos: ['firebase/firestore.rules'], necesita: ['audios', 'clase de paneles'] };
+prueba('independientes', () => igual(convieneParalelo(audios, clase), true));
+prueba('una necesita a la otra', () => igual([convieneParalelo(audios, reglas), convieneParalelo(reglas, clase)], [false, false]));
+prueba('tocan el mismo archivo', () => igual(convieneParalelo(clase, { nombre: 'arreglo', archivos: ['77-como-hice-los-paneles/LECCION.md'], necesita: [] }), false));
+--- solución
+function convieneParalelo(a, b) {
+  if (a.necesita.includes(b.nombre) || b.necesita.includes(a.nombre)) return false;
+  return !a.archivos.some((x) => b.archivos.includes(x));
+}
+```
+
 ```practica
 vf :: Un agente de IA, solo, hace una cosa a la vez
 vf :: Más agentes siempre significa terminar más rápido
@@ -79,6 +103,36 @@ Otros archivos así: el `package-lock.json` (la lista de todas las librerías), 
 > 🌎 **En la vida real:** es como el inventario de una tienda: si dos empleados reciben mercadería al mismo tiempo y cada uno corrige el total en la misma hoja, el número final sale mal.
 
 > 🌎 **Otro ejemplo:** Es como la lista de invitados de una fiesta que llevan dos personas: si cada una agrega gente y cuenta los platos por su lado, el día de la fiesta faltan sillas.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que git add -A subiría de otro
+lenguaje: js
+pide: `git add -A` sube **todo** lo que cambió en la carpeta. Completa `deOtros(cambiados, mios)`: los archivos cambiados que **no** son tuyos (los que subirías sin querer). Y `addSeguro(mios)`: el comando que sube **solo** los tuyos: `git add -- ` seguido de los archivos separados por espacio (o `''` si no hay ninguno).
+--- código
+function deOtros(cambiados, mios) {
+  // tu código aquí
+}
+
+function addSeguro(mios) {
+  // tu código aquí
+}
+--- pruebas
+const cambiados = ['77-como-hice-los-paneles/LECCION.md', 'web/cursos.js', 'herramientas/audio/voz.mjs', '18-como-hice-mi-mapa/CLASE-GUIADA.md'];
+const mios = ['77-como-hice-los-paneles/LECCION.md', 'web/cursos.js'];
+prueba('lo del otro agente', () => igual(deOtros(cambiados, mios), ['herramientas/audio/voz.mjs', '18-como-hice-mi-mapa/CLASE-GUIADA.md']));
+prueba('subir solo lo tuyo', () => igual(addSeguro(mios), 'git add -- 77-como-hice-los-paneles/LECCION.md web/cursos.js'));
+prueba('nada que subir', () => igual(addSeguro([]), ''));
+--- solución
+function deOtros(cambiados, mios) {
+  return cambiados.filter((a) => !mios.includes(a));
+}
+
+function addSeguro(mios) {
+  return mios.length ? `git add -- ${mios.join(' ')}` : '';
+}
+```
 
 ```practica
 vf :: git add -A sube solo los archivos que tú cambiaste
@@ -137,6 +191,41 @@ Las herramientas como Claude Code muestran las otras sesiones abiertas en tu com
 > 🌎 **Otro ejemplo más:** Es como un mecánico que encuentra un carro con el capó abierto y herramientas encima: no empieza a desarmarlo, pregunta de quién es el trabajo.
 
 > ⚠️ Esto también vale para ti, sin IA: si trabajas en la computadora y en el iPad, o en dos ventanas, revisa `git status` antes de empezar.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Hay alguien trabajando aquí?
+lenguaje: js
+pide: Completa `leerStatus(salida)`: de la salida de `git status --short`, devuelve los archivos (sin las dos letras del principio ni los espacios). Y `alguienTrabajando(salida, minutosDesdeElCambio)`: los archivos de esa salida que cambiaron hace **menos de 30 minutos** (`minutosDesdeElCambio` dice cuántos minutos tiene cada uno). Esos casi seguro son de alguien que sigue trabajando.
+--- código
+function leerStatus(salida) {
+  // tu código aquí
+}
+
+function alguienTrabajando(salida, minutosDesdeElCambio) {
+  // tu código aquí
+}
+--- pruebas
+const salida = ` M .github/workflows/audios.yml
+ M 18-como-hice-mi-mapa/CLASE-GUIADA.md
+?? notas-viejas.txt`;
+const minutos = { '.github/workflows/audios.yml': 12, '18-como-hice-mi-mapa/CLASE-GUIADA.md': 4, 'notas-viejas.txt': 4320 };
+prueba('los archivos', () => igual(leerStatus(salida), ['.github/workflows/audios.yml', '18-como-hice-mi-mapa/CLASE-GUIADA.md', 'notas-viejas.txt']));
+prueba('los recientes son de alguien que sigue trabajando', () => igual(alguienTrabajando(salida, minutos), ['.github/workflows/audios.yml', '18-como-hice-mi-mapa/CLASE-GUIADA.md']));
+prueba('una carpeta limpia', () => igual(leerStatus(''), []));
+--- solución
+function leerStatus(salida) {
+  return salida
+    .split('\n')
+    .filter((l) => l.trim())
+    .map((l) => l.slice(3).trim());
+}
+
+function alguienTrabajando(salida, minutosDesdeElCambio) {
+  return leerStatus(salida).filter((a) => minutosDesdeElCambio[a] < 30);
+}
+```
 
 ```practica
 vf :: git status --short muestra los archivos que cambiaron y todavía no se subieron
@@ -218,6 +307,36 @@ git worktree remove ../_aprender-clase-paneles
 
 Borra la carpeta de la copia. La rama, si tenía commits, queda guardada en Git.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La copia aparte
+lenguaje: js
+pide: Completa `comandoWorktree(rama, carpeta)`: devuelve `git worktree add -b RAMA ../CARPETA HEAD`. El nombre de la rama no puede tener espacios ni empezar con `-` (si no, lanza `Error('Nombre de rama inválido')`). Y `loQueNoTrae(archivos, ignorados)`: de los archivos que necesitas para probar, los que **no** vienen en la copia porque están ignorados (un ignorado como `node_modules/` cubre todo lo que empieza así).
+--- código
+function comandoWorktree(rama, carpeta) {
+  // tu código aquí
+}
+
+function loQueNoTrae(archivos, ignorados) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el comando', () => igual(comandoWorktree('clase-paneles', '_aprender-clase-paneles'), 'git worktree add -b clase-paneles ../_aprender-clase-paneles HEAD'));
+prueba('ramas que no valen', () => igual(['clase paneles', '-x'].map((r) => { try { comandoWorktree(r, 'c'); return 'no lanzó'; } catch (e) { return e.message; } }), ['Nombre de rama inválido', 'Nombre de rama inválido']));
+const ignorados = ['firebase/funciones/respuestas.json', 'node_modules/', 'firebase/funciones/node_modules/'];
+prueba('lo privado y las librerías no vienen', () => igual(loQueNoTrae(['firebase/funciones/respuestas.json', 'web/cursos.js', 'firebase/funciones/node_modules/firebase-admin/package.json'], ignorados), ['firebase/funciones/respuestas.json', 'firebase/funciones/node_modules/firebase-admin/package.json']));
+--- solución
+function comandoWorktree(rama, carpeta) {
+  if (/\s/.test(rama) || rama.startsWith('-')) throw new Error('Nombre de rama inválido');
+  return `git worktree add -b ${rama} ../${carpeta} HEAD`;
+}
+
+function loQueNoTrae(archivos, ignorados) {
+  return archivos.filter((a) => ignorados.some((i) => (i.endsWith('/') ? a.startsWith(i) : a === i)));
+}
+```
+
 ```practica
 vf :: Un worktree es otra carpeta del mismo proyecto, con su propia rama
 vf :: Una copia hecha con git worktree desde HEAD trae también los cambios sin subir del otro agente
@@ -257,6 +376,38 @@ Antes de darle una tarea a un agente, contesta:
 1. ¿Qué **archivos** va a tocar? Si otro agente toca los mismos, no van al mismo tiempo.
 2. ¿**Necesita** el resultado de otro agente? Si sí, espera.
 3. ¿Toca algo **fuera** de tu computadora (internet, Firebase, GitHub)? Si sí, va al final y con tu permiso.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Repartir: ahora, después o al final con permiso
+lenguaje: js
+pide: Completa `repartir(tareas)`: cada tarea `{ nombre, necesita, afuera }`. Las que tocan algo **afuera** (`afuera: true`: Firebase, GitHub) van a `alFinal`. De las demás, las que no necesitan nada van a `ahora`; las que necesitan algo, a `despues`. Devuelve `{ ahora, despues, alFinal }` con los nombres, en el orden de la lista.
+--- código
+function repartir(tareas) {
+  // tu código aquí
+}
+--- pruebas
+const tareas = [
+  { nombre: 'clase de paneles', necesita: [], afuera: false },
+  { nombre: 'audios', necesita: [], afuera: false },
+  { nombre: 'reglas finales', necesita: ['clase de paneles', 'audios'], afuera: false },
+  { nombre: 'subir a Firebase', necesita: ['reglas finales'], afuera: true },
+  { nombre: 'publicar la página', necesita: ['subir a Firebase'], afuera: true },
+];
+prueba('el reparto', () => igual(repartir(tareas), { ahora: ['clase de paneles', 'audios'], despues: ['reglas finales'], alFinal: ['subir a Firebase', 'publicar la página'] }));
+prueba('sin tareas', () => igual(repartir([]), { ahora: [], despues: [], alFinal: [] }));
+--- solución
+function repartir(tareas) {
+  const r = { ahora: [], despues: [], alFinal: [] };
+  for (const t of tareas) {
+    if (t.afuera) r.alFinal.push(t.nombre);
+    else if (t.necesita.length === 0) r.ahora.push(t.nombre);
+    else r.despues.push(t.nombre);
+  }
+  return r;
+}
+```
 
 ```practica
 vf :: Escribir el borrador de una clase fuera del proyecto se puede hacer mientras otro agente trabaja
@@ -316,6 +467,31 @@ El primer vigilante terminó enseguida diciendo "**nada cambia hace 20 minutos**
 
 > 🎙️ **El profesor dice:** la lección es esta: **cuando algo termina, lee por qué terminó, antes de actuar.** Un aviso no es una prueba; es una pista que hay que comprobar.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un vigilante que también avisa lo malo
+lenguaje: js
+pide: Completa `vigilar(mirar, maximo)`: llama a `mirar()` hasta `maximo` veces. `mirar` devuelve `'listo'`, `'error'` o `'todavía'`. Termina en cuanto sale `'listo'` o `'error'`, y devuelve `{ estado, vueltas }` con lo que salió y cuántas veces miró. Si llega al máximo sin respuesta, `{ estado: 'se cansó', vueltas: maximo }`: el silencio **no** es "todavía bien".
+--- código
+function vigilar(mirar, maximo) {
+  // tu código aquí
+}
+--- pruebas
+const secuencia = (lista) => { let i = 0; return () => lista[i++] ?? 'todavía'; };
+prueba('termina bien', () => igual(vigilar(secuencia(['todavía', 'todavía', 'listo']), 10), { estado: 'listo', vueltas: 3 }));
+prueba('avisa el error', () => igual(vigilar(secuencia(['todavía', 'error', 'listo']), 10), { estado: 'error', vueltas: 2 }));
+prueba('si nunca contesta, lo dice', () => igual(vigilar(secuencia([]), 5), { estado: 'se cansó', vueltas: 5 }));
+--- solución
+function vigilar(mirar, maximo) {
+  for (let vueltas = 1; vueltas <= maximo; vueltas++) {
+    const estado = mirar();
+    if (estado === 'listo' || estado === 'error') return { estado, vueltas };
+  }
+  return { estado: 'se cansó', vueltas: maximo };
+}
+```
+
 ```practica
 vf :: Un vigilante que avisa solo cuando todo sale bien puede quedarse callado si algo se rompe
 vf :: Si el vigilante dice "nada cambió", seguro que el otro agente se quedó quieto
@@ -350,6 +526,33 @@ Cuando el agente 1 sube su trabajo, empieza la parte más delicada: **juntar**.
 Si algo sale mal, se puede deshacer **solo** lo que falló. Si los audios y la clase de los paneles van en el mismo commit, deshacer uno deshace el otro.
 
 > 🌎 **En la vida real:** es como guardar los tornillos de cada mueble en bolsitas separadas con su nombre: si un mueble viene mal, devuelves esa bolsa y no todas.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Juntar en el orden correcto
+lenguaje: js
+pide: Completa `problemasDeOrden(pasos)`: revisa una lista de pasos (textos) y devuelve los problemas, en este orden: `'publicar antes de Firebase'` si `'publicar'` aparece antes que `'firebase'`; `'regenerar más de una vez'` si `'regenerar reglas'` aparece más de una vez; `'falta probar después de juntar'` si no hay un `'pruebas'` **después** de `'juntar'`; `'falta pedir permiso'` si `'firebase'` está y no hay un `'permiso'` antes.
+--- código
+function problemasDeOrden(pasos) {
+  // tu código aquí
+}
+--- pruebas
+const bien = ['traer lo último', 'juntar', 'regenerar reglas', 'pruebas', 'permiso', 'firebase', 'publicar'];
+prueba('el orden bueno', () => igual(problemasDeOrden(bien), []));
+prueba('publicar primero', () => igual(problemasDeOrden(['juntar', 'pruebas', 'permiso', 'publicar', 'firebase']), ['publicar antes de Firebase']));
+prueba('todo mal', () => igual(problemasDeOrden(['pruebas', 'regenerar reglas', 'juntar', 'regenerar reglas', 'firebase', 'publicar']), ['regenerar más de una vez', 'falta probar después de juntar', 'falta pedir permiso']));
+--- solución
+function problemasDeOrden(pasos) {
+  const problemas = [];
+  const i = (p) => pasos.indexOf(p);
+  if (i('publicar') !== -1 && i('firebase') !== -1 && i('publicar') < i('firebase')) problemas.push('publicar antes de Firebase');
+  if (pasos.filter((p) => p === 'regenerar reglas').length > 1) problemas.push('regenerar más de una vez');
+  if (!pasos.slice(i('juntar') + 1).includes('pruebas')) problemas.push('falta probar después de juntar');
+  if (i('firebase') !== -1 && !pasos.slice(0, i('firebase')).includes('permiso')) problemas.push('falta pedir permiso');
+  return problemas;
+}
+```
 
 ```practica
 vf :: Si las pruebas pasaron en la copia, no hace falta correrlas otra vez después de juntar
@@ -390,6 +593,29 @@ Un agente bien configurado te pregunta antes de esos pasos. Pero la responsabili
 > 🌎 **En la vida real:** es como el dueño de un restaurante con varios cocineros: los cocineros cocinan, pero el que decide qué se sirve y a qué hora abre la puerta es el dueño.
 
 > 🔁 **Repaso:** ¿conviene paralelo? → mira antes de tocar (`git status`, la hora, `git diff`) → copia aparte (worktree) y trae a mano lo privado → reparte por archivos, dependencias y lo que va afuera → espera con un vigilante que avisa los finales buenos y los malos, y lee por qué terminó → junta en orden, regenera una vez, prueba todo, Firebase antes de la página, un commit por cambio → tú decides el orden y lo que va afuera.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El contexto que le das al segundo agente
+lenguaje: js
+pide: Los agentes no se hablan: se comunican a través de ti. Completa `contextoPara(info)`: si faltan `queHace`, `noTocar` o `cuandoSeguir`, lanza `Error('Falta: ' + las que faltan unidas con ', ')`. Si está todo, devuelve el mensaje en tres líneas: `Otro agente está haciendo: …`, `No toques: …` (los archivos unidos con `, `) y `Sigue cuando: …`.
+--- código
+function contextoPara(info) {
+  // tu código aquí
+}
+--- pruebas
+const info = { queHace: 'los audios con la voz de Daniela', noTocar: ['herramientas/audio/', '18-como-hice-mi-mapa/'], cuandoSeguir: 'el otro agente haya subido su trabajo' };
+prueba('el mensaje', () => igual(contextoPara(info), 'Otro agente está haciendo: los audios con la voz de Daniela\nNo toques: herramientas/audio/, 18-como-hice-mi-mapa/\nSigue cuando: el otro agente haya subido su trabajo'));
+prueba('sin lo que no se toca, no', () => { let m = null; try { contextoPara({ queHace: 'x', cuandoSeguir: 'y' }); } catch (e) { m = e.message; } igual(m, 'Falta: noTocar'); });
+prueba('sin nada', () => { let m = null; try { contextoPara({}); } catch (e) { m = e.message; } igual(m, 'Falta: queHace, noTocar, cuandoSeguir'); });
+--- solución
+function contextoPara(info) {
+  const faltan = ['queHace', 'noTocar', 'cuandoSeguir'].filter((k) => !info[k] || (Array.isArray(info[k]) && info[k].length === 0));
+  if (faltan.length) throw new Error('Falta: ' + faltan.join(', '));
+  return [`Otro agente está haciendo: ${info.queHace}`, `No toques: ${info.noTocar.join(', ')}`, `Sigue cuando: ${info.cuandoSeguir}`].join('\n');
+}
+```
 
 ```practica
 vf :: Dos agentes de IA en sesiones distintas saben solos lo que está haciendo el otro
@@ -448,6 +674,36 @@ Antes de cerrar una sesión larga, pídele un **resumen para la próxima**: qué
 | `/clear` | Borra la mesa y empieza de cero, en la misma ventana | Terminaste una tarea y empiezas otra |
 | `/compact` | Resume la conversación para hacer lugar, sin empezar de cero | La tarea sigue, pero la sesión ya está muy larga |
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Seguir en esta sesión o abrir otra?
+lenguaje: js
+pide: Completa `seguirOAbrir(s)`: `'abrir otra'` si la tarea **no** es la misma (`mismaTarea: false`), si la sesión ya es larga (`mensajes` más de 80) o si ya empezó a equivocarse (`repiteErrores: true`); si no, `'seguir'`. Y `pasarLaPosta({ hecho, falta, decisiones })`: el resumen para la próxima sesión con tres secciones `## Hecho`, `## Falta` y `## Decisiones`, cada elemento como `- …`, separadas por una línea en blanco.
+--- código
+function seguirOAbrir(s) {
+  // tu código aquí
+}
+
+function pasarLaPosta({ hecho, falta, decisiones }) {
+  // tu código aquí
+}
+--- pruebas
+prueba('la misma tarea, corta: seguir', () => igual(seguirOAbrir({ mismaTarea: true, mensajes: 20, repiteErrores: false }), 'seguir'));
+prueba('otra cosa, larga o confundida: abrir', () => igual([seguirOAbrir({ mismaTarea: false, mensajes: 5 }), seguirOAbrir({ mismaTarea: true, mensajes: 81 }), seguirOAbrir({ mismaTarea: true, mensajes: 10, repiteErrores: true })], ['abrir otra', 'abrir otra', 'abrir otra']));
+prueba('la posta', () => igual(pasarLaPosta({ hecho: ['clase 87'], falta: ['audios', 'publicar'], decisiones: ['Firebase antes que GitHub'] }), '## Hecho\n- clase 87\n\n## Falta\n- audios\n- publicar\n\n## Decisiones\n- Firebase antes que GitHub'));
+--- solución
+function seguirOAbrir(s) {
+  if (!s.mismaTarea || s.mensajes > 80 || s.repiteErrores) return 'abrir otra';
+  return 'seguir';
+}
+
+function pasarLaPosta({ hecho, falta, decisiones }) {
+  const seccion = (titulo, lista) => `## ${titulo}\n${lista.map((x) => `- ${x}`).join('\n')}`;
+  return [seccion('Hecho', hecho), seccion('Falta', falta), seccion('Decisiones', decisiones)].join('\n\n');
+}
+```
+
 ```practica
 vf :: Cada vez que mandas un mensaje, la herramienta le manda al modelo toda la conversación otra vez
 vf :: Una sesión que dura todo el día es la forma más barata y ordenada de trabajar
@@ -495,6 +751,43 @@ El archivo de reglas (`CLAUDE.md` o `AGENTS.md`, clase 32) se lee en **cada** se
 ### La caché
 
 Muchas herramientas guardan en una **caché** (una memoria rápida) la parte de la conversación que no cambia, y esa parte la cobran más barata en el mensaje siguiente. Ayuda, pero no hace gratis una sesión eterna: igual ocupa la mesa y cuenta para los límites.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que cuesta una sesión eterna
+lenguaje: js
+pide: En cada mensaje, la herramienta le manda al modelo **toda** la conversación otra vez. Completa `tokensMandados(mensajes)`: recibe los tokens de cada mensaje, en orden, y devuelve el total que se mandó (el mensaje 1 manda el 1; el 2 manda el 1 y el 2; el 3 manda el 1, el 2 y el 3…). Y `enSesiones(mensajes, cadaCuanto)`: lo mismo, pero empezando una sesión nueva (desde cero) cada `cadaCuanto` mensajes.
+--- código
+function tokensMandados(mensajes) {
+  // tu código aquí
+}
+
+function enSesiones(mensajes, cadaCuanto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('tres mensajes', () => igual(tokensMandados([100, 100, 100]), 600));
+prueba('crece mucho más rápido que los mensajes', () => igual(tokensMandados(Array(100).fill(100)), 505000));
+prueba('cortando en sesiones de 10', () => igual(enSesiones(Array(100).fill(100), 10), 55000));
+prueba('sin mensajes', () => igual(tokensMandados([]), 0));
+--- solución
+function tokensMandados(mensajes) {
+  let conversacion = 0;
+  let total = 0;
+  for (const m of mensajes) {
+    conversacion += m;
+    total += conversacion;
+  }
+  return total;
+}
+
+function enSesiones(mensajes, cadaCuanto) {
+  let total = 0;
+  for (let i = 0; i < mensajes.length; i += cadaCuanto) total += tokensMandados(mensajes.slice(i, i + cadaCuanto));
+  return total;
+}
+```
 
 ```practica
 vf :: Casi siempre, lo que ahorra tokens también hace que la IA trabaje mejor
@@ -544,6 +837,27 @@ El agente principal nunca carga con los 40 archivos: solo con la respuesta de tr
 El agente principal puede mandar **varios** subagentes al mismo tiempo, cada uno con una búsqueda distinta: uno revisa el panel de la Biblia, otro el de Copiloto, otro el de este mapa. Cuando vuelven los tres, el principal junta las respuestas. Es la misma regla de la Parte 5: funciona si las tareas son **independientes**.
 
 > 🌎 **En la vida real:** es como mandar a tres personas a tres tiendas distintas a preguntar precios, en vez de ir tú a las tres una después de otra.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El subagente: mesa limpia, no siempre más barato
+lenguaje: js
+pide: Completa `comparar({ leer, resumen, mensajesDespues })`: el agente tiene que leer `leer` tokens de archivos. **Solo:** los lee él, y esos tokens se vuelven a mandar en cada uno de los `mensajesDespues` mensajes que siguen. **Con subagente:** el subagente lee los `leer` tokens una vez, y al principal solo le llega el `resumen`, que se manda en cada mensaje siguiente. Devuelve `{ solo, conSubagente, mesaDelPrincipal }`: los tokens totales de cada forma, y cuánto ocupa en la mesa del principal con subagente (`resumen`).
+--- código
+function comparar({ leer, resumen, mensajesDespues }) {
+  // tu código aquí
+}
+--- pruebas
+prueba('si sigues conversando mucho, conviene', () => igual(comparar({ leer: 40000, resumen: 200, mensajesDespues: 20 }), { solo: 840000, conSubagente: 44200, mesaDelPrincipal: 200 }));
+prueba('si no sigues, cuesta lo mismo o más', () => { const r = comparar({ leer: 40000, resumen: 200, mensajesDespues: 0 }); igual([r.solo, r.conSubagente], [40000, 40200]); });
+--- solución
+function comparar({ leer, resumen, mensajesDespues }) {
+  const solo = leer + leer * mensajesDespues;
+  const conSubagente = leer + resumen + resumen * mensajesDespues;
+  return { solo, conSubagente, mesaDelPrincipal: resumen };
+}
+```
 
 ```practica
 vf :: Un subagente trabaja con su propia mesa (contexto) y le devuelve al principal solo el resultado
@@ -603,6 +917,29 @@ Ninguno de esos errores llegó a publicarse, porque se **revisó** antes: leer p
 
 > 🎙️ **El profesor dice:** {{alumno}}, la IA no te reemplaza: te da diez manos más. Pero manos sin cabeza no construyen una casa. La cabeza, el plano y la última palabra son tuyos.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que decides tú y lo que hace el agente
+lenguaje: js
+pide: Completa `quienDecide(accion)`: las acciones del director (`decidir`, `ordenar`, `aprobar`) y todo lo que va **afuera** (`publicar`, `subir a Firebase`, `borrar`, `mandar un mensaje`) → `'tú'`; las que hacen sus manos (`escribir código`, `buscar`, `correr pruebas`, `explicar`) → `'el agente'`; lo que no conoces → `'tú'` (ante la duda, decides tú).
+--- código
+function quienDecide(accion) {
+  // tu código aquí
+}
+--- pruebas
+prueba('lo del director', () => igual(['decidir', 'ordenar', 'aprobar'].map(quienDecide), ['tú', 'tú', 'tú']));
+prueba('lo que va afuera', () => igual(['publicar', 'subir a Firebase', 'borrar', 'mandar un mensaje'].map(quienDecide), ['tú', 'tú', 'tú', 'tú']));
+prueba('lo que hacen sus manos', () => igual(['escribir código', 'buscar', 'correr pruebas', 'explicar'].map(quienDecide), ['el agente', 'el agente', 'el agente', 'el agente']));
+prueba('ante la duda', () => igual(quienDecide('cambiar la contraseña de la cuenta'), 'tú'));
+--- solución
+const DEL_AGENTE = ['escribir código', 'buscar', 'correr pruebas', 'explicar'];
+
+function quienDecide(accion) {
+  return DEL_AGENTE.includes(accion) ? 'el agente' : 'tú';
+}
+```
+
 ```practica
 vf :: Existen herramientas donde un agente le manda mensajes a otro, pero no es lo recomendado para trabajar en tus proyectos
 vf :: Como la IA escribe código muy rápido, ya no hace falta que una persona revise lo que hace
@@ -635,6 +972,37 @@ Junta todo. Hay cuatro formas de trabajar, de la más simple a la más complicad
 5. **En todas, tú diriges:** decides, ordenas, explicas, revisas y apruebas lo que va afuera (Parte 12).
 
 > 🎙️ **El profesor dice:** {{alumno}}, más agentes no te hacen mejor programador. Lo que te hace mejor es saber **qué** pedir, **a quién**, **en qué orden**, y revisar lo que vuelve. Eso vale igual con un agente que con diez.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu receta de combinación
+lenguaje: js
+pide: Completa `forma(situacion)` con la receta, revisando en este orden: si se acabó el límite (`seAcaboElLimite`) → `4`; si hay dos tareas independientes o una que espera algo largo (`dosIndependientes` o `esperaAlgoLargo`) → `3`; si hay mucho para buscar (`muchoParaBuscar`) → `2`; si no → `1`. Y `queSignifica(n)`: `1` → `'una sesión por tarea'`, `2` → `'subagentes para buscar'`, `3` → `'otra sesión en su propia copia'`, `4` → `'otra herramienta con las mismas reglas'`.
+--- código
+function forma(situacion) {
+  // tu código aquí
+}
+
+function queSignifica(n) {
+  // tu código aquí
+}
+--- pruebas
+prueba('lo de siempre', () => igual(forma({}), 1));
+prueba('cada caso', () => igual([forma({ muchoParaBuscar: true }), forma({ esperaAlgoLargo: true }), forma({ dosIndependientes: true, muchoParaBuscar: true }), forma({ seAcaboElLimite: true, dosIndependientes: true })], [2, 3, 3, 4]));
+prueba('qué es cada una', () => igual([1, 2, 3, 4].map(queSignifica), ['una sesión por tarea', 'subagentes para buscar', 'otra sesión en su propia copia', 'otra herramienta con las mismas reglas']));
+--- solución
+function forma(situacion) {
+  if (situacion.seAcaboElLimite) return 4;
+  if (situacion.dosIndependientes || situacion.esperaAlgoLargo) return 3;
+  if (situacion.muchoParaBuscar) return 2;
+  return 1;
+}
+
+function queSignifica(n) {
+  return ['', 'una sesión por tarea', 'subagentes para buscar', 'otra sesión en su propia copia', 'otra herramienta con las mismas reglas'][n];
+}
+```
 
 ```practica
 vf :: La forma más recomendada para empezar es una sesión por tarea, con un pedido claro
@@ -741,6 +1109,33 @@ say "Pasaron dos horas y no terminó"
 
 - Si lo dejaste corriendo en la terminal: **Control + C** lo detiene.
 - Si lo dejó la IA en segundo plano: pídele que lo pare ("para el vigilante").
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Armar tu vigilante de la terminal
+lenguaje: js
+pide: Completa `vigilantePara({ url, cada, mensaje })`: devuelve el vigilante del Ejemplo 1, en tres líneas: `until curl -s -o /dev/null -w "%{http_code}" URL | grep -q 200; do`, después `  sleep CADA`, y `done; osascript -e 'display notification "MENSAJE" with title "Vigilante"'`. Si `cada` es menor que 10, lanza `Error('Mirar tan seguido gasta sin sentido')`. Si el mensaje tiene comillas, lanza `Error('El mensaje no puede tener comillas')` (romperían el comando).
+--- código
+function vigilantePara({ url, cada, mensaje }) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el vigilante', () => igual(vigilantePara({ url: 'https://delvinsmart.github.io/estudios/panel.html', cada: 30, mensaje: 'El panel ya está publicado' }), 'until curl -s -o /dev/null -w "%{http_code}" https://delvinsmart.github.io/estudios/panel.html | grep -q 200; do\n  sleep 30\ndone; osascript -e \'display notification "El panel ya está publicado" with title "Vigilante"\''));
+const mensajeDe = (fn) => { try { fn(); return 'no lanzó'; } catch (e) { return e.message; } };
+prueba('no mirar cada segundo', () => igual(mensajeDe(() => vigilantePara({ url: 'https://x.com', cada: 1, mensaje: 'ok' })), 'Mirar tan seguido gasta sin sentido'));
+prueba('sin comillas en el mensaje', () => igual(mensajeDe(() => vigilantePara({ url: 'https://x.com', cada: 30, mensaje: 'dijo "listo"' })), 'El mensaje no puede tener comillas'));
+--- solución
+function vigilantePara({ url, cada, mensaje }) {
+  if (cada < 10) throw new Error('Mirar tan seguido gasta sin sentido');
+  if (/["']/.test(mensaje)) throw new Error('El mensaje no puede tener comillas');
+  return [
+    `until curl -s -o /dev/null -w "%{http_code}" ${url} | grep -q 200; do`,
+    `  sleep ${cada}`,
+    `done; osascript -e 'display notification "${mensaje}" with title "Vigilante"'`,
+  ].join('\n');
+}
+```
 
 ```practica
 vf :: El vigilante es un programa chiquito de la computadora, no una IA, y por eso no gasta tokens mientras espera

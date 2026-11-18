@@ -64,6 +64,31 @@ Convierte lo que hicimos hoy en una clase para mi mapa de estudios:
 con partes, ejemplos de la vida real y prácticas.
 ```
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Lo puedes explicar con palabras simples?
+lenguaje: js
+pide: La técnica Feynman: si lo explicas simple, lo entendiste. Completa `palabrasSinExplicar(texto, tecnicas)`: de la lista de palabras técnicas, devuelve las que aparecen en el texto (sin importar mayúsculas) y **no** van seguidas, más adelante en la misma oración, de una explicación entre paréntesis. En el orden de la lista.
+--- código
+function palabrasSinExplicar(texto, tecnicas) {
+  // tu código aquí
+}
+--- pruebas
+const tecnicas = ['token', 'worktree', 'idempotente', 'caché'];
+prueba('todas explicadas', () => igual(palabrasSinExplicar('Cada token (un pedacito de texto) cuesta. Un worktree (otra carpeta del mismo proyecto) evita pisarse.', tecnicas), []));
+prueba('una sin explicar', () => igual(palabrasSinExplicar('La caché ahorra. Cada token (un pedacito de texto) cuesta.', tecnicas), ['caché']));
+prueba('la explicación tiene que estar en la misma oración', () => igual(palabrasSinExplicar('Usa un Worktree. (Es otra carpeta.)', tecnicas), ['worktree']));
+--- solución
+function palabrasSinExplicar(texto, tecnicas) {
+  const oraciones = texto.toLowerCase().split(/(?<=\.)\s+/);
+  return tecnicas.filter((palabra) => {
+    const donde = oraciones.filter((o) => o.includes(palabra));
+    return donde.length > 0 && donde.some((o) => !/\(/.test(o.slice(o.indexOf(palabra))));
+  });
+}
+```
+
 ```practica
 vf :: Pedirle a la IA que te explique lo que hizo y que quede escrito como clase es una forma de aprender mientras trabajas
 vf :: Si la IA hace todo el trabajo, igual vas a poder explicarlo en una entrevista
@@ -109,6 +134,36 @@ sale mal, y explícame cómo usarlo y cómo funciona.
 
 Fíjate en el final: "explícame cómo funciona". Así la herramienta no es una caja negra: la entiendes y la puedes arreglar.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Vale la pena hacerla herramienta?
+lenguaje: js
+pide: Completa `semanasParaRecuperar({ vecesPorSemana, minutosCadaVez, minutosHacerla })`: cuántas semanas tarda la herramienta en devolverte el tiempo que costó hacerla (hacia arriba). Y `conviene(tarea)`: `true` si se recupera en 4 semanas o menos, **o** si la tarea se hace más de 3 veces por semana (donde más errores se cometen a mano).
+--- código
+function semanasParaRecuperar({ vecesPorSemana, minutosCadaVez, minutosHacerla }) {
+  // tu código aquí
+}
+
+function conviene(tarea) {
+  // tu código aquí
+}
+--- pruebas
+const reglas = { vecesPorSemana: 5, minutosCadaVez: 10, minutosHacerla: 60 };
+prueba('las reglas del certificado', () => igual(semanasParaRecuperar(reglas), 2));
+prueba('algo de una vez al mes', () => igual(semanasParaRecuperar({ vecesPorSemana: 0.25, minutosCadaVez: 20, minutosHacerla: 120 }), 24));
+prueba('conviene', () => igual([conviene(reglas), conviene({ vecesPorSemana: 0.25, minutosCadaVez: 20, minutosHacerla: 120 })], [true, false]));
+prueba('muy seguido, aunque tarde en recuperarse', () => igual(conviene({ vecesPorSemana: 4, minutosCadaVez: 1, minutosHacerla: 300 }), true));
+--- solución
+function semanasParaRecuperar({ vecesPorSemana, minutosCadaVez, minutosHacerla }) {
+  return Math.ceil(minutosHacerla / (vecesPorSemana * minutosCadaVez));
+}
+
+function conviene(tarea) {
+  return semanasParaRecuperar(tarea) <= 4 || tarea.vecesPorSemana > 3;
+}
+```
+
 ```practica
 vf :: Si un trabajo se repite muchas veces, conviene pedirle a la IA una herramienta que lo haga sola
 vf :: Pedirle a la IA que haga el mismo trabajo a mano cada semana es lo más barato
@@ -140,6 +195,40 @@ Para tareas chicas y repetitivas, a veces conviene un **modelo local**: una IA q
 
 > 🌎 **En la vida real:** es como tener una cafetera en casa en vez de comprar café en la calle cada vez: para el café de todos los días, sale gratis.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un menú de tareas que funciona sin IA
+lenguaje: js
+pide: Completa `leerMenu(texto)`: el menú tiene líneas como `1) emulador del iPhone      5) commit` (dos opciones por línea). Devuelve un objeto número → tarea, con los números como texto y las tareas sin espacios de más. Y `elegir(texto, numero)`: la tarea de ese número, o `null` si no existe.
+--- código
+function leerMenu(texto) {
+  // tu código aquí
+}
+
+function elegir(texto, numero) {
+  // tu código aquí
+}
+--- pruebas
+const menu = `1) emulador del iPhone      5) commit
+2) Android final            6) versión para Google Play
+3) iPhone                   7) panel
+4) Samsung                  8) versión + commit + panel`;
+prueba('lee el menú', () => igual(leerMenu(menu)['6'], 'versión para Google Play'));
+prueba('las ocho', () => igual(Object.keys(leerMenu(menu)).sort(), ['1', '2', '3', '4', '5', '6', '7', '8']));
+prueba('elegir', () => igual([elegir(menu, 8), elegir(menu, '3'), elegir(menu, 9)], ['versión + commit + panel', 'iPhone', null]));
+--- solución
+function leerMenu(texto) {
+  const tareas = {};
+  for (const m of texto.matchAll(/(\d+)\)\s+(.+?)(?=\s{2,}\d+\)|$)/gm)) tareas[m[1]] = m[2].trim();
+  return tareas;
+}
+
+function elegir(texto, numero) {
+  return leerMenu(texto)[String(numero)] ?? null;
+}
+```
+
 ```practica
 vf :: Un script que escribió la IA sigue funcionando aunque se acaben los tokens
 vf :: tareas.sh de Copiloto necesita a Claude para funcionar
@@ -165,6 +254,33 @@ Además de aprender y automatizar, hay usos que ahorran mucho trabajo:
 
 > 🌎 **Otro ejemplo:** Es como un celular: puedes usarlo solo para llamar, o para el banco, el mapa, la cámara, el traductor y aprender idiomas. El aparato es el mismo; el provecho depende de ti.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El pedido para cada uso
+lenguaje: js
+pide: Completa `pedidoPara(uso, detalle)` con las plantillas de la tabla: `'segunda opinión'` → `'Revisa esto como si fueras un atacante: DETALLE. ¿Qué puede salir mal?'`; `'comparar'` → `'Dame dos o tres formas de DETALLE, con ventajas y desventajas, sin elegir tú.'`; `'documentar'` → `'Escribe cómo funciona DETALLE para alguien que llega nuevo.'`; `'aprender'` → `'Hazme 5 preguntas sobre DETALLE, una a la vez, sin darme la respuesta.'`. Un uso que no está: `null`.
+--- código
+function pedidoPara(uso, detalle) {
+  // tu código aquí
+}
+--- pruebas
+prueba('segunda opinión', () => igual(pedidoPara('segunda opinión', 'las reglas de Firestore'), 'Revisa esto como si fueras un atacante: las reglas de Firestore. ¿Qué puede salir mal?'));
+prueba('comparar', () => igual(pedidoPara('comparar', 'generar los audios gratis'), 'Dame dos o tres formas de generar los audios gratis, con ventajas y desventajas, sin elegir tú.'));
+prueba('documentar y aprender', () => igual([pedidoPara('documentar', 'el panel'), pedidoPara('aprender', 'los worktrees')], ['Escribe cómo funciona el panel para alguien que llega nuevo.', 'Hazme 5 preguntas sobre los worktrees, una a la vez, sin darme la respuesta.']));
+prueba('un uso que no está', () => igual(pedidoPara('adivinar', 'x'), null));
+--- solución
+function pedidoPara(uso, detalle) {
+  const plantillas = {
+    'segunda opinión': `Revisa esto como si fueras un atacante: ${detalle}. ¿Qué puede salir mal?`,
+    comparar: `Dame dos o tres formas de ${detalle}, con ventajas y desventajas, sin elegir tú.`,
+    documentar: `Escribe cómo funciona ${detalle} para alguien que llega nuevo.`,
+    aprender: `Hazme 5 preguntas sobre ${detalle}, una a la vez, sin darme la respuesta.`,
+  };
+  return plantillas[uso] ?? null;
+}
+```
+
 ```practica
 vf :: Pedirle a la IA que revise tu trabajo como si fuera un atacante es una buena forma de encontrar problemas
 elige :: Para elegir entre dos formas de guardar los datos, ¿qué pedido conviene? :: "Elige tú la mejor" :: "Dame las opciones con ventajas y desventajas, sin elegir tú" :: "Haz las dos"
@@ -189,6 +305,41 @@ Sacarle el máximo provecho **no** es pasarle todo. Hay cosas que son tuyas:
 > 🎙️ **El profesor dice:** {{alumno}}, todo lo que viste en este curso (una app publicada, dos sitios, sus paneles y este mapa) se construyó así: la IA puso las manos rápidas; la idea, la dirección y las ganas de entender cada cosa las puso una persona. Ese es el máximo provecho: que cada cosa que construyes te deje sabiendo más que antes.
 
 > 🔁 **Repaso:** aprender mientras construyes (explicar, guardar como clase, estudiar, simular la entrevista) → lo repetitivo se vuelve herramienta (la IA la escribe una vez, trabaja siempre sin tokens) → herramientas que funcionan sin la IA, y modelos locales gratis para lo chico → segunda opinión, explicar errores, comparar, documentar, traducir, estudiar → las decisiones, las claves, la revisión final y tus prácticas no se delegan.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Lo que no se delega
+lenguaje: js
+pide: Completa `separar(tareas)`: devuelve `{ tuyas, delegables }`. Son **tuyas** las que tienen alguna de estas marcas: `decision`, `claves`, `revisionFinal`, `practica` (tus ejercicios cuando estudias) o `publicarSinEntender` (y esa última, además, va en `alerta`). Las demás son delegables. Devuelve los nombres, en el orden de la lista, y `alerta` con los nombres de las que tienen `publicarSinEntender`.
+--- código
+function separar(tareas) {
+  // tu código aquí
+}
+--- pruebas
+const tareas = [
+  { nombre: 'escribir el panel' },
+  { nombre: 'qué entra en la versión 1', decision: true },
+  { nombre: 'pegar la clave de Stripe en el chat', claves: true },
+  { nombre: 'mirar la app en el celular', revisionFinal: true },
+  { nombre: 'resolver el ejercicio de la clase 39', practica: true },
+  { nombre: 'subir un cambio que no entiendo', publicarSinEntender: true },
+  { nombre: 'buscar dónde se usa guardar()' },
+];
+prueba('las tuyas', () => igual(separar(tareas).tuyas, ['qué entra en la versión 1', 'pegar la clave de Stripe en el chat', 'mirar la app en el celular', 'resolver el ejercicio de la clase 39', 'subir un cambio que no entiendo']));
+prueba('las que delegas', () => igual(separar(tareas).delegables, ['escribir el panel', 'buscar dónde se usa guardar()']));
+prueba('la alerta', () => igual(separar(tareas).alerta, ['subir un cambio que no entiendo']));
+--- solución
+function separar(tareas) {
+  const marcas = ['decision', 'claves', 'revisionFinal', 'practica', 'publicarSinEntender'];
+  const r = { tuyas: [], delegables: [], alerta: [] };
+  for (const t of tareas) {
+    (marcas.some((m) => t[m]) ? r.tuyas : r.delegables).push(t.nombre);
+    if (t.publicarSinEntender) r.alerta.push(t.nombre);
+  }
+  return r;
+}
+```
 
 ```practica
 vf :: Cuando estudias, lo mejor es que la IA resuelva los ejercicios y tú leas la solución
