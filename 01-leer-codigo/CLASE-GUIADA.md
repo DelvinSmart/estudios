@@ -1,6 +1,6 @@
 # Clase guiada 01: Leer código
 
-Esta es la clase **como si yo te la estuviera dando**, para que la puedas estudiar sin ninguna IA al lado. La [lección](LECCION.md) es el resumen para repasar; esta es la clase completa, explicada paso a paso.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. La [lección](LECCION.md) es el resumen para repasar.
 
 **Cómo estudiarla:**
 1. Lee una parte por día (o dos, si vas bien). No corras.

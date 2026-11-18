@@ -1,6 +1,6 @@
 # Clase guiada 04: CI (Integración Continua)
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** una o dos partes por día. En cada **✋ Para y piensa**, responde antes de abrir. Aprueba la práctica de cada parte para prender su bombillo 💡.
 

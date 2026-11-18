@@ -1,6 +1,6 @@
 # Clase guiada 03: Mi primera prueba
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** esta clase es **práctica**: necesitas la computadora abierta. Haz cada paso de verdad, no solo lo leas. Calcula 30 a 60 minutos. En cada **✋ Para y piensa**, responde antes de abrir la respuesta.
 

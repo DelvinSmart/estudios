@@ -1,6 +1,6 @@
 # Clase guiada 10: Arquitectura de software
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** es la clase más **teórica** del curso, y una de las que más te van a preguntar en entrevistas. De 2 a 3 horas, en dos días: partes 1 a 4 el primero, 5 a 9 el segundo. Lee despacio y en voz alta.
 

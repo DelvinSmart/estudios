@@ -1,6 +1,6 @@
 # Clase guiada 14: ¿Qué dice la Biblia? por dentro
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. La [lección](LECCION.md) es el resumen, y [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md) tiene las frases cortas.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. La [lección](LECCION.md) es el resumen, y [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md) tiene las frases cortas.
 
 **Cómo estudiarla:** una parte por día. Abre al lado `SSD_Desarrollo/Developer/que-dice-la-biblia`. Esta clase cuenta **un solo día de mucho trabajo**, el 15 de noviembre de 2026: el nombre nuevo, los derechos, las fuentes, el griego, la Reina-Valera, la LBLA, el motor de diseño… y **todo lo que se intentó y no funcionó**.
 

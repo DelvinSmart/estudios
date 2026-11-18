@@ -1,6 +1,6 @@
 # Clase guiada 11: Cómo arreglé Copiloto
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. Junta la [guía de estudio](GUIA-DE-ESTUDIO.md) y el [informe](INFORME.md) en una sola clase, contada como historia.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. Junta la [guía de estudio](GUIA-DE-ESTUDIO.md) y el [informe](INFORME.md) en una sola clase, contada como historia.
 
 **Cómo estudiarla:** es el tema **avanzado**: haz primero los Temas 01 a 10. Una o dos partes por día. Es la historia real del 4 y 5 de noviembre de 2026, cuando tu app pasó de tardar **17,7 segundos** en abrir a unos **6,3**.
 

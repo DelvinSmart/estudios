@@ -1,6 +1,6 @@
 # Clase guiada 16: CSS
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** usa la carpeta `practica` del Tema 15. Crea `practica/estilos.css` y conéctalo en el `head` de tu `index.html` con `<link rel="stylesheet" href="estilos.css">`. Todo lo que aprendas, pruébalo ahí: guarda y recarga.
 

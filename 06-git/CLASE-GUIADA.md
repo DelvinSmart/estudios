@@ -1,6 +1,6 @@
 # Clase guiada 06: Git
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) tiene además la **chuleta completa** de comandos para tener a mano.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) tiene además la **chuleta completa** de comandos para tener a mano.
 
 **Cómo estudiarla:** de 1 a 2 horas, en dos o tres días. La parte 7 es práctica en la terminal, con una carpeta de mentira: **no toca la app**.
 

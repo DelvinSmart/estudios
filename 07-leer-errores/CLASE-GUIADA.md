@@ -1,6 +1,6 @@
 # Clase guiada 07: Leer errores
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** de 1 a 2 horas. Las partes 1 a 6 se leen; la parte 7 es práctica en la app (al final se deshace todo).
 

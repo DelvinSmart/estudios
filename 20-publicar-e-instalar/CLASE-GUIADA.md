@@ -1,6 +1,6 @@
 # Clase guiada 20: Publicar e instalar
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) tiene la chuleta de comandos para tener a mano.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) tiene la chuleta de comandos para tener a mano.
 
 **Cómo estudiarla:** una o dos partes por día. Está basada en las guías de tu app (`copiloto-driver/docs/`: `GUIA_COMPLETA_PASO_A_PASO.md`, `COMO_INSTALAR_EN_TELEFONOS.md`, `COMO_SUBIR_ACTUALIZACION.md`, `SUBIR_ESTA_VERSION.md`) y en sus scripts (`scripts/`). Esas guías son el manual del día a día; esta clase te explica **por qué** cada paso es así.
 

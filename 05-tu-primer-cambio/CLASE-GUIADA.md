@@ -1,6 +1,6 @@
 # Clase guiada 05: Mi primer cambio
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** es una clase **práctica**: necesitas la computadora, la carpeta de la app y el simulador. Calcula de 45 a 90 minutos. Al final **deshaces todo**: la app tiene que quedar como estaba.
 

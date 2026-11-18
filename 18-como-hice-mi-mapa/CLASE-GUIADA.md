@@ -1,6 +1,6 @@
 # Clase guiada 18: Cómo hice mi mapa de estudios
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** abre al lado la carpeta `Aprender/web/` en VS Code. Esta clase explica **la misma página donde la estás leyendo**: cada cosa que lees, la puedes ver funcionando.
 

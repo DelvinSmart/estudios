@@ -1,6 +1,6 @@
 # Clase guiada 15: HTML
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** abre al lado un editor (VS Code) y un navegador. Crea una carpeta `practica` dentro de esta clase con un archivo `practica/index.html`: todo lo que aprendas, escríbelo ahí y míralo con doble clic. Cada vez que cambies algo: guarda y recarga (`Cmd + R`).
 

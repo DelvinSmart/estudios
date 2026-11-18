@@ -1,6 +1,6 @@
 # Clase guiada 08: Firebase por dentro
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** de 1 a 2 horas. Esta clase es de **leer y entender**: en ningún momento se cambia nada en Firebase. Lo que está en producción son los datos de personas reales.
 

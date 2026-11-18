@@ -1,6 +1,6 @@
 # Clase guiada 12: Cómo hice Estudios Bíblicos
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. La [lección](LECCION.md) es el resumen para repasar, y [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md) te da las frases cortas.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. La [lección](LECCION.md) es el resumen para repasar, y [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md) te da las frases cortas.
 
 **Cómo estudiarla:** una parte por día. Abre al lado la carpeta `SSD_Desarrollo/Developer/que-dice-la-biblia` y mira el archivo del que habla cada parte. Esta clase **no** es sobre el contenido de los estudios: es sobre **cómo está construida la página**.
 

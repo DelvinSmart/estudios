@@ -731,7 +731,16 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 .estado-cert .acciones { margin: 0; }
 .estado-cert .acciones .boton, .estado-cert .acciones .boton-principal { margin-top: 0; }
 .nota-muestra { margin: 0 0 10px; text-align: center; font-size: 0.82rem; }
-.pasos-arriba { margin: 0 0 18px; padding: 0 0 12px; border-bottom: 1px dashed var(--borde); }
+.pasos-arriba { margin: 0 0 18px; padding: 0 0 12px; border-bottom: 1px dashed var(--borde); flex-wrap: nowrap; align-items: stretch; gap: 8px; }
+/* Arriba de cada parte: volver, anterior y siguiente son el mismo botón, del tamaño de su texto y en una sola fila. */
+.pasos-arriba .paso { flex: 0 0 auto; max-width: none; padding: 10px 14px; text-align: center; white-space: nowrap; }
+.pasos-lados { display: flex; gap: 8px; margin-left: auto; }
+@media (max-width: 640px) {
+  .pasos-arriba .largo { display: none; }
+  /* Con anterior y siguiente, "← volver" corto para que entren los tres en una fila. */
+  .pasos-arriba:has(.pasos-lados .paso + .paso) .medio { display: none; }
+  .pasos-arriba .paso { padding: 10px 12px; font-size: 0.8rem; }
+}
 
 @media (max-width: 640px) {
   .mapa-islas { padding: 24px 12px 30px; border-radius: 16px; }

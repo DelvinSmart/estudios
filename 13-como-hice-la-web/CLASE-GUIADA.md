@@ -1,6 +1,6 @@
 # Clase guiada 13: Cómo hice la web de Copiloto Driver
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. La [lección](LECCION.md) es el resumen, y [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md) tiene las frases cortas.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. La [lección](LECCION.md) es el resumen, y [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md) tiene las frases cortas.
 
 **Cómo estudiarla:** una parte por día. Si tienes la app, abre `copiloto-driver/webapp` al lado. Es la clase que junta **todo**: React, TypeScript, Firebase, arquitectura hexagonal, motores de diseño y pruebas.
 

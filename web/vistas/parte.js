@@ -63,11 +63,10 @@ export async function vistaParte(num, doc, cual) {
     const id = idParte(num, doc, i);
     hoja.insertAdjacentHTML('beforeend', `
       <nav class="pasos pasos-arriba">
-        <a class="paso" href="#/clase/${num}/${doc}">← volver al mapa de la clase</a>
-        <span class="mono tenue">
-          ${i > 1 ? `<a href="#/clase/${num}/${doc}/${i - 1}">‹ anterior</a>` : ''}
-          ${i > 1 && i < partes.length ? ' · ' : ''}
-          ${i < partes.length ? `<a href="#/clase/${num}/${doc}/${i + 1}">siguiente ›</a>` : ''}
+        <a class="paso" href="#/clase/${num}/${doc}">← volver<span class="medio"> al mapa</span><span class="largo"> de la clase</span></a>
+        <span class="pasos-lados">
+          ${i > 1 ? `<a class="paso" href="#/clase/${num}/${doc}/${i - 1}">‹ anterior</a>` : ''}
+          ${i < partes.length ? `<a class="paso" href="#/clase/${num}/${doc}/${i + 1}">siguiente ›</a>` : ''}
         </span>
       </nav>
       <p class="mono comentario">// parte ${dos(i)} de ${dos(partes.length)}</p>

@@ -1,6 +1,6 @@
 # Clase guiada 17: JavaScript en la página
 
-Esta es la clase **como si yo te la estuviera dando**, para estudiarla sin ninguna IA. El [resumen](LECCION.md) es para repasar después.
+Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
 **Cómo estudiarla:** usa la carpeta `practica` de los Temas 15 y 16. Crea `practica/app.js` y conéctalo al final del `body` con `<script src="app.js"></script>`. Abre la **consola** del navegador (clic derecho → Inspeccionar → Consola) y déjala abierta: ahí vas a ver lo que imprimes y los errores.
 
