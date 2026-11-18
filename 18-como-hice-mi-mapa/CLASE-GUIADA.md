@@ -175,7 +175,7 @@ for (const l of lineas) {
 
 > 🌎 **En la vida real:** hacer el índice de un libro buscando cada "Capítulo X", sin confundirte con la palabra "capítulo" dentro de una cita.
 
-> 📌 **Nota:** es la misma idea del script que agregó los 270 ejemplos "🌎 En la vida real" a tus clases: también saltaba los bloques de código.
+> 📌 **Nota:** es la misma idea del script que agregó los 270 ejemplos "🌎 En la vida real" a las clases: también saltaba los bloques de código.
 
 ```practica
 elige :: ¿Qué hace la página con cada línea que empieza con `## `? :: La borra :: Empieza una parte nueva (una parada del mapa) :: La pone en negrita
@@ -638,7 +638,7 @@ vf :: Cada vez que se sube una clase, se rehacen los más de 500 audios
 elige :: ¿Qué hace ffmpeg en los audios? :: Convierte el texto en voz :: Achica el .wav de Piper a un .m4a liviano :: Sube los audios a GitHub
 elige :: Quieres probar otra voz. ¿Qué cambias? :: El código del generador :: Una línea: node herramientas/audio/voz.mjs y el nombre de la voz (o "voz" en motor.json) :: Todas las clases
 elige :: ¿Por qué el repositorio de audios no crece aunque se rehagan los audios? :: Porque los audios no pesan nada :: Porque cada publicación reemplaza a la anterior, sin guardar historial :: Porque GitHub los borra solos
-escribe :: Un amigo te pregunta cómo hiciste para que tus clases tengan audio sin pagar nada. ¿Qué le dices? :: Uso Piper, una voz gratis que corre en la computadora, y ffmpeg para achicar los audios. Un programa lee cada parte, la prepara para el oído y graba el audio, pero solo rehace los que cambiaron (con una huella). GitHub Actions lo corre solo cada vez que subo una clase y publica los audios en otro repositorio, sin historial para que no crezca. La voz y un interruptor para apagarlo están en un solo archivo, motor.json.
+escribe :: Un amigo te pregunta cómo se hizo para que las clases de este mapa tengan audio sin pagar nada. ¿Qué le dices? :: Uso Piper, una voz gratis que corre en la computadora, y ffmpeg para achicar los audios. Un programa lee cada parte, la prepara para el oído y graba el audio, pero solo rehace los que cambiaron (con una huella). GitHub Actions lo corre solo cada vez que subo una clase y publica los audios en otro repositorio, sin historial para que no crezca. La voz y un interruptor para apagarlo están en un solo archivo, motor.json.
 ```
 
 > 🔁 **Repaso:** dos formas de escuchar → cuatro pasos (leer, preparar, Piper, ffmpeg) → huella → motor y voz en `motor.json` → interruptor → GitHub Actions → caché → sin historial → llave solo para lo necesario.
@@ -676,9 +676,9 @@ vf :: El mapa lee los archivos .md cada vez :: V :: Una sola fuente de verdad.
 
 > 🎙️ **El profesor:** cuéntalo como un proyecto tuyo, en voz alta.
 
-> 🌎 **En la vida real:** Contar cómo hiciste este mapa es como mostrar una herramienta que construiste para ti mismo: qué problema resuelve y cómo funciona por dentro.
+> 🌎 **En la vida real:** Contar cómo se hizo este mapa es como mostrar una herramienta hecha a la medida: qué problema resuelve y cómo funciona por dentro.
 
-> 🎤 **Entrevista:** "¿Cómo funciona tu mapa de estudios?"
+> 🎤 **Entrevista:** "¿Cómo funciona este mapa de estudios?"
 
 <details>
 <summary>Ver una buena respuesta</summary>

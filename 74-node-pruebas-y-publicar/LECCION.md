@@ -73,7 +73,7 @@ escribe :: Escribe una prueba que confirme que GET /gastos/99 responde 404. :: t
 
 ### Cloud Functions de Firebase (como este mapa)
 
-Tu proyecto `mapa-estudios-ds` ya corre dos funciones de Node (`corregirPractica` y `enviarCorreoCuenta`). Una API de Express también se puede publicar como función:
+El proyecto `mapa-estudios-ds` de este mapa ya corre dos funciones de Node (`corregirPractica` y `enviarCorreoCuenta`). Una API de Express también se puede publicar como función:
 
 ```js
 import { onRequest } from 'firebase-functions/v2/https';
@@ -85,7 +85,7 @@ export const api = onRequest({ region: 'us-central1', maxInstances: 2 }, app);
 firebase deploy --only functions:api
 ```
 
-Las funciones tienen una **cuota gratis** mensual, y tu proyecto tiene la **alerta de presupuesto** de 10 reales. Pon `maxInstances` bajo y límites de uso (clase 73) para no salirte de lo gratis.
+Las funciones tienen una **cuota gratis** mensual, y el de este mapa tiene una **alerta de presupuesto** de 10 reales. Pon `maxInstances` bajo y límites de uso (clase 73) para no salirte de lo gratis.
 
 > 🌎 **En la vida real:** es como tener tu puesto dentro de un mercado que ya pagó la luz y la seguridad, mientras no pases cierto consumo.
 
@@ -128,7 +128,7 @@ escribe :: Escribe la lista de lo que revisas antes de publicar tu API. :: Que l
 | 6 | Base de datos, autenticación, permisos y límites |
 | 7 | Pruebas con supertest y publicar gratis |
 
-Con esto puedes construir el **backend** de tus apps: una API para Copiloto, para tu web o para un proyecto nuevo, y entender las funciones que ya corren en este mapa.
+Con esto puedes construir el **backend** de una app: una API para Copiloto, para una web o para un proyecto nuevo, y entender las funciones que ya corren en este mapa.
 
 > 🌎 **En la vida real:** es como un mecánico que ya sabe desarmar, arreglar, probar y entregar.
 
@@ -139,7 +139,7 @@ vf :: Con este curso puedes construir y publicar el backend de una app
 vf :: Las funciones de este mapa de estudios no tienen relación con Node
 elige :: ¿En qué clase aprendiste los middleware? :: 1 :: 4 :: 7
 elige :: ¿Qué clase cubre la autenticación y los permisos? :: 2 :: 6 :: 3
-escribe :: Propón un backend en Node para una de tus apps y di qué partes del curso usarías. :: Por ejemplo, una API de gastos para Copiloto con Express, validación y CORS, guardando en Firestore con firebase-admin, verificando el token del usuario, con límites de uso, pruebas con supertest y publicada como Cloud Function.
+escribe :: Propón un backend en Node para una app (por ejemplo, Copiloto) y di qué partes del curso usarías. :: Por ejemplo, una API de gastos para Copiloto con Express, validación y CORS, guardando en Firestore con firebase-admin, verificando el token del usuario, con límites de uso, pruebas con supertest y publicada como Cloud Function.
 ```
 
 ## Para la entrevista

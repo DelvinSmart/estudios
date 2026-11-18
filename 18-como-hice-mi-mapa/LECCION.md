@@ -131,7 +131,7 @@ for (const l of lineas) {
 }
 ```
 
-> 📌 **Nota:** es la misma idea del script que agregó los 270 ejemplos "🌎 En la vida real" a tus clases: también saltaba los bloques de código para no confundirse.
+> 📌 **Nota:** es la misma idea del script que agregó los 270 ejemplos "🌎 En la vida real" a las clases: también saltaba los bloques de código para no confundirse.
 
 **Preguntas**
 7. Si una clase no tiene ningún `##`, ¿cuántas paradas tiene su mapa?
@@ -376,11 +376,11 @@ Es igual que con **¿Qué dice la Biblia?** (Tema 12, parte 9): GitHub Pages sir
 
 ## Para la entrevista
 
-> 🌎 **En la vida real:** Contar cómo hiciste este mapa es como mostrar una herramienta que construiste para ti: qué problema resuelve y cómo funciona por dentro.
+> 🌎 **En la vida real:** Contar cómo se hizo este mapa es como mostrar una herramienta hecha a la medida: qué problema resuelve y cómo funciona por dentro.
 
 > 🎤 **Entrevista:** cuéntalo como un proyecto tuyo, en voz alta.
 
-**¿Cómo funciona tu mapa de estudios?**
+**¿Cómo funciona este mapa de estudios?**
 > Es una página de una sola pantalla hecha con HTML, CSS y JavaScript, sin frameworks. Las clases son archivos Markdown en el repositorio; la página los trae con `fetch`, los parte por sus títulos y los dibuja como un mapa de tres niveles: etapas, clases y partes. Un enrutador mira lo que va después del `#` y dibuja la pantalla que toca.
 
 **¿Por qué leer los Markdown y no escribir el HTML de cada clase?**

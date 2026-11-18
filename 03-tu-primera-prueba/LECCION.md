@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** en el Tema 02 miraste cómo un inspector revisa una casa. Ahora tú eres el inspector: tomas la lista, vas a la puerta y compruebas si cierra. Es pasar de ver un partido a jugarlo.
 
-En el Tema 02 leíste pruebas. Ahora vas a **escribir una tú**, dentro de tu app de verdad. Vas a probar la regla del nombre de "Mi empresa", la misma función que leíste en el Tema 01.
+En el Tema 02 leíste pruebas. Ahora vas a **escribir una tú**, dentro de una app de verdad, Copiloto. Vas a probar la regla del nombre de "Mi empresa", la misma función que leíste en el Tema 01.
 
 **Antes de empezar:** necesitas haber hecho los Temas 01 y 02.
 

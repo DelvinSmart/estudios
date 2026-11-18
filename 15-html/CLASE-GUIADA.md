@@ -295,7 +295,7 @@ vf :: El HTML semántico cambia cómo se ve la página
 
 ## 6. Formularios: cuando el usuario escribe
 
-> 🎙️ **El profesor:** tu app está llena de formularios: registrar un ingreso, cargar combustible, editar el vehículo. En la web se arman así.
+> 🎙️ **El profesor:** la app Copiloto está llena de formularios: registrar un ingreso, cargar combustible, editar el vehículo. En la web se arman así.
 
 ```html
 <form>
@@ -428,7 +428,7 @@ elige :: ¿Qué herramienta revisa tu HTML y te dice los errores? :: Git :: vali
 **A. Tu tarjeta de presentación**
 1. Arma el esqueleto completo de la parte 3.
 2. Pon un `h1` con tu nombre y un `p` que diga qué haces.
-3. Agrega una lista con 3 cosas que construiste (Copiloto Driver, la web, ¿Qué dice la Biblia?).
+3. Agrega una lista con 3 cosas que hiciste o te gustaría hacer (por ejemplo: una app, una web, un sitio de estudios).
 4. Cada cosa de la lista debe ser un enlace a su página.
 
 **B. Semántica**

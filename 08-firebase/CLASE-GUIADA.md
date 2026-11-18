@@ -26,9 +26,9 @@ vf :: Con Firebase tienes que comprar y mantener tu propio servidor
 
 > 🔁 **Repaso:** Firebase = backend sin administrar servidores (serverless). Como alquilar en un shopping.
 
-## 2. Las piezas que usa tu app
+## 2. Las piezas que usa la app Copiloto
 
-> 🎙️ **El profesor:** Firebase no es una cosa: son varias piezas. Tu app usa cinco. Imagínalas como **los servicios de un edificio de oficinas**.
+> 🎙️ **El profesor:** Firebase no es una cosa: son varias piezas. La app Copiloto usa cinco. Imagínalas como **los servicios de un edificio de oficinas**.
 
 > 🌎 **Otro ejemplo:** En un hospital: la recepción que te identifica (Authentication), el archivo de historias clínicas (Firestore), el depósito de radiografías (Storage), los médicos que trabajan adentro (Cloud Functions) y la cartelera de la entrada (Hosting).
 
@@ -78,7 +78,7 @@ vf :: El panel web se publica con Firebase Hosting
 
 Y una diferencia con Excel: **cada ficha puede tener sus propios renglones**. No todas tienen que tener los mismos campos.
 
-### Cómo está organizada tu app
+### Cómo está organizada la app Copiloto
 
 ```text
 users/                          ← colección: una entrada por persona
@@ -155,7 +155,7 @@ escribe :: ¿Por qué casi todo está dentro de `users/{uid}`? :: Para que los d
 
 ### El problema
 
-La app está en el teléfono de miles de personas que **no controlas**. Y aquí va algo que sorprende: **cualquiera puede intentar** leer o escribir en tu base de datos **directamente**, sin usar tu app (con una app falsa, o con un programa). La app no es una muralla.
+La app está en el teléfono de miles de personas que **no controlas**. Y aquí va algo que sorprende: **cualquiera puede intentar** leer o escribir en tu base de datos **directamente**, sin usar la app Copiloto (con una app falsa, o con un programa). La app no es una muralla.
 
 Por eso existen las **reglas de seguridad**: un archivo, **`firestore.rules`**, que Firebase revisa **en el servidor** en cada lectura y cada escritura, venga de donde venga.
 
@@ -209,7 +209,7 @@ match /vehicleColors/{id} {
 
 > 🌎 **Otro ejemplo:** Es como el examen práctico de un cerrajero: le dan puertas de práctica y tiene que demostrar que nadie más las abre.
 
-Un error en las reglas puede exponer los datos de **todas** las personas. Por eso tu app tiene pruebas de reglas (`rules-test/`), que corren con el **emulador** de Firebase: una copia falsa de la base de datos en tu computadora. Por ejemplo, intentan leer los ingresos de otra persona y comprueban que la regla **lo impida**. Y corren en el CI (Tema 04, trabajo `reglas`).
+Un error en las reglas puede exponer los datos de **todas** las personas. Por eso la app Copiloto tiene pruebas de reglas (`rules-test/`), que corren con el **emulador** de Firebase: una copia falsa de la base de datos en tu computadora. Por ejemplo, intentan leer los ingresos de otra persona y comprueban que la regla **lo impida**. Y corren en el CI (Tema 04, trabajo `reglas`).
 
 > ✋ **Para y piensa:** ¿por qué no alcanza con que la app "no muestre" los datos de otros?
 
@@ -300,7 +300,7 @@ escribe :: Nombra los tres motivos para poner código en el servidor. :: Secreto
 
 ## 6. El camino completo de un ingreso
 
-> 🎙️ **El profesor:** juntemos todo. Esto es lo que pasa, por dentro, cuando registras R$ 50 en "Mi empresa". Si puedes contar este recorrido en una entrevista, demuestras que entiendes tu app de punta a punta.
+> 🎙️ **El profesor:** juntemos todo. Esto es lo que pasa, por dentro, cuando registras R$ 50 en "Mi empresa". Si puedes contar este recorrido en una entrevista, demuestras que entiendes la app Copiloto de punta a punta.
 
 1. **La pantalla** (`FinanceUnifiedRegisterForm`) arma el ingreso con lo que escribiste.
 2. **El contexto** (`EarningsContext`) decide si es acumulativo (Tema 01) y calcula cuánto guardar.
@@ -396,7 +396,7 @@ elige :: ¿Por qué la app no puede escribir `billing`? :: Porque es muy grande 
 
 > 🌎 **En la vida real:** Explicar tu backend es como explicar un edificio: recepción, archivo, portero y oficina de atrás, cada uno con su trabajo.
 
-> 🎤 **Entrevista:** "¿Cómo está hecho el backend de tu app?"
+> 🎤 **Entrevista:** "¿Cómo está hecho el backend de Copiloto?"
 
 <details>
 <summary>Ver una buena respuesta</summary>
@@ -417,7 +417,7 @@ elige :: ¿Por qué la app no puede escribir `billing`? :: Porque es muy grande 
 </details>
 
 ```practica
-escribe :: Explica en voz alta (y escribe) cómo protege tu app los datos de cada persona. :: Cada persona tiene sus datos dentro de users/{uid}; las reglas de Firestore solo dejan leer y escribir si hay sesión y el uid coincide con el de la carpeta; lo delicado se hace en Cloud Functions; y las reglas tienen pruebas con el emulador.
+escribe :: Explica en voz alta (y escribe) cómo protege la app Copiloto los datos de cada persona. :: Cada persona tiene sus datos dentro de users/{uid}; las reglas de Firestore solo dejan leer y escribir si hay sesión y el uid coincide con el de la carpeta; lo delicado se hace en Cloud Functions; y las reglas tienen pruebas con el emulador.
 ```
 
 > 🔁 **Repaso final de la clase:** Firebase y sus cinco piezas, cómo se guardan los datos en Firestore, las reglas de seguridad (lo más importante), Cloud Functions, el camino de un ingreso y las reglas de oro de seguridad. Próxima: **Tema 09, CRUD en Node.js**.

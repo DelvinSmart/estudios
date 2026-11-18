@@ -22,7 +22,7 @@ Toda página web del mundo, desde Google hasta tu página **¿Qué dice la Bibli
 
 El navegador lee esas etiquetas y dibuja: un título grande, un párrafo y un botón.
 
-| Pieza | Qué hace | En tus proyectos |
+| Pieza | Qué hace | En ¿Qué dice la Biblia? |
 |---|---|---|
 | **HTML** | Qué cosas hay | Las tarjetas de estudios en `index.html` |
 | **CSS** | Cómo se ven | Los colores del tema en `css/styles.css` |
@@ -237,7 +237,7 @@ Toda página HTML tiene este esqueleto. Puedes copiarlo y empezar desde aquí:
 
 Atributos útiles: `required` (obligatorio), `placeholder` (texto de ejemplo gris), `min` y `max` (límites), `disabled` (apagado).
 
-> 📌 **Nota:** el `type` del `input` importa mucho en el celular. `type="number"` abre el teclado numérico; `type="email"` abre uno con `@`. Es lo mismo que hace tu app cuando registras litros.
+> 📌 **Nota:** el `type` del `input` importa mucho en el celular. `type="number"` abre el teclado numérico; `type="email"` abre uno con `@`. Es lo mismo que hace Copiloto cuando registras litros.
 
 **Preguntas**
 11. ¿Qué pasa si tocas un `label` que tiene `for="litros"`?
@@ -301,7 +301,7 @@ Hazlos en `practica/index.html`. Escribe tú cada línea, sin copiar y pegar.
 **A. Tu tarjeta de presentación**
 1. Arma el esqueleto completo de la Parte 3.
 2. Pon un `h1` con tu nombre y un `p` que diga qué haces.
-3. Agrega una lista con 3 cosas que construiste (Copiloto Driver, la web, ¿Qué dice la Biblia?).
+3. Agrega una lista con 3 cosas que hiciste o te gustaría hacer (por ejemplo: una app, una web, un sitio de estudios).
 4. Cada cosa de la lista debe ser un enlace a su página.
 
 **B. Semántica**

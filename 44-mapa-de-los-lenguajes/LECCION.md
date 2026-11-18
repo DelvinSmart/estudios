@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** en una obra hay albañiles, electricistas, plomeros y pintores. Cada uno con sus herramientas, pero todos construyen la misma casa. En programación pasa igual: JavaScript, TypeScript, React, React Native, Node.js, Kotlin… no compiten, cada uno hace su parte.
 
-> 🎙️ **El profesor dice:** antes de empezar el camino, necesitas el mapa de los nombres que vas a escuchar todo el tiempo. Al terminar esta clase vas a poder explicar, con tus apps como ejemplo, qué es **JavaScript**, qué agrega **TypeScript**, para qué sirve **Node.js**, qué es **React**, qué es **React Native** y **Expo**, y dónde entran **Kotlin** y **Swift**.
+> 🎙️ **El profesor dice:** antes de empezar el camino, necesitas el mapa de los nombres que vas a escuchar todo el tiempo. Al terminar esta clase vas a poder explicar, con Copiloto y los otros proyectos del curso como ejemplo, qué es **JavaScript**, qué agrega **TypeScript**, para qué sirve **Node.js**, qué es **React**, qué es **React Native** y **Expo**, y dónde entran **Kotlin** y **Swift**.
 
 ## Parte 1. Lenguaje, librería, framework y plataforma
 
@@ -182,7 +182,7 @@ vf :: React Native usa div y p igual que la web
 vf :: Con React Native, un solo código sirve para iPhone y Android
 elige :: ¿Qué es Expo? :: Un lenguaje :: Un framework y herramientas para correr, compilar y publicar apps de React Native :: Una base de datos
 elige :: ¿Qué es un componente en React? :: Un archivo de imagen :: Un pedazo reutilizable de pantalla, como un botón o una tarjeta :: Un servidor
-escribe :: Explica con tus apps la diferencia entre React y React Native. :: React arma pantallas web con componentes (como la web de Copiloto); React Native usa la misma forma de trabajar para hacer apps de teléfono con piezas nativas (como la app Copiloto Driver), con un solo código para iPhone y Android.
+escribe :: Explica con los proyectos del curso la diferencia entre React y React Native. :: React arma pantallas web con componentes (como la web de Copiloto); React Native usa la misma forma de trabajar para hacer apps de teléfono con piezas nativas (como la app Copiloto Driver), con un solo código para iPhone y Android.
 ```
 
 ## Parte 4. Kotlin, Swift y cómo encaja todo
@@ -238,7 +238,7 @@ El Python que quizás tengas en la cabeza es de **otro proyecto**: el Agente de 
 
 > 🌎 **Otro ejemplo:** Es como la caja registradora: cobra, te dice cuánto gastaste y te da un consejo, y funciona con el mismo sistema que el resto del local.
 
-### Tus proyectos en el mapa
+### Los proyectos del curso en el mapa
 
 **Copiloto, parte por parte:**
 
@@ -252,7 +252,7 @@ El Python que quizás tengas en la cabeza es de **otro proyecto**: el Agente de 
 
 **Más del 95 % del código de Copiloto es TypeScript.**
 
-**Todos tus proyectos:**
+**Todos los proyectos del curso:**
 
 | Proyecto | Hecho con |
 |---|---|
@@ -286,7 +286,7 @@ vf :: Kotlin es el lenguaje oficial para apps Android
 vf :: Para tener una app en iPhone y Android con Kotlin y Swift basta con un solo código
 elige :: ¿Con qué está hecho este mapa de estudios? :: React Native :: HTML, CSS y JavaScript (con Firebase) :: Kotlin
 elige :: ¿Qué orden de cursos propone el mapa para hacer apps? :: Kotlin, después JavaScript :: JavaScript + TypeScript, después React Native, después Kotlin :: Solo Python
-escribe :: Un amigo te pregunta qué usas para tus apps y por qué no Kotlin. ¿Qué le dices? :: Uso React Native con TypeScript y Expo, que con un solo código me da la app para iPhone y Android; Kotlin es el lenguaje nativo de Android y lo usaría para algo solo de Android o para una pieza nativa especial.
+escribe :: Un amigo te pregunta qué usa Copiloto y por qué no Kotlin. ¿Qué le dices? :: Usa React Native con TypeScript y Expo, que con un solo código da la app para iPhone y Android; Kotlin es el lenguaje nativo de Android y lo usaría para algo solo de Android o para una pieza nativa especial.
 ```
 
 ## Para la entrevista

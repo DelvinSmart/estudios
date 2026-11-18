@@ -159,7 +159,7 @@ def guardar_punto(estado: EstadoAgente) -> None:
 
 > 🌎 **En la vida real:** el `TypedDict` es la ficha de la partida guardada del videojuego, con casillas fijas: nivel, vidas, objetos. Si mañana agregas una casilla nueva ("mascota"), subes la `version_esquema` para que las partidas viejas sigan cargando.
 
-> 💡 **Idea:** es TypeScript, como tu app (Tema 01). Los tipos aquí hacen el mismo trabajo: si alguien escribe mal un campo, se entera antes de correrlo.
+> 💡 **Idea:** es TypeScript, como Copiloto (Tema 01). Los tipos aquí hacen el mismo trabajo: si alguien escribe mal un campo, se entera antes de correrlo.
 
 ## 4.4 Salidas ordenadas
 

@@ -202,7 +202,7 @@ new Set(records.map((r) => normalizeFiscalAppId(r.appId)));
 
 > 🌎 **Otro ejemplo:** Como el examen de manejo en el auto de la autoescuela, no en el tuyo con tus mañas: si apruebas ahí, manejas bien en cualquiera.
 
-**Qué es:** Integración Continua. Una máquina limpia revisa cada subida. La lección completa, con el archivo de tu app explicado línea por línea, es el [Tema 04](../04-ci/LECCION.md).
+**Qué es:** Integración Continua. Una máquina limpia revisa cada subida. La lección completa, con el archivo de Copiloto explicado línea por línea, es el [Tema 04](../04-ci/LECCION.md).
 
 **Comparación:** es un inspector que revisa cada carro antes de salir de la fábrica.
 

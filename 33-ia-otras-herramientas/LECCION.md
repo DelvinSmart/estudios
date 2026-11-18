@@ -108,7 +108,7 @@ Cambie la herramienta o el modelo, el método es el mismo: **reglas del proyecto
 
 ### Cuidado con mezclar herramientas en el mismo cambio
 
-Dos agentes trabajando al mismo tiempo **en los mismos archivos** se pisan. Si usas dos herramientas, que cada una trabaje en su parte (o en su propia rama de Git, Tema 06), y revisa antes de juntar. Te pasó con la guía `COMO-SUBIR-CAMBIOS.md`: otro agente trabajó en su rama y después comparamos y juntamos lo mejor.
+Dos agentes trabajando al mismo tiempo **en los mismos archivos** se pisan. Si usas dos herramientas, que cada una trabaje en su parte (o en su propia rama de Git, Tema 06), y revisa antes de juntar. Pasó con la guía `COMO-SUBIR-CAMBIOS.md` de ¿Qué dice la Biblia?: otro agente trabajó en su rama y después se compararon y se juntó lo mejor.
 
 > 🌎 **En la vida real:** dos pintores en la misma pared, cada uno con un color, terminan en un desastre.
 

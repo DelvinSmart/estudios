@@ -8,7 +8,7 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 ## 1. La idea en una frase
 
-> 🎙️ **El profesor:** {{alumno}}, tu app vive en el teléfono. Un día quisiste que la persona pudiera ver sus números **en la computadora**, con la misma cuenta. Hacer una web es fácil… lo difícil es hacerla **sin copiar la app**. Esta clase es la historia de cómo se logró, y es de lo que más te puede lucir en una entrevista.
+> 🎙️ **El profesor:** {{alumno}}, Copiloto vive en el teléfono. Un día hizo falta que la persona pudiera ver sus números **en la computadora**, con la misma cuenta. Hacer una web es fácil… lo difícil es hacerla **sin copiar la app**. Esta clase es la historia de cómo se logró, y es de lo que más te puede lucir en una entrevista.
 
 > 🌎 **En la vida real:** Es como un banco que tiene app y página web: tu saldo es uno solo; las dos pantallas lo muestran igual porque leen la misma cuenta.
 
@@ -560,7 +560,7 @@ vf :: El corte para "todo en una pantalla" se bajó a 640 de alto en el motor
 
 > 🌎 **Otro ejemplo:** Es como comparar el resumen del banco con tu libreta: los dos deberían dar el mismo saldo; si no, alguien anotó mal.
 
-Cuando publicaste la web en LinkedIn, un ingeniero (Principal Engineer) comentó: *"yo pondría pruebas de contrato en los cálculos de ganancias y gastos, para detectar cualquier diferencia entre la web y el móvil"*.
+Cuando la web se publicó en LinkedIn, un ingeniero (Principal Engineer) comentó: *"yo pondría pruebas de contrato en los cálculos de ganancias y gastos, para detectar cualquier diferencia entre la web y el móvil"*.
 
 ### El problema que vio
 
@@ -620,7 +620,7 @@ vf :: Si dos partes usan la misma calculadora, no hace falta probar que den el m
 
 > 🌎 **En la vida real:** Contar la web es como contar cómo abriste una segunda sucursal sin construir otra cocina.
 
-> 🎤 **Entrevista:** "Cuéntame de la web de tu app."
+> 🎤 **Entrevista:** "Cuéntame de la web de Copiloto."
 
 <details>
 <summary>Ver una buena respuesta</summary>

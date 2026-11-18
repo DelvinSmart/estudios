@@ -18,7 +18,7 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 ### Qué es un lenguaje de programación
 
-Igual que las personas hablan español o portugués, las computadoras se programan en **lenguajes**: JavaScript, Python, Java, Kotlin… Cada uno tiene sus palabras y sus reglas. Tu app, **Copiloto Driver**, está escrita en **TypeScript**.
+Igual que las personas hablan español o portugués, las computadoras se programan en **lenguajes**: JavaScript, Python, Java, Kotlin… Cada uno tiene sus palabras y sus reglas. **Copiloto Driver**, la app real que usamos de ejemplo en todo el curso (una app para conductores, publicada en Google Play), está escrita en **TypeScript**.
 
 > 🌎 **En la vida real:** el español y el portugués se parecen mucho: si sabes uno, lees bastante del otro. Con los lenguajes de programación pasa lo mismo. Si aprendes a leer TypeScript, después vas a entender gran parte de JavaScript, Java o Kotlin.
 
@@ -28,7 +28,7 @@ Igual que las personas hablan español o portugués, las computadoras se program
 
 **JavaScript** es el lenguaje de la web: lo entienden todos los navegadores. **TypeScript** es **JavaScript con tipos**. Se escribe casi igual, pero a cada dato le dices **qué clase de cosa es**.
 
-¿Para qué sirve eso? Piensa en esta situación de tu app: hay una casilla para escribir **cuántos litros cargaste**. Si por un error del código, en vez de un número llega la palabra `"Etios"`, la app intentaría hacer cuentas con una palabra… y fallaría **en el teléfono del conductor**, en plena calle.
+¿Para qué sirve eso? Piensa en esta situación de Copiloto: hay una casilla para escribir **cuántos litros cargaste**. Si por un error del código, en vez de un número llega la palabra `"Etios"`, la app intentaría hacer cuentas con una palabra… y fallaría **en el teléfono del conductor**, en plena calle.
 
 Con TypeScript, ese error aparece **antes**, cuando el programador escribe el código. El programa se niega a armarse hasta que lo arregles.
 
@@ -69,7 +69,7 @@ let activo: boolean = true;         // verdadero o falso
 let segundoApellido: string | null = null;   // texto, o nada
 ```
 
-| Tipo | Qué guarda | Cómo se reconoce | Ejemplo en tu app |
+| Tipo | Qué guarda | Cómo se reconoce | Ejemplo en Copiloto |
 |---|---|---|---|
 | `string` | Texto | Va entre comillas `'...'` | El nombre de tu empresa: `'Thermomac'` |
 | `number` | Números, con o sin decimales | Sin comillas | Litros: `45`, precio: `5.89` |
@@ -209,7 +209,7 @@ interface Gasto {
 }
 ```
 
-**En tu app:** al registrar un gasto, la **nota** es opcional. Si no escribes nada, se guarda `null` ("no dejó nota"); si escribes "lavado completo", se guarda ese texto. Cuando la app muestra el gasto, revisa primero: si la nota es `null`, no dibuja la línea de la nota.
+**En Copiloto:** al registrar un gasto, la **nota** es opcional. Si no escribes nada, se guarda `null` ("no dejó nota"); si escribes "lavado completo", se guarda ese texto. Cuando la app muestra el gasto, revisa primero: si la nota es `null`, no dibuja la línea de la nota.
 
 **La regla para recordarlo:** `null` = **"pregunté y no hay respuesta"**. Una casilla opcional en blanco es `null`. Pero un **0 que la persona escribió** (por ejemplo, "propina: 0") **sí es una respuesta**: es un número.
 
@@ -256,7 +256,7 @@ elige :: ¿Qué hace textoEscrito.trim() === '' ? null : textoEscrito.trim()? ::
 escribe :: Explica con un formulario de tu vida por qué una casilla opcional en blanco es null. :: Por ejemplo, la nota de un gasto: si no escribo nada, no hay dato, entonces se guarda null; si escribo una nota, se guarda el texto. null es "pregunté y no hay respuesta".
 ```
 
-> 🔁 **Repaso:** el código son órdenes escritas para la computadora. Tu app está en TypeScript, que es JavaScript con tipos. Los tipos (`string`, `number`, `boolean`, `null`) dicen qué clase de dato va en cada caja, y así los errores aparecen antes de llegar al teléfono. Y `null` no es cero: es **"no hay dato"** (como una casilla opcional en blanco), y TypeScript te obliga a revisarlo antes de usarlo.
+> 🔁 **Repaso:** el código son órdenes escritas para la computadora. La app Copiloto está en TypeScript, que es JavaScript con tipos. Los tipos (`string`, `number`, `boolean`, `null`) dicen qué clase de dato va en cada caja, y así los errores aparecen antes de llegar al teléfono. Y `null` no es cero: es **"no hay dato"** (como una casilla opcional en blanco), y TypeScript te obliga a revisarlo antes de usarlo.
 
 ## 2. Las cinco piezas
 
@@ -408,7 +408,7 @@ vf :: `carro.modelo` lee el dato `modelo` del objeto `carro`
 
 ## 3. Primer ejemplo real: el nombre de "Mi empresa"
 
-> 🎙️ **El profesor:** basta de ejemplos inventados. Ahora vamos a leer **código real de tu app**, el que corre hoy en los teléfonos. No te asustes si al principio se ve raro: vamos a ir línea por línea, y al final lo vas a poder explicar tú.
+> 🎙️ **El profesor:** basta de ejemplos inventados. Ahora vamos a leer **código real de Copiloto**, el que corre hoy en los teléfonos. No te asustes si al principio se ve raro: vamos a ir línea por línea, y al final lo vas a poder explicar tú.
 
 > 🌎 **En la vida real:** Es como el formulario para inscribir a un niño en la escuela: alguien tiene que revisar que el nombre esté bien escrito y que entre en la casilla antes de imprimir la credencial.
 
@@ -463,7 +463,7 @@ export const MY_COMPANY_NAME_MAX_LENGTH = 24;
 /** Limpa o nome digitado; `null` = inválido (vazio volta ao nome padrão). */
 ```
 
-Todo lo que está entre `/**` y `*/` es un **comentario**: la computadora lo ignora. Está en portugués porque el código de tu app tiene sus comentarios en portugués. Dice: *"Limpia el nombre escrito; `null` = inválido (vacío vuelve al nombre por defecto)"*. **Siempre lee el comentario primero**: te cuenta en una línea para qué existe la función.
+Todo lo que está entre `/**` y `*/` es un **comentario**: la computadora lo ignora. Está en portugués porque el código de Copiloto tiene sus comentarios en portugués. Dice: *"Limpia el nombre escrito; `null` = inválido (vacío vuelve al nombre por defecto)"*. **Siempre lee el comentario primero**: te cuenta en una línea para qué existe la función.
 
 ### La firma de la función
 
@@ -633,7 +633,7 @@ vf :: Si quiero permitir 3 palabras, tengo que cambiar el `2` en el `if`
 
 ## 4. Segundo ejemplo real: ¿un ingreso es acumulativo?
 
-> 🎙️ **El profesor:** ahora una función cortita, de una sola línea… pero que decide **cómo se cuenta el dinero en toda tu app**. Es un buen ejemplo de que en programación lo corto puede ser lo más importante.
+> 🎙️ **El profesor:** ahora una función cortita, de una sola línea… pero que decide **cómo se cuenta el dinero en toda la app Copiloto**. Es un buen ejemplo de que en programación lo corto puede ser lo más importante.
 
 > 🌎 **En la vida real:** Como la diferencia entre el saldo de tu cuenta del banco (ya incluye todo lo anterior) y los depósitos sueltos que haces (cada uno se suma).
 
@@ -786,7 +786,7 @@ vf :: Una función de una sola línea no puede ser importante
 
 > 🌎 **Otro ejemplo:** Como entender una señal de tránsito nueva: ves el dibujo, lees la palabra y adivinas la regla: "no pasan bicicletas".
 
-Esta también es de tu app, del archivo `src/utils/fuelLevel.ts`. No la viste antes:
+Esta también es de Copiloto, del archivo `src/utils/fuelLevel.ts`. No la viste antes:
 
 ```ts
 export function vehicleHasFuelTank(vehicleType: string | undefined): boolean {
@@ -891,7 +891,7 @@ vf :: Hay que entender cada símbolo antes de seguir leyendo
 
 </details>
 
-> 🎤 **Entrevista:** "Cuéntame de una función de tu app que sea importante."
+> 🎤 **Entrevista:** "Cuéntame de una función de Copiloto que sea importante."
 
 <details>
 <summary>Ver una buena respuesta</summary>
@@ -902,4 +902,4 @@ vf :: Hay que entender cada símbolo antes de seguir leyendo
 
 </details>
 
-> 🔁 **Repaso final de la clase:** sabes qué es TypeScript y sus tipos, reconoces las cinco piezas, leíste dos funciones reales de tu app línea por línea, tienes un método de cuatro pasos para leer cualquier archivo, y puedes explicarlo en una entrevista. Si lo puedes decir en voz alta sin mirar, esta clase está hecha. ¡Felicitaciones! Próxima: **Tema 02, Pruebas automáticas**.
+> 🔁 **Repaso final de la clase:** sabes qué es TypeScript y sus tipos, reconoces las cinco piezas, leíste dos funciones reales de Copiloto línea por línea, tienes un método de cuatro pasos para leer cualquier archivo, y puedes explicarlo en una entrevista. Si lo puedes decir en voz alta sin mirar, esta clase está hecha. ¡Felicitaciones! Próxima: **Tema 02, Pruebas automáticas**.

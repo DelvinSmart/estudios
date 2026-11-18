@@ -8,7 +8,7 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 ## 1. Dónde vive cada cosa en la app
 
-> 🎙️ **El profesor:** {{alumno}}, hasta hoy leíste código, escribiste una prueba y entendiste el CI. Hoy vas a **cambiar tu app con tus manos** y ver el cambio en la pantalla. Pero antes de cambiar algo, hay que saber **dónde buscarlo**. Una app grande es como una casa grande: si no sabes en qué habitación está la llave, no la encuentras.
+> 🎙️ **El profesor:** {{alumno}}, hasta hoy leíste código, escribiste una prueba y entendiste el CI. Hoy vas a **cambiar la app Copiloto con tus manos** y ver el cambio en la pantalla. Pero antes de cambiar algo, hay que saber **dónde buscarlo**. Una app grande es como una casa grande: si no sabes en qué habitación está la llave, no la encuentras.
 
 > 🌎 **En la vida real:** Es como conocer un supermercado antes de buscar algo: sabes que los lácteos están al fondo y la limpieza en el pasillo 5, así no recorres todo.
 
@@ -35,9 +35,9 @@ Todo el código de la app vive dentro de `src/`. Estas son sus habitaciones:
 
 ### La regla de oro de los textos
 
-En tu app, **los textos nunca se escriben directamente en la pantalla**. La pantalla pide el texto por un **nombre** (una **clave**), y el texto real está en el archivo de cada idioma.
+En Copiloto, **los textos nunca se escriben directamente en la pantalla**. La pantalla pide el texto por un **nombre** (una **clave**), y el texto real está en el archivo de cada idioma.
 
-¿Por qué? Porque tu app está en **seis idiomas** (español, portugués, inglés, francés, italiano y alemán). Si el texto estuviera escrito en la pantalla, existiría en uno solo.
+¿Por qué? Porque la app Copiloto está en **seis idiomas** (español, portugués, inglés, francés, italiano y alemán). Si el texto estuviera escrito en la pantalla, existiría en uno solo.
 
 > 🌎 **En la vida real:** un restaurante con menú en varios idiomas: el mesero no se aprende el plato en cada idioma; señala el **número** del plato (la clave), y el menú de cada idioma dice el nombre.
 
@@ -56,7 +56,7 @@ En **`theme/`**, donde están los colores y medidas oficiales. (Recuerda el cand
 elige :: ¿Dónde están las pantallas completas? :: `components/` :: `screens/` :: `utils/`
 elige :: ¿Dónde están los textos de la app? :: En cada pantalla :: En `i18n/locales/`, un archivo por idioma :: En `theme/`
 elige :: ¿Dónde están las reglas y cálculos sin pantalla, como `fuelLevel.ts`? :: `screens/` :: `context/` :: `utils/`
-elige :: ¿En cuántos idiomas está tu app? :: 2 :: 3 :: 6
+elige :: ¿En cuántos idiomas está la app Copiloto? :: 2 :: 3 :: 6
 vf :: Una pieza que se usa en varias pantallas va en `components/`
 escribe :: ¿Por qué los textos no se escriben directamente en la pantalla? :: Porque la app está en seis idiomas: la pantalla pide el texto por una clave y cada idioma tiene su archivo con el texto.
 ```
@@ -73,7 +73,7 @@ En la terminal, dentro de la carpeta de la app:
 ./scripts/emuladores.sh expo
 ```
 
-- `./scripts/emuladores.sh` es un script de tu app (un archivo con varios comandos guardados).
+- `./scripts/emuladores.sh` es un script de Copiloto (un archivo con varios comandos guardados).
 - `expo` le dice qué modo usar: el simulador del iPhone, con los cambios al instante.
 
 Espera a que se abra la app en el simulador. **La primera vez tarda como un minuto.**
@@ -339,7 +339,7 @@ vf :: Después de deshacer, `git status` no debería mostrar los tres archivos
 
 ## 7. Cómo se hace un cambio de verdad
 
-> 🎙️ **El profesor:** lo de hoy fue práctica. Pero cuando un cambio es **para quedarse**, en tu app siempre se sigue este orden (está escrito en el `AGENTS.md` de la app). Apréndelo: es exactamente lo que te van a preguntar en una entrevista.
+> 🎙️ **El profesor:** lo de hoy fue práctica. Pero cuando un cambio es **para quedarse**, en Copiloto siempre se sigue este orden (está escrito en el `AGENTS.md` de la app). Apréndelo: es exactamente lo que te van a preguntar en una entrevista.
 
 1. Se cambia el código.
 2. Se mira en el **simulador**.
@@ -393,9 +393,9 @@ vf :: Si pasan `tsc` y `npm test`, se puede subir sin probar en el teléfono
 
 > 🎙️ **El profesor:** responde en voz alta.
 
-> 🌎 **En la vida real:** Explicar los idiomas de tu app es como explicar un menú con fotos y números: la cocina es una, y cada cliente lo lee en su idioma.
+> 🌎 **En la vida real:** Explicar los idiomas de Copiloto es como explicar un menú con fotos y números: la cocina es una, y cada cliente lo lee en su idioma.
 
-> 🎤 **Entrevista:** "¿Cómo maneja tu app varios idiomas?"
+> 🎤 **Entrevista:** "¿Cómo maneja la app Copiloto varios idiomas?"
 
 <details>
 <summary>Ver una buena respuesta</summary>
@@ -404,7 +404,7 @@ vf :: Si pasan `tsc` y `npm test`, se puede subir sin probar en el teléfono
 
 </details>
 
-> 🎤 **Entrevista:** "¿Cómo haces un cambio en tu app?"
+> 🎤 **Entrevista:** "¿Cómo haces un cambio en Copiloto?"
 
 <details>
 <summary>Ver una buena respuesta</summary>

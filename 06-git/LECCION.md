@@ -45,7 +45,7 @@ Hasta hoy, los commits y los push los hacía el script o Claude. En este tema va
 
 > 🌎 **Otro ejemplo:** En un equipo de fútbol: el repositorio es la historia del club; un commit, cada partido; una rama, un entrenamiento táctico aparte; merge, usar esa táctica en el partido oficial; y un pull request, proponerle la táctica al entrenador.
 
-| Palabra | Significado | En tu app |
+| Palabra | Significado | En Copiloto |
 |---|---|---|
 | **Repositorio** (repo) | La carpeta del proyecto con toda su historia | `copiloto-driver` |
 | **Commit** | Un punto guardado de la historia, con un mensaje | `f333022 feat(ganhos,painel): Minha empresa...` |
@@ -79,13 +79,13 @@ Hasta hoy, los commits y los push los hacía el script o Claude. En este tema va
 3. `git commit` guarda ese punto en la historia, con un mensaje.
 4. `git push` lo sube a GitHub. Ahí corre el CI (Tema 04).
 
-## 4. Tu app en números
+## 4. La app Copiloto en números
 
 > 🌎 **En la vida real:** **295 commits** son como 295 páginas del diario de la obra. El código `2ce8c04` es como el **número de seguimiento** de un paquete de Correios: único, nadie más tiene el mismo, y con él encuentras exactamente ese envío.
 
 > 🌎 **Otro ejemplo:** Como el número de un boleto de avión: con ese código encuentras exactamente tu vuelo, aunque haya miles ese día.
 
-- Tu app tiene **295 commits** (al 10/11/2026).
+- La app Copiloto tiene **295 commits** (al 10/11/2026).
 - Trabajas en la rama **`feature/smart-camera`**.
 - También existen `main` (la principal) y una rama vieja, `cursor/quita-foto-fondo-san-4084`.
 
@@ -284,7 +284,7 @@ git init
 1. `git switch -c experimento`
 2. Agrega una línea `Esto es un experimento` y haz commit.
 3. `git switch master`. Abre `notas.txt`: la línea del experimento **no está**.
-   (En tu Mac, un repositorio nuevo empieza con la rama `master`. En GitHub y en tu app la principal se llama `main`; es lo mismo con otro nombre.)
+   (En tu Mac, un repositorio nuevo empieza con la rama `master`. En GitHub y en Copiloto la principal se llama `main`; es lo mismo con otro nombre.)
 4. `git switch experimento`: la línea vuelve.
 
 Así trabajan los equipos: cada cosa nueva en su rama, sin dañar la principal.
@@ -298,7 +298,7 @@ Así trabajan los equipos: cada cosa nueva en su rama, sin dañar la principal.
 2. `git merge experimento`
 3. Abre `notas.txt`: ahora la principal tiene la línea del experimento.
 
-## 8. Lo que el script de tu app hace por ti
+## 8. Lo que el script de Copiloto hace por ti
 
 > 🌎 **En la vida real:** el script era como un **lavadero automático**: tú metías el carro y salía limpio, sin saber qué pasaba adentro. Ahora sabes que adentro hay: revisar que no quedó nada prohibido en el carro (`git status`), enjabonar todo (`git add -A`), secar y poner el ticket (`git commit`) y sacarlo a la calle (`git push`).
 
@@ -320,7 +320,7 @@ Ahora sabes qué es cada paso.
 
 > 🌎 **Otro ejemplo:** Es como no publicar la foto de tu tarjeta de crédito en redes: una vez que se compartió, no se puede borrar de los teléfonos de los demás.
 
-En tu app hay un archivo llamado **`.gitignore`**: la lista de lo que Git **no** debe guardar. Por ejemplo:
+En Copiloto hay un archivo llamado **`.gitignore`**: la lista de lo que Git **no** debe guardar. Por ejemplo:
 - `node_modules/` (las librerías: se instalan con `npm ci`).
 - `android/` (se genera con `expo prebuild`).
 - `store-assets/` (ahí se guardan los AAB).
@@ -460,7 +460,7 @@ Para cuando estás a mitad de algo y necesitas cambiar de rama sin hacer commit.
 | `git blame <archivo>` | Quién cambió cada línea y en qué commit |
 | `git bisect` | Busca, probando por mitades, en qué commit apareció un error |
 
-**Prueba en tu app (sin riesgo, solo mira):**
+**Prueba en Copiloto (sin riesgo, solo mira):**
 ```bash
 git blame src/data/workAppsCatalog.ts | grep my_company
 ```

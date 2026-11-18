@@ -79,7 +79,7 @@ Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "r
 
 ## 5.4 Las métricas que importan
 
-> 🌎 **En la vida real:** en tu app de conductor no basta con "cuánto gané". Importa cuánto gané **por hora**, cuánto gasté en combustible **por viaje**, cuántos viajes cancelé. Con agentes es igual: un solo número engaña.
+> 🌎 **En la vida real:** en una app para conductores, como Copiloto, no basta con "cuánto gané". Importa cuánto gané **por hora**, cuánto gasté en combustible **por viaje**, cuántos viajes cancelé. Con agentes es igual: un solo número engaña.
 
 > 🌎 **Otro ejemplo:** Como evaluar un restaurante: no solo si la comida es rica, sino cuánto tarda, cuánto cuesta cada plato bien servido y cuántos clientes se quejan.
 
@@ -158,7 +158,7 @@ escribe :: ¿Qué es un rastro y por qué hay que instrumentar desde el primer d
 
 ## 6.1 La arquitectura de referencia
 
-> 🎙️ **El profesor:** un agente en tu computadora no es un producto. Esta parte es el CI, las reglas de Firestore y el "probar en el teléfono real" de tus clases anteriores, aplicados a agentes.
+> 🎙️ **El profesor:** un agente en tu computadora no es un producto. Esta parte es el CI, las reglas de Firestore y el "probar en el teléfono real" de las clases anteriores, aplicados a agentes.
 
 > 🌎 **En la vida real:** Es como pasar de cocinar en casa a abrir un restaurante: además de la receta, necesitas turnos, seguridad, costos y un plan si algo sale mal.
 

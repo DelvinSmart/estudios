@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** hasta ahora mirabas la tienda por dentro (la app en el teléfono). Hoy bajas al **depósito** y a la **oficina de atrás**: dónde se guarda la mercadería, quién tiene llave y quién trabaja ahí cuando la tienda está cerrada.
 
-Tu app guarda los datos de las personas en **Firebase**. En este tema vas a entender dónde vive cada dato, quién puede leerlo y qué pasa cuando el Copiloto o el panel hacen algo.
+La app Copiloto guarda los datos de las personas en **Firebase**. En este tema vas a entender dónde vive cada dato, quién puede leerlo y qué pasa cuando el Copiloto o el panel hacen algo.
 
 **Antes de empezar:** Temas 01 a 07.
 
@@ -18,7 +18,7 @@ Tu app guarda los datos de las personas en **Firebase**. En este tema vas a ente
 
 **Comparación:** en vez de construir un edificio para guardar tus cosas, alquilas casilleros, una oficina y un portero.
 
-## 2. Las piezas que usa tu app
+## 2. Las piezas que usa la app Copiloto
 
 > 🌎 **En la vida real:** son los servicios del edificio de oficinas que alquilaste:
 > - **Authentication** = la **recepción** con el guardia que te pide documento y te da una credencial con tu número (`uid`).
@@ -62,7 +62,7 @@ Firestore no usa tablas como Excel. Usa **colecciones** y **documentos**:
 | **Campo** | Un dato del documento | Una línea de la hoja: `amountBrl: 50` |
 | **Subcolección** | Una colección dentro de un documento | Una carpeta dentro de una hoja |
 
-### Cómo está organizada tu app
+### Cómo está organizada la app Copiloto
 
 > 🌎 **En la vida real:** es como un edificio de departamentos:
 > - `users/` = el edificio.
@@ -116,7 +116,7 @@ Un ingreso guardado se ve más o menos así:
 
 La app está en el teléfono de cada persona, y **cualquiera puede intentar** leer o escribir en la base de datos directamente, sin usar la app. Por eso existen las **reglas de seguridad**: un archivo que dice quién puede hacer qué.
 
-Están en tu app, en **`firestore.rules`**.
+Están en Copiloto, en **`firestore.rules`**.
 
 ### Regla real 1: cada uno ve solo sus ingresos
 
@@ -161,7 +161,7 @@ match /vehicleColors/{id} {
 > 🌎 **En la vida real:** es como probar las cerraduras de un edificio antes de que se muden los inquilinos. Usas una **maqueta** (el emulador) y mandas a alguien a intentar abrir la puerta del vecino. Si la cerradura no cede, aprobado. Si una sola cerradura falla, se pueden robar las cosas de **todos**.
 
 > 🌎 **Otro ejemplo:** Es como el examen práctico de un cerrajero: le dan puertas de práctica y tiene que demostrar que nadie más las abre.
-Un error en las reglas puede exponer los datos de todos. Por eso tu app tiene **23 pruebas de reglas** (`rules-test/`), que corren con el **emulador** de Firebase: una copia falsa de la base de datos en tu computadora. Ejemplo: intentan leer los ingresos de otra persona y comprueban que la regla lo **impida**.
+Un error en las reglas puede exponer los datos de todos. Por eso la app Copiloto tiene **23 pruebas de reglas** (`rules-test/`), que corren con el **emulador** de Firebase: una copia falsa de la base de datos en tu computadora. Ejemplo: intentan leer los ingresos de otra persona y comprueban que la regla lo **impida**.
 
 ## 5. Cloud Functions: el código del servidor
 
@@ -183,7 +183,7 @@ Algunas cosas **no pueden** hacerse en el teléfono:
 - **Poderes de administrador:** el panel cambia el catálogo de todos; eso no se le puede permitir a cualquier teléfono.
 - **Cosas automáticas:** avisos y suscripciones que corren aunque nadie abra la app.
 
-Están en la carpeta **`functions/src/`** de tu app. Ejemplos reales:
+Están en la carpeta **`functions/src/`** de Copiloto. Ejemplos reales:
 
 | Función | Qué hace |
 |---|---|
@@ -280,7 +280,7 @@ Están en `AGENTS.md`, sección 9:
 >
 > ¿Por qué Firebase? Como alquilar en un shopping: no administras el edificio y crece solo, pero dependes del dueño del shopping y hay que mirar la cuenta de la luz (el costo por lecturas).
 
-**¿Cómo está hecho el backend de tu app?**
+**¿Cómo está hecho el backend de Copiloto?**
 > Uso Firebase: Authentication para el inicio de sesión, Firestore como base de datos, Cloud Functions para lo que necesita secretos o permisos de administrador (como la IA con Gemini), y Hosting para el panel y la landing. Los datos de cada persona están dentro de su propio documento de usuario, y las reglas de seguridad garantizan que cada uno solo lea lo suyo. Esas reglas tienen pruebas automáticas con el emulador.
 
 **¿Por qué Firebase?**

@@ -19,7 +19,7 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 | **U** | *Update* (actualizar) | `PUT` | Corregir un gasto | Editar un ingreso |
 | **D** | *Delete* (borrar) | `DELETE` | Eliminar un gasto | Borrar un ingreso |
 
-Casi todo sistema es esto: el banco con tus cuentas, la farmacia con sus remedios, tu app con los ingresos.
+Casi todo sistema es esto: el banco con tus cuentas, la farmacia con sus remedios, la app Copiloto con los ingresos.
 
 > 🌎 **En la vida real:** la libreta de contactos del celular: **agregar** un contacto (C), **buscarlo** (R), **cambiarle** el número (U) y **borrarlo** (D).
 
@@ -503,7 +503,7 @@ Dentro de `crearApp`: `let gastos = cargar();` y `let siguienteId = gastos.reduc
 ### Ejercicio 5: una base de datos real
 
 Cambia el archivo por una base de datos: SQLite (la más simple), PostgreSQL o Firestore.
-- **Pista de arquitectura (Tema 10):** crea un "**repositorio**" con funciones `listar`, `crear`, `actualizar` y `borrar`, igual que el `SanRepository` de tu app. Así las rutas no saben qué base de datos hay detrás.
+- **Pista de arquitectura (Tema 10):** crea un "**repositorio**" con funciones `listar`, `crear`, `actualizar` y `borrar`, igual que el `SanRepository` de Copiloto. Así las rutas no saben qué base de datos hay detrás.
 
 > 🌎 **En la vida real:** el repositorio es un **secretario**: las rutas le dicen "guarde esto" y no les importa si él lo guarda en un cuaderno, en un archivador o en el banco.
 

@@ -185,7 +185,7 @@ una respuesta  controles           el caso, en        herramientas trabajadores,
 
 > 💡 **Idea:** la regla de la guía: **empieza lo más a la izquierda que el problema te permita.**
 
-> ✋ **Para y piensa:** tu app tiene un Copiloto que responde preguntas. Si solo recibe la pregunta y devuelve una respuesta, una vez, ¿es un agente o una llamada al modelo?
+> ✋ **Para y piensa:** la app Copiloto Driver tiene un asistente, el Copiloto, que responde preguntas. Si solo recibe la pregunta y devuelve una respuesta, una vez, ¿es un agente o una llamada al modelo?
 
 <details>
 <summary>Ver la respuesta</summary>

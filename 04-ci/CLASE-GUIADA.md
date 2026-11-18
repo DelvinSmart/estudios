@@ -53,11 +53,11 @@ vf :: Si una revisión falla, el CI me avisa
 
 ## 2. ¿Para qué sirve?
 
-> 🎙️ **El profesor:** "si yo ya corro las pruebas en mi Mac, ¿para qué otra máquina?" Buena pregunta. Te doy cinco razones y una historia real de tu app.
+> 🎙️ **El profesor:** "si yo ya corro las pruebas en mi Mac, ¿para qué otra máquina?" Buena pregunta. Te doy cinco razones y una historia real de Copiloto.
 
 > 🌎 **Otro ejemplo:** Como un auditor externo que revisa las cuentas de tu negocio: no se olvida, no conoce tus atajos, avisa rápido, deja un informe guardado y te da tranquilidad.
 
-| Para qué | Qué significa en tu app | 🌎 En la vida real |
+| Para qué | Qué significa en Copiloto | 🌎 En la vida real |
 |---|---|---|
 | **Nadie se olvida** | Aunque tengas prisa, la máquina corre las 400 pruebas igual | El lavaplatos: aunque estés cansado, lava todo |
 | **Máquina limpia** | Tu Mac tiene cosas que otros no tienen; la del CI empieza de cero | Cocinar tu receta en la cocina de un amigo |
@@ -67,7 +67,7 @@ vf :: Si una revisión falla, el CI me avisa
 
 ### La historia real: el condimento escondido
 
-En tu app, la copia limpia del CI **encontró un fallo que en tu Mac no se veía**. ¿Cómo puede ser? Tu Mac tenía cosas instaladas de antes que, sin que nadie lo supiera, **tapaban** el problema. En la máquina limpia, sin esas cosas, el fallo apareció.
+En Copiloto, la copia limpia del CI **encontró un fallo que en tu Mac no se veía**. ¿Cómo puede ser? Tu Mac tenía cosas instaladas de antes que, sin que nadie lo supiera, **tapaban** el problema. En la máquina limpia, sin esas cosas, el fallo apareció.
 
 > 🌎 **En la vida real:** en tu casa la receta sale bien porque tenías un condimento guardado que ni recordabas. En la cocina de tu amigo descubres que **la receta no lo menciona**: sin él, sale mal.
 
@@ -85,11 +85,11 @@ En tu app, la copia limpia del CI **encontró un fallo que en tu Mac no se veía
 ```practica
 escribe :: Explica la historia del "condimento escondido" con tus palabras. :: En mi Mac había cosas instaladas de antes que tapaban un fallo; la máquina limpia del CI no las tenía, así que el fallo apareció y se pudo arreglar.
 elige :: ¿Qué razón es "puedo ver qué subida rompió algo y cuándo"? :: Confianza :: Historial :: Aviso rápido
-elige :: ¿Cuánto tarda más o menos el CI de tu app? :: 4 segundos :: Unos 4 minutos :: 4 horas
+elige :: ¿Cuánto tarda más o menos el CI de Copiloto? :: 4 segundos :: Unos 4 minutos :: 4 horas
 vf :: Si todo pasa en mi Mac, seguro que pasa en cualquier computadora
 ```
 
-> 🔁 **Repaso:** el CI no se olvida, usa una máquina limpia, avisa rápido, deja historial y da confianza. En tu app atrapó un fallo que la Mac escondía.
+> 🔁 **Repaso:** el CI no se olvida, usa una máquina limpia, avisa rápido, deja historial y da confianza. En Copiloto atrapó un fallo que la Mac escondía.
 
 ## 3. Lo que el CI NO hace
 
@@ -113,13 +113,13 @@ escribe :: Nombra los tres límites del CI. :: No prueba en un teléfono real, n
 
 ## 4. ¿Dónde vive?
 
-> 🎙️ **El profesor:** el CI no es magia: es **un archivo de texto** dentro de tu proyecto. Vamos a ver dónde está y en qué formato se escribe.
+> 🎙️ **El profesor:** el CI no es magia: es **un archivo de texto** dentro del proyecto. Vamos a ver dónde está y en qué formato se escribe.
 
 > 🌎 **En la vida real:** Es como la caja de instrucciones de un electrodoméstico: siempre está en el mismo lugar (adentro de la tapa), para que cualquiera la encuentre.
 
 > 🌎 **Otro ejemplo:** Es como el horario de turnos pegado en la sala de empleados: no está en la cabeza de nadie, está escrito en un lugar fijo que todos consultan.
 
-En tu app vive en el archivo **`.github/workflows/ci.yml`**.
+En Copiloto vive en el archivo **`.github/workflows/ci.yml`**.
 
 - **`.github/workflows/`** es la carpeta donde GitHub **siempre** busca las instrucciones. El punto al principio de `.github` hace que sea una carpeta "oculta" en la Mac (en VS Code sí se ve).
 - **`ci.yml`** es un archivo **YAML**: un formato de texto para configuraciones.
@@ -196,9 +196,9 @@ elige :: `runs-on: ubuntu-latest` quiere decir… :: Que corre en un iPhone :: Q
 
 > 🔁 **Repaso:** `name`, `on` (cuándo), `jobs` (trabajos en paralelo), `runs-on` (sistema), `steps` (pasos en orden), `uses` (pieza hecha), `run` (comando), `working-directory` (carpeta).
 
-## 6. El archivo de tu app, explicado
+## 6. El archivo de Copiloto, explicado
 
-> 🎙️ **El profesor:** ahora leemos el archivo **real** de tu app, como hicimos con las funciones en el Tema 01. Es el más largo de la clase: tómate tu tiempo.
+> 🎙️ **El profesor:** ahora leemos el archivo **real** de Copiloto, como hicimos con las funciones en el Tema 01. Es el más largo de la clase: tómate tu tiempo.
 
 > 🌎 **En la vida real:** Leer el archivo real es como leer el reglamento interno de tu propia empresa: ya conoces las palabras, ahora ves las reglas de verdad.
 
@@ -224,7 +224,7 @@ on:
 
 ### Los 6 trabajos
 
-Hoy (noviembre de 2026) el CI de tu app tiene **6 trabajos** que corren **al mismo tiempo**, cada uno en su máquina:
+Hoy (noviembre de 2026) el CI de Copiloto tiene **6 trabajos** que corren **al mismo tiempo**, cada uno en su máquina:
 
 | # | Trabajo | Qué revisa |
 |---|---|---|
@@ -376,7 +376,7 @@ El trabajo **`app`**, en el paso **Candado de diseño** (`check:design`).
 </details>
 
 ```practica
-elige :: ¿Cuántos trabajos tiene hoy el CI de tu app? :: 3 :: 5 :: 6 :: 10
+elige :: ¿Cuántos trabajos tiene hoy el CI de Copiloto? :: 3 :: 5 :: 6 :: 10
 elige :: ¿Qué hace `actions/checkout`? :: Instala Node :: Descarga tu código a la máquina limpia :: Corre las pruebas
 elige :: ¿Por qué se usa `npm ci` y no `npm install`? :: Porque es más lindo :: Porque instala exactamente lo anotado en `package-lock.json` y falla si algo no coincide :: Porque no instala nada
 elige :: Un archivo de 1.200 líneas, ¿qué paso lo atrapa? :: Secretos :: Tamaño (`check:size`) :: Bundle
@@ -422,7 +422,7 @@ vf :: Para ver qué falló, entras a la corrida, después al trabajo, y buscas e
 
 ## 8. ¿Cómo se construye un CI desde cero?
 
-> 🎙️ **El profesor:** en una entrevista te pueden pedir: "¿cómo armarías un CI para un proyecto nuevo?". Esta es la receta, y es la misma que se usó en tu app.
+> 🎙️ **El profesor:** en una entrevista te pueden pedir: "¿cómo armarías un CI para un proyecto nuevo?". Esta es la receta, y es la misma que se usó en Copiloto.
 
 1. **Decide qué revisar.** Empieza por lo más importante: que compile y que pasen las pruebas.
 2. **Asegúrate de que cada revisión sea un comando** que funcione en tu terminal. Si en tu Mac se revisa con `npm test`, en el CI también.
@@ -446,7 +446,7 @@ jobs:
 ```
 
 5. **Súbelo** con `git push` y mira la pestaña Actions.
-6. **Agrega revisiones de a una.** Cada vez que encuentres un error que se repite, crea una revisión para que no vuelva. **Así nacieron el candado de diseño y el de ciclos** en tu app.
+6. **Agrega revisiones de a una.** Cada vez que encuentres un error que se repite, crea una revisión para que no vuelva. **Así nacieron el candado de diseño y el de ciclos** en Copiloto.
 
 > 🌎 **En la vida real:** el reglamento de un gimnasio nuevo: empiezas con una regla ("todos firman al entrar") y, cada vez que se repite un problema ("dejan las pesas tiradas"), agregas otra.
 
@@ -471,7 +471,7 @@ elige :: ¿Cómo nacieron los candados de diseño y de ciclos? :: Venían con Gi
 
 ## 9. Cómo "piensa" el CI
 
-> 🎙️ **El profesor:** este es el secreto más simple del CI, y te va a ayudar a entender todo: **el CI no entiende tu app**. Solo entiende **una cosa**.
+> 🎙️ **El profesor:** este es el secreto más simple del CI, y te va a ayudar a entender todo: **el CI no entiende la app Copiloto**. Solo entiende **una cosa**.
 
 Cada comando, al terminar, devuelve un número llamado **código de salida** (*exit code*):
 - **`0`** significa "todo bien".
@@ -481,7 +481,7 @@ Si un paso devuelve algo distinto de 0, el CI lo marca en rojo y detiene ese tra
 
 Por eso scripts como `check:design` están hechos para **terminar con error** cuando encuentran un problema. El CI no sabe qué es un color: solo ve que el script terminó con un número distinto de 0.
 
-Mira cómo lo hace el script de tamaño de tu app (está en portugués):
+Mira cómo lo hace el script de tamaño de Copiloto (está en portugués):
 
 ```js
 for (const [file, lines] of big) console.error(`✖ ${file}: ${lines} linhas (máximo ${MAX_LINES})`);
@@ -510,7 +510,7 @@ escribe :: Explica con tus palabras cómo "piensa" el CI. :: Solo mira el códig
 
 > 🌎 **En la vida real:** Es como recorrer la fábrica con el jefe y explicar con tus palabras qué hace cada máquina.
 
-1. Abre `.github/workflows/ci.yml` en tu app y busca los 6 trabajos. Escribe con tus palabras qué hace cada uno.
+1. Abre `.github/workflows/ci.yml` en Copiloto y busca los 6 trabajos. Escribe con tus palabras qué hace cada uno.
 2. Entra a la pestaña **Actions** y abre la última subida. ¿Cuánto tardó? ¿Cuál fue el trabajo más lento?
 3. En la terminal de la app, corre `npm run check:size`. ¿Qué dice?
 4. Si cambias un color a mano en una pantalla (`color: '#FF0000'`), ¿qué paso del CI falla?
@@ -525,7 +525,7 @@ escribe :: Explica con tus palabras cómo "piensa" el CI. :: Solo mira el códig
 3. Si todo está bien: `✔ Tamanho: nenhum arquivo passa de 1000 linhas.` ("ningún archivo pasa de 1000 líneas").
 4. El **Candado de diseño** (`check:design`), en el trabajo `app`.
 5. Porque `npm ci` instala exactamente lo anotado en `package-lock.json` y falla si algo no coincide; así la máquina del CI tiene las mismas versiones que tú.
-6. Porque el CI solo corre comandos y pruebas, y ninguno mira la pantalla. Para eso se prueba en el teléfono (o con pruebas E2E, que tu app todavía no tiene).
+6. Porque el CI solo corre comandos y pruebas, y ninguno mira la pantalla. Para eso se prueba en el teléfono (o con pruebas E2E, que Copiloto todavía no tiene).
 
 </details>
 
@@ -542,7 +542,7 @@ escribe :: Explica con tus palabras cómo "piensa" el CI. :: Solo mira el códig
 
 </details>
 
-> 🎤 **Entrevista:** "¿Qué revisa el CI de tu app?"
+> 🎤 **Entrevista:** "¿Qué revisa el CI de Copiloto?"
 
 <details>
 <summary>Ver una buena respuesta</summary>
@@ -564,7 +564,7 @@ escribe :: Explica con tus palabras cómo "piensa" el CI. :: Solo mira el códig
 
 ```practica
 escribe :: ¿Qué diferencia hay entre CI y CD? :: CI revisa el código en cada subida; CD además lo publica automáticamente.
-vf :: Tu app tiene CD: se publica sola en Google Play
+vf :: La app Copiloto tiene CD: se publica sola en Google Play
 ```
 
-> 🔁 **Repaso final de la clase:** sabes qué es el CI, para qué sirve, sus límites, dónde vive, cómo se lee el YAML, los 6 trabajos de tu app, cómo verlo en GitHub, cómo armar uno desde cero y que solo mira el código de salida. Próxima: **Tema 05, Mi primer cambio**.
+> 🔁 **Repaso final de la clase:** sabes qué es el CI, para qué sirve, sus límites, dónde vive, cómo se lee el YAML, los 6 trabajos de Copiloto, cómo verlo en GitHub, cómo armar uno desde cero y que solo mira el código de salida. Próxima: **Tema 05, Mi primer cambio**.

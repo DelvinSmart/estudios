@@ -31,13 +31,13 @@ Toda prueba hace la misma pregunta:
 
 | Para qué | Qué significa |
 |---|---|
-| Encontrar errores | Detecta un fallo antes que tus usuarios |
+| Encontrar errores | Detecta un fallo antes que los usuarios |
 | Proteger lo que ya funciona | Si arreglas algo y dañas otra cosa, te avisa |
 | Cambiar sin miedo | Mejoras el código y la prueba te dice si rompiste algo |
 | Dejar claras las reglas | La prueba explica qué debe pasar |
 | Ahorrar tiempo | No revisas todo a mano en cada cambio |
 
-**Ejemplo real de tu app:** las pruebas encontraron que una cuenta con `Uber` y `uber` el mismo día sumaba el doble. A simple vista la app parecía bien. Un error de dinero así puede pasar meses sin que nadie lo note.
+**Ejemplo real de Copiloto:** las pruebas encontraron que una cuenta con `Uber` y `uber` el mismo día sumaba el doble. A simple vista la app parecía bien. Un error de dinero así puede pasar meses sin que nadie lo note.
 
 **Comparación:** una prueba es como la alarma de humo. No apaga el fuego, pero avisa antes de que se queme la casa.
 
@@ -271,9 +271,9 @@ Devuelve el `Math.max` y corre de nuevo hasta ver `fail 0`.
 
 **Caso real:** una prueba del San falló porque revisaba el 1 de enero, y la última rodada era el 4. La app estaba bien; el error era de la prueba.
 
-## 7. Las pruebas de tu app
+## 7. Las pruebas de Copiloto
 
-> 🌎 **En la vida real:** un edificio tiene distintos inspectores: el electricista revisa los cables, el plomero las tuberías, el bombero las salidas de emergencia y el de ascensores, los ascensores. Tu app tiene cuatro grupos de inspectores:
+> 🌎 **En la vida real:** un edificio tiene distintos inspectores: el electricista revisa los cables, el plomero las tuberías, el bombero las salidas de emergencia y el de ascensores, los ascensores. La app Copiloto tiene cuatro grupos de inspectores:
 > - **App (187)**: revisan las cuentas y la pantalla del teléfono.
 > - **Servidor (153)**: revisan lo que pasa en la "oficina central" en la nube.
 > - **Reglas de seguridad (23)**: revisan que las cerraduras de cada apartamento funcionen.
@@ -313,7 +313,7 @@ Los números cambian: cada vez que se agrega algo importante, se agregan sus pru
 | `functions/test/earningsLogic.test.js` | Que el Copiloto entienda "mi empresa" y "minha empresa" |
 | `rules-test/firestore.rules.test.js` | Que nadie lea los datos de otra persona |
 
-### Una prueba de tu app, leída
+### Una prueba de Copiloto, leída
 
 > 🌎 **En la vida real:** el `for` es como el inspector que revisa **los tres** extintores del piso, uno por uno, con la misma pregunta: "¿está cargado?". En vez de escribir tres pruebas iguales, escribe una y la repite con cada uno.
 >

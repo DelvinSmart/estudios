@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** cocinar no alcanza: hay que llevar el plato a la mesa. Esta clase es sobre **todas las formas de "subir"**: el código a GitHub, tus páginas a internet, el servidor a Firebase, la app a tus teléfonos y la app a Google Play.
 
-Resumen para repasar. La explicación completa, con prácticas, está en la [clase guiada](CLASE-GUIADA.md). Basada en las guías de tu app (`copiloto-driver/docs/`) y en sus scripts.
+Resumen para repasar. La explicación completa, con prácticas, está en la [clase guiada](CLASE-GUIADA.md). Basada en las guías de Copiloto (`copiloto-driver/docs/`) y en sus scripts.
 
 **Antes de empezar:** Temas 04, 06, 08 y 12.
 

@@ -10,11 +10,11 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 > 🎙️ **El profesor:** {{alumno}}, los errores asustan al principio: letras rojas, palabras en inglés… Hoy vas a cambiar esa idea para siempre. **Un error no es un fracaso: es un mensaje.** El programa te está diciendo **qué** salió mal y **dónde**. Quien sabe leerlo arregla en minutos lo que otro tarda horas en adivinar.
 
-Y antes de todo, la regla de oro, que está escrita en el documento principal de tu app (`AGENTS.md`):
+Y antes de todo, la regla de oro, que está escrita en el documento principal de Copiloto (`AGENTS.md`):
 
 > **Verificar antes de adivinar.** Primero consigues el error real o el dato real. Después cambias algo.
 
-¿Por qué está escrita? Porque **dos veces** se "arregló" algo en tu app **adivinando**, y el arreglo era falso: el problema seguía ahí, escondido.
+¿Por qué está escrita? Porque **dos veces** se "arregló" algo en Copiloto **adivinando**, y el arreglo era falso: el problema seguía ahí, escondido.
 
 > 🌎 **En la vida real:** el médico serio pide el análisis de sangre antes de recetar. El que receta "por si acaso" puede curarte algo que no tenías y dejarte enfermo de lo que sí tenías.
 
@@ -110,7 +110,7 @@ Cuanto más arriba en la tabla, **más barato**. Un error de TypeScript **nunca*
 
 > 🌎 **Otro ejemplo:** Como encontrar un error en un vestido: en el molde (gratis), en la tela cortada (barato), en la prueba (caro) o en la fiesta, puesto (carísimo).
 
-> 💡 **Idea:** por eso tu app usa TypeScript y tiene tantas pruebas: para que los errores aparezcan **arriba** en la tabla, y no en el teléfono de un conductor.
+> 💡 **Idea:** por eso la app Copiloto usa TypeScript y tiene tantas pruebas: para que los errores aparezcan **arriba** en la tabla, y no en el teléfono de un conductor.
 
 ```practica
 elige :: ¿Dónde es más barato encontrar un error? :: En ejecución :: En Metro :: En TypeScript
@@ -123,7 +123,7 @@ elige :: La pantalla roja del simulador al abrir la app es un error de… :: Typ
 
 ## 4. Errores reales, leídos
 
-> 🎙️ **El profesor:** ahora seis errores **de verdad**, que salieron el 10 de noviembre de 2026 trabajando en tu app. Vamos uno por uno, como un médico que repasa casos reales. Para cada uno: qué dice, cuál era la causa real y qué se hizo.
+> 🎙️ **El profesor:** ahora seis errores **de verdad**, que salieron el 10 de noviembre de 2026 trabajando en Copiloto. Vamos uno por uno, como un médico que repasa casos reales. Para cada uno: qué dice, cuál era la causa real y qué se hizo.
 
 > 🌎 **En la vida real:** Estos errores son como casos clínicos que estudia un médico: no son inventados; le pasaron a pacientes reales, y por eso enseñan tanto.
 
@@ -180,7 +180,7 @@ src/screens/copilot/IACopilotoScreen.styles.ts(2,10): error TS6133:
 - **Causa real:** el estilo que lo usaba se movió a otra pieza (`ChatInputShell`).
 - **Arreglo:** borrar `Platform` del `import`.
 
-**Lección:** no rompe nada, pero es **código muerto**. Tu app no lo permite, para mantenerse limpia.
+**Lección:** no rompe nada, pero es **código muerto**. La app Copiloto no lo permite, para mantenerse limpia.
 
 ### Error 4: una prueba que falla
 
@@ -203,7 +203,7 @@ not ok 77 - plataformas da conta: fixas do app + workApps ativas
 
 ### Error 5: el error de verdad detrás de "no pasa nada"
 
-En el panel de tu app, al mover el color de la foto de un carro, **no pasaba nada**, y no salía ningún error. Para encontrarlo, se probó la misma función **con la foto real del Etios**, y apareció:
+En el panel de Copiloto, al mover el color de la foto de un carro, **no pasaba nada**, y no salía ningún error. Para encontrarlo, se probó la misma función **con la foto real del Etios**, y apareció:
 
 ```text
 TypeError: null is not an object (evaluating 'source.r')

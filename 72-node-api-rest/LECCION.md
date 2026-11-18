@@ -118,7 +118,7 @@ escribe :: ¿Por qué la API responde siempre los errores con la misma forma, po
 
 ### Permitir solo tus dominios
 
-Si tu web está en `https://delvinsmart.github.io` y la API en otro lado, el navegador **bloquea** las respuestas salvo que la API diga que ese origen está permitido:
+Si la web está en `https://delvinsmart.github.io` y la API en otro lado, el navegador **bloquea** las respuestas salvo que la API diga que ese origen está permitido:
 
 ```js
 import cors from 'cors';

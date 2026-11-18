@@ -28,7 +28,7 @@ Es una **máquina en internet que revisa tu código sola cada vez que lo subes**
 
 > 🌎 **Otro ejemplo:** Como un auditor externo: no se olvida, no conoce tus atajos, avisa rápido, deja un informe guardado y te da tranquilidad.
 
-| Para qué | Qué significa en tu app |
+| Para qué | Qué significa en Copiloto |
 |---|---|
 | **Nadie se olvida de revisar** | Aunque tengas prisa, la máquina corre las 400 pruebas igual |
 | **Máquina limpia** | Tu Mac tiene archivos y programas que otros no tienen. La máquina del CI empieza de cero, como la de cualquier otra persona |
@@ -36,7 +36,7 @@ Es una **máquina en internet que revisa tu código sola cada vez que lo subes**
 | **Historial** | Puedes ver qué subida rompió algo y cuándo |
 | **Confianza** | Si el CI está en verde, el código cumple todas las reglas que escribiste |
 
-**Caso real de tu app:** la copia limpia del CI encontró un fallo que en tu Mac no se veía. La Mac tenía cosas instaladas de antes que escondían el problema; la máquina limpia, no.
+**Caso real de Copiloto:** la copia limpia del CI encontró un fallo que en tu Mac no se veía. La Mac tenía cosas instaladas de antes que escondían el problema; la máquina limpia, no.
 
 ## 3. Lo que el CI NO hace
 
@@ -58,7 +58,7 @@ Es una **máquina en internet que revisa tu código sola cada vez que lo subes**
 
 > 🌎 **Otro ejemplo:** Es como el horario de turnos pegado en la sala de empleados: está escrito en un lugar fijo que todos consultan.
 
-En tu app, en el archivo **`.github/workflows/ci.yml`**.
+En Copiloto, en el archivo **`.github/workflows/ci.yml`**.
 
 - `.github/workflows/` es la carpeta donde GitHub busca las instrucciones.
 - `ci.yml` es un archivo **YAML**: un formato de texto para configuraciones. Se escribe con sangría (espacios a la izquierda); la sangría dice qué está dentro de qué.
@@ -90,7 +90,7 @@ La herramienta que lo ejecuta se llama **GitHub Actions**. Es gratis para proyec
 | `name` | El nombre que ves en GitHub |
 | `working-directory` | En qué carpeta corren los comandos |
 
-## 6. El archivo de tu app, explicado
+## 6. El archivo de Copiloto, explicado
 
 > 🌎 **En la vida real:** ahora leemos la hoja de instrucciones real de tu "restaurante", renglón por renglón.
 
@@ -293,7 +293,7 @@ gh run list --limit 5
 
 > 🌎 **Otro ejemplo:** Como las reglas de una casa con adolescentes: empiezas con una y agregas otra cada vez que pasa algo que no quieres que se repita.
 
-Así se hizo el de tu app, y así lo harías en cualquier proyecto:
+Así se hizo el de Copiloto, y así lo harías en cualquier proyecto:
 
 1. **Decide qué revisar.** Empieza por lo más importante: que compile y que pasen las pruebas.
 2. **Asegúrate de que cada revisión sea un comando.** Si en tu computadora se revisa con `npm test`, en el CI también. Primero tiene que funcionar en tu terminal.
@@ -315,7 +315,7 @@ Así se hizo el de tu app, y así lo harías en cualquier proyecto:
          - run: npm test
    ```
 5. **Súbelo** con `git push` y mira la pestaña Actions.
-6. **Agrega revisiones de a una.** Cada vez que encuentres un error que se repite, crea una revisión para que no vuelva. Así nacieron el candado de diseño y el de ciclos en tu app.
+6. **Agrega revisiones de a una.** Cada vez que encuentres un error que se repite, crea una revisión para que no vuelva. Así nacieron el candado de diseño y el de ciclos en Copiloto.
 
 ## 9. Cómo "piensa" el CI
 
@@ -327,7 +327,7 @@ Así se hizo el de tu app, y así lo harías en cualquier proyecto:
 
 > 🌎 **Otro ejemplo:** Como un semáforo: no sabe nada del tránsito; solo muestra verde o rojo según la señal que recibe.
 
-El CI no entiende tu app. **Solo entiende una cosa: si cada comando terminó bien o mal.**
+El CI no entiende la app Copiloto. **Solo entiende una cosa: si cada comando terminó bien o mal.**
 
 - Cada comando, al terminar, devuelve un número llamado **código de salida**.
 - `0` significa "todo bien".
@@ -340,7 +340,7 @@ Por eso los scripts como `check:design` están hechos para **terminar con error*
 
 > 🌎 **En la vida real:** es como recorrer el taller con el jefe y señalar a cada uno de los 6 mecánicos diciendo con tus palabras qué hace cada uno.
 
-1. Abre `.github/workflows/ci.yml` en tu app y busca los 6 trabajos. Escribe con tus palabras qué hace cada uno.
+1. Abre `.github/workflows/ci.yml` en Copiloto y busca los 6 trabajos. Escribe con tus palabras qué hace cada uno.
 2. Entra a la pestaña **Actions** de tu repositorio y abre la última subida. ¿Cuánto tardó? ¿Cuál fue el trabajo más lento?
 3. En la terminal de la app corre `npm run check:size`. ¿Qué dice?
 4. Pregunta: si cambias un color a mano en una pantalla (`color: '#FF0000'`), ¿qué paso del CI falla?
@@ -352,19 +352,19 @@ Por eso los scripts como `check:design` están hechos para **terminar con error*
 
 4. El **Candado de diseño** (`check:design`).
 5. Porque `npm ci` instala exactamente lo que está anotado en `package-lock.json`, y falla si algo no coincide. Así la máquina del CI tiene las mismas versiones que tú.
-6. Porque el CI solo revisa comandos y pruebas. Ninguno mira la pantalla. Para eso se prueba en el teléfono (o con pruebas E2E, que tu app todavía no tiene).
+6. Porque el CI solo revisa comandos y pruebas. Ninguno mira la pantalla. Para eso se prueba en el teléfono (o con pruebas E2E, que Copiloto todavía no tiene).
 
 </details>
 
 ## Para la entrevista
 
 > 🌎 **En la vida real:** explicarlo es como explicar el control del aeropuerto: "cada maleta pasa por rayos X sola, en una máquina limpia, y si algo está mal no sube al avión".
-> - **CI vs. CD**: CI es el control de seguridad. CD sería que, además, la maleta se suba **sola** al avión. En tu app la subes tú.
+> - **CI vs. CD**: CI es el control de seguridad. CD sería que, además, la maleta se suba **sola** al avión. En Copiloto la subes tú.
 
 **¿Qué es CI?**
 > Integración continua: en cada subida, una máquina limpia descarga el código, lo instala desde cero y corre las revisiones automáticas. Si algo falla, el equipo lo sabe en minutos.
 
-**¿Qué revisa el CI de tu app?**
+**¿Qué revisa el CI de Copiloto?**
 > Seis trabajos en paralelo: la app (tipos, diseño, ciclos, tamaño, secretos, pruebas y que se pueda armar para Android e iOS), las pruebas en Kotlin del módulo de Android, las del servidor, las de las reglas de seguridad de Firestore, que el panel web se pueda armar, y la web del usuario con sus pruebas.
 
 **¿Qué diferencia hay entre CI y CD?**

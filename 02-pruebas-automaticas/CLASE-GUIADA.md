@@ -8,7 +8,7 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 ## 1. ¿Qué es una prueba?
 
-> 🎙️ **El profesor:** {{alumno}}, hoy vamos a ver algo que separa a un programador aficionado de uno profesional: **las pruebas automáticas**. Tu app tiene más de 400. Cuando termines esta clase, vas a poder explicar en una entrevista qué son, para qué sirven y cómo se escribe una.
+> 🎙️ **El profesor:** {{alumno}}, hoy vamos a ver algo que separa a un programador aficionado de uno profesional: **las pruebas automáticas**. La app Copiloto tiene más de 400. Cuando termines esta clase, vas a poder explicar en una entrevista qué son, para qué sirven y cómo se escribe una.
 
 > 🌎 **En la vida real:** Es como el control de calidad de una fábrica de galletas: una máquina toma una galleta de cada lote, la pesa y la compara con el peso correcto. Si no coincide, se para la línea.
 
@@ -64,7 +64,7 @@ elige :: Pruebo `2 + 2` y sale `5`. ¿Qué pasa con la prueba? :: Pasa :: Falla 
 
 ## 2. ¿Para qué sirve?
 
-> 🎙️ **El profesor:** "¿y para qué escribir más código si la app ya funciona?" Es la pregunta que se hace todo el mundo al principio. Te respondo con cinco razones, y con un caso real de tu app que te va a convencer.
+> 🎙️ **El profesor:** "¿y para qué escribir más código si la app ya funciona?" Es la pregunta que se hace todo el mundo al principio. Te respondo con cinco razones, y con un caso real de Copiloto que te va a convencer.
 
 > 🌎 **En la vida real:** Es como el cinturón de seguridad: el 99 % de los viajes no lo necesitas, pero el día que lo necesitas, te salva.
 
@@ -76,7 +76,7 @@ elige :: Pruebo `2 + 2` y sale `5`. ¿Qué pasa con la prueba? :: Pasa :: Falla 
 
 | Para qué | Qué significa | 🌎 En el carro |
 |---|---|---|
-| **Encontrar errores** | Detecta un fallo antes que tus usuarios | La luz de aceite se prende **antes** de que se funda el motor |
+| **Encontrar errores** | Detecta un fallo antes que los usuarios | La luz de aceite se prende **antes** de que se funda el motor |
 | **Proteger lo que ya funciona** | Si arreglas algo y dañas otra cosa, te avisa | El mecánico cambia los frenos y el tablero avisa que desconectó el sensor del ABS |
 | **Cambiar sin miedo** | Mejoras el código y la prueba dice si rompiste algo | Cambias la radio tranquilo: si tocas un cable que no debías, se prende una luz |
 | **Dejar claras las reglas** | La prueba explica qué debe pasar | El manual dice "presión de llantas: 32"; la prueba es esa frase para una máquina |
@@ -84,7 +84,7 @@ elige :: Pruebo `2 + 2` y sale `5`. ¿Qué pasa con la prueba? :: Pasa :: Falla 
 
 ### El caso real: Uber y uber
 
-En tu app, las pruebas encontraron esto: si una cuenta tenía registros con `Uber` (mayúscula) y `uber` (minúscula) el mismo día, **la app sumaba el doble**. A simple vista todo parecía bien: los números se veían normales. Pero eran dinero mal contado.
+En Copiloto, las pruebas encontraron esto: si una cuenta tenía registros con `Uber` (mayúscula) y `uber` (minúscula) el mismo día, **la app sumaba el doble**. A simple vista todo parecía bien: los números se veían normales. Pero eran dinero mal contado.
 
 ¿Por qué es tan grave? Porque **un error de dinero así puede pasar meses sin que nadie lo note**. El conductor ve un número, confía en él, y nunca sabe que está mal. Una prueba lo atrapó antes.
 
@@ -111,7 +111,7 @@ elige :: ¿Qué razón es "mejoro el código y la prueba me dice si rompí algo"
 elige :: ¿Por qué los errores de dinero son peligrosos? :: Porque hacen que la app no abra :: Porque pueden pasar meses sin que nadie los note :: Porque son fáciles de ver
 ```
 
-> 🔁 **Repaso:** las pruebas encuentran errores, protegen lo que ya funciona, te dejan cambiar sin miedo, dejan las reglas escritas y ahorran tiempo. En tu app atraparon una suma doble de dinero que nadie veía.
+> 🔁 **Repaso:** las pruebas encuentran errores, protegen lo que ya funciona, te dejan cambiar sin miedo, dejan las reglas escritas y ahorran tiempo. En Copiloto atraparon una suma doble de dinero que nadie veía.
 
 ## 3. Lo que una prueba NO hace
 
@@ -419,7 +419,7 @@ Vuelve a poner el `Math.max` y corre de nuevo hasta ver `fail 0`.
 2. **¿Mi prueba está bien escrita?**
 3. **¿El código está mal?**
 
-El código es **el último** sospechoso, no el primero. Caso real de tu app: una prueba del San falló porque revisaba el 1 de enero, pero la última rodada era el día 4. **La app estaba bien; la prueba estaba mal.**
+El código es **el último** sospechoso, no el primero. Caso real de Copiloto: una prueba del San falló porque revisaba el 1 de enero, pero la última rodada era el día 4. **La app estaba bien; la prueba estaba mal.**
 
 > 🌎 **En la vida real:** si reclamas que el bus no pasó a las 7:00 cuando el horario decía 7:40, el bus estaba bien: el error era tuyo al mirar el horario.
 
@@ -447,11 +447,11 @@ elige :: ¿Qué hace `module.exports = { faltaParaMeta }`? :: Borra la función 
 
 > 🔁 **Repaso:** regla → casos (lo esperado lo calculas tú) → código → prueba → correr → sabotear → leer el error → corregir. Si falla, sospecha primero de la regla, después de la prueba y por último del código.
 
-## 7. Las pruebas de tu app
+## 7. Las pruebas de Copiloto
 
-> 🎙️ **El profesor:** ahora mira lo que ya tienes. Tu app no tiene "algunas pruebas": tiene **más de 400**, en cuatro grupos. Esto es algo de lo que puedes hablar con orgullo en una entrevista.
+> 🎙️ **El profesor:** ahora mira una app real. Copiloto no tiene "algunas pruebas": tiene **más de 400**, en cuatro grupos. Saber explicar algo así es algo que vale mucho en una entrevista.
 
-> 🌎 **En la vida real:** Es como un edificio grande con inspección de luz, agua, gas y ascensores, cada una con su inspector. Tu app tiene sus cuatro inspectores.
+> 🌎 **En la vida real:** Es como un edificio grande con inspección de luz, agua, gas y ascensores, cada una con su inspector. La app Copiloto tiene sus cuatro inspectores.
 
 > 🌎 **Otro ejemplo:** Es como un hospital con médicos de distintas especialidades: cada grupo de pruebas cuida una parte del cuerpo de la app.
 
@@ -485,7 +485,7 @@ Los números cambian: cada vez que se agrega algo importante, se agregan sus pru
 | `earningsLogic.test.js` | Que el Copiloto entienda igual "mi empresa" que "minha empresa" |
 | `firestore.rules.test.js` | Que **nadie lea los datos de otra persona** |
 
-### Una prueba de tu app, leída
+### Una prueba de Copiloto, leída
 
 Del archivo `earningSourceRules.test.ts` (un poco simplificado):
 
@@ -509,7 +509,7 @@ Si alguien cambia esa función sin querer y Mi empresa empieza a acumular, **est
 > 🌎 **Otro ejemplo:** Como el profesor que pasa lista con la misma pregunta para tres alumnos: "¿trajo la tarea?", en vez de escribir tres preguntas iguales.
 
 ```practica
-elige :: ¿Cuántas pruebas automáticas tiene tu app, más o menos? :: Unas 40 :: Más de 400 :: Ninguna
+elige :: ¿Cuántas pruebas automáticas tiene la app Copiloto, más o menos? :: Unas 40 :: Más de 400 :: Ninguna
 elige :: ¿Qué prueba protege que nadie lea los datos de otra persona? :: `fuelLevel.test.ts` :: `firestore.rules.test.js` :: `appFiscalDay.test.ts`
 elige :: En Jest, `expect(x).toBe(true)` es lo mismo que… :: `test(x)` :: `assert.equal(x, true)` :: `return true`
 vf :: `it` y `test` hacen lo mismo
@@ -517,7 +517,7 @@ vf :: Para Uber, el día cambia a medianoche
 escribe :: Explica qué hace la prueba de `earningSourceRules` que leímos. :: Revisa con un `for` que Mi empresa, Viajes particulares y Extras den `true` en `isImmutableEarningPlatform`, o sea, que nunca acumulen. Si alguien rompe la función, la prueba falla.
 ```
 
-> 🔁 **Repaso:** tu app tiene más de 400 pruebas en cuatro grupos (app con Jest, servidor y reglas con node:test, Android con JUnit). Protegen el dinero, el día de Uber, el tanque, el San, el Copiloto y la privacidad.
+> 🔁 **Repaso:** la app Copiloto tiene más de 400 pruebas en cuatro grupos (app con Jest, servidor y reglas con node:test, Android con JUnit). Protegen el dinero, el día de Uber, el tanque, el San, el Copiloto y la privacidad.
 
 ## 8. Cómo es en un proyecto real
 
@@ -658,4 +658,4 @@ vf :: 90 % de cobertura quiere decir que la app no tiene errores
 escribe :: Escribe de memoria la secuencia para hacer una prueba. :: Regla → casos → código → prueba → correr → sabotear → leer el error → corregir.
 ```
 
-> 🔁 **Repaso final de la clase:** sabes qué es una prueba, para qué sirve y sus límites, el vocabulario, los tres tipos y la pirámide, cómo se hace una paso a paso (con sabotaje incluido), qué pruebas tiene tu app y cómo se trabaja en un equipo real. Próxima: **Tema 03, Mi primera prueba**.
+> 🔁 **Repaso final de la clase:** sabes qué es una prueba, para qué sirve y sus límites, el vocabulario, los tres tipos y la pirámide, cómo se hace una paso a paso (con sabotaje incluido), qué pruebas tiene la app Copiloto y cómo se trabaja en un equipo real. Próxima: **Tema 03, Mi primera prueba**.

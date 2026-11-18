@@ -121,7 +121,7 @@ elige :: ¿Dónde se puede usar await? :: En cualquier lugar :: Dentro de una fu
 escribe :: Escribe una función async que pida un JSON y devuelva los datos, con try/catch. :: async function leer(url) { try { const r = await fetch(url); if (!r.ok) throw new Error(r.status); return await r.json(); } catch (e) { console.error(e); return null; } }
 ```
 
-## Parte 4. Asincronía en tus apps
+## Parte 4. Asincronía en las apps de verdad
 
 > 🌎 **En la vida real:** en Copiloto, cada vez que guardas un gasto, la app lo manda a Firebase y sigue respondiendo mientras tanto.
 

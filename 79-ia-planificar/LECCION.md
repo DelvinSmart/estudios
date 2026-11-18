@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** nadie empieza una casa poniendo ladrillos. Primero hay un **plano**: cuánto mide el terreno, dónde va la sala, dónde los cuartos, dónde la cocina y el baño, por dónde pasan el agua y la luz. Con el plano, los albañiles trabajan rápido y sin romper paredes. Sin plano, a la semana descubres que el baño quedó sin ventana y la cocina sin desagüe.
 
-> 🎙️ **El profesor dice:** {{alumno}}, con la IA es muy tentador ir directo al "hazme una app de…". Y la IA lo hace: rapidísimo. El problema es que construye rapidísimo **lo que le dijiste**, no lo que **querías**. En esta clase vas a ver por qué planificar antes de pedir código ahorra tiempo, tokens y errores; qué piezas tiene un buen plan; cómo armarlo con ayuda de la IA, sin que ella decida por ti; la historia real de este mapa de estudios, que fue fácil de construir porque ya tenía su plano; las "puertas y ventanas" que la IA olvida si nadie se las pide; y cómo evitar el código espagueti con lo que ya usan tus proyectos: motores, candados y pruebas.
+> 🎙️ **El profesor dice:** {{alumno}}, con la IA es muy tentador ir directo al "hazme una app de…". Y la IA lo hace: rapidísimo. El problema es que construye rapidísimo **lo que le dijiste**, no lo que **querías**. En esta clase vas a ver por qué planificar antes de pedir código ahorra tiempo, tokens y errores; qué piezas tiene un buen plan; cómo armarlo con ayuda de la IA, sin que ella decida por ti; la historia real de este mapa de estudios, que fue fácil de construir porque ya tenía su plano; las "puertas y ventanas" que la IA olvida si nadie se las pide; y cómo evitar el código espagueti con lo que ya usan los proyectos de este curso: motores, candados y pruebas.
 
 ## Parte 1. Por qué planificar (y con la IA, más todavía)
 
@@ -303,9 +303,9 @@ elige :: ¿Por qué la IA produce código espagueti con facilidad si nadie la gu
 escribe :: Explica con un ejemplo de la vida real qué es el código espagueti y por qué es un problema. :: Es como la instalación eléctrica de una casa vieja donde cada uno agregó cables a su manera: funciona, pero nadie sabe qué interruptor prende qué, y cambiar un enchufe deja sin luz otra parte. En el código, cambiar una cosa rompe otra que no tenía nada que ver.
 ```
 
-## Parte 9. Cómo se ordenó el código en tus proyectos
+## Parte 9. Cómo se ordenó el código en los proyectos del curso
 
-La buena noticia: el espagueti se evita con **ideas simples**, y tus proyectos ya las usan. Aquí van las cinco más importantes, con sus nombres técnicos (para la entrevista) y dónde las aplicaste.
+La buena noticia: el espagueti se evita con **ideas simples**, y los proyectos de este curso ya las usan. Aquí van las cinco más importantes, con sus nombres técnicos (para la entrevista) y dónde se aplicaron.
 
 ### 1. Una sola fuente de verdad
 
@@ -369,7 +369,7 @@ vf :: Si existe un motor de diseño, no hace falta un candado, porque todos lo v
 elige :: ¿Qué revisa el candado check:size de Copiloto? :: Que las imágenes no pesen mucho :: Que ningún archivo pase de 1.000 líneas :: Que la app abra rápido
 elige :: ¿Qué quiere decir que web/lector.js "no sabe nada de la pantalla"? :: Que está roto :: Que solo lee y corta las clases; dibujar es tarea de otra pieza :: Que no se usa
 elige :: ¿Cómo se comprobó que pasar al motor de diseño no cambió nada en ¿Qué dice la Biblia? :: Mirándolo rápido :: Comparando la página nueva con la vieja, elemento por elemento: más de 3.900 y 0 diferencias :: Preguntándole a la IA
-escribe :: Nombra las cinco ideas para evitar el código espagueti y da un ejemplo de tus proyectos para dos de ellas. :: Una sola fuente de verdad, cada pieza una sola tarea, motores, candados y pruebas. Por ejemplo: la fuente de verdad es cursos.js en el mapa; los candados son check:design, check:cycles, check:size y check:secrets en Copiloto, que no dejan publicar si algo no cumple.
+escribe :: Nombra las cinco ideas para evitar el código espagueti y da un ejemplo de los proyectos del curso para dos de ellas. :: Una sola fuente de verdad, cada pieza una sola tarea, motores, candados y pruebas. Por ejemplo: la fuente de verdad es cursos.js en el mapa; los candados son check:design, check:cycles, check:size y check:secrets en Copiloto, que no dejan publicar si algo no cumple.
 ```
 
 ## Parte 10. Pedirle a la IA código ordenado

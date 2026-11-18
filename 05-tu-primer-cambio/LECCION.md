@@ -208,7 +208,7 @@ Corre `git status` otra vez. Esos archivos ya no deben aparecer.
 
 > 🌎 **Otro ejemplo:** Como un vuelo comercial: se revisa en tierra, pasa el control técnico, un vuelo de prueba, y recién ahí lleva pasajeros.
 
-Cuando el cambio es para quedarse, en tu app siempre se sigue este orden (está en `AGENTS.md`):
+Cuando el cambio es para quedarse, en Copiloto siempre se sigue este orden (está en `AGENTS.md`):
 
 1. Se cambia el código.
 2. Se mira en el simulador.
@@ -238,5 +238,5 @@ Cuando el cambio es para quedarse, en tu app siempre se sigue este orden (está 
 
 > 🌎 **En la vida real:** explícalo como el restaurante: "la pantalla pide el plato por número, hay un menú por idioma y una lista oficial; si un menú no tiene un plato, el sistema no deja abrir el restaurante".
 
-**¿Cómo maneja tu app varios idiomas?**
+**¿Cómo maneja la app Copiloto varios idiomas?**
 > Los textos no están en las pantallas. Cada pantalla pide el texto por una clave, y hay un archivo por idioma. Un archivo de tipos define todas las claves, así que si falta una traducción en cualquiera de los seis idiomas, TypeScript no compila y el CI lo detiene.

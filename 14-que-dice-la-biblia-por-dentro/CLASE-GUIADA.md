@@ -158,7 +158,7 @@ Dos palabras importantes:
 
 1. **Buscador:** escoges libro, capítulo y versículos, y "Abrir en la Biblia" abre el pasaje exacto en Bible.com. La dirección se arma sola: `bible.com/bible/89/1TI.2.11-14.LBLA` (el 89 es la LBLA).
 2. **Versículos ya copiados:** si un versículo ya está en otro estudio, el panel lo **reutiliza** (`js/panel-reusar.js`).
-3. **Leer capturas:** escoges muchas capturas de tu app de la Biblia; el panel las lee **dentro del navegador** (Tesseract.js, Tema 12), reconoce el libro y el capítulo y pone cada versículo en su pasaje.
+3. **Leer capturas:** escoges muchas capturas de una app de la Biblia; el panel las lee **dentro del navegador** (Tesseract.js, Tema 12), reconoce el libro y el capítulo y pone cada versículo en su pasaje.
 4. **La regla para las IAs** (en `AGENTS.md`): **ninguna IA escribe un versículo de memoria**; el texto lo trae el autor.
 
 **¿Por qué una foto tuya sí y un robot no?** Con la foto, **tú** traes el texto, igual que al pegarlo. El robot entraría **él** a la página de otro.

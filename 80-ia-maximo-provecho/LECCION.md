@@ -2,15 +2,15 @@
 
 > 🌎 **En la vida real:** dos personas compran la misma caja de herramientas. Una la usa para colgar un cuadro y la guarda. La otra aprende a usar cada herramienta, se arma un banco de trabajo y termina haciendo sus propios muebles. La caja es la misma; lo que cambia es **cómo** se usa.
 
-> 🎙️ **El profesor dice:** {{alumno}}, en las clases anteriores viste cómo planificar, cómo ordenar el código y cómo dirigir a uno o varios agentes. Esta clase es sobre **sacarle el jugo**: usar la IA para **aprender** mientras trabajas, para **no repetir** trabajo aburrido, y para dejar herramientas que sigan funcionando aunque la IA no esté. Casi todo lo que vas a ver ya lo hiciste tú, en tus proyectos. A veces uno hace tantas cosas que se olvida de todo lo que logró: esta clase también sirve para eso, para ver el camino recorrido.
+> 🎙️ **El profesor dice:** {{alumno}}, en las clases anteriores viste cómo planificar, cómo ordenar el código y cómo dirigir a uno o varios agentes. Esta clase es sobre **sacarle el jugo**: usar la IA para **aprender** mientras trabajas, para **no repetir** trabajo aburrido, y para dejar herramientas que sigan funcionando aunque la IA no esté. Casi todo lo que vas a ver salió de los proyectos reales de este curso: Copiloto, ¿Qué dice la Biblia? y este mapa.
 
 ## Parte 1. Aprender mientras construyes
 
 La forma más común de usar la IA es: "hazme esto". Funciona, pero al final tienes el trabajo hecho y **no aprendiste nada**. El día que la IA no esté, o que tengas que explicarlo en una entrevista, te quedas en blanco (clase 35).
 
-Hay otra forma, y es la que usas tú: **cada vez que se hace algo, pides que te lo explique y que quede escrito como una clase.**
+Hay otra forma, y es la que se usó para armar este curso: **cada vez que se hace algo, pides que te lo explique y que quede escrito como una clase.**
 
-### Tu método, paso a paso
+### El método, paso a paso
 
 1. **Se construye algo de verdad**: arreglar Copiloto, hacer el sitio de la Biblia, el certificado, el panel.
 2. **Se pide la explicación**: "explícame cómo funciona, como si no supiera nada".
@@ -20,7 +20,7 @@ Hay otra forma, y es la que usas tú: **cada vez que se hace algo, pides que te 
 
 Este mapa entero nació así. Mira de dónde salen sus clases:
 
-| Lo que construiste | La clase que salió de ahí |
+| Lo que se construyó | La clase que salió de ahí |
 |---|---|
 | Arreglar la velocidad y el orden de Copiloto | Cómo arreglé Copiloto |
 | El sitio de estudios bíblicos | Cómo hice Estudios Bíblicos y ¿Qué dice la Biblia? por dentro |
@@ -38,7 +38,7 @@ Este mapa entero nació así. Mira de dónde salen sus clases:
 
 ### Por qué funciona tan bien
 
-- **Los ejemplos son tuyos.** No aprendes con "Juan tiene 3 manzanas": aprendes con el tanque de tu carro, tu app y tus usuarios. Eso se recuerda.
+- **Los ejemplos son de verdad.** No aprendes con "Juan tiene 3 manzanas": aprendes con el tanque de un carro, una app publicada y sus usuarios reales. Y si haces tus propios proyectos, mejor todavía: lo tuyo se recuerda más.
 - **Explicar es la mejor forma de aprender.** Si lo puedes explicar con palabras simples, lo entendiste. Si no, sabes exactamente qué te falta. (Esta idea tiene nombre: la **técnica Feynman**, por un físico que enseñaba así.)
 - **Queda escrito.** Lo que solo está en una conversación se pierde; lo que está en una clase, lo repasas cuando quieras, desde el iPad.
 
@@ -67,9 +67,9 @@ con partes, ejemplos de la vida real y prácticas.
 ```practica
 vf :: Pedirle a la IA que te explique lo que hizo y que quede escrito como clase es una forma de aprender mientras trabajas
 vf :: Si la IA hace todo el trabajo, igual vas a poder explicarlo en una entrevista
-elige :: ¿Por qué se aprende mejor con ejemplos de tu propia app? :: Porque son más cortos :: Porque son cosas que conoces y te importan, y por eso se recuerdan :: Porque la IA no sabe otros ejemplos
+elige :: ¿Por qué se aprende mejor con ejemplos de proyectos reales? :: Porque son más cortos :: Porque son cosas que conoces y te importan, y por eso se recuerdan :: Porque la IA no sabe otros ejemplos
 elige :: ¿Qué dice la técnica Feynman? :: Que hay que leer mucho :: Que si puedes explicarlo con palabras simples, lo entendiste; si no, sabes qué te falta :: Que la IA aprende sola
-escribe :: Escribe con tus palabras los pasos de tu método para aprender mientras construyes. :: Construyo algo de verdad; le pido a la IA que me lo explique como si no supiera nada; lo guardo como clase, con ejemplos de la vida real y prácticas; lo estudio después escribiendo yo y dejando que la IA corrija; y simulo la entrevista: si no lo puedo explicar, no está terminado.
+escribe :: Escribe con tus palabras los pasos del método para aprender mientras construyes. :: Construyo algo de verdad; le pido a la IA que me lo explique como si no supiera nada; lo guardo como clase, con ejemplos de la vida real y prácticas; lo estudio después escribiendo yo y dejando que la IA corrija; y simulo la entrevista: si no lo puedo explicar, no está terminado.
 ```
 
 ## Parte 2. Convertir lo repetitivo en una herramienta
@@ -84,20 +84,20 @@ La regla es simple: **si vas a hacer algo más de dos o tres veces, no se lo pid
 
 > 🌎 **Otro ejemplo más:** Es como programar el riego del jardín: en vez de acordarte de regar cada mañana, pones el temporizador una vez.
 
-### Lo que ya convertiste en herramienta
+### Lo que ya se convirtió en herramienta en estos proyectos
 
 | El trabajo repetitivo | La herramienta | Qué hace sola |
 |---|---|---|
 | Contar las partes de cada curso para las reglas del certificado | `generar-reglas.mjs` (este mapa) | Lee todas las clases y escribe las reglas |
 | Sacar las respuestas de las prácticas de cada clase | `separar-respuestas.mjs` (este mapa) | Las saca de los `.md` y las guarda en el archivo privado |
 | Grabar el audio de cada parte | La acción "Audios de las clases" en GitHub | Al subir una clase, rehace solo los audios que cambiaron |
-| Copiar versículos a mano en un estudio | "Leer capturas" en el panel de la Biblia | Lee las fotos de tu app de la Biblia y pone cada versículo en su lugar, dentro del navegador |
+| Copiar versículos a mano en un estudio | "Leer capturas" en el panel de la Biblia | Lee las fotos de una app de la Biblia y pone cada versículo en su lugar, dentro del navegador |
 | Armar el sitio y los PDF de la Biblia | La acción `publicar.yml` | En cada cambio, arma el sitio, genera los PDF y publica |
 | Sacar una versión nueva de Copiloto | `release.sh` | Revisa los tipos, arma Android y iPhone, escribe la nota de versión y sube |
 | Instalar Copiloto en tu iPhone | `instalar-iphone.sh` | Compila e instala, con cable o por Wi-Fi |
 | Editar una clase desde el iPad | El panel de clases | Abre, revisa y publica sin abrir la computadora |
 
-Mira el ejemplo de los versículos: el panel de la Biblia lee las **capturas de pantalla** de tu app de la Biblia con una herramienta gratuita que reconoce letras en fotos (se llama **OCR**: reconocimiento de texto), **dentro del navegador**, sin subir las fotos a ningún lado. Antes era copiar versículo por versículo; ahora es escoger las fotos y revisar.
+Mira el ejemplo de los versículos: el panel de la Biblia lee las **capturas de pantalla** de una app de la Biblia con una herramienta gratuita que reconoce letras en fotos (se llama **OCR**: reconocimiento de texto), **dentro del navegador**, sin subir las fotos a ningún lado. Antes era copiar versículo por versículo; ahora es escoger las fotos y revisar.
 
 ### Cómo pedir una herramienta
 
@@ -151,7 +151,7 @@ escribe :: Explica con un ejemplo de la vida real por qué conviene que tus herr
 
 Además de aprender y automatizar, hay usos que ahorran mucho trabajo:
 
-| Uso | Cómo | Ejemplo tuyo |
+| Uso | Cómo | Ejemplo en estos proyectos |
 |---|---|---|
 | **Segunda opinión** | "Revisa esto como si fueras un atacante" o "¿qué puede salir mal?" | La auditoría de seguridad de Copiloto (clase 24) |
 | **Explicar un error** | Pegar el error completo y el archivo: "¿qué quiere decir y por dónde empiezo?" | Leer errores (clase 07) |
@@ -169,7 +169,7 @@ Además de aprender y automatizar, hay usos que ahorran mucho trabajo:
 vf :: Pedirle a la IA que revise tu trabajo como si fuera un atacante es una buena forma de encontrar problemas
 elige :: Para elegir entre dos formas de guardar los datos, ¿qué pedido conviene? :: "Elige tú la mejor" :: "Dame las opciones con ventajas y desventajas, sin elegir tú" :: "Haz las dos"
 elige :: ¿Qué conviene hacer con una traducción que hizo la IA? :: Publicarla sin mirar :: Revisarla antes de usarla :: Borrarla
-escribe :: Nombra tres usos de la IA que no sean "escribir código" y da un ejemplo de cada uno en tus proyectos. :: Segunda opinión: la auditoría de seguridad de Copiloto. Documentar: los LEEME y los informes. Traducir: los textos de Copiloto en seis idiomas. También comparar opciones, como elegir la voz gratis de los audios.
+escribe :: Nombra tres usos de la IA que no sean "escribir código" y da un ejemplo de cada uno en los proyectos del curso. :: Segunda opinión: la auditoría de seguridad de Copiloto. Documentar: los LEEME y los informes. Traducir: los textos de Copiloto en seis idiomas. También comparar opciones, como elegir la voz gratis de los audios.
 ```
 
 ## Parte 5. Lo que no conviene delegar
@@ -186,7 +186,7 @@ Sacarle el máximo provecho **no** es pasarle todo. Hay cosas que son tuyas:
 
 > 🌎 **Otro ejemplo:** Es como el gimnasio: el entrenador te enseña y te corrige, pero si él levanta las pesas por ti, el que se pone fuerte es él.
 
-> 🎙️ **El profesor dice:** {{alumno}}, tú convertiste ideas en una app publicada, en sitios, en un panel y en todo este mapa. La IA puso las manos rápidas; la idea, la dirección y las ganas de entender cada cosa fueron tuyas. Ese es el máximo provecho: que cada cosa que construyes te deje sabiendo más que antes.
+> 🎙️ **El profesor dice:** {{alumno}}, todo lo que viste en este curso (una app publicada, dos sitios, sus paneles y este mapa) se construyó así: la IA puso las manos rápidas; la idea, la dirección y las ganas de entender cada cosa las puso una persona. Ese es el máximo provecho: que cada cosa que construyes te deje sabiendo más que antes.
 
 > 🔁 **Repaso:** aprender mientras construyes (explicar, guardar como clase, estudiar, simular la entrevista) → lo repetitivo se vuelve herramienta (la IA la escribe una vez, trabaja siempre sin tokens) → herramientas que funcionan sin la IA, y modelos locales gratis para lo chico → segunda opinión, explicar errores, comparar, documentar, traducir, estudiar → las decisiones, las claves, la revisión final y tus prácticas no se delegan.
 

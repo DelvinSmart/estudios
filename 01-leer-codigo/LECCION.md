@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** aprender a leer código es como aprender a leer una receta de cocina antes de cocinar. Primero entiendes qué dice ("pica la cebolla, fríela 5 minutos"); recién después te animas a escribir tu propia receta.
 
-Antes de escribir código hay que saber leerlo. Casi todo el código del mundo se arma con las mismas piezas. Aquí las vas a aprender con dos funciones reales de tu app.
+Antes de escribir código hay que saber leerlo. Casi todo el código del mundo se arma con las mismas piezas. Aquí las vas a aprender con dos funciones reales de Copiloto.
 
 ## 1. El lenguaje: TypeScript
 
@@ -14,7 +14,7 @@ Antes de escribir código hay que saber leerlo. Casi todo el código del mundo s
 
 > 🌎 **Otro ejemplo:** Es como cargar combustible: JavaScript es la bomba que te deja meter diésel en un carro a gasolina; TypeScript es la boquilla que no entra en el tanque equivocado.
 
-Tu app está escrita en **TypeScript**. Es JavaScript con **tipos**: a cada dato le dices qué clase de cosa es (texto, número, lista...). Si te equivocas, el programa avisa antes de llegar al teléfono.
+La app Copiloto está escrita en **TypeScript**. Es JavaScript con **tipos**: a cada dato le dices qué clase de cosa es (texto, número, lista...). Si te equivocas, el programa avisa antes de llegar al teléfono.
 
 ```ts
 let nombre: string = 'Thermomac';   // texto

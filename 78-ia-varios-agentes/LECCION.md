@@ -557,7 +557,7 @@ escribe :: Explica con un ejemplo de la vida real qué es un subagente y qué se
 
 ### ¿Y si los agentes se hablaran solos?
 
-Existe: algunas herramientas ya dejan que un agente le mande mensajes a otro, o que un agente "líder" reparta el trabajo entre varios. **No lo recomendamos y en este curso no nos vamos a enfocar en eso:** gasta muchos más tokens (cada mensaje entre ellos es una pregunta nueva), se pueden enredar en vueltas sin fin y pierdes el control de lo que se decide. Lo que funciona, y lo que hiciste en esta historia, es otra cosa: **la persona en el medio, dirigiendo.**
+Existe: algunas herramientas ya dejan que un agente le mande mensajes a otro, o que un agente "líder" reparta el trabajo entre varios. **No lo recomendamos y en este curso no nos vamos a enfocar en eso:** gasta muchos más tokens (cada mensaje entre ellos es una pregunta nueva), se pueden enredar en vueltas sin fin y pierdes el control de lo que se decide. Lo que funciona, y lo que se hizo en esta historia, es otra cosa: **la persona en el medio, dirigiendo.**
 
 ### La IA es una herramienta; tú eres el director de obra
 

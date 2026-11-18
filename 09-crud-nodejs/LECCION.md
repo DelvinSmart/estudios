@@ -16,7 +16,7 @@ En este tema vas a hacer un **servidor** pequeño, de verdad, con sus pruebas. E
 > - **U (Update / PUT)** = cambiarle el número porque se compró otro chip.
 > - **D (Delete / DELETE)** = borrar a alguien que ya no usas.
 >
-> Casi cualquier sistema es eso: el banco con tus cuentas, la farmacia con sus remedios, tu app con los ingresos.
+> Casi cualquier sistema es eso: el banco con tus cuentas, la farmacia con sus remedios, la app Copiloto con los ingresos.
 
 > 🌎 **Otro ejemplo:** Como el inventario de una tienda: agregar productos nuevos, ver qué hay, corregir un precio y sacar lo que ya no se vende.
 
@@ -79,7 +79,7 @@ Casi todo sistema es esto: Copiloto Driver registra, muestra, edita y borra ingr
 
 | Archivo | Qué es | Tipo de código |
 |---|---|---|
-| `src/validar.js` | Las **reglas**: ¿la descripción y el monto son válidos? | Reglas puras (como `utils/` en tu app) |
+| `src/validar.js` | Las **reglas**: ¿la descripción y el monto son válidos? | Reglas puras (como `utils/` en Copiloto) |
 | `src/app.js` | Las **5 rutas** del CRUD. **Empieza por aquí.** | Rutas |
 | `src/server.js` | Enciende el servidor en el puerto 3000 | Arranque |
 | `test/validar.test.js` | Pruebas **unitarias** de las reglas | Prueba unitaria |
@@ -338,7 +338,7 @@ Guarda los gastos en un archivo `gastos.json`.
 >
 > El "repositorio" es como un **secretario**: las rutas le dicen "guarde esto" y no les importa si él lo guarda en un cuaderno, en un archivador o en el banco. Si mañana cambias de archivador, solo el secretario se entera.
 Cambia el archivo por una base de datos: SQLite (la más simple), PostgreSQL o Firestore.
-- **Pista de arquitectura (Tema 10):** crea un "repositorio" con funciones `listar`, `crear`, `actualizar` y `borrar`, igual que el `SanRepository` de tu app. Así las rutas no saben qué base de datos hay detrás.
+- **Pista de arquitectura (Tema 10):** crea un "repositorio" con funciones `listar`, `crear`, `actualizar` y `borrar`, igual que el `SanRepository` de Copiloto. Así las rutas no saben qué base de datos hay detrás.
 
 ## Respuesta de la pista del ejercicio 2
 

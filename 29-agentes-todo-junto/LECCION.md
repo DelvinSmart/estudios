@@ -106,7 +106,7 @@ Cada pregunta con **lo que debe tener una respuesta fuerte**:
 
 Cada proyecto va con un **README** que diga: el patrón, el diagrama de arquitectura, los resultados de evaluación, el costo por ejecución y **qué harías distinto**. **Ese README es la entrevista.**
 
-> 💡 **Idea:** tú ya tienes algo parecido: tus clases 12 a 14 cuentan cómo hiciste tus proyectos, qué salió mal y qué decidiste. Es el mismo músculo.
+> 💡 **Idea:** este curso ya tiene algo parecido: las clases 12 a 14 cuentan cómo se hicieron sus proyectos, qué salió mal y qué se decidió. Es el mismo músculo.
 
 ## 7.6 Para seguir leyendo
 
@@ -209,5 +209,5 @@ escribe :: Responde: ¿qué es MCP y por qué importa? :: Un estándar abierto p
 **¿Cuál es el error más común al construir agentes?**
 > Empezar por lo complejo. Lo correcto es empezar con una sola llamada, medir, y agregar complejidad solo cuando la medición demuestra que lo simple falla. La mayoría de los problemas se resuelven con un flujo de trabajo y alguna parte de agente.
 
-**¿Qué aprendiste usando agentes para construir tus proyectos?**
+**¿Qué aprendiste usando agentes para construir un proyecto?**
 > (Responde con tu experiencia: construiste Copiloto Driver, la web y ¿Qué dice la Biblia? trabajando con un agente de código. Cuenta una vez que el agente se equivocó, cómo lo detectaste —por ejemplo, con las pruebas o el CI— y qué regla agregaste para que no pase de nuevo. Esa es la pregunta 12.)

@@ -95,7 +95,7 @@ escribe :: Explica la regla de oro de separar responsabilidades. :: Las reglas d
 
 > 🌎 **Otro ejemplo:** En un banco: qué es una cuenta (entidad), abrir una cuenta o transferir (caso de uso), el cajero y la app (adaptadores), y el sistema de computadoras que usen (framework).
 
-| Capa | Qué contiene | Ejemplo en tu app | 🌎 En una panadería |
+| Capa | Qué contiene | Ejemplo en Copiloto | 🌎 En una panadería |
 |---|---|---|---|
 | **Entidades** (centro) | Los objetos del negocio y sus reglas más básicas | Un `EarningRecord` (un ingreso), un `SanGroup` | Qué **es** un pan: harina, agua, sal |
 | **Casos de uso** | Lo que la app **hace**: una acción completa | "Registrar un ingreso": decide si es acumulativo, calcula y guarda | "Hornear una tanda", "vender una docena" |
@@ -147,9 +147,9 @@ escribe :: ¿Qué es la inversión de dependencias? :: Que el código de adentro
 
 > 🔁 **Repaso:** entidades → casos de uso → adaptadores → frameworks. Las dependencias solo apuntan hacia adentro; el centro usa contratos (interfaces) y afuera se cumplen: inversión de dependencias.
 
-## 4. El ejemplo real de tu app: el módulo del San
+## 4. El ejemplo real de Copiloto: el módulo del San
 
-> 🎙️ **El profesor:** basta de teoría. Tu app tiene un módulo hecho **exactamente así**: el San. Si entiendes este ejemplo, puedes explicar Clean Architecture en una entrevista con **tu propio código**, y eso vale oro.
+> 🎙️ **El profesor:** basta de teoría. La app Copiloto tiene un módulo hecho **exactamente así**: el San. Si entiendes este ejemplo, puedes explicar Clean Architecture en una entrevista con **tu propio código**, y eso vale oro.
 
 ```text
 src/san/
@@ -324,7 +324,7 @@ escribe :: Cuenta el camino de "Ya pagué" en MVC. :: La vista recibe el toque, 
 
 > 🎙️ **El profesor:** la segunda "de pantalla" es la más común en **apps móviles** y encaja muy bien con React: **MVVM**.
 
-| Parte | Qué hace | En tu app | 🌎 En el carro |
+| Parte | Qué hace | En Copiloto | 🌎 En el carro |
 |---|---|---|---|
 | **Modelo** | Los datos y las reglas | `utils/`, `services/` | El **motor y los sensores** |
 | **Vista** | **Solo dibuja** | Los componentes (`components/`) | Las **agujas** del tablero |
@@ -339,7 +339,7 @@ Un **hook** (en React) es una función que empieza con `use…` y le da a un com
 **¿MVC o MVVM?** La diferencia: en MVVM la vista **se actualiza sola** cuando cambia el modelo de vista (está "conectada"); en MVC el controlador le **dice** a la vista qué mostrar.
 
 ```practica
-elige :: En tu app, ¿qué cumple el papel de modelo de vista? :: Las pantallas :: Los hooks y contextos, como `useVehicleFuelLevel` :: Firestore
+elige :: En Copiloto, ¿qué cumple el papel de modelo de vista? :: Las pantallas :: Los hooks y contextos, como `useVehicleFuelLevel` :: Firestore
 elige :: ¿Qué hace `VehicleFuelGauge`? :: Calcula el nivel del tanque :: Solo dibuja lo que recibe :: Guarda en Firestore
 vf :: En MVVM, la vista hace los cálculos
 vf :: MVVM es muy común en apps móviles
@@ -348,9 +348,9 @@ escribe :: ¿Qué diferencia hay entre MVC y MVVM? :: En MVC el controlador le d
 
 > 🔁 **Repaso:** MVVM = modelo, vista (solo dibuja) y modelo de vista (hooks y contextos que preparan los datos). La vista se actualiza sola.
 
-## 8. ¿Qué arquitectura usa tu app?
+## 8. ¿Qué arquitectura usa la app Copiloto?
 
-> 🎙️ **El profesor:** pregunta segura en una entrevista: "¿qué arquitectura usa tu app?". La respuesta honesta, y la que más impresiona, es: **"una mezcla, y te explico por qué"**. Como la mayoría de las apps reales.
+> 🎙️ **El profesor:** pregunta segura en una entrevista: "¿qué arquitectura usa la app Copiloto?". La respuesta honesta, y la que más impresiona, es: **"una mezcla, y te explico por qué"**. Como la mayoría de las apps reales.
 
 | Parte de la app | Se parece a |
 |---|---|
@@ -371,19 +371,19 @@ escribe :: ¿Qué diferencia hay entre MVC y MVVM? :: En MVC el controlador le d
 > 💡 **Idea:** decir **qué mejorarías** de tu propia app en una entrevista no te hace ver mal: te hace ver con criterio.
 
 ```practica
-elige :: ¿Qué parte de tu app se parece más a Clean Architecture? :: Las pantallas :: El módulo del San :: Cloud Functions
+elige :: ¿Qué parte de Copiloto se parece más a Clean Architecture? :: Las pantallas :: El módulo del San :: Cloud Functions
 elige :: ¿Qué se podría mejorar según esta parte? :: Borrar el San :: Sacar las reglas de `EarningsContext` a un caso de uso :: Quitar las pruebas
 vf :: La mayoría de las apps reales usan una sola arquitectura pura
-escribe :: ¿Qué arquitectura usa tu app? Responde como en una entrevista. :: Una mezcla: el San usa Clean/hexagonal con un repositorio como contrato y una fábrica; las pantallas siguen MVVM con hooks y contextos; las reglas puras están en utils; y Cloud Functions es un servidor aparte. Mejoraría sacar reglas de EarningsContext a un caso de uso.
+escribe :: ¿Qué arquitectura usa la app Copiloto? Responde como en una entrevista. :: Una mezcla: el San usa Clean/hexagonal con un repositorio como contrato y una fábrica; las pantallas siguen MVVM con hooks y contextos; las reglas puras están en utils; y Cloud Functions es un servidor aparte. Mejoraría sacar reglas de EarningsContext a un caso de uso.
 ```
 
-> 🔁 **Repaso:** tu app es una mezcla: San (Clean/hexagonal), pantallas (MVVM), `utils/` (reglas puras), Copiloto (módulos registrados), Cloud Functions (servidor aparte).
+> 🔁 **Repaso:** la app Copiloto es una mezcla: San (Clean/hexagonal), pantallas (MVVM), `utils/` (reglas puras), Copiloto (módulos registrados), Cloud Functions (servidor aparte).
 
 ## 9. Cuidado: no exagerar
 
 > 🎙️ **El profesor:** última lección, y es de sabiduría: **más capas no siempre es mejor**.
 
-En un proyecto chico, una Clean Architecture completa puede ser **demasiado**: muchos archivos para hacer algo simple. Se usa la arquitectura que el proyecto **necesita**. Tu app la usa completa donde vale la pena (el San, que es complejo y compartido entre personas) y más simple donde no.
+En un proyecto chico, una Clean Architecture completa puede ser **demasiado**: muchos archivos para hacer algo simple. Se usa la arquitectura que el proyecto **necesita**. La app Copiloto la usa completa donde vale la pena (el San, que es complejo y compartido entre personas) y más simple donde no.
 
 Por ejemplo, tu página **¿Qué dice la Biblia?** y este mapa no usan Clean Architecture: son páginas chicas con archivos separados por trabajo. Y está **bien**.
 
@@ -438,7 +438,7 @@ elige :: `src/screens/onboarding/VehicleSetupScreen.tsx` es… :: Presentación 
 
 > 🎙️ **El profesor:** esta es una de las conversaciones más importantes de tu entrevista. Practícala varias veces, en voz alta.
 
-> 🌎 **En la vida real:** Explicar la arquitectura de tu app es como explicar el plano de tu casa: qué cuarto es cuál y por qué está ahí.
+> 🌎 **En la vida real:** Explicar la arquitectura de Copiloto es como explicar el plano de tu casa: qué cuarto es cuál y por qué está ahí.
 
 > 🎤 **Entrevista:** "¿Qué es Clean Architecture?"
 
@@ -449,7 +449,7 @@ elige :: `src/screens/onboarding/VehicleSetupScreen.tsx` es… :: Presentación 
 
 </details>
 
-> 🎤 **Entrevista:** "¿Usaste alguna en tu app?"
+> 🎤 **Entrevista:** "¿Usaste alguna en Copiloto?"
 
 <details>
 <summary>Ver una buena respuesta</summary>
@@ -471,4 +471,4 @@ elige :: `src/screens/onboarding/VehicleSetupScreen.tsx` es… :: Presentación 
 escribe :: Explica Clean Architecture en 3 frases, usando el San de ejemplo. :: Las reglas del negocio están en el centro y no conocen la base de datos; se comunican por contratos. En el San, los servicios usan el contrato SanRepository, que cumplen Firestore, el teléfono o la memoria. Una fábrica elige cuál, y así se cambia o se prueba sin tocar las reglas.
 ```
 
-> 🔁 **Repaso final de la clase:** por qué importa la arquitectura, separar responsabilidades, Clean Architecture y su regla de la dependencia, el San como ejemplo real, hexagonal, MVC, MVVM, qué usa tu app y no exagerar. Próxima: **Tema 11, Cómo arreglé Copiloto**.
+> 🔁 **Repaso final de la clase:** por qué importa la arquitectura, separar responsabilidades, Clean Architecture y su regla de la dependencia, el San como ejemplo real, hexagonal, MVC, MVVM, qué usa la app Copiloto y no exagerar. Próxima: **Tema 11, Cómo arreglé Copiloto**.

@@ -16,7 +16,7 @@ Un error no es un fracaso: es un **mensaje** del programa diciéndote qué sali�
 
 > **Verificar antes de adivinar.** Primero consigues el error real o el dato real. Después cambias algo.
 
-Está escrita en el documento principal de tu app (`AGENTS.md`), porque dos veces se "arregló" algo adivinando y el arreglo era falso.
+Está escrita en el documento principal de Copiloto (`AGENTS.md`), porque dos veces se "arregló" algo adivinando y el arreglo era falso.
 
 ## 2. Las partes de un error
 
@@ -62,11 +62,11 @@ Cuanto más arriba en la tabla aparece un error, **más barato** es arreglarlo. 
 
 ## 4. Errores reales de hoy, leídos
 
-> 🌎 **En la vida real:** como un médico que repasa casos de pacientes reales: no son ejemplos de libro, pasaron de verdad en tu app.
+> 🌎 **En la vida real:** como un médico que repasa casos de pacientes reales: no son ejemplos de libro, pasaron de verdad en Copiloto.
 
 > 🌎 **Otro ejemplo:** Son como la caja negra de vuelos anteriores: se estudian para que el próximo piloto no repita el error.
 
-Todos estos salieron el 10/11/2026 mientras trabajábamos en tu app.
+Todos estos salieron el 10/11/2026 mientras trabajábamos en Copiloto.
 
 ### Error 1: un nombre que no existe
 
@@ -107,7 +107,7 @@ but required in type 'VehicleSelectFieldProps'.
 
 ### Error 3: algo declarado que no se usa
 
-> 🌎 **En la vida real:** es como tener una herramienta en la caja que ya no usas para nada: no estorba mucho, pero ocupa lugar y confunde al que abre la caja ("¿para qué será esto?"). Tu app tiene la regla de no dejar herramientas que no se usan.
+> 🌎 **En la vida real:** es como tener una herramienta en la caja que ya no usas para nada: no estorba mucho, pero ocupa lugar y confunde al que abre la caja ("¿para qué será esto?"). La app Copiloto tiene la regla de no dejar herramientas que no se usan.
 
 > 🌎 **Otro ejemplo:** Es como un contacto viejo en el teléfono de alguien que ya no existe: no molesta, pero ensucia la lista.
 
@@ -120,7 +120,7 @@ src/screens/copilot/IACopilotoScreen.styles.ts(2,10): error TS6133:
 - **Causa real:** se movió el estilo que usaba `Platform` a otra pieza (`ChatInputShell`).
 - **Arreglo:** borrar `Platform` del `import`.
 
-**Lección:** no rompe nada, pero es código muerto. Tu app no lo permite, para mantenerla limpia.
+**Lección:** no rompe nada, pero es código muerto. La app Copiloto no lo permite, para mantenerla limpia.
 
 ### Error 4: una prueba que falla
 

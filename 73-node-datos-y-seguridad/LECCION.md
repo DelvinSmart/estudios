@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** una tienda que guarda la mercadería en el mostrador la pierde al cerrar. Una base de datos es la bodega con llave: los datos siguen ahí al apagar el servidor.
 
-> 🎙️ **El profesor dice:** la API de la clase 72 guarda todo en una variable: si el servidor se reinicia, se pierde. Hoy: guardar en una **base de datos** (SQLite para aprender, Firestore como en tus apps), consultas con parámetros, y las reglas de seguridad del servidor: secretos en `.env`, autenticación, límites de uso y cabeceras seguras.
+> 🎙️ **El profesor dice:** la API de la clase 72 guarda todo en una variable: si el servidor se reinicia, se pierde. Hoy: guardar en una **base de datos** (SQLite para aprender, Firestore como en Copiloto), consultas con parámetros, y las reglas de seguridad del servidor: secretos en `.env`, autenticación, límites de uso y cabeceras seguras.
 
 ## Parte 1. Una base de datos de verdad
 
@@ -50,7 +50,7 @@ db.prepare('SELECT * FROM gastos WHERE tipo = ?').all(tipo);       // ✅
 
 ### Firestore desde Node: firebase-admin
 
-En tus proyectos, el servidor (Cloud Functions) usa **firebase-admin**, que **se salta las reglas de seguridad**: por eso todo lo que hace la función tiene que validar y revisar permisos en el código, como `corregirPractica` y `enviarCorreoCuenta` de este mapa.
+En los proyectos de este curso, el servidor (Cloud Functions) usa **firebase-admin**, que **se salta las reglas de seguridad**: por eso todo lo que hace la función tiene que validar y revisar permisos en el código, como `corregirPractica` y `enviarCorreoCuenta` de este mapa.
 
 > 🌎 **En la vida real:** el administrador tiene la llave maestra: por eso él mismo tiene que revisar quién pide qué.
 

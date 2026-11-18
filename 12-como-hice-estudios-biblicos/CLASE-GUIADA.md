@@ -68,7 +68,7 @@ elige :: Un bloque puede ser… :: Solo texto :: Texto, pasaje, subtítulo, imag
 
 > 🌎 **Otro ejemplo:** Como armar un puesto en la feria con una mesa y un toldo, en vez de construir un local: para lo que vendes, alcanza y sobra.
 
-> 💡 **Idea:** tu web de Copiloto (Tema 13) sí usa React. ¿Contradicción? No: esa web es grande y comparte código con la app. **Se elige la herramienta según el tamaño del trabajo** (Tema 10, parte 9).
+> 💡 **Idea:** la web de Copiloto (Tema 13) sí usa React. ¿Contradicción? No: esa web es grande y comparte código con la app. **Se elige la herramienta según el tamaño del trabajo** (Tema 10, parte 9).
 
 ```practica
 elige :: Para cambiar el color de los botones, ¿qué tipo de archivo abres? :: HTML :: CSS :: JSON
@@ -536,7 +536,7 @@ vf :: Contar lo que salió mal en un proyecto ayuda en una entrevista
 
 > 🎙️ **El profesor:** la explicación completa está en [Para la entrevista](EXPLICACIONES-PARA-ENTREVISTA.md). Aquí, la versión para decir en voz alta en un minuto.
 
-> 🌎 **En la vida real:** Contar este proyecto es como mostrar una casa que construiste: el plano, los materiales, por qué hiciste cada cosa y qué cambiarías.
+> 🌎 **En la vida real:** Contar este proyecto es como mostrar una casa terminada: el plano, los materiales, por qué se hizo cada cosa y qué se cambiaría.
 
 > 🎤 **Entrevista:** "Cuéntame de un proyecto web que hayas hecho."
 

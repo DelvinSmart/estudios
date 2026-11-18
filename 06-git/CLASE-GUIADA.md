@@ -66,7 +66,7 @@ elige :: Un commit es como… :: un archivo borrado :: un punto de guardado del 
 
 > 🌎 **Otro ejemplo:** En un equipo de fútbol: el repositorio es la historia del club; un commit, cada partido jugado con su resultado; una rama, un entrenamiento táctico aparte; merge, usar esa táctica en el partido oficial; y un pull request, proponerle la táctica al entrenador antes.
 
-| Palabra | Significado | En tu app | 🌎 En la obra |
+| Palabra | Significado | En Copiloto | 🌎 En la obra |
 |---|---|---|---|
 | **Repositorio** (repo) | La carpeta del proyecto con toda su historia | `copiloto-driver` | La carpeta de la obra, con todo desde el primer día |
 | **Commit** | Un punto guardado, con un mensaje | `f333022 feat(ganhos,painel)…` | Una foto con fecha y nota |
@@ -143,11 +143,11 @@ vf :: Si cambié un archivo pero no hice `git add`, no entra en el commit
 
 > 🔁 **Repaso:** editar → `git add` (staging) → `git commit` (historia en tu Mac) → `git push` (GitHub + CI).
 
-## 4. Tu app en números
+## 4. La app Copiloto en números
 
 > 🎙️ **El profesor:** mira tu propia historia. Esto es lo que había el 10 de noviembre de 2026.
 
-- Tu app tenía **295 commits**: 295 puntos guardados.
+- La app Copiloto tenía **295 commits**: 295 puntos guardados.
 - Trabajas en la rama **`feature/smart-camera`**.
 - También existen `main` (la principal) y una rama vieja, `cursor/quita-foto-fondo-san-4084`.
 
@@ -173,7 +173,7 @@ vf :: Dos commits distintos pueden tener el mismo identificador
 elige :: ¿En qué rama trabajas la app? :: `main` :: `feature/smart-camera` :: `master`
 ```
 
-> 🔁 **Repaso:** cada commit tiene un identificador único (hash) y un mensaje. Tu app trabaja en la rama `feature/smart-camera`.
+> 🔁 **Repaso:** cada commit tiene un identificador único (hash) y un mensaje. La app Copiloto trabaja en la rama `feature/smart-camera`.
 
 ## 5. Cómo se escribe un buen mensaje
 
@@ -393,7 +393,7 @@ Corre `git status`: dice que **no hay commits todavía** (*No commits yet*).
 3. `git switch master`. Abre `notas.txt`: la línea del experimento **no está**.
 4. `git switch experimento`: la línea **vuelve**.
 
-> 📌 **Nota:** en tu Mac, un repositorio nuevo empieza con la rama **`master`**. En GitHub y en tu app la principal se llama **`main`**. Es lo mismo con otro nombre.
+> 📌 **Nota:** en tu Mac, un repositorio nuevo empieza con la rama **`master`**. En GitHub y en Copiloto la principal se llama **`main`**. Es lo mismo con otro nombre.
 
 > 🌎 **En la vida real:** probarte ropa en el probador: te pones la camisa nueva (la rama `experimento`); al salir (`git switch master`) vuelves con tu ropa de siempre. La camisa no desapareció: está colgada esperando.
 
@@ -431,7 +431,7 @@ escribe :: Cuenta lo que pasó en la Parte E con tus palabras. :: Creé la rama 
 
 > 🔁 **Repaso:** `init` (crear repo), `add` + `commit` (guardar), `diff` (ver), `restore` (deshacer), `switch -c` (rama nueva), `switch` (cambiar), `merge` (unir).
 
-## 8. Lo que el script de tu app hace por ti
+## 8. Lo que el script de Copiloto hace por ti
 
 > 🎙️ **El profesor:** ¿te acuerdas del script `./scripts/tareas.sh` que usabas para guardar? Ahora puedes ver qué hacía por dentro: **los mismos comandos que acabas de aprender**.
 
@@ -445,7 +445,7 @@ escribe :: Cuenta lo que pasó en la Parte E con tus palabras. :: Creé la rama 
 > 🌎 **Otro ejemplo:** Como el piloto automático de un avión: hace las mismas maniobras que haría el piloto, en el mismo orden.
 
 ```practica
-escribe :: ¿Qué hace el script de guardar de tu app, paso a paso? :: Revisa con git status que no haya archivos prohibidos, hace git add -A, hace git commit con el mensaje y hace git push.
+escribe :: ¿Qué hace el script de guardar de Copiloto, paso a paso? :: Revisa con git status que no haya archivos prohibidos, hace git add -A, hace git commit con el mensaje y hace git push.
 vf :: El script hacía algo distinto a los comandos de Git
 ```
 
@@ -461,7 +461,7 @@ vf :: El script hacía algo distinto a los comandos de Git
 
 ### El archivo `.gitignore`
 
-Es la lista de lo que Git **no** debe guardar. En tu app, por ejemplo:
+Es la lista de lo que Git **no** debe guardar. En Copiloto, por ejemplo:
 - `node_modules/` → las librerías (se reinstalan con `npm ci`).
 - `android/` → se genera con `expo prebuild`.
 - `store-assets/` → ahí se guardan los AAB (los archivos que se suben a Google Play).
@@ -555,7 +555,7 @@ git stash pop   # los devuelve (y los quita de la lista)
 
 > 🌎 **Otro ejemplo:** `blame` es como la firma en cada página de un contrato: sabes quién escribió qué. `bisect` es como encontrar qué día empezó una gotera revisando las fotos de la casa por mitades.
 
-Prueba en tu app (**sin riesgo, solo mira**):
+Prueba en Copiloto (**sin riesgo, solo mira**):
 
 ```bash
 git blame src/data/workAppsCatalog.ts | grep my_company

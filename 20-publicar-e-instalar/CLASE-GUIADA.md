@@ -2,7 +2,7 @@
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) tiene la chuleta de comandos para tener a mano.
 
-**Cómo estudiarla:** una o dos partes por día. Está basada en las guías de tu app (`copiloto-driver/docs/`: `GUIA_COMPLETA_PASO_A_PASO.md`, `COMO_INSTALAR_EN_TELEFONOS.md`, `COMO_SUBIR_ACTUALIZACION.md`, `SUBIR_ESTA_VERSION.md`) y en sus scripts (`scripts/`). Esas guías son el manual del día a día; esta clase te explica **por qué** cada paso es así.
+**Cómo estudiarla:** una o dos partes por día. Está basada en las guías de Copiloto (`copiloto-driver/docs/`: `GUIA_COMPLETA_PASO_A_PASO.md`, `COMO_INSTALAR_EN_TELEFONOS.md`, `COMO_SUBIR_ACTUALIZACION.md`, `SUBIR_ESTA_VERSION.md`) y en sus scripts (`scripts/`). Esas guías son el manual del día a día; esta clase te explica **por qué** cada paso es así.
 
 **Lo que necesitas saber antes:** Temas 04 (CI), 06 (Git), 08 (Firebase) y 12 (cómo se publica la página de estudios).
 
@@ -260,7 +260,7 @@ elige :: Cambiaste los textos de un estudio. ¿Desde dónde lo subes? :: Solo de
 | La **landing** (la página de presentación) | `firebase deploy --only hosting:landing` |
 | Las **reglas** de seguridad de Firestore | `firebase deploy --only firestore:rules` |
 
-`--only` quiere decir "solo esto": así no publicas sin querer algo que no tocaste. `hosting:admin` y `hosting:landing` son los dos **sitios** que tiene tu proyecto en Firebase Hosting (están en `firebase.json`).
+`--only` quiere decir "solo esto": así no publicas sin querer algo que no tocaste. `hosting:admin` y `hosting:landing` son los dos **sitios** que tiene el proyecto de Copiloto en Firebase Hosting (están en `firebase.json`).
 
 > ⚠️ **Cuidado:** esto **es producción**. Un deploy de reglas mal hecho puede abrir o cerrar los datos de todas las personas. Antes de un deploy: las pruebas (incluidas las de reglas) tienen que pasar, y lo decides tú.
 
@@ -323,7 +323,7 @@ escribe :: ¿Por qué hay que mirar la hora del APK antes de instalarlo? :: Porq
 
 > 🔁 **Repaso:** APK = probar (se instala, `assembleRelease`). AAB = Google Play (no se instala, `bundleRelease`). Y siempre mira la hora del archivo.
 
-## 6. La firma: la llave de tu app
+## 6. La firma: la llave de Copiloto
 
 > 🎙️ **El profesor:** esta parte es **la más importante de la clase**, porque un error aquí no tiene arreglo. Léela despacio.
 
@@ -333,7 +333,7 @@ escribe :: ¿Por qué hay que mirar la hora del APK antes de instalarlo? :: Porq
 
 ### Qué es la firma
 
-Cada APK y cada AAB se **firma** con una **llave** (un archivo llamado *keystore*, protegido con contraseñas). La firma es **la identidad de tu app** ante Google y ante los teléfonos: dice "esta app la hizo el dueño de Copiloto Driver".
+Cada APK y cada AAB se **firma** con una **llave** (un archivo llamado *keystore*, protegido con contraseñas). La firma es **la identidad de Copiloto** ante Google y ante los teléfonos: dice "esta app la hizo el dueño de Copiloto Driver".
 
 - **Una sola llave firma los dos**, el APK y el AAB. No hay que cambiar nada entre uno y otro: se elige sola.
 - Si un día subieras un AAB firmado con **otra** llave, Google lo **rechazaría**: "assinado com a chave errada".
@@ -555,7 +555,7 @@ La primera vez, el iPhone puede bloquear la app. Se arregla en **Ajustes → Gen
 
 > 🌎 **Otro ejemplo:** Como cuando instalas un programa nuevo en la computadora y te pregunta "¿confías en este fabricante?": dices sí una vez.
 
-> 💡 **Idea:** un error real de la guía de tu app: el comando de Wi-Fi estaba **mal escrito** (decía una letra suelta en vez de `./scripts/instalar-iphone.sh`), y por eso "a la IA le funcionaba y a ti no": pegabas otra cosa. Cuando algo funciona para uno y no para otro, compara **exactamente** qué corre cada uno (Tema 07).
+> 💡 **Idea:** un error real de la guía de Copiloto: el comando de Wi-Fi estaba **mal escrito** (decía una letra suelta en vez de `./scripts/instalar-iphone.sh`), y por eso "a la IA le funcionaba y a ti no": pegabas otra cosa. Cuando algo funciona para uno y no para otro, compara **exactamente** qué corre cada uno (Tema 07).
 
 ```practica
 elige :: ¿Qué comando instala en el iPhone por cable y por Wi-Fi? :: Dos distintos :: El mismo: `./scripts/instalar-iphone.sh` :: `adb install`
@@ -569,7 +569,7 @@ vf :: `adb` sirve para instalar en el iPhone
 
 ## 9. Los emuladores
 
-> 🎙️ **El profesor:** un **emulador** (o **simulador**) es un teléfono **de mentira** dentro de la Mac. Sirve para ver cambios rápido sin tocar tu teléfono real. Tu app tiene un script aparte para ellos:
+> 🎙️ **El profesor:** un **emulador** (o **simulador**) es un teléfono **de mentira** dentro de la Mac. Sirve para ver cambios rápido sin tocar tu teléfono real. La app Copiloto tiene un script aparte para ellos:
 
 | Dónde | Comando |
 |---|---|
@@ -659,7 +659,7 @@ Google **revisa** la actualización (de unas horas a 2 o 3 días). Cuando la apr
 
 > 🌎 **Otro ejemplo:** Es como pedir un permiso de construcción para algo fuera de lo común: la municipalidad pide planos, fotos y una visita antes de aprobar.
 
-El cartón automático necesita leer la pantalla de las apps de viajes, y en Android eso solo se puede con la **API de Accesibilidad** (pensada para personas ciegas o con poca visión). Google la vigila de cerca, porque es la misma puerta que usan los programas espía. Cuando la detecta, **detiene la publicación** y pide tres cosas: una **declaración** de qué lees y para qué, un **video** mostrando la función, y una **cuenta de prueba** para el revisor. Hasta responder, la versión queda parada. Tu app tiene todo eso preparado en sus guías privadas (`PERMISOS_EN_GOOGLE_PLAY.md`, `SUBIR_ESTA_VERSION.md`).
+El cartón automático necesita leer la pantalla de las apps de viajes, y en Android eso solo se puede con la **API de Accesibilidad** (pensada para personas ciegas o con poca visión). Google la vigila de cerca, porque es la misma puerta que usan los programas espía. Cuando la detecta, **detiene la publicación** y pide tres cosas: una **declaración** de qué lees y para qué, un **video** mostrando la función, y una **cuenta de prueba** para el revisor. Hasta responder, la versión queda parada. La app Copiloto tiene todo eso preparado en sus guías privadas (`PERMISOS_EN_GOOGLE_PLAY.md`, `SUBIR_ESTA_VERSION.md`).
 
 > ✋ **Para y piensa:** instalaste la versión nueva en tu Samsung por cable. ¿Los testers de Play ya la tienen?
 
@@ -674,17 +674,17 @@ El cartón automático necesita leer la pantalla de las apps de viajes, y en And
 elige :: ¿Por qué hay que subir el `versionCode` antes de cada AAB? :: Por estética :: Porque Google rechaza un número de versión que ya se subió :: Porque lo pide GitHub
 elige :: ¿Qué número ve la gente en la tienda? :: `versionCode` :: `version` :: Ninguno
 elige :: ¿Qué hace `./scripts/publicar-android.sh`? :: Instala en el iPhone :: Sube la versión, genera el AAB, revisa la firma y lo deja en `store-assets` :: Hace push
-elige :: ¿En qué idioma se escriben las notas de versión de tu app? :: Español :: Portugués :: Inglés
+elige :: ¿En qué idioma se escriben las notas de versión de Copiloto? :: Español :: Portugués :: Inglés
 vf :: Instalar la app por cable en tu teléfono también se la manda a los testers de Play
 vf :: Los avisos amarillos de Play Console bloquean la publicación
-escribe :: ¿Por qué Google pide una declaración, un video y una cuenta de prueba para tu app? :: Porque el cartón automático usa la API de Accesibilidad para leer la pantalla de las apps de viajes, y Google la vigila porque es la misma puerta que usan los programas espía.
+escribe :: ¿Por qué Google pide una declaración, un video y una cuenta de prueba para Copiloto? :: Porque el cartón automático usa la API de Accesibilidad para leer la pantalla de las apps de viajes, y Google la vigila porque es la misma puerta que usan los programas espía.
 ```
 
 > 🔁 **Repaso:** subir `versionCode` (y `version`) → `publicar-android.sh` → Play Console: Testar e lançar → Criar nova versão → AAB → notas en portugués → publicar → revisión de Google.
 
 ## 11. El orden real de un día de trabajo
 
-> 🎙️ **El profesor:** juntemos todo. Este es el orden en que se trabaja en tu app, y es exactamente lo que te van a preguntar en una entrevista ("¿cómo llevas un cambio a producción?").
+> 🎙️ **El profesor:** juntemos todo. Este es el orden en que se trabaja en Copiloto, y es exactamente lo que te van a preguntar en una entrevista ("¿cómo llevas un cambio a producción?").
 
 > 🌎 **En la vida real:** Es como la rutina de un panadero: amasa, hornea, prueba, empaca, y solo cuando todo está bien abre la tienda.
 
@@ -704,11 +704,11 @@ escribe :: ¿Por qué Google pide una declaración, un video y una cuenta de pru
 
 > 🌎 **Otro ejemplo:** Es como un contador que prepara la declaración de impuestos, pero la firma y la presentas tú.
 
-Si le pides el cambio a una IA en la carpeta del proyecto, ella puede hacer los pasos de traer, cambiar, probar, revisar y guardar, pero **solo hace el `git push` (y cualquier publicación) cuando tú se lo dices**. Así lo dicen los `AGENTS.md` de tus proyectos. Publicar es decisión tuya.
+Si le pides el cambio a una IA en la carpeta del proyecto, ella puede hacer los pasos de traer, cambiar, probar, revisar y guardar, pero **solo hace el `git push` (y cualquier publicación) cuando tú se lo dices**. Así lo dicen los `AGENTS.md` de estos proyectos. Publicar es decisión tuya.
 
 ### El script de todo junto: `release.sh`
 
-Tu app tiene un script que hace el ciclo completo, en orden, y **se detiene** si algo falla:
+La app Copiloto tiene un script que hace el ciclo completo, en orden, y **se detiene** si algo falla:
 
 1. Revisa que **compile** (TypeScript de la app, del servidor y del panel).
 2. Genera el **AAB** e instala en el **iPhone**, **en paralelo** (como `Promise.all`).
@@ -787,7 +787,7 @@ escribe :: ¿Qué tienes que copiar a una Mac nueva para poder seguir publicando
 
 > 🌎 **En la vida real:** Contar cómo publicas es como contarle a un cliente cómo entregas un trabajo: lo pruebas, lo guardas, lo revisan y recién después lo entregas.
 
-> 🎤 **Entrevista:** "¿Cómo llevas un cambio a producción en tu app?"
+> 🎤 **Entrevista:** "¿Cómo llevas un cambio a producción en Copiloto?"
 
 <details>
 <summary>Ver una buena respuesta</summary>

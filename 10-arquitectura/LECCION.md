@@ -91,7 +91,7 @@ La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos,
 
 > 🌎 **Otro ejemplo:** En un banco: qué es una cuenta (entidad), abrir una cuenta o transferir (caso de uso), el cajero y la app (adaptadores), y el sistema de computadoras (framework).
 
-| Capa | Qué contiene | Ejemplo en tu app |
+| Capa | Qué contiene | Ejemplo en Copiloto |
 |---|---|---|
 | **Entidades** (centro) | Los objetos del negocio y sus reglas más básicas | Un `EarningRecord` (un ingreso), un `SanGroup` |
 | **Casos de uso** | Lo que la app **hace**: una acción completa | "Registrar un ingreso": decide si es acumulativo, calcula la diferencia y lo guarda |
@@ -113,7 +113,7 @@ La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos,
 
 ¿Cómo guarda datos un caso de uso si no puede conocer Firestore? Con una **interfaz**: un contrato que dice *qué* se puede hacer, sin decir *cómo*. El de adentro define el contrato; el de afuera lo cumple. Esto se llama **inversión de dependencias**.
 
-## 4. El ejemplo real de tu app: el módulo del San
+## 4. El ejemplo real de Copiloto: el módulo del San
 
 > 🌎 **En la vida real:** el San es como una **cooperativa** bien organizada, con sus oficinas:
 > - `models/` = los **estatutos**: qué es un grupo, qué es un miembro.
@@ -125,7 +125,7 @@ La propuso **Robert C. Martin** ("Uncle Bob") en 2012. Se dibuja como círculos,
 
 > 🌎 **Otro ejemplo:** Como un club deportivo bien organizado: reglamento, tesorería, archivo, secretaría, megáfono y avisos al celular de los socios.
 
-El San es la parte de tu app más parecida a Clean Architecture. Mira sus carpetas en `src/san/`:
+El San es la parte de Copiloto más parecida a Clean Architecture. Mira sus carpetas en `src/san/`:
 
 ```
 src/san/
@@ -282,7 +282,7 @@ Es una de las más antiguas (de los años 70) y muy usada en servidores web.
 
 Es la más común en **apps móviles** (Android, iOS) y encaja bien con React.
 
-| Parte | Qué hace | En tu app |
+| Parte | Qué hace | En Copiloto |
 |---|---|---|
 | **Modelo** | Los datos y las reglas | `utils/`, `services/` |
 | **Vista** | Solo dibuja | Los componentes (`components/`) |
@@ -290,7 +290,7 @@ Es la más común en **apps móviles** (Android, iOS) y encaja bien con React.
 
 **Ejemplo real:** el hook `useVehicleFuelLevel` (en `src/hooks/`) junta los abastecimientos y el kilometraje, calcula el nivel del tanque y se lo entrega listo a la barra de combustible. La barra (`VehicleFuelGauge`) solo dibuja lo que recibe; no calcula nada.
 
-## 8. ¿Qué arquitectura usa tu app?
+## 8. ¿Qué arquitectura usa la app Copiloto?
 
 > 🌎 **En la vida real:** es como una casa que se fue ampliando: la cocina se hizo con un estilo, el cuarto nuevo con otro. Funciona y está ordenada, pero no todo es igual:
 > - **El San** = el ala nueva, construida con planos de arquitecto.
@@ -303,7 +303,7 @@ Es la más común en **apps móviles** (Android, iOS) y encaja bien con React.
 
 > 🌎 **Otro ejemplo:** Como un barrio que creció con el tiempo: unas calles planificadas y otras que se fueron haciendo; funciona, y se sabe qué se podría ordenar.
 
-Tu app es una **mezcla**, como la mayoría de las apps reales:
+La app Copiloto es una **mezcla**, como la mayoría de las apps reales:
 
 | Parte de la app | Se parece a |
 |---|---|
@@ -319,11 +319,11 @@ Tu app es una **mezcla**, como la mayoría de las apps reales:
 
 ## 9. Cuidado: no exagerar
 
-> 🌎 **En la vida real:** para hacer un huevo frito no necesitas una cocina industrial con cinco ayudantes. Para un restaurante de 200 cubiertos, sí. Usa la organización que el trabajo pide: tu app pone "cocina industrial" en el San (complejo y compartido) y "sartén y listo" en lo simple.
+> 🌎 **En la vida real:** para hacer un huevo frito no necesitas una cocina industrial con cinco ayudantes. Para un restaurante de 200 cubiertos, sí. Usa la organización que el trabajo pide: la app Copiloto pone "cocina industrial" en el San (complejo y compartido) y "sartén y listo" en lo simple.
 
 > 🌎 **Otro ejemplo:** Como usar un camión de mudanza para llevar una carta: funciona, pero es exagerado. Se elige el transporte según la carga.
 
-Más capas no siempre es mejor. En un proyecto chico, una Clean Architecture completa puede ser **demasiado**: muchos archivos para hacer algo simple. Se usa la arquitectura que el proyecto **necesita**. Tu app la usa completa donde vale la pena (el San, que es complejo y compartido entre personas) y más simple donde no.
+Más capas no siempre es mejor. En un proyecto chico, una Clean Architecture completa puede ser **demasiado**: muchos archivos para hacer algo simple. Se usa la arquitectura que el proyecto **necesita**. La app Copiloto la usa completa donde vale la pena (el San, que es complejo y compartido entre personas) y más simple donde no.
 
 ## Ejercicios
 
@@ -360,7 +360,7 @@ Más capas no siempre es mejor. En un proyecto chico, una Clean Architecture com
 **¿Qué es Clean Architecture?**
 > Una forma de organizar el código en capas, con las reglas del negocio en el centro y las herramientas (base de datos, interfaz) afuera. La regla principal es que las dependencias apuntan hacia adentro: las reglas no conocen la base de datos; se comunican por interfaces. Así se pueden cambiar las herramientas y probar las reglas solas.
 
-**¿Usaste alguna en tu app?**
+**¿Usaste alguna en Copiloto?**
 > Sí. El módulo del San usa un repositorio como contrato, con tres implementaciones: Firestore para la app real, almacenamiento local y memoria para pruebas. Los servicios solo conocen el contrato, y una fábrica decide cuál usar. Es la idea de puertos y adaptadores. Las pantallas siguen un estilo MVVM, con hooks que preparan los datos.
 
 **¿Siempre usarías Clean Architecture?**

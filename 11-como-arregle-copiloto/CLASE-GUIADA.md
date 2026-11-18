@@ -2,13 +2,13 @@
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. Junta la [guía de estudio](GUIA-DE-ESTUDIO.md) y el [informe](INFORME.md) en una sola clase, contada como historia.
 
-**Cómo estudiarla:** es el tema **avanzado**: haz primero los Temas 01 a 10. Una o dos partes por día. Es la historia real del 4 y 5 de noviembre de 2026, cuando tu app pasó de tardar **17,7 segundos** en abrir a unos **6,3**.
+**Cómo estudiarla:** es el tema **avanzado**: haz primero los Temas 01 a 10. Una o dos partes por día. Es la historia real del 4 y 5 de noviembre de 2026, cuando la app Copiloto pasó de tardar **17,7 segundos** en abrir a unos **6,3**.
 
 **Para qué te sirve:** es **la** historia para contar en una entrevista. Tiene todo: un problema real, medición, causas, arreglos, errores cometidos y lo que se aprendió.
 
 ## 1. El hilo de JavaScript
 
-> 🎙️ **El profesor:** {{alumno}}, empecemos por el problema. Tu app, publicada en Google Play, tardaba **17,7 segundos** en mostrar el Início en un Samsung A31. Para un conductor, eso es eternidad. Para entender por qué, hay que entender **una idea**: el hilo de JavaScript.
+> 🎙️ **El profesor:** {{alumno}}, empecemos por el problema. La app Copiloto, publicada en Google Play, tardaba **17,7 segundos** en mostrar el Início en un Samsung A31. Para un conductor, eso es eternidad. Para entender por qué, hay que entender **una idea**: el hilo de JavaScript.
 
 > 🌎 **En la vida real:** Es como una cocina con un solo cocinero: si se pone a pelar 50 kilos de papa, nadie más recibe su plato hasta que termine, aunque la heladera esté llena.
 
@@ -418,7 +418,7 @@ elige :: ¿Qué no puede detectar el CI? :: Errores de tipos :: Lo que no revisa
 
 ## 10. Motores, tokens y candados
 
-> 🎙️ **El profesor:** ahora el orden del diseño. Tres palabras que usas en tu app y en tu página de estudios bíblicos: **token**, **motor** y **candado**.
+> 🎙️ **El profesor:** ahora el orden del diseño. Tres palabras que se usan en Copiloto y en el sitio de estudios bíblicos: **token**, **motor** y **candado**.
 
 - **Token:** un **nombre** para un valor de diseño, como `dash.radiusLg` o `dash.formHint`. (Es la variable CSS del Tema 16.)
 - **Motor:** una **pieza única** que controla algo en toda la app. `Touchable` controla cómo reacciona **todo** al toque.
@@ -441,7 +441,7 @@ color: dash.formHint
 
 ```practica
 elige :: ¿Qué es un token de diseño? :: Una contraseña :: Un nombre para un valor de diseño, como `dash.formHint` :: Un botón
-elige :: ¿Qué es `Touchable` en tu app? :: Un token :: Un motor: controla el toque en toda la app :: Un candado
+elige :: ¿Qué es `Touchable` en Copiloto? :: Un token :: Un motor: controla el toque en toda la app :: Un candado
 elige :: ¿Para qué sirve el candado si ya existe el motor? :: Para nada :: Para impedir que alguien, persona o IA, se salte el motor :: Para pintar
 vf :: Cambiar un color en un token lo cambia en toda la app
 elige :: ¿Cuántos botones sueltos pasaron al motor? :: 21 :: 112 :: 0
