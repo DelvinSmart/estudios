@@ -55,6 +55,37 @@ print(semana[::-1])   # al revés
 
 > 🌎 **Otro ejemplo:** Es como elegir capítulos de un libro: del 3 al 6.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Listas y rebanadas
+lenguaje: python
+pide: Completa `separar_semana(semana)`: devuelve dos listas, los días de lunes a viernes y el fin de semana, con rebanadas (`[0:5]` y `[5:]`). Y `resumen(viajes)`: devuelve el primero, el último (índice `-1`), el mayor y la suma. **No cambies** la lista que recibes.
+--- código
+def separar_semana(semana):
+    pass  # tu código aquí
+
+
+def resumen(viajes):
+    pass  # tu código aquí: return primero, ultimo, mayor, suma
+--- pruebas
+semana = ["lun", "mar", "mié", "jue", "vie", "sáb", "dom"]
+prueba("la semana partida", lambda: igual(separar_semana(semana), (["lun", "mar", "mié", "jue", "vie"], ["sáb", "dom"])))
+prueba("el resumen", lambda: igual(resumen([18.5, 22.0, 9.75]), (18.5, 9.75, 22.0, 50.25)))
+@prueba("no cambia la lista")
+def _():
+    viajes = [18.5, 22.0, 9.75]
+    resumen(viajes)
+    igual(viajes, [18.5, 22.0, 9.75])
+--- solución
+def separar_semana(semana):
+    return semana[0:5], semana[5:]
+
+
+def resumen(viajes):
+    return viajes[0], viajes[-1], max(viajes), sum(viajes)
+```
+
 ```practica
 vf :: En Python, el primer elemento de una lista es el índice 0
 vf :: lista[-1] da error porque no hay índices negativos
@@ -92,6 +123,35 @@ Desarmar también sirve para intercambiar valores: `a, b = b, a`.
 > 🌎 **En la vida real:** la lista del supermercado cambia; tu dirección (calle, número, ciudad) no.
 
 > 🌎 **Otro ejemplo:** Es como un menú del día (cambia) y la receta original de la casa (fija).
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tuplas: devolver dos cosas
+lenguaje: python
+pide: Completa `menor_y_mayor(valores)`: devuelve una **tupla** con el menor y el mayor. Y `intercambiar(a, b)`: devuelve los dos al revés, con el truco de Python `b, a`. Mira en las pruebas cómo se **desarma** la tupla en dos variables.
+--- código
+def menor_y_mayor(valores):
+    pass  # tu código aquí
+
+
+def intercambiar(a, b):
+    pass  # tu código aquí
+--- pruebas
+@prueba("se desarma en dos variables")
+def _():
+    menor, mayor = menor_y_mayor([120, 95, 180])
+    igual((menor, mayor), (95, 180))
+prueba("es una tupla", lambda: ok(isinstance(menor_y_mayor([1, 2]), tuple), "tiene que devolver una tupla"))
+prueba("intercambiar", lambda: igual(intercambiar("Uber", "99"), ("99", "Uber")))
+--- solución
+def menor_y_mayor(valores):
+    return min(valores), max(valores)
+
+
+def intercambiar(a, b):
+    return b, a
+```
 
 ```practica
 vf :: Una tupla se puede cambiar después de creada
@@ -156,6 +216,38 @@ total = sum(g["valor"] for g in gastos)
 
 > 🌎 **Otro ejemplo:** Es como una caja de fichas de pacientes: cada ficha con los mismos campos.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Diccionarios: buscar por nombre
+lenguaje: python
+pide: Completa `dato(carro, llave)`: devuelve el valor de esa llave, o `"sin datos"` si no existe (con `.get`). Y `total_por_tipo(gastos)`: recibe una lista de diccionarios como `{"tipo": "lavado", "valor": 30.0}` y devuelve un diccionario con cuánto se gastó en cada tipo.
+--- código
+def dato(carro, llave):
+    pass  # tu código aquí
+
+
+def total_por_tipo(gastos):
+    pass  # tu código aquí
+--- pruebas
+carro = {"marca": "Toyota", "modelo": "Corolla", "km": 85000}
+prueba("una llave que existe", lambda: igual(dato(carro, "km"), 85000))
+prueba("una que no existe, sin error", lambda: igual(dato(carro, "seguro"), "sin datos"))
+gastos = [{"tipo": "combustible", "valor": 150.0}, {"tipo": "lavado", "valor": 30.0}, {"tipo": "combustible", "valor": 100.0}]
+prueba("total por tipo", lambda: igual(total_por_tipo(gastos), {"combustible": 250.0, "lavado": 30.0}))
+prueba("sin gastos", lambda: igual(total_por_tipo([]), {}))
+--- solución
+def dato(carro, llave):
+    return carro.get(llave, "sin datos")
+
+
+def total_por_tipo(gastos):
+    totales = {}
+    for g in gastos:
+        totales[g["tipo"]] = totales.get(g["tipo"], 0) + g["valor"]
+    return totales
+```
+
 ```practica
 vf :: Un diccionario de Python se parece a un objeto de JavaScript
 vf :: carro["seguro"] devuelve None si la llave no existe
@@ -203,6 +295,40 @@ const caros = viajes.filter((v) => v > 20);
 > 🌎 **En la vida real:** es como decir "de esta canasta, dame solo las manzanas rojas, ya peladas", en una frase.
 
 > 🌎 **Otro ejemplo:** Es como el filtro de una búsqueda en una tienda online: "solo los de menos de 100".
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Conjuntos y comprensiones
+lenguaje: python
+pide: Completa tres funciones, **cada una en una sola línea**. `apps_distintas(apps)`: las apps sin repetir, ordenadas (`sorted(set(…))`). `caros(viajes, minimo)`: los viajes mayores que el mínimo, con una comprensión. `con_propina(viajes)`: cada viaje por 1.1, redondeado a 2 decimales.
+--- código
+def apps_distintas(apps):
+    pass  # tu código aquí
+
+
+def caros(viajes, minimo):
+    pass  # tu código aquí
+
+
+def con_propina(viajes):
+    pass  # tu código aquí
+--- pruebas
+prueba("sin repetidas", lambda: igual(apps_distintas(["Uber", "99", "Uber", "InDrive", "99"]), ["99", "InDrive", "Uber"]))
+prueba("los caros", lambda: igual(caros([18.5, 22.0, 9.75, 40.0], 20), [22.0, 40.0]))
+prueba("con propina", lambda: igual(con_propina([10.0, 18.5]), [11.0, 20.35]))
+--- solución
+def apps_distintas(apps):
+    return sorted(set(apps))
+
+
+def caros(viajes, minimo):
+    return [v for v in viajes if v > minimo]
+
+
+def con_propina(viajes):
+    return [round(v * 1.1, 2) for v in viajes]
+```
 
 ```practica
 vf :: Un set no guarda elementos repetidos

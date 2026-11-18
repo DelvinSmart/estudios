@@ -42,6 +42,32 @@ Un error común: usar `print` adentro de la función en vez de `return`. `print`
 
 > 🌎 **Otro ejemplo:** Es como ver una foto en la pantalla de otro: la viste, pero no la guardaste.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Imprimir no es devolver
+lenguaje: python
+pide: Esta función **muestra** el resultado, pero no lo **devuelve**: por eso `ganancia_de_la_semana` no puede sumarlo (recibe `None`). Arregla `ganancia_neta` para que devuelva el resultado. Después completa `ganancia_de_la_semana(dias)`: recibe una lista de pares `(bruto, gastos)` y suma la ganancia neta de cada día, **usando** `ganancia_neta`.
+--- código
+def ganancia_neta(bruto, gastos):
+    print(bruto - gastos)
+
+
+def ganancia_de_la_semana(dias):
+    pass  # tu código aquí
+--- pruebas
+prueba("devuelve la ganancia", lambda: igual(ganancia_neta(320.0, 95.5), 224.5))
+prueba("la semana", lambda: igual(ganancia_de_la_semana([(320.0, 95.5), (200.0, 50.0)]), 374.5))
+prueba("una semana sin días", lambda: igual(ganancia_de_la_semana([]), 0))
+--- solución
+def ganancia_neta(bruto, gastos):
+    return bruto - gastos
+
+
+def ganancia_de_la_semana(dias):
+    return sum(ganancia_neta(bruto, gastos) for bruto, gastos in dias)
+```
+
 ```practica
 vf :: En Python, las funciones se crean con def
 vf :: Una función sin return devuelve 0
@@ -94,6 +120,41 @@ registrar(tipo="lavado", valor=30)
 
 > 🌎 **Otro ejemplo:** Es como una lista de invitados abierta: vengan los que vengan, entran.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Valores por defecto, *args y **kwargs
+lenguaje: python
+pide: Completa tres funciones. `precio_viaje(km, tarifa_km=1.8, minimo=8.0)`: `km * tarifa_km`, pero nunca menos que el mínimo (con `max`). `total(*montos)`: la suma de **cuantos** montos le pasen. `registro(**datos)`: un texto como `"tipo=lavado, valor=30"`, en el orden en que llegaron.
+--- código
+def precio_viaje(km, tarifa_km=1.8, minimo=8.0):
+    pass  # tu código aquí
+
+
+def total(*montos):
+    pass  # tu código aquí
+
+
+def registro(**datos):
+    pass  # tu código aquí
+--- pruebas
+prueba("con los valores por defecto", lambda: igual(precio_viaje(3), 8.0))
+prueba("cambiando uno por su nombre", lambda: igual(precio_viaje(10, tarifa_km=2.5), 25.0))
+prueba("cuantos montos quieras", lambda: igual([total(10, 20, 30), total(5), total()], [60, 5, 0]))
+prueba("con nombre", lambda: igual(registro(tipo="lavado", valor=30), "tipo=lavado, valor=30"))
+--- solución
+def precio_viaje(km, tarifa_km=1.8, minimo=8.0):
+    return max(km * tarifa_km, minimo)
+
+
+def total(*montos):
+    return sum(montos)
+
+
+def registro(**datos):
+    return ", ".join(f"{llave}={valor}" for llave, valor in datos.items())
+```
+
 ```practica
 vf :: Un parámetro con valor por defecto se puede omitir al llamar la función
 vf :: *args recibe los argumentos como un diccionario
@@ -134,6 +195,45 @@ Una función **pura** solo usa sus parámetros y solo devuelve un resultado, sin
 > 🌎 **En la vida real:** es como una calculadora: misma cuenta, mismo resultado, y no te cambia nada de la mesa.
 
 > 🌎 **Otro ejemplo:** Es como una receta exacta: mismos ingredientes, misma torta.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: De una función que cambia lo de afuera a una pura
+lenguaje: python
+pide: `agregar_gasto` cambia una lista **global**: cada vez que la llamas con lo mismo, da otra cosa. Reescríbela **pura**: `agregar_gasto(gastos, valor)` recibe la lista y devuelve una lista **nueva** con el valor al final, sin tocar la que recibió. Y `con_impuesto(valor)`, que **lee** la constante `IMPUESTO` de afuera (leerla sí está bien) y redondea a 2 decimales.
+--- código
+IMPUESTO = 0.15
+historial = []
+
+
+def agregar_gasto(valor):
+    historial.append(valor)
+    return historial
+
+
+def con_impuesto(valor):
+    pass  # tu código aquí
+--- pruebas
+@prueba("devuelve una lista nueva con el gasto")
+def _():
+    antes = [150.0]
+    despues = agregar_gasto(antes, 30.0)
+    igual(despues, [150.0, 30.0])
+    igual(antes, [150.0])
+prueba("lo mismo da siempre lo mismo", lambda: igual(agregar_gasto([], 5.0), agregar_gasto([], 5.0)))
+prueba("lee la constante de afuera", lambda: igual(con_impuesto(100), 115.0))
+--- solución
+IMPUESTO = 0.15
+
+
+def agregar_gasto(gastos, valor):
+    return gastos + [valor]
+
+
+def con_impuesto(valor):
+    return round(valor * (1 + IMPUESTO), 2)
+```
 
 ```practica
 vf :: Una variable creada dentro de una función se puede usar afuera
@@ -179,6 +279,35 @@ Los tipos ayudan al editor y a herramientas como `mypy` a encontrar errores, y a
 > 🌎 **En la vida real:** es como la etiqueta de un enchufe: "110 V". El enchufe funciona igual, pero la etiqueta evita que lo conectes mal.
 
 > 🌎 **Otro ejemplo:** Es como el prospecto de un remedio: dice para qué sirve y cómo se usa.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: lambda, tipos y docstring
+lenguaje: python
+pide: Completa `del_mas_caro(viajes)`: los viajes ordenados por valor, del más caro al más barato (`sorted` con `key=lambda v: v["valor"]` y `reverse=True`). Y escribe `ganancia_neta` **con tipos** (`bruto: float, gastos: float -> float`) y un **docstring** entre triples comillas que diga qué hace.
+--- código
+def del_mas_caro(viajes):
+    pass  # tu código aquí
+
+
+def ganancia_neta(bruto, gastos):
+    return bruto - gastos
+--- pruebas
+viajes = [{"destino": "Centro", "valor": 18.5}, {"destino": "Aeropuerto", "valor": 45.0}, {"destino": "Shopping", "valor": 22.0}]
+prueba("del más caro al más barato", lambda: igual([v["destino"] for v in del_mas_caro(viajes)], ["Aeropuerto", "Shopping", "Centro"]))
+prueba("tiene sus tipos", lambda: igual(ganancia_neta.__annotations__, {"bruto": float, "gastos": float, "return": float}))
+prueba("tiene su docstring", lambda: ok(ganancia_neta.__doc__ and len(ganancia_neta.__doc__.strip()) > 10, "escribe qué hace la función entre triples comillas"))
+prueba("y sigue funcionando", lambda: igual(ganancia_neta(320.0, 95.5), 224.5))
+--- solución
+def del_mas_caro(viajes):
+    return sorted(viajes, key=lambda v: v["valor"], reverse=True)
+
+
+def ganancia_neta(bruto: float, gastos: float) -> float:
+    """Devuelve lo que te queda después de los gastos del día."""
+    return bruto - gastos
+```
 
 ```practica
 vf :: Una lambda es una función corta de una sola expresión

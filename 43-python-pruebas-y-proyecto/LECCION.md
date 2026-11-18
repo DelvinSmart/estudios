@@ -59,6 +59,60 @@ Lo normal (el caso de todos los días), los **bordes** (cero, vacío, el máximo
 
 > 🌎 **Otro ejemplo:** Es como probar una receta con la cantidad normal, el doble y sin sal.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Pruebas que atrapan el sabotaje
+lenguaje: python
+pide: `ganancia_neta` ya está bien hecha. Escribe **tú** sus pruebas, como en pytest: `test_resta_los_gastos` (con `assert`) y `test_montos_negativos_dan_error` (que llame con un monto negativo y compruebe que sale `ValueError`: sin pytest, usa `try`/`except` y, si no salió, `raise AssertionError`). Las pruebas del mapa van a **sabotear** la función, y tus pruebas tienen que darse cuenta.
+--- código
+def ganancia_neta(bruto, gastos):
+    if bruto < 0 or gastos < 0:
+        raise ValueError("Los montos no pueden ser negativos")
+    return round(bruto - gastos, 2)
+
+
+def test_resta_los_gastos():
+    pass  # tu código aquí
+
+
+def test_montos_negativos_dan_error():
+    pass  # tu código aquí
+--- pruebas
+def atrapa(prueba_tuya, saboteada):
+    buena = globals()["ganancia_neta"]
+    globals()["ganancia_neta"] = saboteada
+    try:
+        prueba_tuya()
+    except AssertionError:
+        return True
+    finally:
+        globals()["ganancia_neta"] = buena
+    return False
+prueba("con la función buena, tus pruebas pasan", lambda: (test_resta_los_gastos(), test_montos_negativos_dan_error()))
+prueba("atrapan una resta al revés", lambda: ok(atrapa(test_resta_los_gastos, lambda b, g: round(g - b, 2)), "test_resta_los_gastos no se dio cuenta"))
+prueba("atrapan que se olvide de los gastos", lambda: ok(atrapa(test_resta_los_gastos, lambda b, g: b), "test_resta_los_gastos no se dio cuenta"))
+prueba("atrapan que ya no avise de los negativos", lambda: ok(atrapa(test_montos_negativos_dan_error, lambda b, g: round(b - g, 2)), "test_montos_negativos_dan_error no se dio cuenta"))
+--- solución
+def ganancia_neta(bruto, gastos):
+    if bruto < 0 or gastos < 0:
+        raise ValueError("Los montos no pueden ser negativos")
+    return round(bruto - gastos, 2)
+
+
+def test_resta_los_gastos():
+    assert ganancia_neta(300, 80.5) == 219.5
+    assert ganancia_neta(150, 0) == 150
+
+
+def test_montos_negativos_dan_error():
+    try:
+        ganancia_neta(-10, 5)
+    except ValueError:
+        return
+    raise AssertionError("con un monto negativo tenía que salir ValueError")
+```
+
 ```practica
 vf :: pytest corre las funciones que empiezan con test_ en los archivos test_*.py
 vf :: Una buena prueba solo revisa el caso normal
@@ -161,6 +215,59 @@ def test_semana_vacia():
 
 > 🌎 **Otro ejemplo:** Es como ensayar la mudanza con una caja antes de mover todo.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El resumen de la semana
+lenguaje: python
+pide: Completa `resumir(movimientos)`, la función pura del proyecto: devuelve un diccionario con `ganado` (la suma de los viajes), `gastado` (la de los gastos), `neto` y `por_app` (cuánto se ganó en cada app, solo de los viajes). Los tres totales, redondeados a 2 decimales. La dataclass `Movimiento` ya está.
+--- código
+from dataclasses import dataclass
+
+
+@dataclass
+class Movimiento:
+    fecha: str
+    tipo: str      # "viaje" o "gasto"
+    detalle: str   # la app o el tipo de gasto
+    valor: float
+
+
+def resumir(movimientos):
+    pass  # tu código aquí
+--- pruebas
+semana = [
+    Movimiento("2026-11-10", "viaje", "Uber", 32.5),
+    Movimiento("2026-11-10", "viaje", "99", 18.0),
+    Movimiento("2026-11-10", "gasto", "combustible", 150.0),
+    Movimiento("2026-11-11", "viaje", "Uber", 45.0),
+    Movimiento("2026-11-11", "gasto", "lavado", 30.0),
+]
+prueba("la semana", lambda: igual(resumir(semana), {"ganado": 95.5, "gastado": 180.0, "neto": -84.5, "por_app": {"Uber": 77.5, "99": 18.0}}))
+prueba("una semana vacía", lambda: igual(resumir([]), {"ganado": 0, "gastado": 0, "neto": 0, "por_app": {}}))
+prueba("sin centavos raros", lambda: igual(resumir([Movimiento("d", "viaje", "Uber", 0.1), Movimiento("d", "viaje", "Uber", 0.2)])["ganado"], 0.3))
+--- solución
+from dataclasses import dataclass
+
+
+@dataclass
+class Movimiento:
+    fecha: str
+    tipo: str      # "viaje" o "gasto"
+    detalle: str   # la app o el tipo de gasto
+    valor: float
+
+
+def resumir(movimientos):
+    ganado = sum(m.valor for m in movimientos if m.tipo == "viaje")
+    gastado = sum(m.valor for m in movimientos if m.tipo == "gasto")
+    por_app = {}
+    for m in movimientos:
+        if m.tipo == "viaje":
+            por_app[m.detalle] = por_app.get(m.detalle, 0) + m.valor
+    return {"ganado": round(ganado, 2), "gastado": round(gastado, 2), "neto": round(ganado - gastado, 2), "por_app": por_app}
+```
+
 ```practica
 vf :: Separar leer_movimientos de resumir hace que resumir se pueda probar sin archivos
 vf :: Para probar el resumen hace falta siempre un archivo CSV real
@@ -204,6 +311,55 @@ Muchos proyectos usan el paquete **requests**, que hace lo mismo con menos líne
 
 > 🌎 **Otro ejemplo:** Es como la llave de tu casa: no la dejas pegada en la puerta para que cualquiera la use.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una API que puede fallar
+lenguaje: python
+pide: En vez de ir a internet, `pedir` es una función que te dan: devuelve el texto JSON de la respuesta o lanza `OSError` si no hay conexión. Completa `estrellas(pedir)`: devuelve `"estudios · 3 estrellas"` (con `name` y `stargazers_count` del JSON), o `None` si falla la conexión (`OSError`) o si el texto no es JSON (`json.JSONDecodeError`). Y `clave_de_api(entorno)`: devuelve `entorno["MI_CLAVE"]`, o lanza `RuntimeError("Falta MI_CLAVE en el entorno")` si no está.
+--- código
+import json
+
+
+def estrellas(pedir):
+    pass  # tu código aquí
+
+
+def clave_de_api(entorno):
+    pass  # tu código aquí
+--- pruebas
+def sin_internet():
+    raise OSError("sin conexión")
+prueba("una respuesta buena", lambda: igual(estrellas(lambda: '{"name": "estudios", "stargazers_count": 3}'), "estudios · 3 estrellas"))
+prueba("sin internet: None", lambda: igual(estrellas(sin_internet), None))
+prueba("una respuesta rota: None", lambda: igual(estrellas(lambda: "<html>error 502</html>"), None))
+prueba("la clave del entorno", lambda: igual(clave_de_api({"MI_CLAVE": "abc123"}), "abc123"))
+@prueba("sin clave: un error claro")
+def _():
+    try:
+        clave_de_api({})
+    except RuntimeError as e:
+        igual(str(e), "Falta MI_CLAVE en el entorno")
+        return
+    raise AssertionError("tenía que lanzar RuntimeError")
+--- solución
+import json
+
+
+def estrellas(pedir):
+    try:
+        datos = json.loads(pedir())
+    except (OSError, json.JSONDecodeError):
+        return None
+    return f"{datos['name']} · {datos['stargazers_count']} estrellas"
+
+
+def clave_de_api(entorno):
+    if "MI_CLAVE" not in entorno:
+        raise RuntimeError("Falta MI_CLAVE en el entorno")
+    return entorno["MI_CLAVE"]
+```
+
 ```practica
 vf :: Con urllib de la biblioteca estándar se pueden pedir datos a una API sin instalar nada
 vf :: La clave de una API se puede escribir directo en el código si el repositorio es privado
@@ -236,6 +392,39 @@ Un proyecto por semana, chico y tuyo: el resumen de la semana con gráficos, un 
 > 🌎 **En la vida real:** es como el músico que toca una canción nueva cada semana.
 
 > 🌎 **Otro ejemplo:** Es como el que va al gimnasio poco pero siempre: a los meses se nota.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La lista de tu próximo proyecto
+lenguaje: python
+pide: Antes de dar por terminado un proyecto chico, se revisa la lista. Completa `que_falta(proyecto)`: recibe un diccionario como `{"entorno": True, "requirements": False, "pruebas": True, "git": True}` y devuelve lo que falta, siempre en este orden: `entorno`, `requirements`, `pruebas`, `git`. Si una llave no está, también falta. Y `listo(proyecto)`: `True` solo si no falta nada.
+--- código
+PASOS = ["entorno", "requirements", "pruebas", "git"]
+
+
+def que_falta(proyecto):
+    pass  # tu código aquí
+
+
+def listo(proyecto):
+    pass  # tu código aquí
+--- pruebas
+prueba("falta uno", lambda: igual(que_falta({"entorno": True, "requirements": False, "pruebas": True, "git": True}), ["requirements"]))
+prueba("en orden, y lo que no está también falta", lambda: igual(que_falta({"git": True, "pruebas": False}), ["entorno", "requirements", "pruebas"]))
+prueba("listo", lambda: igual(listo({p: True for p in PASOS}), True))
+prueba("no listo", lambda: igual(listo({"entorno": True}), False))
+--- solución
+PASOS = ["entorno", "requirements", "pruebas", "git"]
+
+
+def que_falta(proyecto):
+    return [paso for paso in PASOS if not proyecto.get(paso, False)]
+
+
+def listo(proyecto):
+    return not que_falta(proyecto)
+```
 
 ```practica
 vf :: Para trabajar con planillas grandes en Python se usa mucho pandas

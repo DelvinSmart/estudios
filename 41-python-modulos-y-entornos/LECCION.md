@@ -53,6 +53,47 @@ if __name__ == "__main__":
 
 > 🌎 **Otro ejemplo:** Es como un actor que ensaya en su casa: el ensayo no sale en la función.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Piezas con nombre que se usan entre sí
+lenguaje: python
+pide: En un módulo, cada función tiene **un nombre** y las demás la usan por ese nombre (como cuando haces `from calculos import ganancia_neta`). Completa `ganancia_neta(bruto, gastos)`, `formatear(valor)` (que devuelve `"R$ 219.50"`, con 2 decimales) e `informe(bruto, gastos)`, que devuelve `"Te quedó R$ 219.50"` **usando** las otras dos (no vuelvas a hacer la resta ni el formato adentro).
+--- código
+def ganancia_neta(bruto, gastos):
+    pass  # tu código aquí
+
+
+def formatear(valor):
+    pass  # tu código aquí
+
+
+def informe(bruto, gastos):
+    pass  # tu código aquí: usa ganancia_neta y formatear
+--- pruebas
+prueba("cada pieza", lambda: (igual(ganancia_neta(300, 80.5), 219.5), igual(formatear(219.5), "R$ 219.50")))
+prueba("el informe", lambda: igual(informe(300, 80.5), "Te quedó R$ 219.50"))
+@prueba("el informe USA a las otras (si cambias una, cambia el informe)")
+def _():
+    original = globals()["formatear"]
+    globals()["formatear"] = lambda v: "PROBADO"
+    try:
+        igual(informe(300, 80.5), "Te quedó PROBADO")
+    finally:
+        globals()["formatear"] = original
+--- solución
+def ganancia_neta(bruto, gastos):
+    return bruto - gastos
+
+
+def formatear(valor):
+    return f"R$ {valor:.2f}"
+
+
+def informe(bruto, gastos):
+    return f"Te quedó {formatear(ganancia_neta(bruto, gastos))}"
+```
+
 ```practica
 vf :: Cada archivo .py es un módulo que se puede importar
 vf :: El código dentro de if __name__ == "__main__" corre también cuando otro archivo importa el módulo
@@ -108,6 +149,49 @@ print(archivo.exists())
 
 > 🌎 **Otro ejemplo:** Es como las direcciones con calle y número en vez de "la casa azul después del árbol".
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La biblioteca estándar: pilas incluidas
+lenguaje: python
+pide: Usa módulos que ya vienen con Python. `proximo_aceite(fecha, dias=90)`: recibe la fecha como texto `"2026-11-16"` y devuelve la fecha del próximo cambio como `"14/02/2027"` (con `date.fromisoformat`, `timedelta` y `strftime("%d/%m/%Y")`). `promedio(valores)`: con `mean` de `statistics`. `litros_redondos(litros)`: hacia arriba, con `math.ceil`.
+--- código
+# tus imports aquí
+
+
+def proximo_aceite(fecha, dias=90):
+    pass  # tu código aquí
+
+
+def promedio(valores):
+    pass  # tu código aquí
+
+
+def litros_redondos(litros):
+    pass  # tu código aquí
+--- pruebas
+prueba("el próximo aceite", lambda: igual(proximo_aceite("2026-11-16"), "14/02/2027"))
+prueba("con otros días", lambda: igual(proximo_aceite("2026-11-16", dias=30), "16/12/2026"))
+prueba("el promedio", lambda: igual(promedio([120, 95, 180]), 131.66666666666666))
+prueba("hacia arriba", lambda: igual([litros_redondos(32.1), litros_redondos(32.0)], [33, 32]))
+--- solución
+import math
+from datetime import date, timedelta
+from statistics import mean
+
+
+def proximo_aceite(fecha, dias=90):
+    return (date.fromisoformat(fecha) + timedelta(days=dias)).strftime("%d/%m/%Y")
+
+
+def promedio(valores):
+    return mean(valores)
+
+
+def litros_redondos(litros):
+    return math.ceil(litros)
+```
+
 ```practica
 vf :: La biblioteca estándar viene con Python, no hay que instalarla
 vf :: Para trabajar con fechas hay que instalar un paquete externo sí o sí
@@ -155,6 +239,48 @@ Es el equivalente a `package.json` + `npm install`.
 
 > 🌎 **Otro ejemplo:** Es como la lista de útiles escolares: todos llevan los mismos cuadernos.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer un requirements.txt
+lenguaje: python
+pide: Completa `leer_requirements(texto)`: devuelve un diccionario con cada paquete y su versión, de líneas como `requests==2.32.3`. Ignora las líneas vacías y los comentarios (`#`). Si un paquete no tiene versión fija (sin `==`), su versión es `None`. Y `sin_version(texto)`: la lista de esos paquetes sin versión fija, que son un riesgo (cada vez puede bajar otra cosa).
+--- código
+def leer_requirements(texto):
+    pass  # tu código aquí
+
+
+def sin_version(texto):
+    pass  # tu código aquí
+--- pruebas
+req = """# para hablar con APIs
+requests==2.32.3
+
+pytest==8.3.3
+pandas
+"""
+prueba("los paquetes y sus versiones", lambda: igual(leer_requirements(req), {"requests": "2.32.3", "pytest": "8.3.3", "pandas": None}))
+prueba("los que no tienen versión fija", lambda: igual(sin_version(req), ["pandas"]))
+prueba("vacío", lambda: igual(leer_requirements(""), {}))
+--- solución
+def leer_requirements(texto):
+    paquetes = {}
+    for linea in texto.splitlines():
+        linea = linea.strip()
+        if not linea or linea.startswith("#"):
+            continue
+        if "==" in linea:
+            nombre, version = linea.split("==", 1)
+            paquetes[nombre.strip()] = version.strip()
+        else:
+            paquetes[linea] = None
+    return paquetes
+
+
+def sin_version(texto):
+    return [nombre for nombre, version in leer_requirements(texto).items() if version is None]
+```
+
 ```practica
 vf :: PyPI es para Python lo que npm es para JavaScript
 vf :: Cualquier paquete con un nombre parecido al oficial es seguro
@@ -192,6 +318,37 @@ Cuando está activo, la terminal muestra `(.venv)` al principio. La carpeta `.ve
 > 🌎 **En la vida real:** activar es como ponerte el uniforme del trabajo: mientras lo tienes puesto, todo lo que haces es "de ese trabajo".
 
 > 🌎 **Otro ejemplo:** Es como entrar a una habitación: lo que dejas adentro se queda ahí cuando sales.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El entorno virtual no se sube
+lenguaje: python
+pide: Completa `falta_en_gitignore(texto)`: revisa el `.gitignore` de un proyecto de Python y devuelve lo que **falta** de esta lista, en este orden: `.venv/` y `__pycache__/` (cuenta también si está escrito sin la barra final, como `.venv`). Y `como_activar(sistema)`: `"mac"` o `"linux"` → `"source .venv/bin/activate"`; `"windows"` → `".venv\\Scripts\\activate"`.
+--- código
+def falta_en_gitignore(texto):
+    pass  # tu código aquí
+
+
+def como_activar(sistema):
+    pass  # tu código aquí
+--- pruebas
+prueba("todo en orden", lambda: igual(falta_en_gitignore(".venv/\n__pycache__/\n.env\n"), []))
+prueba("sin la barra también vale", lambda: igual(falta_en_gitignore(".venv\n__pycache__\n"), []))
+prueba("falta la carpeta del entorno", lambda: igual(falta_en_gitignore("__pycache__/\n"), [".venv/"]))
+prueba("vacío: falta todo", lambda: igual(falta_en_gitignore(""), [".venv/", "__pycache__/"]))
+prueba("activar en cada sistema", lambda: igual([como_activar("mac"), como_activar("linux"), como_activar("windows")], ["source .venv/bin/activate", "source .venv/bin/activate", ".venv\\Scripts\\activate"]))
+--- solución
+def falta_en_gitignore(texto):
+    lineas = {linea.strip().rstrip("/") for linea in texto.splitlines()}
+    return [entrada for entrada in [".venv/", "__pycache__/"] if entrada.rstrip("/") not in lineas]
+
+
+def como_activar(sistema):
+    if sistema == "windows":
+        return ".venv\\Scripts\\activate"
+    return "source .venv/bin/activate"
+```
 
 ```practica
 vf :: Un entorno virtual tiene sus propios paquetes, separados de otros proyectos

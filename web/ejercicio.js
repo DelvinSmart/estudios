@@ -2,7 +2,7 @@
 // En el .md se escriben en un bloque ```ejercicio:
 //
 //   titulo: Suma los gastos de la semana
-//   lenguaje: js                      (js, ts, html o kotlin; html puede traer su <style>)
+//   lenguaje: js                      (js, ts, html, kotlin o python; html puede traer su <style>)
 //   pide: Completa total(gastos) para que devuelva la suma de los valores.
 //   --- código
 //   function total(gastos) {
@@ -22,10 +22,12 @@
 //
 // Son para aprender: se revisan en el navegador. El certificado depende de las prácticas que corrige el servidor.
 //
+// python: corre de verdad en el navegador con Pyodide, dentro de la caja y en un Worker (ver web/ejercicio-python.js).
 // kotlin: no corre en el navegador. El código viaja al Kotlin Playground de JetBrains (gratis) y las pruebas se
 // leen de lo que imprime (ver web/ejercicio-kotlin.js). Allá corre aislado en sus servidores, no en este sitio.
 
 import { correrKotlin } from './ejercicio-kotlin.js';
+import { cajaPython, ESPERA_PYTHON_MS, ESPERA_PYTHON_CORRER_MS } from './ejercicio-python.js';
 
 const CLAVE = 'mapa-ejercicio:';
 const CLAVE_OK = 'mapa-ejercicio-ok:';
@@ -181,12 +183,18 @@ function correrEnCaja(ej, codigo) {
     caja.title = 'caja aislada donde corre tu código';
     let terminado = false;
     const fin = (r) => { if (terminado) return; terminado = true; window.removeEventListener('message', alRecibir); clearTimeout(reloj); listo({ ...r, caja }); };
-    const alRecibir = (ev) => { if (ev.source === caja.contentWindow && ev.data?.__ejercicio) fin(ev.data); };
+    const alRecibir = (ev) => {
+      if (ev.source !== caja.contentWindow) return;
+      if (ev.data?.__ejercicio) fin(ev.data);
+      // Python avisa cuando terminó de bajar: desde ahí, el código tiene un reloj corto (un ciclo sin fin no espera 60 s).
+      if (ev.data?.__ejercicioListo) { clearTimeout(reloj); reloj = setTimeout(() => fin({ error: `Tu código corrió más de ${ESPERA_PYTHON_CORRER_MS / 1000} segundos sin terminar: ¿hay un ciclo que nunca termina (un while que nunca se vuelve falso)?`, logs: [], resultados: [] }), ESPERA_PYTHON_CORRER_MS); }
+    };
     window.addEventListener('message', alRecibir);
-    const espera = ej.lenguaje === 'ts' ? ESPERA_TS_MS : ESPERA_MS;
-    const reloj = setTimeout(() => fin({ error: `Se quedó trabado más de ${espera / 1000} segundos: ¿hay un ciclo que nunca termina?${ej.lenguaje === 'ts' ? ' (o no hay internet para bajar TypeScript)' : ''}`, logs: [], resultados: [] }), espera);
+    const espera = { ts: ESPERA_TS_MS, python: ESPERA_PYTHON_MS }[ej.lenguaje] || ESPERA_MS;
+    const sinInternet = { ts: ' (o no hay internet para bajar TypeScript)', python: ' (o no hay internet para bajar Python)' }[ej.lenguaje] || '';
+    let reloj = setTimeout(() => fin({ error: `Se quedó trabado más de ${espera / 1000} segundos: ¿hay un ciclo que nunca termina?${sinInternet}`, logs: [], resultados: [] }), espera);
     caja.addEventListener('load', () => caja.contentWindow.postMessage({ codigo, pruebas: ej.pruebas }, '*'), { once: true });
-    caja.srcdoc = ej.lenguaje === 'html' ? cajaHtml(codigo) : ej.lenguaje === 'ts' ? CAJA_TS : CAJA_JS;
+    caja.srcdoc = ej.lenguaje === 'html' ? cajaHtml(codigo) : ej.lenguaje === 'ts' ? CAJA_TS : ej.lenguaje === 'python' ? cajaPython() : CAJA_JS;
     document.body.appendChild(caja); // una caja fuera de la página no carga; en html, después se mueve debajo del resultado
     return caja;
   });
@@ -228,7 +236,7 @@ export function crearEjercicio(texto, id) {
   const probar = async () => {
     const boton = caja.querySelector('.ejercicio-probar');
     boton.disabled = true;
-    const espera = { ts: 'TypeScript está revisando los tipos… (la primera vez tarda unos segundos)', kotlin: 'Kotlin está compilando y corriendo tu código en el Playground de JetBrains… (unos segundos)' };
+    const espera = { ts: 'TypeScript está revisando los tipos… (la primera vez tarda unos segundos)', kotlin: 'Kotlin está compilando y corriendo tu código en el Playground de JetBrains… (unos segundos)', python: 'Python está corriendo tu código… (la primera vez baja Python: puede tardar unos segundos)' };
     resultado.innerHTML = `<p class="tenue mono">${espera[ej.lenguaje] || 'probando…'}</p>`;
     vista?.remove();
     const r = ej.lenguaje === 'kotlin' ? await correrKotlin(editor.value, ej.pruebas) : await correrEnCaja(ej, editor.value);

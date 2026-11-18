@@ -44,6 +44,36 @@ Aquí: en el archivo `ganancias.py`, línea 7, se dividió por cero (`viajes` va
 
 > 🌎 **Otro ejemplo:** Es como los códigos del médico: "fractura", "torcedura"… cada nombre dice qué pasó.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer un traceback de abajo hacia arriba
+lenguaje: python
+pide: Completa `que_paso(traceback)`: recibe el texto de un error de Python y devuelve tres cosas: el **tipo** de error (lo que está antes de `:` en la **última** línea), el **mensaje** (lo de después) y el **número de línea** del último `File "…", line N` (como `int`). Pista: `splitlines()`, y recorre las líneas buscando `", line "`.
+--- código
+def que_paso(traceback):
+    pass  # tu código aquí: return tipo, mensaje, linea
+--- pruebas
+error = """Traceback (most recent call last):
+  File "ganancias.py", line 12, in <module>
+    print(promedio(viajes))
+  File "ganancias.py", line 7, in promedio
+    return total / cantidad
+ZeroDivisionError: division by zero"""
+prueba("qué pasó y dónde", lambda: igual(que_paso(error), ("ZeroDivisionError", "division by zero", 7)))
+otro = 'Traceback (most recent call last):\n  File "carro.py", line 3, in <module>\n    print(carro["seguro"])\nKeyError: \'seguro\''
+prueba("otro error", lambda: igual(que_paso(otro), ("KeyError", "'seguro'", 3)))
+--- solución
+def que_paso(traceback):
+    lineas = traceback.strip().splitlines()
+    tipo, mensaje = lineas[-1].split(": ", 1)
+    numero = None
+    for linea in lineas:
+        if '", line ' in linea:
+            numero = int(linea.split('", line ')[1].split(",")[0])
+    return tipo, mensaje, numero
+```
+
 ```practica
 vf :: El traceback de Python se lee de abajo hacia arriba
 vf :: "10" + 5 en Python da 15
@@ -89,6 +119,47 @@ Nunca escribas `except:` vacío que se trague **todo**: esconde errores de verda
 
 > 🌎 **Otro ejemplo:** Es como un médico que da calmante sin buscar qué duele: el dolor se va, la enfermedad no.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: try y except: atrapar solo lo que sabes manejar
+lenguaje: python
+pide: Completa `leer_litros(texto)`: convierte el texto en `float` (acepta coma) y, si **no** es un número, devuelve `None` en vez de romperse. Atrapa **solo** `ValueError`. Y `promedio(valores)`: el promedio, o `0.0` si la lista está vacía, atrapando `ZeroDivisionError`.
+--- código
+def leer_litros(texto):
+    pass  # tu código aquí
+
+
+def promedio(valores):
+    pass  # tu código aquí
+--- pruebas
+prueba("un número", lambda: igual(leer_litros("32.5"), 32.5))
+prueba("con coma", lambda: igual(leer_litros("32,5"), 32.5))
+prueba("no es un número: None, sin romperse", lambda: igual(leer_litros("mucho"), None))
+prueba("el promedio", lambda: igual(promedio([120, 95, 180]), 131.66666666666666))
+prueba("sin valores: 0.0", lambda: igual(promedio([]), 0.0))
+@prueba("otros errores NO se esconden")
+def _():
+    try:
+        leer_litros(None)
+    except AttributeError:
+        return
+    raise AssertionError("con None tiene que salir el error de verdad: no uses except vacío")
+--- solución
+def leer_litros(texto):
+    try:
+        return float(texto.replace(",", "."))
+    except ValueError:
+        return None
+
+
+def promedio(valores):
+    try:
+        return sum(valores) / len(valores)
+    except ZeroDivisionError:
+        return 0.0
+```
+
 ```practica
 vf :: El bloque finally se ejecuta siempre, haya error o no
 vf :: Un except vacío que atrapa todo es una buena práctica
@@ -127,6 +198,34 @@ La regla de oro (la misma de seguridad, Tema 22): **valida los datos donde entra
 > 🌎 **En la vida real:** en el aeropuerto revisan las maletas en la entrada, no en el avión.
 
 > 🌎 **Otro ejemplo:** Es como lavar las verduras al traerlas del mercado, no en el plato.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: raise: avisar en vez de devolver algo equivocado
+lenguaje: python
+pide: Completa `registrar_gasto(valor)`. Si el valor no es un número (`int` o `float`), lanza `TypeError("El gasto tiene que ser un número")`. Si es 0 o menos, `ValueError("El gasto tiene que ser mayor que cero")`. Si está bien, devuelve el valor redondeado a 2 decimales.
+--- código
+def registrar_gasto(valor):
+    pass  # tu código aquí
+--- pruebas
+def mensaje_de(error, fn):
+    try:
+        fn()
+    except error as e:
+        return str(e)
+    return "no lanzó " + error.__name__
+prueba("un gasto bien, redondeado a 2 decimales", lambda: igual(registrar_gasto(30.556), 30.56))
+prueba("cero o negativo: ValueError", lambda: igual([mensaje_de(ValueError, lambda: registrar_gasto(v)) for v in (0, -5)], ["El gasto tiene que ser mayor que cero"] * 2))
+prueba("un texto: TypeError", lambda: igual(mensaje_de(TypeError, lambda: registrar_gasto("30")), "El gasto tiene que ser un número"))
+--- solución
+def registrar_gasto(valor):
+    if not isinstance(valor, (int, float)):
+        raise TypeError("El gasto tiene que ser un número")
+    if valor <= 0:
+        raise ValueError("El gasto tiene que ser mayor que cero")
+    return round(valor, 2)
+```
 
 ```practica
 vf :: raise sirve para lanzar un error a propósito cuando un dato no tiene sentido
@@ -197,6 +296,54 @@ print(leidos["gastos"])
 > 🌎 **En la vida real:** es como una ficha con campos y subcampos que cualquier sistema entiende.
 
 > 🌎 **Otro ejemplo:** Es como un idioma internacional de los datos: Python, JavaScript y Firebase lo hablan.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: CSV y JSON
+lenguaje: python
+pide: Completa `total_del_csv(texto)`: recibe el texto de una planilla CSV con una columna `valor` y devuelve la suma (usa `csv.DictReader(io.StringIO(texto))`, que lee el texto como si fuera un archivo). Y `guardar_y_leer(datos, ruta)`: guarda los datos en un archivo JSON con `with open(…, "w", encoding="utf-8")` y `json.dump(…, ensure_ascii=False)`, y después lo **lee** con `json.load` y devuelve lo leído.
+--- código
+import csv
+import io
+import json
+
+
+def total_del_csv(texto):
+    pass  # tu código aquí
+
+
+def guardar_y_leer(datos, ruta):
+    pass  # tu código aquí
+--- pruebas
+import os
+import tempfile
+planilla = "fecha,app,valor\n2026-11-10,Uber,32.50\n2026-11-10,99,18.00\n2026-11-11,Uber,45.00\n"
+prueba("la suma de la planilla", lambda: igual(total_del_csv(planilla), 95.5))
+ruta = os.path.join(tempfile.mkdtemp(), "datos.json")
+datos = {"carro": "Corolla", "ciudad": "São Paulo", "gastos": [150.0, 30.0]}
+prueba("ida y vuelta", lambda: igual(guardar_y_leer(datos, ruta), datos))
+@prueba("las tildes quedan como letras (ensure_ascii=False)")
+def _():
+    guardar_y_leer(datos, ruta)
+    with open(ruta, encoding="utf-8") as f:
+        ok("São Paulo" in f.read(), "en el archivo tiene que decir São Paulo, no S\\u00e3o Paulo")
+--- solución
+import csv
+import io
+import json
+
+
+def total_del_csv(texto):
+    return sum(float(fila["valor"]) for fila in csv.DictReader(io.StringIO(texto)))
+
+
+def guardar_y_leer(datos, ruta):
+    with open(ruta, "w", encoding="utf-8") as f:
+        json.dump(datos, f, ensure_ascii=False, indent=2)
+    with open(ruta, encoding="utf-8") as f:
+        return json.load(f)
+```
 
 ```practica
 vf :: with open cierra el archivo solo, aunque haya un error

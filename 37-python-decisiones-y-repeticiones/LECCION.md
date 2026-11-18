@@ -40,6 +40,32 @@ Configura tu editor (VS Code) para que la tecla Tab ponga 4 espacios. No mezcles
 
 > 🌎 **Otro ejemplo:** Es como escribir con la misma letra toda la carta.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una línea fuera de lugar
+lenguaje: python
+pide: Este código **corre**, pero hace algo mal: dice "Toma agua." **siempre**, y tenía que decirlo solo en los días buenos. El problema es **una sola sangría**. Arréglala (sin cambiar ningún texto) para que la línea quede adentro del `if`.
+--- código
+def mensaje(viajes):
+    texto = "Día normal."
+    if viajes > 10:
+        texto = "¡Buen día!"
+    texto = texto + " Toma agua."
+    return texto
+--- pruebas
+prueba("un buen día", lambda: igual(mensaje(12), "¡Buen día! Toma agua."))
+prueba("un día normal", lambda: igual(mensaje(5), "Día normal."))
+prueba("el borde: 10 no es más que 10", lambda: igual(mensaje(10), "Día normal."))
+--- solución
+def mensaje(viajes):
+    texto = "Día normal."
+    if viajes > 10:
+        texto = "¡Buen día!"
+        texto = texto + " Toma agua."
+    return texto
+```
+
 ```practica
 vf :: En Python, la sangría es parte del código
 vf :: Python usa llaves { } para los bloques, igual que JavaScript
@@ -103,6 +129,48 @@ if not gastos:
 
 > 🌎 **Otro ejemplo:** Es como un tanque en cero: el tanque está, pero para manejar cuenta como vacío.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: if, elif, else y lo que cuenta como falso
+lenguaje: python
+pide: Completa tres funciones. `nivel(ganancia)`: 250 o más → `"Superaste la meta"`; 150 o más → `"Cerca de la meta"`; si no, `"Día flojo"`. `es_fin_de_semana(dia)`: `True` si es `"sábado"` o `"domingo"` (usa `or`). `aviso(gastos)`: si la lista está vacía (usa `if not gastos`), `"Todavía no registraste gastos"`; si no, `"N gastos"`.
+--- código
+def nivel(ganancia):
+    pass  # tu código aquí
+
+
+def es_fin_de_semana(dia):
+    pass  # tu código aquí
+
+
+def aviso(gastos):
+    pass  # tu código aquí
+--- pruebas
+prueba("los niveles y sus bordes", lambda: igual([nivel(g) for g in [250, 249, 150, 149]], ["Superaste la meta", "Cerca de la meta", "Cerca de la meta", "Día flojo"]))
+prueba("fin de semana", lambda: igual([es_fin_de_semana(d) for d in ["sábado", "domingo", "lunes"]], [True, True, False]))
+prueba("sin gastos", lambda: igual(aviso([]), "Todavía no registraste gastos"))
+prueba("con gastos", lambda: igual(aviso([150, 30]), "2 gastos"))
+--- solución
+def nivel(ganancia):
+    if ganancia >= 250:
+        return "Superaste la meta"
+    elif ganancia >= 150:
+        return "Cerca de la meta"
+    else:
+        return "Día flojo"
+
+
+def es_fin_de_semana(dia):
+    return dia == "sábado" or dia == "domingo"
+
+
+def aviso(gastos):
+    if not gastos:
+        return "Todavía no registraste gastos"
+    return f"{len(gastos)} gastos"
+```
+
 ```practica
 vf :: En Python, else if se escribe elif
 vf :: En Python, "y" se escribe && como en JavaScript
@@ -159,6 +227,50 @@ for i, app in enumerate(apps, start=1):
 
 > 🌎 **Otro ejemplo:** Es como las páginas numeradas de un libro.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: for, range y enumerate
+lenguaje: python
+pide: Completa con `for`. `total(ganancias)`: la suma, con un ciclo (sin usar `sum`). `dias()`: la lista `["Día 1", …, "Día 7"]` con `range`. `numeradas(apps)`: `["1. Uber", "2. 99", …]` con `enumerate(apps, start=1)`.
+--- código
+def total(ganancias):
+    pass  # tu código aquí
+
+
+def dias():
+    pass  # tu código aquí
+
+
+def numeradas(apps):
+    pass  # tu código aquí
+--- pruebas
+prueba("el total", lambda: igual(total([120, 95, 180, 210]), 605))
+prueba("sin ganancias", lambda: igual(total([]), 0))
+prueba("los días", lambda: igual(dias(), ["Día 1", "Día 2", "Día 3", "Día 4", "Día 5", "Día 6", "Día 7"]))
+prueba("numeradas", lambda: igual(numeradas(["Uber", "99", "InDrive"]), ["1. Uber", "2. 99", "3. InDrive"]))
+--- solución
+def total(ganancias):
+    suma = 0
+    for g in ganancias:
+        suma += g
+    return suma
+
+
+def dias():
+    lista = []
+    for dia in range(1, 8):
+        lista.append(f"Día {dia}")
+    return lista
+
+
+def numeradas(apps):
+    lista = []
+    for i, app in enumerate(apps, start=1):
+        lista.append(f"{i}. {app}")
+    return lista
+```
+
 ```practica
 vf :: for g in ganancias recorre la lista elemento por elemento
 vf :: range(5) da los números del 1 al 5
@@ -209,6 +321,45 @@ for g in [120, -5, 90, 0, 200]:
 > 🌎 **En la vida real:** `continue` es saltar una canción que no te gusta; `break` es apagar la radio.
 
 > 🌎 **Otro ejemplo:** Es como revisar facturas: si una está rota, pasas a la siguiente (continue); si se acabó la jornada, paras (break).
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: while, break y continue
+lenguaje: python
+pide: Completa `meses_para(meta, por_mes)` con un `while`: cuántos meses ahorrando `por_mes` hacen falta para llegar **al menos** a la meta. Y `sumar_validos(ganancias)`: suma los valores, pero **salta** los negativos (`continue`) y **para** al encontrar un 0 (`break`), sin sumarlo.
+--- código
+def meses_para(meta, por_mes):
+    pass  # tu código aquí
+
+
+def sumar_validos(ganancias):
+    pass  # tu código aquí
+--- pruebas
+prueba("ahorrar 1000 de a 150", lambda: igual(meses_para(1000, 150), 7))
+prueba("justo en el borde", lambda: igual(meses_para(300, 150), 2))
+prueba("salta los negativos y para en el 0", lambda: igual(sumar_validos([120, -5, 90, 0, 200]), 210))
+prueba("sin 0, suma todo lo válido", lambda: igual(sumar_validos([10, -1, 20]), 30))
+--- solución
+def meses_para(meta, por_mes):
+    ahorro = 0
+    meses = 0
+    while ahorro < meta:
+        ahorro += por_mes
+        meses += 1
+    return meses
+
+
+def sumar_validos(ganancias):
+    suma = 0
+    for g in ganancias:
+        if g < 0:
+            continue
+        if g == 0:
+            break
+        suma += g
+    return suma
+```
 
 ```practica
 vf :: while repite mientras la condición sea verdadera

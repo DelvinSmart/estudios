@@ -53,6 +53,51 @@ print(mi_carro)   # Toyota Corolla (85120 km)
 
 > 🌎 **Otro ejemplo:** Es como la tarjeta de presentación de una persona.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu primera clase
+lenguaje: python
+pide: Completa la clase `Carro`: `__init__` guarda `marca`, `modelo` y `km` (por defecto 0) en `self`; `recorrer(distancia)` suma al `km`; `falta_para_aceite(cada=5000)` devuelve cuántos km faltan para el próximo cambio (`cada - self.km % cada`); y `__str__` devuelve `"Toyota Corolla (85120 km)"`.
+--- código
+class Carro:
+    def __init__(self, marca, modelo, km=0):
+        pass  # tu código aquí
+
+    def recorrer(self, distancia):
+        pass  # tu código aquí
+
+    def falta_para_aceite(self, cada=5000):
+        pass  # tu código aquí
+
+    def __str__(self):
+        return "Carro"
+--- pruebas
+@prueba("crear y recorrer")
+def _():
+    c = Carro("Toyota", "Corolla", 84800)
+    c.recorrer(320)
+    igual(c.km, 85120)
+prueba("km empieza en 0", lambda: igual(Carro("Fiat", "Uno").km, 0))
+prueba("lo que falta para el aceite", lambda: igual(Carro("Toyota", "Corolla", 84800).falta_para_aceite(), 200))
+prueba("cómo se muestra", lambda: igual(str(Carro("Toyota", "Corolla", 85120)), "Toyota Corolla (85120 km)"))
+--- solución
+class Carro:
+    def __init__(self, marca, modelo, km=0):
+        self.marca = marca
+        self.modelo = modelo
+        self.km = km
+
+    def recorrer(self, distancia):
+        self.km += distancia
+
+    def falta_para_aceite(self, cada=5000):
+        return cada - self.km % cada
+
+    def __str__(self):
+        return f"{self.marca} {self.modelo} ({self.km} km)"
+```
+
 ```practica
 vf :: Una clase es el plano y cada objeto es una copia con sus propios valores
 vf :: En Python, self es una palabra opcional que casi nunca se usa
@@ -104,6 +149,57 @@ Si dudas, es mejor **componer** (un objeto que tiene otro adentro: "el conductor
 > 🌎 **En la vida real:** un conductor no "es" un carro: "tiene" un carro.
 
 > 🌎 **Otro ejemplo:** Es como una casa: "tiene" una cocina; no "es" una cocina.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Herencia con super()
+lenguaje: python
+pide: `Vehiculo` ya está. Escribe `CarroDeApp`, que **hereda** de `Vehiculo`: su `__init__(self, placa, km=0, apps=None)` llama a `super().__init__(placa, km)` y guarda `self.apps = apps or []` (una lista **nueva** si no le pasan ninguna); y `trabaja_en(app)` dice si la app está en su lista.
+--- código
+class Vehiculo:
+    def __init__(self, placa, km=0):
+        self.placa = placa
+        self.km = km
+
+    def recorrer(self, distancia):
+        self.km += distancia
+
+
+class CarroDeApp:
+    pass  # tu código aquí: hereda de Vehiculo
+--- pruebas
+@prueba("hereda lo de Vehiculo")
+def _():
+    c = CarroDeApp("ABC1D23", 85000, ["Uber", "99"])
+    c.recorrer(40)
+    igual((c.placa, c.km), ("ABC1D23", 85040))
+    ok(isinstance(c, Vehiculo), "un CarroDeApp también es un Vehiculo")
+prueba("trabaja en", lambda: igual([CarroDeApp("X", 0, ["Uber", "99"]).trabaja_en(a) for a in ("99", "InDrive")], [True, False]))
+@prueba("cada carro con su propia lista")
+def _():
+    a = CarroDeApp("A")
+    b = CarroDeApp("B")
+    a.apps.append("Uber")
+    igual(b.apps, [])
+--- solución
+class Vehiculo:
+    def __init__(self, placa, km=0):
+        self.placa = placa
+        self.km = km
+
+    def recorrer(self, distancia):
+        self.km += distancia
+
+
+class CarroDeApp(Vehiculo):
+    def __init__(self, placa, km=0, apps=None):
+        super().__init__(placa, km)
+        self.apps = apps or []
+
+    def trabaja_en(self, app):
+        return app in self.apps
+```
 
 ```practica
 vf :: Una clase hija recibe los atributos y métodos de la clase madre
@@ -160,6 +256,61 @@ print(dia.total_gastos(), dia)
 > 🌎 **En la vida real:** una nota en un papel, un formulario o un contrato: según cuánto importa el dato.
 
 > 🌎 **Otro ejemplo:** Es como una bolsa, una mochila o una maleta: según lo que lleves.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Dataclasses y el error clásico de la lista compartida
+lenguaje: python
+pide: Completa las dataclasses. `Gasto` tiene `tipo: str`, `valor: float` y `nota: str = ""`. `DiaDeTrabajo` tiene `fecha: str` y `gastos`, una lista que empieza vacía **y es distinta para cada día**: usa `field(default_factory=list)`, no `= []`. Su método `total_gastos()` suma los valores.
+--- código
+from dataclasses import dataclass, field
+
+
+@dataclass
+class Gasto:
+    pass  # tu código aquí
+
+
+@dataclass
+class DiaDeTrabajo:
+    fecha: str
+
+    def total_gastos(self):
+        pass  # tu código aquí
+--- pruebas
+prueba("un gasto se compara por su contenido", lambda: igual(Gasto("lavado", 30.0), Gasto("lavado", 30.0, "")))
+@prueba("el total del día")
+def _():
+    dia = DiaDeTrabajo("2026-11-16")
+    dia.gastos.append(Gasto("combustible", 150.0))
+    dia.gastos.append(Gasto("peaje", 5.4))
+    igual(dia.total_gastos(), 155.4)
+@prueba("cada día con su propia lista")
+def _():
+    lunes = DiaDeTrabajo("2026-11-16")
+    martes = DiaDeTrabajo("2026-11-17")
+    lunes.gastos.append(Gasto("lavado", 30.0))
+    igual(martes.gastos, [])
+--- solución
+from dataclasses import dataclass, field
+
+
+@dataclass
+class Gasto:
+    tipo: str
+    valor: float
+    nota: str = ""
+
+
+@dataclass
+class DiaDeTrabajo:
+    fecha: str
+    gastos: list = field(default_factory=list)
+
+    def total_gastos(self):
+        return sum(g.valor for g in self.gastos)
+```
 
 ```practica
 vf :: @dataclass escribe el __init__ por ti

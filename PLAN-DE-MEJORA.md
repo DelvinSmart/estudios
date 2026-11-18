@@ -55,7 +55,7 @@ en el aparato y deja ver la solución después de intentarlo.
 - [x] JavaScript
 - [x] HTML y CSS (las pruebas miran la página que armó el alumno)
 - [x] TypeScript (el compilador oficial dentro de la caja: revisa los tipos en modo estricto y explica los errores comunes en español)
-- [ ] Python (Pyodide: Python dentro del navegador)
+- [x] Python (Pyodide 314, Python 3.14 dentro del navegador: en la caja aislada y en un Worker, así un ciclo sin fin se corta a los 10 s sin trabar la página; errores en español con su línea; `web/ejercicio-python.js`, con sus pruebas en `herramientas/`)
 - [x] Kotlin (Kotlin Playground: corre en los servidores gratuitos de JetBrains; la revisión es por la salida; los errores del compilador, explicados en español; `web/ejercicio-kotlin.js`, con sus pruebas en `herramientas/`)
 - [ ] React Native (Snack de Expo para ver la app; la revisión es una lista de comprobación)
 - [x] El panel muestra los ejercicios en la vista previa y no los rompe
@@ -81,7 +81,7 @@ todos los "abre tal archivo de Copiloto".
 | Node.js | ✅ La API de gastos con Express (clase 87): 32 pruebas, tres almacenes (memoria, archivo y Firestore) y cómo publicarla | ✅ Completo: 9 clases, un ejercicio de código en cada parte (31, probados con su solución). Probándola con curl se encontraron y arreglaron dos errores: dos gastos a la vez se pisaban y aceptaba el 31 de febrero |
 | React Native | ✅ La app de gastos con Expo y TypeScript (clase 88): motor de diseño, lógica con pruebas, AsyncStorage, FlatList, 27 pruebas con Jest y Testing Library, y abrirla en el iPhone con Expo Go | ✅ Completo: 8 clases, un ejercicio de código en cada parte (27, probados con su solución). Probándola de verdad se encontró y arregló que el gasto más nuevo del mismo día quedaba abajo |
 | Kotlin | ✅ La app de gastos nativa en Android (clase 89): Gradle con catálogo de versiones, lógica en Kotlin puro, DataStore detrás de una interfaz, ViewModel con StateFlow, Compose, 23 pruebas con JUnit, y probada en el emulador (guardar, cerrar y abrir, borrar, girar) | ✅ Completo: 8 clases, un ejercicio de Kotlin de verdad en cada parte (27, corren en el Kotlin Playground y probados con su solución). Mirándola en el emulador se encontraron y arreglaron las barras del sistema ilegibles y un chip sin el color del motor |
-| Python | El resumen semanal de un conductor desde un CSV, con pytest | Ejercicios en cada parte con Pyodide |
+| Python | El resumen semanal de un conductor desde un CSV, con pytest | ✅ Un ejercicio de Python de verdad en cada parte (31, probados con su solución en la computadora y en el navegador), varios con un error real para arreglar (print en vez de return, una sangría, una función que cambia lo de afuera, pruebas que atrapan un sabotaje). Falta: el proyecto final |
 | Seguridad | Auditar la versión "con errores" del proyecto de práctica y arreglarla | Más clases: es el curso más corto |
 | IA para programadores | Construir una app pequeña dirigiendo a la IA: plan, reglas, pruebas, revisión | Ejercicios de pedidos y de revisión de código |
 | Agentes de IA | Un agente pequeño que corre gratis en la computadora (Ollama) | Ejercicios con el código de cada patrón |

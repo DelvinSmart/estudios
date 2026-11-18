@@ -58,6 +58,32 @@ python3 hola.py
 
 > 🌎 **Otro ejemplo:** Es como la diferencia entre improvisar una receta y tenerla escrita en un cuaderno.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu primer código en Python
+lenguaje: python
+pide: Completa dos funciones. `saludo(nombre)` devuelve `"¡Hola, Delvin!"` para `"Delvin"`. `repetir(texto, veces)` devuelve el texto repetido, como `"hola" * 3` en el intérprete. Cambia cada `pass` por tu código con `return`. Puedes usar `print()` para mirar valores: sale debajo de las pruebas.
+--- código
+def saludo(nombre):
+    pass  # tu código aquí
+
+
+def repetir(texto, veces):
+    pass  # tu código aquí
+--- pruebas
+prueba("el saludo", lambda: igual(saludo("Delvin"), "¡Hola, Delvin!"))
+prueba("otro nombre", lambda: igual(saludo("Ana"), "¡Hola, Ana!"))
+prueba("repetir", lambda: igual(repetir("hola", 3), "holaholahola"))
+--- solución
+def saludo(nombre):
+    return f"¡Hola, {nombre}!"
+
+
+def repetir(texto, veces):
+    return texto * veces
+```
+
 ```practica
 vf :: En la Mac, Python 3 se corre con el comando python3
 vf :: El intérprete (REPL) sirve para guardar programas largos
@@ -112,6 +138,39 @@ total = 10  # también al final de una línea
 > 🌎 **En la vida real:** es como las notas al margen de un libro: el libro no cambia, pero te ayudan a entender.
 
 > 🌎 **Otro ejemplo:** Es como el post-it en la nevera: "no comer, es para mañana".
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Nombres en snake_case y una constante
+lenguaje: python
+pide: Escribe la constante `IMPUESTO = 0.15` (en MAYÚSCULAS, porque no cambia) y completa `ganancia_por_viaje(ganancia_total, numero_de_viajes)` y `con_impuesto(valor)`, que suma el impuesto y redondea a 2 decimales con `round(…, 2)`. Fíjate en los nombres: minúsculas y guion bajo.
+--- código
+# tu constante aquí
+
+
+def ganancia_por_viaje(ganancia_total, numero_de_viajes):
+    pass  # tu código aquí
+
+
+def con_impuesto(valor):
+    pass  # tu código aquí
+--- pruebas
+prueba("la constante existe", lambda: igual(IMPUESTO, 0.15))
+prueba("ganancia por viaje", lambda: igual(ganancia_por_viaje(117.0, 12), 9.75))
+prueba("con impuesto", lambda: igual(con_impuesto(100), 115.0))
+prueba("redondea los centavos", lambda: igual(con_impuesto(9.99), 11.49))
+--- solución
+IMPUESTO = 0.15
+
+
+def ganancia_por_viaje(ganancia_total, numero_de_viajes):
+    return ganancia_total / numero_de_viajes
+
+
+def con_impuesto(valor):
+    return round(valor * (1 + IMPUESTO), 2)
+```
 
 ```practica
 vf :: En Python se crea una variable con const o let
@@ -186,6 +245,35 @@ print(type(tiene_carro_propio))   # <class 'bool'>
 
 > 🌎 **Otro ejemplo:** Es como pasar una receta de tazas a gramos.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: int, float y convertir
+lenguaje: python
+pide: Completa `repartir(km, dias)`: devuelve dos cosas, cuántos km enteros tocan por día (con `//`) y cuántos sobran (con `%`). Y `a_numero(texto)`: si el texto tiene un punto, devuelve un `float`; si no, un `int`. Pista: `"." in texto`.
+--- código
+def repartir(km, dias):
+    pass  # tu código aquí: return enteros, sobran
+
+
+def a_numero(texto):
+    pass  # tu código aquí
+--- pruebas
+prueba("repartir 23 km en 5 días", lambda: igual(repartir(23, 5), (4, 3)))
+prueba("justo", lambda: igual(repartir(20, 5), (4, 0)))
+prueba("un entero", lambda: (igual(a_numero("12"), 12), ok(type(a_numero("12")) is int, "tiene que ser int")))
+prueba("un decimal", lambda: (igual(a_numero("9.75"), 9.75), ok(type(a_numero("9.75")) is float, "tiene que ser float")))
+--- solución
+def repartir(km, dias):
+    return km // dias, km % dias
+
+
+def a_numero(texto):
+    if "." in texto:
+        return float(texto)
+    return int(texto)
+```
+
 ```practica
 vf :: En Python, int y float son tipos distintos de número
 vf :: En Python, verdadero se escribe true, con minúscula
@@ -227,6 +315,26 @@ print(f"Rendimiento: {km / litros:.1f} km por litro")
 > 🌎 **En la vida real:** es como un formulario en papel: lo que escribes es texto hasta que alguien lo pasa a la calculadora.
 
 > 🌎 **Otro ejemplo:** Es como dictar un número por teléfono: el otro lo anota como palabras y después lo convierte en cifras.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El rendimiento, con dos decimales
+lenguaje: python
+pide: En el programa de la lección, `input()` devuelve **texto**. Aquí la función recibe ese texto ya escrito. Completa `rendimiento(km_texto, litros_texto)`: convierte los dos con `float()` y devuelve `"Rendimiento: 12.5 km por litro"` con **un** decimal (`:.1f` en una f-string).
+--- código
+def rendimiento(km_texto, litros_texto):
+    pass  # tu código aquí
+--- pruebas
+prueba("redondo", lambda: igual(rendimiento("400", "32"), "Rendimiento: 12.5 km por litro"))
+prueba("con decimales en el texto", lambda: igual(rendimiento("351.5", "30.2"), "Rendimiento: 11.6 km por litro"))
+prueba("siempre un decimal", lambda: igual(rendimiento("300", "30"), "Rendimiento: 10.0 km por litro"))
+--- solución
+def rendimiento(km_texto, litros_texto):
+    km = float(km_texto)
+    litros = float(litros_texto)
+    return f"Rendimiento: {km / litros:.1f} km por litro"
+```
 
 ```practica
 vf :: print en Python es como console.log en JavaScript
