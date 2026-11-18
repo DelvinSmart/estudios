@@ -1004,7 +1004,7 @@ body.con-reproductor { padding-bottom: 70px; }
 .ejercicio-resultado { display: flex; flex-direction: column; gap: 8px; }
 .ejercicio-cuenta { margin: 0; font-weight: 700; color: var(--amarillo); }
 .ejercicio-cuenta.bien { color: var(--acento); }
-.ejercicio-error { margin: 0; color: var(--rojo); font: 0.85rem var(--mono); }
+.ejercicio-error { margin: 0; color: var(--rojo); font: 0.85rem/1.5 var(--mono); white-space: pre-wrap; }
 .ejercicio-pruebas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; }
 .texto .ejercicio-pruebas { padding: 0; margin: 0; }
 .ejercicio-pruebas li span { display: inline-block; width: 1.2em; font-weight: 800; }
