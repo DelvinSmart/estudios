@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gastos del carro</title>
+  <style>
+    :root { --fondo: #0f141b; --tarjeta: #18212c; --texto: #e6edf3; --tenue: #8796aa; --acento: #7ee787; --peligro: #ff7b72; --hueco: 14px; --relleno: 16px; --radio: 14px; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font-family: system-ui, sans-serif; }
+    main { max-width: 520px; margin: 0 auto; padding: var(--relleno); display: grid; gap: var(--hueco); }
+    .tarjeta { background: var(--tarjeta); border-radius: var(--radio); padding: var(--relleno); display: grid; gap: var(--hueco); }
+    form { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; }
+    label { display: grid; gap: 4px; color: var(--tenue); font-size: 14px; }
+    input, select, button { font: inherit; padding: 8px; border-radius: 8px; border: 1px solid var(--tenue); background: var(--fondo); color: var(--texto); }
+    button { background: var(--acento); color: var(--fondo); border: 0; font-weight: 700; cursor: pointer; }
+    .ancho { grid-column: 1 / -1; }
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    li { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+    li button { background: transparent; color: var(--peligro); border: 1px solid var(--peligro); padding: 4px 10px; }
+    #aviso { color: var(--peligro); min-height: 1.2em; margin: 0; }
+    .total { font-size: 28px; font-weight: 700; margin: 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Gastos del carro</h1>
+
+    <section class="tarjeta">
+      <p class="total" id="total">R$ 0,00</p>
+      <p id="cantidad">0 gastos</p>
+    </section>
+
+    <section class="tarjeta">
+      <form id="nuevo">
+        <label>Tipo
+          <select id="tipo">
+            <option value="combustible">Combustible</option>
+            <option value="lavado">Lavado</option>
+            <option value="peaje">Peaje</option>
+            <option value="mantenimiento">Mantenimiento</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+        <label>Valor (R$)
+          <input id="valor" type="number" step="0.01" min="0.01" required>
+        </label>
+        <label class="ancho">Fecha
+          <input id="fecha" type="date" required>
+        </label>
+        <button class="ancho">Guardar</button>
+      </form>
+      <p id="aviso" role="alert"></p>
+    </section>
+
+    <section class="tarjeta">
+      <ul id="lista"></ul>
+    </section>
+  </main>
+
+  <script type="module">
+    // Esta página no calcula nada: le pide todo a la API (la misma idea que la app y la web de Copiloto).
+    const dinero = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const $ = (s) => document.querySelector(s);
+
+    async function pedir(ruta, opciones = {}) {
+      const r = await fetch(ruta, { headers: { 'Content-Type': 'application/json' }, ...opciones });
+      if (r.status === 204) return null;
+      const datos = await r.json();
+      if (!r.ok) throw new Error(datos.detalles?.join(' · ') ?? datos.error);
+      return datos;
+    }
+
+    async function dibujar() {
+      const [gastos, resumen] = await Promise.all([pedir('/gastos'), pedir('/gastos/resumen')]);
+      $('#total').textContent = dinero(resumen.total);
+      $('#cantidad').textContent = `${resumen.cantidad} gasto${resumen.cantidad === 1 ? '' : 's'}`;
+      $('#lista').replaceChildren(...gastos.map((g) => {
+        const li = document.createElement('li');
+        const texto = document.createElement('span');
+        texto.textContent = `${g.fecha} · ${g.tipo} · ${dinero(g.valor)}`;   // textContent: nunca innerHTML con datos
+        const borrar = document.createElement('button');
+        borrar.textContent = 'Borrar';
+        borrar.addEventListener('click', async () => { await pedir(`/gastos/${g.id}`, { method: 'DELETE' }); dibujar(); });
+        li.append(texto, borrar);
+        return li;
+      }));
+    }
+
+    $('#fecha').value = new Date().toISOString().slice(0, 10);
+    $('#nuevo').addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+      $('#aviso').textContent = '';
+      try {
+        await pedir('/gastos', { method: 'POST', body: JSON.stringify({ tipo: $('#tipo').value, valor: Number($('#valor').value), fecha: $('#fecha').value }) });
+        $('#valor').value = '';
+        dibujar();
+      } catch (error) {
+        $('#aviso').textContent = error.message;
+      }
+    });
+
+    dibujar().catch(() => { $('#aviso').textContent = 'No pude hablar con la API. ¿Está encendida (npm start)?'; });
+  </script>
+</body>
+</html>

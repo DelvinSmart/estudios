@@ -1,0 +1,21 @@
+{
+  "name": "api-de-gastos",
+  "version": "1.0.0",
+  "description": "El proyecto del curso Node.js: una API de gastos con Express, guardada en un archivo y con sus pruebas",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/servidor.mjs",
+    "dev": "node --watch src/servidor.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.0"
+  }
+}

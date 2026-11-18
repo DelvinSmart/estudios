@@ -31,6 +31,35 @@ Lo que **no** tiene: `document`, `window` ni botones; no hay página. Lo que **s
 
 > 🌎 **Otro ejemplo:** Es como un electricista que hace instalaciones, arreglos y también te arma la lámpara.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Corre en el navegador, en Node o en los dos?
+lenguaje: js
+pide: Node tiene `process`, `fs` y `http`, pero no tiene `document` ni `window`. El navegador es al revés. Las dos cosas tienen `console`, `fetch`, `JSON` y `setTimeout`. Completa `dondeCorre(codigo)`: devuelve `'navegador'`, `'node'` o `'los dos'` según lo que use el código (si usa algo de un solo lado, es de ese lado).
+--- código
+const SOLO_NAVEGADOR = ['document', 'window', 'localStorage'];
+const SOLO_NODE = ['process', 'node:fs', 'node:http', 'require('];
+
+function dondeCorre(codigo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('document: navegador', () => igual(dondeCorre("document.querySelector('#total')"), 'navegador'));
+prueba('process: node', () => igual(dondeCorre('const archivo = process.argv[2];'), 'node'));
+prueba('fs: node', () => igual(dondeCorre("import { readFile } from 'node:fs/promises';"), 'node'));
+prueba('JSON y console: los dos', () => igual(dondeCorre("console.log(JSON.stringify({ a: 1 }))"), 'los dos'));
+--- solución
+const SOLO_NAVEGADOR = ['document', 'window', 'localStorage'];
+const SOLO_NODE = ['process', 'node:fs', 'node:http', 'require('];
+
+function dondeCorre(codigo) {
+  if (SOLO_NAVEGADOR.some((p) => codigo.includes(p))) return 'navegador';
+  if (SOLO_NODE.some((p) => codigo.includes(p))) return 'node';
+  return 'los dos';
+}
+```
+
 ```practica
 vf :: Node.js ejecuta JavaScript fuera del navegador
 vf :: En Node.js existe document para cambiar el HTML de una página
@@ -71,6 +100,36 @@ Un cálculo **largo y pesado** (por ejemplo, un ciclo de mil millones de vueltas
 > 🌎 **En la vida real:** si el único mesero se pone a pelar 100 kilos de papas, ninguna mesa es atendida.
 
 > 🌎 **Otro ejemplo:** Es como un auto parado en medio de una calle de un solo carril.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El orden del event loop
+lenguaje: js
+pide: Node no espera parado: pide el archivo y sigue. Completa la función `async` `orden()`: anota en la lista `pasos` `'1. pido'`, después **sin esperar** pide `leerArchivoDeMentira()`, anota `'2. sigo atendiendo'`, y recién ahí espera el archivo y anota `'3. llegó: ' + texto`. Devuelve `pasos`.
+--- código
+const leerArchivoDeMentira = () => new Promise((listo) => setTimeout(() => listo('gastos'), 20));
+
+async function orden() {
+  const pasos = [];
+  // tu código aquí
+  return pasos;
+}
+--- pruebas
+prueba('el orden', async () => igual(await orden(), ['1. pido', '2. sigo atendiendo', '3. llegó: gastos']));
+prueba('no espera parado: el 2 va antes de que llegue', async () => { const p = orden(); await new Promise((r) => setTimeout(r, 5)); igual((await p)[1], '2. sigo atendiendo'); });
+--- solución
+const leerArchivoDeMentira = () => new Promise((listo) => setTimeout(() => listo('gastos'), 20));
+
+async function orden() {
+  const pasos = [];
+  pasos.push('1. pido');
+  const texto = leerArchivoDeMentira();
+  pasos.push('2. sigo atendiendo');
+  pasos.push('3. llegó: ' + (await texto));
+  return pasos;
+}
+```
 
 ```practica
 vf :: Node ejecuta tu JavaScript en un solo hilo
@@ -125,6 +184,28 @@ Los archivos `.mjs` (o con `"type": "module"` en `package.json`) usan `import`; 
 > 🌎 **En la vida real:** son las herramientas que vienen de fábrica con el carro.
 
 > 🌎 **Otro ejemplo:** Es como la vajilla que trae un departamento amueblado.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: process.argv y process.env
+lenguaje: js
+pide: Al correr `node resumen.mjs semana.csv`, `process.argv` es `['/ruta/a/node', '/ruta/a/resumen.mjs', 'semana.csv']`. Completa `leerOpciones(argv, env)`: devuelve `{ archivo, modo }` donde `archivo` es el tercer elemento y `modo` sale de `env.NODE_ENV` (o `'desarrollo'` si no está). Si falta el archivo, devuelve `{ error: 'Uso: node resumen.mjs <archivo.csv>', codigo: 1 }`.
+--- código
+function leerOpciones(argv, env) {
+  // tu código aquí
+}
+--- pruebas
+prueba('con archivo', () => igual(leerOpciones(['node', 'resumen.mjs', 'semana.csv'], {}), { archivo: 'semana.csv', modo: 'desarrollo' }));
+prueba('en producción', () => igual(leerOpciones(['node', 'resumen.mjs', 'mes.csv'], { NODE_ENV: 'produccion' }).modo, 'produccion'));
+prueba('sin archivo: error con código 1', () => igual(leerOpciones(['node', 'resumen.mjs'], {}), { error: 'Uso: node resumen.mjs <archivo.csv>', codigo: 1 }));
+--- solución
+function leerOpciones(argv, env) {
+  const archivo = argv[2];
+  if (!archivo) return { error: 'Uso: node resumen.mjs <archivo.csv>', codigo: 1 };
+  return { archivo, modo: env.NODE_ENV ?? 'desarrollo' };
+}
+```
 
 ```practica
 vf :: process.argv tiene lo que escribiste después del nombre del archivo al correrlo

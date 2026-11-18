@@ -45,6 +45,43 @@ Por eso Copiloto guarda primero en el aparato y reintenta con cuidado: un `POST`
 - **Paginación:** nunca devuelvas 10.000 viajes de una vez. `GET /viajes?limite=20&despues=abc123` trae 20 y te dice desde dónde seguir.
 - **Versión en la ruta:** `/v1/gastos`. Si un día cambias la forma de la respuesta, creas `/v2/gastos` y las apps viejas, que la gente no actualizó, siguen funcionando con `/v1`.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Reintentar sin duplicar
+lenguaje: js
+pide: Un `POST` repetido (mala señal, la app reintenta) crea dos gastos. La solución: la app manda una **clave de idempotencia**. Completa `crearServidor()` con `post(gasto, clave)`: si ya vio esa clave, devuelve el **mismo** gasto que creó la primera vez (sin crear otro); si no, lo crea con un id nuevo. `cantidad()` dice cuántos hay.
+--- código
+function crearServidor() {
+  const gastos = [];
+  const vistas = new Map();
+  return {
+    post(gasto, clave) {
+      // tu código aquí
+    },
+    cantidad: () => gastos.length,
+  };
+}
+--- pruebas
+prueba('reintentar no duplica', () => { const s = crearServidor(); const a = s.post({ valor: 30 }, 'k1'); const b = s.post({ valor: 30 }, 'k1'); igual([s.cantidad(), a.id === b.id], [1, true]); });
+prueba('otra clave, otro gasto', () => { const s = crearServidor(); s.post({ valor: 30 }, 'k1'); s.post({ valor: 30 }, 'k2'); igual(s.cantidad(), 2); });
+--- solución
+function crearServidor() {
+  const gastos = [];
+  const vistas = new Map();
+  return {
+    post(gasto, clave) {
+      if (vistas.has(clave)) return vistas.get(clave);
+      const nuevo = { id: gastos.length + 1, ...gasto };
+      gastos.push(nuevo);
+      vistas.set(clave, nuevo);
+      return nuevo;
+    },
+    cantidad: () => gastos.length,
+  };
+}
+```
+
 ```practica
 vf :: En una API REST, el servidor recuerda quién eres por la conversación anterior, sin que mandes el token en cada pedido
 vf :: DELETE /gastos/3 es idempotente: hacerlo dos veces deja todo igual que hacerlo una vez
@@ -69,6 +106,26 @@ Un **monolito** es una sola aplicación de servidor que hace todo: usuarios, gas
 | Llamar a otra parte es llamar a una función, sin red. | Muchos equipos tocando el mismo código se estorban. |
 
 La recomendación de la industria es: **empieza con un monolito ordenado** (lógica separada por áreas, como `gastos.mjs` aparte de las rutas). Solo cuando duele, lo partes.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Monolito o microservicios?
+lenguaje: js
+pide: Completa `recomendar(equipo)`: `equipo = { personas, equipos, partesQueSeEstorban }`. Recomienda `'microservicios'` solo si hay **más de un equipo** y **partes que se estorban**; en cualquier otro caso, `'monolito ordenado'`.
+--- código
+function recomendar(equipo) {
+  // tu código aquí
+}
+--- pruebas
+prueba('una persona (Copiloto)', () => igual(recomendar({ personas: 1, equipos: 1, partesQueSeEstorban: false }), 'monolito ordenado'));
+prueba('muchos, sin estorbarse', () => igual(recomendar({ personas: 30, equipos: 4, partesQueSeEstorban: false }), 'monolito ordenado'));
+prueba('varios equipos que se estorban', () => igual(recomendar({ personas: 40, equipos: 5, partesQueSeEstorban: true }), 'microservicios'));
+--- solución
+function recomendar(equipo) {
+  return equipo.equipos > 1 && equipo.partesQueSeEstorban ? 'microservicios' : 'monolito ordenado';
+}
+```
 
 ```practica
 vf :: Empezar un proyecto nuevo con un monolito ordenado es una mala práctica
@@ -132,6 +189,34 @@ Fíjate en tres cosas:
 
 Cuándo **no** vale la pena: si tienes un solo frontend, o la app y la web piden casi lo mismo. Un BFF es un servidor más que mantener.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un BFF que aguanta si un servicio se cae
+lenguaje: js
+pide: Completa la función `async` `inicio(pedir)`: pide **a la vez** `'ganancias'`, `'metas'` y `'recordatorios'` con `pedir(nombre)` (que devuelve una promesa), usando `Promise.allSettled`. Devuelve `{ gananciaHoy, meta, proximoAviso }` con `total`, `valor` y `texto` de cada respuesta, o `null` si ese servicio falló.
+--- código
+async function inicio(pedir) {
+  // tu código aquí
+}
+--- pruebas
+const respuestas = { ganancias: { total: 180 }, metas: { valor: 300 }, recordatorios: { texto: 'Cambiar el aceite' } };
+const todoBien = (n) => Promise.resolve(respuestas[n]);
+const metasCaidas = (n) => (n === 'metas' ? Promise.reject(new Error('caído')) : Promise.resolve(respuestas[n]));
+prueba('todo bien', async () => igual(await inicio(todoBien), { gananciaHoy: 180, meta: 300, proximoAviso: 'Cambiar el aceite' }));
+prueba('metas caído: lo demás igual llega', async () => igual(await inicio(metasCaidas), { gananciaHoy: 180, meta: null, proximoAviso: 'Cambiar el aceite' }));
+prueba('a la vez, no uno por uno', async () => { let enCurso = 0, maximo = 0; const lento = (n) => { enCurso++; maximo = Math.max(maximo, enCurso); return new Promise((r) => setTimeout(() => { enCurso--; r(respuestas[n]); }, 10)); }; await inicio(lento); igual(maximo, 3); });
+--- solución
+async function inicio(pedir) {
+  const [hoy, meta, avisos] = await Promise.allSettled([pedir('ganancias'), pedir('metas'), pedir('recordatorios')]);
+  return {
+    gananciaHoy: hoy.status === 'fulfilled' ? hoy.value.total : null,
+    meta: meta.status === 'fulfilled' ? meta.value.valor : null,
+    proximoAviso: avisos.status === 'fulfilled' ? avisos.value.texto : null,
+  };
+}
+```
+
 ```practica
 vf :: Un BFF es un servidor hecho a la medida de un frontend, por ejemplo uno para la app y otro para la web
 elige :: ¿Qué gana la app del celular con un BFF? :: Ya no necesita internet :: Hace un solo pedido y recibe solo los campos que usa :: Puede saltarse la autenticación
@@ -173,6 +258,53 @@ Los eventos ya los conoces: el `AIEventBus` de Copiloto es exactamente esa idea,
 | Más cosas que publicar | 10 servicios son 10 cosas que vigilar. |
 
 Por eso la regla es: **microservicios cuando el equipo y el tamaño lo piden**, no por moda. Copiloto, hecho por una persona, está mejor como está.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Eventos: avisar sin esperar
+lenguaje: js
+pide: Entre microservicios, uno avisa "pasó algo" y quien quiera escucha. Completa `crearBus()`: `escuchar(evento, fn)` y `avisar(evento, datos)` (llama a todos los que escuchan ese evento, en orden). Después, en `conectar(bus, notificaciones)`, haz que el evento `'gasto registrado'` con `valor` mayor que 500 agregue a `notificaciones` el texto `'Gasto alto: R$ VALOR'`.
+--- código
+function crearBus() {
+  const oyentes = {};
+  return {
+    escuchar(evento, fn) {
+      // tu código aquí
+    },
+    avisar(evento, datos) {
+      // tu código aquí
+    },
+  };
+}
+
+function conectar(bus, notificaciones) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un gasto alto avisa', () => { const bus = crearBus(); const n = []; conectar(bus, n); bus.avisar('gasto registrado', { valor: 800 }); igual(n, ['Gasto alto: R$ 800']); });
+prueba('uno chico no', () => { const bus = crearBus(); const n = []; conectar(bus, n); bus.avisar('gasto registrado', { valor: 30 }); igual(n, []); });
+prueba('varios escuchan', () => { const bus = crearBus(); let a = 0; bus.escuchar('x', () => a++); bus.escuchar('x', () => a++); bus.avisar('x'); igual(a, 2); });
+prueba('un evento sin oyentes no rompe', () => { const bus = crearBus(); bus.avisar('nadie escucha', {}); ok(true); });
+--- solución
+function crearBus() {
+  const oyentes = {};
+  return {
+    escuchar(evento, fn) {
+      (oyentes[evento] ??= []).push(fn);
+    },
+    avisar(evento, datos) {
+      for (const fn of oyentes[evento] ?? []) fn(datos);
+    },
+  };
+}
+
+function conectar(bus, notificaciones) {
+  bus.escuchar('gasto registrado', (g) => {
+    if (g.valor > 500) notificaciones.push(`Gasto alto: R$ ${g.valor}`);
+  });
+}
+```
 
 ```practica
 vf :: En microservicios, cada servicio debería tener su propia base de datos y pedirle a los otros por su API

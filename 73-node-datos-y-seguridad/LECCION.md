@@ -56,6 +56,28 @@ En los proyectos de este curso, el servidor (Cloud Functions) usa **firebase-adm
 
 > 🌎 **Otro ejemplo:** Es como el gerente del banco que puede abrir cualquier caja: su responsabilidad es mayor.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Consultas con parámetros
+lenguaje: js
+pide: Haz una mini base que **nunca** pega los datos dentro del texto de la consulta. Completa `consulta(sql, parametros, filas)`: solo entiende `SELECT * FROM gastos WHERE campo = ?`. Busca el campo en el SQL y filtra las filas comparando con `parametros[0]` **tal cual** (aunque traiga comillas o `DROP TABLE`, es solo un texto a comparar).
+--- código
+function consulta(sql, parametros, filas) {
+  // tu código aquí
+}
+--- pruebas
+const filas = [{ id: 1, tipo: 'lavado', valor: 30 }, { id: 2, tipo: 'peaje', valor: 12 }];
+prueba('por tipo', () => igual(consulta('SELECT * FROM gastos WHERE tipo = ?', ['lavado'], filas), [filas[0]]));
+prueba('un ataque es solo un texto', () => igual(consulta('SELECT * FROM gastos WHERE tipo = ?', ["lavado'; DROP TABLE gastos;--"], filas), []));
+prueba('las filas siguen ahí', () => igual(filas.length, 2));
+--- solución
+function consulta(sql, parametros, filas) {
+  const campo = sql.match(/WHERE (\w+) = \?/)[1];
+  return filas.filter((f) => f[campo] === parametros[0]);
+}
+```
+
 ```practica
 vf :: SQLite guarda toda la base de datos en un archivo
 vf :: Pegar el texto del usuario dentro del SQL con plantillas es seguro si usas comillas
@@ -95,6 +117,32 @@ En el código: `process.env.CLAVE_API_EXTERNA`. En la nube, el gestor de secreto
 > 🌎 **En la vida real:** autenticación es mostrar el documento en la portería; autorización es que te dejen subir solo a tu piso.
 
 > 🌎 **Otro ejemplo:** Es como el hotel: la tarjeta dice quién eres y abre solo tu habitación.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Quién eres? y ¿puedes?
+lenguaje: js
+pide: Completa `revisar(cabeceras, uidDeLaRuta, tokens)`: lee `Authorization: Bearer <token>`; si falta o el token no está en `tokens` → `{ estado: 401 }`. Con el `uid` del token: si no es el de la ruta → `{ estado: 403 }`; si es → `{ estado: 200, uid }`. **Nunca** uses un uid que mande el cliente en el cuerpo.
+--- código
+function revisar(cabeceras, uidDeLaRuta, tokens) {
+  // tu código aquí
+}
+--- pruebas
+const tokens = { 'tok-ana': 'ana', 'tok-beto': 'beto' };
+prueba('Ana lee lo suyo', () => igual(revisar({ authorization: 'Bearer tok-ana' }, 'ana', tokens), { estado: 200, uid: 'ana' }));
+prueba('sin token: 401', () => igual(revisar({}, 'ana', tokens), { estado: 401 }));
+prueba('token inventado: 401', () => igual(revisar({ authorization: 'Bearer falso' }, 'ana', tokens), { estado: 401 }));
+prueba('Beto pide lo de Ana: 403', () => igual(revisar({ authorization: 'Bearer tok-beto' }, 'ana', tokens), { estado: 403 }));
+--- solución
+function revisar(cabeceras, uidDeLaRuta, tokens) {
+  const m = (cabeceras.authorization ?? '').match(/^Bearer (.+)$/);
+  const uid = m ? tokens[m[1]] : undefined;
+  if (!uid) return { estado: 401 };
+  if (uid !== uidDeLaRuta) return { estado: 403 };
+  return { estado: 200, uid };
+}
+```
 
 ```practica
 vf :: node --env-file=.env carga las variables del .env sin instalar nada
@@ -143,6 +191,38 @@ Secretos en `.env` o en el gestor de secretos · valida todo lo que entra · con
 > 🌎 **En la vida real:** es la lista que revisa el encargado antes de abrir la tienda cada mañana.
 
 > 🌎 **Otro ejemplo:** Es como el checklist del piloto: corto, siempre el mismo.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un límite de pedidos por minuto
+lenguaje: js
+pide: Completa `crearLimite(maximo, ventanaMs)`: devuelve una función `(ip, ahora) => true/false`. Deja pasar hasta `maximo` pedidos por IP dentro de cada ventana (que empieza con el primer pedido); después devuelve `false` (el 429) hasta que pase la ventana.
+--- código
+function crearLimite(maximo, ventanaMs) {
+  const cuentas = new Map();
+  return (ip, ahora) => {
+    // tu código aquí
+  };
+}
+--- pruebas
+prueba('3 pasan, el 4.º no', () => { const p = crearLimite(3, 60000); igual([p('1.1.1.1', 0), p('1.1.1.1', 10), p('1.1.1.1', 20), p('1.1.1.1', 30)], [true, true, true, false]); });
+prueba('otra IP tiene su propia cuenta', () => { const p = crearLimite(1, 60000); p('a', 0); igual(p('b', 1), true); });
+prueba('al pasar el minuto, vuelve a dejar', () => { const p = crearLimite(1, 60000); p('a', 0); p('a', 10); igual(p('a', 60001), true); });
+--- solución
+function crearLimite(maximo, ventanaMs) {
+  const cuentas = new Map();
+  return (ip, ahora) => {
+    const c = cuentas.get(ip);
+    if (!c || ahora - c.inicio > ventanaMs) {
+      cuentas.set(ip, { inicio: ahora, n: 1 });
+      return true;
+    }
+    c.n++;
+    return c.n <= maximo;
+  };
+}
+```
 
 ```practica
 vf :: express-rate-limit limita cuántos pedidos puede hacer cada IP en un tiempo

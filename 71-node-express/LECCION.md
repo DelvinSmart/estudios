@@ -54,6 +54,57 @@ Compáralo con la clase 70: `:id` reemplaza la expresión regular, `express.json
 
 > 🌎 **Otro ejemplo:** Es como una carta ya abierta y ordenada en tu escritorio.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un mini Express: rutas con :id
+lenguaje: js
+pide: Haz un mini Express. `crearApp()` devuelve `{ get(patron, fn), manejar(url) }`. `get` guarda la ruta; `manejar` busca la primera que encaja (un pedazo `:nombre` encaja con cualquier texto y va a `params.nombre`), arma `pedido = { params, query }` y devuelve lo que devuelva `fn(pedido)`. Si ninguna encaja, `{ estado: 404 }`.
+--- código
+function crearApp() {
+  const rutas = [];
+  return {
+    get(patron, fn) {
+      // tu código aquí
+    },
+    manejar(url) {
+      // tu código aquí
+    },
+  };
+}
+--- pruebas
+const app = crearApp();
+app.get('/gastos', (q) => ({ estado: 200, tipo: q.query.tipo ?? null }));
+app.get('/gastos/:id', (q) => ({ estado: 200, id: q.params.id }));
+prueba('una ruta fija', () => igual(app.manejar('/gastos'), { estado: 200, tipo: null }));
+prueba('con query', () => igual(app.manejar('/gastos?tipo=lavado'), { estado: 200, tipo: 'lavado' }));
+prueba('con :id', () => igual(app.manejar('/gastos/3'), { estado: 200, id: '3' }));
+prueba('no existe', () => igual(app.manejar('/viajes'), { estado: 404 }));
+--- solución
+function crearApp() {
+  const rutas = [];
+  return {
+    get(patron, fn) {
+      rutas.push({ partes: patron.split('/'), fn });
+    },
+    manejar(url) {
+      const u = new URL(url, 'http://localhost');
+      const partes = u.pathname.split('/');
+      for (const r of rutas) {
+        if (r.partes.length !== partes.length) continue;
+        const params = {};
+        const encaja = r.partes.every((p, i) => {
+          if (p.startsWith(':')) { params[p.slice(1)] = partes[i]; return true; }
+          return p === partes[i];
+        });
+        if (encaja) return r.fn({ params, query: Object.fromEntries(u.searchParams) });
+      }
+      return { estado: 404 };
+    },
+  };
+}
+```
+
 ```practica
 vf :: express.json() lee el cuerpo JSON del pedido por ti
 vf :: En Express, /gastos/:id guarda el número en pedido.query.id
@@ -102,6 +153,48 @@ Los middleware corren **en el orden en que los escribes**. Si pones la ruta ante
 
 > 🌎 **Otro ejemplo:** Es como vestirse: primero las medias, después los zapatos.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Middleware: la línea de producción
+lenguaje: js
+pide: Completa `correr(middlewares, pedido)`: cada middleware es `(pedido, respuesta, siguiente)`. Llama al primero; si llama a `siguiente()`, pasa al próximo. `respuesta` es un objeto con `estado` y `cuerpo` que empieza vacío `{}` y que devuelves al final. Después, escribe `soloConClave`: si `pedido.headers['x-clave']` no es `'secreta'`, pone `estado: 401` y `cuerpo: { error: 'Falta la clave' }` y **no** sigue.
+--- código
+function correr(middlewares, pedido) {
+  const respuesta = {};
+  // tu código aquí
+  return respuesta;
+}
+
+function soloConClave(pedido, respuesta, siguiente) {
+  // tu código aquí
+}
+--- pruebas
+const anotar = (pedido, respuesta, siguiente) => { pedido.anotado = true; siguiente(); };
+const borrar = (pedido, respuesta) => { respuesta.estado = 204; };
+prueba('pasa por todos', () => { const p = { headers: { 'x-clave': 'secreta' } }; igual(correr([anotar, soloConClave, borrar], p), { estado: 204 }); igual(p.anotado, true); });
+prueba('sin clave, se corta', () => igual(correr([anotar, soloConClave, borrar], { headers: {} }), { estado: 401, cuerpo: { error: 'Falta la clave' } }));
+prueba('el orden importa', () => { const p = { headers: {} }; correr([soloConClave, anotar], p); igual(p.anotado, undefined); });
+--- solución
+function correr(middlewares, pedido) {
+  const respuesta = {};
+  const paso = (i) => {
+    if (i < middlewares.length) middlewares[i](pedido, respuesta, () => paso(i + 1));
+  };
+  paso(0);
+  return respuesta;
+}
+
+function soloConClave(pedido, respuesta, siguiente) {
+  if (pedido.headers['x-clave'] !== 'secreta') {
+    respuesta.estado = 401;
+    respuesta.cuerpo = { error: 'Falta la clave' };
+    return;
+  }
+  siguiente();
+}
+```
+
 ```practica
 vf :: Un middleware puede responder y cortar, o llamar siguiente() para pasar al próximo
 vf :: El orden en que se escriben los middleware no importa
@@ -142,6 +235,35 @@ Nunca le muestres al usuario el error completo (el *stack*, rutas de archivos, c
 > 🌎 **En la vida real:** al cliente le dices "estamos resolviendo un problema"; el informe técnico va al mecánico.
 
 > 🌎 **Otro ejemplo:** Es como un hospital: al paciente le explican claro, el detalle va a la historia clínica.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Errores en un solo lugar
+lenguaje: js
+pide: Completa `manejarConErrores(ruta, registro)`: devuelve una función `async (pedido) => respuesta` que corre `await ruta(pedido)`; si la ruta lanza un error, lo anota en `registro` (con su mensaje completo, para ti) y responde `{ estado: 500, cuerpo: { error: 'Algo salió mal' } }` (al usuario, **nada** interno).
+--- código
+function manejarConErrores(ruta, registro) {
+  // tu código aquí
+}
+--- pruebas
+const bien = async () => ({ estado: 200, cuerpo: { ok: true } });
+const rota = async () => { throw new Error('SELECT * FROM gastos falló en /srv/app/db.mjs:12'); };
+prueba('sin error, pasa', async () => igual(await manejarConErrores(bien, [])({}), { estado: 200, cuerpo: { ok: true } }));
+prueba('con error: 500 sin detalles', async () => igual(await manejarConErrores(rota, [])({}), { estado: 500, cuerpo: { error: 'Algo salió mal' } }));
+prueba('el detalle va al registro', async () => { const r = []; await manejarConErrores(rota, r)({}); ok(r[0]?.includes('db.mjs'), 'anota el mensaje en el registro'); });
+--- solución
+function manejarConErrores(ruta, registro) {
+  return async (pedido) => {
+    try {
+      return await ruta(pedido);
+    } catch (error) {
+      registro.push(error.message);
+      return { estado: 500, cuerpo: { error: 'Algo salió mal' } };
+    }
+  };
+}
+```
 
 ```practica
 vf :: El manejador de errores de Express tiene cuatro parámetros y va al final

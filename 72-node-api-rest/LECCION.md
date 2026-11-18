@@ -26,6 +26,31 @@
 
 > 🌎 **Otro ejemplo:** Es como los íconos de un tablero de carro: el mismo dibujo en todas las marcas.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Es una ruta REST?
+lenguaje: js
+pide: En REST las rutas nombran **cosas** (sustantivos en plural) y el verbo dice qué hacer. Completa `esRest(ruta)`: `false` si algún pedazo de la ruta empieza con un verbo de acción (`borrar`, `crear`, `editar`, `listar`, `get`, `delete`, `update`), sin importar mayúsculas; si no, `true`.
+--- código
+const VERBOS = ['borrar', 'crear', 'editar', 'listar', 'get', 'delete', 'update'];
+
+function esRest(ruta) {
+  // tu código aquí
+}
+--- pruebas
+prueba('/gastos', () => igual(esRest('/gastos'), true));
+prueba('/gastos/3', () => igual(esRest('/gastos/3'), true));
+prueba('/borrarGasto/3', () => igual(esRest('/borrarGasto/3'), false));
+prueba('/api/getGastos', () => igual(esRest('/api/getGastos'), false));
+--- solución
+const VERBOS = ['borrar', 'crear', 'editar', 'listar', 'get', 'delete', 'update'];
+
+function esRest(ruta) {
+  return !ruta.split('/').some((p) => VERBOS.some((v) => p.toLowerCase().startsWith(v)));
+}
+```
+
 ```practica
 vf :: En REST, las rutas nombran cosas y el verbo dice qué hacer
 vf :: /borrarGasto?id=3 es una ruta REST bien hecha
@@ -102,6 +127,48 @@ app.delete('/gastos/:id', (q, r) => (G.borrar(Number(q.params.id)) ? r.status(20
 
 > 🌎 **Otro ejemplo:** Es como un recepcionista que deriva cada llamada al departamento correcto.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Validar y quedarse solo con lo conocido
+lenguaje: js
+pide: Completa `validar(datos, parcial)` como en la clase: el tipo tiene que estar en `TIPOS` y el valor ser un número mayor que 0; con `parcial = true` (para PATCH), solo se revisa lo que viene. Y `soloConocidos(datos)`: devuelve un objeto **solo** con `tipo` y `valor` (los que vengan), ignorando cualquier otro campo como `admin`.
+--- código
+const TIPOS = ['combustible', 'lavado', 'peaje', 'mantenimiento', 'otro'];
+
+function validar(datos, parcial = false) {
+  // tu código aquí
+}
+
+function soloConocidos(datos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un gasto bien', () => igual(validar({ tipo: 'lavado', valor: 30 }), []));
+prueba('tipo inventado', () => igual(validar({ tipo: 'casino', valor: 30 }).length, 1));
+prueba('valor en texto', () => igual(validar({ tipo: 'lavado', valor: '30' }).length, 1));
+prueba('falta todo', () => igual(validar({}).length, 2));
+prueba('PATCH solo con valor', () => igual(validar({ valor: 50 }, true), []));
+prueba('ignora admin', () => igual(soloConocidos({ tipo: 'peaje', valor: 12, admin: true }), { tipo: 'peaje', valor: 12 }));
+prueba('solo lo que viene', () => igual(soloConocidos({ valor: 5 }), { valor: 5 }));
+--- solución
+const TIPOS = ['combustible', 'lavado', 'peaje', 'mantenimiento', 'otro'];
+
+function validar(datos, parcial = false) {
+  const errores = [];
+  if (!parcial || 'tipo' in datos) if (!TIPOS.includes(datos.tipo)) errores.push(`tipo debe ser uno de: ${TIPOS.join(', ')}`);
+  if (!parcial || 'valor' in datos) if (!(typeof datos.valor === 'number' && datos.valor > 0)) errores.push('valor debe ser un número mayor que 0');
+  return errores;
+}
+
+function soloConocidos(datos) {
+  const r = {};
+  if ('tipo' in datos) r.tipo = datos.tipo;
+  if ('valor' in datos) r.valor = datos.valor;
+  return r;
+}
+```
+
 ```practica
 vf :: Separar la lógica de las rutas permite probarla sin HTTP
 vf :: Si alguien manda un campo admin: true, la API lo guarda junto con el gasto
@@ -130,6 +197,31 @@ Nunca `origin: '*'` en una API con datos privados (Tema 23). CORS **no** reempla
 > 🌎 **En la vida real:** la lista de invitados de la fiesta no reemplaza al guardia que revisa el documento.
 
 > 🌎 **Otro ejemplo:** Es como el control de acceso por tarjeta: dice qué puertas, no quién eres.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: CORS: ¿este origen puede leer la respuesta?
+lenguaje: js
+pide: Completa `cabecerasCors(origen, permitidos)`: si el origen está en la lista, devuelve `{ 'Access-Control-Allow-Origin': origen }`; si no, `{}` (el navegador bloqueará la respuesta). Nunca devuelvas `'*'`.
+--- código
+const PERMITIDOS = ['https://delvinsmart.github.io', 'http://localhost:5173'];
+
+function cabecerasCors(origen, permitidos) {
+  // tu código aquí
+}
+--- pruebas
+prueba('tu web', () => igual(cabecerasCors('https://delvinsmart.github.io', PERMITIDOS), { 'Access-Control-Allow-Origin': 'https://delvinsmart.github.io' }));
+prueba('tu Mac', () => igual(cabecerasCors('http://localhost:5173', PERMITIDOS)['Access-Control-Allow-Origin'], 'http://localhost:5173'));
+prueba('otra página: nada', () => igual(cabecerasCors('https://pagina-rara.com', PERMITIDOS), {}));
+prueba('sin origen: nada', () => igual(cabecerasCors(undefined, PERMITIDOS), {}));
+--- solución
+const PERMITIDOS = ['https://delvinsmart.github.io', 'http://localhost:5173'];
+
+function cabecerasCors(origen, permitidos) {
+  return permitidos.includes(origen) ? { 'Access-Control-Allow-Origin': origen } : {};
+}
+```
 
 ```practica
 vf :: CORS controla qué páginas pueden leer las respuestas de tu API desde el navegador

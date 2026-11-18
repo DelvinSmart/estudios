@@ -57,6 +57,73 @@ Cada ruta con el caso bueno, los **errores** (400, 404) y los **bordes** (lista 
 
 > 🌎 **Otro ejemplo:** Es como revisar un paracaídas: abre, no se enreda, y aguanta el peso.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Pruebas para la API, con su sabotaje
+lenguaje: js
+pide: Con un `pedir` de mentira (como supertest, pero sin red), escribe al menos 3 pruebas con `it` y `assertEqual(real, esperado)`: crear un gasto bueno da 201, un valor negativo da 400, y borrar uno que no existe da 404. Las revisiones sabotean la API y tus pruebas tienen que notarlo.
+--- código
+let SABOTAJE = '';
+function crearAPI() {
+  let gastos = [];
+  return function pedir(verbo, ruta, cuerpo) {
+    if (verbo === 'POST' && ruta === '/gastos') {
+      if (!(cuerpo.valor > 0) && SABOTAJE !== 'sinValidar') return { status: 400 };
+      const g = { id: gastos.length + 1, ...cuerpo };
+      gastos.push(g);
+      return { status: 201, body: g };
+    }
+    if (verbo === 'DELETE') {
+      const id = Number(ruta.split('/')[2]);
+      if (!gastos.some((g) => g.id === id)) return { status: SABOTAJE === 'borrar200' ? 200 : 404 };
+      gastos = gastos.filter((g) => g.id !== id);
+      return { status: 204 };
+    }
+    return { status: 404 };
+  };
+}
+
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const assertEqual = (real, esperado) => { if (real !== esperado) throw new Error(`esperaba ${esperado} y recibió ${real}`); };
+
+// ✍️ Tus pruebas aquí (cada prueba crea su propia API: const pedir = crearAPI();):
+--- pruebas
+const correrTodas = () => misPruebas.filter((p) => { try { p.fn(); return false; } catch { return true; } }).map((p) => p.nombre);
+prueba('pasan con la API correcta', () => { const f = correrTodas(); ok(misPruebas.length >= 3 && f.length === 0, f.length ? 'fallan: ' + f.join(' | ') : 'escribe al menos 3 pruebas'); });
+prueba('notan si deja de validar', () => { SABOTAJE = 'sinValidar'; const f = correrTodas(); SABOTAJE = ''; ok(f.length > 0, 'falta la prueba del valor negativo'); });
+prueba('notan si borrar lo que no existe da 200', () => { SABOTAJE = 'borrar200'; const f = correrTodas(); SABOTAJE = ''; ok(f.length > 0, 'falta la prueba del 404 al borrar'); });
+--- solución
+let SABOTAJE = '';
+function crearAPI() {
+  let gastos = [];
+  return function pedir(verbo, ruta, cuerpo) {
+    if (verbo === 'POST' && ruta === '/gastos') {
+      if (!(cuerpo.valor > 0) && SABOTAJE !== 'sinValidar') return { status: 400 };
+      const g = { id: gastos.length + 1, ...cuerpo };
+      gastos.push(g);
+      return { status: 201, body: g };
+    }
+    if (verbo === 'DELETE') {
+      const id = Number(ruta.split('/')[2]);
+      if (!gastos.some((g) => g.id === id)) return { status: SABOTAJE === 'borrar200' ? 200 : 404 };
+      gastos = gastos.filter((g) => g.id !== id);
+      return { status: 204 };
+    }
+    return { status: 404 };
+  };
+}
+
+const misPruebas = [];
+const it = (nombre, fn) => misPruebas.push({ nombre, fn });
+const assertEqual = (real, esperado) => { if (real !== esperado) throw new Error(`esperaba ${esperado} y recibió ${real}`); };
+
+it('crea un gasto con 201', () => { const pedir = crearAPI(); assertEqual(pedir('POST', '/gastos', { tipo: 'lavado', valor: 30 }).status, 201); });
+it('rechaza un valor negativo con 400', () => { const pedir = crearAPI(); assertEqual(pedir('POST', '/gastos', { tipo: 'lavado', valor: -5 }).status, 400); });
+it('borrar uno que no existe da 404', () => { const pedir = crearAPI(); assertEqual(pedir('DELETE', '/gastos/99').status, 404); });
+```
+
 ```practica
 vf :: supertest prueba la app de Express sin abrir un puerto
 vf :: Las pruebas de una API solo necesitan el caso en que todo sale bien
@@ -102,6 +169,34 @@ Las funciones tienen una **cuota gratis** mensual, y el de este mapa tiene una *
 
 > 🌎 **Otro ejemplo:** Es como revisar el carro antes de un viaje largo.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La lista antes de publicar
+lenguaje: js
+pide: Completa `listoParaPublicar(proyecto)`: devuelve lo que falta, en este orden: `'las pruebas no pasan'` (si `pruebasOk` no es true), `'hay un secreto en el código'` (si algún archivo de `archivos` es `.env` o el `codigo` tiene `sk_`), `'falta GET /salud'` (si `rutas` no lo incluye), `'CORS abierto a todos'` (si `cors` es `'*'`), `'sin límite de instancias'` (si `maxInstances` no es un número).
+--- código
+function listoParaPublicar(proyecto) {
+  // tu código aquí
+}
+--- pruebas
+const bien = { pruebasOk: true, archivos: ['app.mjs'], codigo: 'app.get()', rutas: ['GET /salud', 'GET /gastos'], cors: ['https://delvinsmart.github.io'], maxInstances: 2 };
+prueba('todo bien', () => igual(listoParaPublicar(bien), []));
+prueba('sin /salud y con CORS abierto', () => igual(listoParaPublicar({ ...bien, rutas: ['GET /gastos'], cors: '*' }), ['falta GET /salud', 'CORS abierto a todos']));
+prueba('un .env', () => igual(listoParaPublicar({ ...bien, archivos: ['.env', 'app.mjs'] }), ['hay un secreto en el código']));
+prueba('pruebas rojas y sin límite', () => igual(listoParaPublicar({ ...bien, pruebasOk: false, maxInstances: undefined }), ['las pruebas no pasan', 'sin límite de instancias']));
+--- solución
+function listoParaPublicar(proyecto) {
+  const falta = [];
+  if (proyecto.pruebasOk !== true) falta.push('las pruebas no pasan');
+  if (proyecto.archivos.includes('.env') || proyecto.codigo.includes('sk_')) falta.push('hay un secreto en el código');
+  if (!proyecto.rutas.includes('GET /salud')) falta.push('falta GET /salud');
+  if (proyecto.cors === '*') falta.push('CORS abierto a todos');
+  if (typeof proyecto.maxInstances !== 'number') falta.push('sin límite de instancias');
+  return falta;
+}
+```
+
 ```practica
 vf :: Una app de Express se puede publicar como una Cloud Function con onRequest
 vf :: Con la cuota gratis, conviene dejar maxInstances sin límite
@@ -133,6 +228,40 @@ Con esto puedes construir el **backend** de una app: una API para Copiloto, para
 > 🌎 **En la vida real:** es como un mecánico que ya sabe desarmar, arreglar, probar y entregar.
 
 > 🌎 **Otro ejemplo:** Es como terminar la escuela de cocina: ya puedes abrir tu cocina.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El mapa de lo que sabes hacer
+lenguaje: js
+pide: Completa `queClase(tarea)` con el número de clase del curso (1 a 7) donde se aprende: event loop → 1; leer archivos o path → 2; node:http → 3; middleware → 4; validar o CORS → 5; SQL, token o límites → 6; supertest o publicar → 7. Cada tarea trae una de esas palabras.
+--- código
+function queClase(tarea) {
+  // tu código aquí
+}
+--- pruebas
+prueba('event loop', () => igual(queClase('explicar el event loop'), 1));
+prueba('path', () => igual(queClase('armar rutas con path'), 2));
+prueba('node:http', () => igual(queClase('un servidor con node:http'), 3));
+prueba('middleware', () => igual(queClase('escribir un middleware'), 4));
+prueba('CORS', () => igual(queClase('configurar CORS'), 5));
+prueba('SQL', () => igual(queClase('consultas SQL con parámetros'), 6));
+prueba('supertest', () => igual(queClase('probar con supertest'), 7));
+--- solución
+const CLAVES = [
+  [1, ['event loop']],
+  [2, ['archivos', 'path']],
+  [3, ['node:http']],
+  [4, ['middleware']],
+  [5, ['validar', 'CORS']],
+  [6, ['SQL', 'token', 'límites']],
+  [7, ['supertest', 'publicar']],
+];
+
+function queClase(tarea) {
+  return CLAVES.find(([, palabras]) => palabras.some((p) => tarea.includes(p)))?.[0] ?? null;
+}
+```
 
 ```practica
 vf :: Con este curso puedes construir y publicar el backend de una app

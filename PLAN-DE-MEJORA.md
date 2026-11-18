@@ -78,7 +78,7 @@ todos los "abre tal archivo de Copiloto".
 |---|---|---|
 | Programación | "Gastos del carro": leer su código, escribir pruebas, CI, Git, Firebase con emulador y un CRUD | ✅ Todas las clases (23): un ejercicio en cada parte (206; HTML y CSS con páginas que se prueban solas), la clase 03 hecha con Gastos del carro y Vitest, 04 a 07 usando Gastos del carro (CI, `npm run mostrar`, Git, errores reales), 08 con sus reglas y el emulador,, 10 con `src/caja/`, y 18 y 20 con pasos que cualquiera puede hacer (bajar el sitio con git clone, publicar su propia página gratis) |
 | JavaScript + TypeScript | ✅ La web de gastos, de una carpeta vacía a GitHub Pages (clase 84) | ✅ Completo: 13 clases, un ejercicio de código en cada parte (54, probados con su solución), y las clases nuevas del DOM, errores y clases (POO), fechas y guardar |
-| Node.js | La API de gastos con Express, con pruebas, publicada | Ejercicios de cada ruta, revisión automática |
+| Node.js | ✅ La API de gastos con Express (clase 87): 32 pruebas, tres almacenes (memoria, archivo y Firestore) y cómo publicarla | ✅ Completo: 9 clases, un ejercicio de código en cada parte (31, probados con su solución). Probándola con curl se encontraron y arreglaron dos errores: dos gastos a la vez se pisaban y aceptaba el 31 de febrero |
 | React Native | La app de gastos con Expo, en el teléfono | Formularios, listas, guardar datos, publicar paso a paso |
 | Kotlin | La app de gastos con Jetpack Compose | Ejercicios del lenguaje en el Playground |
 | Python | El resumen semanal de un conductor desde un CSV, con pytest | Ejercicios en cada parte con Pyodide |

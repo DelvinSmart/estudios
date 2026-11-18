@@ -45,6 +45,26 @@ La función se ejecuta **una vez por cada pedido**. `pedido` trae qué te pidier
 
 > 🌎 **Otro ejemplo:** Es como un sobre: el remitente, la dirección y la carta adentro.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Desarmar el pedido
+lenguaje: js
+pide: Completa `leerPedido(metodo, url)`: devuelve `{ verbo, ruta, consulta }` donde `ruta` es la parte antes del `?` y `consulta` es un objeto con lo de después (`/gastos/3?mes=11&tipo=lavado` → `{ mes: '11', tipo: 'lavado' }`). Usa `new URL(url, 'http://localhost')`.
+--- código
+function leerPedido(metodo, url) {
+  // tu código aquí
+}
+--- pruebas
+prueba('con consulta', () => igual(leerPedido('GET', '/gastos/3?mes=11&tipo=lavado'), { verbo: 'GET', ruta: '/gastos/3', consulta: { mes: '11', tipo: 'lavado' } }));
+prueba('sin consulta', () => igual(leerPedido('POST', '/gastos'), { verbo: 'POST', ruta: '/gastos', consulta: {} }));
+--- solución
+function leerPedido(metodo, url) {
+  const u = new URL(url, 'http://localhost');
+  return { verbo: metodo, ruta: u.pathname, consulta: Object.fromEntries(u.searchParams) };
+}
+```
+
 ```practica
 vf :: La función de createServer se ejecuta una vez por cada pedido
 vf :: El verbo GET se usa para crear datos nuevos
@@ -103,6 +123,39 @@ Son los mismos de la clase 09.
 
 > 🌎 **Otro ejemplo:** Es como las luces de un semáforo, pero con más colores.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un servidor sin librerías
+lenguaje: js
+pide: Escribe el manejador de pedidos de la clase, sin `node:http` (aquí lo probamos con objetos de mentira). `manejar(pedido)` recibe `{ method, url }` y devuelve `{ estado, cuerpo }`: `GET /gastos` → 200 con la lista; `GET /gastos/1` → 200 con ese gasto o 404 `{ error: 'No existe ese gasto' }`; cualquier otra → 404 `{ error: 'Ruta no encontrada' }`.
+--- código
+const gastos = [{ id: 1, tipo: 'lavado', valor: 30 }];
+
+function manejar(pedido) {
+  // tu código aquí
+}
+--- pruebas
+prueba('la lista', () => igual(manejar({ method: 'GET', url: '/gastos' }), { estado: 200, cuerpo: gastos }));
+prueba('uno', () => igual(manejar({ method: 'GET', url: '/gastos/1' }), { estado: 200, cuerpo: gastos[0] }));
+prueba('uno que no existe', () => igual(manejar({ method: 'GET', url: '/gastos/9' }), { estado: 404, cuerpo: { error: 'No existe ese gasto' } }));
+prueba('otra ruta', () => igual(manejar({ method: 'GET', url: '/nada' }).cuerpo, { error: 'Ruta no encontrada' }));
+prueba('otro verbo', () => igual(manejar({ method: 'DELETE', url: '/gastos' }).estado, 404));
+--- solución
+const gastos = [{ id: 1, tipo: 'lavado', valor: 30 }];
+
+function manejar(pedido) {
+  const { pathname } = new URL(pedido.url, 'http://localhost');
+  if (pedido.method === 'GET' && pathname === '/gastos') return { estado: 200, cuerpo: gastos };
+  const coincide = pathname.match(/^\/gastos\/(\d+)$/);
+  if (pedido.method === 'GET' && coincide) {
+    const g = gastos.find((x) => x.id === Number(coincide[1]));
+    return g ? { estado: 200, cuerpo: g } : { estado: 404, cuerpo: { error: 'No existe ese gasto' } };
+  }
+  return { estado: 404, cuerpo: { error: 'Ruta no encontrada' } };
+}
+```
+
 ```practica
 vf :: 404 significa que lo pedido no existe
 vf :: Cuando se crea algo nuevo, lo correcto es responder 500
@@ -148,6 +201,35 @@ Fíjate en todo lo que tuviste que hacer a mano: leer en pedazos, limitar el tam
 > 🌎 **En la vida real:** es como armar un mueble sin instrucciones: se puede, pero entiendes por qué las instrucciones existen.
 
 > 🌎 **Otro ejemplo:** Es como cocinar el pan desde la harina antes de comprarlo hecho.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer el cuerpo en pedazos, con límite
+lenguaje: js
+pide: El cuerpo de un POST llega en pedazos. Completa la función `async` `leerJson(pedazos, limite)`: recorre con `for await` y junta el texto; si pasa del `limite` de letras, lanza `Error('demasiado grande')`; al final, devuelve `JSON.parse` del texto (o `{}` si llegó vacío).
+--- código
+async function* llegando(...partes) { for (const p of partes) yield p; }
+
+async function leerJson(pedazos, limite) {
+  // tu código aquí
+}
+--- pruebas
+prueba('junta los pedazos', async () => igual(await leerJson(llegando('{"tipo":', '"lavado","valor":30}'), 100), { tipo: 'lavado', valor: 30 }));
+prueba('vacío: {}', async () => igual(await leerJson(llegando(), 100), {}));
+prueba('demasiado grande', async () => { let m = ''; try { await leerJson(llegando('x'.repeat(60), 'x'.repeat(60)), 100); } catch (e) { m = e.message; } igual(m, 'demasiado grande'); });
+--- solución
+async function* llegando(...partes) { for (const p of partes) yield p; }
+
+async function leerJson(pedazos, limite) {
+  let texto = '';
+  for await (const pedazo of pedazos) {
+    texto += pedazo;
+    if (texto.length > limite) throw new Error('demasiado grande');
+  }
+  return JSON.parse(texto || '{}');
+}
+```
 
 ```practica
 vf :: El cuerpo de un POST puede llegar en varios pedazos
