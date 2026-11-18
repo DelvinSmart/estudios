@@ -456,7 +456,14 @@ service cloud.firestore {
         '67:LECCION.md:1',
         '67:LECCION.md:2',
         '67:LECCION.md:3',
-        '67:LECCION.md:4'
+        '67:LECCION.md:4',
+        '89:LECCION.md:1',
+        '89:LECCION.md:2',
+        '89:LECCION.md:3',
+        '89:LECCION.md:4',
+        '89:LECCION.md:5',
+        '89:LECCION.md:6',
+        '89:LECCION.md:7'
       ] : (curso == 'python' ? [
         '36:LECCION.md:1',
         '36:LECCION.md:2',
@@ -646,7 +653,7 @@ service cloud.firestore {
         '29:LECCION.md:10'
       ] : [])))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 67 : (curso == 'node' ? 40 : (curso == 'reactnative' ? 35 : (curso == 'kotlin' ? 28 : (curso == 'python' ? 39 : (curso == 'seguridad' ? 26 : (curso == 'ia' ? 62 : (curso == 'agentes' ? 56 : -1))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 67 : (curso == 'node' ? 40 : (curso == 'reactnative' ? 35 : (curso == 'kotlin' ? 35 : (curso == 'python' ? 39 : (curso == 'seguridad' ? 26 : (curso == 'ia' ? 62 : (curso == 'agentes' ? 56 : -1))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -1018,7 +1025,13 @@ service cloud.firestore {
         '66:LECCION.md:3',
         '67:LECCION.md:1',
         '67:LECCION.md:2',
-        '67:LECCION.md:3'
+        '67:LECCION.md:3',
+        '89:LECCION.md:1',
+        '89:LECCION.md:2',
+        '89:LECCION.md:3',
+        '89:LECCION.md:4',
+        '89:LECCION.md:5',
+        '89:LECCION.md:6'
       ] : (curso == 'python' ? [
         '36:LECCION.md:1',
         '36:LECCION.md:2',
@@ -1203,7 +1216,8 @@ service cloud.firestore {
         '64:LECCION.md:1': '63:LECCION.md:4',
         '65:LECCION.md:1': '64:LECCION.md:4',
         '66:LECCION.md:1': '65:LECCION.md:4',
-        '67:LECCION.md:1': '66:LECCION.md:4'
+        '67:LECCION.md:1': '66:LECCION.md:4',
+        '89:LECCION.md:1': '67:LECCION.md:4'
       } : (curso == 'python' ? {
         '37:LECCION.md:1': '36:LECCION.md:5',
         '38:LECCION.md:1': '37:LECCION.md:5',

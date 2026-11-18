@@ -1,0 +1,11 @@
+# Lo que Gradle y Android Studio generan solos: no se sube.
+.gradle/
+build/
+/local.properties
+.idea/
+*.iml
+.DS_Store
+.kotlin/
+# Llaves de firma: NUNCA al repositorio (clase 20)
+*.jks
+*.keystore
