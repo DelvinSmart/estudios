@@ -1,0 +1,6 @@
+# El entorno virtual y lo que Python genera solo: no se sube (clase 41).
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store

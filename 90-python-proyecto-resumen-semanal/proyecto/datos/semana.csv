@@ -1,0 +1,12 @@
+fecha,tipo,detalle,valor
+2026-11-16,viaje,Uber,32.50
+2026-11-16,viaje,99,18.00
+2026-11-16,gasto,combustible,150.00
+2026-11-17,viaje,Uber,45.00
+2026-11-17,gasto,lavado,30.00
+2026-11-18,viaje,Uber,88.00
+2026-11-18,viaje,InDrive,40.00
+2026-11-19,viaje,99,52.50
+2026-11-20,viaje,Uber,61.00
+2026-11-20,viaje,99,27.50
+2026-11-20,gasto,peaje,5.40

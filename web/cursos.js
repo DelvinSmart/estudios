@@ -48,6 +48,7 @@ export const CLASES = {
   '41': { carpeta: '41-python-modulos-y-entornos', titulo: 'Módulos, paquetes y entornos', meta: 'import, la biblioteca estándar, pip y venv', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '42': { carpeta: '42-python-clases-y-objetos', titulo: 'Clases y objetos', meta: 'class, __init__, self, herencia y dataclasses', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '43': { carpeta: '43-python-pruebas-y-proyecto', titulo: 'Pruebas y un proyecto real', meta: 'pytest, el resumen de la semana de un conductor y las APIs', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '90': { carpeta: '90-python-proyecto-resumen-semanal', titulo: 'Proyecto final: el resumen de la semana', meta: 'Un programa de terminal: revisar cada fila, juntar los problemas, argparse y 28 pruebas con pytest', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '44': { carpeta: '44-mapa-de-los-lenguajes', titulo: 'El mapa de los lenguajes', meta: 'JavaScript, TypeScript, Node, React, React Native, Expo, Kotlin y Swift: qué es cada uno', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '45': { carpeta: '45-js-variables-y-tipos', titulo: 'Variables, tipos y la consola', meta: 'const, let, los tipos, las plantillas y ===', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '46': { carpeta: '46-js-decisiones-y-ciclos', titulo: 'Decisiones y ciclos', meta: 'if, ternario, falsy, ??, ?., for...of, while y switch', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -139,7 +140,7 @@ const LOGOS_CLASE = {
   '54': ['react', 'typescript'], '55': ['react'], '56': ['react'], '57': ['expo', 'apple'], '58': ['react'], '59': ['firebase', 'react'], '60': ['expo', 'android', 'apple'], '88': ['react', 'typescript', 'expo'],
   '61': ['kotlin'], '62': ['kotlin'], '63': ['kotlin'], '64': ['kotlin'], '65': ['kotlin'], '66': ['compose', 'kotlin', 'android'], '67': ['androide', 'firebase', 'gradle'], '89': ['kotlin', 'compose', 'android'],
   '36': ['python'], '37': ['python'], '38': ['python'], '39': ['python'], '40': ['python', 'markdown'],
-  '41': ['python', 'bash'], '42': ['python'], '43': ['python', 'github'],
+  '41': ['python', 'bash'], '42': ['python'], '43': ['python', 'github'], '90': ['python', 'bash'],
 };
 for (const [n, logos] of Object.entries(LOGOS_CLASE)) if (CLASES[n]) CLASES[n].logos = logos;
 
@@ -202,7 +203,7 @@ export const ETAPAS = [
   {
     id: 'python', curso: 'python', icono: '🐍', titulo: 'Python', logos: ['python'],
     desc: 'Un curso aparte, con su propio certificado: Python completo, de los primeros pasos a un proyecto con pruebas.',
-    clases: ['36', '37', '38', '39', '40', '41', '42', '43'],
+    clases: ['36', '37', '38', '39', '40', '41', '42', '43', '90'],
   },
   {
     id: 'seguridad', curso: 'seguridad', icono: '🛡️', titulo: 'Seguridad: pensar como hacker', logos: ['owasp'],

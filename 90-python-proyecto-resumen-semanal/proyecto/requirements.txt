@@ -1,0 +1,3 @@
+# Lo que necesita el proyecto, con la versión exacta (clase 41).
+# El programa solo usa la biblioteca estándar; pytest es para las pruebas.
+pytest==9.2.0

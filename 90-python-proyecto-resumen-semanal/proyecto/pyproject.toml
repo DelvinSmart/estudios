@@ -1,0 +1,4 @@
+# La configuración de pytest: dónde están las pruebas y desde dónde se importa resumen.py.
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
