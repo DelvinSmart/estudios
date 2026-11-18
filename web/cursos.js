@@ -80,6 +80,7 @@ export const CLASES = {
   '74': { carpeta: '74-node-pruebas-y-publicar', titulo: 'Pruebas y publicar', meta: 'node:test, supertest y publicar gratis en Firebase', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '75': { carpeta: '75-script-y-spa', titulo: '¿Qué es un script y qué es una SPA?', meta: 'La casa, el guion y la página que cambia sin recargar: esta misma plataforma', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '76': { carpeta: '76-node-bff-y-microservicios', titulo: 'REST a fondo, BFF y microservicios', meta: 'Idempotencia, códigos, versiones, un BFF en Express y cuándo partir en microservicios', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '77': { carpeta: '77-como-hice-los-paneles', titulo: 'Cómo hice los paneles', meta: 'La trastienda de mis tres proyectos: la llave, GitHub, Firebase y cómo viaja cada cambio', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '19': { carpeta: '19-agentes-de-ia', titulo: 'Qué es un agente', meta: 'Python para leer los ejemplos, las piezas y el ciclo de un agente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '25': { carpeta: '25-agentes-cinco-patrones', titulo: 'Los cinco patrones', meta: 'Herramientas (ReAct), planificación, reflexión, enrutamiento y multiagente', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '26': { carpeta: '26-agentes-veinte-patrones', titulo: 'Veinte patrones más', meta: 'Flujo, razonamiento, coordinación, control, conocimiento y cómo elegir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -92,17 +93,20 @@ export const CLASES = {
   '33': { carpeta: '33-ia-otras-herramientas', titulo: 'Otras herramientas', meta: 'OpenCode, Codex, Gemini y modelos locales con Llama', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '34': { carpeta: '34-ia-sin-romper-nada', titulo: 'Trabajar sin romper nada', meta: 'Errores típicos de la IA, revisar, secretos, ataques y costos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '35': { carpeta: '35-ia-tu-flujo', titulo: 'Tu flujo de trabajo', meta: 'De la idea a lo publicado, y seguir aprendiendo de verdad', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '79': { carpeta: '79-ia-planificar', titulo: 'El plano y la estructura', meta: 'Planificar antes de programar, las puertas y ventanas que la IA olvida, y cómo evitar el código espagueti', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '78': { carpeta: '78-ia-varios-agentes', titulo: 'Uno o varios agentes, y dirigirlos', meta: 'Varios agentes sin pisarse, gastar menos tokens, subagentes, tu propio vigilante y la persona como director', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '80': { carpeta: '80-ia-maximo-provecho', titulo: 'Sacarle el máximo provecho', meta: 'Aprender mientras construyes, convertir lo repetitivo en herramientas y lo que no se delega', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
 };
 
 // El dibujo de cada clase en el mapa de islas.
 const ICONOS = {
   '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
   '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁',
-  '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄',
+  '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄', '79': '🗒️', '78': '👥', '80': '🚀',
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦',
-  '21': '🎓', '22': '🔐', '23': '🕵️', '24': '🛡️',
+  '21': '🎓', '77': '🎛️', '22': '🔐', '23': '🕵️', '24': '🛡️',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
 
@@ -112,10 +116,10 @@ const LOGOS_CLASE = {
   '06': ['git', 'github'], '08': ['firebase'], '09': ['node', 'javascript'], '11': ['react', 'typescript', 'firebase'],
   '12': ['html', 'css', 'javascript'], '13': ['react', 'typescript', 'vite', 'tailwind', 'firebase'], '14': ['html', 'css', 'javascript'],
   '15': ['html'], '16': ['css'], '17': ['javascript'], '18': ['html', 'css', 'javascript', 'markdown'],
-  '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'],
+  '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'], '77': ['github', 'firebase', 'react'],
   '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '25': ['python', 'javascript'], '27': ['python'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
-  '35': ['claude', 'git'],
+  '35': ['claude', 'git'], '79': ['claude'], '78': ['claude', 'git'], '80': ['claude', 'ollama'],
   '44': ['javascript', 'typescript', 'react', 'kotlin'],
   '68': ['node'], '69': ['node'], '70': ['node'], '71': ['node', 'javascript'], '72': ['node', 'javascript'], '73': ['node', 'firebase'], '74': ['node', 'firebase'],
   '75': ['html', 'css', 'javascript'],
@@ -163,7 +167,7 @@ export const ETAPAS = [
   {
     id: 'proyectos', icono: '🚀', titulo: 'Mis proyectos por dentro', logos: ['react', 'firebase', 'github'],
     desc: 'Todo lo anterior, aplicado a lo que yo construí.',
-    clases: ['12', '13', '14', '18', '20', '21'],
+    clases: ['12', '13', '14', '18', '20', '21', '77'],
   },
   {
     id: 'javascript', curso: 'javascript', icono: '🟨', titulo: 'JavaScript + TypeScript', logos: ['javascript', 'typescript', 'node', 'vitest'],
@@ -198,7 +202,7 @@ export const ETAPAS = [
   {
     id: 'ia-programadores', curso: 'ia', icono: '🧠', titulo: 'IA para programadores', logos: ['claude', 'gemini', 'ollama'],
     desc: 'Un curso aparte, con su propio certificado: trabajar con Claude, Gemini, OpenCode, Codex y Llama sin romper nada.',
-    clases: ['30', '31', '32', '33', '34', '35'],
+    clases: ['30', '31', '32', '33', '34', '35', '79', '78', '80'],
   },
   {
     id: 'agentes', curso: 'agentes', icono: '🤖', titulo: 'Agentes de IA', logos: ['python', 'javascript'],
