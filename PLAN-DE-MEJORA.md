@@ -125,9 +125,9 @@ pruebas, el sistema de diseño, instalar en el iPhone y la calculadora. Copiloto
 de iPhone (y Kotlin en la de Android): se cuenta cómo encajan.
 
 - [x] Plan de clases del curso de Swift (abajo)
-- [ ] Las clases, con ejercicios (Swift no corre en el navegador: se practica en Xcode, gratis en la Mac,
-  con una lista de comprobación; y los ejercicios cortos con un sitio gratuito para correr Swift en línea)
-- [ ] El curso en el mapa, con su certificado (eso cambia las reglas de Firebase: se suben antes de publicar)
+- [ ] Las clases, con ejercicios (los cortos corren en la página con Compiler Explorer; las pantallas, en Xcode):
+  **2 de 10** (97 y 98, con 6 ejercicios de Swift probados con su solución)
+- [x] El curso en el mapa, con su certificado (prefijo SW; las reglas lo aceptan y no le dejan prender partes de otro curso: 41 pruebas de reglas en verde con el emulador). Crece con cada tanda de clases.
 
 #### El plan del curso de Swift
 

@@ -216,6 +216,12 @@ test('el curso de Python acepta sus partes y su prefijo PY', async () => {
   await assertFails(setDoc(doc(db('beto'), RUTA('beto', 'python')), primero(porCurso.programacion[0])));
 });
 
+test('el curso de Swift acepta sus partes y no las de Kotlin', async () => {
+  await assertSucceeds(setDoc(doc(db('ana'), RUTA('ana', 'swift')), primero(porCurso.swift[0])));
+  await assertFails(setDoc(doc(db('beto'), RUTA('beto', 'swift')), primero(porCurso.kotlin[0])));
+});
+
+
 // Deja prendidas (sin reglas) todas las partes de antes de "parte" en su curso, con una hora vieja,
 // para poder probar prender "parte" respetando el orden.
 async function llegarHasta(uid, parte, curso = 'programacion') {

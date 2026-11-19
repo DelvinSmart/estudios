@@ -10,7 +10,7 @@ Datos: `cursos/{curso}/progreso/{uid}`, `cursos/{curso}/emitidos/{uid}` y `certi
 | `generar-reglas.mjs` | Arma `firestore.rules` metiendo la lista real de las partes. |
 | `firestore.rules` | Lo que se sube a Firebase (generado, no lo edites a mano). |
 | `partes.mjs` | Lee los `.md` y lista los ids de todas las partes. |
-| `pruebas/reglas.test.mjs` | 31 pruebas: las trampas tienen que fallar y lo correcto tiene que pasar. |
+| `pruebas/reglas.test.mjs` | 41 pruebas: las trampas tienen que fallar y lo correcto tiene que pasar. |
 | `practicas.mjs` | Lee las prácticas de todas las clases (qué bloques hay y en qué parte). |
 | `separar-respuestas.mjs` | Saca las respuestas de los `.md` y las guarda en `funciones/respuestas.json` (**privado**, en `.gitignore`). |
 | `pruebas/integracion.test.mjs` | De punta a punta con los emuladores: fallar, esperar, aprobar en el servidor y prender el bombillo. |

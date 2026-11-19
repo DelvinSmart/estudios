@@ -14,7 +14,7 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function cursos() { return ['programacion', 'javascript', 'node', 'reactnative', 'kotlin', 'python', 'seguridad', 'ia', 'agentes']; }
+    function cursos() { return ['programacion', 'javascript', 'node', 'reactnative', 'kotlin', 'swift', 'python', 'seguridad', 'ia', 'agentes']; }
     function partes(curso) {
       return (curso == 'programacion' ? [
         '01:CLASE-GUIADA.md:1',
@@ -486,6 +486,15 @@ service cloud.firestore {
         '96:LECCION.md:4',
         '96:LECCION.md:5',
         '96:LECCION.md:6'
+      ] : (curso == 'swift' ? [
+        '97:LECCION.md:1',
+        '97:LECCION.md:2',
+        '97:LECCION.md:3',
+        '97:LECCION.md:4',
+        '98:LECCION.md:1',
+        '98:LECCION.md:2',
+        '98:LECCION.md:3',
+        '98:LECCION.md:4'
       ] : (curso == 'python' ? [
         '36:LECCION.md:1',
         '36:LECCION.md:2',
@@ -702,9 +711,9 @@ service cloud.firestore {
         '93:LECCION.md:5',
         '93:LECCION.md:6',
         '93:LECCION.md:7'
-      ] : [])))))))));
+      ] : []))))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 48 : (curso == 'kotlin' ? 42 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 33 : (curso == 'ia' ? 69 : (curso == 'agentes' ? 63 : -1))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 48 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 8 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 33 : (curso == 'ia' ? 69 : (curso == 'agentes' ? 63 : -1)))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -1102,6 +1111,13 @@ service cloud.firestore {
         '96:LECCION.md:3',
         '96:LECCION.md:4',
         '96:LECCION.md:5'
+      ] : (curso == 'swift' ? [
+        '97:LECCION.md:1',
+        '97:LECCION.md:2',
+        '97:LECCION.md:3',
+        '98:LECCION.md:1',
+        '98:LECCION.md:2',
+        '98:LECCION.md:3'
       ] : (curso == 'python' ? [
         '36:LECCION.md:1',
         '36:LECCION.md:2',
@@ -1246,9 +1262,9 @@ service cloud.firestore {
         '93:LECCION.md:4',
         '93:LECCION.md:5',
         '93:LECCION.md:6'
-      ] : [])))))))));
+      ] : []))))))))));
     }
-    function primera(curso) { return (curso == 'programacion' ? '01:CLASE-GUIADA.md:1' : (curso == 'javascript' ? '45:LECCION.md:1' : (curso == 'node' ? '68:LECCION.md:1' : (curso == 'reactnative' ? '54:LECCION.md:1' : (curso == 'kotlin' ? '61:LECCION.md:1' : (curso == 'python' ? '36:LECCION.md:1' : (curso == 'seguridad' ? '22:LECCION.md:1' : (curso == 'ia' ? '30:LECCION.md:1' : (curso == 'agentes' ? '19:LECCION.md:1' : ''))))))))); }
+    function primera(curso) { return (curso == 'programacion' ? '01:CLASE-GUIADA.md:1' : (curso == 'javascript' ? '45:LECCION.md:1' : (curso == 'node' ? '68:LECCION.md:1' : (curso == 'reactnative' ? '54:LECCION.md:1' : (curso == 'kotlin' ? '61:LECCION.md:1' : (curso == 'swift' ? '97:LECCION.md:1' : (curso == 'python' ? '36:LECCION.md:1' : (curso == 'seguridad' ? '22:LECCION.md:1' : (curso == 'ia' ? '30:LECCION.md:1' : (curso == 'agentes' ? '19:LECCION.md:1' : '')))))))))); }
     function inicioDeClase(curso) {
       return (curso == 'programacion' ? {
         '44:LECCION.md:1': '01:CLASE-GUIADA.md:7',
@@ -1316,6 +1332,8 @@ service cloud.firestore {
         '67:LECCION.md:1': '66:LECCION.md:5',
         '89:LECCION.md:1': '67:LECCION.md:4',
         '96:LECCION.md:1': '89:LECCION.md:7'
+      } : (curso == 'swift' ? {
+        '98:LECCION.md:1': '97:LECCION.md:4'
       } : (curso == 'python' ? {
         '37:LECCION.md:1': '36:LECCION.md:5',
         '38:LECCION.md:1': '37:LECCION.md:5',
@@ -1346,9 +1364,9 @@ service cloud.firestore {
         '28:LECCION.md:1': '27:LECCION.md:8',
         '29:LECCION.md:1': '28:LECCION.md:14',
         '93:LECCION.md:1': '29:LECCION.md:10'
-      } : {})))))))));
+      } : {}))))))))));
     }
-    function prefijo(curso) { return (curso == 'programacion' ? 'ME' : (curso == 'javascript' ? 'JS' : (curso == 'node' ? 'ND' : (curso == 'reactnative' ? 'RN' : (curso == 'kotlin' ? 'KT' : (curso == 'python' ? 'PY' : (curso == 'seguridad' ? 'SE' : (curso == 'ia' ? 'IA' : (curso == 'agentes' ? 'AG' : '??'))))))))); }
+    function prefijo(curso) { return (curso == 'programacion' ? 'ME' : (curso == 'javascript' ? 'JS' : (curso == 'node' ? 'ND' : (curso == 'reactnative' ? 'RN' : (curso == 'kotlin' ? 'KT' : (curso == 'swift' ? 'SW' : (curso == 'python' ? 'PY' : (curso == 'seguridad' ? 'SE' : (curso == 'ia' ? 'IA' : (curso == 'agentes' ? 'AG' : '??')))))))))); }
     // La parte que va justo antes de "p" en su curso ('' si p es la primera del curso).
     function anteriorDe(curso, p) {
       let t = p.split(':');
