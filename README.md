@@ -9,6 +9,7 @@ en una entrevista.
 | Archivo | Para qué sirve |
 |---|---|
 | [PROGRESO.md](PROGRESO.md) | **En qué clase voy**, qué terminé, qué me falta y qué me costó. Se lee siempre primero. |
+| [PENDIENTES.md](PENDIENTES.md) | Lo que tengo que hacer yo con mi cuenta (alerta de presupuesto, App Check), paso a paso. |
 | [AGENTS.md](AGENTS.md) | Las reglas para la IA que me enseña: cómo tiene que dar las clases. |
 | [COMO-ESTUDIAR-CON-OTRA-IA.md](COMO-ESTUDIAR-CON-OTRA-IA.md) | Cómo seguir estudiando con ChatGPT o Gemini, con un prompt listo para pegar. |
 | [index.html](index.html) | **El mapa de estudios**: una página que muestra todas las clases como un mapa (etapas → clases → partes). Lee los `LECCION.md` directamente. Cómo abrirla y cómo funciona: [Tema 18](18-como-hice-mi-mapa/LECCION.md). |

@@ -34,7 +34,7 @@ jobs:
     timeout-minutes: 340   # cambiar la voz rehace todos los audios: puede tardar un par de horas
     steps:
       - name: Bajar el mapa de estudios
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           path: Aprender
           # Este checkout solo se lee: sin credenciales guardadas, los scripts no pueden hacer push aquí.
@@ -50,20 +50,20 @@ jobs:
 
       - name: Bajar los audios que ya existen
         if: steps.motor.outputs.activo == 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: DelvinSmart/estudios-audio
           path: estudios-audio
           ssh-key: ${{ secrets.AUDIO_DEPLOY_KEY }}
 
       - if: steps.motor.outputs.activo == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
 
       - if: steps.motor.outputs.activo == 'true'
         id: python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
@@ -73,7 +73,7 @@ jobs:
       - name: Recuperar Piper y ffmpeg ya instalados
         if: steps.motor.outputs.activo == 'true'
         id: programas
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ~/programas-voz
           key: programas-voz-${{ runner.os }}-py${{ steps.python.outputs.python-version }}-piper1.8.0-imageio0.5.1
@@ -93,7 +93,7 @@ jobs:
 
       - name: Guardar las voces descargadas entre corridas
         if: steps.motor.outputs.activo == 'true'
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: voces
           key: voz-${{ steps.motor.outputs.voz }}

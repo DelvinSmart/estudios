@@ -239,8 +239,9 @@ Hecho en esa sesión (todas las pruebas en verde, menos las de reglas, que neces
 
 Pendiente (el informe completo está fuera del repositorio, en la carpeta Developer: `auditoria-mapa-de-estudios-2026-11-19.md`):
 
-- [ ] **Publicar el servidor:** `firebase deploy --only functions,firestore:rules` (los cambios de seguridad
-      del servidor y la parte nueva de la clase 78 no cuentan en la nube hasta publicarlos)
+- [x] Pruebas de reglas (42) e integración (3) corridas con Java 21: todas en verde
+- [x] Acciones de GitHub fijadas por su código exacto (SHA)
+- [ ] **Lo que tiene que hacer Delvin con su cuenta** (alerta de presupuesto y App Check): paso a paso en `PENDIENTES.md`
 - [ ] Clase 00 "Programar desde cero" y una ruta para quien nunca programó; revisar ejercicios que usan algo
       antes de enseñarlo (45, 47, 36, 63)
 - [ ] Más práctica: 3 a 5 ejercicios por concepto, un reto final sin solución por curso, repaso espaciado
