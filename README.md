@@ -165,7 +165,7 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 08 | [Pruebas y un proyecto real](43-python-pruebas-y-proyecto/LECCION.md) | pytest, el resumen de la semana de un conductor y las APIs | `43` |
 | 09 | [Proyecto final: el resumen de la semana](90-python-proyecto-resumen-semanal/LECCION.md) | Un programa de terminal: revisar cada fila, juntar los problemas, argparse y 28 pruebas con pytest | `90` |
 
-### 🛡️ Seguridad · 6 clases · certificado `SE-…`
+### 🛡️ Seguridad · 8 clases · certificado `SE-…`
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
@@ -174,7 +174,9 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 03 | [Seguridad avanzada](24-seguridad-avanzada/LECCION.md) | Auditar un sistema entero, como hicimos con Copiloto | `24` |
 | 04 | [Más ataques web, del lado del defensor](107-seguridad-mas-ataques-web/LECCION.md) | Path traversal, SSRF, redirecciones abiertas y archivos subidos con sorpresa | `107` |
 | 05 | [La auditoría de este mismo sitio](108-seguridad-auditoria-de-este-sitio/LECCION.md) | Los hallazgos de verdad: el oráculo de las prácticas, los correos de Gmail, la llave del panel, SRI y escapar en un solo lugar | `108` |
-| 06 | [Proyecto final: auditar una API con errores](91-seguridad-proyecto-auditoria/LECCION.md) | Una API con 10 errores a propósito: trampas, arreglos sin romper nada y el informe | `91` |
+| 06 | [Criptografía para programadores](109-seguridad-criptografia/LECCION.md) | Hash, cifrado y firma, un JWT por dentro, el ataque de alg: none, la cookie bien hecha y dos trampas clásicas | `109` |
+| 07 | [Apps móviles](110-seguridad-apps-moviles/LECCION.md) | El archivo de la app se abre (jadx), la caja fuerte del teléfono, los deep links, y MobSF y Frida | `110` |
+| 08 | [Proyecto final: auditar una API con errores](91-seguridad-proyecto-auditoria/LECCION.md) | Una API con 10 errores a propósito: trampas, arreglos sin romper nada y el informe | `91` |
 
 ### 🧠 IA para programadores · 10 clases · certificado `IA-…`
 

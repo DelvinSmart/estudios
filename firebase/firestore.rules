@@ -614,6 +614,17 @@ service cloud.firestore {
         '108:LECCION.md:4',
         '108:LECCION.md:5',
         '108:LECCION.md:6',
+        '109:LECCION.md:1',
+        '109:LECCION.md:2',
+        '109:LECCION.md:3',
+        '109:LECCION.md:4',
+        '109:LECCION.md:5',
+        '109:LECCION.md:6',
+        '110:LECCION.md:1',
+        '110:LECCION.md:2',
+        '110:LECCION.md:3',
+        '110:LECCION.md:4',
+        '110:LECCION.md:5',
         '91:LECCION.md:1',
         '91:LECCION.md:2',
         '91:LECCION.md:3',
@@ -758,7 +769,7 @@ service cloud.firestore {
         '93:LECCION.md:7'
       ] : []))))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 48 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 44 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 63 : -1)))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 48 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 55 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 63 : -1)))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -1265,7 +1276,16 @@ service cloud.firestore {
         '108:LECCION.md:2',
         '108:LECCION.md:3',
         '108:LECCION.md:4',
-        '108:LECCION.md:5'
+        '108:LECCION.md:5',
+        '109:LECCION.md:1',
+        '109:LECCION.md:2',
+        '109:LECCION.md:3',
+        '109:LECCION.md:4',
+        '109:LECCION.md:5',
+        '110:LECCION.md:1',
+        '110:LECCION.md:2',
+        '110:LECCION.md:3',
+        '110:LECCION.md:4'
       ] : (curso == 'ia' ? [
         '30:LECCION.md:1',
         '30:LECCION.md:2',
@@ -1435,7 +1455,9 @@ service cloud.firestore {
         '24:LECCION.md:1': '23:LECCION.md:9',
         '107:LECCION.md:1': '24:LECCION.md:9',
         '108:LECCION.md:1': '107:LECCION.md:5',
-        '91:LECCION.md:1': '108:LECCION.md:6'
+        '109:LECCION.md:1': '108:LECCION.md:6',
+        '110:LECCION.md:1': '109:LECCION.md:6',
+        '91:LECCION.md:1': '110:LECCION.md:5'
       } : (curso == 'ia' ? {
         '31:LECCION.md:1': '30:LECCION.md:5',
         '32:LECCION.md:1': '31:LECCION.md:6',
