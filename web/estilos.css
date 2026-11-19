@@ -348,6 +348,8 @@ a:hover { text-decoration: underline; }
 .resultado:hover { background: var(--tarjeta-hover); text-decoration: none; }
 .resultado > .mono { flex-shrink: 0; font-size: 0.8rem; padding-top: 2px; }
 .resultado mark { background: color-mix(in srgb, var(--amarillo) 35%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; }
+.glosario-def { border-left: 3px solid var(--acento); background: color-mix(in srgb, var(--acento) 7%, transparent); margin: 2px 0; }
+.glosario-def .glosario-ir { white-space: nowrap; }
 
 /* ---------- 8. Compu grande: el camino va en zigzag ---------- */
 @media (min-width: 900px) {
