@@ -394,7 +394,8 @@ Todos los comandos más usados, en un solo lugar. Los que tienen ⚠️ **borran
 
 `switch` y `checkout` hacen lo mismo al cambiar de rama. `switch` es la forma nueva y más clara; `checkout` es la antigua y hace varias cosas más.
 
-### Deshacer
+<details>
+<summary><b>⏪ Deshacer: descartar o arreglar</b></summary>
 
 > 🌎 **En la vida real:** - `git restore` ⚠️ = tirar el borrador a la basura.
 > - `git restore --staged` = sacar una foto de la pila "para pegar" y devolverla a la mesa: no se pierde.
@@ -416,7 +417,10 @@ Todos los comandos más usados, en un solo lugar. Los que tienen ⚠️ **borran
 
 **Si te equivocaste en algo que ya subiste a GitHub, usa `git revert`**, no `reset`. `revert` agrega un arreglo; `reset` reescribe la historia y le complica la vida a cualquiera que ya la tenga.
 
-### Guardar a un lado (stash)
+</details>
+
+<details>
+<summary><b>📦 Guardar a un lado (stash)</b></summary>
 
 > 🌎 **En la vida real:** estás cocinando y tocan el timbre. No tiras la comida ni la terminas: la pones en la nevera (`stash`), atiendes, y después la sacas (`stash pop`). `stash list` es mirar qué hay en la nevera. `apply` es sacar una porción y dejar el resto guardado; `drop` es tirar lo que estaba en la nevera.
 
@@ -431,7 +435,10 @@ Para cuando estás a mitad de algo y necesitas cambiar de rama sin hacer commit.
 | `git stash apply` | Devuelve lo último que guardaste (y lo deja en la lista) |
 | `git stash drop` | Borra lo último que guardaste a un lado |
 
-### GitHub (el remoto)
+</details>
+
+<details>
+<summary><b>☁️ GitHub (el remoto)</b></summary>
 
 > 🌎 **En la vida real:** - `git remote -v` = mirar a qué oficina de correos mandas tus paquetes.
 > - `git remote add origin` = darte de alta en esa oficina.
@@ -452,7 +459,10 @@ Para cuando estás a mitad de algo y necesitas cambiar de rama sin hacer commit.
 
 `git pull` = `git fetch` (mirar) + `git merge` (mezclar).
 
-### Investigar
+</details>
+
+<details>
+<summary><b>🔍 Investigar la historia</b></summary>
 
 > 🌎 **En la vida real:** son las herramientas del detective:
 > - `git log --graph` = el árbol genealógico de la familia, dibujado.
@@ -469,6 +479,8 @@ Para cuando estás a mitad de algo y necesitas cambiar de rama sin hacer commit.
 | `git show <commit>` | Qué cambió en un commit |
 | `git blame <archivo>` | Quién cambió cada línea y en qué commit |
 | `git bisect` | Busca, probando por mitades, en qué commit apareció un error |
+
+</details>
 
 **Prueba en Copiloto (sin riesgo, solo mira):**
 ```bash
