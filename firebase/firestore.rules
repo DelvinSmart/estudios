@@ -818,10 +818,15 @@ service cloud.firestore {
         '118:LECCION.md:2',
         '118:LECCION.md:3',
         '118:LECCION.md:4',
-        '118:LECCION.md:5'
+        '118:LECCION.md:5',
+        '119:LECCION.md:1',
+        '119:LECCION.md:2',
+        '119:LECCION.md:3',
+        '119:LECCION.md:4',
+        '119:LECCION.md:5'
       ] : [])))))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 281 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 79 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 64 : (curso == 'trabajo' ? 5 : -1))))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 281 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 79 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 64 : (curso == 'trabajo' ? 10 : -1))))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -1449,7 +1454,11 @@ service cloud.firestore {
         '118:LECCION.md:1',
         '118:LECCION.md:2',
         '118:LECCION.md:3',
-        '118:LECCION.md:4'
+        '118:LECCION.md:4',
+        '119:LECCION.md:1',
+        '119:LECCION.md:2',
+        '119:LECCION.md:3',
+        '119:LECCION.md:4'
       ] : [])))))))))));
     }
     function primera(curso) { return (curso == 'programacion' ? '116:LECCION.md:1' : (curso == 'javascript' ? '45:LECCION.md:1' : (curso == 'node' ? '68:LECCION.md:1' : (curso == 'reactnative' ? '54:LECCION.md:1' : (curso == 'kotlin' ? '61:LECCION.md:1' : (curso == 'swift' ? '97:LECCION.md:1' : (curso == 'python' ? '36:LECCION.md:1' : (curso == 'seguridad' ? '22:LECCION.md:1' : (curso == 'ia' ? '30:LECCION.md:1' : (curso == 'agentes' ? '19:LECCION.md:1' : (curso == 'trabajo' ? '118:LECCION.md:1' : ''))))))))))); }
@@ -1572,7 +1581,7 @@ service cloud.firestore {
         '29:LECCION.md:1': '28:LECCION.md:14',
         '93:LECCION.md:1': '29:LECCION.md:10'
       } : (curso == 'trabajo' ? {
-        
+        '119:LECCION.md:1': '118:LECCION.md:5'
       } : {})))))))))));
     }
     function prefijo(curso) { return (curso == 'programacion' ? 'ME' : (curso == 'javascript' ? 'JS' : (curso == 'node' ? 'ND' : (curso == 'reactnative' ? 'RN' : (curso == 'kotlin' ? 'KT' : (curso == 'swift' ? 'SW' : (curso == 'python' ? 'PY' : (curso == 'seguridad' ? 'SE' : (curso == 'ia' ? 'IA' : (curso == 'agentes' ? 'AG' : (curso == 'trabajo' ? 'TR' : '??'))))))))))); }
