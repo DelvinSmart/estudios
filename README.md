@@ -212,6 +212,12 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 06 | [Todo junto](29-agentes-todo-junto/LECCION.md) | La arquitectura completa, la lista para producción y la entrevista | `29` |
 | 07 | [Proyecto final: un agente que corre gratis](93-agentes-proyecto-ollama/LECCION.md) | El Copiloto de gastos con Ollama: herramientas, frenos, controles, rastros y un set de evaluación con el modelo de verdad | `93` |
 
+### 💼 Lo que piden en el trabajo · 1 clases · certificado `TR-…`
+
+| # | Clase | Qué voy a saber hacer al terminar | Carpeta |
+|---|---|---|---|
+| 01 | [Algoritmos y Big-O](118-trabajo-algoritmos-big-o/LECCION.md) | Medir el costo (Big-O) sin fórmulas, elegir la estructura correcta (de O(n²) a O(n)) y resolver un problema en vivo | `118` |
+
 <!-- clases:fin -->
 
 ## Cómo estudiar cada clase
