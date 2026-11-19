@@ -238,6 +238,8 @@ Text(texto)
 
 **Lo que no cambió en ninguna:** el plan con la tabla de decisiones, la lógica separada de la pantalla, el teclado como datos, el motor de diseño, la accesibilidad y las pruebas primero. Eso es lo que sabes de verdad; el lenguaje es la herramienta.
 
+> 📌 **Nota:** ¿por qué esta calculadora no se instala en Android, y por qué existen apps solo para iPhone? Está explicado en la clase 44, en **"Para ir más lejos: ¿por qué la app de un teléfono no sirve en el otro?"**.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

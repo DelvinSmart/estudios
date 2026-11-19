@@ -29,6 +29,7 @@ service cloud.firestore {
         '44:LECCION.md:3',
         '44:LECCION.md:4',
         '44:LECCION.md:5',
+        '44:LECCION.md:6',
         '02:CLASE-GUIADA.md:1',
         '02:CLASE-GUIADA.md:2',
         '02:CLASE-GUIADA.md:3',
@@ -740,6 +741,7 @@ service cloud.firestore {
         '19:LECCION.md:9',
         '19:LECCION.md:10',
         '19:LECCION.md:11',
+        '19:LECCION.md:12',
         '25:LECCION.md:1',
         '25:LECCION.md:2',
         '25:LECCION.md:3',
@@ -794,7 +796,7 @@ service cloud.firestore {
         '93:LECCION.md:7'
       ] : []))))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 74 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 63 : -1)))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 267 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 74 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 64 : -1)))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -924,6 +926,7 @@ service cloud.firestore {
         '44:LECCION.md:2',
         '44:LECCION.md:3',
         '44:LECCION.md:4',
+        '44:LECCION.md:6',
         '75:LECCION.md:1',
         '75:LECCION.md:2',
         '75:LECCION.md:3',
@@ -1395,6 +1398,7 @@ service cloud.firestore {
       ] : (curso == 'agentes' ? [
         '19:LECCION.md:5',
         '19:LECCION.md:11',
+        '19:LECCION.md:12',
         '25:LECCION.md:6',
         '26:LECCION.md:7',
         '27:LECCION.md:8',
@@ -1413,7 +1417,7 @@ service cloud.firestore {
     function inicioDeClase(curso) {
       return (curso == 'programacion' ? {
         '44:LECCION.md:1': '01:CLASE-GUIADA.md:7',
-        '02:CLASE-GUIADA.md:1': '44:LECCION.md:5',
+        '02:CLASE-GUIADA.md:1': '44:LECCION.md:6',
         '03:CLASE-GUIADA.md:1': '02:CLASE-GUIADA.md:11',
         '04:CLASE-GUIADA.md:1': '03:CLASE-GUIADA.md:11',
         '05:CLASE-GUIADA.md:1': '04:CLASE-GUIADA.md:11',
@@ -1519,7 +1523,7 @@ service cloud.firestore {
         '80:LECCION.md:1': '78:LECCION.md:16',
         '92:LECCION.md:1': '80:LECCION.md:6'
       } : (curso == 'agentes' ? {
-        '25:LECCION.md:1': '19:LECCION.md:11',
+        '25:LECCION.md:1': '19:LECCION.md:12',
         '26:LECCION.md:1': '25:LECCION.md:6',
         '27:LECCION.md:1': '26:LECCION.md:7',
         '28:LECCION.md:1': '27:LECCION.md:8',

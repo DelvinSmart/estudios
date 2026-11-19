@@ -418,3 +418,93 @@ escribe :: Un amigo te pregunta qué usa Copiloto y por qué no Kotlin. ¿Qué l
 > 🌎 **En la vida real:** es como explicar los roles de un equipo de obra: quién hace qué y cómo se juntan.
 
 > 🌎 **Otro ejemplo:** Es como un mapa de metro bien explicado: cada línea, su color y sus conexiones.
+
+## Para ir más lejos: ¿por qué la app de un teléfono no sirve en el otro?
+
+> 🌎 **En la vida real:** un cargador de enchufe americano no entra en un enchufe europeo. La electricidad es la misma, pero la forma de conectar es otra. Con un **adaptador** sí funciona.
+
+> 🌎 **Otro ejemplo:** la llave de tu casa abre tu puerta, no la del vecino, aunque las dos sean "llaves" y las dos sean "puertas".
+
+En el curso hay **la misma calculadora hecha tres veces**: en React Native (clases 94 y 95), en Kotlin (96) y en Swift (106). La hicimos tres veces **a propósito, para aprender** cómo piensa cada uno. En un trabajo de verdad casi nunca se hace eso. Aquí está el porqué.
+
+> 📌 **Nota (una palabra bien dicha):** iPhone y Android no son "dos idiomas": son **dos sistemas operativos** (el programa principal del teléfono, el que maneja todo lo demás). iPhone usa **iOS**, de Apple; los otros usan **Android**, de Google. Lo que sí son idiomas son los **lenguajes**: Swift, Kotlin, TypeScript.
+
+### La calculadora de Swift no corre en Android. ¿Por qué?
+
+1. **Usa piezas que solo existen en Apple.** La pantalla está hecha con **SwiftUI**, y SwiftUI viene **dentro** de iOS. Android no la trae. Es como un mueble armado con tornillos especiales: en otra casa no hay ese destornillador.
+2. **El archivo final es otro.** Una app de iPhone se entrega como un archivo **.ipa**; Android instala archivos **.apk** o **.aab**. Cada teléfono solo sabe abrir el suyo.
+3. **Para armarla y publicarla se necesitan cosas de Apple.** **Xcode**, el programa con que se arma, solo existe para Mac. Y la App Store solo acepta apps **firmadas** con una cuenta de desarrollador de Apple (cuesta US$ 99 al año). Una **firma** es un sello digital que prueba quién hizo la app y que nadie la cambió después.
+
+> 💡 **Idea:** el lenguaje Swift ya se puede llevar a Android de forma oficial, pero todavía en sus primeros pasos y **sin SwiftUI**. Te llevas la lógica (las cuentas), no la pantalla. Para una app de verdad hoy no es el camino.
+
+### La calculadora de Kotlin no se publica para iPhone. ¿Por qué?
+
+1. **Usa piezas que solo existen en Android:** el **ViewModel** y el **DataStore** de la 96 son de Android, y la app corre sobre **ART**, el motor de Android. El iPhone no tiene ninguno de los dos.
+2. **El archivo es .aab o .apk**, y la App Store no los acepta.
+3. **Google Play** acepta tu app con una cuenta que se paga **una vez** (US$ 25), pero eso solo te abre la tienda de Android.
+
+> 💡 **Idea:** existe **Kotlin Multiplatform**: compartes la lógica en Kotlin entre Android e iPhone, y con **Compose Multiplatform** también la pantalla. Funciona y lo usan empresas grandes. Pero ya no es "la app de Android": es otra forma de trabajar, con su propio aprendizaje.
+
+### Entonces, ¿por qué existen apps solo para un teléfono?
+
+Porque a veces **conviene**. No es un error:
+
+| Razón | Ejemplo |
+|---|---|
+| **Lo nuevo del sistema, el primer día** | Cuando Apple saca algo nuevo (un tipo de widget, algo del reloj, de la cámara), sale primero en Swift. Un traductor como React Native tarda un tiempo en traerlo. |
+| **Que se sienta 100 % de la casa** | Juegos, editores de fotos o de video, apps que usan mucho la cámara o los sensores: lo nativo saca el máximo. |
+| **Solo hay clientes en un sistema** | Una empresa donde todos los empleados usan teléfonos Android: ¿para qué hacerla para iPhone? |
+| **La empresa ya tiene dos equipos** | Bancos o redes sociales grandes: un equipo de iOS (Swift) y otro de Android (Kotlin), cada uno experto en lo suyo. |
+| **La app es parte del sistema** | La calculadora que viene en el iPhone la hace Apple, solo para su sistema. |
+
+### ¿Y por qué Copiloto Driver se hizo para los dos?
+
+Porque lo hizo **una persona**, y tenía que llegar a conductores con iPhone **y** con Android. Con React Native y Expo:
+
+- **Un solo código** de pantallas y lógica, **unas solas pruebas**.
+- Cada arreglo llega a los dos teléfonos **a la vez**.
+- Ni siquiera hace falta una Mac para armar la del iPhone: **EAS Build** (clase 60) la arma en las Mac de Expo, en internet.
+
+**Pero no es 100 % un solo código.** Para leer la pantalla y mostrar la burbuja encima de otras apps, Copiloto necesitó **piezas nativas**: una en **Kotlin** para Android y otra en **Swift** para iPhone. TypeScript las llama por un **puente** (lo ves completo en la clase 113). Es el adaptador del enchufe: casi todo es un solo código, y lo que es propio de cada teléfono lo hace una pieza en su idioma.
+
+| ¿Qué necesitas? | Lo que se suele elegir |
+|---|---|
+| iPhone **y** Android, un equipo chico | **React Native con Expo** (o Flutter, que usa el lenguaje Dart) |
+| iPhone y Android, compartiendo lógica pero con pantallas nativas | **Kotlin Multiplatform** |
+| Solo iPhone, con lo último de Apple | **Swift** con SwiftUI |
+| Solo Android, con lo último de Google | **Kotlin** con Compose |
+
+> 🎙️ **El profesor dice:** la pregunta nunca es "¿cuál es el mejor lenguaje?". Es **"¿para quién es la app, y quién la va a mantener?"**.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
+
+```ejercicio
+titulo: ¿Dónde se puede instalar?
+lenguaje: js
+pide: Completa `dondeCorre(app)`. `app.hechaCon` puede ser `'swift'`, `'kotlin'` o `'react-native'`. Devuelve una lista: `'swift'` → `['iphone']`; `'kotlin'` → `['android']`; `'react-native'` → `['android', 'iphone']`. Si `app.multiplataforma` es `true` y está hecha con `'kotlin'` (Kotlin Multiplatform), también es `['android', 'iphone']`.
+--- código
+function dondeCorre(app) {
+  // tu código aquí
+}
+--- pruebas
+prueba('la calculadora de Swift', () => igual(dondeCorre({ hechaCon: 'swift' }), ['iphone']));
+prueba('la calculadora de Kotlin', () => igual(dondeCorre({ hechaCon: 'kotlin' }), ['android']));
+prueba('Copiloto Driver', () => igual(dondeCorre({ hechaCon: 'react-native' }), ['android', 'iphone']));
+prueba('Kotlin Multiplatform', () => igual(dondeCorre({ hechaCon: 'kotlin', multiplataforma: true }), ['android', 'iphone']));
+--- solución
+function dondeCorre(app) {
+  if (app.hechaCon === 'react-native') return ['android', 'iphone'];
+  if (app.hechaCon === 'kotlin') return app.multiplataforma ? ['android', 'iphone'] : ['android'];
+  if (app.hechaCon === 'swift') return ['iphone'];
+  return [];
+}
+```
+
+```practica
+vf :: La calculadora hecha en Swift con SwiftUI se puede instalar en un teléfono Android
+elige :: ¿Por qué la app de Kotlin de la clase 96 no se puede subir a la App Store? :: Porque Kotlin es un lenguaje viejo :: Porque usa piezas de Android (ViewModel, DataStore, ART) y se entrega en un archivo que el iPhone no abre :: Porque Apple no deja usar calculadoras
+vf :: iPhone y Android son dos lenguajes de programación
+elige :: Una empresa donde todos los empleados usan teléfonos Android necesita una app interna. ¿Qué tiene más sentido? :: Hacerla dos veces, en Swift y en Kotlin :: Hacerla solo para Android, por ejemplo en Kotlin :: Hacerla solo para iPhone
+vf :: Copiloto Driver es 100 % un solo código, sin nada de Kotlin ni de Swift
+escribe :: Un amigo te pregunta: "¿Por qué hiciste Copiloto en React Native y no en Swift?". ¿Qué le dices? :: Porque los conductores usan iPhone y Android, y yo solo: con React Native y Expo tengo un solo código y unas solas pruebas para los dos, y cada arreglo llega a los dos a la vez. Para lo que solo el teléfono sabe hacer, como leer la pantalla, escribí una pieza en Kotlin y otra en Swift. Swift lo elegiría para una app solo de iPhone que necesite lo último de Apple.
+```

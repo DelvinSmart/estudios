@@ -347,6 +347,8 @@ Después, en el emulador, en modo oscuro y claro: `0,1 + 0,2 =` dio **0,3**; `15
 
 **¿Cuál conviene?** Depende de para quién es la app. Si tiene que estar en **Android y en iPhone** y la hace un equipo chico, React Native ahorra hacer todo dos veces (Copiloto lo hace así). Si es **solo para Android** o necesita lo último de Android (widgets, el reloj, el auto), Kotlin nativo es el camino directo. Lo que **no** cambia, y es lo más importante: el plan, la tabla de decisiones, la lógica separada de la pantalla, el motor de diseño y las pruebas primero. **Eso es saber programar; el lenguaje es la herramienta.**
 
+> 📌 **Nota:** ¿por qué esta app no se puede subir a la App Store del iPhone, y por qué existen apps solo para Android? Está explicado en la clase 44, en **"Para ir más lejos: ¿por qué la app de un teléfono no sirve en el otro?"**.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

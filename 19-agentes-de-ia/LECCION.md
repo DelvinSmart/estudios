@@ -626,3 +626,83 @@ elige :: ¿Qué es una trayectoria? :: Un tipo de modelo :: La secuencia complet
 elige :: ¿Qué es un rastro (trace)? :: Un error :: El registro de las llamadas al modelo y a herramientas de una ejecución, con tiempos, tokens y costo :: Una contraseña
 escribe :: Di las tres preguntas antes de construir un agente. :: ¿Puedo definir cómo se ve terminado? ¿El agente puede verificar su propio avance? ¿Puedo pagar la peor ejecución posible, en dinero y en daño?
 ```
+
+## ¿Por qué Python para agentes? ¿Y si lo hago en otro lenguaje?
+
+> 🌎 **En la vida real:** para ser chef puedes cocinar con cualquier cuchillo, pero en las cocinas profesionales casi todos usan el mismo tipo, porque las recetas, los cursos y los compañeros lo usan. No es que corte "mejor" por arte de magia: es que **todo a su alrededor está pensado para ese cuchillo**.
+
+> 🌎 **Otro ejemplo:** puedes hablar de fútbol en cualquier idioma, pero si quieres trabajar en la liga inglesa, te conviene el inglés: ahí están los entrenadores, los videos y las entrevistas.
+
+**Primero lo importante: sí se puede en otros lenguajes.** Un agente, por dentro, es un **ciclo** (lo viste en 1.3): manda texto al modelo por internet, recibe una respuesta, corre una herramienta si la pide, y repite. Para eso un lenguaje solo necesita tres cosas que **todos** los lenguajes modernos tienen:
+
+1. Hacer un **pedido por internet** (*HTTP*: la forma en que un programa le habla a un servidor).
+2. Leer y escribir **JSON** (el formato de texto con llaves `{ }` que usan las APIs).
+3. Repetir pasos en un **ciclo** (`while`).
+
+**La prueba está en tus proyectos:** el asistente de Copiloto está hecho en **TypeScript**, en Firebase Cloud Functions, con Gemini. Y en esta clase cada ejemplo está en JavaScript **y** en Python, y hacen lo mismo.
+
+### Entonces, ¿por qué todos dicen "Python"?
+
+No es porque Python sea más rápido ni más seguro. Es por **lo que hay alrededor**:
+
+| Razón | Qué quiere decir |
+|---|---|
+| **Las librerías salen primero en Python** | Una **librería** es código que otro escribió para que tú lo uses. Cuando una empresa de IA saca algo nuevo, el ejemplo y la librería oficial suelen salir primero en Python, y después (o a veces nunca) en otros lenguajes. |
+| **Los frameworks de agentes** | Un **framework** es un "esqueleto" ya armado donde tú pones tus piezas. Casi todos los de agentes nacieron en Python; varios ya tienen versión en TypeScript, pero la de Python suele estar más completa. |
+| **Los datos y el aprendizaje automático** | Si el agente tiene que analizar planillas, hacer cuentas con muchos datos o entrenar un modelo, Python tiene las herramientas de referencia (pandas para tablas, NumPy para números, PyTorch para modelos). |
+| **Los ejemplos y las respuestas** | La mayoría de los tutoriales, guías y respuestas en internet sobre IA están en Python. Si te trabas, encuentras ayuda más rápido. |
+| **El trabajo** | La mayoría de las ofertas de "AI engineer" piden Python. |
+| **Es corto de escribir** | Python se lee casi como inglés y pide menos símbolos. Para probar ideas rápido (en un **cuaderno**, *notebook*: un documento donde el código y sus resultados están juntos) es muy cómodo. |
+
+### Lo que NO es verdad (aunque se escucha mucho)
+
+- ❌ **"Python es más rápido."** Al revés: Python es **más lento** que JavaScript, Kotlin o Swift para hacer cuentas. Pero en un agente **casi todo el tiempo se va esperando al modelo** (uno o varios segundos por respuesta, por internet). Si tu código tarda 2 milisegundos o 20, no se nota al lado de esos segundos. Y cuando Python hace cuentas pesadas de IA, por dentro las hace código escrito en C o en la tarjeta de video, no Python.
+- ❌ **"En otro lenguaje el agente es menos seguro."** La seguridad de un agente depende de **cómo lo diseñas**: qué herramientas le das, qué frenos pones, si tratas lo que entra como datos y no como órdenes (lo verás en las clases de frenos y controles). Un agente mal diseñado es peligroso en Python y en TypeScript igual.
+- ❌ **"Las respuestas son mejores en Python."** La respuesta la da **el modelo**, no tu lenguaje. El mismo modelo, con las mismas instrucciones, responde lo mismo desde Python o desde TypeScript.
+
+> 💡 **Idea:** el lenguaje cambia **lo cómodo que es construirlo**, no **lo inteligente que es el agente**.
+
+### ¿Cuándo conviene otro lenguaje?
+
+| Si el agente… | Conviene | Por qué |
+|---|---|---|
+| Vive dentro de tu **app web o tu servidor de Node** (como el asistente de Copiloto) | **TypeScript** | Un solo lenguaje en todo el proyecto, los mismos tipos, sin un segundo servidor que mantener. Las empresas de IA también tienen librería oficial en TypeScript. |
+| Analiza **datos**, planillas o documentos en cantidad | **Python** | Por pandas, NumPy y todo lo de datos. |
+| Tiene que correr **dentro del teléfono**, con el modelo chico que trae el propio teléfono | **Kotlin** (Android) o **Swift** (iPhone) | Esos modelos se usan con las herramientas de cada sistema, que están en su idioma nativo. |
+| Es un **servicio enorme** que atiende a muchísimas personas a la vez | A veces **Go** o **Java** | Las empresas grandes ya tienen su sistema en esos lenguajes. |
+| Es para **aprender y conseguir trabajo** en IA | **Python** | Por los ejemplos, la ayuda y las ofertas. |
+
+> 🎙️ **El profesor dice:** si ya sabes JavaScript, **no estás atrasado**: el ciclo, las herramientas, los frenos y las evaluaciones son iguales. Aprende a **leer** Python (esta clase te enseña lo justo) y construye en el lenguaje donde vive tu proyecto.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
+
+```ejercicio
+titulo: ¿En qué lenguaje hago este agente?
+lenguaje: js
+pide: Completa `lenguajeDelAgente(p)`. `p` dice dónde vive y qué hace el agente. Reglas, en este orden: si `p.dentroDelTelefono` es `true` → `'Kotlin o Swift'`; si `p.analizaDatos` es `true` → `'Python'`; si `p.proyecto` es `'node'` o `'web'` → `'TypeScript'`; en cualquier otro caso → `'Python'`.
+--- código
+function lenguajeDelAgente(p) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el asistente de Copiloto vive en el servidor de Node', () => igual(lenguajeDelAgente({ proyecto: 'node' }), 'TypeScript'));
+prueba('un agente que lee planillas', () => igual(lenguajeDelAgente({ proyecto: 'node', analizaDatos: true }), 'Python'));
+prueba('con el modelo del teléfono', () => igual(lenguajeDelAgente({ proyecto: 'web', dentroDelTelefono: true }), 'Kotlin o Swift'));
+prueba('un proyecto nuevo para aprender', () => igual(lenguajeDelAgente({ proyecto: 'nuevo' }), 'Python'));
+--- solución
+function lenguajeDelAgente(p) {
+  if (p.dentroDelTelefono) return 'Kotlin o Swift';
+  if (p.analizaDatos) return 'Python';
+  if (p.proyecto === 'node' || p.proyecto === 'web') return 'TypeScript';
+  return 'Python';
+}
+```
+
+```practica
+vf :: Un agente de IA solo se puede hacer en Python
+elige :: ¿Cuál es la razón principal por la que se recomienda Python para IA? :: Es el lenguaje más rápido :: Las librerías, los frameworks, los ejemplos y los trabajos de IA están casi todos en Python :: Hace que el modelo responda mejor
+vf :: Como Python es más lento, un agente en Python se nota mucho más lento que uno en TypeScript
+vf :: El mismo modelo con las mismas instrucciones responde lo mismo desde Python o desde TypeScript
+elige :: Tu app web y tu servidor ya están en TypeScript y quieres agregar un asistente. ¿Qué conviene? :: Escribir un servidor nuevo en Python solo para el asistente :: Hacerlo en TypeScript, dentro del mismo proyecto :: Hacerlo en Swift
+escribe :: Un entrevistador te pregunta: "¿Por qué hiciste el asistente en TypeScript y no en Python?". ¿Qué respondes? :: Porque el asistente vive en el mismo servidor de la app, que ya está en TypeScript: un solo lenguaje, los mismos tipos y nada extra que mantener. Python es lo más usado en IA por sus librerías y ejemplos, y lo sé leer, pero el ciclo del agente, las herramientas y los frenos son iguales en los dos.
+```
