@@ -878,6 +878,10 @@ Como la voz es parte de la huella, **cambiarla rehace todos los audios** con la 
 
 > 🌎 **Otro ejemplo más:** Es como el modo avión del teléfono: un toque y se cortan todas las conexiones; otro toque y vuelven.
 
+## 13. Los audios, hechos solos: la automatización
+
+> 🎙️ **El profesor dice:** ya viste cómo se hace un audio y el motor que lo genera. Ahora, cómo logré que los audios se **rehagan solos** cuando cambia una clase, sin que yo tenga que acordarme, y sin llenar el repositorio ni gastar de más.
+
 ### La automatización: GitHub Actions
 
 **GitHub Actions** es una computadora que GitHub presta **gratis** (en repositorios públicos) para correr tareas cuando pasa algo en el repositorio. La receta está en `.github/workflows/audios.yml`:
