@@ -123,10 +123,47 @@ Desde cero y completo, con el mismo molde que los demás: el lenguaje, SwiftUI p
 pruebas, el sistema de diseño, instalar en el iPhone y la calculadora. Copiloto ya usa Swift en su pieza
 de iPhone (y Kotlin en la de Android): se cuenta cómo encajan.
 
-- [ ] Plan de clases del curso de Swift
+- [x] Plan de clases del curso de Swift (abajo)
 - [ ] Las clases, con ejercicios (Swift no corre en el navegador: se practica en Xcode, gratis en la Mac,
   con una lista de comprobación; y los ejercicios cortos con un sitio gratuito para correr Swift en línea)
 - [ ] El curso en el mapa, con su certificado (eso cambia las reglas de Firebase: se suben antes de publicar)
+
+#### El plan del curso de Swift
+
+**Cómo se practica (decidido y probado el 2026-11-19).** Los ejercicios cortos corren **desde la página**, como los
+de Kotlin: el código viaja a **Compiler Explorer** (godbolt.org, gratis, Swift 6.4.2, la misma versión que trae
+Xcode), que lo compila, lo corre y devuelve lo que imprimió, en unos 2 segundos. Se probó que:
+- acepta pedidos desde la página (CORS abierto);
+- los errores de compilación llegan con su línea (se explican en español, como los de Kotlin);
+- **trampa encontrada:** si el programa se cae (`x[0]` en una lista vacía), se perdía todo lo impreso antes, porque
+  la salida queda en un búfer. Se arregla apagando el búfer al empezar (`setvbuf(stdout, nil, _IONBF, 0)`). Las pruebas
+  que no llegaron a correr se marcan "el programa se cayó", con el mensaje de Swift.
+- El código de inicio no usa `fatalError()` (que tumbaría todas las pruebas): devuelve un valor de relleno
+  (`return 0`, `return ""`), así cada prueba falla por separado.
+- La herramienta `revisar-ejercicios.mjs` revisa los de Swift con el `swift` de la Mac (sin internet).
+
+Las pantallas (SwiftUI) no corren en el navegador: se hacen en **Xcode** (gratis, en la Mac) y se prueban en el
+simulador del iPhone. Esas clases tienen ejercicios cortos de la lógica (que sí corren en la página) y una lista
+de comprobación para lo que se hace en Xcode.
+
+**Las clases** (números 97 a 106, todas con un ejercicio de código en cada parte y su práctica):
+
+| # | Clase | Lo que tiene |
+|---|---|---|
+| 97 | Primeros pasos | Qué es Swift y dónde se usa, Xcode y los Playgrounds, `let` y `var`, tipos, inferencia, `print` y la interpolación `\(…)` |
+| 98 | Opcionales, decisiones y ciclos | `String?`, `if let`, `guard let`, `??`, `switch` (que no deja casos afuera), rangos `1...5` y `for-in` |
+| 99 | Funciones, closures y colecciones | Etiquetas de argumentos (`sumar(_ a:, a b:)`), closures, `map`, `filter`, `reduce`, `Array`, `Dictionary` y `Set` |
+| 100 | Tipos: struct, class, enum y protocolos | Valor contra referencia (la diferencia más importante de Swift), `enum` con valores asociados, `protocol` y extensiones |
+| 101 | Errores y concurrencia | `throws`, `try`, `do-catch`, `Result`, `async`/`await` y `Task`; los `actor` en una idea |
+| 102 | SwiftUI: tu primera pantalla | Crear el proyecto en Xcode, `View`, `VStack`/`HStack`, `@State`, la vista previa y el simulador |
+| 103 | SwiftUI con datos | `@Observable`, `List` y `ForEach`, `NavigationStack`, guardar con `UserDefaults` y SwiftData |
+| 104 | El motor de diseño en SwiftUI | Colores en el catálogo con modo claro y oscuro, un `enum Motor`, `extension Color`, `ViewModifier` y el entorno |
+| 105 | Pruebas e instalar en tu iPhone | Swift Testing (`@Test`, `#expect`), probar la lógica, instalar gratis en tu iPhone (7 días) y qué cuesta la App Store |
+| 106 | Proyecto final: la calculadora en SwiftUI | Las mismas decisiones y pruebas que la de React Native y la de Kotlin, en el simulador del iPhone, y cómo encaja Swift con React Native: el módulo nativo de Copiloto (ReplayKit y Vision en el iPhone, su gemelo en Kotlin en Android) |
+
+**El orden de trabajo:** primero el motor de ejercicios de Swift (con sus pruebas, como el de Kotlin y el de Python),
+después las clases de a dos, cada tanda probada y publicada, y al final el curso en el mapa con su certificado
+(cambia las reglas de Firebase: se suben antes de publicar).
 
 ### H. El recorrido de cada proyecto, de punta a punta (✅ clase 85)
 
