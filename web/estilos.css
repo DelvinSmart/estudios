@@ -83,6 +83,22 @@ a:hover { text-decoration: underline; }
 .cargando::after { content: '▋'; animation: parpadeo 1s steps(1) infinite; margin-left: 4px; }
 :focus-visible { outline: 2px solid var(--acento-2); outline-offset: 3px; border-radius: 6px; }
 
+/* ---------- Modo presentación: texto grande y sin distracciones (para grabar y lives) ---------- */
+/* Agranda todo (el rem crece) y el texto del cuerpo, y esconde los menús y las migas.
+   Se deja visible solo el botón 📺 para poder salir. No toca nada del contenido ni del progreso. */
+:root[data-presentacion="si"] { font-size: 19px; }
+:root[data-presentacion="si"] body { font-size: 1.1rem; line-height: 1.8; }
+:root[data-presentacion="si"] .barra-acciones > *:not(#boton-presentacion) { display: none; }
+:root[data-presentacion="si"] #migas,
+:root[data-presentacion="si"] .pie,
+:root[data-presentacion="si"] footer { display: none; }
+:root[data-presentacion="si"] .logo { opacity: 0.45; }
+:root[data-presentacion="si"] #boton-presentacion { background: var(--acento); color: #fff; }
+:root[data-presentacion="si"] .app { max-width: 1000px; }
+@media (max-width: 900px) {
+  :root[data-presentacion="si"] .barra-acciones .boton-icono { padding: 0 10px; }
+}
+
 @keyframes parpadeo { 50% { opacity: 0; } }
 @keyframes entrar { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 

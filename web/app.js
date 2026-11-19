@@ -95,6 +95,22 @@ document.getElementById('boton-tema').addEventListener('click', () => {
 });
 if (!leerTema()) document.documentElement.dataset.theme = 'dark';
 
+// ---------- el modo presentación (para grabar videos y lives) ----------
+// Agranda el texto y oculta los menús y distracciones. Se recuerda entre sesiones.
+const CLAVE_PRESENTACION = 'mapa-presentacion';
+const botonPresentacion = document.getElementById('boton-presentacion');
+function ponerPresentacion(si) {
+  document.documentElement.dataset.presentacion = si ? 'si' : '';
+  botonPresentacion.setAttribute('aria-pressed', String(si));
+  botonPresentacion.title = si ? 'Salir del modo presentación' : 'Modo presentación (para grabar y lives)';
+}
+botonPresentacion.addEventListener('click', () => {
+  const si = document.documentElement.dataset.presentacion !== 'si';
+  ponerPresentacion(si);
+  try { localStorage.setItem(CLAVE_PRESENTACION, si ? 'si' : ''); } catch (e) { /* sin almacenamiento */ }
+});
+try { if (localStorage.getItem(CLAVE_PRESENTACION) === 'si') ponerPresentacion(true); } catch (e) { /* nada */ }
+
 // ---------- arranque ----------
 
 async function empezar() {
