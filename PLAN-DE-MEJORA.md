@@ -126,7 +126,7 @@ de iPhone (y Kotlin en la de Android): se cuenta cómo encajan.
 
 - [x] Plan de clases del curso de Swift (abajo)
 - [ ] Las clases, con ejercicios (los cortos corren en la página con Compiler Explorer; las pantallas, en Xcode):
-  **4 de 10** (97 a 100, con 12 ejercicios de Swift probados con su solución en la Mac y en Compiler Explorer)
+  **6 de 10** (97 a 102, con 18 ejercicios de Swift probados con su solución en la Mac y en Compiler Explorer, y la app "Mi jornada" en SwiftUI probada en el simulador del iPhone)
 - [x] El curso en el mapa, con su certificado (prefijo SW; las reglas lo aceptan y no le dejan prender partes de otro curso: 41 pruebas de reglas en verde con el emulador). Crece con cada tanda de clases.
 
 #### El plan del curso de Swift

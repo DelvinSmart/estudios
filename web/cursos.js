@@ -46,6 +46,8 @@ export const CLASES = {
   '98': { carpeta: '98-swift-opcionales-y-decisiones', titulo: 'Opcionales, decisiones y ciclos', meta: 'String?, if let, guard let, ??, por qué evitar el !, switch con rangos y for', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '99': { carpeta: '99-swift-funciones-y-colecciones', titulo: 'Funciones, closures y colecciones', meta: 'Etiquetas de argumentos, closures con $0, Array, Dictionary, Set, map, filter y reduce', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '100': { carpeta: '100-swift-tipos-y-protocolos', titulo: 'struct, class, enum y protocolos', meta: 'Valor contra referencia, enum con valores asociados, protocolos y extensiones', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '101': { carpeta: '101-swift-errores-y-concurrencia', titulo: 'Errores y concurrencia', meta: 'throws, try, do-catch, try?, async, await, async let y Task', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '102': { carpeta: '102-swift-primera-pantalla', titulo: 'Tu primera pantalla con SwiftUI', meta: 'Crear el proyecto en Xcode, View, VStack y HStack, modificadores, @State y la app Mi jornada en el simulador', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '36': { carpeta: '36-python-primeros-pasos', titulo: 'Primeros pasos', meta: 'Correr Python, variables, tipos, print e input', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '37': { carpeta: '37-python-decisiones-y-repeticiones', titulo: 'Decisiones y repeticiones', meta: 'La sangría, if, elif, else, for, range y while', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '38': { carpeta: '38-python-colecciones', titulo: 'Listas, tuplas, diccionarios y conjuntos', meta: 'Agrupar datos y las comprensiones', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -125,7 +127,7 @@ const ICONOS = {
   '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄', '79': '🗒️', '78': '👥', '80': '🚀', '92': '🏁',
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁', '94': '🧮', '95': '📱',
-  '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁', '96': '⚖️', '97': '👋', '98': '🛟', '99': '🧰', '100': '🏗️',
+  '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁', '96': '⚖️', '97': '👋', '98': '🛟', '99': '🧰', '100': '🏗️', '101': '🚦', '102': '🖼️',
   '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️', '91': '🏁',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
@@ -148,7 +150,7 @@ const LOGOS_CLASE = {
   '45': ['javascript'], '46': ['javascript'], '47': ['javascript'], '48': ['javascript'], '49': ['javascript', 'firebase'],
   '50': ['node', 'javascript'], '51': ['typescript'], '52': ['typescript'], '53': ['typescript', 'vitest'], '81': ['javascript', 'html'], '82': ['javascript'], '83': ['javascript'], '84': ['javascript', 'css', 'github'],
   '54': ['react', 'typescript'], '55': ['react'], '56': ['react'], '94': ['react', 'typescript'], '95': ['expo', 'apple', 'android'], '57': ['expo', 'apple'], '58': ['react'], '59': ['firebase', 'react'], '60': ['expo', 'android', 'apple'], '88': ['react', 'typescript', 'expo'],
-  '61': ['kotlin'], '62': ['kotlin'], '63': ['kotlin'], '64': ['kotlin'], '96': ['kotlin', 'android'], '97': ['swift', 'apple'], '98': ['swift'], '99': ['swift'], '100': ['swift'], '65': ['kotlin'], '66': ['compose', 'kotlin', 'android'], '67': ['androide', 'firebase', 'gradle'], '89': ['kotlin', 'compose', 'android'],
+  '61': ['kotlin'], '62': ['kotlin'], '63': ['kotlin'], '64': ['kotlin'], '96': ['kotlin', 'android'], '97': ['swift', 'apple'], '98': ['swift'], '99': ['swift'], '100': ['swift'], '101': ['swift'], '102': ['swift', 'apple'], '65': ['kotlin'], '66': ['compose', 'kotlin', 'android'], '67': ['androide', 'firebase', 'gradle'], '89': ['kotlin', 'compose', 'android'],
   '36': ['python'], '37': ['python'], '38': ['python'], '39': ['python'], '40': ['python', 'markdown'],
   '41': ['python', 'bash'], '42': ['python'], '43': ['python', 'github'], '90': ['python', 'bash'],
 };
@@ -213,7 +215,7 @@ export const ETAPAS = [
   {
     id: 'swift', curso: 'swift', icono: '🐦', titulo: 'Swift', logos: ['swift', 'apple'],
     desc: 'Un curso aparte, con su propio certificado: el lenguaje del iPhone, de los primeros pasos a una app en SwiftUI.',
-    clases: ['97', '98', '99', '100'],
+    clases: ['97', '98', '99', '100', '101', '102'],
   },
   {
     id: 'python', curso: 'python', icono: '🐍', titulo: 'Python', logos: ['python'],
