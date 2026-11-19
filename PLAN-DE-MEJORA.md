@@ -90,11 +90,11 @@ todos los "abre tal archivo de Copiloto".
 
 Cómo se construye un motor (colores, formas, efectos, separaciones), dónde se pone y cómo lo "llama" un recuadro:
 
-- [ ] CSS: variables (`--hueco`, `--relleno`), como este mismo mapa
-- [ ] JavaScript y TypeScript: un objeto de tema
-- [ ] React Native: un archivo de tema, como `dash.*` de Copiloto
-- [ ] Kotlin: el tema de Jetpack Compose
-- [ ] Python y Node (sin pantallas): la misma idea con la configuración en un solo lugar
+- [x] CSS: variables (`--hueco`, `--relleno`), como este mismo mapa (clase 16, parte 6: las cuatro familias, cómo llama cada recuadro, y cambiar el motor en un pedazo de la página)
+- [x] JavaScript y TypeScript: un objeto de tema (clase 51, parte 5: una interfaz Tema que cumplen el oscuro y el claro)
+- [x] React Native: un archivo de tema, como `dash.*` de Copiloto (clase 56, parte 4: `motor.ts`, StyleSheet y `useColorScheme`)
+- [x] Kotlin: el tema de Jetpack Compose (clase 66, parte 4: `object Motor`, MaterialTheme, `isSystemInDarkTheme` y `copy`)
+- [x] Python y Node (sin pantallas): la misma idea con la configuración en un solo lugar (clase 41, parte 5, y clase 73, parte 4: leer una vez, revisar al arrancar y congelar)
 - [x] CSS dentro de JavaScript: el motor de la web de gastos (clase 84) y cómo lo llama cada elemento
 - [x] Qué es la **programación orientada a objetos**, en qué se parece y en qué no a un motor de diseño (clase 82)
 

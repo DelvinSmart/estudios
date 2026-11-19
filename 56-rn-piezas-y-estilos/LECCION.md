@@ -221,6 +221,90 @@ elige :: ¿Qué conviene para que la app se vea bien en teléfonos de distintos 
 escribe :: Nombra dos diferencias entre hacer una pantalla web y una de React Native. :: En React Native se usan View y Text en vez de div y p, y los estilos son objetos con flexDirection en columna por defecto; además hay que cuidar la muesca, el teclado y los distintos tamaños de teléfono.
 ```
 
+## Parte 4. Un archivo de tema: el motor de la app
+
+> 🌎 **En la vida real:** es como la paleta de un pintor: antes de empezar, pone en la tabla los colores que va a usar en todo el cuadro. Después moja el pincel **en la paleta**, no en un tubo nuevo cada vez.
+
+> 🌎 **Otro ejemplo:** Es como el menú fijo de un restaurante: la cocina sabe qué platos hay y cómo se hacen. Cada mesero **pide del menú**; no inventa un plato distinto en cada mesa.
+
+En React Native no hay variables de CSS: el motor es **un archivo de TypeScript** que exporta los valores. El de la app de gastos (clase 88) es `src/tema/motor.ts`:
+
+```ts
+// src/tema/motor.ts: todos los colores, separaciones, formas y letras, en un solo lugar.
+export const color = { fondo: '#0f141b', tarjeta: '#18212c', texto: '#e6edf3', acento: '#7ee787' } as const;
+export const espacio = { chico: 8, medio: 14, grande: 20 } as const;
+export const forma = { radio: 14, radioChico: 8 } as const;
+export const letra = { chica: 14, normal: 16, grande: 30 } as const;
+```
+
+Y cada componente **llama** al motor dentro de su `StyleSheet.create`:
+
+```tsx
+import { color, espacio, forma, letra } from '../tema/motor';
+
+const estilos = StyleSheet.create({
+  tarjeta: { backgroundColor: color.tarjeta, padding: espacio.medio, borderRadius: forma.radio },
+  titulo: { color: color.texto, fontSize: letra.grande },
+});
+```
+
+**¿Y el modo claro?** El teléfono dice si está en oscuro o claro con `useColorScheme()` (devuelve `'dark'`, `'light'` o `null`). Entonces el motor tiene **dos** juegos de colores, y los estilos se arman **con el que toca**:
+
+```tsx
+const esquema = useColorScheme();
+const tema = esquema === 'light' ? claro : oscuro;   // si no sabe (null), oscuro
+const estilos = crearEstilos(tema);                    // una función que arma el StyleSheet con ese tema
+```
+
+> 📌 **Nota:** esta es la misma idea que `dash.*` de Copiloto: un solo lugar donde vive el diseño, y pantallas que solo lo llaman.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los estilos salen del tema
+lenguaje: js
+pide: Completa `temaPara(esquema)`: devuelve `claro` si el esquema es `'light'`, y `oscuro` en cualquier otro caso (también si es `null`). Y `crearEstilos(tema)`: devuelve `{ tarjeta: { backgroundColor, padding, borderRadius }, titulo: { color, fontSize } }` con la tarjeta del tema, el espacio medio, el radio, el color de texto y la letra grande. Ningún número escrito a mano: todo sale del tema.
+--- código
+const oscuro = { color: { tarjeta: '#18212c', texto: '#e6edf3' }, espacio: { medio: 14 }, forma: { radio: 14 }, letra: { grande: 30 } };
+const claro = { ...oscuro, color: { tarjeta: '#ffffff', texto: '#1d232b' } };
+
+function temaPara(esquema) {
+  // tu código aquí
+}
+
+function crearEstilos(tema) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el teléfono en claro', () => igual(temaPara('light'), claro));
+prueba('en oscuro', () => igual(temaPara('dark'), oscuro));
+prueba('si no sabe, oscuro', () => igual(temaPara(null), oscuro));
+prueba('los estilos del oscuro', () => igual(crearEstilos(oscuro), { tarjeta: { backgroundColor: '#18212c', padding: 14, borderRadius: 14 }, titulo: { color: '#e6edf3', fontSize: 30 } }));
+prueba('el mismo código da el claro', () => igual(crearEstilos(claro).tarjeta.backgroundColor, '#ffffff'));
+prueba('si el motor cambia, cambian los estilos', () => igual(crearEstilos({ ...oscuro, espacio: { medio: 20 } }).tarjeta.padding, 20));
+--- solución
+const oscuro = { color: { tarjeta: '#18212c', texto: '#e6edf3' }, espacio: { medio: 14 }, forma: { radio: 14 }, letra: { grande: 30 } };
+const claro = { ...oscuro, color: { tarjeta: '#ffffff', texto: '#1d232b' } };
+
+function temaPara(esquema) {
+  return esquema === 'light' ? claro : oscuro;
+}
+
+function crearEstilos(tema) {
+  return {
+    tarjeta: { backgroundColor: tema.color.tarjeta, padding: tema.espacio.medio, borderRadius: tema.forma.radio },
+    titulo: { color: tema.color.texto, fontSize: tema.letra.grande },
+  };
+}
+```
+
+```practica
+vf :: En React Native el motor de diseño es un archivo de TypeScript que exporta los colores, espacios, formas y letras
+vf :: Si useColorScheme() devuelve null, la app no puede dibujar nada
+elige :: ¿Cómo tiene modo claro una app de React Native con motor de diseño? :: Con un archivo de estilos distinto por pantalla :: Con dos juegos de colores en el motor y los estilos armados con el que toca :: Cambiando cada color a mano → crearEstilos(tema) arma el StyleSheet con el tema que dice useColorScheme().
+escribe :: Encuentras padding: 13 escrito a mano en un componente. ¿Qué haces y por qué? :: Lo cambio por un valor del motor (espacio.medio, por ejemplo), o agrego ese valor al motor si de verdad hace falta. Si no, ese componente no cambia cuando cambia el motor y la app queda despareja.
+```
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué diferencias hay entre React y React Native?":** "La lógica es la misma: componentes, props, estado y hooks. Cambian las piezas: View, Text, Pressable y TextInput en vez de etiquetas HTML, que se convierten en vistas nativas. Los estilos son objetos con StyleSheet y Flexbox en columna por defecto. Para listas largas uso FlatList, y cuido SafeArea, el teclado y los tamaños, probando en iPhone y Android."

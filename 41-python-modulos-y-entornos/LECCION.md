@@ -358,6 +358,124 @@ elige :: ¿Cómo sabes que el entorno virtual está activo? :: La pantalla cambi
 escribe :: Escribe los pasos para empezar un proyecto de Python nuevo con su entorno virtual e instalar requests. :: cd al proyecto; python3 -m venv .venv; source .venv/bin/activate; python -m pip install requests; anotarlo en requirements.txt y poner .venv en .gitignore.
 ```
 
+## Parte 5. La configuración en un solo lugar: el motor de un programa sin pantalla
+
+> 🌎 **En la vida real:** es como la planilla de turnos pegada en la puerta de la cocina: horarios, quién cierra, cuántos platos por mesa. Nadie lo decide de memoria: **todos miran la planilla**, y si algo cambia, se cambia la planilla.
+
+> 🌎 **Otro ejemplo:** Es como el tablero de un auto: las luces, la velocidad máxima del limitador y la alarma se configuran en un lugar, no en cada rueda.
+
+Un programa de terminal no tiene colores ni botones, pero tiene la **misma idea** que un motor de diseño: los valores que deciden cómo se comporta (límites, nombres de archivos, el modo) viven **en un solo lugar**. Si están desparramados (un `500` aquí, un `"datos.csv"` allá), cambiarlos es buscarlos uno por uno.
+
+En Python ese lugar es **un módulo** (parte 1 de esta clase): `config.py`.
+
+```python
+# config.py: lo que se puede ajustar, en un solo lugar.
+import os
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)        # frozen: nadie la puede cambiar después de crearla
+class Config:
+    archivo: str = "datos/gastos.csv"
+    limite_semana: float = 500.0
+    modo: str = "normal"
+
+
+def leer_config(env=os.environ) -> Config:
+    return Config(
+        archivo=env.get("ARCHIVO", "datos/gastos.csv"),
+        limite_semana=float(env.get("LIMITE_SEMANA", "500")),
+        modo=env.get("MODO", "normal"),
+    )
+```
+
+Y el resto del programa **la importa**, sin leer `os.environ` por su cuenta:
+
+```python
+from config import leer_config
+
+config = leer_config()
+if total > config.limite_semana:
+    print("Te pasaste del límite de la semana")
+```
+
+Tres decisiones que importan:
+
+- **Valores por defecto**: el programa funciona sin configurar nada.
+- **Se revisa al empezar**: si `LIMITE_SEMANA=mucho`, el programa avisa **al arrancar**, no a la mitad.
+- **`frozen=True`**: nadie la cambia por accidente en medio del programa (intentarlo da `FrozenInstanceError`).
+
+> 💡 **Idea:** `env=os.environ` como parámetro es lo que hace que se pueda **probar**: en la prueba le pasas un diccionario común, sin tocar las variables de tu computadora.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer la configuración una sola vez
+lenguaje: python
+pide: Completa `leer_config(env)`: devuelve un `Config` con `archivo` (de `"ARCHIVO"`, por defecto `"datos/gastos.csv"`), `limite_semana` (de `"LIMITE_SEMANA"` como `float`, por defecto `500.0`) y `modo` (de `"MODO"`, por defecto `"normal"`). Si el límite no es un número, lanza `ValueError("LIMITE_SEMANA tiene que ser un número")`. Si el modo no es `"normal"` ni `"detallado"`, lanza `ValueError("MODO tiene que ser normal o detallado")`.
+--- código
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Config:
+    archivo: str
+    limite_semana: float
+    modo: str
+
+
+def leer_config(env):
+    pass  # tu código aquí
+--- pruebas
+def _error(env):
+    try:
+        leer_config(env)
+    except ValueError as e:
+        return str(e)
+    return "no lanzó ValueError"
+
+prueba("sin nada: los valores por defecto", lambda: igual(leer_config({}), Config("datos/gastos.csv", 500.0, "normal")))
+prueba("lee lo que viene", lambda: igual(leer_config({"LIMITE_SEMANA": "350.5", "MODO": "detallado"}).limite_semana, 350.5))
+prueba("un límite que no es número", lambda: igual(_error({"LIMITE_SEMANA": "mucho"}), "LIMITE_SEMANA tiene que ser un número"))
+prueba("un modo que no existe", lambda: igual(_error({"MODO": "rapido"}), "MODO tiene que ser normal o detallado"))
+def _congelada():
+    c = leer_config({})
+    try:
+        c.limite_semana = 1
+    except Exception as e:
+        igual(type(e).__name__, "FrozenInstanceError")
+        return
+    ok(False, "se pudo cambiar: tiene que estar congelada")
+prueba("nadie la cambia después", _congelada)
+--- solución
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Config:
+    archivo: str
+    limite_semana: float
+    modo: str
+
+
+def leer_config(env):
+    try:
+        limite = float(env.get("LIMITE_SEMANA", "500"))
+    except ValueError:
+        raise ValueError("LIMITE_SEMANA tiene que ser un número")
+    modo = env.get("MODO", "normal")
+    if modo not in ("normal", "detallado"):
+        raise ValueError("MODO tiene que ser normal o detallado")
+    return Config(env.get("ARCHIVO", "datos/gastos.csv"), limite, modo)
+```
+
+```practica
+vf :: Un programa sin pantalla también se beneficia de tener sus valores en un solo lugar, como un motor de diseño
+vf :: Conviene que cada función lea os.environ por su cuenta, cuando lo necesita
+elige :: ¿Para qué sirve frozen=True en la dataclass de la configuración? :: Para que ocupe menos memoria :: Para que nadie la cambie por accidente después de crearla :: Para que se guarde en un archivo → Intentar cambiarla da FrozenInstanceError.
+escribe :: ¿Por qué leer_config recibe env como parámetro en vez de usar os.environ adentro? :: Para poder probarla pasándole un diccionario común, sin tocar las variables de la computadora. Por defecto usa os.environ, así en el programa real no cambia nada.
+```
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo organizas un proyecto de Python?":** "Separo el código en módulos e importo lo que necesito. Uso primero la biblioteca estándar (datetime, pathlib, json, csv). Para paquetes externos, un entorno virtual por proyecto con venv, los paquetes anotados en requirements.txt con su versión, y la carpeta .venv fuera de Git. Antes de instalar algo reviso que sea el paquete oficial."

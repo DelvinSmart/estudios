@@ -306,6 +306,110 @@ elige :: ¿Qué parte conviene siempre anotar en una función? :: Ninguna :: Los
 escribe :: Tipa una función rendimiento que recibe km y litros y devuelve un número. :: function rendimiento(km: number, litros: number): number { return km / litros; }
 ```
 
+## Parte 5. El motor de diseño con tipos
+
+> 🌎 **En la vida real:** es como la planilla de un uniforme de equipo: dice qué prendas lleva (camiseta, short, medias) y de qué color. Un uniforme de visitante tiene **las mismas prendas** con otros colores; si le falta una, el árbitro no lo deja entrar.
+
+> 🌎 **Otro ejemplo:** Es como el formulario de un pasaporte: el de cada persona tiene datos distintos, pero **los mismos campos**. Un formulario con un campo de menos no se acepta.
+
+En la clase 84 armaste el motor de la web de gastos como un objeto de JavaScript. En TypeScript ese objeto gana algo enorme: **un tipo que dice qué tiene que tener**.
+
+```ts
+interface Tema {
+  colores: { fondo: string; texto: string; acento: string };
+  espacio: { chico: number; medio: number; grande: number };
+  radio: number;
+}
+
+const oscuro: Tema = {
+  colores: { fondo: '#0f141b', texto: '#e6edf3', acento: '#7ee787' },
+  espacio: { chico: 8, medio: 14, grande: 20 },
+  radio: 14,
+};
+```
+
+Ahora el **modo claro** tiene que cumplir **la misma interfaz**. Si te olvidas un color, TypeScript te frena **antes** de abrir la app:
+
+```ts
+const claro: Tema = {
+  colores: { fondo: '#ffffff', texto: '#1d232b' },   // ✗ Property 'acento' is missing
+  espacio: oscuro.espacio,
+  radio: oscuro.radio,
+};
+```
+
+Ese es el valor de tipar el motor: **los dos temas no pueden tener piezas distintas**. Y cada recuadro **llama** al motor que le pasan, sin saber cuál es:
+
+```ts
+function estiloDeTarjeta(tema: Tema) {
+  return { background: tema.colores.fondo, padding: tema.espacio.medio, borderRadius: tema.radio };
+}
+```
+
+`estiloDeTarjeta(oscuro)` y `estiloDeTarjeta(claro)` dan tarjetas distintas con **el mismo código**.
+
+> 💡 **Idea:** `as const` (clase 52) sirve cuando hay **un solo** tema: congela los valores. Cuando hay **dos o más** que tienen que ser iguales por dentro, lo que conviene es una **interfaz**, como aquí.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Dos temas con la misma forma
+lenguaje: ts
+pide: Ya está la interfaz `Tema` y el tema `oscuro`. Escribe `claro: Tema` con fondo `'#ffffff'`, texto `'#1d232b'` y acento `'#1a7f37'`, y **los mismos** espacios y radio que `oscuro` (reúsalos, no los copies). Después completa `estiloDeBoton(tema: Tema)`: devuelve `{ background: acento, color: fondo, padding: espacio.chico, borderRadius: radio }`. TypeScript revisa que no falte nada.
+--- código
+interface Tema {
+  colores: { fondo: string; texto: string; acento: string };
+  espacio: { chico: number; medio: number; grande: number };
+  radio: number;
+}
+
+const oscuro: Tema = {
+  colores: { fondo: '#0f141b', texto: '#e6edf3', acento: '#7ee787' },
+  espacio: { chico: 8, medio: 14, grande: 20 },
+  radio: 14,
+};
+
+// tu tema claro aquí
+
+function estiloDeBoton(tema: Tema) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el botón oscuro', () => igual(estiloDeBoton(oscuro), { background: '#7ee787', color: '#0f141b', padding: 8, borderRadius: 14 }));
+prueba('el botón claro, con el mismo código', () => igual(estiloDeBoton(claro), { background: '#1a7f37', color: '#ffffff', padding: 8, borderRadius: 14 }));
+prueba('el claro reúsa los espacios del oscuro', () => ok(claro.espacio === oscuro.espacio, 'usa espacio: oscuro.espacio'));
+const t: Tema = claro;
+--- solución
+interface Tema {
+  colores: { fondo: string; texto: string; acento: string };
+  espacio: { chico: number; medio: number; grande: number };
+  radio: number;
+}
+
+const oscuro: Tema = {
+  colores: { fondo: '#0f141b', texto: '#e6edf3', acento: '#7ee787' },
+  espacio: { chico: 8, medio: 14, grande: 20 },
+  radio: 14,
+};
+
+const claro: Tema = {
+  colores: { fondo: '#ffffff', texto: '#1d232b', acento: '#1a7f37' },
+  espacio: oscuro.espacio,
+  radio: oscuro.radio,
+};
+
+function estiloDeBoton(tema: Tema) {
+  return { background: tema.colores.acento, color: tema.colores.fondo, padding: tema.espacio.chico, borderRadius: tema.radio };
+}
+```
+
+```practica
+vf :: Si el tema claro y el oscuro usan la misma interfaz, TypeScript avisa cuando a uno le falta un color
+vf :: Para que un recuadro funcione con el tema claro y el oscuro, hay que escribirlo dos veces
+elige :: Hay un tema oscuro y uno claro que tienen que tener las mismas piezas. ¿Qué conviene? :: as const en cada uno :: Una interfaz Tema que cumplan los dos :: Escribirlos con any → as const congela un solo objeto; la interfaz obliga a que todos tengan la misma forma.
+escribe :: ¿Qué quiere decir que un recuadro "llama" al motor de diseño? :: Que no escribe colores ni medidas a mano: usa los valores del motor (tema.colores.acento, tema.espacio.medio), así cambiar el motor cambia todos los recuadros.
+```
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿por qué usas TypeScript?":** "Porque encuentra errores antes de que lleguen al usuario: si paso un texto donde va un número, o uso un campo que no existe, el editor me avisa. Anoto los parámetros y los datos que vienen de afuera, dejo que infiera lo demás, modelo los estados con uniones de literales y describo los datos con interfaces, con opcionales y readonly donde corresponde."

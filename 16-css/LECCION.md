@@ -205,6 +205,8 @@ Así se hace el **modo oscuro y claro** de esta página: las reglas usan solo va
 
 > 💡 **Idea:** tu página **¿Qué dice la Biblia?** hace lo mismo con su motor de diseño (Tema 12, parte 7, y Tema 14). Ahora sabes cómo funciona por dentro.
 
+**Más que colores.** Un motor de diseño tiene cuatro familias, y todas son variables: **color** (`--fondo`), **separaciones** (`--relleno` adentro de una caja, `--hueco` entre una y otra), **forma** (`--radio`) y **efectos** (`--sombra`). Cada recuadro **llama** al motor en vez de escribir números: `.tarjeta { padding: var(--relleno); border-radius: var(--radio); }`. Y una variable se puede cambiar en un pedazo de la página: `.compacta { --relleno: 8px; }` achica todas las tarjetas que están adentro. La clase guiada tiene el ejercicio.
+
 **Preguntas**
 11. ¿Qué ventaja tiene `var(--acento)` sobre escribir `#7ee787` en 20 lugares?
 12. ¿Qué cambias para tener un modo claro?

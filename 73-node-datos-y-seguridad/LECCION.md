@@ -232,6 +232,76 @@ elige :: ¿Cuál de estas NO está en la lista del servidor seguro? :: Consultas
 escribe :: Escribe cinco cosas de la lista corta del servidor seguro. :: Secretos en .env o en el gestor de secretos, validar todo lo que entra, consultas con parámetros, verificar el token y los permisos, y límites de uso (además de CORS, helmet y errores sin detalles).
 ```
 
+## Parte 4. La configuración en un solo lugar
+
+> 🌎 **En la vida real:** es como el tablero de llaves de un edificio: cada llave tiene su gancho con su nombre. El portero no guarda llaves en los bolsillos de cada saco; si falta una, se nota **al abrir el tablero**, no cuando alguien queda afuera.
+
+> 🌎 **Otro ejemplo:** Es como la ficha técnica de un auto: potencia, presión de las llantas y tipo de aceite, en una sola hoja. El mecánico mira la ficha, no adivina.
+
+En la parte 2 pusiste los secretos en `.env`. La pregunta siguiente es **quién los lee**. Si cada archivo hace `process.env.ALGO` por su cuenta, pasan tres cosas malas: un nombre mal escrito da `undefined` **a la mitad** del programa, los valores por defecto se repiten (y se contradicen), y no se puede probar sin tocar las variables de la computadora.
+
+La solución es la misma idea que un motor de diseño, para un programa sin pantalla: **un solo módulo** que lee todo, lo revisa y lo entrega.
+
+```js
+// src/config.js: lo único que lee process.env.
+export function leerConfig(env = process.env) {
+  const puerto = Number(env.PUERTO ?? 3000);
+  if (!Number.isInteger(puerto)) throw new Error('PUERTO tiene que ser un número entero');
+  const modo = env.NODE_ENV ?? 'desarrollo';
+  if (modo === 'produccion' && !env.TOKEN_SECRETO) throw new Error('Falta TOKEN_SECRETO');
+  return Object.freeze({ puerto, modo, tokenSecreto: env.TOKEN_SECRETO ?? 'solo-para-desarrollo' });
+}
+
+export const config = leerConfig();
+```
+
+```js
+// src/servidor.js: no sabe de dónde salen los valores. Solo los usa.
+import { config } from './config.js';
+app.listen(config.puerto);
+```
+
+- **Falla al arrancar, no a la mitad.** Si falta el secreto en producción, el servidor ni prende, con un mensaje claro.
+- **`Object.freeze`**: nadie cambia la configuración por accidente mientras corre.
+- **`env = process.env`** como parámetro: en las pruebas le pasas un objeto común.
+
+> 📌 **Nota:** fíjate en el valor por defecto de `tokenSecreto`: existe **solo** para desarrollo. En producción no hay valor por defecto: si falta, es un error. Un secreto "de mentira" que llega a producción es un agujero de seguridad.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer la configuración una sola vez
+lenguaje: js
+pide: Completa `leerConfig(env)`. Devuelve un objeto **congelado** (`Object.freeze`) con `puerto` (de `env.PUERTO` como número, por defecto `3000`), `modo` (de `env.NODE_ENV`, por defecto `'desarrollo'`) y `limitePorMinuto` (de `env.LIMITE`, por defecto `60`). Lanza `Error('PUERTO tiene que ser un número entero')` si el puerto no es un entero, y `Error('Falta TOKEN_SECRETO')` si el modo es `'produccion'` y no viene `env.TOKEN_SECRETO`.
+--- código
+function leerConfig(env) {
+  // tu código aquí
+}
+--- pruebas
+const error = (env) => { try { leerConfig(env); return 'no lanzó'; } catch (e) { return e.message; } };
+prueba('sin nada: los valores por defecto', () => igual(leerConfig({}), { puerto: 3000, modo: 'desarrollo', limitePorMinuto: 60 }));
+prueba('lee lo que viene', () => igual(leerConfig({ PUERTO: '8080', LIMITE: '100' }).puerto, 8080));
+prueba('un puerto que no es número', () => igual(error({ PUERTO: 'ochenta' }), 'PUERTO tiene que ser un número entero'));
+prueba('producción sin secreto no arranca', () => igual(error({ NODE_ENV: 'produccion' }), 'Falta TOKEN_SECRETO'));
+prueba('producción con secreto sí', () => igual(leerConfig({ NODE_ENV: 'produccion', TOKEN_SECRETO: 'x' }).modo, 'produccion'));
+prueba('nadie la cambia después', () => ok(Object.isFrozen(leerConfig({})), 'usa Object.freeze'));
+--- solución
+function leerConfig(env) {
+  const puerto = Number(env.PUERTO ?? 3000);
+  if (!Number.isInteger(puerto)) throw new Error('PUERTO tiene que ser un número entero');
+  const modo = env.NODE_ENV ?? 'desarrollo';
+  if (modo === 'produccion' && !env.TOKEN_SECRETO) throw new Error('Falta TOKEN_SECRETO');
+  return Object.freeze({ puerto, modo, limitePorMinuto: Number(env.LIMITE ?? 60) });
+}
+```
+
+```practica
+vf :: Conviene que un solo módulo lea process.env y el resto del programa use lo que ese módulo entrega
+vf :: En producción, si falta el secreto, lo mejor es usar uno por defecto para que el servidor arranque igual
+elige :: ¿Cuándo conviene que falle una configuración mal puesta? :: Cuando alguien use esa parte :: Al arrancar el programa :: Nunca: mejor seguir → Fallar al arrancar, con un mensaje claro, evita errores raros a la mitad.
+escribe :: ¿Qué tiene que ver la configuración en un solo lugar con un motor de diseño? :: Es la misma idea: los valores que deciden cómo se ve o cómo se comporta algo viven en un solo lugar, y el resto los llama. Cambiar un valor es cambiar una línea, no buscarlo por todo el código.
+```
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo aseguras una API en Node?":** "Guardo en una base de datos con consultas parametrizadas para evitar inyección, con restricciones en la propia tabla. Los secretos van en .env o en el gestor de secretos, nunca en el código. Verifico el token de Firebase Auth en el servidor y solo dejo tocar lo que es del uid. Pongo límites de uso, helmet, CORS para mis dominios y errores sin detalles. Y si uso firebase-admin, sé que se salta las reglas, así que valido todo en el código, como en las funciones de mi mapa de estudios."

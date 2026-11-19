@@ -465,6 +465,77 @@ Se lee: "cuando el `<html>` tenga `data-theme="light"`, las variables valen esto
 
 > 💡 **Idea:** el botón ◐ de esta página hace exactamente eso. Y tu página **¿Qué dice la Biblia?** usa la misma idea en su motor de diseño (Temas 12 y 14).
 
+### Más que colores: el motor completo
+
+> 🌎 **En la vida real:** un motor de diseño es como el reglamento de construcción de un barrio: cuántos metros entre casa y casa, de qué alto las rejas, qué tejas se usan. Cada casa lo **sigue**; nadie mide a ojo.
+
+Los colores son una sola de las **cuatro familias** de un motor de diseño. Las otras tres también son variables:
+
+| Familia | Qué decide | Ejemplo |
+|---|---|---|
+| **Color** | Fondo, texto, acento, peligro | `--fondo`, `--acento` |
+| **Separaciones** | El aire adentro y entre las cajas | `--relleno` (adentro), `--hueco` (entre una y otra) |
+| **Forma** | Qué tan redondas son las esquinas | `--radio` |
+| **Efectos** | Sombras, transparencias | `--sombra` |
+
+```css
+:root {
+  --relleno: 16px;   /* el aire adentro de una caja */
+  --hueco: 8px;      /* el aire entre una caja y otra */
+  --radio: 12px;     /* las esquinas */
+  --sombra: 0 2px 8px rgb(0 0 0 / .3);
+}
+
+.tarjeta { padding: var(--relleno); border-radius: var(--radio); box-shadow: var(--sombra); }
+.lista   { display: grid; gap: var(--hueco); }
+```
+
+Fíjate: `.tarjeta` **no escribe ningún número**. Solo **llama** al motor: "dame el relleno de la casa, las esquinas de la casa". Esta misma página está hecha así: busca `--hueco` y `--relleno` en `web/estilos.css`.
+
+**El truco que hace al motor poderoso:** una variable se puede **cambiar en una parte de la página**, y todo lo que está adentro la usa:
+
+```css
+.compacta { --relleno: 8px; }   /* adentro de .compacta, las tarjetas tienen menos aire */
+```
+
+No tocaste `.tarjeta`: cambiaste **el valor** que ella llama. Es lo mismo que el modo claro, pero en un pedazo de la página.
+
+> 💡 **Idea:** la regla de un motor es una sola: **ningún color ni medida escritos a mano fuera de `:root`**. Si encuentras un `padding: 13px` suelto, ese recuadro se escapó del motor.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El motor completo: separaciones y forma
+lenguaje: html
+pide: En `:root`, crea `--relleno: 16px`, `--hueco: 8px` y `--radio: 12px`. Haz que `.tarjeta` use `--relleno` para su `padding` y `--radio` para su `border-radius`, y que `.lista` (que ya es grid) use `--hueco` para su `gap`. Después, sin tocar `.tarjeta`, haz que **adentro de `.compacta`** el relleno sea `8px`.
+--- código
+<style>
+  /* tu motor y tus reglas aquí */
+  .lista { display: grid; }
+</style>
+<div class="lista">
+  <div class="tarjeta" id="normal">Normal</div>
+  <div class="compacta"><div class="tarjeta" id="chica">Compacta</div></div>
+</div>
+--- pruebas
+prueba('la tarjeta tiene el relleno del motor', () => igual(estilo('#normal', 'padding-top'), '16px'));
+prueba('las esquinas salen del motor', () => igual(estilo('#normal', 'border-top-left-radius'), '12px'));
+prueba('la lista usa el hueco', () => igual(estilo('.lista', 'row-gap'), '8px'));
+prueba('adentro de .compacta hay menos aire', () => igual(estilo('#chica', 'padding-top'), '8px'));
+prueba('la tarjeta llama al motor, no escribe números', () => ok([...document.styleSheets[0].cssRules].some((r) => r.selectorText === '.tarjeta' && r.cssText.includes('var(--relleno)')), '.tarjeta tiene que usar var(--relleno)'));
+--- solución
+<style>
+  :root { --relleno: 16px; --hueco: 8px; --radio: 12px; }
+  .compacta { --relleno: 8px; }
+  .lista { display: grid; gap: var(--hueco); }
+  .tarjeta { padding: var(--relleno); border-radius: var(--radio); }
+</style>
+<div class="lista">
+  <div class="tarjeta" id="normal">Normal</div>
+  <div class="compacta"><div class="tarjeta" id="chica">Compacta</div></div>
+</div>
+```
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

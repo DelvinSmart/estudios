@@ -296,6 +296,91 @@ elige :: ¿Qué cancela las corrutinas del ViewModel al cerrar la pantalla? :: r
 escribe :: ¿Qué responsabilidades tiene el ViewModel y cuáles la pantalla? :: El ViewModel pide los datos (con el repositorio y corrutinas) y guarda el estado; la pantalla solo muestra ese estado y avisa de los toques.
 ```
 
+## Parte 4. El tema de Compose: el motor de diseño en Kotlin
+
+> 🌎 **En la vida real:** es como el manual de marca de una empresa: el logo, los colores y las tipografías están en un solo documento. Cada folleto, cartel y camioneta **sigue el manual**; nadie elige "un verde parecido".
+
+> 🌎 **Otro ejemplo:** Es como el tablero de luces de una casa: un solo panel decide qué se prende. Las lámparas no tienen su propio interruptor escondido.
+
+En Compose el motor tiene **dos capas**. La de la app de gastos (clase 89) está en `tema/Motor.kt`:
+
+**1. Los valores, en un `object`** (un objeto que existe una sola vez, clase 64):
+
+```kotlin
+object Motor {
+    object Colores {
+        val fondo = Color(0xFF0F141B)
+        val tarjeta = Color(0xFF18212C)
+        val acento = Color(0xFF7EE787)
+    }
+    object Espacio { val chico = 8.dp; val medio = 14.dp; val grande = 20.dp }
+    object Forma { val radio = 14.dp }
+}
+```
+
+**2. El tema de Material 3**, que envuelve toda la app y les pasa esos colores a los componentes de Google (botones, tarjetas):
+
+```kotlin
+@Composable
+fun TemaGastos(contenido: @Composable () -> Unit) {
+    val colores = darkColorScheme(background = Motor.Colores.fondo, primary = Motor.Colores.acento)
+    MaterialTheme(colorScheme = colores, content = contenido)
+}
+```
+
+Y cada componente **llama** al motor, sin escribir un número:
+
+```kotlin
+Card(shape = RoundedCornerShape(Motor.Forma.radio)) {
+    Text("Combustible", modifier = Modifier.padding(Motor.Espacio.medio))
+}
+```
+
+**El modo claro** sale de `isSystemInDarkTheme()`: devuelve `true` o `false`, y el tema elige `darkColorScheme(...)` o `lightColorScheme(...)` con los colores del motor. Es la misma idea que `useColorScheme()` en React Native (clase 56): **el teléfono dice el modo, el motor da los valores**.
+
+> 💡 **Idea:** `.dp` (*density-independent pixels*) es la medida de Android que se ve del mismo tamaño en una pantalla chica y en una grande. Por eso el motor guarda `14.dp` y no `14` píxeles.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un tema con data class y copy
+lenguaje: kotlin
+pide: Sin Compose (el Playground no lo tiene), arma la idea con Kotlin puro. Ya están `Colores` y `Tema`, y el tema `Oscuro`. Escribe `Claro`: **una copia** de `Oscuro` (`copy`) que solo cambia el fondo a `"#FFFFFF"` y el texto a `"#1D232B"`. Y completa `temaPara(oscuro: Boolean)`, que devuelve `Oscuro` o `Claro`, y `rellenoDeTarjeta(tema)`, que devuelve el espacio medio del tema.
+--- código
+data class Colores(val fondo: String, val texto: String, val acento: String)
+data class Tema(val colores: Colores, val espacioMedio: Int, val radio: Int)
+
+val Oscuro = Tema(Colores("#0F141B", "#E6EDF3", "#7EE787"), espacioMedio = 14, radio = 14)
+val Claro: Tema = Oscuro  // cámbialo: una copia con otro fondo y otro texto
+
+fun temaPara(oscuro: Boolean): Tema = TODO()
+
+fun rellenoDeTarjeta(tema: Tema): Int = TODO()
+--- pruebas
+prueba("el claro cambia el fondo y el texto") { igual(Claro.colores, Colores("#FFFFFF", "#1D232B", "#7EE787")) }
+prueba("y deja igual lo demás") { igual(Claro.espacioMedio to Claro.radio, 14 to 14) }
+prueba("el teléfono en oscuro") { igual(temaPara(true), Oscuro) }
+prueba("en claro") { igual(temaPara(false), Claro) }
+prueba("el relleno sale del tema") { igual(rellenoDeTarjeta(Oscuro.copy(espacioMedio = 20)), 20) }
+--- solución
+data class Colores(val fondo: String, val texto: String, val acento: String)
+data class Tema(val colores: Colores, val espacioMedio: Int, val radio: Int)
+
+val Oscuro = Tema(Colores("#0F141B", "#E6EDF3", "#7EE787"), espacioMedio = 14, radio = 14)
+val Claro: Tema = Oscuro.copy(colores = Oscuro.colores.copy(fondo = "#FFFFFF", texto = "#1D232B"))
+
+fun temaPara(oscuro: Boolean): Tema = if (oscuro) Oscuro else Claro
+
+fun rellenoDeTarjeta(tema: Tema): Int = tema.espacioMedio
+```
+
+```practica
+vf :: En Compose, el tema de Material 3 envuelve toda la app y les pasa los colores del motor a los componentes
+vf :: Cada pantalla de Compose debería elegir sus propios colores para verse mejor
+elige :: ¿Cómo sabe la app de Compose si el teléfono está en modo oscuro? :: Con useColorScheme() :: Con isSystemInDarkTheme() :: Leyendo un archivo de configuración → isSystemInDarkTheme() es la versión de Compose de useColorScheme() de React Native.
+escribe :: ¿Por qué copy sirve para armar el tema claro a partir del oscuro? :: Porque copy crea un tema nuevo cambiando solo lo que le dices (el fondo y el texto) y dejando igual lo demás (espacios, radio, acento). Así los dos temas comparten las mismas medidas sin copiarlas a mano.
+```
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo haces una pantalla en Android moderno?":** "Con Jetpack Compose: funciones @Composable, Column, Row y LazyColumn, y Modifier para el estilo. El estado local va con remember y mutableStateOf; el estado de la pantalla en un ViewModel que expone un StateFlow con una sealed de Cargando, Lista o Error, pidiendo los datos en viewModelScope con un repositorio. Es la misma idea que React Native, que ya uso en Copiloto, pero nativa."
