@@ -96,6 +96,7 @@ export const CLASES = {
   '27': { carpeta: '27-agentes-disenar', titulo: 'Diseñar un agente', meta: 'Contexto, herramientas, estado, salidas, modelo y protocolos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '28': { carpeta: '28-agentes-evaluar-publicar', titulo: 'Evaluar y publicar', meta: 'Medir un agente con pruebas y llevarlo a producción', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '29': { carpeta: '29-agentes-todo-junto', titulo: 'Todo junto', meta: 'La arquitectura completa, la lista para producción y la entrevista', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '93': { carpeta: '93-agentes-proyecto-ollama', titulo: 'Proyecto final: un agente que corre gratis', meta: 'El Copiloto de gastos con Ollama: herramientas, frenos, controles, rastros y un set de evaluación con el modelo de verdad', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '30': { carpeta: '30-ia-como-funciona', titulo: 'Cómo funciona un modelo', meta: 'Qué hace bien, qué inventa, tokens, contexto, planes y privacidad', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '31': { carpeta: '31-ia-pedir-bien', titulo: 'Pedir bien', meta: 'Las piezas de un buen pedido, errores, pasos y mejorar el pedido con Gemini', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '32': { carpeta: '32-ia-claude-code', titulo: 'Claude y Claude Code', meta: 'Tu herramienta principal: CLAUDE.md, AGENTS.md, revisar, sesiones y MCP', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -113,7 +114,7 @@ export const CLASES = {
 // El dibujo de cada clase en el mapa de islas.
 const ICONOS = {
   '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
-  '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁',
+  '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁', '93': '🦾',
   '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄', '79': '🗒️', '78': '👥', '80': '🚀', '92': '🏁',
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁',
@@ -129,7 +130,7 @@ const LOGOS_CLASE = {
   '12': ['html', 'css', 'javascript'], '13': ['react', 'typescript', 'vite', 'tailwind', 'firebase'], '14': ['html', 'css', 'javascript'],
   '15': ['html'], '16': ['css'], '17': ['javascript'], '18': ['html', 'css', 'javascript', 'markdown'],
   '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'], '77': ['github', 'firebase', 'react'], '85': ['firebase', 'javascript', 'github'], '86': ['javascript', 'typescript', 'react'],
-  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'],
+  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'], '93': ['python', 'ollama'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
   '35': ['claude', 'git'], '79': ['claude'], '78': ['claude', 'git'], '80': ['claude', 'ollama'], '92': ['claude', 'javascript'],
   '44': ['javascript', 'typescript', 'react', 'kotlin'],
@@ -220,7 +221,7 @@ export const ETAPAS = [
   {
     id: 'agentes', curso: 'agentes', icono: '🤖', titulo: 'Agentes de IA', logos: ['python', 'javascript'],
     desc: 'Un curso aparte, con su propio certificado: diseñar, medir y publicar tus propios agentes.',
-    clases: ['19', '25', '26', '27', '28', '29'],
+    clases: ['19', '25', '26', '27', '28', '29', '93'],
   },
 ];
 

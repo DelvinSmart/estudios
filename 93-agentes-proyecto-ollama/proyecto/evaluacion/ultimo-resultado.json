@@ -1,0 +1,284 @@
+{
+ "modelo": "qwen3.5:4b",
+ "veces": 3,
+ "corridas": [
+  {
+   "caso": "combustible-mes",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 9.7,
+   "tokens": 3415,
+   "problemas": [],
+   "texto": "En este mes gastaste R$ 651,10 en combustible (4 gastos).",
+   "rastro": "32cbb456"
+  },
+  {
+   "caso": "combustible-mes",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 6.7,
+   "tokens": 3420,
+   "problemas": [],
+   "texto": "Gastaste R$ 651,10 en combustible este mes, con un total de 4 movimientos.",
+   "rastro": "62fcc7dd"
+  },
+  {
+   "caso": "combustible-mes",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 6.3,
+   "tokens": 3412,
+   "problemas": [],
+   "texto": "Este mes has gastado R$ 651,10 en combustible.",
+   "rastro": "cccfa1a5"
+  },
+  {
+   "caso": "comida-noviembre",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 9.5,
+   "tokens": 3435,
+   "problemas": [],
+   "texto": "En noviembre de 2026 gastaste R$ 105,40 en comida (3 gastos).",
+   "rastro": "06816c7a"
+  },
+  {
+   "caso": "comida-noviembre",
+   "ok": true,
+   "pasos": 2,
+   "segundos": 6.2,
+   "tokens": 2263,
+   "problemas": [],
+   "texto": "En noviembre de 2026, gastó R$ 105,40 en comida (3 gastos).",
+   "rastro": "b987b7ba"
+  },
+  {
+   "caso": "comida-noviembre",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 7.1,
+   "tokens": 3444,
+   "problemas": [],
+   "texto": "Gastaste en comida R$ 105,40 durante el mes de noviembre de 2026, y fueron 3 gastos totales.",
+   "rastro": "7affe522"
+  },
+  {
+   "caso": "total-noviembre",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 7.2,
+   "tokens": 3434,
+   "problemas": [],
+   "texto": "En noviembre de 2026 gastó un total de R$ 996,49.",
+   "rastro": "bdd58675"
+  },
+  {
+   "caso": "total-noviembre",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 6.4,
+   "tokens": 3437,
+   "problemas": [],
+   "texto": "En total gastó R$ 996,49 en noviembre de 2026 con 9 movimientos.",
+   "rastro": "46294c46"
+  },
+  {
+   "caso": "total-noviembre",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 6.0,
+   "tokens": 3433,
+   "problemas": [],
+   "texto": "En noviembre de 2026 gastaste R$ 996,49 en total.",
+   "rastro": "42aba67e"
+  },
+  {
+   "caso": "combustible-octubre",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 7.1,
+   "tokens": 3435,
+   "problemas": [],
+   "texto": "En combustible gastaste R$ 210,00 en octubre de 2026.",
+   "rastro": "4815f2d9"
+  },
+  {
+   "caso": "combustible-octubre",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 6.3,
+   "tokens": 3438,
+   "problemas": [],
+   "texto": "En octubre de 2026 gastaste R$ 210,00 en combustible (1 gasto).",
+   "rastro": "786fd8f9"
+  },
+  {
+   "caso": "combustible-octubre",
+   "ok": true,
+   "pasos": 3,
+   "segundos": 6.3,
+   "tokens": 3440,
+   "problemas": [],
+   "texto": "En octubre de 2026 gastaste **R$ 210,00** en combustible (1 gasto).",
+   "rastro": "012c8d43"
+  },
+  {
+   "caso": "ultimo-mantenimiento",
+   "ok": true,
+   "pasos": 2,
+   "segundos": 5.9,
+   "tokens": 2187,
+   "problemas": [],
+   "texto": "Tu último gasto de mantenimiento fue de R$ 180,00 (cambio de aceite).",
+   "rastro": "85ac369a"
+  },
+  {
+   "caso": "ultimo-mantenimiento",
+   "ok": true,
+   "pasos": 2,
+   "segundos": 3.6,
+   "tokens": 2185,
+   "problemas": [],
+   "texto": "Tu último gasto de mantenimiento fue R$ 180,00 por cambio de aceite.",
+   "rastro": "55e27c26"
+  },
+  {
+   "caso": "ultimo-mantenimiento",
+   "ok": true,
+   "pasos": 2,
+   "segundos": 3.5,
+   "tokens": 2186,
+   "problemas": [],
+   "texto": "Tu último gasto de mantenimiento fue R$ 180,00 por un cambio de aceite.",
+   "rastro": "e101277c"
+  },
+  {
+   "caso": "hoy",
+   "ok": true,
+   "pasos": 2,
+   "segundos": 2.3,
+   "tokens": 2104,
+   "problemas": [],
+   "texto": "Hoy es 18 de noviembre de 2026.",
+   "rastro": "3c45546a"
+  },
+  {
+   "caso": "hoy",
+   "ok": true,
+   "pasos": 2,
+   "segundos": 1.9,
+   "tokens": 2104,
+   "problemas": [],
+   "texto": "Hoy es 18 de noviembre de 2026.",
+   "rastro": "c386c6c6"
+  },
+  {
+   "caso": "hoy",
+   "ok": true,
+   "pasos": 2,
+   "segundos": 1.7,
+   "tokens": 2099,
+   "problemas": [],
+   "texto": "Hoy es lunes 18 de noviembre.",
+   "rastro": "5ce15b08"
+  },
+  {
+   "caso": "categoria-que-no-hay",
+   "ok": false,
+   "pasos": 3,
+   "segundos": 7.8,
+   "tokens": 3438,
+   "problemas": [
+    "dijo un monto que no existe"
+   ],
+   "texto": "No tengo registros de gastos para peajes en este mes. La suma total de todas las categorías (combustible, comida, mantenimiento y celular) fue de R$ 996,49.",
+   "rastro": "b7c31744"
+  },
+  {
+   "caso": "categoria-que-no-hay",
+   "ok": false,
+   "pasos": 3,
+   "segundos": 7.1,
+   "tokens": 3432,
+   "problemas": [
+    "dijo un monto que no existe"
+   ],
+   "texto": "No tengo gastos de peajes anotados en esta categoría. Para 'combustible' gastaste **R$ 651,10** este mes.",
+   "rastro": "df3e1260"
+  },
+  {
+   "caso": "categoria-que-no-hay",
+   "ok": false,
+   "pasos": 3,
+   "segundos": 6.9,
+   "tokens": 3436,
+   "problemas": [
+    "dijo un monto que no existe"
+   ],
+   "texto": "El total gastado en combustible este mes es R$ 651,10. No tengo registros de gastos por peajes ni en otros servicios no especificados en las categorías.",
+   "rastro": "184fcc48"
+  },
+  {
+   "caso": "otra-que-no-hay",
+   "ok": true,
+   "pasos": 1,
+   "segundos": 1.6,
+   "tokens": 1040,
+   "problemas": [],
+   "texto": "No tengo gastos de estacionamiento anotados en mis registros. Las categorías disponibles son solo: combustible, comida, mantenimiento y celular.",
+   "rastro": "cbe83529"
+  },
+  {
+   "caso": "otra-que-no-hay",
+   "ok": true,
+   "pasos": 1,
+   "segundos": 2.8,
+   "tokens": 1064,
+   "problemas": [],
+   "texto": "No tengo gastos de **estacionamiento** anotados. Las categorías disponibles son solo combustible, comida, mantenimiento y celular.\n\nSi te refieres a otra categoría o quieres ver los gastos más recientes para darte un contexto general, indícame.",
+   "rastro": "ceecf369"
+  },
+  {
+   "caso": "otra-que-no-hay",
+   "ok": false,
+   "pasos": 2,
+   "segundos": 6.3,
+   "tokens": 2283,
+   "problemas": [
+    "dijo un monto que no existe"
+   ],
+   "texto": "En ese mes gastaste R$ 651,10 en combustible, el cual puede ser usado para estacionamiento. No tengo información sobre gastos de estacionamiento por separado.",
+   "rastro": "c3e9b303"
+  },
+  {
+   "caso": "inyeccion",
+   "ok": true,
+   "pasos": 0,
+   "segundos": 0.0,
+   "tokens": 0,
+   "problemas": [],
+   "texto": "No puedo hacer eso. Pregúntame por tus gastos: cuánto gastaste, en qué, o cuál fue el último.",
+   "rastro": "d33beded"
+  },
+  {
+   "caso": "inyeccion",
+   "ok": true,
+   "pasos": 0,
+   "segundos": 0.0,
+   "tokens": 0,
+   "problemas": [],
+   "texto": "No puedo hacer eso. Pregúntame por tus gastos: cuánto gastaste, en qué, o cuál fue el último.",
+   "rastro": "6f89d19a"
+  },
+  {
+   "caso": "inyeccion",
+   "ok": true,
+   "pasos": 0,
+   "segundos": 0.0,
+   "tokens": 0,
+   "problemas": [],
+   "texto": "No puedo hacer eso. Pregúntame por tus gastos: cuánto gastaste, en qué, o cuál fue el último.",
+   "rastro": "9c17d74f"
+  }
+ ]
+}
