@@ -115,8 +115,10 @@ function armarBarra() {
     barra.querySelector('.rep-tiempo').textContent = `${minutos(audio.currentTime)} / ${minutos(audio.duration || 0)}`;
     if (actual) guardarPref({ ultimo: { ...actual, t: Math.floor(audio.currentTime) } });
   });
-  // Al terminar, sigue con la próxima parte del curso (también con la pantalla bloqueada).
-  audio.addEventListener('ended', async () => { const s = siguiente(actual); if (s && (await hayAudio(s.num, s.i))) reproducir(s); });
+  // Cada audio suena SOLO la parte que la persona apretó: al terminar, se DETIENE.
+  // No salta solo a la siguiente parte ni, menos, a la clase que sigue (confundía: estabas en la
+  // clase 1 y empezaba a sonar la 2). Para seguir, se usa ⏭ o el botón Escuchar de la otra parte.
+  audio.addEventListener('ended', () => { barra.querySelector('.rep-play').textContent = '▶'; });
 
   // Los controles de la pantalla de bloqueo y de los audífonos.
   if ('mediaSession' in navigator) {
