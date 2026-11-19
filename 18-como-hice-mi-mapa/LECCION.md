@@ -323,12 +323,35 @@ Es igual que con **¿Qué dice la Biblia?** (Tema 12, parte 9): GitHub Pages sir
 '20': { carpeta: '20-mi-tema', titulo: 'Mi tema', meta: 'Qué voy a saber hacer', docs: LECCION },
 ```
 
-3. Ponla en la etapa que le toca, en `ETAPAS` (por ejemplo, en `clases: ['19', '20']`).
-4. Agrégala a `README.md` y a la lista **Mi avance** de `PROGRESO.md` (`- [ ] 20 Mi tema`).
+3. Ponla en la etapa que le toca, en `ETAPAS` (por ejemplo, en `clases: ['19', '20']`). **El lugar en esa lista es el número que verá el alumno.** Si la pones primera, será la "Clase 1" y las demás suben solas.
+4. Corre `node firebase/generar-reglas.mjs` (actualiza solo el índice, las reglas y la lista del README) y agrega la clase a la lista **Mi avance** de `PROGRESO.md`.
 5. Sube los cambios. Listo: aparece en el mapa.
+
+### Dos números a propósito: el id fijo y el número que se ve
+
+> 🌎 **En la vida real:** tu **cédula** no cambia nunca, aunque te mudes de casa. Tu **dirección** sí cambia. Si el banco te guardara por tu dirección, cada mudanza sería un lío; por eso te guarda por la cédula. Aquí es igual.
+
+Fíjate en algo del paso 3: para meter una clase en medio **no hay que renumerar nada**. Eso es a propósito, y es una decisión de diseño que conviene saber explicar:
+
+- **El id (la carpeta): `06`, `44`, `116`…** Es la **cédula** de la clase. **Nunca cambia.** Con él se guarda el progreso de cada alumno (`06:LECCION.md:3`), las reglas y los audios. Como no cambia, **agregar o mover clases no obliga a migrar nada** de lo guardado.
+- **El número que ve el alumno: "Clase 1, 2, 3…"** Es el **lugar** de la clase dentro de su curso. Se **calcula** con el orden de la lista; no se escribe a mano. Si reordenas, se recalcula solo.
+
+Por eso en el texto de las clases se escribe "Tema 06" (el id), y un **motor de referencias** (`web/referencias.js`) lo cambia, al mostrarlo, por el número vivo del mapa. Agregas una clase al principio y **todas las referencias se corrigen solas**.
+
+Y la **dirección (URL)** junta el curso y ese número vivo, para que coincida con lo que se ve en pantalla:
+
+```text
+Lo que ve el alumno:  Programación · Clase 5
+La URL:               #/programacion/5     (no el id de atrás; ese queda oculto)
+```
+
+> 💡 **Idea clave:** separar **el id que no cambia** (para guardar) del **número que se ve** (para mostrar) es un patrón **normal y recomendado** en sitios serios. YouTube guarda cada video con un código fijo (`watch?v=dQw4...`), no por "el video número 5 del canal"; Stack Overflow usa `/questions/11227809/por-que...`, un número fijo y un texto bonito. Hacerlo así **no es un error**: es lo que se espera de alguien que sabe. Lo que **sí** sería un error es guardar el progreso por el número que cambia, porque cada clase nueva rompería los datos de todos.
+
+> 🎤 **Si en una entrevista te dicen "¿y no es raro que la URL no sea el nombre de la carpeta?":** "Es a propósito. Separo el identificador estable, que no cambia nunca y con el que guardo el progreso, del número que ve el usuario, que es su posición en el curso y se calcula. Así agrego o reordeno clases sin migrar los datos de nadie, y la URL igual se ve bonita y coincide con la pantalla. Es el mismo patrón de YouTube o Stack Overflow: un id fijo detrás y una dirección legible delante."
 
 **Preguntas**
 19. Agregaste la carpeta y la lección, pero la clase no aparece en el mapa. ¿Qué te faltó?
+20. ¿Por qué el progreso se guarda con el id de la carpeta (`06`) y no con el número que ve el alumno ("Clase 5")?
 
 ## Ejercicios
 
@@ -375,6 +398,7 @@ Es igual que con **¿Qué dice la Biblia?** (Tema 12, parte 9): GitHub Pages sir
 17. Jekyll convertiría los `.md` en HTML y el mapa no podría leer las lecciones crudas.
 18. Porque con la cuenta gratis GitHub Pages solo publica repositorios públicos, y `estudios` es privado.
 19. Agregarla en `web/cursos.js`: en `CLASES` y en su etapa.
+20. Porque el id no cambia nunca, y el número que se ve es la posición y cambia al reordenar. Si guardara por el número, cada clase nueva correría el progreso de todos. El id fijo evita migrar nada.
 
 </details>
 
