@@ -234,7 +234,7 @@ function crearPuente(buscar: () => Modulo | null) {
 }
 ```
 
-Una cosa más del lado TypeScript de Copiloto: la lista de apps de viaje instaladas llega como **lista** en Android, pero en iPhone llega como **texto JSON** (Swift la arma con `JSONSerialization`, porque una lista de diccionarios con valores mezclados es más fácil de mandar como texto). El tipo lo dice: `listRideApps(): RideApp[] | string`, y TypeScript acepta las dos.
+Una cosa más del lado TypeScript de Copiloto: la lista de apps de viaje instaladas llega como **lista** en Android, pero en iPhone llega como **texto JSON** (Swift la arma con `JSONSerialization`, porque una lista de diccionarios con valores mezclados es más fácil de mandar como texto). El tipo lo dice: `listarApps(): App[] | string`, y TypeScript acepta las dos.
 
 ```ejercicio
 titulo: La misma respuesta, de dos formas
