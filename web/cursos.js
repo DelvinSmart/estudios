@@ -129,6 +129,7 @@ export const CLASES = {
   '79': { carpeta: '79-ia-planificar', titulo: 'El plano y la estructura', meta: 'Planificar antes de programar, las puertas y ventanas que la IA olvida, y cómo evitar el código espagueti', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '85': { carpeta: '85-recorrido-de-cada-proyecto', titulo: 'El recorrido de cada proyecto', meta: 'De punta a punta: Copiloto (app e IA), ¿Qué dice la Biblia? y este mapa, en 30 segundos y en detalle', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '86': { carpeta: '86-la-entrevista', titulo: 'La entrevista: RH y líder técnico', meta: 'Tu historia con tus palabras, cada término en dos versiones (glosario) y el simulacro', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '117': { carpeta: '117-portafolio-en-voz-alta', titulo: 'Mi portafolio en voz alta', meta: 'Una ficha por proyecto: los pitches de 30 s, 1 y 5 min, las decisiones con su alternativa, un bug con STAR y qué mejorarías', docs: LECCION },
   '78': { carpeta: '78-ia-varios-agentes', titulo: 'Uno o varios agentes, y dirigirlos', meta: 'Varios agentes sin pisarse, gastar menos tokens, subagentes, tu propio vigilante y la persona como director', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '80': { carpeta: '80-ia-maximo-provecho', titulo: 'Sacarle el máximo provecho', meta: 'Aprender mientras construyes, convertir lo repetitivo en herramientas y lo que no se delega', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '92': { carpeta: '92-ia-proyecto-dirigir-la-ia', titulo: 'Proyecto final: una app dirigiendo a la IA', meta: 'El plan, las reglas, un paso por pedido, la revisión que encuentra lo que las pruebas no ven y el cuaderno de pedidos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -143,7 +144,7 @@ const ICONOS = {
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁', '94': '🧮', '95': '📱',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁', '96': '⚖️', '97': '👋', '98': '🛟', '99': '🧰', '100': '🏗️', '101': '🚦', '102': '🖼️', '103': '🗂️', '104': '🎨', '105': '🧪', '106': '🏁',
-  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '109': '🔑', '110': '📲', '111': '🧰', '113': '🌉', '112': '💼', '114': '🎯', '115': '🚨', '91': '🏁',
+  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '117': '🗣️', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '109': '🔑', '110': '📲', '111': '🧰', '113': '🌉', '112': '💼', '114': '🎯', '115': '🚨', '91': '🏁',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
 
@@ -205,7 +206,7 @@ export const ETAPAS = [
   {
     id: 'proyectos', icono: '🚀', titulo: 'Mis proyectos por dentro', logos: ['react', 'firebase', 'github'],
     desc: 'Todo lo anterior, aplicado a lo que yo construí.',
-    clases: ['12', '13', '14', '18', '20', '21', '77', '85', '86'],
+    clases: ['12', '13', '14', '18', '20', '21', '77', '85', '86', '117'],
   },
   {
     id: 'javascript', curso: 'javascript', icono: '🟨', titulo: 'JavaScript + TypeScript', logos: ['javascript', 'typescript', 'node', 'vitest'],

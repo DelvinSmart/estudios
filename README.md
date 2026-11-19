@@ -23,7 +23,7 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 
 <!-- clases:inicio (generado por firebase/generar-reglas.mjs: no editar a mano) -->
 
-### 💻 Programación · 26 clases · certificado `ME-…`
+### 💻 Programación · 27 clases · certificado `ME-…`
 
 **🧱 Fundamentos**
 
@@ -75,6 +75,7 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 24 | [Cómo hice los paneles](77-como-hice-los-paneles/LECCION.md) | La trastienda de mis tres proyectos: la llave, GitHub, Firebase y cómo viaja cada cambio | `77` |
 | 25 | [El recorrido de cada proyecto](85-recorrido-de-cada-proyecto/LECCION.md) | De punta a punta: Copiloto (app e IA), ¿Qué dice la Biblia? y este mapa, en 30 segundos y en detalle | `85` |
 | 26 | [La entrevista: RH y líder técnico](86-la-entrevista/LECCION.md) | Tu historia con tus palabras, cada término en dos versiones (glosario) y el simulacro | `86` |
+| 27 | [Mi portafolio en voz alta](117-portafolio-en-voz-alta/LECCION.md) | Una ficha por proyecto: los pitches de 30 s, 1 y 5 min, las decisiones con su alternativa, un bug con STAR y qué mejorarías | `117` |
 
 ### 🟨 JavaScript + TypeScript · 13 clases · certificado `JS-…`
 
