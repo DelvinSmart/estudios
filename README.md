@@ -107,7 +107,7 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 08 | [REST a fondo, BFF y microservicios](76-node-bff-y-microservicios/LECCION.md) | Idempotencia, códigos, versiones, un BFF en Express y cuándo partir en microservicios | `76` |
 | 09 | [Proyecto final: la API de gastos](87-node-proyecto-api-de-gastos/LECCION.md) | Express, validación, un almacén que no pierde datos, 32 pruebas y cómo publicarla | `87` |
 
-### 📱 React Native · 10 clases · certificado `RN-…`
+### 📱 React Native · 11 clases · certificado `RN-…`
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
@@ -121,6 +121,7 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 08 | [Proyecto final: la app de gastos](88-rn-proyecto-app-de-gastos/LECCION.md) | Expo y TypeScript: motor de diseño, lógica con pruebas, AsyncStorage, FlatList y abrirla en tu iPhone | `88` |
 | 09 | [La calculadora 1: el plano, el motor y la lógica](94-rn-proyecto-calculadora/LECCION.md) | El proyecto estrella: las decisiones de las cuentas, el motor de diseño, 0,1 + 0,2 y un reducer sin eval, con las pruebas primero | `94` |
 | 10 | [La calculadora 2: la pantalla y el teléfono](95-rn-calculadora-al-telefono/LECCION.md) | El teclado como datos, accesibilidad, lo que se encontró mirando, y la app de verdad en el iPhone y en Android | `95` |
+| 11 | [El puente nativo](113-rn-el-puente-nativo/LECCION.md) | Cómo se hablan TypeScript, Kotlin y Swift: Expo Modules, JSI, funciones, promesas, eventos y el almacén compartido de Copiloto | `113` |
 
 ### 🤖 Kotlin · 9 clases · certificado `KT-…`
 

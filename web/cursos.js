@@ -91,6 +91,7 @@ export const CLASES = {
   '88': { carpeta: '88-rn-proyecto-app-de-gastos', titulo: 'Proyecto final: la app de gastos', meta: 'Expo y TypeScript: motor de diseño, lógica con pruebas, AsyncStorage, FlatList y abrirla en tu iPhone', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '94': { carpeta: '94-rn-proyecto-calculadora', titulo: 'La calculadora 1: el plano, el motor y la lógica', meta: 'El proyecto estrella: las decisiones de las cuentas, el motor de diseño, 0,1 + 0,2 y un reducer sin eval, con las pruebas primero', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '95': { carpeta: '95-rn-calculadora-al-telefono', titulo: 'La calculadora 2: la pantalla y el teléfono', meta: 'El teclado como datos, accesibilidad, lo que se encontró mirando, y la app de verdad en el iPhone y en Android', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '113': { carpeta: '113-rn-el-puente-nativo', titulo: 'El puente nativo', meta: 'Cómo se hablan TypeScript, Kotlin y Swift: Expo Modules, JSI, funciones, promesas, eventos y el almacén compartido de Copiloto', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '61': { carpeta: '61-kotlin-primeros-pasos', titulo: 'Primeros pasos', meta: 'Playground, val y var, tipos y plantillas', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '62': { carpeta: '62-kotlin-null-y-decisiones', titulo: 'Null safety, decisiones y ciclos', meta: 'String?, ?., ?:, if y when como expresiones, rangos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '63': { carpeta: '63-kotlin-funciones-y-colecciones', titulo: 'Funciones, lambdas y colecciones', meta: 'fun, lambdas, extensiones, map, filter y sumOf', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -138,7 +139,7 @@ const ICONOS = {
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁', '94': '🧮', '95': '📱',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁', '96': '⚖️', '97': '👋', '98': '🛟', '99': '🧰', '100': '🏗️', '101': '🚦', '102': '🖼️', '103': '🗂️', '104': '🎨', '105': '🧪', '106': '🏁',
-  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '109': '🔑', '110': '📲', '111': '🧰', '112': '💼', '91': '🏁',
+  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '109': '🔑', '110': '📲', '111': '🧰', '113': '🌉', '112': '💼', '91': '🏁',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
 
@@ -149,7 +150,7 @@ const LOGOS_CLASE = {
   '12': ['html', 'css', 'javascript'], '13': ['react', 'typescript', 'vite', 'tailwind', 'firebase'], '14': ['html', 'css', 'javascript'],
   '15': ['html'], '16': ['css'], '17': ['javascript'], '18': ['html', 'css', 'javascript', 'markdown'],
   '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'], '77': ['github', 'firebase', 'react'], '85': ['firebase', 'javascript', 'github'], '86': ['javascript', 'typescript', 'react'],
-  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '107': ['owasp', 'node'], '108': ['owasp', 'firebase', 'github'], '109': ['owasp', 'node'], '110': ['owasp', 'android', 'apple'], '111': ['bitwarden', 'letsencrypt', 'github'], '112': ['owasp', 'bash'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'], '93': ['python', 'ollama'],
+  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '107': ['owasp', 'node'], '108': ['owasp', 'firebase', 'github'], '109': ['owasp', 'node'], '110': ['owasp', 'android', 'apple'], '113': ['expo', 'kotlin', 'swift'], '111': ['bitwarden', 'letsencrypt', 'github'], '112': ['owasp', 'bash'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'], '93': ['python', 'ollama'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
   '35': ['claude', 'git'], '79': ['claude'], '78': ['claude', 'git'], '80': ['claude', 'ollama'], '92': ['claude', 'javascript'],
   '44': ['javascript', 'typescript', 'react', 'kotlin'],
@@ -215,7 +216,7 @@ export const ETAPAS = [
   {
     id: 'reactnative', curso: 'reactnative', icono: '📱', titulo: 'React Native', logos: ['react', 'typescript', 'expo', 'firebase'],
     desc: 'Un curso aparte, con su propio certificado: apps para iPhone y Android con un solo código, como Copiloto.',
-    clases: ['54', '55', '56', '57', '58', '59', '60', '88', '94', '95'],
+    clases: ['54', '55', '56', '57', '58', '59', '60', '88', '94', '95', '113'],
   },
   {
     id: 'kotlin', curso: 'kotlin', icono: '🤖', titulo: 'Kotlin', logos: ['kotlin', 'compose', 'androide', 'gradle'],
