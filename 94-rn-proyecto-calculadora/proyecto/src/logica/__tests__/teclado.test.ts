@@ -6,7 +6,7 @@ test('cinco filas de cuatro teclas', () => {
   FILAS.forEach((fila) => expect(fila).toHaveLength(4));
 });
 
-test('cada tecla aparece una sola vez, y están las 19 de la calculadora', () => {
+test('cada tecla aparece una sola vez, y están las de la calculadora', () => {
   const todas = FILAS.flat();
   expect(new Set(todas).size).toBe(todas.length);
   expect(todas).toEqual(expect.arrayContaining(['0', '9', ',', '+', '−', '×', '÷', '=', 'C', '⌫', '%', '±']));

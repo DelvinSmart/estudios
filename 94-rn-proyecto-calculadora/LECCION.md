@@ -15,12 +15,12 @@
 | `src/logica/teclado.ts` | El teclado como datos (clase 95) |
 | `src/tema/motor.ts` | El motor de diseño: colores, separaciones, formas y letras |
 | `src/componentes/` y `src/pantallas/` | La pantalla (clase 95) |
-| `__tests__/` | 55 pruebas con Jest y Testing Library |
+| `__tests__/` | 56 pruebas con Jest y Testing Library |
 
 ```bash
 cd estudios/94-rn-proyecto-calculadora/proyecto
 npm install
-npm test          # 55 en verde
+npm test          # 56 en verde
 npm run tipos     # TypeScript, sin errores
 npm run web       # la calculadora en el navegador
 ```

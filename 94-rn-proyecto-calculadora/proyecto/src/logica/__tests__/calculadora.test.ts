@@ -49,6 +49,7 @@ describe('las teclas de función', () => {
   test('% solo divide entre 100', () => expect(tocar('5', '0', '%')).toBe('0,5'));
   test('200 + 10 % es el 10% de 200', () => expect(tocar('2', '0', '0', '+', '1', '0', '%')).toBe('20'));
   test('200 + 10 % = 220', () => expect(tocar('2', '0', '0', '+', '1', '0', '%', '=')).toBe('220'));
+  test('15 + 3 % es 0,45 (la versión de Kotlin lo tenía mal al principio)', () => expect(tocar('1', '5', '+', '3', '%')).toBe('0,45'));
   test('en una multiplicación, % divide entre 100', () => expect(tocar('5', '0', '×', '1', '0', '%', '=')).toBe('5'));
 });
 

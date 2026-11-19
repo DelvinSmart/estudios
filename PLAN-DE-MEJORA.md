@@ -113,8 +113,9 @@ hecho de la mejor forma y sin código espagueti:
   y una cuenta gratuita de Apple (la app dura 7 días y se vuelve a instalar; publicar en la App Store sí cuesta,
   y eso se explica pero no se hace).
 
-- [x] Las clases de la calculadora (curso de React Native): clases 94 y 95. El plano con la tabla de decisiones, el motor con tema claro y oscuro, un reducer sin `eval` (0,1 + 0,2 = 0,3), el teclado como datos con accesibilidad, 55 pruebas, el número cortado que se encontró mirando un iPhone SE, y la app armada en Release: en el simulador del iPhone y como APK en un Android
-- [ ] La misma calculadora en Kotlin (Android) y en Swift (iPhone), para comparar
+- [x] Las clases de la calculadora (curso de React Native): clases 94 y 95. El plano con la tabla de decisiones, el motor con tema claro y oscuro, un reducer sin `eval` (0,1 + 0,2 = 0,3), el teclado como datos con accesibilidad, 56 pruebas, el número cortado que se encontró mirando un iPhone SE, y la app armada en Release: en el simulador del iPhone y como APK en un Android
+- [x] La misma calculadora en Kotlin (Android), para comparar (clase 96): las mismas decisiones y pruebas, familias sealed, BigDecimal exacto (y su trampa con `/`), ViewModel con `update`, el `applicationId` repetido que Android no dejó instalar, y la tabla para elegir entre React Native y nativo
+- [ ] La misma calculadora en Swift (iPhone): va como proyecto final del curso de Swift (G)
 
 ### G. Un curso nuevo: Swift, el lenguaje del iPhone
 

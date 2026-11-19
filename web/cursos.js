@@ -41,6 +41,7 @@ export const CLASES = {
   '24': { carpeta: '24-seguridad-avanzada', titulo: 'Seguridad avanzada', meta: 'Auditar un sistema entero, como hicimos con Copiloto', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '91': { carpeta: '91-seguridad-proyecto-auditoria', titulo: 'Proyecto final: auditar una API con errores', meta: 'Una API con 10 errores a propósito: trampas, arreglos sin romper nada y el informe', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '89': { carpeta: '89-kotlin-proyecto-app-de-gastos', titulo: 'Proyecto final: la app de gastos en Android', meta: 'Gradle, lógica en Kotlin puro, DataStore, ViewModel con StateFlow, Compose y el emulador', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '96': { carpeta: '96-kotlin-proyecto-calculadora', titulo: 'La misma calculadora, en Kotlin', meta: 'Las mismas decisiones y pruebas que la de React Native: familias sealed, BigDecimal exacto, ViewModel y cuál conviene elegir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '36': { carpeta: '36-python-primeros-pasos', titulo: 'Primeros pasos', meta: 'Correr Python, variables, tipos, print e input', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '37': { carpeta: '37-python-decisiones-y-repeticiones', titulo: 'Decisiones y repeticiones', meta: 'La sangría, if, elif, else, for, range y while', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '38': { carpeta: '38-python-colecciones', titulo: 'Listas, tuplas, diccionarios y conjuntos', meta: 'Agrupar datos y las comprensiones', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -120,7 +121,7 @@ const ICONOS = {
   '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄', '79': '🗒️', '78': '👥', '80': '🚀', '92': '🏁',
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁', '94': '🧮', '95': '📱',
-  '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁',
+  '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁', '96': '⚖️',
   '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️', '91': '🏁',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
@@ -143,7 +144,7 @@ const LOGOS_CLASE = {
   '45': ['javascript'], '46': ['javascript'], '47': ['javascript'], '48': ['javascript'], '49': ['javascript', 'firebase'],
   '50': ['node', 'javascript'], '51': ['typescript'], '52': ['typescript'], '53': ['typescript', 'vitest'], '81': ['javascript', 'html'], '82': ['javascript'], '83': ['javascript'], '84': ['javascript', 'css', 'github'],
   '54': ['react', 'typescript'], '55': ['react'], '56': ['react'], '94': ['react', 'typescript'], '95': ['expo', 'apple', 'android'], '57': ['expo', 'apple'], '58': ['react'], '59': ['firebase', 'react'], '60': ['expo', 'android', 'apple'], '88': ['react', 'typescript', 'expo'],
-  '61': ['kotlin'], '62': ['kotlin'], '63': ['kotlin'], '64': ['kotlin'], '65': ['kotlin'], '66': ['compose', 'kotlin', 'android'], '67': ['androide', 'firebase', 'gradle'], '89': ['kotlin', 'compose', 'android'],
+  '61': ['kotlin'], '62': ['kotlin'], '63': ['kotlin'], '64': ['kotlin'], '96': ['kotlin', 'android'], '65': ['kotlin'], '66': ['compose', 'kotlin', 'android'], '67': ['androide', 'firebase', 'gradle'], '89': ['kotlin', 'compose', 'android'],
   '36': ['python'], '37': ['python'], '38': ['python'], '39': ['python'], '40': ['python', 'markdown'],
   '41': ['python', 'bash'], '42': ['python'], '43': ['python', 'github'], '90': ['python', 'bash'],
 };
@@ -203,7 +204,7 @@ export const ETAPAS = [
   {
     id: 'kotlin', curso: 'kotlin', icono: '🤖', titulo: 'Kotlin', logos: ['kotlin', 'compose', 'androide', 'gradle'],
     desc: 'Un curso aparte, con su propio certificado: el lenguaje nativo de Android, hasta publicar una app.',
-    clases: ['61', '62', '63', '64', '65', '66', '67', '89'],
+    clases: ['61', '62', '63', '64', '65', '66', '67', '89', '96'],
   },
   {
     id: 'python', curso: 'python', icono: '🐍', titulo: 'Python', logos: ['python'],
