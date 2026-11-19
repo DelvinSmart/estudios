@@ -218,6 +218,64 @@ export const GLOSARIO = [
     definicion: 'El "apretón de manos" con el que dos computadoras abren una conexión por internet antes de mandarse datos.' },
   { termino: 'firewall', alias: ['cortafuegos'], clase: '112',
     definicion: 'Un portero de red que deja pasar solo las conexiones permitidas y bloquea el resto.' },
+
+  // La web (clases 15-17)
+  { termino: 'HTML', alias: ['html'], clase: '15',
+    definicion: 'El lenguaje que pone el contenido y la estructura de una página: títulos, párrafos, botones, imágenes. El "esqueleto".' },
+  { termino: 'etiqueta', alias: ['etiquetas', 'tag', 'tags'], clase: '15',
+    definicion: 'Cada pieza de HTML, escrita entre `< >`, como `<p>` (párrafo) o `<button>` (botón).' },
+  { termino: 'CSS', alias: ['css'], clase: '16',
+    definicion: 'El lenguaje que da el aspecto a una página: colores, tamaños, posiciones. La "ropa" del esqueleto HTML.' },
+  { termino: 'selector', alias: ['selectores'], clase: '16',
+    definicion: 'En CSS, la forma de decir a qué elementos aplica un estilo (por su etiqueta, su clase o su id).' },
+  { termino: 'Flexbox', alias: ['flexbox', 'flex'], clase: '16',
+    definicion: 'La forma de acomodar cosas en fila o en columna y repartir el espacio entre ellas. Se usa en la web y en React Native.' },
+  { termino: 'responsive', alias: ['adaptable', 'responsivo'], clase: '16',
+    definicion: 'Que la pantalla se acomoda sola a cualquier tamaño: se ve bien en el teléfono y en la computadora.' },
+
+  // TypeScript (clases 51-52)
+  { termino: 'interface', alias: ['interfaz', 'interfaces'], clase: '51',
+    definicion: 'En TypeScript, la forma de describir cómo es un objeto (qué campos tiene y de qué tipo), para que el editor avise si te equivocas.' },
+  { termino: 'genérico', alias: ['generico', 'genéricos', 'generics'], clase: '52',
+    definicion: 'Un tipo "con un hueco" que sirve para cualquier dato, como una `Lista<T>` que puede ser de números o de textos.' },
+
+  // Kotlin (clases 61-67)
+  { termino: 'val y var', alias: ['val', 'var'], clase: '61',
+    definicion: 'En Kotlin, `val` es una caja que no cambia (como const) y `var` una que sí.' },
+  { termino: 'data class', alias: ['data-class'], clase: '64',
+    definicion: 'En Kotlin, un molde para datos que ya trae hechas las funciones de comparar y copiar. Ideal para guardar información.' },
+  { termino: 'enum', alias: ['enums', 'enumeración'], clase: '64',
+    definicion: 'Una lista cerrada de opciones con nombre (por ejemplo: ROJO, AMARILLO, VERDE). El código no deja usar otra que no esté en la lista.' },
+  { termino: 'DataStore', alias: ['datastore'], clase: '67',
+    definicion: 'La forma moderna de guardar datos simples en una app de Android, que sobreviven al cerrarla.' },
+
+  // Python (clases 36-43)
+  { termino: 'diccionario', alias: ['diccionarios', 'dict'], clase: '38',
+    definicion: 'En Python, un dato con parejas nombre→valor, como `{\"nombre\": \"Ana\", \"edad\": 30}`. Es el equivalente del objeto de JavaScript.' },
+  { termino: 'f-string', alias: ['f string', 'fstring'], clase: '36',
+    definicion: 'En Python, un texto con huecos para meter valores: `f\"Hola {nombre}\"`. Igual que las plantillas con acento grave de JavaScript.' },
+
+  // React Native / publicar (clases 54-60)
+  { termino: 'JSX', alias: ['jsx'], clase: '54',
+    definicion: 'La forma de escribir, dentro del código, cómo se ve la pantalla, mezclando etiquetas con JavaScript. Lo usan React y React Native.' },
+  { termino: 'FlatList', alias: ['flatlist'], clase: '56',
+    definicion: 'La pieza de React Native para mostrar listas largas de forma eficiente: solo dibuja lo que se ve en pantalla.' },
+  { termino: 'EAS Build', alias: ['eas', 'eas build'], clase: '60',
+    definicion: 'El servicio de Expo que arma la app en sus computadoras (incluida la del iPhone), así no necesitas una Mac para publicar.' },
+  { termino: 'AAB', alias: ['aab', 'app bundle'], clase: '60',
+    definicion: 'El archivo (Android App Bundle) que se sube a Google Play; la tienda arma desde él el APK para cada teléfono.' },
+
+  // IA (clases 19, 25-35)
+  { termino: 'prompt', alias: ['prompts', 'instrucción'], clase: '30',
+    definicion: 'El texto con el que le pides algo a un modelo de IA. Un buen prompt es claro y da el contexto necesario.' },
+  { termino: 'contexto', alias: ['ventana de contexto', 'context window'], clase: '19',
+    definicion: 'Todo lo que el modelo puede "ver" en una llamada: tus instrucciones, el historial y los datos que le pasas. Es limitado y cuesta.' },
+
+  // Node (clases 68-76)
+  { termino: 'REST', alias: ['rest', 'api rest'], clase: '70',
+    definicion: 'Una forma común de diseñar una API: cada cosa tiene su dirección (endpoint) y se usan los verbos de HTTP (GET para leer, POST para crear…).' },
+  { termino: 'BFF', alias: ['bff', 'backend for frontend'], clase: '76',
+    definicion: 'Un servidor pequeño hecho a la medida de una app, que junta y acomoda lo que esa app necesita, para no cargarla de trabajo.' },
 ];
 
 // Las palabras que introduce una clase (su id): las que se enseñan ahí. Sirve para la caja
