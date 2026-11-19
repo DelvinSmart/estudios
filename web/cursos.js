@@ -9,6 +9,7 @@ const CON_ENTREVISTA = [
 ];
 
 export const CLASES = {
+  '116': { carpeta: '116-programar-desde-cero', titulo: 'Programar desde cero', meta: 'Qué es programar, las primeras palabras sin miedo y cómo usar este curso', docs: LECCION },
   '01': { carpeta: '01-leer-codigo', titulo: 'Leer código', meta: 'Leer una función de la app y decir qué hace', docs: LECCION },
   '02': { carpeta: '02-pruebas-automaticas', titulo: 'Pruebas automáticas', meta: 'Entender las más de 400 pruebas de la app y correrlas', docs: LECCION },
   '03': { carpeta: '03-tu-primera-prueba', titulo: 'Mi primera prueba', meta: 'Escribir una prueba yo solo', docs: LECCION },
@@ -135,6 +136,7 @@ export const CLASES = {
 
 // El dibujo de cada clase en el mapa de islas.
 const ICONOS = {
+  '116': '🌱',
   '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
   '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁', '93': '🦾',
   '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄', '79': '🗒️', '78': '👥', '80': '🚀', '92': '🏁',
@@ -183,7 +185,7 @@ export const ETAPAS = [
   {
     id: 'fundamentos', icono: '🧱', titulo: 'Fundamentos', logos: ['typescript', 'git', 'jest'],
     desc: 'Leer código, probarlo, guardarlo y entender sus errores. La base de todo.',
-    clases: ['01', '44', '02', '03', '04', '05', '06', '07'],
+    clases: ['116', '01', '44', '02', '03', '04', '05', '06', '07'],
   },
   {
     id: 'web', icono: '🌐', titulo: 'La web: HTML, CSS y JavaScript', logos: ['html', 'css', 'javascript'],
