@@ -1,0 +1,22 @@
+/* EL MOTOR DE DISEÑO: todos los colores, espacios y formas, en un solo lugar (regla de AGENTS.md). */
+:root {
+  --fondo: #0f141b;
+  --tarjeta: #18212c;
+  --borde: #2b3644;
+  --texto: #e6edf3;
+  --tenue: #8796aa;
+  --acento: #7ee787;
+  --sobre-acento: #0f141b;
+  --pronto: #f2cc60;
+  --vencido: #ff7b72;
+
+  --hueco: 14px;
+  --hueco-chico: 8px;
+  --relleno: 16px;
+  --radio: 14px;
+  --radio-chico: 8px;
+
+  --letra: 16px;
+  --letra-chica: 14px;
+  --letra-grande: 28px;
+}

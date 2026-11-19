@@ -1,0 +1,11 @@
+{
+  "name": "mantenimiento-del-carro",
+  "version": "1.0.0",
+  "description": "El proyecto del curso IA para programadores: una app chica construida dirigiendo a la IA, con su plan, sus reglas, sus pedidos y sus pruebas.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 -m http.server 8000 --bind 127.0.0.1"
+  }
+}

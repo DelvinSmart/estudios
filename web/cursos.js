@@ -107,13 +107,14 @@ export const CLASES = {
   '86': { carpeta: '86-la-entrevista', titulo: 'La entrevista: RH y líder técnico', meta: 'Tu historia con tus palabras, cada término en dos versiones (glosario) y el simulacro', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '78': { carpeta: '78-ia-varios-agentes', titulo: 'Uno o varios agentes, y dirigirlos', meta: 'Varios agentes sin pisarse, gastar menos tokens, subagentes, tu propio vigilante y la persona como director', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '80': { carpeta: '80-ia-maximo-provecho', titulo: 'Sacarle el máximo provecho', meta: 'Aprender mientras construyes, convertir lo repetitivo en herramientas y lo que no se delega', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '92': { carpeta: '92-ia-proyecto-dirigir-la-ia', titulo: 'Proyecto final: una app dirigiendo a la IA', meta: 'El plan, las reglas, un paso por pedido, la revisión que encuentra lo que las pruebas no ven y el cuaderno de pedidos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
 };
 
 // El dibujo de cada clase en el mapa de islas.
 const ICONOS = {
   '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
   '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁',
-  '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄', '79': '🗒️', '78': '👥', '80': '🚀',
+  '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄', '79': '🗒️', '78': '👥', '80': '🚀', '92': '🏁',
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁',
@@ -130,7 +131,7 @@ const LOGOS_CLASE = {
   '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'], '77': ['github', 'firebase', 'react'], '85': ['firebase', 'javascript', 'github'], '86': ['javascript', 'typescript', 'react'],
   '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
-  '35': ['claude', 'git'], '79': ['claude'], '78': ['claude', 'git'], '80': ['claude', 'ollama'],
+  '35': ['claude', 'git'], '79': ['claude'], '78': ['claude', 'git'], '80': ['claude', 'ollama'], '92': ['claude', 'javascript'],
   '44': ['javascript', 'typescript', 'react', 'kotlin'],
   '68': ['node'], '69': ['node'], '70': ['node'], '71': ['node', 'javascript'], '72': ['node', 'javascript'], '73': ['node', 'firebase'], '74': ['node', 'firebase'],
   '75': ['html', 'css', 'javascript'],
@@ -214,7 +215,7 @@ export const ETAPAS = [
   {
     id: 'ia-programadores', curso: 'ia', icono: '🧠', titulo: 'IA para programadores', logos: ['claude', 'gemini', 'ollama'],
     desc: 'Un curso aparte, con su propio certificado: trabajar con Claude, Gemini, OpenCode, Codex y Llama sin romper nada.',
-    clases: ['30', '31', '32', '33', '34', '35', '79', '78', '80'],
+    clases: ['30', '31', '32', '33', '34', '35', '79', '78', '80', '92'],
   },
   {
     id: 'agentes', curso: 'agentes', icono: '🤖', titulo: 'Agentes de IA', logos: ['python', 'javascript'],

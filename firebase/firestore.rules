@@ -607,7 +607,14 @@ service cloud.firestore {
         '80:LECCION.md:3',
         '80:LECCION.md:4',
         '80:LECCION.md:5',
-        '80:LECCION.md:6'
+        '80:LECCION.md:6',
+        '92:LECCION.md:1',
+        '92:LECCION.md:2',
+        '92:LECCION.md:3',
+        '92:LECCION.md:4',
+        '92:LECCION.md:5',
+        '92:LECCION.md:6',
+        '92:LECCION.md:7'
       ] : (curso == 'agentes' ? [
         '19:LECCION.md:1',
         '19:LECCION.md:2',
@@ -667,7 +674,7 @@ service cloud.firestore {
         '29:LECCION.md:10'
       ] : [])))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 67 : (curso == 'node' ? 40 : (curso == 'reactnative' ? 35 : (curso == 'kotlin' ? 35 : (curso == 'python' ? 46 : (curso == 'seguridad' ? 33 : (curso == 'ia' ? 62 : (curso == 'agentes' ? 56 : -1))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 67 : (curso == 'node' ? 40 : (curso == 'reactnative' ? 35 : (curso == 'kotlin' ? 35 : (curso == 'python' ? 46 : (curso == 'seguridad' ? 33 : (curso == 'ia' ? 69 : (curso == 'agentes' ? 56 : -1))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -1167,7 +1174,13 @@ service cloud.firestore {
         '80:LECCION.md:2',
         '80:LECCION.md:3',
         '80:LECCION.md:4',
-        '80:LECCION.md:5'
+        '80:LECCION.md:5',
+        '92:LECCION.md:1',
+        '92:LECCION.md:2',
+        '92:LECCION.md:3',
+        '92:LECCION.md:4',
+        '92:LECCION.md:5',
+        '92:LECCION.md:6'
       ] : (curso == 'agentes' ? [
         '19:LECCION.md:5',
         '19:LECCION.md:11',
@@ -1265,7 +1278,8 @@ service cloud.firestore {
         '35:LECCION.md:1': '34:LECCION.md:6',
         '79:LECCION.md:1': '35:LECCION.md:4',
         '78:LECCION.md:1': '79:LECCION.md:11',
-        '80:LECCION.md:1': '78:LECCION.md:15'
+        '80:LECCION.md:1': '78:LECCION.md:15',
+        '92:LECCION.md:1': '80:LECCION.md:6'
       } : (curso == 'agentes' ? {
         '25:LECCION.md:1': '19:LECCION.md:11',
         '26:LECCION.md:1': '25:LECCION.md:6',

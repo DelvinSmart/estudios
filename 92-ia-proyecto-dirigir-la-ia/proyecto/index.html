@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mantenimiento del carro</title>
+  <link rel="stylesheet" href="motor.css">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <main>
+    <h1>Mantenimiento del carro</h1>
+
+    <form id="form-km" class="tarjeta">
+      <label>Km que marca el carro hoy
+        <input id="km" name="km" inputmode="numeric" placeholder="por ejemplo 84700">
+      </label>
+      <div id="problemas-km"></div>
+      <button>Actualizar km</button>
+    </form>
+
+    <p id="sin-guardar" class="aviso" hidden>No se pudo guardar en este navegador. Lo que anotes se pierde al cerrar.</p>
+
+    <section id="lista" aria-live="polite"></section>
+
+    <form id="form-nuevo" class="tarjeta">
+      <label>Qué mantenimiento es
+        <input name="nombre" placeholder="Cambio de aceite" maxlength="60">
+      </label>
+      <div class="fila">
+        <label>Cada cuántos km
+          <input name="cadaKm" inputmode="numeric" placeholder="5000">
+        </label>
+        <label>Cada cuántos meses
+          <input name="cadaMeses" inputmode="numeric" placeholder="6">
+        </label>
+      </div>
+      <div class="fila">
+        <label>Km del último cambio
+          <input name="ultimoKm" inputmode="numeric" placeholder="80000">
+        </label>
+        <label>Fecha del último cambio
+          <input id="ultima-fecha" name="ultimaFecha" type="date">
+        </label>
+      </div>
+      <div id="problemas"></div>
+      <button>Agregar</button>
+    </form>
+  </main>
+  <script type="module" src="src/app.mjs"></script>
+</body>
+</html>
