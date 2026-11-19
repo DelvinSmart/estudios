@@ -276,6 +276,72 @@ export const GLOSARIO = [
     definicion: 'Una forma común de diseñar una API: cada cosa tiene su dirección (endpoint) y se usan los verbos de HTTP (GET para leer, POST para crear…).' },
   { termino: 'BFF', alias: ['bff', 'backend for frontend'], clase: '76',
     definicion: 'Un servidor pequeño hecho a la medida de una app, que junta y acomoda lo que esa app necesita, para no cargarla de trabajo.' },
+
+  // Errores, eventos y la web
+  { termino: 'excepción', alias: ['excepcion', 'excepciones', 'lanzar un error', 'throw'], clase: '07',
+    definicion: 'Un error que ocurre mientras el programa corre y lo interrumpe. Se puede "atrapar" (try/catch) para manejarlo en vez de que todo se caiga.' },
+  { termino: 'stack trace', alias: ['rastro de la pila', 'stacktrace'], clase: '07',
+    definicion: 'La lista que muestra un error: por qué funciones pasó antes de romperse. Se lee de arriba (dónde explotó) hacia abajo.' },
+  { termino: 'evento', alias: ['eventos', 'addeventlistener'], clase: '17',
+    definicion: 'Algo que pasa en la página y tu código puede escuchar: un clic, una tecla, enviar un formulario. Se responde con una función.' },
+  { termino: 'SPA', alias: ['spa', 'single page application'], clase: '75',
+    definicion: 'Una app de una sola página que no recarga al navegar: cambia lo que muestra con JavaScript. Así está hecho este mapa de estudios.' },
+  { termino: 'script', alias: ['scripts'], clase: '75',
+    definicion: 'Un programa corto que automatiza una tarea, o el archivo de JavaScript que una página carga para funcionar.' },
+
+  // Arquitectura (clase 10)
+  { termino: 'arquitectura', alias: ['arquitecturas'], clase: '10',
+    definicion: 'Cómo se organiza un programa grande en piezas con trabajos claros, para que no se vuelva un caos. Programar con IA es sobre todo decidir bien esto.' },
+  { termino: 'MVC y MVVM', alias: ['mvc', 'mvvm'], clase: '10',
+    definicion: 'Dos formas de separar una app en: los datos, la pantalla y la pieza que los conecta. Evitan mezclar todo en un solo archivo.' },
+  { termino: 'capa', alias: ['capas', 'arquitectura hexagonal', 'clean'], clase: '10',
+    definicion: 'Separar el programa por niveles (la pantalla, las reglas del negocio, los datos) para poder cambiar uno sin romper los otros.' },
+
+  // Kotlin (clases 62-63)
+  { termino: 'null safety', alias: ['null-safety', 'seguridad de nulos'], clase: '62',
+    definicion: 'La regla de Kotlin que obliga a decir si algo puede ser nulo (`String?`) y a revisarlo antes de usarlo, para que no explote por un nulo.' },
+  { termino: 'when', alias: ['when de kotlin'], clase: '62',
+    definicion: 'En Kotlin, una forma clara de elegir entre muchos casos (como un `switch` ordenado). También da un valor.' },
+  { termino: 'lambda', alias: ['lambdas', 'función anónima'], clase: '63',
+    definicion: 'Una función corta sin nombre que se escribe ahí mismo, para pasarla a otra función (por ejemplo, a `map` o `filter`).' },
+
+  // Node (clase 69)
+  { termino: 'stream', alias: ['streams', 'flujo'], clase: '69',
+    definicion: 'Leer o escribir datos por pedazos, en vez de cargar todo en memoria. Sirve para archivos grandes sin llenar la RAM.' },
+
+  // React a fondo (clase 59)
+  { termino: 'onSnapshot', alias: ['onsnapshot', 'en vivo'], clase: '59',
+    definicion: 'La forma de Firestore de avisarle a la app, al instante, cada vez que cambian los datos, sin tener que volver a preguntar.' },
+  { termino: 'Context', alias: ['context de react', 'contexto de react'], clase: '59',
+    definicion: 'En React, una forma de compartir un dato con muchas pantallas sin pasarlo a mano por cada una (por ejemplo, quién inició sesión).' },
+  { termino: 'memo', alias: ['usememo', 'react.memo', 'memorizar'], clase: '59',
+    definicion: 'Guardar un resultado ya calculado para no rehacerlo en cada dibujado, y así la app no se ponga lenta.' },
+
+  // Swift a fondo (clases 101-103)
+  { termino: 'async/await', alias: ['async await', 'await de swift'], clase: '101',
+    definicion: 'La forma moderna de escribir tareas que tardan (bajar datos) como si fueran paso a paso, sin congelar la app. También existe en JavaScript.' },
+  { termino: '@Observable', alias: ['observable', 'observado'], clase: '103',
+    definicion: 'En SwiftUI, marcar un dato para que, cuando cambie, las pantallas que lo usan se redibujen solas.' },
+
+  // Seguridad (clases 23-24)
+  { termino: 'OWASP', alias: ['owasp', 'owasp top 10'], clase: '23',
+    definicion: 'Una organización que publica la lista de los fallos de seguridad web más comunes (el "Top 10"). Es la guía de qué revisar primero.' },
+  { termino: 'pentest', alias: ['pentesting', 'prueba de penetración'], clase: '24',
+    definicion: 'Atacar un sistema a propósito, con permiso, para encontrar sus fallos antes que un atacante de verdad. Siempre dentro de un alcance acordado.' },
+
+  // Agentes de IA (clases 25-28)
+  { termino: 'ReAct', alias: ['react (agentes)', 'razonar y actuar'], clase: '25',
+    definicion: 'Un patrón de agente: el modelo razona un paso, usa una herramienta, mira el resultado y repite. "Razonar + actuar", en un ciclo.' },
+  { termino: 'RAG', alias: ['rag', 'recuperar y generar'], clase: '26',
+    definicion: 'Darle al modelo, junto con la pregunta, los documentos que necesita para responder bien, en vez de que invente. "Buscar y luego responder".' },
+  { termino: 'orquestador', alias: ['orquestadores', 'orquestar'], clase: '25',
+    definicion: 'La pieza que decide qué paso, herramienta o agente va después. El "director" del agente.' },
+  { termino: 'evaluación', alias: ['eval', 'evals', 'evaluaciones'], clase: '28',
+    definicion: 'Una prueba repetible que califica cómo se porta un agente en muchos casos. Es la unidad de progreso: sin eval, no sabes si mejoró.' },
+  { termino: 'control', alias: ['guardrail', 'guardrails', 'freno'], clase: '27',
+    definicion: 'Una revisión que bloquea o marca una entrada, salida o acción del agente si rompe una regla. El "freno de mano".' },
+  { termino: 'subagente', alias: ['subagentes', 'sub-agente'], clase: '78',
+    definicion: 'Un agente que otro agente lanza para una parte del trabajo, con su propio contexto, para no llenar el del principal.' },
 ];
 
 // Las palabras que introduce una clase (su id): las que se enseñan ahí. Sirve para la caja
