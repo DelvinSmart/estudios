@@ -31,6 +31,7 @@ service cloud.firestore {
         '01:CLASE-GUIADA.md:5',
         '01:CLASE-GUIADA.md:6',
         '01:CLASE-GUIADA.md:7',
+        '01:CLASE-GUIADA.md:8',
         '44:LECCION.md:1',
         '44:LECCION.md:2',
         '44:LECCION.md:3',
@@ -808,7 +809,7 @@ service cloud.firestore {
         '93:LECCION.md:7'
       ] : []))))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 274 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 79 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 64 : -1)))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 275 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 79 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 64 : -1)))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -969,11 +970,11 @@ service cloud.firestore {
         '86:LECCION.md:7',
         '116:LECCION.md:5',
         '116:LECCION.md:6',
-        '01:CLASE-GUIADA.md:1',
         '01:CLASE-GUIADA.md:2',
         '01:CLASE-GUIADA.md:3',
         '01:CLASE-GUIADA.md:4',
         '01:CLASE-GUIADA.md:5',
+        '01:CLASE-GUIADA.md:6',
         '02:CLASE-GUIADA.md:1',
         '02:CLASE-GUIADA.md:2',
         '02:CLASE-GUIADA.md:3',
@@ -1435,7 +1436,7 @@ service cloud.firestore {
     function inicioDeClase(curso) {
       return (curso == 'programacion' ? {
         '01:CLASE-GUIADA.md:1': '116:LECCION.md:7',
-        '44:LECCION.md:1': '01:CLASE-GUIADA.md:7',
+        '44:LECCION.md:1': '01:CLASE-GUIADA.md:8',
         '02:CLASE-GUIADA.md:1': '44:LECCION.md:6',
         '03:CLASE-GUIADA.md:1': '02:CLASE-GUIADA.md:11',
         '04:CLASE-GUIADA.md:1': '03:CLASE-GUIADA.md:11',

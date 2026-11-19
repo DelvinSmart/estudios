@@ -107,6 +107,10 @@ TypeScript te marca un **error antes de correr el programa**: dijiste que en la 
 
 </details>
 
+## 2. `null`: cuando no hay respuesta (y por qué no es cero)
+
+> 🎙️ **El profesor dice:** ya viste los cuatro tipos. Ahora, el que más confunde y más errores causa: `null`. Vale la pena ir despacio con este, porque entenderlo bien te ahorra muchos dolores de cabeza.
+
 ### `null` a fondo: cero no es lo mismo que "no sé"
 
 > 🎙️ **El profesor:** `null` es el tipo que más cuesta al principio, porque parece "cero" o "vacío". No lo es. Vamos con un caso de tu trabajo que lo deja claro para siempre.
@@ -288,7 +292,7 @@ escribe :: Explica con un formulario de tu vida por qué una casilla opcional en
 
 > 🔁 **Repaso:** el código son órdenes escritas para la computadora. La app Copiloto está en TypeScript, que es JavaScript con tipos. Los tipos (`string`, `number`, `boolean`, `null`) dicen qué clase de dato va en cada caja, y así los errores aparecen antes de llegar al teléfono. Y `null` no es cero: es **"no hay dato"** (como una casilla opcional en blanco), y TypeScript te obliga a revisarlo antes de usarlo.
 
-## 2. Las cinco piezas
+## 3. Las cinco piezas
 
 > 🎙️ **El profesor:** ahora te voy a contar un secreto que tranquiliza mucho: **casi todo el código del mundo se arma con las mismas cinco piezas**. Una app gigante como Uber y tu función más chica usan las mismas cinco. Si las reconoces, puedes empezar a leer cualquier archivo.
 
@@ -461,7 +465,7 @@ vf :: `carro.modelo` lee el dato `modelo` del objeto `carro`
 
 > 🔁 **Repaso:** constante (un valor fijo con nombre), función (una máquina que recibe y devuelve), `if` (una decisión), lista (varios en orden) y objeto (varios datos de una cosa). Con estas cinco se arma casi todo.
 
-## 3. Primer ejemplo real: el nombre de "Mi empresa"
+## 4. Primer ejemplo real: el nombre de "Mi empresa"
 
 > 📌 **Nota:** el código de Copiloto es privado, pero todo lo que lees en esta clase está también en el proyecto de práctica **[Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro)**, con nombres en español: esta función es `normalizarNombreEmpresa` en `src/datos/aplicaciones.ts`, y la de la parte 5 es `vehiculoTieneTanque` en `src/utils/combustible.ts`. Puedes abrirlos y leerlos con la clase al lado.
 
@@ -722,7 +726,7 @@ vf :: Si quiero permitir 3 palabras, tengo que cambiar el `2` en el `if`
 
 > 🔁 **Repaso:** la función recibe lo que escribió el conductor, deja los espacios en uno solo y quita los de los lados; si quedó vacío devuelve `''` (usa "Mi empresa"); si pasa de 24 letras o de 2 palabras devuelve `null` (no sirve); si no, devuelve el nombre limpio. Las reglas son constantes con nombre, en un solo lugar.
 
-## 4. Segundo ejemplo real: ¿un ingreso es acumulativo?
+## 5. Segundo ejemplo real: ¿un ingreso es acumulativo?
 
 > 🎙️ **El profesor:** ahora una función cortita, de una sola línea… pero que decide **cómo se cuenta el dinero en toda la app Copiloto**. Es un buen ejemplo de que en programación lo corto puede ser lo más importante.
 
@@ -884,7 +888,7 @@ vf :: Una función de una sola línea no puede ser importante
 
 > 🔁 **Repaso:** la función recibe el id de una plataforma y responde sí o no: sí para Extras, Viajes particulares y Mi empresa (cada registro se suma aparte), no para el resto (acumulativas, como Uber). `===` compara exacto, `||` es "o", y por ser una regla de dinero tiene pruebas.
 
-## 5. Cómo leer cualquier archivo
+## 6. Cómo leer cualquier archivo
 
 > 🎙️ **El profesor:** ya leíste dos funciones reales. Ahora te doy **el método**, para que puedas leer cualquier otra tú solo. Y una tranquilidad: ni los programadores con 20 años de experiencia entienden cada símbolo de un archivo nuevo a la primera. Lo que hacen es seguir un orden.
 
@@ -994,7 +998,7 @@ vf :: Hay que entender cada símbolo antes de seguir leyendo
 
 > 🌎 **En la vida real:** Practicar es como los penales en el entrenamiento: no hay público, puedes errar, y cada error te enseña dónde apuntar.
 
-**A. ¿Qué devuelve `normalizeMyCompanyName`?** Sigue el colador de la parte 3.
+**A. ¿Qué devuelve `normalizeMyCompanyName`?** Sigue el colador de la parte 4.
 1. `"  Thermomac  "`
 2. `"Refrigeración   Silva"` (con muchos espacios en el medio)
 3. `""` (vacío)
