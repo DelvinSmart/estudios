@@ -136,7 +136,7 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 08 | [Proyecto final: la app de gastos en Android](89-kotlin-proyecto-app-de-gastos/LECCION.md) | Gradle, lógica en Kotlin puro, DataStore, ViewModel con StateFlow, Compose y el emulador | `89` |
 | 09 | [La misma calculadora, en Kotlin](96-kotlin-proyecto-calculadora/LECCION.md) | Las mismas decisiones y pruebas que la de React Native: familias sealed, BigDecimal exacto, ViewModel y cuál conviene elegir | `96` |
 
-### 🐦 Swift · 8 clases · certificado `SW-…`
+### 🐦 Swift · 10 clases · certificado `SW-…`
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
@@ -148,6 +148,8 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 06 | [Tu primera pantalla con SwiftUI](102-swift-primera-pantalla/LECCION.md) | Crear el proyecto en Xcode, View, VStack y HStack, modificadores, @State y la app Mi jornada en el simulador | `102` |
 | 07 | [SwiftUI con datos](103-swift-swiftui-con-datos/LECCION.md) | List y ForEach, NavigationStack, borrar deslizando, un diario compartido con @Observable y guardar en el teléfono con Codable | `103` |
 | 08 | [El motor de diseño en SwiftUI](104-swift-motor-de-diseno/LECCION.md) | Separaciones, formas y letras en un enum, colores con modo claro y oscuro, y un ViewModifier para cada tarjeta | `104` |
+| 09 | [Pruebas, e instalar en tu iPhone](105-swift-pruebas-e-instalar/LECCION.md) | Swift Testing con @Test y #expect, romper a propósito, tablas de casos e instalar gratis en tu iPhone | `105` |
+| 10 | [Proyecto final: la calculadora en SwiftUI](106-swift-proyecto-calculadora/LECCION.md) | Las mismas decisiones y pruebas que en React Native y Kotlin, Decimal y su trampa, las tres comparadas y cómo encaja Swift en Copiloto | `106` |
 
 ### 🐍 Python · 9 clases · certificado `PY-…`
 

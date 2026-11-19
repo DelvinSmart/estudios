@@ -117,7 +117,7 @@ hecho de la mejor forma y sin código espagueti:
 
 - [x] Las clases de la calculadora (curso de React Native): clases 94 y 95. El plano con la tabla de decisiones, el motor con tema claro y oscuro, un reducer sin `eval` (0,1 + 0,2 = 0,3), el teclado como datos con accesibilidad, 56 pruebas, el número cortado que se encontró mirando un iPhone SE, y la app armada en Release: en el simulador del iPhone y como APK en un Android
 - [x] La misma calculadora en Kotlin (Android), para comparar (clase 96): las mismas decisiones y pruebas, familias sealed, BigDecimal exacto (y su trampa con `/`), ViewModel con `update`, el `applicationId` repetido que Android no dejó instalar, y la tabla para elegir entre React Native y nativo
-- [ ] La misma calculadora en Swift (iPhone): va como proyecto final del curso de Swift (G)
+- [x] La misma calculadora en Swift (iPhone), para comparar (clase 106): las mismas decisiones y pruebas (44, con Swift Testing), Decimal exacto y su trampa (crearlo desde un Double), minimumScaleFactor de fábrica, la tabla de las tres y cómo encaja Swift en una app de React Native
 
 ### G. Un curso nuevo: Swift, el lenguaje del iPhone
 
@@ -126,8 +126,8 @@ pruebas, el sistema de diseño, instalar en el iPhone y la calculadora. Copiloto
 de iPhone (y Kotlin en la de Android): se cuenta cómo encajan.
 
 - [x] Plan de clases del curso de Swift (abajo)
-- [ ] Las clases, con ejercicios (los cortos corren en la página con Compiler Explorer; las pantallas, en Xcode):
-  **8 de 10** (97 a 104, con 24 ejercicios de Swift probados con su solución en la Mac y en Compiler Explorer, y la app "Mi jornada" en SwiftUI, que crece de la 102 a la 104: lista, detalle, guardar en el teléfono y su motor de diseño, probada en el simulador en modo claro y oscuro)
+- [x] Las clases, con ejercicios (los cortos corren en la página con Compiler Explorer; las pantallas, en Xcode):
+  **10 de 10** (97 a 106, con 31 ejercicios de Swift probados con su solución en la Mac y en Compiler Explorer; la app "Mi jornada" de la 102 a la 105, con 10 pruebas de Swift Testing; y la calculadora en SwiftUI con 44 pruebas, probadas en el simulador del iPhone)
 - [x] El curso en el mapa, con su certificado (prefijo SW; las reglas lo aceptan y no le dejan prender partes de otro curso: 41 pruebas de reglas en verde con el emulador). Crece con cada tanda de clases.
 
 #### El plan del curso de Swift
