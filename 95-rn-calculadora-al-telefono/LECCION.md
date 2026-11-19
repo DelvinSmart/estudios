@@ -71,7 +71,7 @@ function etiquetaDe(t) {
 ```practica
 vf :: Si el teclado es una lista de datos, cambiar el orden de las teclas no obliga a tocar ningún componente
 vf :: La etiqueta para el lector de pantalla es opcional, porque el símbolo ÷ ya se entiende
-elige :: ¿Qué decide tipoDe(tecla)? :: El número que escribe :: De qué tipo es (número, función, operador o igual), y con eso su color :: Si la tecla está encendida → El color sale del tipo, y el tipo de la tabla.
+elige :: ¿Qué decide tipoDe(tecla)? :: El número que escribe :: De qué tipo es (número, función, operador o igual), y con eso su color :: Si la tecla está encendida
 escribe :: ¿Qué ventaja tiene que el teclado sea datos y no 20 botones escritos a mano? :: Que se cambia el orden o se agrega una tecla cambiando la tabla, sin tocar componentes, y que se puede probar (5 filas de 4, sin repetidas).
 ```
 
@@ -132,7 +132,7 @@ function coloresDeTecla(tipo, encendida, colores) {
 ```practica
 vf :: Con style como función, Pressable sabe si el dedo está encima (pressed) y la tecla puede cambiar mientras se toca
 vf :: El componente Tecla hace la cuenta cuando lo tocan, para que sea más rápido
-elige :: ¿Para qué sirve accessibilityLiveRegion en el visor? :: Para que el número sea más grande :: Para que el lector de pantalla diga el número nuevo cuando cambia :: Para que se pueda copiar → Quien no ve se entera del resultado sin buscarlo.
+elige :: ¿Para qué sirve accessibilityLiveRegion en el visor? :: Para que el número sea más grande :: Para que el lector de pantalla diga el número nuevo cuando cambia :: Para que se pueda copiar
 escribe :: ¿Por qué el operador elegido se dibuja con los colores al revés? :: Para que la persona sepa qué operador tocó mientras el visor todavía muestra el primer número; se apaga cuando empieza a escribir el segundo.
 ```
 
@@ -226,7 +226,7 @@ function tocarConFuncion(estado, t) {
 ```practica
 vf :: Con setEstado((e) => apretar(e, t)), React le pasa a la función el estado más nuevo, aunque se toquen dos teclas muy rápido
 vf :: La pantalla decide los colores, el tamaño de las teclas y qué pasa con cada tecla
-elige :: ¿Qué hace useWindowDimensions en la calculadora? :: Mide el visor :: Da el ancho de la pantalla, para que el motor calcule el lado de las teclas :: Cambia el modo oscuro → Y se actualiza solo si giras el teléfono.
+elige :: ¿Qué hace useWindowDimensions en la calculadora? :: Mide el visor :: Da el ancho de la pantalla, para que el motor calcule el lado de las teclas :: Cambia el modo oscuro
 escribe :: Una persona toca 1 y 2 muy rápido y ve solo "2". ¿Qué buscas en el código? :: Un setEstado que use el estado de afuera, como setEstado(apretar(estado, t)). Se arregla con la forma con función, setEstado((e) => apretar(e, t)), que siempre recibe el estado más nuevo.
 ```
 
@@ -300,7 +300,7 @@ function letraDelVisor(texto, ancho) {
 ```practica
 vf :: Las pruebas de la pantalla buscan las teclas por su etiqueta de accesibilidad, así que también revisan que las etiquetas existan
 vf :: Si las 54 pruebas pasan, no hace falta mirar la app en un teléfono chico
-elige :: ¿Por qué adjustsFontSizeToFit no alcanzó? :: Porque es muy lento :: Porque solo funciona en el iPhone: en Android a medias y en la web nada :: Porque no existe en React Native → Por eso el tamaño se calcula en el motor, con el ancho.
+elige :: ¿Por qué adjustsFontSizeToFit no alcanzó? :: Porque es muy lento :: Porque solo funciona en el iPhone: en Android a medias y en la web nada :: Porque no existe en React Native
 escribe :: ¿En qué orden se arregló el número cortado? :: Primero una prueba que lo reproduce (en rojo), después el arreglo en el motor (la letra depende también del ancho), las pruebas en verde, volver a mirar la app y anotar el cambio en el plan.
 ```
 
@@ -393,7 +393,7 @@ function problemasDe(expo) {
 ```practica
 vf :: Con Expo Go, la app se prueba en el teléfono sin instalarla: el código viaja desde la computadora por la red
 vf :: Para tener la app en tu iPhone hay que pagar la cuenta de desarrollador de Apple
-elige :: ¿Qué diferencia hay entre armar la app en Debug y en Release? :: Release tiene más pruebas :: Release lleva el código adentro y anda sola; Debug lo pide a la computadora mientras programas :: Debug es para Android y Release para iPhone → Una app para usar de verdad se arma en Release.
+elige :: ¿Qué diferencia hay entre armar la app en Debug y en Release? :: Release tiene más pruebas :: Release lleva el código adentro y anda sola; Debug lo pide a la computadora mientras programas :: Debug es para Android y Release para iPhone
 escribe :: ¿Por qué la calculadora sale para Android y para iPhone con un solo código? :: Porque está hecha con React Native: el mismo TypeScript se convierte en botones y textos nativos de cada sistema. Solo cambia cómo se arma e instala en cada uno.
 ```
 

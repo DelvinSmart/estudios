@@ -76,7 +76,7 @@ func mensaje(segundoNombre: String?) -> String {
 ```practica
 vf :: Un Int? puede tener un número o nil, y Swift no deja usarlo como Int sin revisarlo antes
 vf :: nil y 0 son lo mismo en Swift
-elige :: ¿Qué hace Int(texto) ?? 0? :: Siempre devuelve 0 :: Devuelve el número si se pudo convertir, o 0 si no :: Cierra la app si el texto no es un número → ?? da un valor por defecto cuando hay nil.
+elige :: ¿Qué hace Int(texto) ?? 0? :: Siempre devuelve 0 :: Devuelve el número si se pudo convertir, o 0 si no :: Cierra la app si el texto no es un número
 escribe :: ¿Por qué Int("doce") devuelve un Int? y no un Int? :: Porque la conversión puede salir mal: con nil Swift dice "no se pudo", y obliga a revisarlo antes de usar el número, en vez de cerrar la app.
 ```
 
@@ -135,7 +135,7 @@ func rendimiento(km: String, litros: String) -> String {
 ```practica
 vf :: guard let revisa al principio y, si falta algo, sale enseguida; después el valor queda abierto para el resto de la función
 vf :: Usar ! es la forma recomendada de abrir un opcional, porque es más corta
-elige :: ¿Qué tiene que hacer el else de un guard? :: Nada, es opcional :: Salir de la función (con return) :: Imprimir un error → Si no sale, Swift no compila.
+elige :: ¿Qué tiene que hacer el else de un guard? :: Nada, es opcional :: Salir de la función (con return) :: Imprimir un error
 escribe :: Encuentras let n = Int(texto)! en una app. ¿Qué puede pasar y cómo lo arreglas? :: Si el texto no es un número, Int(texto) da nil y el ! cierra la app. Lo cambio por if let, guard let o Int(texto) ?? 0, según lo que tenga que pasar cuando no es un número.
 ```
 
@@ -216,7 +216,7 @@ func diasBuenos(_ ganancias: [Double]) -> Int {
 ```practica
 vf :: En Swift, un switch tiene que cubrir todos los casos, si no, no compila
 vf :: En un switch de Swift hay que poner break al final de cada caso, como en JavaScript
-elige :: ¿Qué números incluye 1..<5? :: Del 1 al 5 :: Del 1 al 4 :: Del 0 al 5 → ..< no incluye el último; ... sí.
+elige :: ¿Qué números incluye 1..<5? :: Del 1 al 5 :: Del 1 al 4 :: Del 0 al 5
 escribe :: ¿Qué ventaja tiene que el switch obligue a cubrir todos los casos? :: Que no te puedes olvidar de uno: si agregas un caso nuevo (por ejemplo, un nivel más), Swift te avisa en cada switch que no lo trata, en vez de fallar callado cuando la app ya está en uso.
 ```
 

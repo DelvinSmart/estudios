@@ -377,7 +377,7 @@ fun rellenoDeTarjeta(tema: Tema): Int = tema.espacioMedio
 ```practica
 vf :: En Compose, el tema de Material 3 envuelve toda la app y les pasa los colores del motor a los componentes
 vf :: Cada pantalla de Compose debería elegir sus propios colores para verse mejor
-elige :: ¿Cómo sabe la app de Compose si el teléfono está en modo oscuro? :: Con useColorScheme() :: Con isSystemInDarkTheme() :: Leyendo un archivo de configuración → isSystemInDarkTheme() es la versión de Compose de useColorScheme() de React Native.
+elige :: ¿Cómo sabe la app de Compose si el teléfono está en modo oscuro? :: Con useColorScheme() :: Con isSystemInDarkTheme() :: Leyendo un archivo de configuración
 escribe :: ¿Por qué copy sirve para armar el tema claro a partir del oscuro? :: Porque copy crea un tema nuevo cambiando solo lo que le dices (el fondo y el texto) y dejando igual lo demás (espacios, radio, acento). Así los dos temas comparten las mismas medidas sin copiarlas a mano.
 ```
 

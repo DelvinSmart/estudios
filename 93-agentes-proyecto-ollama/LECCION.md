@@ -74,7 +74,7 @@ def faltan_en_el_plan(texto):
 ```practica
 vf :: En este proyecto, las tres preguntas de la clase 19 se respondieron antes de escribir código
 vf :: Como el agente es chico, no hace falta escribir lo que NO hace
-elige :: ¿Por qué este proyecto es un agente y no una cadena de pasos fijos? :: Porque usa un modelo de lenguaje :: Porque la cantidad y el orden de las herramientas dependen de la pregunta :: Porque corre en la computadora → "Este mes" pide la fecha y después sumar; "el último" pide listar. El camino lo elige el modelo.
+elige :: ¿Por qué este proyecto es un agente y no una cadena de pasos fijos? :: Porque usa un modelo de lenguaje :: Porque la cantidad y el orden de las herramientas dependen de la pregunta :: Porque corre en la computadora
 escribe :: ¿Qué cambia en el plan si quieres una herramienta que anote gastos nuevos? :: Ya no es solo lectura: la tercera pregunta (¿puedo pagar la peor ejecución?) cambia. Primero se cambia el plan con su motivo, y la herramienta va con confirmación de una persona antes de escribir.
 ```
 
@@ -151,7 +151,7 @@ def sumar_gastos(args, gastos):
 ```practica
 vf :: La descripción de una herramienta es parte del prompt: el modelo la lee para decidir cuándo usarla
 vf :: Si el modelo manda una categoría que no existe, lo mejor es lanzar una excepción para que se note
-elige :: ¿Para qué sirve que las categorías sean una lista cerrada (enum)? :: Para que el código sea más corto :: Para que el modelo no pueda inventar una categoría con otro nombre :: Para gastar menos memoria → Es la "lista cerrada de opciones" de la clase 27, parte 4.4.
+elige :: ¿Para qué sirve que las categorías sean una lista cerrada (enum)? :: Para que el código sea más corto :: Para que el modelo no pueda inventar una categoría con otro nombre :: Para gastar menos memoria
 escribe :: ¿Por qué listar_gastos trae como mucho 10 gastos? :: Porque el resultado de una herramienta entra en el contexto de todos los pasos siguientes: si es grande, se paga en tokens y en demora en cada vuelta, y el modelo presta menos atención. Resultados flacos.
 ```
 
@@ -237,7 +237,7 @@ def correr(modelo, herramientas, max_pasos=6):
 ```practica
 vf :: Los frenos del ciclo (máximo de pasos, presupuesto, llamadas repetidas) van en el código y no en el prompt
 vf :: Cuando el modelo repite la misma llamada por tercera vez, el ciclo se corta enseguida
-elige :: ¿Para qué sirve el ModeloDeMentira? :: Para gastar menos en la nube :: Para probar el ciclo y las herramientas rápido y siempre igual, sin depender del modelo :: Para reemplazar a Ollama en producción → Las pruebas miden tu código; al modelo se lo mide con la evaluación.
+elige :: ¿Para qué sirve el ModeloDeMentira? :: Para gastar menos en la nube :: Para probar el ciclo y las herramientas rápido y siempre igual, sin depender del modelo :: Para reemplazar a Ollama en producción
 escribe :: ¿Por qué cada final del ciclo tiene un nombre (listo, bloqueado, máximo de pasos…)? :: Para que el rastro y la evaluación sepan por qué terminó cada ejecución, no solo que terminó. Así se puede contar cuántas llegaron al máximo, cuántas se bloquearon, y encontrar el problema.
 ```
 
@@ -300,7 +300,7 @@ def sin_apoyo(respuesta, totales):
 ```practica
 vf :: El control de salida revisa que cada monto de la respuesta esté en lo que devolvieron las herramientas
 vf :: Buscar frases como "ignora las instrucciones" alcanza para defenderse de la inyección de prompts
-elige :: Si el modelo insiste con un monto sin apoyo, ¿qué hace el ciclo? :: Lo borra de la respuesta :: Entrega la respuesta marcada con un aviso :: Vuelve a intentar hasta que salga bien → Una vuelta para corregir; si insiste, se entrega marcada para que la persona no confíe a ciegas.
+elige :: Si el modelo insiste con un monto sin apoyo, ¿qué hace el ciclo? :: Lo borra de la respuesta :: Entrega la respuesta marcada con un aviso :: Vuelve a intentar hasta que salga bien
 escribe :: ¿Por qué el control saca las fechas antes de buscar montos? :: Porque una fecha como 2026-11-18 tiene números (2026, 11, 18) que no son montos y no van a estar en los totales: el control los marcaría como inventados.
 ```
 
@@ -371,7 +371,7 @@ def leer(datos):
 ```practica
 vf :: Con Ollama, el modelo corre en tu computadora: no se paga por token ni hace falta internet
 vf :: Si Ollama responde 400, conviene reintentar con espera exponencial
-elige :: En el rastro, ¿por qué los tokens crecen en cada vuelta (937, 1065, 1160)? :: Porque el modelo se cansa :: Porque cada vuelta manda toda la conversación otra vez, con los resultados nuevos :: Porque Ollama cobra más → En los ciclos manda la entrada: por eso importan los resultados flacos y compactar.
+elige :: En el rastro, ¿por qué los tokens crecen en cada vuelta (937, 1065, 1160)? :: Porque el modelo se cansa :: Porque cada vuelta manda toda la conversación otra vez, con los resultados nuevos :: Porque Ollama cobra más
 escribe :: ¿Para qué sirve la opción --hoy cuando pruebas el agente? :: Para fijar la fecha y que la misma pregunta dé la misma respuesta. Sin eso, "este mes" cambia cada mes y no puedes comparar una prueba con otra.
 ```
 
@@ -452,7 +452,7 @@ def pass_k(resultados):
 ```practica
 vf :: Que las 46 pruebas pasen quiere decir que el agente responde bien
 vf :: La evaluación de este proyecto califica con reglas, no con otro modelo
-elige :: ¿Qué mide pass^3? :: Cuántos casos salieron bien al menos una vez de tres :: Cuántos casos salieron bien las tres veces :: El promedio de pasos → pass^k es la confiabilidad: lo que siente la persona que pregunta todos los días.
+elige :: ¿Qué mide pass^3? :: Cuántos casos salieron bien al menos una vez de tres :: Cuántos casos salieron bien las tres veces :: El promedio de pasos
 escribe :: Una persona te cuenta que el agente le inventó un monto. ¿Qué haces primero? :: Busco su rastro, veo qué devolvieron las herramientas y en qué paso apareció el número, y convierto ese caso en un caso nuevo del set de evaluación antes de arreglarlo, para que no vuelva a pasar sin que se note.
 ```
 

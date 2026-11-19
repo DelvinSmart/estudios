@@ -86,7 +86,7 @@ func resumen(_ valores: [Double]) -> String {
 ```practica
 vf :: En Swift Testing, #expect recibe una condición y, si falla, muestra los valores que había
 vf :: Las pruebas de "Mi jornada" necesitan el teléfono de verdad para guardar los viajes
-elige :: ¿Para qué sirve @testable import MiJornada? :: Para que la app corra más rápido :: Para que las pruebas puedan ver el código de la app que no es público :: Para instalar la app → Va en el archivo de pruebas, no en la app.
+elige :: ¿Para qué sirve @testable import MiJornada? :: Para que la app corra más rápido :: Para que las pruebas puedan ver el código de la app que no es público :: Para instalar la app
 escribe :: ¿Por qué cada error que se encontró mirando la app (como "1 viajes") tiene ahora su propia prueba? :: Para que no vuelva: si alguien cambia el texto mañana y reaparece el error, la prueba falla antes de que lo vea una persona.
 ```
 
@@ -156,7 +156,7 @@ struct Diario {
 ```practica
 vf :: Si una prueba pasa a la primera y nunca la viste fallar, no sabes si de verdad atrapa errores
 vf :: Una prueba con arguments: [0.0, -5, -0.01] corre una sola vez, con el primer valor
-elige :: ¿Por qué la tabla de casos tiene 0, -5 y -0.01? :: Porque son números al azar :: Porque son los bordes: el cero, un negativo y uno apenas negativo :: Porque Swift lo pide → Los errores viven en los bordes.
+elige :: ¿Por qué la tabla de casos tiene 0, -5 y -0.01? :: Porque son números al azar :: Porque son los bordes: el cero, un negativo y uno apenas negativo :: Porque Swift lo pide
 escribe :: ¿Cuándo conviene romper el código a propósito? :: Cuando escribes una prueba nueva que nunca viste fallar (por ejemplo, si la escribiste después del código y pasó a la primera): la rompes una vez para ver que avisa, y después vuelves a dejar el código bien.
 ```
 
@@ -229,7 +229,7 @@ func aviso(_ dias: Int) -> String {
 ```practica
 vf :: Con una cuenta gratuita de Apple se puede instalar tu app en tu propio iPhone
 vf :: Para instalar la app en tu iPhone hay que pagar los US$ 99 por año
-elige :: La primera vez que abres tu app en el iPhone dice que no confía en el desarrollador. ¿Qué haces? :: La borras y la vuelves a instalar :: Ajustes → General → VPN y gestión de dispositivos → tu Apple ID → Confiar :: Pagas la cuenta de desarrollador → Es una sola vez por cuenta.
+elige :: La primera vez que abres tu app en el iPhone dice que no confía en el desarrollador. ¿Qué haces? :: La borras y la vuelves a instalar :: Ajustes → General → VPN y gestión de dispositivos → tu Apple ID → Confiar :: Pagas la cuenta de desarrollador
 escribe :: ¿Por qué esta clase dice que la instalación en el iPhone no se probó, en vez de contarla como hecha? :: Porque el iPhone no estaba conectado a la Mac en ese momento: contarla como hecha sería mentir. Se explica la lista de Apple, y se anota que la prueba real queda para cuando se instale en el teléfono.
 ```
 

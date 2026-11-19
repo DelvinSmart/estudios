@@ -73,7 +73,7 @@ func escapados(_ codigo: String) -> [String] {
 ```practica
 vf :: En SwiftUI, el motor de diseño se puede escribir como un enum sin casos, con valores static
 vf :: Si una sola pantalla tiene un número escrito a mano, no importa: el resto sigue usando el motor
-elige :: ¿Por qué las medidas de SwiftUI son puntos y no píxeles? :: Porque son más chicos :: Para que se vean del mismo tamaño en un iPhone chico y en uno grande :: Porque Apple no deja usar píxeles → Es el dp de Android.
+elige :: ¿Por qué las medidas de SwiftUI son puntos y no píxeles? :: Porque son más chicos :: Para que se vean del mismo tamaño en un iPhone chico y en uno grande :: Porque Apple no deja usar píxeles
 escribe :: ¿Cómo se encontró el número que se había escapado del motor en "Mi jornada"? :: Releyendo la lista con una sola pregunta: ¿hay algún número escrito a mano? Estaba el tamaño del puntito de color (10); se pasó al motor como Motor.Forma.punto.
 ```
 
@@ -158,7 +158,7 @@ func hexDeApp(_ app: String, oscuro: Bool) -> UInt32 {
 ```practica
 vf :: Un color hecho con UIColor { rasgos in … } elige solo su versión clara u oscura cada vez que se dibuja
 vf :: Para el modo oscuro hay que escribir cada pantalla dos veces
-elige :: ¿Por qué el punto de Uber es blanco en modo oscuro? :: Porque Uber lo pide :: Porque un punto negro sobre un fondo oscuro no se vería :: Por error → Cada color se piensa en los dos modos.
+elige :: ¿Por qué el punto de Uber es blanco en modo oscuro? :: Porque Uber lo pide :: Porque un punto negro sobre un fondo oscuro no se vería :: Por error
 escribe :: ¿Qué otra forma hay en Xcode de tener colores con modo claro y oscuro, además del código? :: El catálogo de colores (Assets.xcassets): se elige cada color con un selector y se le agrega su versión oscura. Hace lo mismo; en código se leen todos juntos en un archivo.
 ```
 
@@ -229,7 +229,7 @@ func resumen(_ valores: [Double]) -> String {
 ```practica
 vf :: Con un ViewModifier propio, la forma de una tarjeta vive en un solo lugar y cada recuadro la llama con .tarjeta()
 vf :: Si los dos números de la tarjeta están bien calculados, la tarjeta está bien diseñada
-elige :: ¿Dónde se arregló que el total apareciera dos veces? :: En la pantalla, borrando el texto :: En la lógica: el resumen del diario pasó a mostrar el promedio :: En el motor → Así el texto nuevo se puede probar sin abrir el simulador.
+elige :: ¿Dónde se arregló que el total apareciera dos veces? :: En la pantalla, borrando el texto :: En la lógica: el resumen del diario pasó a mostrar el promedio :: En el motor
 escribe :: En las clases 102, 103 y 104, ¿qué tienen en común las cosas que se encontraron mirando la app? :: Que ninguna era un error de cuenta: "1 viajes", un aviso repetido, el total dos veces y un número escapado del motor. Las pruebas no las ven porque todo estaba "bien"; aparecen mirando la app en el simulador, y cada pantalla nueva encontró algo.
 ```
 

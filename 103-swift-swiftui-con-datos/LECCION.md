@@ -94,7 +94,7 @@ func borrar(_ viajes: [Viaje], en posiciones: IndexSet) -> [Viaje] {
 ```practica
 vf :: Identifiable le da a cada viaje un id único, para que la lista sepa cuál es cuál
 vf :: NavigationLink(value:) funciona con cualquier tipo, cumpla o no algún protocolo
-elige :: ¿Qué manda .onDelete cuando deslizas un viaje? :: El viaje entero :: Las posiciones a borrar (un IndexSet) :: El id del viaje → Por eso el diario borra por posiciones.
+elige :: ¿Qué manda .onDelete cuando deslizas un viaje? :: El viaje entero :: Las posiciones a borrar (un IndexSet) :: El id del viaje
 escribe :: ¿Por qué hay que borrar las posiciones de mayor a menor? :: Porque si borras primero una de adelante, todas las que vienen después se corren un lugar, y borrarías el viaje equivocado. De atrás para adelante, las posiciones que faltan no cambian.
 ```
 
@@ -208,7 +208,7 @@ final class Diario {
 ```practica
 vf :: El diario es una class porque lo comparten varias pantallas: lo que anota el formulario lo ve la lista
 vf :: Con private(set) var viajes, cualquier pantalla puede agregar viajes directo a la lista
-elige :: ¿Para qué sirve .environment(diario) en la app? :: Para guardar el diario en el teléfono :: Para que todas las pantallas de adentro puedan pedir el diario con @Environment :: Para cambiar el modo oscuro → Es el Context de React.
+elige :: ¿Para qué sirve .environment(diario) en la app? :: Para guardar el diario en el teléfono :: Para que todas las pantallas de adentro puedan pedir el diario con @Environment :: Para cambiar el modo oscuro
 escribe :: ¿Qué pasaría si el formulario tuviera su propia copia de los viajes (un struct) en vez del diario compartido? :: Anotaría en su copia y la lista no se enteraría: el viaje nuevo no aparecería. Con una class compartida, los dos ven el mismo objeto.
 ```
 
@@ -295,7 +295,7 @@ func desdeJSON(_ datos: Data) -> [Viaje] {
 ```practica
 vf :: Con Codable, Swift convierte un viaje a JSON y de vuelta sin escribir nada más
 vf :: Si lo guardado en el teléfono está roto, lo mejor es dejar que la app se cierre para que se note
-elige :: ¿Para qué el diario usa un protocolo Guardado en vez de UserDefaults directo? :: Para que sea más rápido :: Para poder probarlo y verlo en la vista previa con un guardado en memoria :: Porque UserDefaults no funciona en el iPhone → Es el repositorio de las clases 83 y 87.
+elige :: ¿Para qué el diario usa un protocolo Guardado en vez de UserDefaults directo? :: Para que sea más rápido :: Para poder probarlo y verlo en la vista previa con un guardado en memoria :: Porque UserDefaults no funciona en el iPhone
 escribe :: ¿Cuál fue la prueba más importante que se hizo a mano en el simulador, y por qué no alcanza con las del código? :: Cerrar la app del todo y volver a abrirla, para ver que los viajes seguían ahí. Las pruebas del código usan un guardado en memoria: no prueban que el teléfono de verdad guarde y lea.
 ```
 

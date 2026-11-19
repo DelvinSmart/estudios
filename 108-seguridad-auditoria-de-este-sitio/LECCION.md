@@ -56,7 +56,7 @@ function respuestaDelCorrector(resultados) {
 ```practica
 vf :: Aunque las respuestas estén escondidas en el servidor, una corrección que dice cuál pregunta falló permite descubrirlas
 vf :: Para que las prácticas sean seguras alcanza con no poner las respuestas en la página
-elige :: ¿Qué otro ataque del curso se parece al oráculo de las prácticas? :: El XSS :: La enumeración de cuentas: "ese correo no existe" contra "contraseña incorrecta" :: El path traversal → En los dos, la respuesta deja saber algo que debería estar escondido.
+elige :: ¿Qué otro ataque del curso se parece al oráculo de las prácticas? :: El XSS :: La enumeración de cuentas: "ese correo no existe" contra "contraseña incorrecta" :: El path traversal
 escribe :: ¿Por qué con el arreglo un programa ya no puede aprobar sin leer? :: Porque si no aprueba, solo sabe cuántas fallaron, no cuáles. Con varias preguntas, adivinar cuáles cambiar sin saber es mucho más difícil que leer la clase.
 ```
 
@@ -119,7 +119,7 @@ function gmailCanonico(correo) {
 ```practica
 vf :: Para Gmail, ana.perez@gmail.com y anaperez+1@gmail.com llegan a la misma bandeja
 vf :: Conviene sacar los puntos de todos los correos, de cualquier servicio, para contar personas
-elige :: ¿Para qué sirve el tope por conexión (IP) además del tope por correo? :: Para que el sitio sea más rápido :: Para frenar a alguien que crea cientos de cuentas desde el mismo lugar con correos distintos :: Para bloquear Gmail → Varias desde un aula es normal; cientos, no.
+elige :: ¿Para qué sirve el tope por conexión (IP) además del tope por correo? :: Para que el sitio sea más rápido :: Para frenar a alguien que crea cientos de cuentas desde el mismo lugar con correos distintos :: Para bloquear Gmail
 escribe :: ¿Qué podía hacer un atacante antes de que se arreglara lo del correo canónico? :: Inventar variantes del correo de otra persona (con puntos o +algo) y mandarle muchos correos de verificación, y de paso gastar el tope diario del sitio para que nadie más pudiera crear cuenta.
 ```
 
@@ -173,7 +173,7 @@ function compartenAlmacen(a, b) {
 ```practica
 vf :: Dos proyectos publicados en la misma cuenta de github.io, en caminos distintos, comparten el mismo localStorage
 vf :: Una llave guardada en localStorage solo la puede leer la página que la guardó
-elige :: ¿Por qué sessionStorage es mejor para la llave del panel? :: Porque guarda más datos :: Porque vive solo en esa pestaña y se borra al cerrarla :: Porque está cifrado → Menos tiempo guardado, menos riesgo.
+elige :: ¿Por qué sessionStorage es mejor para la llave del panel? :: Porque guarda más datos :: Porque vive solo en esa pestaña y se borra al cerrarla :: Porque está cifrado
 escribe :: Además de dónde se guarda, ¿qué otra cosa reduce el daño si alguien roba la llave del panel? :: Que la llave tenga los menos permisos posibles: que solo pueda tocar este repositorio, y nada más de la cuenta (mínimo privilegio).
 ```
 
@@ -251,7 +251,7 @@ function nombreValido(n) {
 ```practica
 vf :: Con SRI, si el archivo del CDN cambia, el navegador no corre el script
 vf :: Revisar el nombre del certificado en la página alcanza, no hace falta en las reglas de Firestore
-elige :: ¿Por qué se piden las acciones de GitHub por su SHA y no por la etiqueta v4? :: Porque el SHA es más corto :: Porque una etiqueta se puede mover a otro código; el SHA es la huella exacta :: Porque GitHub lo obliga → Es la cadena de suministro.
+elige :: ¿Por qué se piden las acciones de GitHub por su SHA y no por la etiqueta v4? :: Porque el SHA es más corto :: Porque una etiqueta se puede mover a otro código; el SHA es la huella exacta :: Porque GitHub lo obliga
 escribe :: ¿Qué podía pasar si la función que corrige aceptaba respuestas de cualquier tamaño? :: Alguien podía mandar un objeto enorme (un millón de claves o 10 MB de texto) y hacer trabajar al servidor por nada, gastando y cobrando, una y otra vez.
 ```
 
@@ -306,7 +306,7 @@ function escapar(t) {
 ```practica
 vf :: Tener la misma función de seguridad copiada en cinco archivos es peligroso, porque al corregirla es fácil olvidar una copia
 vf :: No escapar la comilla simple no importa, porque en HTML casi siempre se usan comillas dobles
-elige :: ¿Qué hace escapar con "<b>hola</b>"? :: Lo borra :: Lo convierte en &lt;b&gt;hola&lt;/b&gt;, que se ve tal cual :: Lo deja en negrita → Así el navegador no lo lee como etiquetas.
+elige :: ¿Qué hace escapar con "<b>hola</b>"? :: Lo borra :: Lo convierte en &lt;b&gt;hola&lt;/b&gt;, que se ve tal cual :: Lo deja en negrita
 escribe :: ¿Qué aprendiste de la auditoría sobre el código repetido? :: Que no es solo desprolijo: una regla de seguridad repetida en varios lugares se termina arreglando en unos y no en otros. Tiene que vivir en un solo lugar, con su prueba, y los demás la importan.
 ```
 

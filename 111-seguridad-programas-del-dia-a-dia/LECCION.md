@@ -71,7 +71,7 @@ function codigoValido(recibido, secreto, segundos) {
 ```practica
 vf :: En un buen gestor de contraseñas, lo que se guarda en la nube viaja cifrado y ni la empresa lo puede leer
 vf :: El código de 6 cifras por SMS es tan seguro como el de una app de segundo factor
-elige :: ¿Cómo calculan el mismo código el sitio y tu app, sin hablar entre ellos? :: Con internet :: Con el mismo secreto (el del QR) y la misma hora, cada 30 segundos :: Al azar → Es TOTP: secreto + reloj.
+elige :: ¿Cómo calculan el mismo código el sitio y tu app, sin hablar entre ellos? :: Con internet :: Con el mismo secreto (el del QR) y la misma hora, cada 30 segundos :: Al azar
 escribe :: ¿Cómo funciona un phishing que roba el código de segundo factor, y qué lo frena? :: La página falsa te pide la contraseña y el código, y los usa al instante en el sitio real, antes de que el código venza. Lo frenan las llaves de acceso (passkeys) o llaves físicas, que están atadas al dominio verdadero.
 ```
 
@@ -127,7 +127,7 @@ function vecesFiltrada(hash, respuesta) {
 ```practica
 vf :: Para consultar Have I Been Pwned no hace falta mandar la contraseña: se mandan los primeros 5 caracteres de su hash
 vf :: Si una contraseña nunca se filtró en un sitio, se puede repetir en todos los demás sin riesgo
-elige :: ¿Qué es el credential stuffing? :: Adivinar contraseñas al azar :: Probar en otros sitios los correos y contraseñas de una filtración :: Robar cookies → Funciona porque mucha gente repite la contraseña.
+elige :: ¿Qué es el credential stuffing? :: Adivinar contraseñas al azar :: Probar en otros sitios los correos y contraseñas de una filtración :: Robar cookies
 escribe :: ¿Cómo usaría un sitio a Have I Been Pwned para proteger a sus usuarios? :: Al crear la cuenta o cambiar la contraseña, consulta (con k-anonimato) si esa contraseña ya apareció en filtraciones, y si es así le pide al usuario otra.
 ```
 
@@ -180,7 +180,7 @@ function comoRevisar(esPrivado) {
 ```practica
 vf :: Lo que subes a VirusTotal puede quedar visible para otros, así que un documento privado se busca por su hash
 vf :: Si VirusTotal muestra cero detecciones, el archivo es seguro
-elige :: ¿Cómo usan VirusTotal los atacantes? :: Para limpiar sus archivos :: Para revisar que su programa no lo detecte ningún antivirus antes de mandarlo :: No lo usan → Por eso cero detecciones no es garantía.
+elige :: ¿Cómo usan VirusTotal los atacantes? :: Para limpiar sus archivos :: Para revisar que su programa no lo detecte ningún antivirus antes de mandarlo :: No lo usan
 escribe :: Te llega por correo un PDF "factura pendiente" de alguien que no conoces. ¿Qué haces con VirusTotal y qué más? :: No lo abro. Puedo buscarlo en VirusTotal (es de afuera, no privado mío), pero aunque salga limpio desconfío: reviso el remitente y el dominio, y si es de una empresa, la contacto por su canal oficial (clase 22).
 ```
 
@@ -234,7 +234,7 @@ function diasParaRenovar(diasQueQuedan) {
 ```practica
 vf :: Los registros públicos de certificados muestran los subdominios que tuvieron HTTPS, y un atacante los puede consultar
 vf :: Un subdominio como staging.tuapp.com no hace falta protegerlo, porque nadie sabe que existe
-elige :: ¿Cuánto dura un certificado de Let's Encrypt? :: Un año :: 90 días, y se renueva solo :: Para siempre → Por eso la renovación tiene que ser automática.
+elige :: ¿Cuánto dura un certificado de Let's Encrypt? :: Un año :: 90 días, y se renueva solo :: Para siempre
 escribe :: ¿Para qué le sirve a un defensor mirar los registros de certificados de su dominio? :: Para ver si aparece un certificado de su dominio que él no pidió: sería una señal de que alguien intenta suplantar su sitio.
 ```
 
@@ -320,7 +320,7 @@ function buscarSecretos(commits) {
 ```practica
 vf :: Si se subió una llave a Git, borrarla en un commit nuevo no alcanza: sigue en el historial y hay que rotarla
 vf :: Una llave subida por error a un repositorio público tarda semanas en ser encontrada, así que hay tiempo
-elige :: ¿Qué hace Semgrep? :: Busca contraseñas filtradas :: Revisa el código buscando patrones peligrosos, como innerHTML con datos de afuera o SQL armado con + :: Escanea puertos → Se corre en el CI, en cada cambio.
+elige :: ¿Qué hace Semgrep? :: Busca contraseñas filtradas :: Revisa el código buscando patrones peligrosos, como innerHTML con datos de afuera o SQL armado con + :: Escanea puertos
 escribe :: ¿Cómo usarías gitleaks, Semgrep y ZAP juntos en un proyecto? :: gitleaks antes de cada push y en el CI, para que no se suba ningún secreto; Semgrep en el CI, para frenar patrones peligrosos en el código; y el baseline scan de ZAP contra el sitio de prueba, para ver cabeceras y cookies que faltan.
 ```
 

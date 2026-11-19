@@ -63,7 +63,7 @@ func presentacion(nombre: String, app: String) -> String {
 ```practica
 vf :: Los ejercicios de Swift de esta página corren en Compiler Explorer, con el mismo Swift que trae Xcode
 vf :: Para correr Swift hace falta escribir una función main, como en Kotlin
-elige :: ¿Para qué sirve Xcode? :: Para correr los ejercicios de esta página :: Para hacer las apps del iPhone, con el simulador y los Playgrounds :: Para escribir Kotlin → Es gratis y solo existe para Mac.
+elige :: ¿Para qué sirve Xcode? :: Para correr los ejercicios de esta página :: Para hacer las apps del iPhone, con el simulador y los Playgrounds :: Para escribir Kotlin
 escribe :: ¿Por qué Copiloto, que es de React Native, tiene código en Swift? :: Porque algunas cosas solo las puede hacer el iPhone por dentro (leer la pantalla compartida, sacar texto de una imagen, notificaciones): para eso tiene un módulo nativo en Swift que TypeScript llama como una función más.
 ```
 
@@ -134,7 +134,7 @@ func promedio(_ viajes: [Double]) -> Double {
 ```practica
 vf :: En Swift, let es para lo que no cambia y var para lo que cambia
 vf :: En Swift conviene usar var siempre, por si después hace falta cambiarlo
-elige :: ¿Qué pasa si intentas cambiar un let en Swift? :: Cambia sin problema :: No compila: "cannot assign to value: … is a 'let' constant" :: Se convierte en var → El error te protege de cambiar por accidente algo que no debía cambiar.
+elige :: ¿Qué pasa si intentas cambiar un let en Swift? :: Cambia sin problema :: No compila: "cannot assign to value: … is a 'let' constant" :: Se convierte en var
 escribe :: Una persona sabe TypeScript. ¿Qué le dirías sobre let en Swift? :: Que en Swift let es lo que en TypeScript es const: no cambia. Lo que cambia es var.
 ```
 
@@ -210,7 +210,7 @@ func resumen(viajes: Int, total: Double) -> String {
 ```practica
 vf :: En Swift, multiplicar un Int por un Double no compila: hay que convertir uno a propósito
 vf :: Para meter un valor en un texto, Swift usa ${valor}, como TypeScript
-elige :: ¿Qué devuelve Int("doce")? :: 0 :: nil, porque Int("…") devuelve un Int? (un número o nada) :: Un error que cierra la app → Es la puerta a los opcionales (clase 98).
+elige :: ¿Qué devuelve Int("doce")? :: 0 :: nil, porque Int("…") devuelve un Int? (un número o nada) :: Un error que cierra la app
 escribe :: ¿Cuándo hace falta escribir el tipo, como en var gastos: [Double] = []? :: Cuando Swift no lo puede adivinar solo, como en una lista vacía: no sabe de qué va a ser la lista.
 ```
 

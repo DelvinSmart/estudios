@@ -406,7 +406,7 @@ function estiloDeBoton(tema: Tema) {
 ```practica
 vf :: Si el tema claro y el oscuro usan la misma interfaz, TypeScript avisa cuando a uno le falta un color
 vf :: Para que un recuadro funcione con el tema claro y el oscuro, hay que escribirlo dos veces
-elige :: Hay un tema oscuro y uno claro que tienen que tener las mismas piezas. ¿Qué conviene? :: as const en cada uno :: Una interfaz Tema que cumplan los dos :: Escribirlos con any → as const congela un solo objeto; la interfaz obliga a que todos tengan la misma forma.
+elige :: Hay un tema oscuro y uno claro que tienen que tener las mismas piezas. ¿Qué conviene? :: as const en cada uno :: Una interfaz Tema que cumplan los dos :: Escribirlos con any
 escribe :: ¿Qué quiere decir que un recuadro "llama" al motor de diseño? :: Que no escribe colores ni medidas a mano: usa los valores del motor (tema.colores.acento, tema.espacio.medio), así cambiar el motor cambia todos los recuadros.
 ```
 

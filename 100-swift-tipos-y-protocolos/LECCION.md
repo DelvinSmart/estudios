@@ -93,7 +93,7 @@ class Cuenta {
 ```practica
 vf :: Al copiar un struct se obtiene otro valor independiente; al copiar una class se obtiene otro nombre para el mismo objeto
 vf :: En Swift conviene usar class siempre, porque tiene herencia
-elige :: ¿Para qué sirve mutating en un struct? :: Para que sea más rápido :: Para avisar que esa función cambia el struct por dentro (y solo se puede usar sobre un var) :: Para heredar → Un struct es un valor: cambiarlo tiene que ser a propósito.
+elige :: ¿Para qué sirve mutating en un struct? :: Para que sea más rápido :: Para avisar que esa función cambia el struct por dentro (y solo se puede usar sobre un var) :: Para heredar
 escribe :: Explica la diferencia entre struct y class con un ejemplo de la vida real. :: Un struct es como una fotocopia: si la otra persona la raya, tu original queda igual. Una class es como prestar la llave de tu casa: lo que la otra persona cambie, lo encuentras cambiado.
 ```
 
@@ -176,7 +176,7 @@ func texto(_ e: EstadoViaje) -> String {
 ```practica
 vf :: En Swift, cada caso de un enum puede llevar sus propios datos, como enCamino(chofer: String, minutos: Int)
 vf :: Un switch sobre un enum de Swift siempre necesita un default
-elige :: ¿Qué ventaja tiene un enum con datos frente a varias variables sueltas (chofer, cancelado…)? :: Ocupa menos :: Hace imposibles los estados raros, como "cancelado y en camino" a la vez :: Es más rápido → El viaje está en un solo caso, con sus datos.
+elige :: ¿Qué ventaja tiene un enum con datos frente a varias variables sueltas (chofer, cancelado…)? :: Ocupa menos :: Hace imposibles los estados raros, como "cancelado y en camino" a la vez :: Es más rápido
 escribe :: ¿Qué cosa de Kotlin se parece al enum con valores asociados de Swift? :: Una familia sealed (sealed interface con data class adentro): cada caso es un tipo con sus propios datos, y el when no compila si falta uno.
 ```
 
@@ -279,7 +279,7 @@ extension Double {
 ```practica
 vf :: Un protocolo dice qué tiene que saber hacer un tipo, sin decir cómo, como una interface
 vf :: Con extension solo se le pueden agregar funciones a los tipos que escribiste tú
-elige :: ¿Por qué el igual() de los ejercicios funciona con números, textos y listas? :: Porque Swift adivina :: Porque pide Equatable, y esos tipos lo cumplen :: Porque los convierte a texto → Equatable quiere decir "se puede comparar con ==".
+elige :: ¿Por qué el igual() de los ejercicios funciona con números, textos y listas? :: Porque Swift adivina :: Porque pide Equatable, y esos tipos lo cumplen :: Porque los convierte a texto
 escribe :: ¿Qué protocolo cumple cada pantalla de SwiftUI, y qué crees que pide? :: El protocolo View. Pide una propiedad body que diga qué se dibuja (lo vas a ver en la clase 102).
 ```
 

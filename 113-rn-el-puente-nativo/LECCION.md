@@ -67,7 +67,7 @@ function necesitaDevelopmentBuild(tareas) {
 ```practica
 vf :: TypeScript y Kotlin no se mezclan en el mismo archivo: cada uno vive en su parte y se hablan por el puente
 vf :: Un módulo nativo propio funciona en Expo Go sin hacer nada más
-elige :: ¿Qué es JSI? :: Un formato de archivos :: Un enchufe en C++ del motor de JavaScript, donde el lado nativo cuelga funciones de verdad :: Un lenguaje nuevo → Reemplazó a los mensajes en JSON del puente viejo.
+elige :: ¿Qué es JSI? :: Un formato de archivos :: Un enchufe en C++ del motor de JavaScript, donde el lado nativo cuelga funciones de verdad :: Un lenguaje nuevo
 escribe :: ¿Qué hace el archivo expo-module.config.json de un módulo? :: Dice cuál es la clase del módulo en Android (Kotlin) y cuál en iPhone (Swift), para que Expo las enchufe solo al compilar la app (autolinking).
 ```
 
@@ -130,7 +130,7 @@ function tipoAlCruzar(valor, plataforma) {
 ```practica
 vf :: Una función síncrona del módulo nativo hace esperar a JavaScript mientras corre, así que lo lento va en una AsyncFunction
 vf :: Si TypeScript manda un texto donde Kotlin espera un Boolean, el puente lo convierte solo
-elige :: El nativo quiere avisar "la persona dejó de compartir la pantalla", sin que nadie le haya preguntado. ¿Qué usa? :: Una Function :: Una AsyncFunction :: Un evento (sendEvent), que TypeScript escucha con addListener → Es la única manera en que el nativo habla primero.
+elige :: El nativo quiere avisar "la persona dejó de compartir la pantalla", sin que nadie le haya preguntado. ¿Qué usa? :: Una Function :: Una AsyncFunction :: Un evento (sendEvent), que TypeScript escucha con addListener
 escribe :: ¿En qué se convierte un Record<string, number> de TypeScript en Kotlin y en Swift? :: En Kotlin, en un Map<String, Double>; en Swift, en un diccionario [String: Double].
 ```
 
@@ -269,7 +269,7 @@ function leerApps(respuesta: App[] | string): App[] {
 ```practica
 vf :: requireOptionalNativeModule devuelve null si el módulo no existe (por ejemplo en Expo Go), en vez de tirar un error
 vf :: Conviene cargar el módulo nativo apenas se importa el archivo, para que esté listo antes
-elige :: ¿Por qué cada llamada al módulo de Copiloto tiene un valor de respaldo? :: Para que sea más rápida :: Para que, si algo falla del otro lado, la app siga con un valor seguro en vez de romperse :: Porque TypeScript lo exige → false, una lista vacía…
+elige :: ¿Por qué cada llamada al módulo de Copiloto tiene un valor de respaldo? :: Para que sea más rápida :: Para que, si algo falla del otro lado, la app siga con un valor seguro en vez de romperse :: Porque TypeScript lo exige
 escribe :: ¿Por qué las pantallas de Copiloto no llaman a Kotlin ni a Swift directamente? :: Porque todo pasa por src/index.ts del módulo: ahí están los tipos, la carga tardía y los respaldos. Las pantallas llaman funciones normales y no saben nada del puente.
 ```
 
@@ -395,7 +395,7 @@ func pedirPermiso(_ promesa: Promesa, sistema: (@escaping (Bool) -> Void) -> Voi
 ```practica
 vf :: El módulo de Android y el de iPhone tienen que declarar el mismo nombre y las mismas funciones, porque TypeScript los llama sin saber en qué teléfono está
 vf :: Si una AsyncFunction de Swift se olvida de llamar a promise.resolve, TypeScript recibe un error enseguida
-elige :: ¿Por qué en iPhone Copiloto muestra la oferta como notificación y no como burbuja? :: Porque es más lindo :: Porque Apple no deja dibujar encima de otra app :: Porque Swift no sabe dibujar → En Android sí se puede, con un permiso especial.
+elige :: ¿Por qué en iPhone Copiloto muestra la oferta como notificación y no como burbuja? :: Porque es más lindo :: Porque Apple no deja dibujar encima de otra app :: Porque Swift no sabe dibujar
 escribe :: ¿Para qué sirve el ?: en el lado Kotlin del módulo? :: Para poner un valor por defecto cuando TypeScript no mandó ese dato: el nativo nunca confía en que el mapa llegue completo.
 ```
 
@@ -437,7 +437,7 @@ function canal(quien, appAbierta) {
 ```practica
 vf :: Con la app cerrada no hay JavaScript corriendo, así que lo que trabaja en ese momento no puede preguntarle nada a TypeScript
 vf :: La extensión de iPhone que recibe la pantalla compartida comparte la memoria con la app
-elige :: ¿Cómo sabe el servicio de Android qué mínimos usar con la app cerrada? :: Le pregunta a TypeScript :: Los lee de SharedPreferences, donde el módulo los guardó cuando la app estaba abierta :: Los adivina → Es el almacén compartido.
+elige :: ¿Cómo sabe el servicio de Android qué mínimos usar con la app cerrada? :: Le pregunta a TypeScript :: Los lee de SharedPreferences, donde el módulo los guardó cuando la app estaba abierta :: Los adivina
 escribe :: ¿Cuáles son los dos canales que usa Copiloto entre TypeScript y lo nativo? :: El puente (funciones, funciones asíncronas y eventos) mientras la app está abierta, y un almacén compartido (SharedPreferences en Android, App Group en iPhone) para lo que corre con la app cerrada.
 ```
 

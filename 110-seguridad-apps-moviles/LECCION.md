@@ -60,7 +60,7 @@ function secretosEn(bundle) {
 ```practica
 vf :: Un APK o un IPA se puede abrir como un ZIP y mirar por dentro
 vf :: Una llave secreta está a salvo dentro de la app si el código está compilado
-elige :: ¿La apiKey de Firebase (AIza…) puede ir en la app? :: No, nunca :: Sí: es pública a propósito; lo que protege los datos son las reglas :: Solo cifrada → Las reglas de Firestore son las que deciden (clase 24).
+elige :: ¿La apiKey de Firebase (AIza…) puede ir en la app? :: No, nunca :: Sí: es pública a propósito; lo que protege los datos son las reglas :: Solo cifrada
 escribe :: Tu app necesita cobrar con una llave de pagos. ¿Dónde va la llave y cómo funciona el cobro? :: La llave va en mi servidor (por ejemplo, una Cloud Function), nunca en la app. La app le pide al servidor que cobre, y el servidor usa la llave y revisa que el pedido tenga sentido.
 ```
 
@@ -118,7 +118,7 @@ function dondeGuardar(dato) {
 ```practica
 vf :: AsyncStorage, UserDefaults y DataStore guardan en archivos comunes, sin cifrar
 vf :: Conviene guardar la contraseña del usuario en el teléfono para no pedírsela otra vez
-elige :: ¿Qué usa una app de Expo para guardar un token en la Keychain o el Keystore? :: AsyncStorage :: expo-secure-store :: localStorage → Usa la caja fuerte de cada sistema.
+elige :: ¿Qué usa una app de Expo para guardar un token en la Keychain o el Keystore? :: AsyncStorage :: expo-secure-store :: localStorage
 escribe :: ¿Por qué "guardar lo menos posible" también es seguridad? :: Porque un dato que no guardas no se puede robar: si el teléfono se pierde o la app tiene una falla, no hay nada que sacar.
 ```
 
@@ -177,7 +177,7 @@ function abrirEnlace(texto) {
 ```practica
 vf :: Cualquier página web, mensaje o app puede abrir un deep link de tu app con los datos que quiera
 vf :: Un esquema propio como miapp:// es tan seguro como un Universal Link, porque solo tu app lo usa
-elige :: Un deep link de pagar llega con un monto. ¿Qué hace la app? :: Paga enseguida :: Abre la pantalla de pagar con los datos, para que la persona confirme :: Ignora el enlace → Nunca hace algo importante sola.
+elige :: Un deep link de pagar llega con un monto. ¿Qué hace la app? :: Paga enseguida :: Abre la pantalla de pagar con los datos, para que la persona confirme :: Ignora el enlace
 escribe :: ¿Qué ataque de la clase 23 también puede entrar por un deep link, y cómo se frena? :: El IDOR: un enlace con el id de algo de otra persona (miapp://viaje?id=999). Se frena en el servidor, que revisa que ese id sea de quien lo pide, igual que en la web.
 ```
 
@@ -236,7 +236,7 @@ function revisarInforme(pide, usa) {
 ```practica
 vf :: Con Frida se puede cambiar lo que hace una función de la app mientras corre, por ejemplo que esPremium() devuelva siempre true
 vf :: Detectar si el teléfono tiene root y no dejar abrir la app hace que la app sea segura
-elige :: ¿Para qué usa MobSF un defensor? :: Para hackear apps ajenas :: Para revisar su propia app antes de publicarla: permisos, claves y configuraciones peligrosas :: Para hacer la app más rápida → Es el npm audit de las apps.
+elige :: ¿Para qué usa MobSF un defensor? :: Para hackear apps ajenas :: Para revisar su propia app antes de publicarla: permisos, claves y configuraciones peligrosas :: Para hacer la app más rápida
 escribe :: MobSF muestra que tu app pide READ_CONTACTS y tú nunca usaste los contactos. ¿Qué haces? :: Busco de dónde viene (suele ser una librería que agregué), lo saco si no hace falta, y si una librería lo necesita, evalúo si vale la pena. Un permiso peligroso que no se usa es una puerta abierta sin motivo.
 ```
 

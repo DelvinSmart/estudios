@@ -107,7 +107,7 @@ fun tipoDe(t: Tecla): String = when (t) {
 ```practica
 vf :: Con una familia sealed, un when sin else que se olvida de una tecla no compila
 vf :: En Kotlin, las teclas de la calculadora son textos, igual que en TypeScript
-elige :: ¿Para qué sirve teclaDe("+") en las pruebas de Kotlin? :: Para que corran más rápido :: Para escribir las pruebas igual que en React Native, por el símbolo de la tecla :: Para dibujar las teclas → tocar("2", "+", "3", "=") se lee igual en los dos lenguajes.
+elige :: ¿Para qué sirve teclaDe("+") en las pruebas de Kotlin? :: Para que corran más rápido :: Para escribir las pruebas igual que en React Native, por el símbolo de la tecla :: Para dibujar las teclas
 escribe :: Agregas Tecla.Raiz a la familia y no tocas nada más. ¿Qué pasa en Kotlin? :: No compila: el when de apretar (y los de tipoDe y etiquetaDe) no tiene rama para Raiz y no tiene else, así que Kotlin avisa en cada lugar donde falta decidir qué hace.
 ```
 
@@ -185,7 +185,7 @@ fun porcentaje(base: String, por: String): String =
 ```practica
 vf :: Con BigDecimal, 0,1 + 0,2 da exactamente 0,3, sin redondear
 vf :: En Kotlin, dividir dos BigDecimal con / siempre da todos los decimales
-elige :: ¿Por qué los bancos usan BigDecimal para la plata? :: Porque es más rápido :: Porque guarda los decimales exactos, sin errores como 0,30000000000000004 :: Porque ocupa menos memoria → Con plata, un centavo de error es un error.
+elige :: ¿Por qué los bancos usan BigDecimal para la plata? :: Porque es más rápido :: Porque guarda los decimales exactos, sin errores como 0,30000000000000004 :: Porque ocupa menos memoria
 escribe :: ¿Cómo se encontró el error del porcentaje si las 48 pruebas pasaban? :: Releyendo el código como si fuera de otro. Las pruebas solo tenían porcentajes que daban enteros; se escribió una prueba con 15 + 3 % (en rojo), se cambió / por divide, y la misma prueba se agregó a la versión de React Native.
 ```
 
@@ -254,7 +254,7 @@ fun apretar(e: Estado, t: Char): Estado = when {
 ```practica
 vf :: copy en una data class crea un estado nuevo cambiando solo los campos que le dices
 vf :: Como Estado es una data class, cualquier parte del programa puede cambiar su pantalla por dentro
-elige :: ¿Qué tipo tiene el resultado de calcular en Kotlin? :: number | string :: Una familia sealed: Resultado.Numero o Resultado.Aviso :: Any → Y un when sin else obliga a tratar los dos casos.
+elige :: ¿Qué tipo tiene el resultado de calcular en Kotlin? :: number | string :: Una familia sealed: Resultado.Numero o Resultado.Aviso :: Any
 escribe :: ¿Qué quiere decir el ? en guardado: BigDecimal? :: Que puede ser un número o null (nada). Kotlin obliga a revisar que no sea null antes de usarlo, así no se puede olvidar.
 ```
 
@@ -314,7 +314,7 @@ fun fondoDe(tipo: TipoDeTecla, encendida: Boolean, c: Colores): String =
 ```practica
 vf :: _estado.update { apretar(it, t) } recibe siempre el estado más nuevo, como setEstado((e) => …) en React
 vf :: Al cambiar el teléfono de modo oscuro a claro, la calculadora vuelve a 0
-elige :: ¿Qué hace en Compose lo que en React Native hacía useColorScheme()? :: LocalConfiguration :: isSystemInDarkTheme() :: remember → Las dos le preguntan al teléfono si está en modo oscuro.
+elige :: ¿Qué hace en Compose lo que en React Native hacía useColorScheme()? :: LocalConfiguration :: isSystemInDarkTheme() :: remember
 escribe :: ¿Por qué Calculadora(...) no recibe el ViewModel, sino el estado ya listo? :: Para que solo dibuje lo que recibe: así se puede ver en la vista previa con cualquier estado y es más fácil de probar. El ViewModel lo conecta PantallaCalculadora.
 ```
 
@@ -369,7 +369,7 @@ fun identidadesRepetidas(apps: List<Pair<String, String>>): List<String> =
 ```practica
 vf :: Dos apps con el mismo applicationId no pueden estar instaladas a la vez en un Android
 vf :: El applicationId se puede cambiar cuando quieras, incluso después de publicar en Google Play
-elige :: Una empresa necesita su app en Android y en iPhone, con un equipo chico. ¿Qué conviene más? :: Kotlin nativo :: React Native, un solo código para los dos :: Escribirla dos veces → Kotlin nativo conviene cuando es solo para Android o necesita lo último de Android.
+elige :: Una empresa necesita su app en Android y en iPhone, con un equipo chico. ¿Qué conviene más? :: Kotlin nativo :: React Native, un solo código para los dos :: Escribirla dos veces
 escribe :: Entre las dos calculadoras, ¿qué fue igual y qué cambió? :: Igual: el plan y la tabla de decisiones, la lógica separada de la pantalla, el teclado como datos, el motor de diseño, la accesibilidad y las pruebas primero. Cambió el lenguaje y sus herramientas: TypeScript con number y redondeo contra Kotlin con BigDecimal exacto y familias sealed; useState contra ViewModel; Expo contra Gradle.
 ```
 

@@ -79,7 +79,7 @@ function rutaSegura(pedido) {
 ```practica
 vf :: La defensa contra path traversal es calcular la ruta final y comprobar que sigue adentro de la carpeta permitida
 vf :: Si el código borra todos los "../" del pedido, ya no se puede salir de la carpeta
-elige :: ¿Qué es lo más seguro para servir archivos que subieron los usuarios? :: Aceptar el nombre que manda el usuario :: Guardarlos con un id propio y buscarlo en la base de datos :: Borrar los puntos del nombre → Así el usuario nunca escribe una ruta.
+elige :: ¿Qué es lo más seguro para servir archivos que subieron los usuarios? :: Aceptar el nombre que manda el usuario :: Guardarlos con un id propio y buscarlo en la base de datos :: Borrar los puntos del nombre
 escribe :: ¿Qué archivo intentaría leer primero un atacante con path traversal en una API de Node, y por qué? :: El .env, porque ahí suelen estar las claves y secretos (de la base de datos, de servicios de pago). Con eso puede entrar a todo lo demás.
 ```
 
@@ -152,7 +152,7 @@ function urlPermitida(texto) {
 ```practica
 vf :: En un SSRF, el atacante usa al servidor para llegar a lugares internos que desde internet no se ven
 vf :: Para frenar un SSRF alcanza con prohibir la palabra "localhost"
-elige :: En https://api.mercadopago.com@evil.com/, ¿a qué sitio va el pedido? :: api.mercadopago.com :: evil.com: lo que está antes del @ es un nombre de usuario :: A los dos → Por eso hay que leer la URL con new URL y mirar el hostname.
+elige :: En https://api.mercadopago.com@evil.com/, ¿a qué sitio va el pedido? :: api.mercadopago.com :: evil.com: lo que está antes del @ es un nombre de usuario :: A los dos
 escribe :: ¿Por qué el servidor que busca URLs de los usuarios no debería tener permisos de más en la nube? :: Porque si alguien logra un SSRF, actúa con los permisos de ese servidor. Con pocos permisos, aunque la puerta se abra, hay poco que robar (defensa en profundidad).
 ```
 
@@ -210,7 +210,7 @@ function destinoSeguro(volver) {
 ```practica
 vf :: Una redirección abierta sirve para phishing porque el enlace muestra tu dominio y después lleva a otro
 vf :: Si el destino empieza con "/", es una ruta de tu sitio y es seguro
-elige :: ¿Qué hace la app si el destino de "volver" no es seguro? :: Muestra un error con el destino :: Manda a la portada (/) :: Manda al destino igual → Nunca a la dirección del atacante.
+elige :: ¿Qué hace la app si el destino de "volver" no es seguro? :: Muestra un error con el destino :: Manda a la portada (/) :: Manda al destino igual
 escribe :: Explica con un ejemplo cómo se usaría una redirección abierta en un phishing. :: El atacante manda por WhatsApp un enlace de tuapp.com/entrar?volver=https://sitio-falso.com. La persona ve tu dominio, entra con su contraseña real, y después la app la manda al sitio falso, igual al tuyo, que le pide la contraseña otra vez o la tarjeta.
 ```
 
@@ -274,7 +274,7 @@ function revisarSubida(bytes, tamano) {
 ```practica
 vf :: Un archivo subido se revisa por sus primeros bytes, porque el nombre y el tipo los elige quien lo sube
 vf :: Una imagen SVG es segura de aceptar, porque es una imagen
-elige :: ¿Con qué nombre conviene guardar un archivo subido? :: Con el nombre que eligió el usuario :: Con un id propio, como a7f3….png :: Con la fecha → Así nadie puede meter una ruta en el nombre.
+elige :: ¿Con qué nombre conviene guardar un archivo subido? :: Con el nombre que eligió el usuario :: Con un id propio, como a7f3….png :: Con la fecha
 escribe :: ¿Por qué conviene servir los archivos subidos desde otro dominio que el de tu app? :: Porque si algo dañino se escapara (un HTML con script), correría en ese otro dominio y no con la sesión ni los datos de tu app.
 ```
 

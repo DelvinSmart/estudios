@@ -93,7 +93,7 @@ func mensaje(km: Double, valor: Double) -> String {
 ```practica
 vf :: En Swift, para llamar a una función que tiene throws hay que escribir try, si no, no compila
 vf :: Un error en Swift es un texto suelto, como "falló"
-elige :: ¿Qué ventaja tiene que throws esté en la firma de la función? :: Que la función corre más rápido :: Que quien la usa sabe que puede fallar antes de que pase :: Que no hace falta catch → El compilador obliga a tratar el error.
+elige :: ¿Qué ventaja tiene que throws esté en la firma de la función? :: Que la función corre más rápido :: Que quien la usa sabe que puede fallar antes de que pase :: Que no hace falta catch
 escribe :: ¿Por qué conviene que los errores sean un enum (sinKm, valorNegativo) y no un texto? :: Porque así quien lo atrapa puede decidir qué hacer en cada caso (pedir los km, avisar del valor), y el switch o los catch no se olvidan de ninguno. Un texto solo se puede mostrar.
 ```
 
@@ -168,7 +168,7 @@ func totalValido(_ textos: [String]) -> Double {
 ```practica
 vf :: try? convierte un error en nil, y el resultado se puede abrir con if let o ??
 vf :: try! es la forma más segura de llamar a una función que puede fallar
-elige :: Una foto de perfil no se pudo bajar. ¿Qué conviene? :: try! :: try?, y mostrar la foto de siempre :: do-catch con un aviso → El error no cambia nada para la persona.
+elige :: Una foto de perfil no se pudo bajar. ¿Qué conviene? :: try! :: try?, y mostrar la foto de siempre :: do-catch con un aviso
 escribe :: ¿Cuándo usarías do-catch en vez de try?? :: Cuando la persona necesita saber qué pasó para corregirlo (por ejemplo, "escribe los km"), porque try? pierde el error y solo deja nil.
 ```
 
@@ -247,7 +247,7 @@ func total() async -> Double {
 ```practica
 vf :: Con async let, dos pedidos empiezan al mismo tiempo y se espera a los dos al final
 vf :: Una función async congela la pantalla mientras espera
-elige :: Un botón de SwiftUI tiene que llamar a algo async. ¿Cómo? :: Escribiendo await directo en el botón :: Envolviéndolo en Task { … } :: No se puede → El botón no es async; Task empieza el trabajo que tarda.
+elige :: Un botón de SwiftUI tiene que llamar a algo async. ¿Cómo? :: Escribiendo await directo en el botón :: Envolviéndolo en Task { … } :: No se puede
 escribe :: Tienes que traer las ganancias de Uber, de 99 y de inDrive, y cada pedido tarda 1 segundo. ¿Cómo lo harías y cuánto tardaría? :: Con tres async let, uno por app, y un solo await al sumar. Los tres empiezan juntos, así que tardaría alrededor de 1 segundo en vez de 3.
 ```
 

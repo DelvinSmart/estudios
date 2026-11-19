@@ -472,7 +472,7 @@ def leer_config(env):
 ```practica
 vf :: Un programa sin pantalla también se beneficia de tener sus valores en un solo lugar, como un motor de diseño
 vf :: Conviene que cada función lea os.environ por su cuenta, cuando lo necesita
-elige :: ¿Para qué sirve frozen=True en la dataclass de la configuración? :: Para que ocupe menos memoria :: Para que nadie la cambie por accidente después de crearla :: Para que se guarde en un archivo → Intentar cambiarla da FrozenInstanceError.
+elige :: ¿Para qué sirve frozen=True en la dataclass de la configuración? :: Para que ocupe menos memoria :: Para que nadie la cambie por accidente después de crearla :: Para que se guarde en un archivo
 escribe :: ¿Por qué leer_config recibe env como parámetro en vez de usar os.environ adentro? :: Para poder probarla pasándole un diccionario común, sin tocar las variables de la computadora. Por defecto usa os.environ, así en el programa real no cambia nada.
 ```
 

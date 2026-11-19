@@ -34,6 +34,15 @@ export function separar({ revisar = false } = {}) {
     });
     nuevo[p.id] = { curso: p.curso, parte: p.parte, firma: f, preguntas };
 
+    // La explicación de un "elige" va en su propio campo:  … :: opción c :: → porqué
+    // Si se escribe pegada ("opción c → porqué"), queda DENTRO de la opción: el alumno la ve antes
+    // de responder (y a veces dice la respuesta). Pasó en 96 prácticas; esto lo frena.
+    p.preguntas.forEach((q, i) => {
+      if (q.tipo !== 'elige') return;
+      const ultima = q.opciones[q.opciones.length - 1];
+      if (ultima.includes(' → ') && !preguntas[i].explicacion) problemas.push(`${p.id}, pregunta ${i + 1}: la explicación quedó pegada a la última opción; sepárala con " :: → "`);
+    });
+
     const tieneRespuestas = p.preguntas.some((q) => q.tipo !== 'escribe' && q.correcta !== null);
     if (tieneRespuestas) {
       if (revisar) problemas.push(`${p.ruta} (${p.id}): todavía tiene respuestas a la vista`);

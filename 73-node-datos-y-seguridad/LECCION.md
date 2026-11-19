@@ -302,7 +302,7 @@ function leerConfig(env) {
 ```practica
 vf :: Conviene que un solo módulo lea process.env y el resto del programa use lo que ese módulo entrega
 vf :: En producción, si falta el secreto, lo mejor es usar uno por defecto para que el servidor arranque igual
-elige :: ¿Cuándo conviene que falle una configuración mal puesta? :: Cuando alguien use esa parte :: Al arrancar el programa :: Nunca: mejor seguir → Fallar al arrancar, con un mensaje claro, evita errores raros a la mitad.
+elige :: ¿Cuándo conviene que falle una configuración mal puesta? :: Cuando alguien use esa parte :: Al arrancar el programa :: Nunca: mejor seguir
 escribe :: ¿Qué tiene que ver la configuración en un solo lugar con un motor de diseño? :: Es la misma idea: los valores que deciden cómo se ve o cómo se comporta algo viven en un solo lugar, y el resto los llama. Cambiar un valor es cambiar una línea, no buscarlo por todo el código.
 ```
 

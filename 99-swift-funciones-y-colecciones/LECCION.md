@@ -73,7 +73,7 @@ func viaje(de origen: String, a destino: String) -> String {
 ```practica
 vf :: En Swift, los datos de una función se escriben con su etiqueta al llamarla, como ganancia(viajes: 12, porViaje: 9.75)
 vf :: Si una función se declara como func saludo(_ nombre: String), se llama saludo(nombre: "Ana")
-elige :: En func mover(de origen: String, a destino: String), ¿qué es "de"? :: El nombre que se usa adentro :: La etiqueta que se escribe al llamarla :: El tipo → Adentro se usa origen; afuera se escribe mover(de: …, a: …).
+elige :: En func mover(de origen: String, a destino: String), ¿qué es "de"? :: El nombre que se usa adentro :: La etiqueta que se escribe al llamarla :: El tipo
 escribe :: ¿Qué ventaja tienen las etiquetas de Swift frente a ganancia(12, 9.75) de TypeScript? :: Que la llamada dice qué es cada dato (viajes: 12, porViaje: 9.75): no se confunde el orden ni hace falta ir a mirar la función.
 ```
 
@@ -142,7 +142,7 @@ func conImpuesto(_ valores: [Double]) -> [Double] {
 ```practica
 vf :: Una closure es una función sin nombre que se puede pasar como dato, como las flechas de TypeScript
 vf :: En una closure de Swift, $0 es siempre el número cero
-elige :: ¿Qué es la "closure al final" (trailing closure)? :: Una closure que se corre al final del programa :: Escribir la última closure de una llamada afuera de los paréntesis :: Una closure sin datos → Por eso en SwiftUI se ve Button("Guardar") { … }.
+elige :: ¿Qué es la "closure al final" (trailing closure)? :: Una closure que se corre al final del programa :: Escribir la última closure de una llamada afuera de los paréntesis :: Una closure sin datos
 escribe :: En Button("Guardar") { guardar() }, ¿qué es lo que va entre llaves y cuándo se corre? :: Es una closure: lo que pasa al tocar el botón. No se corre al dibujar el botón, sino después, cada vez que alguien lo toca.
 ```
 
@@ -223,7 +223,7 @@ func grandes(_ viajes: [(app: String, valor: Double)]) -> [Double] {
 ```practica
 vf :: Un Set no guarda elementos repetidos ni tiene un orden fijo
 vf :: porApp["Uber"] en un diccionario de Swift devuelve un Double, siempre
-elige :: ¿Qué hace viajes.reduce(0, +)? :: Cuenta los viajes :: Suma todos los valores, empezando en 0 :: Devuelve el mayor → El + es una función que suma dos números, y se pasa como closure.
+elige :: ¿Qué hace viajes.reduce(0, +)? :: Cuenta los viajes :: Suma todos los valores, empezando en 0 :: Devuelve el mayor
 escribe :: ¿Cuándo usarías un Dictionary en vez de un Array? :: Cuando quiero buscar un valor por una clave (el total de cada app por su nombre) en vez de por la posición en la lista.
 ```
 

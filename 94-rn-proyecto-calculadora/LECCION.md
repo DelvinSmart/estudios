@@ -84,7 +84,7 @@ function deIzquierdaADerecha(partes) {
 ```practica
 vf :: En una calculadora, 2 + 3 × 4 puede dar 14 o 20 según una decisión que se escribe en el plan
 vf :: Usar eval para hacer las cuentas es la forma recomendada, porque es más corta
-elige :: ¿Para qué sirve la lista de lo que la calculadora NO hace? :: Para que el código sea más corto :: Para que el proyecto no crezca para todos lados y se pueda terminar :: Para las pruebas → Sin esa lista, cada sesión agrega algo (historial, paréntesis…) y la app nunca se termina.
+elige :: ¿Para qué sirve la lista de lo que la calculadora NO hace? :: Para que el código sea más corto :: Para que el proyecto no crezca para todos lados y se pueda terminar :: Para las pruebas
 escribe :: ¿Qué hiciste con cada fila de la tabla de decisiones del plan? :: La convertí en una prueba antes de escribir el código: así la decisión queda escrita y la máquina revisa que se cumpla siempre.
 ```
 
@@ -156,7 +156,7 @@ function radioDe(lado) {
 ```practica
 vf :: El lado de las teclas se calcula con el ancho de la pantalla, usando los espacios del motor
 vf :: Como el tema claro y el oscuro se escriben aparte, pueden tener colores distintos sin problema, aunque a uno le falte uno
-elige :: ¿Para qué sirve forma.anchoMaximo? :: Para que el texto sea más grande :: Para que en una tableta la calculadora no se estire y las teclas no salgan gigantes :: Para el modo oscuro → Math.min(anchoPantalla, forma.anchoMaximo) pone un tope.
+elige :: ¿Para qué sirve forma.anchoMaximo? :: Para que el texto sea más grande :: Para que en una tableta la calculadora no se estire y las teclas no salgan gigantes :: Para el modo oscuro
 escribe :: ¿Por qué el lado de la tecla no es un número fijo como 80? :: Porque en un teléfono chico (320 de ancho) cuatro teclas de 80 más sus huecos no entran. Se calcula con el ancho de la pantalla para que entre en cualquiera.
 ```
 
@@ -245,7 +245,7 @@ function calcular(a, operador, b) {
 ```practica
 vf :: 0.1 + 0.2 da 0.30000000000000004 porque las computadoras guardan los decimales en binario
 vf :: Si calcular devuelve number | string, se puede usar el resultado como número sin revisar nada
-elige :: ¿Por qué redondear usa toPrecision(12)? :: Porque es más rápido :: Porque la calculadora muestra como mucho 12 cifras, y así desaparece el error de los decimales :: Para quitar los negativos → 0.30000000000000004 con 12 cifras es 0.3.
+elige :: ¿Por qué redondear usa toPrecision(12)? :: Porque es más rápido :: Porque la calculadora muestra como mucho 12 cifras, y así desaparece el error de los decimales :: Para quitar los negativos
 escribe :: ¿Qué devuelve calcular(1, '÷', 0) y por qué no devuelve Infinity? :: Devuelve el aviso "No se puede dividir entre 0". JavaScript daría Infinity, que en el visor no le dice nada a la persona; el plan decidió mostrar un aviso claro.
 ```
 
@@ -324,7 +324,7 @@ function apretar(e, t) {
 ```practica
 vf :: Toda la calculadora es una función que recibe un estado y una tecla y devuelve un estado nuevo
 vf :: Conviene que apretar cambie el estado que recibe, porque es más rápido
-elige :: ¿Por qué la pantalla se guarda como texto y no como número? :: Porque los textos ocupan menos :: Para mostrar exactamente lo que se tocó, como "12," o "0,50" :: Para formatear más rápido → Como número, "12," sería 12 y "0,50" sería 0,5.
+elige :: ¿Por qué la pantalla se guarda como texto y no como número? :: Porque los textos ocupan menos :: Para mostrar exactamente lo que se tocó, como "12," o "0,50" :: Para formatear más rápido
 escribe :: ¿Qué recuerda el estado de la calculadora mientras haces 2 + 3? :: El número del visor (3), el número guardado (2), el operador (+), si el próximo dígito empieza un número nuevo, y si hay un aviso.
 ```
 
@@ -378,7 +378,7 @@ function formatear(pantalla) {
 ```practica
 vf :: Las pruebas de la calculadora se escribieron antes que el código, sacadas de la tabla de decisiones del plan
 vf :: Si todas las pruebas pasan a la primera, la app no tiene ningún error
-elige :: ¿Para qué sirve el ayudante tocar(...teclas) en las pruebas? :: Para que corran más rápido :: Para que cada prueba se lea como lo que hace una persona y pruebe lo que se ve :: Para no usar Jest → "Toco 2, más, 3, igual: veo 5".
+elige :: ¿Para qué sirve el ayudante tocar(...teclas) en las pruebas? :: Para que corran más rápido :: Para que cada prueba se lea como lo que hace una persona y pruebe lo que se ve :: Para no usar Jest
 escribe :: ¿Por qué conviene separar cómo se guarda el número (-1234.5) de cómo se ve (-1.234,5)? :: Porque así las cuentas no dependen del formato: se puede cambiar cómo se muestra (otro país, otro separador) sin tocar la lógica, y las pruebas de las cuentas siguen igual.
 ```
 

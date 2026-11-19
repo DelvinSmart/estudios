@@ -67,7 +67,7 @@ function cualesPuedo(objetivos) {
 ```practica
 vf :: Atacar con estas herramientas el sitio de otra persona, aunque sea "para probar", puede ser un delito
 vf :: Como la app escucha en 127.0.0.1, alguien más en tu Wi-Fi la puede atacar también
-elige :: ¿Qué es lo primero de una auditoría? :: Lanzar nmap :: Escribir el alcance: qué se puede tocar y qué no :: Buscar el secreto → Sin alcance, no se toca nada.
+elige :: ¿Qué es lo primero de una auditoría? :: Lanzar nmap :: Escribir el alcance: qué se puede tocar y qué no :: Buscar el secreto
 escribe :: ¿Por qué todas estas herramientas son legales de tener pero peligrosas de usar? :: Porque la herramienta no distingue tu servidor del de otro: lo que la vuelve delito es usarla contra algo que no es tuyo y sin permiso. Por eso se practica en un laboratorio propio.
 ```
 
@@ -127,7 +127,7 @@ function hallazgos(cabeceras) {
 ```practica
 vf :: La cabecera X-Powered-By le dice al atacante con qué está hecha tu app, y conviene quitarla
 vf :: Access-Control-Allow-Origin: * es seguro porque no muestra datos privados
-elige :: ¿Para qué sirve el reconocimiento contra tu propio servidor? :: Para atacarlo :: Para ver lo que ve un atacante y taparlo antes :: Para nada → Es el primer paso, también para el defensor.
+elige :: ¿Para qué sirve el reconocimiento contra tu propio servidor? :: Para atacarlo :: Para ver lo que ve un atacante y taparlo antes :: Para nada
 escribe :: nmap te muestra el puerto 3000 abierto con tu app. ¿Eso está bien o mal? :: En el laboratorio está bien, porque lo quieres probar. En un servidor de verdad, solo debería estar abierto lo necesario: si 3000 se ve desde internet sin razón, se cierra con el firewall.
 ```
 
@@ -190,7 +190,7 @@ function frenaIntentos(codigos) {
 ```practica
 vf :: Un login que contesta "ese usuario no existe" le confirma al atacante qué usuarios son reales
 vf :: Si las claves están bien guardadas con bcrypt, no hace falta limitar los intentos del login
-elige :: ¿Qué hace Hydra contra el login? :: Roba la base de datos :: Prueba muchos usuarios y claves hasta que uno entra :: Lee la pantalla → Ataque en línea; se frena limitando intentos.
+elige :: ¿Qué hace Hydra contra el login? :: Roba la base de datos :: Prueba muchos usuarios y claves hasta que uno entra :: Lee la pantalla
 escribe :: ¿Por qué la enumeración (V6) y la falta de límite (V7) son peores juntas? :: Porque primero el atacante usa la enumeración para quedarse solo con los usuarios reales, y después, sin límite de intentos, prueba claves contra esos usuarios cuanto quiera. Una le da la lista, la otra le da el tiempo.
 ```
 
@@ -293,7 +293,7 @@ function cambiaLaConsulta(nota) {
 ```practica
 vf :: El IDOR se arregla pidiendo también el dueño en la consulta: WHERE id = ? AND dueno = ?
 vf :: Con consultas con parámetros, el texto que escribe el usuario nunca se vuelve parte del SQL
-elige :: ¿Qué automatiza sqlmap? :: Adivinar contraseñas :: Probar inyecciones SQL en cada parámetro y sacar los datos :: Escanear puertos → Por dentro manda notas como la del ejemplo.
+elige :: ¿Qué automatiza sqlmap? :: Adivinar contraseñas :: Probar inyecciones SQL en cada parámetro y sacar los datos :: Escanear puertos
 escribe :: Entras como ana y con el IDOR lees la nota privada de beto. ¿Qué falló y cómo se arregla? :: La app buscó el gasto solo por su id y nunca revisó que fuera de ana. Se arregla pidiendo también el dueño (WHERE id = ? AND dueno = ?), así el gasto de otro ni aparece.
 ```
 
@@ -351,7 +351,7 @@ function guardar(cuerpo, usuario, conLista) {
 ```practica
 vf :: Cambiar la validación de la pantalla no sirve, porque con un proxy como ZAP se cambia la petición después
 vf :: Un secreto borrado del código en un commit nuevo ya no es un problema
-elige :: ¿Cómo frena la asignación masiva una lista blanca? :: Borra el cuerpo :: Toma solo los campos esperados y pone el dueño el servidor, nunca el cuerpo :: Cifra los datos → Así un campo "dueno" colado no pasa.
+elige :: ¿Cómo frena la asignación masiva una lista blanca? :: Borra el cuerpo :: Toma solo los campos esperados y pone el dueño el servidor, nunca el cuerpo :: Cifra los datos
 escribe :: Con un proxy agregas "dueno":"beto" a la petición y creas un gasto a nombre de beto. ¿Qué falló y cómo se arregla? :: La app juntó tu cuerpo sobre el dueño verdadero, así que el campo colado lo pisó. Se arregla con una lista blanca: el servidor toma solo tipo, valor y nota, y pone el dueño él mismo.
 ```
 
@@ -414,7 +414,7 @@ function resumen(fallas) {
 ```practica
 vf :: Una auditoría no termina al encontrar las fallas: hay que volver a probar la versión arreglada y demostrar que ya no caen
 vf :: Si la inyección SQL ahora devuelve una lista vacía en vez de los datos de otro, el arreglo funcionó
-elige :: ¿Qué es lo último de una auditoría? :: Borrar la app :: El informe, y volver a probar contra la versión arreglada :: Publicarla → Por cada falla: qué es, qué tan grave, y la prueba del arreglo.
+elige :: ¿Qué es lo último de una auditoría? :: Borrar la app :: El informe, y volver a probar contra la versión arreglada :: Publicarla
 escribe :: Resume cómo harías la auditoría de la app de la clase 91, de principio a fin. :: Escribo el alcance (solo 127.0.0.1). Hago reconocimiento con nmap y miro las cabeceras. Pruebo el login (enumeración y Hydra), saco datos con el IDOR y con sqlmap, uso un proxy para la asignación masiva y gitleaks para el secreto. Anoto cada falla en un informe con su arreglo, y al final corro todo contra la versión arreglada para probar que ya no cae.
 ```
 

@@ -59,7 +59,7 @@ function queUsar(caso) {
 ```practica
 vf :: Un hash no se puede "volver atrás": de la huella no se saca el dato original
 vf :: Guardar una contraseña en base64 la protege, porque no se lee a simple vista
-elige :: ¿Qué conviene para guardar las contraseñas de los usuarios? :: Cifrarlas con AES :: Un hash lento con sal (bcrypt, argon2) :: Base64 → Si roban la base y la llave, con cifrado tienen todas; con un hash no hay llave.
+elige :: ¿Qué conviene para guardar las contraseñas de los usuarios? :: Cifrarlas con AES :: Un hash lento con sal (bcrypt, argon2) :: Base64
 escribe :: ¿Cuál es la diferencia entre cifrar y firmar? :: Cifrar esconde los datos, y se vuelven a leer con la llave. Firmar no esconde nada (cualquiera lo lee), pero prueba quién lo hizo y que no cambió.
 ```
 
@@ -119,7 +119,7 @@ function vencido(datos, ahora) {
 ```practica
 vf :: Cualquiera que tenga un JWT puede leer sus datos, sin ninguna llave
 vf :: Un JWT es un buen lugar para guardar información secreta del usuario, porque está firmado
-elige :: ¿Dónde se revisa la firma de un JWT? :: En la app, al recibirlo :: En el servidor, en cada pedido :: No hace falta revisarla → La app se puede modificar; el servidor es el que decide.
+elige :: ¿Dónde se revisa la firma de un JWT? :: En la app, al recibirlo :: En el servidor, en cada pedido :: No hace falta revisarla
 escribe :: Un compañero dice "le pongo rol: admin al token y ya puedo entrar al panel". ¿Por qué no funciona si el servidor está bien hecho? :: Porque al cambiar los datos, la firma deja de coincidir, y el servidor revisa la firma en cada pedido y rechaza el token. Sin la llave del servidor no se puede hacer una firma nueva válida.
 ```
 
@@ -177,7 +177,7 @@ function aceptar(cabecera, firmaValida) {
 ```practica
 vf :: En el ataque de alg: none, el atacante borra la firma y el servidor que le cree a la cabecera no revisa nada
 vf :: Si la librería es conocida, no hace falta decirle qué algoritmo aceptar
-elige :: ¿Qué hace el servidor si el token dice un algoritmo distinto del que espera? :: Prueba con ese algoritmo :: Lo rechaza antes de mirar la firma :: Lo acepta si la firma parece bien → El algoritmo lo decide el servidor.
+elige :: ¿Qué hace el servidor si el token dice un algoritmo distinto del que espera? :: Prueba con ese algoritmo :: Lo rechaza antes de mirar la firma :: Lo acepta si la firma parece bien
 escribe :: Explica el ataque de alg: none en tres pasos. :: 1) Se toma un token propio y se leen sus datos. 2) Se cambia un dato (rol: admin) y la cabecera a alg: none, y se borra la firma. 3) Un servidor que le cree a la cabecera no revisa ninguna firma y acepta el token falso.
 ```
 
@@ -241,7 +241,7 @@ function revisarCookie(texto) {
 ```practica
 vf :: Una cookie HttpOnly no la puede leer JavaScript, así que un XSS no la puede robar
 vf :: Guardar el token de sesión en localStorage es tan seguro como una cookie HttpOnly
-elige :: ¿Para qué sirve SameSite=Lax? :: Para que la cookie dure más :: Para que no viaje en pedidos que dispara otro sitio (defensa contra CSRF) :: Para cifrar la cookie → Es la defensa moderna contra el CSRF de la clase 23.
+elige :: ¿Para qué sirve SameSite=Lax? :: Para que la cookie dure más :: Para que no viaje en pedidos que dispara otro sitio (defensa contra CSRF) :: Para cifrar la cookie
 escribe :: ¿Por qué una sesión debería vencer (Max-Age)? :: Porque si alguien roba el token, solo le sirve hasta que vence. Una sesión que no vence nunca le da acceso para siempre.
 ```
 
@@ -309,7 +309,7 @@ function igualesTiempoConstante(a, b) {
 ```practica
 vf :: Math.random() no sirve para generar tokens o códigos secretos, porque sus números se pueden predecir
 vf :: Comparar dos tokens con === es siempre seguro, porque da true o false
-elige :: ¿Qué hace una comparación de tiempo constante? :: Compara más rápido :: Recorre todas las letras siempre, acierte o no, para no dejar pistas en el tiempo :: Cifra los dos textos → Así el tiempo de respuesta no dice nada.
+elige :: ¿Qué hace una comparación de tiempo constante? :: Compara más rápido :: Recorre todas las letras siempre, acierte o no, para no dejar pistas en el tiempo :: Cifra los dos textos
 escribe :: ¿Por qué no hace falta comparar en tiempo constante las contraseñas a mano? :: Porque no se comparan las contraseñas, sino sus hashes, y las librerías de hash para contraseñas (bcrypt, argon2) ya hacen la comparación bien.
 ```
 

@@ -96,7 +96,7 @@ struct Jornada {
 ```practica
 vf :: Las pantallas de SwiftUI se hacen en Xcode, que es gratis y corre en la Mac
 vf :: En SwiftUI, la app y las pantallas son class, porque tienen que compartirse
-elige :: ¿Qué hace @main en MiJornadaApp? :: Marca la pantalla principal :: Dice que la app empieza ahí :: Hace que la app sea más rápida → Es la puerta de entrada, como el main de Kotlin.
+elige :: ¿Qué hace @main en MiJornadaApp? :: Marca la pantalla principal :: Dice que la app empieza ahí :: Hace que la app sea más rápida
 escribe :: ¿Para qué sirve la vista previa (Canvas) de Xcode? :: Para ver la pantalla al lado del código y ver cada cambio al instante, sin volver a correr la app en el simulador.
 ```
 
@@ -170,7 +170,7 @@ func enReales(_ valor: Double) -> String {
 ```practica
 vf :: Una pantalla de SwiftUI es un struct que cumple el protocolo View, y lo único que pide es body
 vf :: En SwiftUI, el orden de los modificadores no cambia nada
-elige :: ¿Qué es VStack? :: Una lista que se puede desplazar :: Una pila vertical: pone las cosas una encima de otra :: Un botón → HStack las pone una al lado de la otra.
+elige :: ¿Qué es VStack? :: Una lista que se puede desplazar :: Una pila vertical: pone las cosas una encima de otra :: Un botón
 escribe :: ¿Por qué el botón Deshacer tiene .disabled(jornada.viajes.isEmpty)? :: Para que se apague cuando no hay nada que deshacer: el botón muestra lo que de verdad se puede hacer, y la persona no toca algo que no hace nada.
 ```
 
@@ -248,7 +248,7 @@ func resumen(viajes: Int, promedio: Double) -> String {
 ```practica
 vf :: Con @State, cuando el dato cambia, SwiftUI vuelve a dibujar la pantalla sola
 vf :: El error de "1 viajes" se arregló cambiando la pantalla, porque era un problema de cómo se veía
-elige :: ¿Qué quiere decir el $ en Stepper(…, value: $valor)? :: Que valor es plata :: Que se le pasa la conexión al dato, para que el Stepper lo pueda cambiar :: Que valor es opcional → Sin $, le pasarías solo el número.
+elige :: ¿Qué quiere decir el $ en Stepper(…, value: $valor)? :: Que valor es plata :: Que se le pasa la conexión al dato, para que el Stepper lo pueda cambiar :: Que valor es opcional
 escribe :: ¿Por qué conviene que una regla como el plural de "viaje" esté en la lógica y no en la pantalla? :: Porque en la lógica se puede probar sin abrir la app, se usa igual desde cualquier pantalla, y la pantalla queda corta y fácil de leer: solo muestra lo que le dan.
 ```
 

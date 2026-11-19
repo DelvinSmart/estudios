@@ -375,7 +375,7 @@ function crearEstilos(tema) {
 ```practica
 vf :: En React Native el motor de diseño es un archivo de TypeScript que exporta los colores, espacios, formas y letras
 vf :: Si useColorScheme() devuelve null, la app no puede dibujar nada
-elige :: ¿Cómo tiene modo claro una app de React Native con motor de diseño? :: Con un archivo de estilos distinto por pantalla :: Con dos juegos de colores en el motor y los estilos armados con el que toca :: Cambiando cada color a mano → crearEstilos(tema) arma el StyleSheet con el tema que dice useColorScheme().
+elige :: ¿Cómo tiene modo claro una app de React Native con motor de diseño? :: Con un archivo de estilos distinto por pantalla :: Con dos juegos de colores en el motor y los estilos armados con el que toca :: Cambiando cada color a mano
 escribe :: Encuentras padding: 13 escrito a mano en un componente. ¿Qué haces y por qué? :: Lo cambio por un valor del motor (espacio.medio, por ejemplo), o agrego ese valor al motor si de verdad hace falta. Si no, ese componente no cambia cuando cambia el motor y la app queda despareja.
 ```
 

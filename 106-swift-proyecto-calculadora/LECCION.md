@@ -127,7 +127,7 @@ enum Tecla {
 ```practica
 vf :: En Swift, las teclas de la calculadora son un enum con valores asociados, como .digito(7) u .operador(.sumar)
 vf :: Como la versión de Swift es nueva, hubo que escribir pruebas distintas a las de React Native y Kotlin
-elige :: ¿Qué hace var n = e en apretar, si Estado es un struct? :: Hace que n y e sean el mismo estado :: Hace una copia: cambiar n no toca e :: Borra el estado → Es el { ...e } de TypeScript, de fábrica.
+elige :: ¿Qué hace var n = e en apretar, si Estado es un struct? :: Hace que n y e sean el mismo estado :: Hace una copia: cambiar n no toca e :: Borra el estado
 escribe :: ¿Qué pasa en Swift si agregas una tecla nueva al enum y no tocas apretar? :: No compila: el switch de apretar no tiene default, así que Swift avisa que falta decir qué hace esa tecla.
 ```
 
@@ -186,7 +186,7 @@ func total(precio: String, cantidad: Int) -> String {
 ```practica
 vf :: Un Decimal creado desde el texto "19.99", por 3, da exactamente 59.97
 vf :: Crear un Decimal desde un Double ya calculado es tan exacto como crearlo desde el texto
-elige :: Probaste una idea que leíste ("el Decimal literal ya trae el error") y en tu Swift no pasó. ¿Qué haces? :: La escribo igual en la clase :: No la escribo: lo que va a una clase se prueba antes :: La borro de internet → Se escribió la trampa que sí se comprobó: desde un Double.
+elige :: Probaste una idea que leíste ("el Decimal literal ya trae el error") y en tu Swift no pasó. ¿Qué haces? :: La escribo igual en la clase :: No la escribo: lo que va a una clase se prueba antes :: La borro de internet
 escribe :: ¿Por qué la calculadora no tiene la trampa del Decimal desde un Double? :: Porque lee los números del texto del visor y crea el Decimal desde ese texto, nunca desde un Double. Y hay una prueba (19,99 × 3 = 59,97) para que nadie lo cambie.
 ```
 
@@ -280,7 +280,7 @@ func operadorEncendido(_ e: Estado) -> Operador? {
 ```practica
 vf :: En SwiftUI, minimumScaleFactor achica la letra para que el número entre, y funciona de fábrica
 vf :: Entre las tres calculadoras cambió todo: el plan, la lógica y las pruebas
-elige :: ¿Qué trampa de los decimales tuvo cada versión? :: Ninguna :: Kotlin: / entre BigDecimal; Swift: crear el Decimal desde un Double :: Las dos, la misma → Cada lenguaje tiene la suya, y las pruebas las atraparon.
+elige :: ¿Qué trampa de los decimales tuvo cada versión? :: Ninguna :: Kotlin: / entre BigDecimal; Swift: crear el Decimal desde un Double :: Las dos, la misma
 escribe :: Si tuvieras que elegir una de las tres para una app nueva, ¿qué preguntarías primero? :: Para quién es: si tiene que estar en Android y en iPhone con un equipo chico, React Native; si es solo para iPhone y necesita lo último de Apple, Swift; si es solo para Android, Kotlin.
 ```
 
@@ -372,7 +372,7 @@ let modulo = Modulo(nombre: "MiModulo", funciones: [
 ```practica
 vf :: Una app de React Native puede tener un módulo nativo escrito en Swift para el iPhone y en Kotlin para Android
 vf :: Si una app es de React Native, no puede usar nada que React Native no traiga
-elige :: ¿Qué usa el módulo de Copiloto en el iPhone para leer el texto de la pantalla? :: El teclado del iPhone :: Vision, la herramienta de Apple para reconocer texto en imágenes :: Una página web → Y ReplayKit para la pantalla compartida.
+elige :: ¿Qué usa el módulo de Copiloto en el iPhone para leer el texto de la pantalla? :: El teclado del iPhone :: Vision, la herramienta de Apple para reconocer texto en imágenes :: Una página web
 escribe :: ¿Por qué saber React Native, Kotlin y Swift juntos es valioso en un equipo chico? :: Porque puedes leer y arreglar las tres partes de una app como Copiloto: la mayoría en TypeScript, y los módulos nativos en Swift y Kotlin para lo que solo el teléfono puede hacer, sin frenarte en el borde.
 ```
 
