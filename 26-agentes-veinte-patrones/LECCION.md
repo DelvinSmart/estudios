@@ -39,6 +39,50 @@ Llamada 1 (índice) ─► compuerta ─✓─► Llamada 2 (borrador) ─► co
 
 **4. Evaluador-optimizador.** Un modelo genera, otro evalúa con criterios, y se repite hasta que pasa. Es la reflexión (2.3) con un evaluador dedicado, y **es el nombre que vas a oír** en las discusiones de arquitectura. Funciona mejor cuando hay criterios claros y cada vuelta mejora de forma medible: traducciones, mejorar consultas de búsqueda, código que tiene que pasar pruebas, documentos con requisitos duros.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una cadena de prompts con compuertas, y una votación
+lenguaje: js
+pide: Completa `cadena(pasos, entrada)`. Cada paso es `{ nombre, hacer, compuerta }`: `hacer` recibe la salida del paso anterior y `compuerta` revisa el resultado (devuelve `true` o `false`). Si una compuerta falla, para y devuelve `{ ok: false, fallo: nombre }`; si todas pasan, `{ ok: true, salida }`. Y `votar(respuestas)`: devuelve la respuesta que más se repite (si empatan, la que apareció primero).
+--- código
+function cadena(pasos, entrada) {
+  // tu código aquí
+}
+
+function votar(respuestas) {
+  // tu código aquí
+}
+--- pruebas
+const PASOS = [
+  { nombre: 'índice', hacer: (t) => `índice de ${t}`, compuerta: (r) => r.startsWith('índice') },
+  { nombre: 'borrador', hacer: (r) => r.toUpperCase(), compuerta: (r) => r.length < 40 },
+];
+prueba('pasa por todo', () => igual(cadena(PASOS, 'gasolina'), { ok: true, salida: 'ÍNDICE DE GASOLINA' }));
+prueba('para en la compuerta que falla', () => igual(cadena(PASOS, 'un tema larguísimo que no entra en el borrador'), { ok: false, fallo: 'borrador' }));
+prueba('la mayoría gana', () => igual(votar(['soporte', 'código', 'soporte']), 'soporte'));
+prueba('empate: la primera', () => igual(votar(['código', 'soporte']), 'código'));
+--- solución
+function cadena(pasos, entrada) {
+  let actual = entrada;
+  for (const paso of pasos) {
+    actual = paso.hacer(actual);
+    if (!paso.compuerta(actual)) return { ok: false, fallo: paso.nombre };
+  }
+  return { ok: true, salida: actual };
+}
+
+function votar(respuestas) {
+  const cuenta = {};
+  let ganadora = null;
+  for (const r of respuestas) {
+    cuenta[r] = (cuenta[r] ?? 0) + 1;
+    if (ganadora === null || cuenta[r] > cuenta[ganadora]) ganadora = r;
+  }
+  return ganadora;
+}
+```
+
 ## 3.2 Patrones de razonamiento
 
 > 🌎 **En la vida real:** no es lo mismo **qué** hace un ajedrecista que **cómo piensa** antes de mover. Estos patrones cambian cómo piensa el agente antes y entre acciones.
@@ -71,6 +115,44 @@ Tarea (analizar 40 mil filas) ─► Agente (escribe un programa que usa herrami
 
 > 🌎 **En la vida real:** en vez de dictarle a tu asistente "suma la fila 1… ahora la 2… ahora la 3", le das una planilla con la fórmula ya escrita. Una orden reemplaza cien.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Reflexion: aprender del intento anterior
+lenguaje: python
+pide: En el patrón Reflexion, después de cada intento fallido el agente guarda una lección corta. Completa `recordar(memoria, leccion, maximo=3)`: devuelve una lista **nueva** con la lección al final, sin repetir una que ya estaba, y con solo las últimas `maximo`. Y `prompt_con_memoria(tarea, memoria)`: devuelve la tarea sola si no hay lecciones; si hay, la tarea, una línea `"Lo que aprendiste antes:"` y cada lección en su línea con `"- "` adelante (separadas con `"\n"`).
+--- código
+def recordar(memoria, leccion, maximo=3):
+    pass  # tu código aquí
+
+
+def prompt_con_memoria(tarea, memoria):
+    pass  # tu código aquí
+--- pruebas
+prueba("agrega al final", lambda: igual(recordar(["a"], "b"), ["a", "b"]))
+prueba("no repite", lambda: igual(recordar(["a", "b"], "a"), ["a", "b"]))
+prueba("guarda solo las últimas", lambda: igual(recordar(["a", "b", "c"], "d"), ["b", "c", "d"]))
+def _no_cambia_la_original():
+    original = ["a"]
+    recordar(original, "b")
+    igual(original, ["a"])
+prueba("no cambia la lista original", _no_cambia_la_original)
+prueba("sin memoria", lambda: igual(prompt_con_memoria("Arregla el error", []), "Arregla el error"))
+prueba("con memoria", lambda: igual(prompt_con_memoria("Arregla el error", ["revisa null"]), "Arregla el error\nLo que aprendiste antes:\n- revisa null"))
+--- solución
+def recordar(memoria, leccion, maximo=3):
+    if leccion in memoria:
+        return list(memoria)
+    return (memoria + [leccion])[-maximo:]
+
+
+def prompt_con_memoria(tarea, memoria):
+    if not memoria:
+        return tarea
+    lineas = [tarea, "Lo que aprendiste antes:"] + [f"- {l}" for l in memoria]
+    return "\n".join(lineas)
+```
+
 ## 3.3 Patrones de coordinación
 
 > 🌎 **En la vida real:** cómo se organiza un equipo de personas: con jefe, pasándose el trabajo de mano en mano, con una pizarra común o discutiendo. Cada agente que agregas es **otro lugar donde se puede perder el contexto**, así que elige lo más simple que sirva.
@@ -90,6 +172,39 @@ Tarea (analizar 40 mil filas) ─► Agente (escribe un programa que usa herrami
 **13. Debate y consenso.** Dos o más agentes **defienden posiciones contrarias**, o resuelven el problema por separado y después concilian. Un juez elige al ganador o sintetiza. El debate mejora la exactitud en preguntas discutidas y atrapa errores que un solo agente no vería, **a dos a cuatro veces el costo**. Úsalo para análisis importantes, no para tareas de todos los días.
 
 > 🌎 **En la vida real:** pedir una segunda opinión médica, o un juicio con fiscal y defensor frente a un juez.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una pizarra compartida
+lenguaje: js
+pide: En el patrón pizarra, los agentes no se hablan: escriben en un objeto común. Completa `escribir(pizarra, agente, clave, valor)`: devuelve una pizarra **nueva** donde `clave` vale `{ valor, autor: agente }`. Pero si la clave ya la escribió **otro** agente, no la pisa: devuelve la pizarra igual. Y `quienEscribio(pizarra)`: una lista sin repetidos de los autores, en el orden en que aparecen.
+--- código
+function escribir(pizarra, agente, clave, valor) {
+  // tu código aquí
+}
+
+function quienEscribio(pizarra) {
+  // tu código aquí
+}
+--- pruebas
+const p1 = escribir({}, 'investigador', 'fuentes', ['ANP']);
+prueba('escribe con su autor', () => igual(p1, { fuentes: { valor: ['ANP'], autor: 'investigador' } }));
+prueba('no cambia la original', () => { const vacia = {}; escribir(vacia, 'a', 'x', 1); igual(vacia, {}); });
+prueba('no pisa lo de otro', () => igual(escribir(p1, 'redactor', 'fuentes', []), p1));
+prueba('sí actualiza lo suyo', () => igual(escribir(p1, 'investigador', 'fuentes', ['ANP', 'IBGE']).fuentes.valor, ['ANP', 'IBGE']));
+prueba('quién escribió', () => igual(quienEscribio(escribir(escribir(p1, 'analista', 'precio', 6), 'investigador', 'fecha', 'hoy')), ['investigador', 'analista']));
+--- solución
+function escribir(pizarra, agente, clave, valor) {
+  const actual = pizarra[clave];
+  if (actual && actual.autor !== agente) return pizarra;
+  return { ...pizarra, [clave]: { valor, autor: agente } };
+}
+
+function quienEscribio(pizarra) {
+  return [...new Set(Object.values(pizarra).map((c) => c.autor))];
+}
+```
 
 ## 3.4 Patrones de control
 
@@ -126,6 +241,35 @@ Entrada ─► Control de entrada (inyección, datos personales, fuera de tema) 
 **17. Terminación y presupuestos.** **Todo ciclo necesita más de una forma de parar.** Pon: un máximo de pasos, un presupuesto de *tokens*, un tiempo máximo de reloj y un techo de costo por ejecución. Detecta llamadas repetidas con los mismos datos y córtalas. Define **qué devuelve** el agente cuando llega a un límite: un resultado parcial con una marca, **no un error que lo rompe todo**. Los presupuestos no son un detalle de seguridad: son lo que hace que el costo sea lo bastante predecible como para publicar.
 
 > 🌎 **En la vida real:** el taxímetro con tope: "llévame, pero si pasa de R$ 50, avísame y paramos".
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Más de una forma de parar
+lenguaje: js
+pide: Completa `debeParar(estado, limites)`. Devuelve el **motivo** para parar, o `null` si puede seguir, revisando en este orden: `'máximo de pasos'` si `estado.pasos >= limites.pasos`; `'presupuesto de tokens'` si `estado.tokens >= limites.tokens`; `'llamada repetida'` si las **últimas 3** llamadas de `estado.llamadas` son iguales (compáralas con `JSON.stringify`).
+--- código
+function debeParar(estado, limites) {
+  // tu código aquí
+}
+--- pruebas
+const LIMITES = { pasos: 10, tokens: 50000 };
+const buscar = { nombre: 'buscar_web', args: { q: 'gasolina' } };
+prueba('puede seguir', () => igual(debeParar({ pasos: 2, tokens: 900, llamadas: [buscar] }, LIMITES), null));
+prueba('máximo de pasos', () => igual(debeParar({ pasos: 10, tokens: 900, llamadas: [] }, LIMITES), 'máximo de pasos'));
+prueba('se acabaron los tokens', () => igual(debeParar({ pasos: 3, tokens: 50001, llamadas: [] }, LIMITES), 'presupuesto de tokens'));
+prueba('la misma llamada tres veces', () => igual(debeParar({ pasos: 3, tokens: 900, llamadas: [buscar, buscar, buscar] }, LIMITES), 'llamada repetida'));
+prueba('dos veces todavía no', () => igual(debeParar({ pasos: 3, tokens: 900, llamadas: [buscar, buscar] }, LIMITES), null));
+prueba('tres llamadas distintas no', () => igual(debeParar({ pasos: 3, tokens: 900, llamadas: [buscar, buscar, { nombre: 'buscar_web', args: { q: 'diésel' } }] }, LIMITES), null));
+--- solución
+function debeParar(estado, limites) {
+  if (estado.pasos >= limites.pasos) return 'máximo de pasos';
+  if (estado.tokens >= limites.tokens) return 'presupuesto de tokens';
+  const ultimas = estado.llamadas.slice(-3).map((l) => JSON.stringify(l));
+  if (ultimas.length === 3 && ultimas.every((l) => l === ultimas[0])) return 'llamada repetida';
+  return null;
+}
+```
 
 ## 3.5 Patrones de conocimiento
 
@@ -165,6 +309,33 @@ Consulta ─► Reescribir (¿buscar? ¿dónde?) ─► Buscar (vectores, palabr
 
 > 💡 **Idea:** esta misma conversación conmigo se compactó varias veces: arriba quedó un resumen con los archivos, las decisiones y lo pendiente. Es este patrón en acción.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Compactar el contexto
+lenguaje: python
+pide: Completa `compactar(mensajes, dejar, resumir)`. Si hay `dejar + 1` mensajes o menos, devuelve la lista igual. Si no, deja el **primero** (las instrucciones), después un mensaje `{"rol": "resumen", "contenido": resumir(viejos)}` con los del medio, y al final los últimos `dejar` mensajes, sin tocarlos. `resumir` recibe la lista de los mensajes viejos.
+--- código
+def compactar(mensajes, dejar, resumir):
+    pass  # tu código aquí
+--- pruebas
+M = [{"rol": "sistema", "contenido": "reglas"}] + [{"rol": "usuario", "contenido": f"m{i}"} for i in range(1, 6)]
+contar = lambda viejos: f"{len(viejos)} mensajes viejos"
+prueba("corta no se toca", lambda: igual(compactar(M[:3], 2, contar), M[:3]))
+prueba("el largo final", lambda: igual(len(compactar(M, 2, contar)), 4))
+prueba("las instrucciones quedan primero", lambda: igual(compactar(M, 2, contar)[0], M[0]))
+prueba("el resumen de los del medio", lambda: igual(compactar(M, 2, contar)[1], {"rol": "resumen", "contenido": "3 mensajes viejos"}))
+prueba("los últimos, tal cual", lambda: igual(compactar(M, 2, contar)[2:], M[-2:]))
+--- solución
+def compactar(mensajes, dejar, resumir):
+    if len(mensajes) <= dejar + 1:
+        return mensajes
+    primero = mensajes[0]
+    viejos = mensajes[1:-dejar]
+    ultimos = mensajes[-dejar:]
+    return [primero, {"rol": "resumen", "contenido": resumir(viejos)}] + ultimos
+```
+
 ## 3.6 Tabla para elegir un patrón
 
 > 🌎 **En la vida real:** la tabla de "qué herramienta para qué tornillo" pegada en la pared del taller. Cuando estás frente al problema, la miras y eliges.
@@ -200,6 +371,34 @@ Los veinticinco patrones en una tabla:
 | Memoria | El agente debe servir entre sesiones | Medio |
 | RAG agéntico | Las respuestas deben apoyarse en tus datos | Medio |
 | Compactar el contexto | Las ejecuciones son largas y la ventana se llena | Bajo |
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Elegir el patrón con la tabla
+lenguaje: js
+pide: Completa `elegirPatron(caso)` usando la tabla de arriba, en este orden: si `caso.irreversible` → `'persona en el ciclo'`; si `caso.categorias` → `'enrutamiento'`; si `caso.partesIndependientes` → `'paralelización'`; si `caso.secuenciaFija` → `'cadena de prompts'`; si `caso.calidadPrimero` → `'evaluador-optimizador'`; y si nada de eso, `'ReAct'`.
+--- código
+function elegirPatron(caso) {
+  // tu código aquí
+}
+--- pruebas
+prueba('reembolsar plata', () => igual(elegirPatron({ irreversible: true, categorias: true }), 'persona en el ciclo'));
+prueba('tipos de pedido', () => igual(elegirPatron({ categorias: true }), 'enrutamiento'));
+prueba('cinco revisiones a la vez', () => igual(elegirPatron({ partesIndependientes: true }), 'paralelización'));
+prueba('índice, borrador, pulir', () => igual(elegirPatron({ secuenciaFija: true }), 'cadena de prompts'));
+prueba('calidad primero', () => igual(elegirPatron({ calidadPrimero: true }), 'evaluador-optimizador'));
+prueba('no se sabe cuántos pasos', () => igual(elegirPatron({}), 'ReAct'));
+--- solución
+function elegirPatron(caso) {
+  if (caso.irreversible) return 'persona en el ciclo';
+  if (caso.categorias) return 'enrutamiento';
+  if (caso.partesIndependientes) return 'paralelización';
+  if (caso.secuenciaFija) return 'cadena de prompts';
+  if (caso.calidadPrimero) return 'evaluador-optimizador';
+  return 'ReAct';
+}
+```
 
 ## ✍️ Práctica: veinte patrones más
 

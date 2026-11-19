@@ -31,6 +31,36 @@ Los patrones son **la forma**. Esta parte es **el contenido**: las decisiones qu
 
 > 💡 **Idea:** tu `AGENTS.md` de este curso es exactamente un *system prompt* por secciones: quién es el alumno, el papel de la IA, el idioma, qué leer antes, cómo dar la clase, qué está prohibido.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un system prompt por secciones
+lenguaje: js
+pide: Completa `armarPrompt(partes)`. Arma el texto con las secciones en este orden fijo: `rol`, `tarea`, `reglas`, `herramientas`, `formato`. Cada una empieza con su título (`## Rol`, `## Tarea`, `## Reglas`, `## Herramientas`, `## Formato`) y debajo su texto; se separan con una línea vacía (`'\n\n'`). Salta las que no vienen. Y si hay `reglas`, al final repítelas: `'Recuerda: '` + las reglas (lo importante, cerca del final).
+--- código
+const ORDEN = [['rol', 'Rol'], ['tarea', 'Tarea'], ['reglas', 'Reglas'], ['herramientas', 'Herramientas'], ['formato', 'Formato']];
+
+function armarPrompt(partes) {
+  // tu código aquí
+}
+--- pruebas
+prueba('solo el rol', () => igual(armarPrompt({ rol: 'Eres el Copiloto.' }), '## Rol\nEres el Copiloto.'));
+prueba('el orden es fijo', () => igual(armarPrompt({ tarea: 'Responde.', rol: 'Eres el Copiloto.' }), '## Rol\nEres el Copiloto.\n\n## Tarea\nResponde.'));
+prueba('las reglas se repiten al final', () => igual(
+  armarPrompt({ rol: 'Eres el Copiloto.', reglas: 'Nunca inventes números.' }),
+  '## Rol\nEres el Copiloto.\n\n## Reglas\nNunca inventes números.\n\nRecuerda: Nunca inventes números.'
+));
+prueba('siempre igual (bueno para el caché)', () => igual(armarPrompt({ rol: 'a', formato: 'b' }), armarPrompt({ formato: 'b', rol: 'a' })));
+--- solución
+const ORDEN = [['rol', 'Rol'], ['tarea', 'Tarea'], ['reglas', 'Reglas'], ['herramientas', 'Herramientas'], ['formato', 'Formato']];
+
+function armarPrompt(partes) {
+  const secciones = ORDEN.filter(([clave]) => partes[clave]).map(([clave, titulo]) => `## ${titulo}\n${partes[clave]}`);
+  if (partes.reglas) secciones.push(`Recuerda: ${partes.reglas}`);
+  return secciones.join('\n\n');
+}
+```
+
 ## 4.2 Diseño de herramientas
 
 > 🌎 **En la vida real:** un control remoto bien hecho tiene un botón para cada cosa, con un dibujo claro. Uno mal hecho tiene un botón que "según cuántas veces lo aprietes" hace cinco cosas distintas. Las herramientas de un agente son su control remoto.
@@ -99,6 +129,39 @@ buscar_pedido = {
 
 Fíjate: dice **cuándo usarla**, **cuándo no** y **qué devuelve**; el `pattern` hace imposible pasar un número mal formado, y avisa que es **solo lectura**.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Errores que enseñan y salidas con límite
+lenguaje: js
+pide: Completa la herramienta `buscarPedido(args)`. Si `args.idPedido` no son exactamente 8 dígitos (`/^\d{8}$/`), devuelve `{ estado: 'error', mensaje: 'El idPedido debe tener 8 dígitos, por ejemplo 12345678' }`: un error que le dice al modelo **cómo** corregir. Si no está en `PEDIDOS`, `{ estado: 'no_encontrado', mensaje: 'No hay un pedido 12345678. Pregúntale al cliente el número' }` (con su número). Si está, `{ estado: 'ok', datos }` con solo los **3 últimos** movimientos.
+--- código
+const PEDIDOS = {
+  '12345678': { cliente: 'Ana', movimientos: ['creado', 'pagado', 'enviado', 'en camino', 'entregado'] },
+};
+
+function buscarPedido(args) {
+  // tu código aquí
+}
+--- pruebas
+prueba('número mal formado', () => igual(buscarPedido({ idPedido: '123' }), { estado: 'error', mensaje: 'El idPedido debe tener 8 dígitos, por ejemplo 12345678' }));
+prueba('sin número', () => igual(buscarPedido({}).estado, 'error'));
+prueba('no existe', () => igual(buscarPedido({ idPedido: '87654321' }), { estado: 'no_encontrado', mensaje: 'No hay un pedido 87654321. Pregúntale al cliente el número' }));
+prueba('encontrado, con salida flaca', () => igual(buscarPedido({ idPedido: '12345678' }), { estado: 'ok', datos: { cliente: 'Ana', movimientos: ['enviado', 'en camino', 'entregado'] } }));
+--- solución
+const PEDIDOS = {
+  '12345678': { cliente: 'Ana', movimientos: ['creado', 'pagado', 'enviado', 'en camino', 'entregado'] },
+};
+
+function buscarPedido(args) {
+  const id = args.idPedido;
+  if (!/^\d{8}$/.test(id ?? '')) return { estado: 'error', mensaje: 'El idPedido debe tener 8 dígitos, por ejemplo 12345678' };
+  const pedido = PEDIDOS[id];
+  if (!pedido) return { estado: 'no_encontrado', mensaje: `No hay un pedido ${id}. Pregúntale al cliente el número` };
+  return { estado: 'ok', datos: { cliente: pedido.cliente, movimientos: pedido.movimientos.slice(-3) } };
+}
+```
+
 ## 4.3 Manejo del estado
 
 > 🌎 **En la vida real:** el marcador del videojuego que guarda la partida: en qué nivel vas, cuántas vidas, qué objetos tienes. Si se apaga la consola, vuelves exactamente ahí. Sin eso, empiezas de cero cada vez.
@@ -161,6 +224,47 @@ def guardar_punto(estado: EstadoAgente) -> None:
 
 > 💡 **Idea:** es TypeScript, como Copiloto (Tema 01). Los tipos aquí hacen el mismo trabajo: si alguien escribe mal un campo, se entera antes de correrlo.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Puntos de guardado con versión
+lenguaje: python
+pide: Completa `guardar_punto(puntos, estado)`: agrega a la lista `puntos` una **copia** del estado (`dict(estado)`) con `"version": 2`, y devuelve cuántos puntos hay. Y `cargar(punto)`: los puntos viejos (`"version"` 1 o sin versión) no tienen el campo `"marcas"`; devuelve una copia con `"marcas": []` y `"version": 2`. Los de versión 2 se devuelven como copia, sin cambios.
+--- código
+def guardar_punto(puntos, estado):
+    pass  # tu código aquí
+
+
+def cargar(punto):
+    pass  # tu código aquí
+--- pruebas
+def _guarda_copia():
+    puntos = []
+    estado = {"paso": 1, "marcas": []}
+    igual(guardar_punto(puntos, estado), 1)
+    estado["paso"] = 2
+    igual(puntos[0]["paso"], 1)
+    igual(puntos[0]["version"], 2)
+prueba("guarda una copia con versión", _guarda_copia)
+prueba("carga uno viejo", lambda: igual(cargar({"version": 1, "paso": 3}), {"version": 2, "paso": 3, "marcas": []}))
+prueba("carga uno sin versión", lambda: igual(cargar({"paso": 3}), {"paso": 3, "marcas": [], "version": 2}))
+prueba("uno nuevo queda igual", lambda: igual(cargar({"version": 2, "paso": 4, "marcas": ["revisar"]}), {"version": 2, "paso": 4, "marcas": ["revisar"]}))
+--- solución
+def guardar_punto(puntos, estado):
+    copia = dict(estado)
+    copia["version"] = 2
+    puntos.append(copia)
+    return len(puntos)
+
+
+def cargar(punto):
+    copia = dict(punto)
+    if copia.get("version", 1) < 2:
+        copia["marcas"] = []
+        copia["version"] = 2
+    return copia
+```
+
 ## 4.4 Salidas ordenadas
 
 > 🌎 **En la vida real:** un formulario del gobierno tiene casillas: "Nombre", "Fecha (DD/MM/AAAA)", "Sexo: M / F". No te dejan escribir una carta libre, porque **una máquina** lo va a procesar. Cuando la salida del modelo la va a leer **código**, necesita casillas.
@@ -173,6 +277,60 @@ def guardar_punto(estado: EstadoAgente) -> None:
 - Esquemas **planos y chicos**. Los esquemas muy anidados y con muchos campos opcionales producen más errores.
 - Para las categorías usa **tipos literales** (una lista cerrada de opciones), no texto libre.
 - Pon una descripción corta en **cada campo**: **la descripción es el prompt de ese campo**.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Validar la salida y reintentar con el error
+lenguaje: js
+pide: Completa `validarRuta(texto)`: el modelo devolvió texto que debería ser JSON con `categoria` (una de `CATEGORIAS`) y `confianza` (un número de 0 a 1). Devuelve `{ ok: true, ruta }` o `{ ok: false, error }` con uno de estos errores: `'no es JSON'`, `'categoria debe ser una de: codigo, soporte, no_claro'`, `'confianza debe ser un número de 0 a 1'`. Después `pedirRuta(llm, maxIntentos)`: llama a `llm(error)` (la primera vez con `null`) y, si no valida, vuelve a llamarlo **pasándole el error**. Devuelve la ruta, o `null` si se acaban los intentos.
+--- código
+const CATEGORIAS = ['codigo', 'soporte', 'no_claro'];
+
+function validarRuta(texto) {
+  // tu código aquí
+}
+
+function pedirRuta(llm, maxIntentos = 3) {
+  // tu código aquí
+}
+--- pruebas
+prueba('bien', () => igual(validarRuta('{"categoria":"soporte","confianza":0.9}'), { ok: true, ruta: { categoria: 'soporte', confianza: 0.9 } }));
+prueba('no es JSON', () => igual(validarRuta('Claro, la categoría es soporte'), { ok: false, error: 'no es JSON' }));
+prueba('categoría inventada', () => igual(validarRuta('{"categoria":"ventas","confianza":0.9}').error, 'categoria debe ser una de: codigo, soporte, no_claro'));
+prueba('confianza fuera de rango', () => igual(validarRuta('{"categoria":"codigo","confianza":9}').error, 'confianza debe ser un número de 0 a 1'));
+prueba('reintenta pasando el error', () => {
+  const recibidos = [];
+  const llm = (error) => { recibidos.push(error); return error ? '{"categoria":"codigo","confianza":0.8}' : 'es código'; };
+  igual(pedirRuta(llm), { categoria: 'codigo', confianza: 0.8 });
+  igual(recibidos, [null, 'no es JSON']);
+});
+prueba('se rinde', () => igual(pedirRuta(() => 'nada', 2), null));
+--- solución
+const CATEGORIAS = ['codigo', 'soporte', 'no_claro'];
+
+function validarRuta(texto) {
+  let ruta;
+  try {
+    ruta = JSON.parse(texto);
+  } catch {
+    return { ok: false, error: 'no es JSON' };
+  }
+  if (!CATEGORIAS.includes(ruta.categoria)) return { ok: false, error: `categoria debe ser una de: ${CATEGORIAS.join(', ')}` };
+  if (typeof ruta.confianza !== 'number' || ruta.confianza < 0 || ruta.confianza > 1) return { ok: false, error: 'confianza debe ser un número de 0 a 1' };
+  return { ok: true, ruta };
+}
+
+function pedirRuta(llm, maxIntentos = 3) {
+  let error = null;
+  for (let i = 0; i < maxIntentos; i++) {
+    const r = validarRuta(llm(error));
+    if (r.ok) return r.ruta;
+    error = r.error;
+  }
+  return null;
+}
+```
 
 ## 4.5 Elegir el modelo
 
@@ -191,6 +349,38 @@ Usa **el modelo más fuerte** para los pasos que necesitan criterio (planificar,
 | Caché de prompts | Los prefijos en caché pueden bajar mucho el costo de entrada de un ciclo. Confirma que el proveedor lo tenga. |
 | Salida estructurada | Que el modelo respete el esquema de fábrica reduce reintentos y código de lectura. |
 | Pensamiento extendido | Útil para planificar y para críticas difíciles. Caro en lo demás. |
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Cuánto cuesta un agente por día
+lenguaje: js
+pide: Los precios se dan por **millón** de *tokens*. Completa `costoPorEjecucion(uso, precio)`: `uso` trae `{ entrada, salida }` en tokens y `precio` trae `{ entrada, salida }` en dólares por millón; redondea a 4 decimales (`Math.round(x * 10000) / 10000`). Y `costoPorDia(uso, precio, ejecuciones)`, redondeado a 2 decimales. Fíjate en las pruebas: en los ciclos manda la **entrada**, porque cada vuelta vuelve a mandar toda la conversación.
+--- código
+function costoPorEjecucion(uso, precio) {
+  // tu código aquí
+}
+
+function costoPorDia(uso, precio, ejecuciones) {
+  // tu código aquí
+}
+--- pruebas
+const PRECIO = { entrada: 3, salida: 15 };
+prueba('una ejecución', () => igual(costoPorEjecucion({ entrada: 40000, salida: 2000 }, PRECIO), 0.15));
+prueba('la entrada pesa más', () => ok(40000 * 3 > 2000 * 15, 'en esta ejecución la entrada cuesta más que la salida'));
+prueba('por día', () => igual(costoPorDia({ entrada: 40000, salida: 2000 }, PRECIO, 1000), 150));
+prueba('un modelo chico', () => igual(costoPorDia({ entrada: 40000, salida: 2000 }, { entrada: 0.25, salida: 1.25 }, 1000), 12.5));
+--- solución
+function costoPorEjecucion(uso, precio) {
+  const dolares = (uso.entrada * precio.entrada + uso.salida * precio.salida) / 1000000;
+  return Math.round(dolares * 10000) / 10000;
+}
+
+function costoPorDia(uso, precio, ejecuciones) {
+  const dolares = ((uso.entrada * precio.entrada + uso.salida * precio.salida) / 1000000) * ejecuciones;
+  return Math.round(dolares * 100) / 100;
+}
+```
 
 ## 4.6 Protocolos: MCP y A2A
 
@@ -215,6 +405,51 @@ El anfitrión corre el agente. Los clientes hablan MCP. Los servidores ofrecen l
 > 💡 **Idea:** yo mismo, Claude Code, uso MCP: el navegador con el que probé esta página, el panel de tareas que ves al trabajar conmigo, todos son servidores MCP.
 
 **A2A** (*Agent-to-Agent*), liderado bajo la **Linux Foundation**, estandariza cómo **agentes hechos con distintos *frameworks*** se descubren y se pasan tareas. Importa en empresas donde agentes de distintos equipos o proveedores tienen que cooperar. **Para un solo producto, un supervisor con llamadas directas a funciones es más simple y más fácil de depurar.**
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Hablar MCP: los mensajes JSON-RPC
+lenguaje: js
+pide: MCP usa mensajes **JSON-RPC 2.0**. Completa `pedido(id, metodo, params)`, que arma `{ jsonrpc: '2.0', id, method: metodo, params }`. Después `listarHerramientas(id)` (el método `'tools/list'`, con `params` vacío `{}`) y `llamarHerramienta(id, nombre, args)` (el método `'tools/call'`, con `params: { name: nombre, arguments: args }`). Y `nombresDe(respuesta)`: de una respuesta como `{ result: { tools: [{ name }] } }`, la lista de nombres.
+--- código
+function pedido(id, metodo, params) {
+  // tu código aquí
+}
+
+function listarHerramientas(id) {
+  // tu código aquí
+}
+
+function llamarHerramienta(id, nombre, args) {
+  // tu código aquí
+}
+
+function nombresDe(respuesta) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un pedido', () => igual(pedido(1, 'ping', {}), { jsonrpc: '2.0', id: 1, method: 'ping', params: {} }));
+prueba('listar', () => igual(listarHerramientas(2), { jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} }));
+prueba('llamar', () => igual(llamarHerramienta(3, 'leer_archivo', { ruta: '/notas.md' }), { jsonrpc: '2.0', id: 3, method: 'tools/call', params: { name: 'leer_archivo', arguments: { ruta: '/notas.md' } } }));
+prueba('los nombres', () => igual(nombresDe({ jsonrpc: '2.0', id: 2, result: { tools: [{ name: 'leer_archivo' }, { name: 'buscar' }] } }), ['leer_archivo', 'buscar']));
+--- solución
+function pedido(id, metodo, params) {
+  return { jsonrpc: '2.0', id, method: metodo, params };
+}
+
+function listarHerramientas(id) {
+  return pedido(id, 'tools/list', {});
+}
+
+function llamarHerramienta(id, nombre, args) {
+  return pedido(id, 'tools/call', { name: nombre, arguments: args });
+}
+
+function nombresDe(respuesta) {
+  return respuesta.result.tools.map((t) => t.name);
+}
+```
 
 ## 4.7 El panorama de los frameworks
 
@@ -242,6 +477,35 @@ El panorama cuando se escribió la guía:
 > 💡 **Idea:** como tú trabajas en TypeScript, **Vercel AI SDK** o **Mastra** serían tu puerta de entrada natural; y el **Claude Agent SDK** si quieres un agente que trabaje con archivos y código.
 
 > 🎤 **Entrevista:** **nadie te contrata por conocer un *framework*.** Te contratan por saber **por qué** el *framework* toma las decisiones que toma. Tienes que poder explicar puntos de guardado, flechas condicionales e interrupciones **sin nombrar ninguna librería**.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Framework o sin framework?
+lenguaje: js
+pide: Completa `sugerir(proyecto)` con la tabla de arriba, en este orden: si `proyecto.paraAprender` → `'sin framework'`; si necesita `'grafo'` (está en `proyecto.necesita`) → `'LangGraph'`; si necesita `'archivos y código'` → `'Claude Agent SDK'`; si `proyecto.lenguaje` es `'typescript'` → `'Vercel AI SDK'`; si es `'python'` → `'Pydantic AI'`; y si no, `'sin framework'`.
+--- código
+function sugerir(proyecto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('para aprender', () => igual(sugerir({ paraAprender: true, necesita: ['grafo'] }), 'sin framework'));
+prueba('grafo con puntos de guardado', () => igual(sugerir({ lenguaje: 'python', necesita: ['grafo'] }), 'LangGraph'));
+prueba('trabaja con archivos y código', () => igual(sugerir({ lenguaje: 'typescript', necesita: ['archivos y código'] }), 'Claude Agent SDK'));
+prueba('una web en TypeScript', () => igual(sugerir({ lenguaje: 'typescript', necesita: [] }), 'Vercel AI SDK'));
+prueba('Python con tipos', () => igual(sugerir({ lenguaje: 'python', necesita: [] }), 'Pydantic AI'));
+prueba('otro lenguaje', () => igual(sugerir({ lenguaje: 'go', necesita: [] }), 'sin framework'));
+--- solución
+function sugerir(proyecto) {
+  const necesita = proyecto.necesita ?? [];
+  if (proyecto.paraAprender) return 'sin framework';
+  if (necesita.includes('grafo')) return 'LangGraph';
+  if (necesita.includes('archivos y código')) return 'Claude Agent SDK';
+  if (proyecto.lenguaje === 'typescript') return 'Vercel AI SDK';
+  if (proyecto.lenguaje === 'python') return 'Pydantic AI';
+  return 'sin framework';
+}
+```
 
 ## ✍️ Práctica: diseñar agentes
 

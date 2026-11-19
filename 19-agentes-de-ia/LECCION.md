@@ -55,6 +55,37 @@ Esta clase está basada en la guía **"Agentic design patterns"** de **Bashiri S
 | Tipos | `nombre: string` | `nombre: str` |
 | "Texto o nada" | `string \| null` | `str \| None` |
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: De JavaScript a Python
+lenguaje: python
+pide: Escribe en Python lo que en JavaScript sería `function agregarApp(lista, app) { lista.push(app); return lista.length; }` y `const saludo = (nombre) => \`Hola ${nombre}\``. `agregar_app(lista, app)` agrega la app al final y devuelve cuántas hay. `saludo(nombre)` devuelve `"Hola Delvin"` con una f-string. Usa la tabla de arriba: `append`, `len` y `f"…{…}"`.
+--- código
+def agregar_app(lista, app):
+    pass  # tu código aquí
+
+
+def saludo(nombre):
+    pass  # tu código aquí
+--- pruebas
+prueba("agrega y cuenta", lambda: igual(agregar_app(["Uber"], "99"), 2))
+def _queda_en_la_lista():
+    apps = ["Uber"]
+    agregar_app(apps, "inDrive")
+    igual(apps, ["Uber", "inDrive"])
+prueba("queda al final de la lista", _queda_en_la_lista)
+prueba("el saludo", lambda: igual(saludo("Delvin"), "Hola Delvin"))
+--- solución
+def agregar_app(lista, app):
+    lista.append(app)
+    return len(lista)
+
+
+def saludo(nombre):
+    return f"Hola {nombre}"
+```
+
 ## Python: La gran diferencia: la sangría
 
 En JavaScript, las **llaves** `{ }` dicen qué está adentro de qué. Python **no usa llaves**: usa **dos puntos** `:` al final de la línea y **4 espacios** hacia adentro en las líneas que le pertenecen.
@@ -78,6 +109,41 @@ Es tu función `isImmutableEarningPlatform` del Tema 01, escrita en Python. Fíj
 > 🌎 **En la vida real:** la sangría es como un índice de un libro con subtítulos corridos hacia la derecha: con solo mirar cuánto está corrido un renglón, sabes de qué capítulo es. En Python, si corres mal un renglón, cambia de capítulo, y el programa hace otra cosa (o da error).
 
 > 🌎 **Otro ejemplo:** Como las sangrías de una lista de compras por sección: "Lácteos" y, corridos hacia adentro, "leche, queso". Lo corrido pertenece a la sección.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La sangría manda
+lenguaje: python
+pide: Completa `es_inmutable(app_id)`, que devuelve `True` si el id está en `["extras", "particular_trips", "my_company"]`, con `in`. Y `nivel(ganancia)`: `"buena"` si es 25 o más, `"normal"` si es 15 o más, y si no `"baja"`. Usa `if`, `elif` y `else`, con los dos puntos y 4 espacios.
+--- código
+def es_inmutable(app_id):
+    pass  # tu código aquí
+
+
+def nivel(ganancia):
+    pass  # tu código aquí
+--- pruebas
+prueba("uber no es inmutable", lambda: igual(es_inmutable("uber"), False))
+prueba("extras sí", lambda: igual(es_inmutable("extras"), True))
+prueba("my_company sí", lambda: igual(es_inmutable("my_company"), True))
+prueba("buena", lambda: igual(nivel(30), "buena"))
+prueba("justo 25 es buena", lambda: igual(nivel(25), "buena"))
+prueba("normal", lambda: igual(nivel(15), "normal"))
+prueba("baja", lambda: igual(nivel(9.5), "baja"))
+--- solución
+def es_inmutable(app_id):
+    return app_id in ["extras", "particular_trips", "my_company"]
+
+
+def nivel(ganancia):
+    if ganancia >= 25:
+        return "buena"
+    elif ganancia >= 15:
+        return "normal"
+    else:
+        return "baja"
+```
 
 ## Python: Las tres cosas de Python que más vas a ver en IA
 
@@ -108,6 +174,41 @@ grandes = [v for v in valores if v > 15]    # [18, 25]
 
 **3. `async` / `await` y `asyncio.gather`** (el `Promise.all` de Python), para hacer varias cosas a la vez.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Listas por comprensión
+lenguaje: python
+pide: Sin `for` largos: cada función se escribe en una línea con una lista por comprensión. `dobles(valores)` devuelve cada valor por 2. `grandes(valores, minimo)` devuelve solo los que son mayores que el mínimo. `nombres(herramientas)` recibe una lista de diccionarios como `{"nombre": "buscar_docs"}` y devuelve solo los nombres.
+--- código
+def dobles(valores):
+    pass  # tu código aquí
+
+
+def grandes(valores, minimo):
+    pass  # tu código aquí
+
+
+def nombres(herramientas):
+    pass  # tu código aquí
+--- pruebas
+prueba("dobles", lambda: igual(dobles([18, 12, 25]), [36, 24, 50]))
+prueba("grandes", lambda: igual(grandes([18, 12, 25], 15), [18, 25]))
+prueba("grandes sin ninguno", lambda: igual(grandes([1, 2], 15), []))
+prueba("nombres", lambda: igual(nombres([{"nombre": "buscar_docs"}, {"nombre": "calculadora"}]), ["buscar_docs", "calculadora"]))
+--- solución
+def dobles(valores):
+    return [v * 2 for v in valores]
+
+
+def grandes(valores, minimo):
+    return [v for v in valores if v > minimo]
+
+
+def nombres(herramientas):
+    return [h["nombre"] for h in herramientas]
+```
+
 ## Python: Cómo correr un archivo de Python
 
 > 🌎 **En la vida real:** Es como prender un electrodoméstico nuevo: lo enchufas (instalas con pip) y aprietas el botón (corres el archivo con python3).
@@ -127,6 +228,35 @@ python3 -m pip install pydantic
 ```
 
 > 📌 **Nota:** `pip` es el `npm` de Python: instala librerías. Y **pytest** es el Jest de Python: corre las pruebas automáticas.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Los comandos de la terminal
+lenguaje: python
+pide: Completa `comando_correr(archivo)`, que devuelve `"python3 prueba.py"` para `"prueba.py"`, pero `None` si el archivo no termina en `.py` (usa `.endswith(".py")`). Y `comando_instalar(libreria)`, que devuelve `"python3 -m pip install pydantic"` para `"pydantic"`.
+--- código
+def comando_correr(archivo):
+    pass  # tu código aquí
+
+
+def comando_instalar(libreria):
+    pass  # tu código aquí
+--- pruebas
+prueba("correr un archivo", lambda: igual(comando_correr("prueba.py"), "python3 prueba.py"))
+prueba("otro archivo", lambda: igual(comando_correr("agente.py"), "python3 agente.py"))
+prueba("no es de Python", lambda: igual(comando_correr("notas.txt"), None))
+prueba("instalar", lambda: igual(comando_instalar("pydantic"), "python3 -m pip install pydantic"))
+--- solución
+def comando_correr(archivo):
+    if not archivo.endswith(".py"):
+        return None
+    return f"python3 {archivo}"
+
+
+def comando_instalar(libreria):
+    return f"python3 -m pip install {libreria}"
+```
 
 ## ✍️ Práctica: Python para leer los ejemplos
 
@@ -194,6 +324,28 @@ Es una **llamada al modelo**. Sería un **agente** si el modelo pudiera decidir 
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Llamada, flujo o agente?
+lenguaje: js
+pide: Completa `queEs(sistema)`. El sistema dice `{ repite, decideElModelo }`. Si no repite nada, es `'llamada'`. Si repite pero el camino lo decide tu código (`decideElModelo: false`), es `'flujo de trabajo'`. Si repite y el modelo decide qué hacer después, es `'agente'`.
+--- código
+function queEs(sistema) {
+  // tu código aquí
+}
+--- pruebas
+prueba('el Copiloto que solo responde', () => igual(queEs({ repite: false, decideElModelo: false }), 'llamada'));
+prueba('pasos fijos en el código', () => igual(queEs({ repite: true, decideElModelo: false }), 'flujo de trabajo'));
+prueba('el modelo dirige el ciclo', () => igual(queEs({ repite: true, decideElModelo: true }), 'agente'));
+prueba('sin ciclo no es agente aunque decida', () => igual(queEs({ repite: false, decideElModelo: true }), 'llamada'));
+--- solución
+function queEs(sistema) {
+  if (!sistema.repite) return 'llamada';
+  return sistema.decideElModelo ? 'agente' : 'flujo de trabajo';
+}
+```
+
 ## 1.2 Las siete piezas de un agente
 
 > 🌎 **En la vida real:** un restaurante. El **chef** decide (el modelo). La **receta y las reglas de la casa** (las instrucciones). Los **cuchillos y el horno** (las herramientas). La **comanda y la despensa** (la memoria). El **ritmo de la cocina**: tomar pedido, cocinar, revisar, servir (el ciclo). El **inspector de higiene** (los controles). Y **el local, la luz y el gas** que mantienen todo andando (el entorno de ejecución).
@@ -221,6 +373,31 @@ Todo agente, con la herramienta que sea, tiene estas siete piezas. Si puedes dib
 | **Ciclo de orquestación** | El código que llama al modelo, ejecuta las herramientas, agrega los resultados, revisa si hay que parar y repite. **Aquí viven los patrones.** |
 | **Controles** (*guardrails*) | Revisiones de entradas, salidas y acciones: reglas, formato, permisos, límites de gasto. |
 | **Entorno de ejecución** (*runtime*) | Lo que lo mantiene vivo en producción: registros, puntos de guardado, reintentos, colas, cajas aisladas y la posibilidad de **detenerlo**. |
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Las piezas que faltan
+lenguaje: js
+pide: Completa `piezasQueFaltan(agente)`. El agente es un objeto con algunas de las siete piezas: `modelo`, `instrucciones`, `herramientas`, `memoria`, `ciclo`, `controles` y `entorno`. Devuelve una lista con las que **faltan**, en ese orden. Una pieza falta si no está o si vale `null`.
+--- código
+const PIEZAS = ['modelo', 'instrucciones', 'herramientas', 'memoria', 'ciclo', 'controles', 'entorno'];
+
+function piezasQueFaltan(agente) {
+  // tu código aquí
+}
+--- pruebas
+prueba('completo', () => igual(piezasQueFaltan({ modelo: 'm', instrucciones: 'i', herramientas: [], memoria: {}, ciclo: 'c', controles: [], entorno: 'e' }), []));
+prueba('sin controles ni entorno', () => igual(piezasQueFaltan({ modelo: 'm', instrucciones: 'i', herramientas: [], memoria: {}, ciclo: 'c' }), ['controles', 'entorno']));
+prueba('null cuenta como que falta', () => igual(piezasQueFaltan({ modelo: null }), PIEZAS));
+prueba('una lista vacía de herramientas sí está', () => ok(!piezasQueFaltan({ herramientas: [] }).includes('herramientas')));
+--- solución
+const PIEZAS = ['modelo', 'instrucciones', 'herramientas', 'memoria', 'ciclo', 'controles', 'entorno'];
+
+function piezasQueFaltan(agente) {
+  return PIEZAS.filter((p) => agente[p] === undefined || agente[p] === null);
+}
+```
 
 ## 1.3 El ciclo del agente, paso a paso
 
@@ -284,6 +461,48 @@ def correr_agente(tarea, herramientas, max_pasos=10):
 
 **Esa es toda la idea.** El resto de la guía son variaciones de este ciclo: qué pones en los mensajes, cómo eliges y construyes las herramientas, cómo decides que terminó, y cómo lo mantienes seguro, barato y observable.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Tu primer ciclo de agente
+lenguaje: js
+pide: Completa `correrAgente(tarea, herramientas, llm, maxPasos)`. Aquí `llm(mensajes)` es un modelo **de mentira** que devuelve `{ texto, llamadas }`. Repite hasta `maxPasos` veces: llama al modelo con los mensajes; si no hay llamadas, devuelve `{ fin: 'listo', texto }`. Si hay, corre cada herramienta (`herramientas[llamada.nombre](llamada.args)`) y agrega `{ rol: 'herramienta', contenido: resultado }` a los mensajes. Si se acaban los pasos, devuelve `{ fin: 'maximo' }`.
+--- código
+function correrAgente(tarea, herramientas, llm, maxPasos = 10) {
+  const mensajes = [{ rol: 'usuario', contenido: tarea }];
+  // tu código aquí
+}
+--- pruebas
+const sumar = ({ a, b }) => a + b;
+// Este modelo de mentira pide sumar una vez y, cuando ve el resultado, responde.
+const llmQueSuma = (mensajes) => {
+  const visto = mensajes.find((m) => m.rol === 'herramienta');
+  if (visto) return { texto: `Son ${visto.contenido}`, llamadas: [] };
+  return { texto: '', llamadas: [{ nombre: 'sumar', args: { a: 18, b: 12 } }] };
+};
+prueba('responde sin herramientas', () => igual(correrAgente('hola', {}, () => ({ texto: 'Hola', llamadas: [] })), { fin: 'listo', texto: 'Hola' }));
+prueba('usa la herramienta y responde', () => igual(correrAgente('¿18 + 12?', { sumar }, llmQueSuma), { fin: 'listo', texto: 'Son 30' }));
+prueba('para en el máximo', () => igual(correrAgente('x', { sumar }, () => ({ texto: '', llamadas: [{ nombre: 'sumar', args: { a: 1, b: 1 } }] }), 3), { fin: 'maximo' }));
+prueba('llama al modelo como mucho maxPasos veces', () => {
+  let veces = 0;
+  correrAgente('x', { sumar }, () => { veces++; return { texto: '', llamadas: [{ nombre: 'sumar', args: { a: 1, b: 1 } }] }; }, 4);
+  igual(veces, 4);
+});
+--- solución
+function correrAgente(tarea, herramientas, llm, maxPasos = 10) {
+  const mensajes = [{ rol: 'usuario', contenido: tarea }];
+  for (let paso = 0; paso < maxPasos; paso++) {
+    const respuesta = llm(mensajes);
+    if (respuesta.llamadas.length === 0) return { fin: 'listo', texto: respuesta.texto };
+    for (const llamada of respuesta.llamadas) {
+      const resultado = herramientas[llamada.nombre](llamada.args);
+      mensajes.push({ rol: 'herramienta', contenido: resultado });
+    }
+  }
+  return { fin: 'maximo' };
+}
+```
+
 ## 1.4 Cuándo construir un agente (y cuándo no)
 
 > 🌎 **En la vida real:** no contratas a un arquitecto para colgar un cuadro. Cada nivel de ayuda cuesta más. Los agentes cambian **previsibilidad por capacidad**: cada paso agrega demora, costo y un lugar nuevo donde fallar.
@@ -310,6 +529,34 @@ Si alguna respuesta es "no", **construye primero un flujo de trabajo**.
 
 > 📌 **Nota de producción:** los mejores equipos empiezan con **una sola llamada** al modelo, la miden, y solo agregan complejidad cuando la medición dice que lo simple falla. La complejidad es un costo que pagas para siempre. La capacidad que agregas porque una demo se veía impresionante es la más cara de todas.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La escalera: qué construir
+lenguaje: js
+pide: Completa `queConstruir(caso)`. Primero las tres preguntas: si `caso.sabesCuandoTermina`, `caso.puedeVerificarse` o `caso.puedesPagarLoPeor` es `false`, devuelve `'flujo de trabajo'`. Si pasan las tres: con `caso.pasosFijos` → `'flujo de trabajo'`; con `caso.pocasCategorias` → `'enrutamiento'`; si no → `'agente'`. Y si `caso.errorCaro` es `true`, agrega `' + aprobación'` al final, sea cual sea.
+--- código
+function queConstruir(caso) {
+  // tu código aquí
+}
+--- pruebas
+const bien = { sabesCuandoTermina: true, puedeVerificarse: true, puedesPagarLoPeor: true };
+prueba('pasos fijos', () => igual(queConstruir({ ...bien, pasosFijos: true }), 'flujo de trabajo'));
+prueba('pocas categorías', () => igual(queConstruir({ ...bien, pocasCategorias: true }), 'enrutamiento'));
+prueba('pasos que no se saben', () => igual(queConstruir({ ...bien }), 'agente'));
+prueba('no sabe cuándo termina', () => igual(queConstruir({ ...bien, puedeVerificarse: false }), 'flujo de trabajo'));
+prueba('error caro', () => igual(queConstruir({ ...bien, errorCaro: true }), 'agente + aprobación'));
+--- solución
+function queConstruir(caso) {
+  let tipo;
+  if (!caso.sabesCuandoTermina || !caso.puedeVerificarse || !caso.puedesPagarLoPeor) tipo = 'flujo de trabajo';
+  else if (caso.pasosFijos) tipo = 'flujo de trabajo';
+  else if (caso.pocasCategorias) tipo = 'enrutamiento';
+  else tipo = 'agente';
+  return caso.errorCaro ? `${tipo} + aprobación` : tipo;
+}
+```
+
 ## 1.5 El vocabulario que vas a ver siempre
 
 > 🌎 **En la vida real:** en un taller se habla de "alineación", "balanceo", "escáner". Si no conoces las palabras, no entiendes al mecánico. Estas son las palabras del taller de agentes.
@@ -329,6 +576,38 @@ Si alguna respuesta es "no", **construye primero un flujo de trabajo**.
 | **Orquestador** | La pieza (código o modelo) que decide qué paso, herramienta o agente corre después. |
 
 > 📌 **Nota:** un *token* es un pedacito de texto (más o menos tres cuartos de una palabra). Los modelos cobran y se limitan por *tokens*.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: ¿Cabe en la ventana de contexto?
+lenguaje: js
+pide: Un *token* es más o menos tres cuartos de palabra. Completa `tokensDe(texto)`: cuenta las palabras (separadas por espacios, sin contar los vacíos) y divide entre 0,75, redondeando hacia arriba con `Math.ceil`. Y `cabe(mensajes, ventana)`: suma los tokens del `contenido` de todos los mensajes y dice si es menor o igual que la ventana.
+--- código
+function tokensDe(texto) {
+  // tu código aquí
+}
+
+function cabe(mensajes, ventana) {
+  // tu código aquí
+}
+--- pruebas
+prueba('tres palabras son 4 tokens', () => igual(tokensDe('hola qué tal'), 4));
+prueba('espacios de más no cuentan', () => igual(tokensDe('  hola   mundo '), 3));
+prueba('vacío', () => igual(tokensDe(''), 0));
+prueba('cabe', () => igual(cabe([{ contenido: 'hola qué tal' }, { contenido: 'bien' }], 6), true));
+prueba('no cabe', () => igual(cabe([{ contenido: 'hola qué tal' }, { contenido: 'bien' }], 5), false));
+--- solución
+function tokensDe(texto) {
+  const palabras = texto.split(' ').filter((p) => p !== '');
+  return Math.ceil(palabras.length / 0.75);
+}
+
+function cabe(mensajes, ventana) {
+  const total = mensajes.reduce((suma, m) => suma + tokensDe(m.contenido), 0);
+  return total <= ventana;
+}
+```
 
 ## ✍️ Práctica: qué es un agente
 

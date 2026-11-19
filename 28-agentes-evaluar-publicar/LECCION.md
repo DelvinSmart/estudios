@@ -23,6 +23,40 @@ No puedes mejorar lo que no puedes medir, y los agentes son más difíciles de m
 - Tu evaluación tiene que juzgar **el resultado final**, **el camino** y **cuánto costó** llegar.
 - Tiene que tolerar la **variación**: una sola ejecución no dice casi nada. **Corre cada caso varias veces** y mira la distribución.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Una sola ejecución no dice nada
+lenguaje: js
+pide: El mismo caso se corrió varias veces; cada resultado es `true` (salió bien) o `false`. Completa `resumen(resultados)`, que devuelve `{ exitos, total, tasa }`, con la tasa redondeada a 2 decimales (y `0` si no hay resultados). Y `esInestable(resultados)`: `true` si hay de los dos (algunos bien y algunos mal), porque eso es lo que una sola ejecución esconde.
+--- código
+function resumen(resultados) {
+  // tu código aquí
+}
+
+function esInestable(resultados) {
+  // tu código aquí
+}
+--- pruebas
+prueba('tres de cuatro', () => igual(resumen([true, true, false, true]), { exitos: 3, total: 4, tasa: 0.75 }));
+prueba('redondea', () => igual(resumen([true, false, false]).tasa, 0.33));
+prueba('sin resultados', () => igual(resumen([]), { exitos: 0, total: 0, tasa: 0 }));
+prueba('inestable', () => igual(esInestable([true, false, true]), true));
+prueba('siempre bien no es inestable', () => igual(esInestable([true, true, true]), false));
+prueba('siempre mal tampoco', () => igual(esInestable([false, false]), false));
+--- solución
+function resumen(resultados) {
+  const exitos = resultados.filter((r) => r).length;
+  const total = resultados.length;
+  const tasa = total === 0 ? 0 : Math.round((exitos / total) * 100) / 100;
+  return { exitos, total, tasa };
+}
+
+function esInestable(resultados) {
+  return resultados.includes(true) && resultados.includes(false);
+}
+```
+
 ## 5.2 Las capas de evaluación
 
 > 🌎 **En la vida real:** en una fábrica de autos se revisa cada tornillo (unidad), cada paso de la línea de montaje (camino), el auto terminado en la pista (resultado), choques de prueba (seguridad) y después las quejas de los clientes (en línea).
@@ -38,6 +72,35 @@ No puedes mejorar lo que no puedes medir, y los agentes son más difíciles de m
 | **En línea** | El comportamiento en producción a lo largo del tiempo | Ejecuciones de muestra calificadas todo el tiempo, más señales de usuarios: pulgares, ediciones, reintentos, escalamientos. |
 
 > 💡 **Idea:** el nivel de unidad es lo que ya conoces del Tema 02 y 04: pruebas que corren en el CI en cada subida.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Evaluar la trayectoria, no solo la respuesta
+lenguaje: js
+pide: Una trayectoria es la lista de herramientas que usó el agente, en orden, como `['buscar', 'responder']`. Completa `revisarTrayectoria(pasos, maxBusquedas)`, que devuelve la lista de problemas (vacía si está bien), revisando en este orden: `'respondió sin buscar'` si `'responder'` aparece antes de cualquier `'buscar'` (o no hay ninguno); `'borró sin confirmar'` si hay un `'borrar'` y justo antes no hubo un `'confirmar'`; `'demasiadas búsquedas'` si hay más de `maxBusquedas` `'buscar'`.
+--- código
+function revisarTrayectoria(pasos, maxBusquedas = 3) {
+  // tu código aquí
+}
+--- pruebas
+prueba('un buen camino', () => igual(revisarTrayectoria(['buscar', 'buscar', 'responder']), []));
+prueba('respondió de memoria', () => igual(revisarTrayectoria(['responder']), ['respondió sin buscar']));
+prueba('borró sin confirmar', () => igual(revisarTrayectoria(['buscar', 'borrar', 'responder']), ['borró sin confirmar']));
+prueba('confirmó y borró', () => igual(revisarTrayectoria(['buscar', 'confirmar', 'borrar', 'responder']), []));
+prueba('demasiadas búsquedas', () => igual(revisarTrayectoria(['buscar', 'buscar', 'buscar', 'buscar', 'responder']), ['demasiadas búsquedas']));
+prueba('varios problemas', () => igual(revisarTrayectoria(['responder', 'borrar'], 3), ['respondió sin buscar', 'borró sin confirmar']));
+--- solución
+function revisarTrayectoria(pasos, maxBusquedas = 3) {
+  const problemas = [];
+  const primeraBusqueda = pasos.indexOf('buscar');
+  const respuesta = pasos.indexOf('responder');
+  if (respuesta !== -1 && (primeraBusqueda === -1 || respuesta < primeraBusqueda)) problemas.push('respondió sin buscar');
+  if (pasos.some((p, i) => p === 'borrar' && pasos[i - 1] !== 'confirmar')) problemas.push('borró sin confirmar');
+  if (pasos.filter((p) => p === 'buscar').length > maxBusquedas) problemas.push('demasiadas búsquedas');
+  return problemas;
+}
+```
 
 ## 5.3 Un modelo como juez, bien hecho
 
@@ -77,6 +140,32 @@ Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "r
 
 - Las **tres comillas** `"""…"""` crean un texto de varias líneas, como las comillas invertidas de JavaScript.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un juez que no se deja engañar por el orden
+lenguaje: python
+pide: El juez tiene **sesgo de posición**: tiende a preferir la primera respuesta. Completa `juez_justo(juez, a, b)`: llama a `juez(primera, segunda)` **dos veces**, una con `(a, b)` y otra con `(b, a)`. El juez devuelve `"primera"` o `"segunda"`. Si en los dos órdenes gana la misma respuesta, devuelve `"a"` o `"b"`; si cambia según el orden, devuelve `"empate"`.
+--- código
+def juez_justo(juez, a, b):
+    pass  # tu código aquí
+--- pruebas
+def juez_que_prefiere_lo_largo(x, y):
+    return "primera" if len(x) >= len(y) else "segunda"
+
+def juez_que_prefiere_la_primera(x, y):
+    return "primera"
+
+prueba("gana la larga en los dos órdenes", lambda: igual(juez_justo(juez_que_prefiere_lo_largo, "corta", "una respuesta larga"), "b"))
+prueba("también si va primero", lambda: igual(juez_justo(juez_que_prefiere_lo_largo, "una respuesta larga", "corta"), "a"))
+prueba("el sesgo de posición da empate", lambda: igual(juez_justo(juez_que_prefiere_la_primera, "x", "y"), "empate"))
+--- solución
+def juez_justo(juez, a, b):
+    ida = "a" if juez(a, b) == "primera" else "b"
+    vuelta = "b" if juez(b, a) == "primera" else "a"
+    return ida if ida == vuelta else "empate"
+```
+
 ## 5.4 Las métricas que importan
 
 > 🌎 **En la vida real:** en una app para conductores, como Copiloto, no basta con "cuánto gané". Importa cuánto gané **por hora**, cuánto gasté en combustible **por viaje**, cuántos viajes cancelé. Con agentes es igual: un solo número engaña.
@@ -96,6 +185,44 @@ Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "r
 
 > 💡 **Idea:** ¿por qué pass^k baja tan rápido? Si un agente acierta el 90% de las veces, que acierte **3 veces seguidas** es 0,9 × 0,9 × 0,9 = 73%. Y **10 veces seguidas**, apenas 35%.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: pass@k, pass^k y el costo por éxito
+lenguaje: python
+pide: Si un agente acierta con probabilidad `p`, `pass_arroba_k(p, k)` (al menos uno de k sale bien) es `1 - (1 - p) ** k` y `pass_todos_k(p, k)` (los k salen bien) es `p ** k`. Redondea los dos a 3 decimales con `round`. Y `costo_por_exito(costo_total, exitos)`: el costo dividido entre los **éxitos** (no entre las ejecuciones), a 2 decimales, o `None` si no hubo ninguno.
+--- código
+def pass_arroba_k(p, k):
+    pass  # tu código aquí
+
+
+def pass_todos_k(p, k):
+    pass  # tu código aquí
+
+
+def costo_por_exito(costo_total, exitos):
+    pass  # tu código aquí
+--- pruebas
+prueba("pass@3 con 90%", lambda: igual(pass_arroba_k(0.9, 3), 0.999))
+prueba("pass^3 con 90% baja rápido", lambda: igual(pass_todos_k(0.9, 3), 0.729))
+prueba("pass^10", lambda: igual(pass_todos_k(0.9, 10), 0.349))
+prueba("costo por éxito", lambda: igual(costo_por_exito(93.0, 60), 1.55))
+prueba("sin éxitos", lambda: igual(costo_por_exito(10.0, 0), None))
+--- solución
+def pass_arroba_k(p, k):
+    return round(1 - (1 - p) ** k, 3)
+
+
+def pass_todos_k(p, k):
+    return round(p ** k, 3)
+
+
+def costo_por_exito(costo_total, exitos):
+    if exitos == 0:
+        return None
+    return round(costo_total / exitos, 2)
+```
+
 ## 5.5 Armar el set de evaluación
 
 > 🌎 **En la vida real:** un profesor arma su banco de preguntas de examen con los errores que más vio en sus alumnos. Cada año agrega las nuevas trampas en las que cayeron.
@@ -108,6 +235,30 @@ Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "r
 - Guarda un **set aparte que quien escribe el prompt nunca ve** (para no "estudiar para el examen").
 - **Córrelo en el CI y bloquea la publicación** si bajan la tasa de éxito o sube la de violaciones de seguridad.
 - **Ponle versión al set junto con el código.**
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El CI que bloquea la publicación
+lenguaje: js
+pide: Completa `puedePublicar(antes, ahora)`. Cada uno trae `{ tasaDeExito, violaciones }` del set de evaluación. Devuelve `{ publicar: true }` o `{ publicar: false, motivo }`. Bloquea con `'subieron las violaciones de seguridad'` si `ahora.violaciones > antes.violaciones` (se revisa primero), o con `'bajó la tasa de éxito'` si bajó más de 0,02 (`antes.tasaDeExito - ahora.tasaDeExito > 0.02`).
+--- código
+function puedePublicar(antes, ahora) {
+  // tu código aquí
+}
+--- pruebas
+prueba('igual o mejor', () => igual(puedePublicar({ tasaDeExito: 0.9, violaciones: 0 }, { tasaDeExito: 0.92, violaciones: 0 }), { publicar: true }));
+prueba('baja un poco: pasa', () => igual(puedePublicar({ tasaDeExito: 0.9, violaciones: 0 }, { tasaDeExito: 0.89, violaciones: 0 }), { publicar: true }));
+prueba('baja mucho', () => igual(puedePublicar({ tasaDeExito: 0.9, violaciones: 0 }, { tasaDeExito: 0.85, violaciones: 0 }), { publicar: false, motivo: 'bajó la tasa de éxito' }));
+prueba('una violación nueva', () => igual(puedePublicar({ tasaDeExito: 0.9, violaciones: 0 }, { tasaDeExito: 0.95, violaciones: 1 }), { publicar: false, motivo: 'subieron las violaciones de seguridad' }));
+prueba('la seguridad se revisa primero', () => igual(puedePublicar({ tasaDeExito: 0.9, violaciones: 0 }, { tasaDeExito: 0.5, violaciones: 2 }).motivo, 'subieron las violaciones de seguridad'));
+--- solución
+function puedePublicar(antes, ahora) {
+  if (ahora.violaciones > antes.violaciones) return { publicar: false, motivo: 'subieron las violaciones de seguridad' };
+  if (antes.tasaDeExito - ahora.tasaDeExito > 0.02) return { publicar: false, motivo: 'bajó la tasa de éxito' };
+  return { publicar: true };
+}
+```
 
 ## 5.6 Rastreo y observabilidad
 
@@ -137,6 +288,48 @@ En ese rastro se ve de un vistazo **el tramo más caro** (el investigador) y **l
 - **Qué capturar:** el prompt exacto y las definiciones de herramientas enviadas (con versión), el modelo y sus parámetros, *tokens* y costo, entradas y salidas de herramientas, demora por tramo, la salida final, los puntajes del evaluador y cualquier opinión del usuario ligada al rastro.
 - **Con qué:** **OpenTelemetry** con sus convenciones para IA generativa como base neutral, más una capa especializada como **Langfuse**, **LangSmith**, **Arize Phoenix**, **Braintrust** o **Weights and Biases Weave** para ver rastros, correr evaluaciones y administrar prompts.
 - **El hábito:** revisa rastros **cada semana**. Toma cinco éxitos y cinco fallas. **Cada revisión debe producir al menos un caso de evaluación nuevo o una mejora de herramienta.**
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Leer un rastro: el total y el tramo más caro
+lenguaje: js
+pide: Un rastro es un árbol: cada tramo es `{ nombre, tokens, hijos }` (los `hijos` son más tramos, o una lista vacía). Completa `totalTokens(tramo)`: sus tokens más los de todos sus hijos, nietos, etc. (una función que se llama a sí misma). Y `masCaro(tramo)`: el **nombre** del hijo directo que suma más tokens (con sus hijos adentro).
+--- código
+function totalTokens(tramo) {
+  // tu código aquí
+}
+
+function masCaro(tramo) {
+  // tu código aquí
+}
+--- pruebas
+const RASTRO = {
+  nombre: 'ejecución', tokens: 0, hijos: [
+    { nombre: 'supervisor.planificar', tokens: 6000, hijos: [] },
+    { nombre: 'trabajador.investigador', tokens: 0, hijos: [
+      { nombre: 'llm', tokens: 40000, hijos: [] },
+      { nombre: 'llm', tokens: 31000, hijos: [] },
+    ] },
+    { nombre: 'supervisor.sintetizar', tokens: 55000, hijos: [] },
+  ],
+};
+prueba('un tramo solo', () => igual(totalTokens({ nombre: 'x', tokens: 5, hijos: [] }), 5));
+prueba('el total de la ejecución', () => igual(totalTokens(RASTRO), 132000));
+prueba('el más caro cuenta a sus hijos', () => igual(masCaro(RASTRO), 'trabajador.investigador'));
+--- solución
+function totalTokens(tramo) {
+  return tramo.tokens + tramo.hijos.reduce((suma, hijo) => suma + totalTokens(hijo), 0);
+}
+
+function masCaro(tramo) {
+  let mejor = null;
+  for (const hijo of tramo.hijos) {
+    if (!mejor || totalTokens(hijo) > totalTokens(mejor)) mejor = hijo;
+  }
+  return mejor ? mejor.nombre : null;
+}
+```
 
 ## ✍️ Práctica: evaluar agentes
 
@@ -189,6 +382,47 @@ Cliente (web, app, Slack, API) ─► Capa de API (autentica, valida, encola, tr
 - **Almacén de estado.** Puntos de guardado en una base de datos, archivos en almacenamiento de objetos, y una base de vectores para la memoria semántica.
 - **Observabilidad.** Cada ejecución emite rastros, métricas y registros **a un solo sistema**.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La API devuelve un id al instante
+lenguaje: js
+pide: Completa `crearEjecucion(cola, pedido, id)`: si `pedido.tarea` está vacío (o solo tiene espacios), devuelve `{ error: 'falta la tarea' }` y no encola nada. Si no, agrega `{ id, tarea, estado: 'en cola' }` al final de la cola y devuelve **enseguida** `{ id, estado: 'en cola' }`, sin hacer el trabajo. Y `tomarTrabajo(cola)`: el trabajador saca el **primero** de la cola (`shift`), le pone `estado: 'corriendo'` y lo devuelve; o `null` si no hay.
+--- código
+function crearEjecucion(cola, pedido, id) {
+  // tu código aquí
+}
+
+function tomarTrabajo(cola) {
+  // tu código aquí
+}
+--- pruebas
+prueba('devuelve el id enseguida', () => igual(crearEjecucion([], { tarea: 'informe' }, 'a1'), { id: 'a1', estado: 'en cola' }));
+prueba('queda en la cola', () => { const cola = []; crearEjecucion(cola, { tarea: 'informe' }, 'a1'); igual(cola, [{ id: 'a1', tarea: 'informe', estado: 'en cola' }]); });
+prueba('sin tarea', () => { const cola = []; igual(crearEjecucion(cola, { tarea: '   ' }, 'a2'), { error: 'falta la tarea' }); igual(cola.length, 0); });
+prueba('el primero que llegó', () => {
+  const cola = [];
+  crearEjecucion(cola, { tarea: 'uno' }, 'a1');
+  crearEjecucion(cola, { tarea: 'dos' }, 'a2');
+  igual(tomarTrabajo(cola), { id: 'a1', tarea: 'uno', estado: 'corriendo' });
+  igual(cola.length, 1);
+});
+prueba('cola vacía', () => igual(tomarTrabajo([]), null));
+--- solución
+function crearEjecucion(cola, pedido, id) {
+  const tarea = String(pedido.tarea ?? '').trim();
+  if (!tarea) return { error: 'falta la tarea' };
+  cola.push({ id, tarea, estado: 'en cola' });
+  return { id, estado: 'en cola' };
+}
+
+function tomarTrabajo(cola) {
+  const trabajo = cola.shift();
+  if (!trabajo) return null;
+  return { ...trabajo, estado: 'corriendo' };
+}
+```
+
 ## 6.2 Ejecuciones largas y asíncronas
 
 > 🌎 **En la vida real:** dejas el carro en el taller. Te dan un **número de orden**, te mandan mensajes ("ya revisamos los frenos", "falta la pieza") y si el mecánico de la mañana se va, **el de la tarde sigue desde donde quedó**, porque está todo anotado en la orden.
@@ -205,6 +439,45 @@ Las ejecuciones duran de **segundos a horas**. Diseña para eso:
 
 > 💡 **Idea:** "idempotente" quiere decir que hacerlo una vez o diez veces da el mismo resultado. Como el botón del ascensor: apretarlo cinco veces no trae cinco ascensores. Un pago **sin** clave de idempotencia, reintentado, puede cobrar dos veces.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Idempotencia: un reintento nunca paga dos veces
+lenguaje: js
+pide: Completa `crearReembolsos()`, que devuelve una función `reembolsar(clave, monto, pagar)`. La primera vez que llega una `clave`, llama a `pagar(monto)` y guarda su resultado. Si la misma clave llega otra vez (un reintento), **no** vuelve a pagar: devuelve el resultado guardado. Usa un `Map`.
+--- código
+function crearReembolsos() {
+  // tu código aquí
+}
+--- pruebas
+prueba('paga una vez', () => {
+  let pagos = 0;
+  const reembolsar = crearReembolsos();
+  const pagar = (m) => { pagos++; return `pagado ${m}`; };
+  igual(reembolsar('ticket-7', 480, pagar), 'pagado 480');
+  igual(reembolsar('ticket-7', 480, pagar), 'pagado 480');
+  igual(pagos, 1);
+});
+prueba('otra clave sí paga', () => {
+  let pagos = 0;
+  const reembolsar = crearReembolsos();
+  const pagar = () => ++pagos;
+  reembolsar('a', 10, pagar);
+  reembolsar('b', 10, pagar);
+  igual(pagos, 2);
+});
+--- solución
+function crearReembolsos() {
+  const hechos = new Map();
+  return function reembolsar(clave, monto, pagar) {
+    if (hechos.has(clave)) return hechos.get(clave);
+    const resultado = pagar(monto);
+    hechos.set(clave, resultado);
+    return resultado;
+  };
+}
+```
+
 ## 6.3 Confiabilidad
 
 > 🌎 **En la vida real:** un buen conductor lleva rueda de auxilio, sabe un camino alternativo si la avenida está cortada, y no se queda esperando para siempre en un semáforo roto.
@@ -220,6 +493,36 @@ Las ejecuciones duran de **segundos a horas**. Diseña para eso:
 - **Resultados parciales.** Cuando una ejecución llega a un límite, devuelve lo que tiene con una marca clara.
 
 > 💡 **Idea:** "espera exponencial" es esperar 1 segundo, después 2, después 4, después 8… El "azar" es sumarle unos milisegundos al azar para que mil clientes no reintenten **todos en el mismo instante**.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Reintentos con espera exponencial
+lenguaje: python
+pide: Completa `se_reintenta(codigo)`: `True` para los errores pasajeros (`429`, el límite de uso, y del `500` al `599`); `False` para los demás, como `400`, que van a fallar igual. Y `esperas(intentos, base, tope, azar)`: la lista de segundos a esperar antes de cada reintento: `base`, `base*2`, `base*4`…, sin pasar del `tope` (`min`), y a cada una se le suma `azar()`, redondeado a 2 decimales.
+--- código
+def se_reintenta(codigo):
+    pass  # tu código aquí
+
+
+def esperas(intentos, base, tope, azar):
+    pass  # tu código aquí
+--- pruebas
+prueba("429 sí", lambda: igual(se_reintenta(429), True))
+prueba("503 sí", lambda: igual(se_reintenta(503), True))
+prueba("400 no: va a fallar igual", lambda: igual(se_reintenta(400), False))
+prueba("200 no", lambda: igual(se_reintenta(200), False))
+prueba("exponencial", lambda: igual(esperas(4, 1, 30, lambda: 0), [1, 2, 4, 8]))
+prueba("con tope", lambda: igual(esperas(6, 1, 10, lambda: 0), [1, 2, 4, 8, 10, 10]))
+prueba("con azar", lambda: igual(esperas(2, 1, 30, lambda: 0.25), [1.25, 2.25]))
+--- solución
+def se_reintenta(codigo):
+    return codigo == 429 or 500 <= codigo <= 599
+
+
+def esperas(intentos, base, tope, azar):
+    return [round(min(base * 2 ** i, tope) + azar(), 2) for i in range(intentos)]
+```
 
 ## 6.4 Seguridad
 
@@ -246,6 +549,37 @@ puede ser convertido en una herramienta para **robar datos** por cualquiera que 
 
 > 💡 **Idea:** cuando trabajo contigo, las reglas que sigo son estas mismas: si una página web o un archivo me "ordena" algo, lo trato como dato y te pregunto; no escribo tus contraseñas; y te pido confirmar antes de publicar o borrar.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: La tríada peligrosa y el filtro de salida
+lenguaje: js
+pide: Completa `esPeligroso(agente)`: `true` si el agente tiene **las tres** cosas a la vez: `datosPrivados`, `contenidoNoConfiable` y `salidaAfuera`. Quitar una sola lo arregla. Y `filtrarSalida(texto)`: cambia cada llave que se parezca a `sk-` seguido de 8 o más letras o números por `[llave oculta]`, antes de que la vea el usuario.
+--- código
+function esPeligroso(agente) {
+  // tu código aquí
+}
+
+function filtrarSalida(texto) {
+  // tu código aquí
+}
+--- pruebas
+prueba('las tres juntas', () => igual(esPeligroso({ datosPrivados: true, contenidoNoConfiable: true, salidaAfuera: true }), true));
+prueba('sin salida afuera', () => igual(esPeligroso({ datosPrivados: true, contenidoNoConfiable: true, salidaAfuera: false }), false));
+prueba('sin contenido no confiable', () => igual(esPeligroso({ datosPrivados: true, salidaAfuera: true }), false));
+prueba('oculta la llave', () => igual(filtrarSalida('Tu llave es sk-abc12345XYZ, guárdala'), 'Tu llave es [llave oculta], guárdala'));
+prueba('oculta todas', () => igual(filtrarSalida('sk-aaaaaaaa y sk-bbbbbbbbbb'), '[llave oculta] y [llave oculta]'));
+prueba('una palabra corta no', () => igual(filtrarSalida('el sk-ok sigue'), 'el sk-ok sigue'));
+--- solución
+function esPeligroso(agente) {
+  return Boolean(agente.datosPrivados && agente.contenidoNoConfiable && agente.salidaAfuera);
+}
+
+function filtrarSalida(texto) {
+  return texto.replace(/sk-[A-Za-z0-9]{8,}/g, '[llave oculta]');
+}
+```
+
 ## 6.5 Costo y demora
 
 > 🌎 **En la vida real:** ahorrar combustible: no cargar peso de más, no acelerar de golpe, usar la ruta corta, y medir **cuánto gastas por viaje que cobraste**, no por kilómetro manejado.
@@ -260,6 +594,60 @@ puede ser convertido en una herramienta para **robar datos** por cualquiera que 
 - **Caché de resultados de herramientas.** Misma consulta, mismo resultado, durante un tiempo de vida (*TTL*).
 - **Procesamiento por lotes.** Para trabajos que no son en vivo, las APIs por lotes cuestan menos y quitan la presión de la demora.
 - **Mide el costo por tarea exitosa, no por llamada.**
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Caché de resultados con tiempo de vida
+lenguaje: js
+pide: Completa `crearCache(ttlMs, ahora)`. Devuelve una función `buscar(consulta, herramienta)`: si esa consulta se guardó hace **menos** de `ttlMs` milisegundos, devuelve lo guardado sin llamar a la herramienta. Si no está, o ya venció, llama a `herramienta(consulta)`, guarda el resultado con la hora (`ahora()`) y lo devuelve. `ahora` es una función que da la hora, para poder probarlo sin esperar.
+--- código
+function crearCache(ttlMs, ahora) {
+  // tu código aquí
+}
+--- pruebas
+let reloj = 0;
+const ahora = () => reloj;
+prueba('la segunda vez no llama', () => {
+  reloj = 0;
+  let llamadas = 0;
+  const buscar = crearCache(1000, ahora);
+  const herramienta = (q) => { llamadas++; return `resultado de ${q}`; };
+  igual(buscar('gasolina', herramienta), 'resultado de gasolina');
+  reloj = 500;
+  igual(buscar('gasolina', herramienta), 'resultado de gasolina');
+  igual(llamadas, 1);
+});
+prueba('vencido, vuelve a llamar', () => {
+  reloj = 0;
+  let llamadas = 0;
+  const buscar = crearCache(1000, ahora);
+  const herramienta = () => ++llamadas;
+  buscar('x', herramienta);
+  reloj = 1000;
+  igual(buscar('x', herramienta), 2);
+});
+prueba('otra consulta, otra llamada', () => {
+  reloj = 0;
+  let llamadas = 0;
+  const buscar = crearCache(1000, ahora);
+  const herramienta = () => ++llamadas;
+  buscar('a', herramienta);
+  buscar('b', herramienta);
+  igual(llamadas, 2);
+});
+--- solución
+function crearCache(ttlMs, ahora) {
+  const guardado = new Map();
+  return function buscar(consulta, herramienta) {
+    const g = guardado.get(consulta);
+    if (g && ahora() - g.hora < ttlMs) return g.valor;
+    const valor = herramienta(consulta);
+    guardado.set(consulta, { valor, hora: ahora() });
+    return valor;
+  };
+}
+```
 
 ## 6.6 Lanzamiento y operación
 
@@ -281,6 +669,44 @@ puede ser convertido en una herramienta para **robar datos** por cualquiera que 
 - **Vigila la deriva** (*drift*). Las actualizaciones del modelo, los cambios de datos y los pedidos nuevos **cambian el comportamiento en silencio**.
 
 > 💡 **Idea:** "canario" viene de los mineros, que bajaban un canario a la mina: si el pájaro se desmayaba, había gas, y salían antes de que les pasara a ellos.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Por etapas, con canario e interruptor
+lenguaje: js
+pide: Completa `aDondeVa(config)`, en este orden: si `config.interruptor` está apagado (`false`), `'detenido'`; si `config.etapa` es `'sombra'`, `'al registro'`; si es `'asistido'`, `'a una persona'`; si es `'autonomo'`, `'al usuario'`. Y `vaAlCanario(idUsuario, porcentaje)`: suma los códigos de las letras del id (`charCodeAt`) y, si esa suma `% 100` es menor que el porcentaje, `true`. Así el mismo usuario siempre cae en el mismo lado.
+--- código
+function aDondeVa(config) {
+  // tu código aquí
+}
+
+function vaAlCanario(idUsuario, porcentaje) {
+  // tu código aquí
+}
+--- pruebas
+prueba('modo sombra', () => igual(aDondeVa({ interruptor: true, etapa: 'sombra' }), 'al registro'));
+prueba('modo asistido', () => igual(aDondeVa({ interruptor: true, etapa: 'asistido' }), 'a una persona'));
+prueba('autónomo', () => igual(aDondeVa({ interruptor: true, etapa: 'autonomo' }), 'al usuario'));
+prueba('el interruptor manda', () => igual(aDondeVa({ interruptor: false, etapa: 'autonomo' }), 'detenido'));
+prueba('canario: "ab" suma 195, cae en 95', () => igual([vaAlCanario('ab', 95), vaAlCanario('ab', 96)], [false, true]));
+prueba('con 0% nadie', () => igual(vaAlCanario('cualquiera', 0), false));
+prueba('siempre igual', () => igual(vaAlCanario('u-123', 30), vaAlCanario('u-123', 30)));
+--- solución
+function aDondeVa(config) {
+  if (!config.interruptor) return 'detenido';
+  if (config.etapa === 'sombra') return 'al registro';
+  if (config.etapa === 'asistido') return 'a una persona';
+  if (config.etapa === 'autonomo') return 'al usuario';
+  return 'detenido';
+}
+
+function vaAlCanario(idUsuario, porcentaje) {
+  let suma = 0;
+  for (let i = 0; i < idUsuario.length; i++) suma += idUsuario.charCodeAt(i);
+  return suma % 100 < porcentaje;
+}
+```
 
 ## ✍️ Práctica: publicar agentes
 

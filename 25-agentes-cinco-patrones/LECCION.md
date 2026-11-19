@@ -131,6 +131,54 @@ Es un **ciclo infinito**. Se arregla con un **máximo de pasos**, **detectando l
 
 </details>
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Ejecutar una herramienta sin que reviente
+lenguaje: js
+pide: Completa `ejecutar(llamada)` como en el esqueleto de arriba. Si la herramienta no existe: `{ ok: false, error: 'no existe la herramienta X' }`. Si `validar` dice que no: `{ ok: false, error: 'datos inválidos' }`. Si la función lanza un error: `{ ok: false, error: e.message }`. Si todo va bien: `{ ok: true, datos }`. Nunca debe lanzar: el error vuelve al modelo.
+--- código
+const HERRAMIENTAS = {
+  calculadora: {
+    validar: (args) => typeof args.a === 'number' && typeof args.b === 'number',
+    fn: ({ a, b }) => {
+      if (b === 0) throw new Error('no se puede dividir entre 0');
+      return a / b;
+    },
+  },
+};
+
+function ejecutar(llamada) {
+  // tu código aquí
+}
+--- pruebas
+prueba('todo bien', () => igual(ejecutar({ nombre: 'calculadora', args: { a: 30, b: 4 } }), { ok: true, datos: 7.5 }));
+prueba('herramienta inventada', () => igual(ejecutar({ nombre: 'buscar_web', args: {} }), { ok: false, error: 'no existe la herramienta buscar_web' }));
+prueba('datos inválidos', () => igual(ejecutar({ nombre: 'calculadora', args: { a: '30', b: 4 } }), { ok: false, error: 'datos inválidos' }));
+prueba('la herramienta falla y no revienta', () => igual(ejecutar({ nombre: 'calculadora', args: { a: 1, b: 0 } }), { ok: false, error: 'no se puede dividir entre 0' }));
+--- solución
+const HERRAMIENTAS = {
+  calculadora: {
+    validar: (args) => typeof args.a === 'number' && typeof args.b === 'number',
+    fn: ({ a, b }) => {
+      if (b === 0) throw new Error('no se puede dividir entre 0');
+      return a / b;
+    },
+  },
+};
+
+function ejecutar(llamada) {
+  const h = HERRAMIENTAS[llamada.nombre];
+  if (!h) return { ok: false, error: `no existe la herramienta ${llamada.nombre}` };
+  if (!h.validar(llamada.args)) return { ok: false, error: 'datos inválidos' };
+  try {
+    return { ok: true, datos: h.fn(llamada.args) };
+  } catch (e) {
+    return { ok: false, error: e.message };
+  }
+}
+```
+
 ## 2.2 Planificación
 
 > 🌎 **En la vida real:** un maestro de obras. Antes de poner un ladrillo, escribe el plan: 1) cimientos, 2) paredes, 3) techo, 4) instalaciones. Después cada cuadrilla hace su paso en orden. Si en el paso 2 descubre que el terreno está húmedo, **cambia el plan** antes de seguir.
@@ -226,6 +274,44 @@ for paso in plan.pasos:
 | **Contexto perdido entre pasos** | Pasar resultados ordenados (datos), no resúmenes |
 
 **Ejercicio para construir:** un agente investigador que recibe una pregunta, arma un plan de 3 a 6 búsquedas, las ejecuta y escribe un resumen con fuentes. Guarda el plan como JSON e imprime el estado de cada paso mientras corre. Después **mete una búsqueda que falle a propósito** y confirma que el replanificador se recupera.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: El plan es una estructura de datos
+lenguaje: python
+pide: Completa `siguiente_paso(plan)`: devuelve el `id` del primer paso `"pendiente"` cuyos pasos de `depende_de` estén todos `"hecho"`, o `None` si no hay ninguno. Y `avance(plan)`: devuelve un texto como `"2 de 4 hechos"`. Cada paso es un diccionario como `{"id": 1, "estado": "hecho", "depende_de": []}`.
+--- código
+def siguiente_paso(plan):
+    pass  # tu código aquí
+
+
+def avance(plan):
+    pass  # tu código aquí
+--- pruebas
+PLAN = [
+    {"id": 1, "estado": "hecho", "depende_de": []},
+    {"id": 2, "estado": "pendiente", "depende_de": [1, 3]},
+    {"id": 3, "estado": "pendiente", "depende_de": [1]},
+    {"id": 4, "estado": "pendiente", "depende_de": [2]},
+]
+prueba("salta el que espera a otro", lambda: igual(siguiente_paso(PLAN), 3))
+prueba("cuando el 3 está hecho, sigue el 2", lambda: igual(siguiente_paso([{**p, "estado": "hecho"} if p["id"] == 3 else p for p in PLAN]), 2))
+prueba("todo hecho", lambda: igual(siguiente_paso([{**p, "estado": "hecho"} for p in PLAN]), None))
+prueba("el avance", lambda: igual(avance(PLAN), "1 de 4 hechos"))
+--- solución
+def siguiente_paso(plan):
+    hechos = [p["id"] for p in plan if p["estado"] == "hecho"]
+    for paso in plan:
+        if paso["estado"] == "pendiente" and all(d in hechos for d in paso["depende_de"]):
+            return paso["id"]
+    return None
+
+
+def avance(plan):
+    hechos = len([p for p in plan if p["estado"] == "hecho"])
+    return f"{hechos} de {len(plan)} hechos"
+```
 
 ## 2.3 Reflexión / crítico
 
@@ -326,6 +412,41 @@ return marcar_para_revision(mejor[1], correcciones)
 
 **Ejercicio para construir:** envuelve una generación de código en un ciclo de reflexión donde el crítico son **las pruebas**: **pytest** en Python (lo que usa la guía), o Jest / `node:test` en JavaScript. Genera una función a partir de una descripción, corre las pruebas, devuelve las fallas, tope de tres intentos. Mide cuántas pasan con y sin el ciclo, en 20 descripciones.
 
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un ciclo de reflexión con tope
+lenguaje: js
+pide: Completa `reflexionar(generador, critico, maxIntentos)`. El generador recibe las correcciones (al principio `[]`) y devuelve un borrador. El crítico devuelve `{ paso, problemas, puntaje }`. Si pasa, devuelve `{ borrador, intentos }`. Si no, vuelve a generar con los problemas. Si se acaban los intentos, devuelve el borrador de **mejor puntaje** marcado: `{ borrador, intentos, revisar: true }`.
+--- código
+function reflexionar(generador, critico, maxIntentos = 3) {
+  // tu código aquí
+}
+--- pruebas
+// El generador mejora cuando le dicen qué estaba mal.
+const gen = (correcciones) => (correcciones.includes('falta revisar null') ? 'con null' : 'sin null');
+const crit = (b) => (b === 'con null' ? { paso: true, problemas: [], puntaje: 9 } : { paso: false, problemas: ['falta revisar null'], puntaje: 4 });
+prueba('pasa al segundo intento', () => igual(reflexionar(gen, crit), { borrador: 'con null', intentos: 2 }));
+prueba('pasa a la primera', () => igual(reflexionar(() => 'bien', () => ({ paso: true, problemas: [], puntaje: 10 })), { borrador: 'bien', intentos: 1 }));
+let n = 0;
+const genMalo = () => `v${++n}`;
+const critMalo = (b) => ({ paso: false, problemas: ['mal'], puntaje: b === 'v2' ? 7 : 3 });
+prueba('se acaba y devuelve el mejor', () => igual(reflexionar(genMalo, critMalo, 3), { borrador: 'v2', intentos: 3, revisar: true }));
+--- solución
+function reflexionar(generador, critico, maxIntentos = 3) {
+  let correcciones = [];
+  let mejor = { puntaje: -1, borrador: null };
+  for (let intento = 1; intento <= maxIntentos; intento++) {
+    const borrador = generador(correcciones);
+    const veredicto = critico(borrador);
+    if (veredicto.paso) return { borrador, intentos: intento };
+    if (veredicto.puntaje > mejor.puntaje) mejor = { puntaje: veredicto.puntaje, borrador };
+    correcciones = veredicto.problemas;
+  }
+  return { borrador: mejor.borrador, intentos: maxIntentos, revisar: true };
+}
+```
+
 ## 2.4 Enrutamiento
 
 > 🌎 **En la vida real:** la recepción de un hospital. La recepcionista no opera a nadie: escucha qué te pasa y te manda al especialista correcto (traumatología, cardiología, pediatría). Si no entiende bien qué tienes, **te hace una pregunta** en vez de mandarte a cualquier lado.
@@ -413,6 +534,41 @@ return ESPECIALISTAS[ruta.categoria](pedido, ruta.datos, estado)
 > 📌 **Nota de producción:** el enrutamiento controla **el costo** tanto como la calidad. Es común que los equipos recorten una buena parte del gasto mandando lo simple a un modelo pequeño y dejando el modelo más potente solo para lo que lo necesita.
 
 **Ejercicio para construir:** un enrutador de tres caminos (código, investigación, soporte) con salida ordenada y un umbral de confianza. Escribe 30 pedidos de prueba, incluyendo 5 ambiguos. Mide qué tan seguido acierta. Después reemplaza el enrutador con modelo por un clasificador por parecido (*embeddings*) y compara costo, demora y aciertos.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un enrutador con umbral de confianza
+lenguaje: python
+pide: Completa `enrutar(ruta)`. La ruta es un diccionario `{"categoria": …, "confianza": …}`. Si la categoría es `"no_claro"`, no está en `ESPECIALISTAS` o la confianza es menor que `0.7`, devuelve `"¿Me lo explicas de otra forma?"`. Si no, busca el especialista y **llámalo** con la categoría: `ESPECIALISTAS[categoria](categoria)`.
+--- código
+ESPECIALISTAS = {
+    "codigo": lambda c: "lo ve el especialista en código",
+    "soporte": lambda c: "lo ve el especialista en soporte",
+}
+
+
+def enrutar(ruta):
+    pass  # tu código aquí
+--- pruebas
+prueba("código con confianza", lambda: igual(enrutar({"categoria": "codigo", "confianza": 0.9}), "lo ve el especialista en código"))
+prueba("justo en 0.7 pasa", lambda: igual(enrutar({"categoria": "soporte", "confianza": 0.7}), "lo ve el especialista en soporte"))
+prueba("poca confianza", lambda: igual(enrutar({"categoria": "codigo", "confianza": 0.5}), "¿Me lo explicas de otra forma?"))
+prueba("no claro", lambda: igual(enrutar({"categoria": "no_claro", "confianza": 0.99}), "¿Me lo explicas de otra forma?"))
+prueba("una categoría que no existe", lambda: igual(enrutar({"categoria": "chistes", "confianza": 0.95}), "¿Me lo explicas de otra forma?"))
+--- solución
+ESPECIALISTAS = {
+    "codigo": lambda c: "lo ve el especialista en código",
+    "soporte": lambda c: "lo ve el especialista en soporte",
+}
+
+
+def enrutar(ruta):
+    categoria = ruta["categoria"]
+    if categoria not in ESPECIALISTAS or ruta["confianza"] < 0.7:
+        return "¿Me lo explicas de otra forma?"
+    return ESPECIALISTAS[categoria](categoria)
+```
 
 ## 2.5 Multiagente / supervisor y trabajadores
 
@@ -505,6 +661,47 @@ async def correr_supervisor(tarea):
 > 📌 **Nota de producción:** los sistemas multiagente **queman *tokens***. Según el equipo de ingeniería de Anthropic, un agente usa más o menos **cuatro veces** los *tokens* de una conversación normal, y un sistema multiagente, unas **quince veces**. Asegúrate de que la tarea lo vale antes de usar este patrón.
 
 **Ejercicio para construir:** un supervisor con tres trabajadores: investigador (búsqueda web), analista (corre código para los números) y redactor. Pide un informe de una página sobre un tema con tres conjuntos de números. Corre los trabajadores en paralelo (`Promise.all`). Rastrea toda la ejecución y encuentra **el tramo más caro**.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+
+```ejercicio
+titulo: Un supervisor con trabajadores en paralelo
+lenguaje: js
+pide: Completa `correrSupervisor(delegaciones, trabajadores)`. Cada delegación es `{ trabajador, encargo }`. Corre **todos al mismo tiempo** con `Promise.all` (cada trabajador es una función `async` que recibe el encargo). Si un trabajador no existe, su resultado es `{ trabajador, error: 'no existe' }`; si existe, `{ trabajador, resultado }`. Devuelve la lista en el mismo orden.
+--- código
+async function correrSupervisor(delegaciones, trabajadores) {
+  // tu código aquí
+}
+--- pruebas
+const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+const TRABAJADORES = {
+  investigador: async (e) => { await esperar(150); return `fuentes de ${e}`; },
+  analista: async (e) => { await esperar(150); return `números de ${e}`; },
+};
+prueba('devuelve en orden', async () => igual(
+  await correrSupervisor([{ trabajador: 'investigador', encargo: 'gasolina' }, { trabajador: 'analista', encargo: 'gasolina' }], TRABAJADORES),
+  [{ trabajador: 'investigador', resultado: 'fuentes de gasolina' }, { trabajador: 'analista', resultado: 'números de gasolina' }]
+));
+prueba('trabajan al mismo tiempo', async () => {
+  const inicio = Date.now();
+  await correrSupervisor([{ trabajador: 'investigador', encargo: 'a' }, { trabajador: 'analista', encargo: 'b' }], TRABAJADORES);
+  ok(Date.now() - inicio < 280, 'tardó como si trabajaran de a uno: usa Promise.all');
+});
+prueba('un trabajador que no existe', async () => igual(
+  await correrSupervisor([{ trabajador: 'redactor', encargo: 'x' }], TRABAJADORES),
+  [{ trabajador: 'redactor', error: 'no existe' }]
+));
+--- solución
+async function correrSupervisor(delegaciones, trabajadores) {
+  return Promise.all(
+    delegaciones.map(async (d) => {
+      const trabajador = trabajadores[d.trabajador];
+      if (!trabajador) return { trabajador: d.trabajador, error: 'no existe' };
+      return { trabajador: d.trabajador, resultado: await trabajador(d.encargo) };
+    })
+  );
+}
+```
 
 ## ✍️ Práctica: los cinco patrones
 

@@ -49,7 +49,8 @@ function primerParrafo(lineas) {
     if (/^\s*```/.test(l)) { enCodigo = !enCodigo; continue; }
     if (enCodigo) continue;
     const t = l.trim();
-    const esNormal = t && !/^(#|>|\||<|-{3,}|\* |- |\d+\. )/.test(t);
+    // "✍️ Ahora escribes tú…" es la entrada de un ejercicio, no lo que cuenta la parte: no sirve de resumen.
+    const esNormal = t && !/^(#|>|\||<|-{3,}|\* |- |\d+\. |✍️)/.test(t);
     if (esNormal) parrafo.push(t);
     else if (parrafo.length) break;
   }
