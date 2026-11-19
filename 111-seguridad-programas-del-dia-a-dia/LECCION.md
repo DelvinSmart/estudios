@@ -83,7 +83,7 @@ escribe :: ¿Cómo funciona un phishing que roba el código de segundo factor, y
 
 | | |
 |---|---|
-| **Qué es** | **Have I Been Pwned** (*haveibeenpwned.com*, gratis): una base con miles de millones de correos y contraseñas que aparecieron en filtraciones |
+| **Qué es** | **Have I Been Pwned** (*haveibeenpwned.com*, gratis): dos listas que salieron de filtraciones: una de **correos** que aparecieron en alguna filtración, y **por separado** otra de **contraseñas** (en forma de hash). No guarda la pareja correo+contraseña |
 | **Cómo funciona** | Para consultar una contraseña **sin mandarla**: se le saca el hash SHA-1, se mandan **solo los primeros 5 caracteres**, y el servicio devuelve **todos** los hashes que empiezan así (cientos). Tu programa busca el resto **en tu aparato**. Se llama **k-anonimato**: el servicio nunca sabe cuál era la tuya |
 | **Para el defensor** | Al crear una cuenta o cambiar la contraseña, el sitio revisa si esa contraseña ya se filtró, y si es así, pide otra. También: anotarte para que te avise si tu correo aparece en una filtración |
 | **Para atacar** | Los atacantes usan **esas mismas listas** filtradas: prueban el correo y la contraseña de una filtración en **otros** sitios (*credential stuffing*), porque mucha gente repite la contraseña |
@@ -264,7 +264,7 @@ escribe :: ¿Para qué le sirve a un defensor mirar los registros de certificado
 | **Para atacar** | Leer el código de un proyecto abierto buscando esos mismos patrones |
 | **Defensa** | Correrlo tú primero, y escribir reglas propias para los errores que ya te pasaron |
 
-**OWASP ZAP** (gratis, de código abierto): el proxy de la clase 24, que además tiene un **escaneo automático**. En el CI, el *baseline scan* recorre tu sitio de prueba y avisa lo que falta (cabeceras de seguridad, cookies sin `HttpOnly`, la cookie de la clase 109).
+**ZAP** (gratis, de código abierto; antes se llamaba *OWASP ZAP*, hoy lo mantiene Checkmarx): el proxy de la clase 24, que además tiene un **escaneo automático**. En el CI, el *baseline scan* recorre tu sitio de prueba y avisa lo que falta (cabeceras de seguridad, cookies sin `HttpOnly`, la cookie de la clase 109).
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -326,7 +326,7 @@ escribe :: ¿Cómo usarías gitleaks, Semgrep y ZAP juntos en un proyecto? :: gi
 
 ## Para la entrevista
 
-> 🎤 **Si te preguntan "¿qué herramientas de seguridad usas?":** "En lo personal, un gestor de contraseñas como Bitwarden, con una contraseña distinta por sitio, y segundo factor con app o llaves de acceso, no SMS. Como programador: gitleaks antes de subir y en el CI, porque una llave subida se usa en minutos y borrarla no la saca del historial; Semgrep para patrones peligrosos en el código; el baseline scan de OWASP ZAP contra el sitio de prueba; y npm audit con Dependabot para las dependencias. Al crear cuentas, reviso las contraseñas contra Have I Been Pwned con k-anonimato. Uso VirusTotal con cuidado, porque lo que se sube lo ven otros, y Let's Encrypt con renovación automática, sabiendo que los registros de certificados muestran todos mis subdominios."
+> 🎤 **Si te preguntan "¿qué herramientas de seguridad usas?":** "En lo personal, un gestor de contraseñas como Bitwarden, con una contraseña distinta por sitio, y segundo factor con app o llaves de acceso, no SMS. Como programador: gitleaks antes de subir y en el CI, porque una llave subida se usa en minutos y borrarla no la saca del historial; Semgrep para patrones peligrosos en el código; el baseline scan de ZAP contra el sitio de prueba; y npm audit con Dependabot para las dependencias. Al crear cuentas, reviso las contraseñas contra Have I Been Pwned con k-anonimato. Uso VirusTotal con cuidado, porque lo que se sube lo ven otros, y Let's Encrypt con renovación automática, sabiendo que los registros de certificados muestran todos mis subdominios."
 
 > 🌎 **En la vida real:** es como describir las herramientas de tu taller: para qué sirve cada una, y cuál usarías para cada trabajo.
 

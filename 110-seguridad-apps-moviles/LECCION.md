@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** cuando vendes un mueble armado, el comprador se lo lleva a su casa y puede desarmarlo, mirar cada tornillo y cambiar piezas. Una app instalada en un teléfono es eso: está en las manos de la persona, que puede abrirla y mirarla por dentro.
 
-> 🎙️ **El profesor dice:** {{alumno}}, ya hiciste apps para el teléfono (React Native, Kotlin y Swift). Hoy, cómo se ven **desde el lado del atacante**: el archivo de la app se puede abrir y leer, lo que guarda en el teléfono también, cualquier otra app o página puede abrir tu app con un enlace, y con las herramientas adecuadas se puede cambiar lo que hace mientras corre. Con los programas que se usan para eso (**jadx**, **MobSF**, **Frida**): qué hacen, cómo los usa un defensor, y cómo te defiendes. La guía de referencia es **OWASP MASVS** (el Top 10 de los teléfonos).
+> 🎙️ **El profesor dice:** {{alumno}}, ya hiciste apps para el teléfono (React Native, Kotlin y Swift). Hoy, cómo se ven **desde el lado del atacante**: el archivo de la app se puede abrir y leer, lo que guarda en el teléfono también, cualquier otra app o página puede abrir tu app con un enlace, y con las herramientas adecuadas se puede cambiar lo que hace mientras corre. Con los programas que se usan para eso (**jadx**, **MobSF**, **Frida**): qué hacen, cómo los usa un defensor, y cómo te defiendes. La guía de referencia es **OWASP MASVS** (un estándar para *verificar* la seguridad de una app; la lista corta de los riesgos más comunes es el **OWASP Mobile Top 10**).
 
 > ⚠️ **Antes de empezar:** estas herramientas se usan **en tus propias apps** o con permiso. Abrir y modificar apps ajenas puede violar sus términos y la ley (clase 22, parte 0).
 
@@ -14,8 +14,8 @@
 
 Un **APK** (Android) o un **IPA** (iPhone) es, por dentro, un **archivo ZIP**: se cambia la extensión y se abre. Adentro está todo lo que la app necesita para funcionar, **incluido lo que el programador creyó escondido**:
 
-- En una app de **React Native**, el código está en un archivo de JavaScript (`index.android.bundle`), **casi tal cual se escribió**.
-- En una app **nativa**, el código se puede "desarmar" de vuelta a algo muy parecido al original.
+- En una app de **React Native**, el código va en un archivo (`index.android.bundle`). Desde hace años se compila a **bytecode de Hermes** (el motor de JavaScript de React Native): ya **no** es texto legible, pero existen herramientas que lo vuelven a desarmar. En apps viejas o sin Hermes, sí es JavaScript casi tal cual.
+- En una app **nativa de Android** (Kotlin/Java), el código se "desarma" con jadx a algo **muy parecido** al original. En una app **de iPhone** (Swift), el código es **lenguaje de máquina**, mucho más difícil de leer, y además la app que baja de la App Store viene **cifrada**: hay que descifrarla en un teléfono con jailbreak para analizarla.
 
 **El programa: jadx** (gratis, de código abierto). Abres un APK y muestra el código Java/Kotlin **reconstruido**, con buscador. Un defensor lo usa con **su propia app** antes de publicarla: busca claves, direcciones internas y lógica que no debería estar en el teléfono. Un atacante lo usa para lo mismo con apps ajenas.
 

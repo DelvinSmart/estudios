@@ -75,7 +75,7 @@ escribe :: ¿Qué hace el archivo expo-module.config.json de un módulo? :: Dice
 
 > 🌎 **En la vida real:** en la ventanilla hay tres tipos de trámite. Uno se resuelve **en el momento** ("¿cuánto cuesta?"). Otro te dan un **número y te avisan** cuando está ("tu pasaporte estará en unos días"). Y el tercero es al revés: la oficina **te llama** cuando pasa algo ("llegó su paquete").
 
-> 🌎 **Otro ejemplo:** Es como una casa de cambio: entregas reales y te dan dólares. El valor es el mismo, pero cambia la forma.
+> 🌎 **Otro ejemplo:** Es como escribirle a alguien por WhatsApp: a veces te contesta al toque (en el momento), a veces te dice "lo reviso y te aviso" (te avisa después), y a veces te llega un mensaje suyo sin que hayas preguntado nada (te escribe él primero).
 
 En un módulo de Expo, el lado nativo declara todo en una función `definition()`:
 
@@ -279,7 +279,7 @@ escribe :: ¿Por qué las pantallas de Copiloto no llaman a Kotlin ni a Swift di
 
 > 🌎 **Otro ejemplo:** Es como un menú traducido: el plato 7 es el mismo en la carta en español y en la carta en inglés.
 
-Los dos lados declaran **el mismo nombre** de módulo y **las mismas funciones**, porque TypeScript los llama sin saber en qué teléfono está. En Kotlin:
+Los dos lados declaran **el mismo nombre** de módulo y **comparten la mayoría de las funciones** (guardar los mínimos, encender el lector, listar las apps de viaje), porque TypeScript las llama igual en los dos. Pero **no son idénticos**: cada teléfono resuelve la parte difícil de otra manera, así que cada lado tiene funciones que el otro **no** tiene. Eso está bien, y más abajo verás cómo TypeScript lo maneja. En Kotlin:
 
 ```kotlin
 class MiModulo : Module() {
@@ -306,9 +306,15 @@ Y en Swift, lo mismo con las reglas de Apple:
 public class MiModulo: Module {
     public func definition() -> ModuleDefinition {
         Name("MiModulo")
-        Events("alEmpezarCaptura", "alTerminarCaptura")
 
-        Function("puedeDibujarEncima") { false }       // el iPhone no deja dibujar sobre otra app
+        // guardarMinimos se ve igual que en Kotlin: es una de las funciones compartidas.
+        Function("guardarMinimos") { (minimos: [String: Double], moneda: String) in
+            Preferencias.guardar(minimos, moneda)
+        }
+
+        // De aquí para abajo, SOLO iPhone (ReplayKit). Kotlin, en cambio, tiene las
+        // funciones del lector de accesibilidad, que aquí no existen.
+        Events("alEmpezarCaptura", "alTerminarCaptura")
 
         AsyncFunction("empezarCaptura") { (promise: Promise) in
             DispatchQueue.main.async {                  // lo que toca pantallas va en el hilo principal
@@ -323,7 +329,10 @@ public class MiModulo: Module {
 
 Lo que muestran estos dos archivos, y que pasó de verdad en Copiloto:
 
-- **Mismo contrato, distinto trabajo.** En Android la oferta se muestra en una **burbuja encima** de la app de viajes. Apple no deja dibujar sobre otra app, así que en iPhone `puedeDibujarEncima` devuelve `false`, y la oferta sale como **notificación**, leyendo la pantalla compartida (*ReplayKit*) y su texto (*Vision*). Las funciones que solo tienen sentido en un lado existen igual en el otro, devolviendo algo fijo, para que TypeScript no se rompa.
+- **Mismo trabajo, dos caminos muy distintos.** La parte difícil (ver la oferta de otra app) se resuelve diferente en cada teléfono, y por eso **las funciones no coinciden del todo**:
+  - En **Android**, la oferta se lee con un **servicio de accesibilidad** y se muestra en una **burbuja encima** de la app de viajes. Por eso el lado Kotlin tiene funciones propias como apagar el lector o saber si la burbuja está quieta, que en iPhone no existen.
+  - En **iPhone**, Apple **no** deja dibujar sobre otra app, así que la oferta se lee de la **pantalla compartida** (*ReplayKit*) y su texto (*Vision*), y se muestra como **notificación**. Por eso el lado Swift tiene funciones propias de captura (empezar, parar) y **eventos**, que en Android no existen. Su función `puedeMostrarOferta` no devuelve un `false` fijo: devuelve si hay **permiso de notificaciones**.
+- **TypeScript no necesita que coincidan.** Como viste en la Parte 3, las funciones que solo tiene un teléfono se marcan con `?` en el tipo (`empezarCaptura?`) y se llaman con `?.()`. Si ese teléfono no la tiene, la llamada simplemente no hace nada, en vez de romperse.
 - **Valores por defecto con `?:` y `??`.** Si TypeScript no manda un mínimo, Kotlin usa `?:` y Swift `??`. El nativo **nunca confía** en que el mapa venga completo.
 - **El hilo principal.** Las funciones del módulo **no** corren en el hilo de las pantallas. Todo lo que toca una pantalla del sistema se manda al hilo principal (`DispatchQueue.main` en Swift).
 - **Las promesas se resuelven siempre.** Si una `AsyncFunction` nunca llama a `promise.resolve` (ni a `promise.reject`), el `await` de TypeScript **espera para siempre**.
@@ -393,7 +402,7 @@ func pedirPermiso(_ promesa: Promesa, sistema: (@escaping (Bool) -> Void) -> Voi
 ```
 
 ```practica
-vf :: El módulo de Android y el de iPhone tienen que declarar el mismo nombre y las mismas funciones, porque TypeScript los llama sin saber en qué teléfono está
+vf :: El módulo de Android y el de iPhone comparten el nombre y la mayoría de las funciones, pero cada uno tiene algunas propias, porque cada teléfono resuelve la captura de otra manera
 vf :: Si una AsyncFunction de Swift se olvida de llamar a promise.resolve, TypeScript recibe un error enseguida
 elige :: ¿Por qué en iPhone Copiloto muestra la oferta como notificación y no como burbuja? :: Porque es más lindo :: Porque Apple no deja dibujar encima de otra app :: Porque Swift no sabe dibujar
 escribe :: ¿Para qué sirve el ?: en el lado Kotlin del módulo? :: Para poner un valor por defecto cuando TypeScript no mandó ese dato: el nativo nunca confía en que el mapa llegue completo.
@@ -443,7 +452,7 @@ escribe :: ¿Cuáles son los dos canales que usa Copiloto entre TypeScript y lo 
 
 ## Para la entrevista
 
-> 🎤 **Si te preguntan "¿cómo conectas React Native con código nativo?":** "Con Expo Modules, que por debajo usa JSI. El módulo tiene un lado en Kotlin y otro en Swift con el mismo nombre y las mismas funciones, y un `index.ts` con los tipos. Hay tres maneras de hablar: `Function` para lo rápido, `AsyncFunction` con promesa para lo que espera a la persona, y eventos con `sendEvent` y `addListener` cuando el nativo avisa primero. Los datos se convierten al cruzar: `number` a `Double`, objetos a `Map` o diccionario. En mi app cargo el módulo con `requireOptionalNativeModule` la primera vez que se usa, con un respaldo en cada llamada, para que en Expo Go o con un error en el arranque la app no se caiga. Y lo que tiene que funcionar con la app cerrada, como un servicio de accesibilidad o una extensión de iPhone, no usa el puente: lee un almacén compartido."
+> 🎤 **Si te preguntan "¿cómo conectas React Native con código nativo?":** "Con Expo Modules, que por debajo usa JSI. El módulo tiene un lado en Kotlin y otro en Swift con el mismo nombre; comparten la mayoría de las funciones, y cada uno tiene las suyas según lo que cada teléfono permite, que en el `index.ts` se marcan con `?` y se llaman con `?.()`. Hay tres maneras de hablar: `Function` para lo rápido, `AsyncFunction` con promesa para lo que espera a la persona, y eventos con `sendEvent` y `addListener` cuando el nativo avisa primero. Los datos se convierten al cruzar: `number` a `Double`, objetos a `Map` o diccionario. En mi app cargo el módulo con `requireOptionalNativeModule` la primera vez que se usa, con un respaldo en cada llamada, para que en Expo Go o con un error en el arranque la app no se caiga. Y lo que tiene que funcionar con la app cerrada, como un servicio de accesibilidad o una extensión de iPhone, no usa el puente: lee un almacén compartido."
 
 > 🌎 **En la vida real:** es como explicar cómo funciona la ventanilla de una embajada: qué trámites hay, cuánto tardan y qué pasa cuando la oficina está cerrada.
 

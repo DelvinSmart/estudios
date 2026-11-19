@@ -183,7 +183,7 @@ escribe :: Explica el ataque de alg: none en tres pasos. :: 1) Se toma un token 
 
 ## Parte 4. Dónde guardar el token: la cookie bien hecha
 
-> 🌎 **En la vida real:** puedes llevar la llave de tu casa en el bolsillo de la chaqueta (cualquiera que meta la mano la saca) o en un llavero que solo abre tu puerta y que no se puede sacar del cinturón sin que te des cuenta.
+> 🌎 **En la vida real:** una tarjeta de hotel que la puerta lee sola cuando te acercas, pero que está sellada: sirve para entrar sin que tú hagas nada, y a la vez nadie puede copiar el número que lleva dentro. Así es una cookie con HttpOnly: viaja sola en cada pedido, pero el JavaScript de la página no la puede leer.
 
 > 🌎 **Otro ejemplo:** Es como guardar el pasaporte en la mochila abierta o en el bolsillo interior con cierre.
 
@@ -195,7 +195,7 @@ Después de entrar, la app tiene un token. ¿Dónde lo guarda en el navegador?
 | Cookie común | Sí (`document.cookie`) | Igual |
 | Cookie **`HttpOnly`** | **No** | El script no la ve. El navegador la manda sola al servidor |
 
-La cookie bien hecha lleva **tres marcas**:
+La cookie bien hecha lleva **cuatro marcas**:
 
 ```text
 Set-Cookie: sesion=abc123; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=3600
@@ -203,7 +203,7 @@ Set-Cookie: sesion=abc123; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=3600
 
 - **`HttpOnly`**: JavaScript no la puede leer. Un XSS ya no **roba** la sesión (todavía puede hacer cosas mientras estás en la página, por eso el XSS se cierra igual: clase 23).
 - **`Secure`**: solo viaja por HTTPS (clase 22, parte 6).
-- **`SameSite=Lax`**: no viaja en pedidos que **otro sitio** dispara. Es la defensa moderna contra el **CSRF** (clase 23, parte 6).
+- **`SameSite=Lax`**: no viaja en pedidos que **otro sitio** dispara **por debajo** (un formulario o una imagen hacia tu API), aunque sí viaja si la persona **llega a tu página con un enlace normal**. Es la defensa moderna contra el **CSRF** (clase 23, parte 6). `SameSite=Strict` es aún más estricto: tampoco viaja al llegar por un enlace.
 - **`Max-Age`**: vence sola. Una sesión que no vence nunca es un regalo para quien la robe.
 
 > 📌 **Nota:** apps como esta usan Firebase Auth, que maneja sus propios tokens: no los escribes tú. Pero cuando hagas tu propio servidor (clase 87), esta es la forma.

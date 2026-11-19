@@ -108,7 +108,7 @@ Eso es **SSRF** (*Server-Side Request Forgery*). Fue la puerta de varias filtrac
 
 **La defensa, en capas:**
 1. **Lista de permitidos**, no de prohibidos: solo `https`, y solo los dominios que de verdad hacen falta.
-2. Si la URL es libre (una vista previa de cualquier link): rechazar direcciones **privadas** y **locales** (`localhost`, `127.x`, `10.x`, `192.168.x`, `169.254.x`), y revisarlo **después** de resolver el nombre (un dominio puede apuntar a `127.0.0.1`).
+2. Si la URL es libre (una vista previa de cualquier link): rechazar direcciones **privadas** y **locales** (`localhost`, `127.x`, `10.x`, `172.16.x` a `172.31.x`, `192.168.x`, `169.254.x`, y sus equivalentes en IPv6 como `::1`), y revisarlo **después** de resolver el nombre (un dominio puede apuntar a `127.0.0.1`).
 3. **Sin redirecciones automáticas** (un sitio permitido puede redirigir a uno interno).
 4. Que el servidor que busca URLs **no tenga permisos** que no necesita.
 

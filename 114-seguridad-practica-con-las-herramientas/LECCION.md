@@ -27,7 +27,7 @@ Las herramientas de las clases 111 y 112 se instalan en una Mac con **Homebrew**
 
 ```bash
 brew install nmap sqlmap hydra gobuster gitleaks
-brew install --cask owasp-zap wireshark
+brew install --cask zap wireshark-app
 ```
 
 > 🌎 **En la vida real:** `127.0.0.1` es ensayar con la banda en el garaje con la puerta cerrada: suena igual que en el escenario, pero la calle no escucha.
@@ -93,7 +93,7 @@ X-Powered-By: Express                      ← dice con qué está hecha
 Access-Control-Allow-Origin: *             ← V9: cualquier sitio puede leer sus respuestas
 ```
 
-- **`X-Powered-By: Express`** le regala al atacante la tecnología: ahora busca fallas conocidas de esa versión (Metasploit, clase 112).
+- **`X-Powered-By: Express`** le regala al atacante la tecnología: ahora busca fallas conocidas de esa tecnología (Metasploit, clase 112). (Dice el framework, no la versión exacta, pero ya es una pista.)
 - **`Access-Control-Allow-Origin: *`** (V9) deja que **cualquier** página web lea las respuestas de tu API desde el navegador de la víctima.
 
 > 🌎 **En la vida real:** es como tener el nombre y el modelo de tu cerradura escritos en la puerta: le ahorras la mitad del trabajo al ladrón.
@@ -144,15 +144,23 @@ usuario 'ana' + clave mala       → {"error":"Clave incorrecta"}     ← ana EX
 usuario 'fantasma' + clave mala  → {"error":"Ese usuario no existe"} ← ese no
 ```
 
-Con eso, un atacante arma la lista de usuarios **de verdad** antes de probar claves. Y entonces entra **V7, sin límite de intentos**: nada frena probar miles de claves. Esa es la tarea de **Hydra** (clase 112), que repite el login con una lista de claves hasta que una entra:
+Con eso, un atacante arma la lista de usuarios **de verdad** antes de probar claves. Y entonces entra **V7, sin límite de intentos**: nada frena probar miles de claves. Automatizar eso es lo que hace una herramienta como **Hydra** (clase 112): repite el login con una lista de claves hasta que una entra.
+
+Como esta API recibe el login en **JSON** (no en un formulario de los de antes), lo más claro para verlo es un bucle de **`curl`** de dos líneas, que es lo mismo que Hydra hace por dentro:
 
 ```bash
-# Contra TU laboratorio. Hydra automatiza lo que harías a mano: muchos intentos.
-hydra -l ana -P claves-de-prueba.txt 127.0.0.1 -s 3000 http-post-form \
-  "/login:usuario=^USER^&clave=^PASS^:Clave incorrecta"
+# Contra TU laboratorio (127.0.0.1). Prueba cada clave de la lista y para en la que entra.
+for clave in 123456 qwerty clave-de-ana-para-practicar; do
+  echo "$clave:"; curl -s -X POST 127.0.0.1:3000/login \
+    -H 'Content-Type: application/json' -d "{\"usuario\":\"ana\",\"clave\":\"$clave\"}"; echo
+done
 ```
 
-La defensa (clase 23) es doble: **un solo mensaje** para los dos casos (`"Usuario o clave incorrectos"`), y **cortar después de pocos intentos**. La app arreglada hace las dos: tras 4 fallos devuelve `429 Demasiados intentos`.
+La clave que no entra responde `{"error":"Clave incorrecta"}`; la buena responde `{"token":"…"}`. Con una lista larga de claves filtradas (clase 111), una termina entrando.
+
+> 📌 **Nota:** Hydra tiene un modo para logins en JSON (con `http-post-form`, mandando el cuerpo en JSON y la cabecera `Content-Type: application/json`), pero su sintaxis es quisquillosa y cambia entre versiones. Para aprender la idea, el bucle de `curl` se ve más claro y corre en cualquier Mac.
+
+La defensa (clase 23) es doble: **un solo mensaje** para los dos casos (`"Usuario o clave incorrectos"`), y **cortar después de pocos intentos**. La app arreglada hace las dos: tras **5** fallos, el sexto intento ya recibe `429 Demasiados intentos`.
 
 > 🌎 **En la vida real:** es como un portero que a todos los que fallan les dice lo mismo, y tras unos intentos no te deja ni tocar el timbre por un rato.
 
@@ -200,10 +208,18 @@ escribe :: ¿Por qué la enumeración (V6) y la falta de límite (V7) son peores
 
 > 🌎 **Otro ejemplo:** Es como un casillero cuyo candado abre con cualquier número parecido: no hace falta robar la llave.
 
-**V1, IDOR** (clase 23). Entras como **ana** y pides un gasto que **no es tuyo**, solo cambiando el número:
+**V1, IDOR** (clase 23). Primero entras como **ana** (con su clave de práctica) y guardas su token:
 
-```text
-$ curl http://127.0.0.1:3000/gastos/2 -H "Authorization: Bearer <token de ana>"
+```bash
+# El login devuelve { "token": "…" }. Lo guardamos en una variable para los próximos pedidos.
+TOKEN=$(curl -s -X POST 127.0.0.1:3000/login -H 'Content-Type: application/json' \
+  -d '{"usuario":"ana","clave":"clave-de-ana-para-practicar"}' | sed 's/.*"token":"//; s/".*//')
+```
+
+Ahora, con ese token, pides un gasto que **no es tuyo**, solo cambiando el número:
+
+```bash
+$ curl http://127.0.0.1:3000/gastos/2 -H "Authorization: Bearer $TOKEN"
 {"id":2,"dueno":"beto","tipo":"combustible","valor":150,"nota":"nota privada de beto"}
 ```
 
@@ -214,7 +230,7 @@ La app te dio la **nota privada de beto**, porque busca el gasto por id y **nunc
 ```bash
 # Contra TU laboratorio. sqlmap automatiza la inyección de la parte de abajo.
 sqlmap -u "http://127.0.0.1:3000/gastos/buscar?nota=x" \
-  --headers="Authorization: Bearer <token de ana>" --batch
+  --headers="Authorization: Bearer $TOKEN" --batch
 ```
 
 Por dentro, lo que hace es mandar una **nota** que cierra el texto y agrega una condición siempre verdadera:
@@ -303,7 +319,7 @@ escribe :: Entras como ana y con el IDOR lees la nota privada de beto. ¿Qué fa
 
 > 🌎 **Otro ejemplo:** Es como un formulario de papel con un espacio en blanco: alguien escribe ahí un campo de más que nadie pidió.
 
-Las validaciones de la pantalla no sirven de nada contra un **proxy** como **OWASP ZAP** o **Burp** (clases 24 y 112): se ponen entre tu navegador y la app, y te dejan **cambiar la petición** antes de que salga.
+Las validaciones de la pantalla no sirven de nada contra un **proxy** como **ZAP** (antes OWASP ZAP) o **Burp** (clases 24 y 112): se ponen entre tu navegador y la app, y te dejan **cambiar la petición** antes de que salga.
 
 Con el proxy aprovechas **V2, asignación masiva**. La pantalla solo deja crear un gasto tuyo, pero tú, en el camino, le agregas un campo `dueno`:
 
@@ -314,12 +330,21 @@ POST /gastos   { "tipo":"peaje", "valor":5, "dueno":"beto" }
 
 La app hacía `{ dueno: tú, ...pedido.body }`: lo que viene del cuerpo **pisa** al dueño verdadero. La defensa (clase 23): una **lista blanca**, tomar solo los campos esperados (`tipo`, `valor`, `nota`) y poner el dueño tú, nunca el cuerpo.
 
-Y lo más fácil de todo: **V10, el secreto en el código**. Con **gitleaks** (clase 111), sin siquiera correr la app:
+Y lo más fácil de todo: **V10, el secreto en el código**. Hay dos formas de buscarlo, sin siquiera correr la app. La primera, un **`grep`**, que nunca falla con un secreto que tiene un nombre claro:
 
-```text
-$ gitleaks detect --source con-errores/
-config.mjs:5:  export const CLAVE_SMS = 'clave-de-mentira-del-servicio-de-sms-123'
+```bash
+$ grep -rniE "clave|secret|token|password|api[_-]?key" con-errores/
+con-errores/config.mjs:5:export const CLAVE_SMS = 'clave-de-mentira-del-servicio-de-sms-123'
 ```
+
+La segunda, **gitleaks** (clase 111). En gitleaks moderno (v8) son dos comandos: `gitleaks dir` revisa los archivos de una carpeta, y `gitleaks git` revisa **todo el historial** del repositorio:
+
+```bash
+$ gitleaks dir con-errores/      # los archivos de ahora
+$ gitleaks git .                 # el historial entero (aquí es donde más aparece)
+```
+
+> ⚠️ **Cuidado, una verdad incómoda:** gitleaks **no es magia**. Sus reglas de fábrica cazan muy bien los secretos con **forma de clave de un servicio** (los de GitHub empiezan por `ghp_`, los de Stripe por `sk_live_`, etc.) o cadenas largas y al azar. Pero un secreto escrito con palabras, como `'clave-de-mentira-del-servicio-de-sms-123'`, **se le puede escapar**, porque parece texto normal. Por eso en un proyecto de verdad se usan **las dos cosas**: gitleaks para lo evidente, un `grep` por los nombres de tus secretos, y una **regla propia** de gitleaks para los nombres que usas tú (`CLAVE_SMS`, `TOKEN_…`). Confiar solo en la herramienta es la trampa.
 
 La defensa (clase 22): los secretos en variables de entorno (`.env`, fuera de Git), y **rotar** cualquiera que se haya subido, porque queda en el historial.
 
@@ -349,7 +374,7 @@ function guardar(cuerpo, usuario, conLista) {
 ```
 
 ```practica
-vf :: Cambiar la validación de la pantalla no sirve, porque con un proxy como ZAP se cambia la petición después
+vf :: Cambiar la validación de la pantalla no sirve, porque con un proxy como ZAP o Burp se cambia la petición después
 vf :: Un secreto borrado del código en un commit nuevo ya no es un problema
 elige :: ¿Cómo frena la asignación masiva una lista blanca? :: Borra el cuerpo :: Toma solo los campos esperados y pone el dueño el servidor, nunca el cuerpo :: Cifra los datos
 escribe :: Con un proxy agregas "dueno":"beto" a la petición y creas un gasto a nombre de beto. ¿Qué falló y cómo se arregla? :: La app juntó tu cuerpo sobre el dueño verdadero, así que el campo colado lo pisó. Se arregla con una lista blanca: el servidor toma solo tipo, valor y nota, y pone el dueño él mismo.
@@ -372,7 +397,7 @@ Y repites cada ataque. Ahora:
 | Falla | Con errores | Arreglada |
 |---|---|---|
 | Enumeración (V6) | dos mensajes distintos | `Usuario o clave incorrectos` para los dos |
-| Sin límite (V7) | puros `401` | `429` tras 4 intentos |
+| Sin límite (V7) | puros `401` | `429` tras 5 intentos |
 | IDOR (V1) | te da el gasto de beto | `No existe ese gasto` |
 | Inyección (V3) | saca todo | devuelve `[]` (el texto se busca tal cual) |
 | Asignación masiva (V2) | lo crea a nombre de beto | el dueño queda en ana |
@@ -422,6 +447,6 @@ escribe :: Resume cómo harías la auditoría de la app de la clase 91, de princ
 
 > 🎤 **Si te preguntan "¿has hecho una prueba de seguridad de verdad?":** "Sí, sobre una API de práctica con diez fallas a propósito, en mi computadora. Escribí el alcance, hice reconocimiento con nmap y revisé las cabeceras, que soltaban la tecnología y un CORS abierto. En el login encontré enumeración de usuarios y falta de límite de intentos, que probé con Hydra. Saqué datos con un IDOR a mano y con sqlmap por una inyección SQL, usé un proxy para una asignación masiva, y gitleaks encontró un secreto en el código. Lo anoté todo en un informe con el arreglo de cada una —control de acceso con el dueño, consultas con parámetros, lista blanca, límite de intentos, un solo mensaje en el login— y al final corrí las herramientas contra la versión arreglada para demostrar que ya no caían."
 
-> 🌎 **En la vida real:** es como un electricista que no solo dice "revisé la casa", sino que te muestra cada enchufe que cambió y que ya no dan corriente.
+> 🌎 **En la vida real:** es como un electricista que no solo dice "revisé la casa": te muestra cada enchufe que arregló y, con su probador, te demuestra que ya no da corriente donde no debía.
 
 > 🌎 **Otro ejemplo:** Es como entregar un examen con el procedimiento, no solo el resultado: se ve que sabes hacerlo, no que lo adivinaste.
