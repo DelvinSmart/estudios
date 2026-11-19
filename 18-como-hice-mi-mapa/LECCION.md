@@ -349,9 +349,23 @@ La URL:               #/programacion/5     (no el id de atrás; ese queda oculto
 
 > 🎤 **Si en una entrevista te dicen "¿y no es raro que la URL no sea el nombre de la carpeta?":** "Es a propósito. Separo el identificador estable, que no cambia nunca y con el que guardo el progreso, del número que ve el usuario, que es su posición en el curso y se calcula. Así agrego o reordeno clases sin migrar los datos de nadie, y la URL igual se ve bonita y coincide con la pantalla. Es el mismo patrón de YouTube o Stack Overflow: un id fijo detrás y una dirección legible delante."
 
+### El glosario y la caja "palabras nuevas", también armados solos
+
+La misma idea —**una sola fuente de verdad, y lo demás se calcula**— se usa para el diccionario del curso:
+
+- Hay un archivo, `web/glosario.js`, con una lista de términos. Cada uno tiene su palabra, una **definición fácil**, otras formas de escribirlo (*alias*), y la **clase que lo introduce**.
+- El **buscador** (`web/buscar.js`) revisa esa lista: si escribes una palabra (hasta siglas como CI o PR), su definición sale **arriba** de los resultados. No hay que repetir las definiciones en cada clase.
+- El **mapa de cada clase** muestra una caja **"palabras nuevas en esta clase"** que se arma **sola** con los términos marcados con esa clase (`palabrasDeClase`). Si agrego un término nuevo al glosario con su clase, aparece en su caja sin tocar nada más.
+- Una **prueba** (`herramientas/glosario.test.mjs`) revisa que cada término tenga definición, que apunte a una clase que existe y que no haya repetidos.
+
+> 💡 **Idea:** es el mismo patrón que el motor de referencias: **el dato vive en un solo lugar y la página lo muestra donde haga falta.** Agregar o cambiar una palabra es tocar una sola lista, no cien clases.
+
+> 🎤 **Si te preguntan "¿cómo mantienes las definiciones sin que se repitan por todos lados?":** "Tengo un glosario en un solo archivo, cada palabra con su definición y la clase donde se enseña. El buscador la muestra y cada clase arma sola su caja de palabras nuevas desde esa lista. Una prueba revisa que no falte ninguna definición ni apunte a una clase que no existe. Así la fuente de verdad es una sola."
+
 **Preguntas**
 19. Agregaste la carpeta y la lección, pero la clase no aparece en el mapa. ¿Qué te faltó?
 20. ¿Por qué el progreso se guarda con el id de la carpeta (`06`) y no con el número que ve el alumno ("Clase 5")?
+21. Quieres agregar la palabra "endpoint" al glosario para que salga en el buscador y en su clase. ¿Dónde la agregas y qué datos le pones?
 
 ## Ejercicios
 
@@ -399,6 +413,7 @@ La URL:               #/programacion/5     (no el id de atrás; ese queda oculto
 18. Porque con la cuenta gratis GitHub Pages solo publica repositorios públicos, y `estudios` es privado.
 19. Agregarla en `web/cursos.js`: en `CLASES` y en su etapa.
 20. Porque el id no cambia nunca, y el número que se ve es la posición y cambia al reordenar. Si guardara por el número, cada clase nueva correría el progreso de todos. El id fijo evita migrar nada.
+21. En `web/glosario.js`, agregando un objeto a la lista con: `termino`, una `definicion` fácil, `alias` (otras formas de escribirlo) y la `clase` que lo introduce. Nada más: el buscador y la caja de esa clase lo toman solos.
 
 </details>
 
