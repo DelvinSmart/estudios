@@ -23,6 +23,7 @@ service cloud.firestore {
         '116:LECCION.md:4',
         '116:LECCION.md:5',
         '116:LECCION.md:6',
+        '116:LECCION.md:7',
         '01:CLASE-GUIADA.md:1',
         '01:CLASE-GUIADA.md:2',
         '01:CLASE-GUIADA.md:3',
@@ -807,7 +808,7 @@ service cloud.firestore {
         '93:LECCION.md:7'
       ] : []))))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 273 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 79 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 64 : -1)))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 274 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 79 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 64 : -1)))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -967,6 +968,7 @@ service cloud.firestore {
         '86:LECCION.md:6',
         '86:LECCION.md:7',
         '116:LECCION.md:5',
+        '116:LECCION.md:6',
         '01:CLASE-GUIADA.md:1',
         '01:CLASE-GUIADA.md:2',
         '01:CLASE-GUIADA.md:3',
@@ -1432,7 +1434,7 @@ service cloud.firestore {
     function primera(curso) { return (curso == 'programacion' ? '116:LECCION.md:1' : (curso == 'javascript' ? '45:LECCION.md:1' : (curso == 'node' ? '68:LECCION.md:1' : (curso == 'reactnative' ? '54:LECCION.md:1' : (curso == 'kotlin' ? '61:LECCION.md:1' : (curso == 'swift' ? '97:LECCION.md:1' : (curso == 'python' ? '36:LECCION.md:1' : (curso == 'seguridad' ? '22:LECCION.md:1' : (curso == 'ia' ? '30:LECCION.md:1' : (curso == 'agentes' ? '19:LECCION.md:1' : '')))))))))); }
     function inicioDeClase(curso) {
       return (curso == 'programacion' ? {
-        '01:CLASE-GUIADA.md:1': '116:LECCION.md:6',
+        '01:CLASE-GUIADA.md:1': '116:LECCION.md:7',
         '44:LECCION.md:1': '01:CLASE-GUIADA.md:7',
         '02:CLASE-GUIADA.md:1': '44:LECCION.md:6',
         '03:CLASE-GUIADA.md:1': '02:CLASE-GUIADA.md:11',

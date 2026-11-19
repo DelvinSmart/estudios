@@ -86,7 +86,56 @@ function saludar(nombre) {
 
 > 🎙️ **El profesor dice:** si te salió en verde, acabas de programar. Si te salió en rojo, lee el mensaje, arregla y vuelve a probar: **eso también es programar**, y es lo que hacemos todo el día.
 
-## Parte 5. Cómo está hecho este curso (y cómo estudiarlo)
+## Parte 5. Decisiones: el "sí" y el "no"
+
+> 🌎 **En la vida real:** le explicas a un niño cómo cruzar la calle. No le dices solo "cruza". Le dices: **"mira a los dos lados. SI viene un carro, NO cruces; si NO viene, entonces cruza."** Fíjate que tienes que decirle **las dos cosas**: qué hacer cuando **sí** viene y qué hacer cuando **no**. Si solo dices una, el niño se queda sin saber qué hacer en el otro caso.
+
+> 🌎 **Otro ejemplo:** el semáforo. SI está en rojo, te detienes; si está en verde, avanzas. Una regla con su "sí" y su "no".
+
+Esto en programación se llama una **decisión**, y se escribe con `if` ("si", en inglés) y `else` ("si no"). Es, junto con repetir, lo que hace que un programa no sea una lista fija de pasos, sino algo que **reacciona** a lo que pasa.
+
+```text
+si (viene un carro)   → espera
+si no                 → cruza
+```
+
+Dos ideas que te van a ahorrar muchos errores:
+
+1. **La condición tiene que ser completa y clara.** "Si viene un carro" está claro: o viene o no viene. La máquina necesita una pregunta que se pueda responder con **sí o no**, sin "más o menos".
+2. **Piensa siempre los dos caminos.** ¿Qué pasa si **sí**? ¿Y si **no**? Muchos errores de principiante son por olvidar el "si no": el programa funciona cuando todo va bien, pero no sabe qué hacer cuando algo falta.
+
+> 💡 **Idea:** cuando una decisión tiene **varios** casos (rojo, amarillo, verde), se encadenan: `si… si no, si… si no…`. Lo verás a fondo, con código de verdad, en la clase 46 (Decisiones y ciclos).
+
+✍️ **Ahora escribes tú:**
+
+```ejercicio
+titulo: ¿Cruzo o espero?
+lenguaje: js
+pide: Completa `cruzar(vieneCarro)`. Si `vieneCarro` es `true`, devuelve `'espera'`. Si es `false`, devuelve `'cruza'`. Piensa los dos caminos, como con el niño en la calle.
+--- código
+function cruzar(vieneCarro) {
+  // usa if y else
+}
+--- pruebas
+prueba('si viene un carro, espera', () => igual(cruzar(true), 'espera'));
+prueba('si no viene, cruza', () => igual(cruzar(false), 'cruza'));
+--- solución
+function cruzar(vieneCarro) {
+  if (vieneCarro) {
+    return 'espera';
+  } else {
+    return 'cruza';
+  }
+}
+```
+
+```practica
+elige :: ¿Por qué no basta con decirle a la máquina "si viene un carro, espera", sin el "si no"? :: Porque es muy corto :: Porque no sabría qué hacer cuando NO viene un carro: hay que pensar los dos caminos :: Porque el carro no importa
+vf :: Una decisión (if) necesita una condición que se pueda responder con sí o no
+escribe :: Explica con el ejemplo de cruzar la calle qué son el "if" y el "else". :: El "if" (si) es la condición: "si viene un carro". El "else" (si no) es qué hacer en el otro caso: "si no viene, cruza". Hay que decir los dos para que la máquina sepa qué hacer siempre, no solo cuando se cumple la condición.
+```
+
+## Parte 6. Cómo está hecho este curso (y cómo estudiarlo)
 
 > 🌎 **En la vida real:** es como un mapa de senderos en un parque: hay un camino marcado para empezar, miradores (las prácticas) donde compruebas que entendiste, y al final un sello de que completaste la ruta.
 

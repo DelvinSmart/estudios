@@ -9,6 +9,17 @@ import { htmlMapa, htmlProgreso, activarMapas } from '../mapa-islas.js';
 import { app, ponerMigas, escapar, enLinea, dos } from '../pantalla.js';
 import { conteo, ORDEN, rutaDoc, etapaDe, cursoDeClase, ordenDe, prendidos, claseActual, estadoClase, ETIQUETA_ESTADO, numeroEnCurso, numeroEtapa, migaEtapa, cortoClase } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
+import { palabrasDeClase } from '../glosario.js';
+
+// La caja "palabras nuevas en esta clase": se arma sola con las del glosario marcadas con esta clase.
+function cajaPalabras(num) {
+  const ps = palabrasDeClase(num);
+  if (!ps.length) return '';
+  return `<details class="palabras-nuevas">
+    <summary class="mono">📖 palabras nuevas en esta clase (${ps.length})</summary>
+    <dl>${ps.map((e) => `<dt>${escapar(e.termino)}</dt><dd>${escapar(e.definicion)}</dd>`).join('')}</dl>
+  </details>`;
+}
 
 // ---------- pantalla 1: el mapa grande ----------
 
@@ -203,6 +214,7 @@ export async function vistaClase(num, doc) {
         ${num === '09' ? '<a class="boton" href="#/laboratorio">🧪 laboratorio de CRUD</a>' : ''}
       </div>
     </section>
+    ${cajaPalabras(num)}
     <div id="intro"></div>
     ${htmlMapa({ paradas, final, clase: 'mapa-partes' })}
     ${navegarClases(num)}`;

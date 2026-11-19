@@ -349,6 +349,12 @@ a:hover { text-decoration: underline; }
 .resultado > .mono { flex-shrink: 0; font-size: 0.8rem; padding-top: 2px; }
 .resultado mark { background: color-mix(in srgb, var(--amarillo) 35%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; }
 .glosario-def { border-left: 3px solid var(--acento); background: color-mix(in srgb, var(--acento) 7%, transparent); margin: 2px 0; }
+.palabras-nuevas { margin: 14px 0; border: 1px solid var(--borde); border-radius: 10px; padding: 8px 14px; background: color-mix(in srgb, var(--acento) 5%, transparent); }
+.palabras-nuevas > summary { cursor: pointer; font-size: 0.85rem; }
+.palabras-nuevas dl { margin: 10px 0 2px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; }
+.palabras-nuevas dt { font-weight: 600; }
+.palabras-nuevas dd { margin: 0; color: var(--tenue); }
+@media (max-width: 600px) { .palabras-nuevas dl { grid-template-columns: 1fr; gap: 2px; } .palabras-nuevas dd { margin: 0 0 8px; } }
 .glosario-def .glosario-ir { white-space: nowrap; }
 
 /* ---------- 8. Compu grande: el camino va en zigzag ---------- */

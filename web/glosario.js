@@ -96,7 +96,104 @@ export const GLOSARIO = [
     definicion: 'Un kit de herramientas para construir sobre algo (un sistema, un servicio): librerías, programas y ejemplos juntos.' },
   { termino: 'App Check', alias: ['app check', 'appcheck'], clase: '108',
     definicion: 'Un control de Firebase que deja usar el servidor solo desde tu sitio de verdad, no desde un programa que copió tu configuración.' },
+
+  // Pruebas (clase 02)
+  { termino: 'suite de pruebas', alias: ['suite', 'la suite'], clase: '02',
+    definicion: 'El conjunto completo de pruebas de un proyecto, todas juntas. "Pasó la suite" = pasaron todas.' },
+  { termino: 'mock', alias: ['mocks', 'pieza falsa'], clase: '02',
+    definicion: 'Una pieza falsa que reemplaza a una real durante una prueba (por ejemplo, para no llamar de verdad a internet). Como un muñeco de pruebas de choque.' },
+  { termino: 'regresión', alias: ['regresion'], clase: '02',
+    definicion: 'Cuando algo que ya funcionaba se vuelve a dañar por un cambio nuevo. Las pruebas sirven para atraparla.' },
+  { termino: 'caso borde', alias: ['casos borde', 'edge case'], clase: '02',
+    definicion: 'El límite de una regla, donde las cosas suelen fallar: el valor cero, una lista vacía, justo la fecha del corte.' },
+  { termino: 'E2E', alias: ['e2e', 'punta a punta', 'end to end'], clase: '02',
+    definicion: 'Prueba "de punta a punta": usa la app entera como lo haría una persona. Es la más completa, pero lenta; por eso se hacen pocas.' },
+
+  // JavaScript (clases 45-50)
+  { termino: 'closure', alias: ['closures', 'cierre'], clase: '47',
+    definicion: 'Una función que "se acuerda" de las variables de donde nació, aunque se use después y en otro lado.' },
+  { termino: 'callback', alias: ['callbacks'], clase: '47',
+    definicion: 'Una función que le pasas a otra para que la llame cuando termine o cuando pase algo.' },
+  { termino: 'DOM', alias: ['dom'], clase: '81',
+    definicion: 'El árbol de todo lo que hay en una página web. JavaScript lo cambia para que la página se mueva sin recargar.' },
+
+  // React / móvil (clases 54-60)
+  { termino: 'hook', alias: ['hooks'], clase: '55',
+    definicion: 'En React, una función especial (useState, useEffect…) que le da a un componente memoria o la capacidad de reaccionar a cambios.' },
+  { termino: 'Expo', alias: ['expo'], clase: '57',
+    definicion: 'El framework que se usa para hacer, correr y publicar apps de React Native sin pelearse con las herramientas de cada teléfono.' },
+  { termino: 'AsyncStorage', alias: ['asyncstorage'], clase: '58',
+    definicion: 'La "libretita" donde una app de React Native guarda datos simples en el teléfono, que siguen ahí al cerrarla.' },
+
+  // Node / backend (clases 68-76)
+  { termino: 'Express', alias: ['express'], clase: '70',
+    definicion: 'La librería más usada para hacer un servidor web en Node.js: define las rutas (endpoints) y qué responde cada una.' },
+  { termino: 'middleware', alias: ['middlewares'], clase: '71',
+    definicion: 'Una función que se mete en medio de cada pedido al servidor para revisarlo o cambiarlo antes de responder (por ejemplo, ver si entraste).' },
+  { termino: 'DNS', alias: ['dns'], clase: '107',
+    definicion: 'La "guía telefónica" de internet: convierte un nombre como google.com en la dirección numérica del servidor.' },
+  { termino: 'webhook', alias: ['webhooks'], clase: '107',
+    definicion: 'Un aviso automático que un servicio le manda a tu servidor cuando pasa algo (por ejemplo, "se hizo un pago"), llamando a una URL tuya.' },
+
+  // Kotlin / Swift (clases 61-106)
+  { termino: 'corrutina', alias: ['corrutinas', 'coroutine'], clase: '65',
+    definicion: 'En Kotlin, la forma de hacer tareas que tardan (pedir datos) sin congelar la pantalla, parecido a async/await.' },
+  { termino: 'Compose', alias: ['jetpack compose'], clase: '66',
+    definicion: 'La forma moderna de dibujar pantallas en Android: describes cómo se ve según los datos y el sistema la dibuja (declarativa).' },
+  { termino: 'ViewModel', alias: ['viewmodel'], clase: '66',
+    definicion: 'En Android, la pieza que guarda el estado de una pantalla y sobrevive aunque gires el teléfono.' },
+  { termino: 'opcional', alias: ['opcionales', 'optional'], clase: '98',
+    definicion: 'En Swift, un valor que puede tener algo o no tener nada (nil). Obliga a revisar "¿y si no hay?" antes de usarlo.' },
+  { termino: 'struct', alias: ['structs'], clase: '100',
+    definicion: 'Un molde para datos que se copia al pasarlo (no se comparte). En Swift se usa muchísimo.' },
+  { termino: 'SwiftUI', alias: ['swiftui'], clase: '102',
+    definicion: 'La forma moderna de dibujar pantallas en el iPhone: describes cómo se ven según los datos (declarativa). Solo existe en aparatos Apple.' },
+  { termino: 'Xcode', alias: ['xcode'], clase: '97',
+    definicion: 'El programa de Apple (solo para Mac) con el que se arman, prueban y publican las apps de iPhone.' },
+
+  // Python (clases 36-43)
+  { termino: 'venv', alias: ['entorno virtual'], clase: '41',
+    definicion: 'Una "cajita" aparte para las librerías de un proyecto de Python, para que no se mezclen con las de otros.' },
+  { termino: 'pip', alias: [], clase: '41',
+    definicion: 'El instalador de librerías de Python, como npm lo es de Node.' },
+  { termino: 'pytest', alias: [], clase: '43',
+    definicion: 'La herramienta más usada para escribir y correr pruebas en Python.' },
+
+  // Seguridad (clases 22-24, 107-115)
+  { termino: 'sal', alias: ['salt'], clase: '22',
+    definicion: 'Un texto al azar que se añade a cada contraseña antes de sacar su hash, para que dos claves iguales no den la misma huella.' },
+  { termino: 'cifrar', alias: ['cifrado', 'encriptar'], clase: '109',
+    definicion: 'Volver ilegible un texto con una llave, para que solo quien tenga la llave lo pueda leer. A diferencia del hash, el cifrado SÍ se puede deshacer (con la llave).' },
+  { termino: 'firma digital', alias: ['firma', 'firmar'], clase: '109',
+    definicion: 'Una marca que prueba quién hizo algo y que nadie lo cambió después. Cualquiera la puede comprobar, pero solo el dueño la puede hacer.' },
+  { termino: 'llave pública y privada', alias: ['llave publica', 'clave pública', 'par de llaves'], clase: '109',
+    definicion: 'Un par que va junto: la pública la puede tener todo el mundo (para comprobar o cifrarte algo) y la privada solo tú (para firmar o descifrar).' },
+  { termino: 'AES', alias: ['aes'], clase: '109',
+    definicion: 'El método de cifrado simétrico más usado: la misma llave cifra y descifra. Bueno para guardar datos, no para contraseñas.' },
+  { termino: 'HMAC', alias: ['hmac'], clase: '109',
+    definicion: 'Una firma con una llave secreta compartida: prueba que un mensaje viene de quien dice y no fue cambiado. Es lo que firma un JWT con HS256.' },
+  { termino: 'CSRF', alias: ['csrf'], clase: '23',
+    definicion: 'Un ataque donde otro sitio hace que tu navegador mande un pedido a una app donde ya entraste. Se frena con SameSite y tokens.' },
+  { termino: 'path traversal', alias: ['path-traversal'], clase: '107',
+    definicion: 'Colar algo como ../../ en un nombre de archivo para salir de la carpeta permitida y leer archivos que no debías.' },
+  { termino: 'SSRF', alias: ['ssrf'], clase: '107',
+    definicion: 'Engañar al servidor para que pida una dirección interna por ti, usando los permisos que él tiene y tú no.' },
+  { termino: 'deep link', alias: ['deep links', 'enlace profundo'], clase: '110',
+    definicion: 'Un enlace que abre una pantalla concreta dentro de una app del teléfono. Hay que desconfiar de lo que traiga.' },
+  { termino: 'jailbreak', alias: ['root del teléfono'], clase: '110',
+    definicion: 'Quitarle los candados a un teléfono para tener control total. Una app no debe confiar en un teléfono así.' },
+  { termino: 'TCP', alias: ['tcp'], clase: '112',
+    definicion: 'El "apretón de manos" con el que dos computadoras abren una conexión por internet antes de mandarse datos.' },
+  { termino: 'firewall', alias: ['cortafuegos'], clase: '112',
+    definicion: 'Un portero de red que deja pasar solo las conexiones permitidas y bloquea el resto.' },
 ];
+
+// Las palabras que introduce una clase (su id): las que se enseñan ahí. Sirve para la caja
+// "palabras nuevas en esta clase", que se arma sola desde aquí. Si agregas un término al glosario
+// con su clase, aparece en la caja de esa clase sin tocar nada más.
+export function palabrasDeClase(id) {
+  return GLOSARIO.filter((e) => e.clase === id);
+}
 
 // Busca entradas que coincidan con una palabra ya normalizada (sin tildes, minúsculas).
 export function buscarEnGlosario(palabraSinTildes) {
