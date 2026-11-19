@@ -83,6 +83,12 @@ Toda prueba hace la misma pregunta:
 | Mock | Una pieza falsa que reemplaza a una real (por ejemplo, para no llamar a internet) |
 | CI | La máquina que corre las pruebas sola en cada subida (Tema 04) |
 
+> 📖 **Palabra nueva: "pasaron", "todo pasó", "todo en verde".** Cuando yo (o cualquier programador) digo **"las pruebas pasaron"**, **"pasaron todas"**, **"todo pasó"** o **"está todo en verde"**, es lo mismo: se corrieron **todas** las pruebas y **cada una coincidió** con lo esperado, así que, hasta donde esas pruebas revisan, el código **funciona bien**. El **"todo"** es el conjunto completo de pruebas (la **suite**: todas juntas), no una sola. Lo contrario es **"falló una"** o **"salió en rojo"**: al menos una no coincidió, y hay que ir a mirarla.
+>
+> ⚠️ **Ojo con una trampa:** "pasaron todas" **no** quiere decir que el programa sea perfecto. Quiere decir que lo que **esas** pruebas revisan está bien. Si no hay una prueba para cierto caso, ese caso puede estar roto y las pruebas igual "pasan". Por eso se dice: *las pruebas que pasan dan confianza, no garantía.*
+>
+> 🌎 **En la vida real:** es como la revisión del carro con una lista de 20 puntos. "Pasó todo" es que los 20 puntos están bien, no que el carro nunca se vaya a dañar por algo que no estaba en la lista.
+
 ## 5. Los tres tipos
 
 > 🌎 **En la vida real:** construir un carro:

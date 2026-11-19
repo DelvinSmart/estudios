@@ -220,6 +220,16 @@ git switch -c mi-rama       # crear una rama nueva y pasarte a ella
 git switch main             # cambiarte a otra rama
 ```
 
+> 📖 **Palabra nueva: fast-forward (avance directo).** Cuando unes tu rama con `main` y **nadie tocó `main`** mientras tú trabajabas, Git no inventa un commit de unión: solo **mueve la etiqueta `main` hacia adelante** hasta tu último commit, como correr el marcapáginas unas hojas. Eso es un **fast-forward**. Si en cambio `main` avanzó por otro lado, Git tiene que hacer un **merge** de verdad (juntar las dos historias), y ahí pueden salir **conflictos**.
+>
+> 🌎 **Así entra cada cambio de este mismo curso** (por ejemplo, la clase que estás leyendo):
+> 1. Se crea una rama aparte, por ejemplo `auditoria-2026-11-19`, para no tocar `main` mientras se trabaja.
+> 2. Se hacen los `commit` ahí, con sus mensajes.
+> 3. Se corren las pruebas. Si **todo pasó** (Tema 02), se vuelve a `main` y se une: como nadie más tocó `main`, es un **fast-forward**.
+> 4. `git push` sube `main` a GitHub; ahí el **CI** (Tema 04) corre las pruebas solo, y si quedan verdes, la página se publica.
+>
+> 🌎 **En la vida real:** el fast-forward es como alcanzar a un amigo que se adelantó en línea recta: caminas hasta donde está y ya están juntos, sin desvíos. El merge con conflictos es cuando los dos tomaron caminos distintos y hay que decidir, cruce por cruce, cuál queda.
+
 ## 7. Práctica guiada (sin tocar la app)
 
 > 🌎 **En la vida real:** es el simulador de vuelo de los pilotos: aprendes a aterrizar en una pantalla antes de subirte a un avión con pasajeros. Aquí practicas con una carpeta de mentira.
