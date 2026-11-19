@@ -494,7 +494,15 @@ service cloud.firestore {
         '98:LECCION.md:1',
         '98:LECCION.md:2',
         '98:LECCION.md:3',
-        '98:LECCION.md:4'
+        '98:LECCION.md:4',
+        '99:LECCION.md:1',
+        '99:LECCION.md:2',
+        '99:LECCION.md:3',
+        '99:LECCION.md:4',
+        '100:LECCION.md:1',
+        '100:LECCION.md:2',
+        '100:LECCION.md:3',
+        '100:LECCION.md:4'
       ] : (curso == 'python' ? [
         '36:LECCION.md:1',
         '36:LECCION.md:2',
@@ -713,7 +721,7 @@ service cloud.firestore {
         '93:LECCION.md:7'
       ] : []))))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 48 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 8 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 33 : (curso == 'ia' ? 69 : (curso == 'agentes' ? 63 : -1)))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 266 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 48 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 16 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 33 : (curso == 'ia' ? 69 : (curso == 'agentes' ? 63 : -1)))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -1117,7 +1125,13 @@ service cloud.firestore {
         '97:LECCION.md:3',
         '98:LECCION.md:1',
         '98:LECCION.md:2',
-        '98:LECCION.md:3'
+        '98:LECCION.md:3',
+        '99:LECCION.md:1',
+        '99:LECCION.md:2',
+        '99:LECCION.md:3',
+        '100:LECCION.md:1',
+        '100:LECCION.md:2',
+        '100:LECCION.md:3'
       ] : (curso == 'python' ? [
         '36:LECCION.md:1',
         '36:LECCION.md:2',
@@ -1333,7 +1347,9 @@ service cloud.firestore {
         '89:LECCION.md:1': '67:LECCION.md:4',
         '96:LECCION.md:1': '89:LECCION.md:7'
       } : (curso == 'swift' ? {
-        '98:LECCION.md:1': '97:LECCION.md:4'
+        '98:LECCION.md:1': '97:LECCION.md:4',
+        '99:LECCION.md:1': '98:LECCION.md:4',
+        '100:LECCION.md:1': '99:LECCION.md:4'
       } : (curso == 'python' ? {
         '37:LECCION.md:1': '36:LECCION.md:5',
         '38:LECCION.md:1': '37:LECCION.md:5',
