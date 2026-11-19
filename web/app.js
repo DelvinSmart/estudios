@@ -13,6 +13,7 @@
 // Cada pantalla vive en su propio archivo (web/vistas/). Este archivo solo decide cuál dibujar.
 
 import { CURSOS } from './cursos.js';
+import { normalizarRuta, hashDeClase } from './rutas.js';
 import { textoPlano } from './lector.js';
 import { leerTema, guardarTema } from './guardado.js';
 import { prepararBuscador } from './buscar.js';
@@ -44,7 +45,8 @@ function ponerBotonVolver(mostrar) {
 }
 
 async function dibujar() {
-  const partesRuta = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
+  // Acepta la URL bonita (#/programacion/5) y la vieja (#/clase/44): las dos llevan a la misma clase.
+  const partesRuta = normalizarRuta(location.hash.replace(/^#\/?/, '').split('/').filter(Boolean));
   // Recordar la última pantalla de estudio (mapa, etapa, clase o parte) para poder volver a ella.
   // En las demás (progreso, cuenta, certificado…), arriba a la derecha aparece "← volver a donde estaba".
   const fueraDelEstudio = PANTALLAS_SUELTAS.includes(partesRuta[0]);
@@ -69,6 +71,14 @@ async function dibujar() {
     else vistaInicio();
   } catch (err) {
     mostrarError(err);
+  }
+  // La barra de direcciones muestra siempre la forma bonita (#/curso/número), igual que la pantalla.
+  // El progreso se guarda con el id fijo de atrás; esto solo cambia lo que se VE en la URL.
+  if (partesRuta[0] === 'clase') {
+    const bonito = hashDeClase(partesRuta[1], partesRuta[2], partesRuta[3]);
+    if (bonito && location.hash !== bonito) {
+      try { history.replaceState(null, '', bonito); } catch (e) { /* por si el navegador no deja */ }
+    }
   }
   window.scrollTo({ top: 0 });
   document.title = `${textoPlano(migas.lastElementChild?.textContent || 'Mapa')} · Mapa de estudios`;

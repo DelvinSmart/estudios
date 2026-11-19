@@ -11,13 +11,12 @@
 // Importa SOLO datos (cursos.js) y texto.js: nada del navegador. Así se puede probar en Node
 // (herramientas/referencias.test.mjs) y se usa también al leer los .md.
 
-import { CLASES, CURSOS, ETAPAS, cursoDeEtapa, clasesDelCurso } from './cursos.js';
+import { CLASES, CURSOS } from './cursos.js';
 import { escapar } from './texto.js';
+import { cursoDeClase, numeroDeClase, hashDeClase } from './rutas.js';
 
-// El número que se ve en el mapa, sin depender del navegador (igual que numeroEnCurso de avance.js).
-const etapaDe = (num) => ETAPAS.find((e) => e.clases.includes(num));
-export const cursoDeClase = (num) => cursoDeEtapa(etapaDe(num) || {});
-export const numeroEnCurso = (num) => String(clasesDelCurso(cursoDeClase(num)).indexOf(num) + 1).padStart(2, '0');
+// El número que se ve en el mapa, con dos dígitos (01, 02…), como en el resto de la página.
+export const numeroEnCurso = (num) => String(numeroDeClase(num)).padStart(2, '0');
 
 // "Tema 07", "Temas 02 y 03", "clase 53", "clases 61 a 65", "Tema 11, 12 y 13".
 // Dos o tres dígitos: las clases van de 00 a 115. (Antes solo tomaba dos, y las 100-115 quedaban sin enlazar.)
@@ -27,7 +26,7 @@ const HAY = new RegExp(PATRON.source); // sin la g: para preguntar sin mover las
 
 function enlace(num) {
   const c = CLASES[num];
-  return `<a class="ref-clase" href="#/clase/${num}" title="${escapar(`${CURSOS[cursoDeClase(num)].titulo} · ${numeroEnCurso(num)} ${c.titulo}`)}">${numeroEnCurso(num)}</a>`;
+  return `<a class="ref-clase" href="${hashDeClase(num)}" title="${escapar(`${CURSOS[cursoDeClase(num)].titulo} · ${numeroEnCurso(num)} ${c.titulo}`)}">${numeroEnCurso(num)}</a>`;
 }
 
 // Arma el HTML de una referencia: "Tema 07" → "Tema <a>08</a>", y "de Python" si es de otro curso.
