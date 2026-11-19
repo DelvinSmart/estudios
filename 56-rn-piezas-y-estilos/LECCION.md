@@ -150,6 +150,80 @@ function direccion(estilo) {
 }
 ```
 
+📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+```snack
+titulo: Tres tarjetas en una fila, con Flexbox
+pide: Las tres tarjetas salen una debajo de la otra. Con **Flexbox**, ponlas **en una fila** (`flexDirection: 'row'`), que cada una ocupe **la misma parte** del ancho (`flex: 1`) y que tengan **aire entre ellas** (`gap`).
+--- código
+import { Text, View, StyleSheet } from 'react-native';
+
+function Dato({ titulo, valor }) {
+  return (
+    <View style={estilos.tarjeta}>
+      <Text style={estilos.titulo}>{titulo}</Text>
+      <Text style={estilos.valor}>{valor}</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <View style={estilos.pantalla}>
+      <View style={estilos.fila}>
+        <Dato titulo="Viajes" valor="14" />
+        <Dato titulo="Ganado" valor="R$ 312" />
+        <Dato titulo="Gastos" valor="R$ 95" />
+      </View>
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, justifyContent: 'center', padding: 16, backgroundColor: '#0f141b' },
+  fila: {},
+  tarjeta: { padding: 14, borderRadius: 14, backgroundColor: '#18212c' },
+  titulo: { fontSize: 13, color: '#8796aa' },
+  valor: { fontSize: 20, fontWeight: '700', color: '#e6edf3' },
+});
+--- comprobar
+- Las tres tarjetas están en una sola fila, una al lado de la otra
+- Las tres tienen el mismo ancho
+- Hay aire entre una tarjeta y la otra
+- Si achicas la vista de la app, siguen entrando las tres
+--- solución
+import { Text, View, StyleSheet } from 'react-native';
+
+function Dato({ titulo, valor }) {
+  return (
+    <View style={estilos.tarjeta}>
+      <Text style={estilos.titulo}>{titulo}</Text>
+      <Text style={estilos.valor}>{valor}</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <View style={estilos.pantalla}>
+      <View style={estilos.fila}>
+        <Dato titulo="Viajes" valor="14" />
+        <Dato titulo="Ganado" valor="R$ 312" />
+        <Dato titulo="Gastos" valor="R$ 95" />
+      </View>
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, justifyContent: 'center', padding: 16, backgroundColor: '#0f141b' },
+  fila: { flexDirection: 'row', gap: 10 },
+  tarjeta: { flex: 1, padding: 14, borderRadius: 14, backgroundColor: '#18212c' },
+  titulo: { fontSize: 13, color: '#8796aa' },
+  valor: { fontSize: 20, fontWeight: '700', color: '#e6edf3' },
+});
+```
+
 ```practica
 vf :: En React Native los estilos se escriben como objetos de JavaScript
 vf :: En React Native, flexDirection es row por defecto, igual que en la web

@@ -257,6 +257,10 @@ function pintarVista(caja, md, carpeta) {
       const titulo = (code.textContent.match(/^t[ií]tulo:\s*(.*)$/mi) || [])[1] || 'ejercicio';
       const pruebas = (code.textContent.match(/^\s*prueba\(/gm) || []).length;
       code.parentElement.outerHTML = `<p class="panel-nota">🧩 Ejercicio de código: ${esc(titulo)} (${pruebas} ${pruebas === 1 ? 'prueba' : 'pruebas'}) · en la página se escribe y se prueba</p>`;
+    } else if (code.className.includes('language-snack')) {
+      // La app en Expo Snack: aquí, su título; en la página se abre y se marca la lista.
+      const titulo = (code.textContent.match(/^t[ií]tulo:\s*(.*)$/mi) || [])[1] || 'la app de verdad';
+      code.parentElement.outerHTML = `<p class="panel-nota">📱 App en Expo Snack: ${esc(titulo)} · en la página se abre y se comprueba</p>`;
     } else if (window.hljs) {
       try { window.hljs.highlightElement(code); } catch (e) {}
     }

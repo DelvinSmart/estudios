@@ -148,6 +148,87 @@ function crearContexto(porDefecto) {
 }
 ```
 
+📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+```snack
+titulo: El modo oscuro, compartido con Context
+pide: El botón cambia el modo, pero la `Tarjeta` no se entera: tiene los colores fijos. Crea un **Context** con el tema, ponlo alrededor de todo con un `Provider`, y haz que la `Tarjeta` lo lea con `useContext`, **sin pasarle props**.
+--- código
+import { useState } from 'react';
+import { Text, View, Pressable, StyleSheet } from 'react-native';
+
+const oscuro = { fondo: '#0f141b', tarjeta: '#18212c', texto: '#e6edf3' };
+const claro = { fondo: '#f5f7fa', tarjeta: '#ffffff', texto: '#1d232b' };
+
+function Tarjeta() {
+  const tema = oscuro; // siempre oscuro: tiene que leer el tema compartido
+  return (
+    <View style={[estilos.tarjeta, { backgroundColor: tema.tarjeta }]}>
+      <Text style={{ color: tema.texto, fontSize: 18 }}>Hoy: R$ 312,00</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  const [esOscuro, setEsOscuro] = useState(true);
+  const tema = esOscuro ? oscuro : claro;
+  return (
+    <View style={[estilos.pantalla, { backgroundColor: tema.fondo }]}>
+      <Tarjeta />
+      <Pressable onPress={() => setEsOscuro(!esOscuro)}>
+        <Text style={{ color: tema.texto, textDecorationLine: 'underline' }}>Cambiar a modo {esOscuro ? 'claro' : 'oscuro'}</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 20 },
+  tarjeta: { padding: 20, borderRadius: 14, alignSelf: 'stretch' },
+});
+--- comprobar
+- Al tocar "Cambiar a modo claro", cambia el fondo de la pantalla
+- La tarjeta también cambia: fondo blanco y texto oscuro
+- Al volver a modo oscuro, las dos vuelven
+- `Tarjeta` no recibe el tema por props: lo lee con `useContext`
+--- solución
+import { createContext, useContext, useState } from 'react';
+import { Text, View, Pressable, StyleSheet } from 'react-native';
+
+const oscuro = { fondo: '#0f141b', tarjeta: '#18212c', texto: '#e6edf3' };
+const claro = { fondo: '#f5f7fa', tarjeta: '#ffffff', texto: '#1d232b' };
+const TemaContext = createContext(oscuro);
+
+function Tarjeta() {
+  const tema = useContext(TemaContext); // lo lee del Provider de arriba
+  return (
+    <View style={[estilos.tarjeta, { backgroundColor: tema.tarjeta }]}>
+      <Text style={{ color: tema.texto, fontSize: 18 }}>Hoy: R$ 312,00</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  const [esOscuro, setEsOscuro] = useState(true);
+  const tema = esOscuro ? oscuro : claro;
+  return (
+    <TemaContext.Provider value={tema}>
+      <View style={[estilos.pantalla, { backgroundColor: tema.fondo }]}>
+        <Tarjeta />
+        <Pressable onPress={() => setEsOscuro(!esOscuro)}>
+          <Text style={{ color: tema.texto, textDecorationLine: 'underline' }}>Cambiar a modo {esOscuro ? 'claro' : 'oscuro'}</Text>
+        </Pressable>
+      </View>
+    </TemaContext.Provider>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 20 },
+  tarjeta: { padding: 20, borderRadius: 14, alignSelf: 'stretch' },
+});
+```
+
 ```practica
 vf :: Context permite compartir datos entre muchas pantallas sin pasar props por cada nivel
 vf :: useContext solo funciona dentro del mismo archivo donde se creó el contexto

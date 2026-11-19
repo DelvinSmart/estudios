@@ -243,6 +243,79 @@ async function leerJSON(almacen, clave, porDefecto) {
 }
 ```
 
+📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+```snack
+titulo: Un contador que no se olvida
+pide: Este contador vuelve a 0 cada vez que la app se abre de nuevo. Usa **AsyncStorage** para guardarlo: léelo al abrir (con `useEffect`) y guárdalo cada vez que cambia. Para probarlo, toca algunas veces y después **recarga la vista** de Snack (el botón de recargar, o cambia algo del código).
+dependencias: @react-native-async-storage/async-storage
+--- código
+import { useState } from 'react';
+import { Text, View, Pressable, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [viajes, setViajes] = useState(0);
+
+  return (
+    <View style={estilos.pantalla}>
+      <Text style={estilos.numero}>{viajes}</Text>
+      <Pressable style={estilos.boton} onPress={() => setViajes(viajes + 1)}>
+        <Text style={estilos.textoBoton}>＋ Viaje</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, backgroundColor: '#0f141b' },
+  numero: { fontSize: 56, color: '#e6edf3' },
+  boton: { backgroundColor: '#7ee787', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 12 },
+  textoBoton: { fontSize: 18, fontWeight: '700', color: '#0f141b' },
+});
+--- comprobar
+- Al tocar "＋ Viaje", el número sube
+- Después de recargar la vista, el número sigue donde estaba
+- Mientras se lee lo guardado, no aparece un 0 que después salta al número de verdad
+--- solución
+import { useEffect, useState } from 'react';
+import { Text, View, Pressable, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const CLAVE = 'viajes:v1';
+
+export default function App() {
+  const [viajes, setViajes] = useState(null); // null: todavía no se leyó
+
+  useEffect(() => {
+    AsyncStorage.getItem(CLAVE).then((guardado) => setViajes(Number(guardado) || 0));
+  }, []);
+
+  const sumar = () => {
+    const nuevo = viajes + 1;
+    setViajes(nuevo);
+    AsyncStorage.setItem(CLAVE, String(nuevo));
+  };
+
+  if (viajes === null) return <View style={estilos.pantalla} />; // sin mostrar un 0 falso
+
+  return (
+    <View style={estilos.pantalla}>
+      <Text style={estilos.numero}>{viajes}</Text>
+      <Pressable style={estilos.boton} onPress={sumar}>
+        <Text style={estilos.textoBoton}>＋ Viaje</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, backgroundColor: '#0f141b' },
+  numero: { fontSize: 56, color: '#e6edf3' },
+  boton: { backgroundColor: '#7ee787', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 12 },
+  textoBoton: { fontSize: 18, fontWeight: '700', color: '#0f141b' },
+});
+```
+
 ```practica
 vf :: AsyncStorage guarda datos que siguen ahí al cerrar la app
 vf :: AsyncStorage está cifrado y es ideal para guardar contraseñas

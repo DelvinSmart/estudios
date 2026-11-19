@@ -199,6 +199,50 @@ function crearContador() {
 }
 ```
 
+📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+```snack
+titulo: Tu primer Snack
+pide: Esta es la app más chica posible. Cambia el saludo por **tu nombre**, cambia el **color de fondo** por otro que te guste (`backgroundColor`), y agrega un segundo texto debajo que diga **"Mi primera app en React Native"**. Mira cómo la app cambia mientras escribes.
+--- código
+import { Text, View, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={estilos.pantalla}>
+      <Text style={estilos.saludo}>Hola, conductor</Text>
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#0f141b' },
+  saludo: { fontSize: 28, fontWeight: '700', color: '#7ee787' },
+});
+--- comprobar
+- El saludo dice tu nombre
+- El fondo es del color que elegiste
+- Debajo aparece "Mi primera app en React Native"
+- Elegiste iOS o Android arriba de la vista, y la app se ve también así
+--- solución
+import { Text, View, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={estilos.pantalla}>
+      <Text style={estilos.saludo}>Hola, Delvin</Text>
+      <Text style={estilos.texto}>Mi primera app en React Native</Text>
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: '#1d2a3a' },
+  saludo: { fontSize: 28, fontWeight: '700', color: '#7ee787' },
+  texto: { fontSize: 16, color: '#e6edf3' },
+});
+```
+
 ```practica
 vf :: Expo Snack permite escribir React Native en el navegador sin instalar nada
 vf :: Snack es de pago

@@ -85,6 +85,68 @@ function cambiarValor(lista, id, valor) {
 }
 ```
 
+📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+```snack
+titulo: Un contador de viajes
+pide: La app muestra "0 viajes" y un botón. Usa `useState` para que cada toque en **"＋ Viaje"** sume uno, y agrega un botón **"Empezar el día"** que vuelva a 0. Ojo con el plural: "1 viaje", "2 viajes".
+--- código
+import { useState } from 'react';
+import { Text, View, Pressable, StyleSheet } from 'react-native';
+
+export default function App() {
+  const viajes = 0; // cámbialo por useState
+
+  return (
+    <View style={estilos.pantalla}>
+      <Text style={estilos.numero}>{viajes} viajes</Text>
+      <Pressable style={estilos.boton} onPress={() => {}}>
+        <Text style={estilos.textoBoton}>＋ Viaje</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, backgroundColor: '#0f141b' },
+  numero: { fontSize: 40, color: '#e6edf3' },
+  boton: { backgroundColor: '#7ee787', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 12 },
+  textoBoton: { fontSize: 18, fontWeight: '700', color: '#0f141b' },
+});
+--- comprobar
+- Al abrirla dice "0 viajes"
+- Al tocar "＋ Viaje" una vez dice "1 viaje" (en singular)
+- Al tocarlo otra vez dice "2 viajes"
+- "Empezar el día" la vuelve a "0 viajes"
+--- solución
+import { useState } from 'react';
+import { Text, View, Pressable, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [viajes, setViajes] = useState(0);
+
+  return (
+    <View style={estilos.pantalla}>
+      <Text style={estilos.numero}>{viajes} {viajes === 1 ? 'viaje' : 'viajes'}</Text>
+      <Pressable style={estilos.boton} onPress={() => setViajes((v) => v + 1)}>
+        <Text style={estilos.textoBoton}>＋ Viaje</Text>
+      </Pressable>
+      <Pressable onPress={() => setViajes(0)}>
+        <Text style={estilos.enlace}>Empezar el día</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, backgroundColor: '#0f141b' },
+  numero: { fontSize: 40, color: '#e6edf3' },
+  boton: { backgroundColor: '#7ee787', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 12 },
+  textoBoton: { fontSize: 18, fontWeight: '700', color: '#0f141b' },
+  enlace: { fontSize: 16, color: '#8796aa', textDecorationLine: 'underline' },
+});
+```
+
 ```practica
 vf :: Al llamar setViajes, React vuelve a dibujar el componente
 vf :: Hacer gastos.push(nuevo) actualiza la pantalla correctamente

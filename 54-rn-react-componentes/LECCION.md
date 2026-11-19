@@ -241,6 +241,72 @@ function crearLista(gastos, alElegir) {
 }
 ```
 
+📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+```snack
+titulo: Una tarjeta, tres gastos
+pide: Ya está el componente `TarjetaGasto`, pero muestra siempre lo mismo. Haz que reciba **props** (`tipo` y `valor`) y úsalo tres veces con datos distintos: combustible R$ 150, lavado R$ 30 y peaje R$ 12,50.
+--- código
+import { Text, View, StyleSheet } from 'react-native';
+
+function TarjetaGasto() {
+  return (
+    <View style={estilos.tarjeta}>
+      <Text style={estilos.tipo}>combustible</Text>
+      <Text style={estilos.valor}>R$ 150,00</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <View style={estilos.pantalla}>
+      <TarjetaGasto />
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, justifyContent: 'center', padding: 20, gap: 12, backgroundColor: '#0f141b' },
+  tarjeta: { flexDirection: 'row', justifyContent: 'space-between', padding: 16, borderRadius: 14, backgroundColor: '#18212c' },
+  tipo: { fontSize: 16, color: '#e6edf3' },
+  valor: { fontSize: 16, fontWeight: '700', color: '#7ee787' },
+});
+--- comprobar
+- Se ven tres tarjetas, una debajo de la otra
+- Cada una dice su tipo: combustible, lavado y peaje
+- Cada una tiene su valor: R$ 150,00, R$ 30,00 y R$ 12,50
+- `TarjetaGasto` está escrita una sola vez: lo que cambia llega por props
+--- solución
+import { Text, View, StyleSheet } from 'react-native';
+
+function TarjetaGasto({ tipo, valor }) {
+  return (
+    <View style={estilos.tarjeta}>
+      <Text style={estilos.tipo}>{tipo}</Text>
+      <Text style={estilos.valor}>R$ {valor.toFixed(2).replace('.', ',')}</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <View style={estilos.pantalla}>
+      <TarjetaGasto tipo="combustible" valor={150} />
+      <TarjetaGasto tipo="lavado" valor={30} />
+      <TarjetaGasto tipo="peaje" valor={12.5} />
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  pantalla: { flex: 1, justifyContent: 'center', padding: 20, gap: 12, backgroundColor: '#0f141b' },
+  tarjeta: { flexDirection: 'row', justifyContent: 'space-between', padding: 16, borderRadius: 14, backgroundColor: '#18212c' },
+  tipo: { fontSize: 16, color: '#e6edf3' },
+  valor: { fontSize: 16, fontWeight: '700', color: '#7ee787' },
+});
+```
+
 ```practica
 vf :: Un componente puede cambiar las props que recibe
 vf :: Para avisarle algo al padre, el hijo llama una función que el padre le pasó por props
