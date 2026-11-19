@@ -6,10 +6,15 @@
 // js: se corre aquí mismo, con las mismas ayudas que la caja del navegador (prueba, igual, ok).
 // kotlin: se manda al Kotlin Playground de verdad (hace falta internet); el inicio tiene que COMPILAR y fallar.
 // python: el MISMO programa de pruebas que usa la página (web/ejercicio-python.js), con el Python de la computadora.
+// swift: el MISMO programa que arma la página (web/ejercicio-swift.js), compilado con el swift de la Mac (sin internet).
 // ts y html se revisan en el navegador (necesitan el compilador de TypeScript o una página).
 import { readFileSync } from 'node:fs';
 import { leerEjercicio } from '../web/ejercicio.js';
 import { correrKotlin } from '../web/ejercicio-kotlin.js';
+import { armarPrograma as armarSwift, leerRespuesta as leerSwift } from '../web/ejercicio-swift.js';
+import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { AYUDAS_PY, CORREDOR_PY } from '../web/ejercicio-python.js';
 import { spawnSync } from 'node:child_process';
 
@@ -60,8 +65,25 @@ function correrPython(codigo, pruebas) {
   return JSON.parse(json);
 }
 
+// Swift con el swift de la Mac: compila el mismo programa que manda la página y lee la salida con la misma función.
+function correrSwiftLocal(codigo, pruebas) {
+  const { texto, lineasCodigo } = armarSwift(codigo, pruebas);
+  const dir = mkdtempSync(path.join(tmpdir(), 'swift-'));
+  try {
+    writeFileSync(path.join(dir, 'main.swift'), texto);
+    const c = spawnSync('swiftc', ['-o', path.join(dir, 'prog'), path.join(dir, 'main.swift')], { encoding: 'utf8' });
+    const lineas = (t) => (t || '').split('\n');
+    if (c.status !== 0) return leerSwift({ compilo: false, errores: lineas(c.stderr), salida: [], errSalida: [], seCorto: false }, lineasCodigo);
+    const e = spawnSync(path.join(dir, 'prog'), [], { encoding: 'utf8', timeout: 10000 });
+    return leerSwift({ compilo: true, errores: [], salida: lineas(e.stdout), errSalida: lineas(e.stderr), seCorto: Boolean(e.signal) }, lineasCodigo);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
 const correr = (ej, codigo) => {
   if (ej.lenguaje === 'kotlin') return correrKotlin(codigo, ej.pruebas);
+  if (ej.lenguaje === 'swift') return Promise.resolve(correrSwiftLocal(codigo, ej.pruebas));
   if (ej.lenguaje === 'python') return Promise.resolve(correrPython(codigo, ej.pruebas));
   return correrJs(codigo, ej.pruebas);
 };
@@ -73,7 +95,7 @@ for (const archivo of process.argv.slice(2)) {
   const md = readFileSync(archivo, 'utf8');
   for (const m of md.matchAll(/```ejercicio\n([\s\S]*?)\n```/g)) {
     const ej = leerEjercicio(m[1]);
-    if (!['js', 'kotlin', 'python'].includes(ej.lenguaje)) { saltados++; continue; }
+    if (!['js', 'kotlin', 'python', 'swift'].includes(ej.lenguaje)) { saltados++; continue; }
     total++;
     const [sol, ini] = await Promise.all([correr(ej, ej.solucion), correr(ej, ej.codigo)]);
     const solOk = !sol.error && sol.resultados.length > 0 && sol.resultados.every((x) => x.paso);

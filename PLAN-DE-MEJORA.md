@@ -57,6 +57,7 @@ en el aparato y deja ver la solución después de intentarlo.
 - [x] TypeScript (el compilador oficial dentro de la caja: revisa los tipos en modo estricto y explica los errores comunes en español)
 - [x] Python (Pyodide 314, Python 3.14 dentro del navegador: en la caja aislada y en un Worker, así un ciclo sin fin se corta a los 10 s sin trabar la página; errores en español con su línea; `web/ejercicio-python.js`, con sus pruebas en `herramientas/`)
 - [x] Kotlin (Kotlin Playground: corre en los servidores gratuitos de JetBrains; la revisión es por la salida; los errores del compilador, explicados en español; `web/ejercicio-kotlin.js`, con sus pruebas en `herramientas/`)
+- [x] Swift (Compiler Explorer, gratis, con el Swift 6.4.2 de Xcode: la salida sin búfer para que una caída no borre lo impreso, la lista de pruebas antes de correrlas para marcar las que no llegaron, los errores del compilador y las caídas explicados en español; `web/ejercicio-swift.js`, con 10 pruebas en `herramientas/`, una que compila y corre de verdad)
 - [ ] React Native (Snack de Expo para ver la app; la revisión es una lista de comprobación)
 - [x] El panel muestra los ejercicios en la vista previa y no los rompe
 

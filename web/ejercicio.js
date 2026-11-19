@@ -2,7 +2,7 @@
 // En el .md se escriben en un bloque ```ejercicio:
 //
 //   titulo: Suma los gastos de la semana
-//   lenguaje: js                      (js, ts, html, kotlin o python; html puede traer su <style>)
+//   lenguaje: js                      (js, ts, html, kotlin, swift o python; html puede traer su <style>)
 //   pide: Completa total(gastos) para que devuelva la suma de los valores.
 //   --- código
 //   function total(gastos) {
@@ -25,8 +25,10 @@
 // python: corre de verdad en el navegador con Pyodide, dentro de la caja y en un Worker (ver web/ejercicio-python.js).
 // kotlin: no corre en el navegador. El código viaja al Kotlin Playground de JetBrains (gratis) y las pruebas se
 // leen de lo que imprime (ver web/ejercicio-kotlin.js). Allá corre aislado en sus servidores, no en este sitio.
+// swift: igual que kotlin, pero en Compiler Explorer (godbolt.org, gratis), con el Swift de Xcode (ver web/ejercicio-swift.js).
 
 import { correrKotlin } from './ejercicio-kotlin.js';
+import { correrSwift } from './ejercicio-swift.js';
 import { cajaPython, ESPERA_PYTHON_MS, ESPERA_PYTHON_CORRER_MS } from './ejercicio-python.js';
 
 const CLAVE = 'mapa-ejercicio:';
@@ -236,13 +238,15 @@ export function crearEjercicio(texto, id) {
   const probar = async () => {
     const boton = caja.querySelector('.ejercicio-probar');
     boton.disabled = true;
-    const espera = { ts: 'TypeScript está revisando los tipos… (la primera vez tarda unos segundos)', kotlin: 'Kotlin está compilando y corriendo tu código en el Playground de JetBrains… (unos segundos)', python: 'Python está corriendo tu código… (la primera vez baja Python: puede tardar unos segundos)' };
+    const espera = { ts: 'TypeScript está revisando los tipos… (la primera vez tarda unos segundos)', kotlin: 'Kotlin está compilando y corriendo tu código en el Playground de JetBrains… (unos segundos)', swift: 'Swift está compilando y corriendo tu código en Compiler Explorer… (unos segundos; la primera vez, hasta 10)', python: 'Python está corriendo tu código… (la primera vez baja Python: puede tardar unos segundos)' };
     resultado.innerHTML = `<p class="tenue mono">${espera[ej.lenguaje] || 'probando…'}</p>`;
     vista?.remove();
-    const r = ej.lenguaje === 'kotlin' ? await correrKotlin(editor.value, ej.pruebas) : await correrEnCaja(ej, editor.value);
+    const r = ej.lenguaje === 'kotlin' ? await correrKotlin(editor.value, ej.pruebas)
+      : ej.lenguaje === 'swift' ? await correrSwift(editor.value, ej.pruebas)
+      : await correrEnCaja(ej, editor.value);
     boton.disabled = false;
     if (botonVer) { botonVer.disabled = false; botonVer.title = ''; }
-    // En html, la página del alumno se queda a la vista; en js, la caja se borra. Kotlin no usa caja.
+    // En html, la página del alumno se queda a la vista; en js, la caja se borra. Kotlin y Swift no usan caja.
     if (ej.lenguaje === 'html') { vista = r.caja; } else { r.caja?.remove(); }
     const total = r.resultados.length;
     const bien = r.resultados.filter((x) => x.paso).length;
