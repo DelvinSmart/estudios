@@ -235,7 +235,7 @@ export const ETAPAS = [
     clases: ['30', '31', '32', '33', '34', '35', '79', '78', '80', '92'],
   },
   {
-    id: 'agentes', curso: 'agentes', icono: '🤖', titulo: 'Agentes de IA', logos: ['python', 'javascript'],
+    id: 'agentes', curso: 'agentes', icono: '🦾', titulo: 'Agentes de IA', logos: ['python', 'javascript'],
     desc: 'Un curso aparte, con su propio certificado: diseñar, medir y publicar tus propios agentes.',
     clases: ['19', '25', '26', '27', '28', '29', '93'],
   },
@@ -281,7 +281,7 @@ export const CURSOS = {
     nombre: 'IA para programadores: trabajar con Claude, Gemini, OpenCode, Codex y Llama',
   },
   agentes: {
-    id: 'agentes', titulo: 'Agentes de IA', icono: '🤖', prefijo: 'AG', corto: 'Agentes de IA',
+    id: 'agentes', titulo: 'Agentes de IA', icono: '🦾', prefijo: 'AG', corto: 'Agentes de IA',
     nombre: 'Agentes de IA: patrones para diseñar, medir y publicar agentes',
   },
 };

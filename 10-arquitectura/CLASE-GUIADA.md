@@ -577,7 +577,7 @@ escribe :: Cuenta el camino de "Ya pagué" en MVC. :: La vista recibe el toque, 
 
 **Ejemplo real:** el hook `useVehicleFuelLevel` (en `src/hooks/`) junta los abastecimientos y el kilometraje, calcula el nivel del tanque y se lo entrega **listo** a la barra de combustible. La barra (`VehicleFuelGauge`) **solo dibuja** lo que recibe: no calcula nada.
 
-Un **hook** (en React) es una función que empieza con `use…` y le da a un componente datos que se actualizan solos.
+Un **hook** (en React) es una función que empieza con `use…` y deja que un componente guarde estado, reaccione a cambios o reutilice lógica. Cuando ese estado cambia, React vuelve a dibujar el componente: por eso parece que los datos "se actualizan solos".
 
 > 🌎 **En la vida real:** la aguja del tablero solo se mueve a donde le dicen; la computadora lee los sensores, hace las cuentas ("con estos litros te quedan 120 km") y le pasa a la aguja el número listo.
 

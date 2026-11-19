@@ -21,11 +21,15 @@ import { spawnSync } from 'node:child_process';
 const AYUDAS = `const __p=[];const prueba=(n,f)=>__p.push({n,f});const __m=x=>{try{return JSON.stringify(x)}catch{return String(x)}};
 const igual=(o,e)=>{if(__m(o)!==__m(e))throw new Error('se esperaba '+__m(e)+' y salió '+__m(o))};const ok=(c,m)=>{if(!c)throw new Error(m||'no se cumple')};`;
 
+// El código del ejercicio recibe una consola muda propia. Antes se apagaba console.log
+// del programa entero y, como la solución y el inicio corren A LA VEZ (Promise.all),
+// la segunda llamada guardaba la consola ya apagada y la dejaba así para siempre:
+// la herramienta se quedaba muda a mitad de la revisión. Nada global = nada que pisar.
+const CONSOLA_MUDA = { log() {}, info() {}, warn() {}, error() {}, debug() {}, table() {} };
+
 async function correrJs(codigo, pruebas) {
-  const log = console.log;
-  console.log = () => {};
   try {
-    const lista = new Function(`${AYUDAS}${codigo}\n;${pruebas}\n;return __p;`)();
+    const lista = new Function('console', `${AYUDAS}${codigo}\n;${pruebas}\n;return __p;`)(CONSOLA_MUDA);
     const resultados = [];
     for (const p of lista) {
       try {
@@ -38,8 +42,6 @@ async function correrJs(codigo, pruebas) {
     return { error: null, resultados };
   } catch (e) {
     return { error: e.message, resultados: [] };
-  } finally {
-    console.log = log;
   }
 }
 

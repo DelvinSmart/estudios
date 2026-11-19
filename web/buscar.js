@@ -6,7 +6,7 @@ import { numeroEnCurso } from './avance.js';
 import { leerArchivo, partir, textoPlano } from './lector.js';
 
 const sinTildes = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-const escapar = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+import { escapar } from './texto.js';
 
 let indice = null;
 
@@ -17,13 +17,15 @@ async function armarIndice() {
     c.docs.forEach((d, doc) => {
       trabajos.push(leerArchivo(`${c.carpeta}/${d.archivo}`).then((md) => {
         return partir(md).partes.map((p, i) => {
-          const texto = textoPlano(p.md);
+          // Las respuestas no se buscan: si no, el buscador las mostraba antes de intentar.
+          if (/^respuestas/i.test(textoPlano(p.titulo).trim())) return null;
+          const texto = textoPlano(p.md.replace(/<details[\s\S]*?<\/details>/gi, ' '));
           return { num, doc, parte: i + 1, clase: c.titulo, docTitulo: d.titulo, titulo: textoPlano(p.titulo), texto, buscable: sinTildes(p.titulo + ' ' + texto) };
         });
       }).catch(() => []));
     });
   }
-  indice = (await Promise.all(trabajos)).flat();
+  indice = (await Promise.all(trabajos)).flat().filter(Boolean);
   return indice;
 }
 

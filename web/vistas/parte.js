@@ -166,7 +166,11 @@ export async function vistaParte(num, doc, cual) {
 
     botonEntendido.addEventListener('click', async (ev) => {
       const ahora = !estaEntendida(id);
-      marcarEntendida(id, ahora);
+      if (!marcarEntendida(id, ahora)) {
+        // El navegador no dejó guardar (modo privado o almacenamiento lleno): mejor decirlo que mostrar un ✓ falso.
+        avisar('✗ este navegador no dejó guardar el bombillo (¿modo privado o sin espacio?)');
+        return;
+      }
       ev.currentTarget.classList.toggle('activo', ahora);
       ev.currentTarget.textContent = ahora ? '✓ ya lo entendí' : '¿lo entendiste? márcalo';
       app.querySelector('.indice nav a.activa span').textContent = ahora ? '✓' : dos(i);

@@ -110,6 +110,8 @@ service cloud.firestore {
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.nombre is string
         && request.resource.data.nombre.size() >= 5 && request.resource.data.nombre.size() <= 80
+        // Solo letras, espacios, punto, apóstrofo y guion: nada de enlaces, emojis ni símbolos raros.
+        && request.resource.data.nombre.matches("^[\\p{L}\\p{M}][\\p{L}\\p{M} .'-]*$")
         && request.resource.data.emitido == request.time
         && request.resource.data.partes == total(request.resource.data.curso)
         && progresoDe(request.resource.data.curso, request.auth.uid).n == total(request.resource.data.curso)

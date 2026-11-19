@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** una cosa es saber que una ventana se puede forzar; otra es recorrer un edificio completo con un plano, anotar cada riesgo, decir cuál es más grave y entregar un informe para arreglarlo. Eso es una **auditoría**.
 
-> 🎙️ **El profesor dice:** esta es la última clase del curso de seguridad. Vas a aprender a hacer lo que hicimos con Copiloto Driver antes de publicarlo: una auditoría por categorías, con severidad, pruebas y correcciones. También vas a ver el abuso de costos en la nube, las herramientas de un *pentester*, cómo reportar fallas de forma responsable y por dónde seguir si quieres trabajar en esto.
+> 🎙️ **El profesor dice:** esta es la última clase de teoría del curso de seguridad (después viene el proyecto final: auditar una app de verdad). Vas a aprender a hacer lo que hicimos con Copiloto Driver antes de publicarlo: una auditoría por categorías, con severidad, pruebas y correcciones. También vas a ver el abuso de costos en la nube, las herramientas de un *pentester*, cómo reportar fallas de forma responsable y por dónde seguir si quieres trabajar en esto.
 
 ## Parte 1. Cómo se hace una auditoría
 

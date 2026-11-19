@@ -179,7 +179,7 @@ escribe :: ¿Por qué la API responde siempre los errores con la misma forma, po
 
 ## Parte 3. CORS: dejar que tu web la use
 
-> 🌎 **En la vida real:** CORS es la lista de invitados de la API: qué páginas pueden pedirle cosas desde el navegador.
+> 🌎 **En la vida real:** CORS es la lista de invitados de la API: qué páginas pueden **leer sus respuestas** desde el navegador. (El pedido igual llega al servidor; lo que el navegador bloquea es que una página no invitada lea la respuesta.)
 
 > 🌎 **Otro ejemplo:** Es como la lista de vecinos autorizados para usar la piscina del edificio.
 

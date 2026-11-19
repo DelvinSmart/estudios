@@ -10,6 +10,16 @@ export const ESPERA_FALLO_MS = 15 * 1000; // después de fallar, 15 s antes de v
 export const MAXIMO_ANONIMO_DIA = 400;    // intentos por día sin cuenta, por conexión
 export const MAXIMO_CUENTA_DIA = 600;     // intentos por día con cuenta
 
+// Ninguna práctica tiene tantas preguntas: más claves que esto es basura o un ataque.
+export const MAXIMO_RESPUESTAS = 50;
+
+// ¿La entrada tiene una forma razonable? (un objeto chico, no un texto de 10 MB).
+export function respuestasValidas(respuestas) {
+  if (respuestas === undefined || respuestas === null) return true;
+  if (typeof respuestas !== 'object' || Array.isArray(respuestas)) return false;
+  return Object.keys(respuestas).length <= MAXIMO_RESPUESTAS;
+}
+
 export function corregir(entrada, respuestas) {
   if (!entrada) return { error: 'no-existe' };
   const r = respuestas && typeof respuestas === 'object' ? respuestas : {};
@@ -20,9 +30,13 @@ export function corregir(entrada, respuestas) {
     return Number.isInteger(dada) && dada === p.correcta;
   });
   const aprobada = resultados.every((x) => x !== false);
+  // Si no aprobó, solo se dice CUÁNTAS fallaron, no cuáles. Antes se devolvía pregunta por pregunta,
+  // y eso funcionaba como un oráculo: mandar todo "V" revelaba de una vez qué era verdadero y qué falso,
+  // y un programa aprobaba sin leer. Ahora hay que volver a la clase (que es lo que enseña).
   return {
     aprobada,
-    resultados,
+    resultados: aprobada ? resultados : null,
+    malas: resultados.filter((x) => x === false).length,
     // Las explicaciones (que muchas veces dicen la respuesta) solo se entregan al aprobar.
     explicaciones: aprobada ? entrada.preguntas.map((p) => (p.tipo === 'escribe' ? null : p.explicacion || '')) : null,
   };

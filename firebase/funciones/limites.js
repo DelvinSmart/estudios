@@ -23,3 +23,16 @@ export function decidirSitio(tipo, cuenta) {
   if (tope === undefined) return false;
   return (cuenta || 0) < tope;
 }
+
+// Gmail entrega en la misma bandeja "ana.perez+1@gmail.com", "anaperez@gmail.com" y "ANA.PEREZ@googlemail.com".
+// Para los límites hay que contarlas como UNA: si no, alguien inventa variantes del correo de otra persona,
+// le manda decenas de correos y además gasta el tope diario del sitio.
+export function gmailCanonico(correo) {
+  const [local = '', dominio = ''] = String(correo).trim().toLowerCase().split('@');
+  if (dominio !== 'gmail.com' && dominio !== 'googlemail.com') return `${local}@${dominio}`;
+  return `${local.split('+')[0].replace(/\./g, '')}@gmail.com`;
+}
+
+// Tope por conexión (dirección IP) para pedir correos de verificación: varias cuentas desde el mismo
+// lugar es normal (un aula), cientos no. Sin espera entre uno y otro, solo un máximo por día.
+export const MAXIMO_CONEXION_DIA = 20;

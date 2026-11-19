@@ -207,7 +207,7 @@ elige :: ¿Qué hace `ref || ""`? :: Borra la referencia :: Si no hay referencia
 |---|---|
 | **YouVersion Platform** (los de la app de la Biblia) | Creaste la cuenta de desarrollador. **No tiene la LBLA.** |
 | **Una IA o Ollama** que escriba los versículos | No sirve: un modelo escribe lo que "le suena". Cambia palabras o mezcla versiones. |
-| **Un programa que saque el texto** de Bible.com o de Lockman | Lockman **prohíbe por escrito** el *scraping*. Y el navegador no deja leer otras páginas (**CORS**). |
+| **Un programa que saque el texto** de Bible.com o de Lockman | Lockman **prohíbe por escrito** el *scraping*. Y el navegador no deja que una página lea las respuestas de otro sitio (la **política del mismo origen**; **CORS** es la forma en que un sitio da permiso, y Bible.com no lo da). |
 | **Un robot que tome foto** de la página y copie el texto | Es lo mismo que el scraping, disfrazado. No. |
 | **Mostrar Bible.com dentro** de la página | Bible.com no lo permite. |
 
@@ -260,7 +260,7 @@ function enlaceBible(libro, capitulo, desde, hasta) {
 
 ```practica
 elige :: ¿Por qué no sirve que una IA escriba los versículos? :: Porque es lenta :: Porque escribe lo que le suena: puede cambiar palabras o mezclar versiones :: Porque es cara
-escribe :: ¿Qué es scraping y por qué no se hizo? :: Sacar el texto de una página con un programa; Lockman lo prohíbe por escrito y además el navegador no deja leer otras páginas (CORS).
+escribe :: ¿Qué es scraping y por qué no se hizo? :: Sacar el texto de una página con un programa; Lockman lo prohíbe por escrito y además el navegador no deja leer las respuestas de otro sitio (política del mismo origen; CORS es el permiso que ese sitio no da).
 elige :: ¿Qué es CORS? :: Un formato de imagen :: Una regla del navegador que no deja que una página lea otra de otro dueño :: Un tipo de JSON
 elige :: ¿Dónde se leen las capturas en "Leer capturas"? :: En un servidor :: Dentro del navegador, con Tesseract.js :: En Google
 vf :: Con una foto tuya, eres tú quien trae el texto, igual que al pegarlo

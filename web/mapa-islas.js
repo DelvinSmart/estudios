@@ -1,12 +1,13 @@
 // El mapa de islas: cada parada es una isla flotante con su tarjeta, unidas por un camino punteado.
 // Se usa en el mapa grande (etapas), en cada etapa (clases) y en cada clase (partes).
 //
-// Cómo se acomoda: las islas van en filas que se recorren como una serpiente
-// (la primera fila de izquierda a derecha, la segunda de derecha a izquierda…).
+// Cómo se acomoda: las islas van en filas que se leen como un libro: cada fila de izquierda
+// a derecha, y al terminar se baja a la siguiente. (Antes iban en serpiente: la segunda fila de
+// derecha a izquierda. Se veía bonito, pero una persona lee el 04 antes que el 03 y se salta pasos.)
 // Cuántas islas por fila depende del ancho de la pantalla: 3, 2 o 1 (celular).
 // El camino se dibuja con SVG después, midiendo dónde quedó cada isla.
 
-const escapar = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+import { escapar } from './texto.js';
 
 // Una parada: { num, titulo (html), desc (html), extra (html), pie (html), href, estado, icono }
 // estado: 'hecha' | 'actual' | 'empezada' | 'pendiente'
@@ -89,7 +90,7 @@ function acomodar(mapa) {
   items.forEach((li, i) => {
     const fila = Math.floor(i / cols);
     const pos = i % cols;
-    const col = fila % 2 === 0 ? pos : cols - 1 - pos; // serpiente
+    const col = pos; // siempre de izquierda a derecha, como se lee
     li.style.gridRow = String(fila + 1);
     li.style.gridColumn = String(col + 1);
     // Un poco de altura distinta para que no parezca una tabla.

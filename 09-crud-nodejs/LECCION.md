@@ -60,7 +60,8 @@ Casi todo sistema es esto: Copiloto Driver registra, muestra, edita y borra ingr
 | **JSON** | El formato de los datos: `{ "descripcion": "Agua", "monto": 3 }` |
 | **Puerto** | La "puerta" por donde escucha el servidor: `3000` |
 | **localhost** | "Esta misma computadora" |
-| **API** | El conjunto de rutas que ofrece un servidor |
+| **Endpoint** | Una ruta concreta de la API con su método: `GET /gastos` es un endpoint, `POST /gastos` es otro |
+| **API** | Lo que un programa ofrece para que otro lo use. En una **API web**, como esta, es el conjunto de rutas que ofrece un servidor (también hay APIs sin internet: `localStorage` es una API del navegador) |
 
 **Comparación:** el servidor es un mesero. La petición es tu pedido ("tráeme la lista de gastos"); la respuesta es el plato. El código de respuesta es lo que dice el mesero: "aquí está" (200), "no tenemos eso" (404), "su pedido no se entiende" (400).
 
@@ -338,7 +339,7 @@ Guarda los gastos en un archivo `gastos.json`.
 > 🌎 **En la vida real:** es pasar del cuaderno al **archivo de un banco**: aguanta millones de fichas y varias personas a la vez.
 >
 > El "repositorio" es como un **secretario**: las rutas le dicen "guarde esto" y no les importa si él lo guarda en un cuaderno, en un archivador o en el banco. Si mañana cambias de archivador, solo el secretario se entera.
-Cambia el archivo por una base de datos: SQLite (la más simple), PostgreSQL o Firestore.
+Cambia el archivo por una base de datos: SQLite (la más simple), PostgreSQL o Firestore. (SQLite y PostgreSQL se manejan con **SQL**, *Structured Query Language*: el idioma estándar para pedirle cosas a una base de datos en tablas, como `SELECT * FROM gastos WHERE monto > 10`. Firestore no usa SQL.)
 - **Pista de arquitectura (Tema 10):** crea un "repositorio" con funciones `listar`, `crear`, `actualizar` y `borrar`, igual que el `SanRepository` de Copiloto. Así las rutas no saben qué base de datos hay detrás.
 
 ## Respuesta de la pista del ejercicio 2

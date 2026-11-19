@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** el último tramo de una obra: instalar los servicios, inspeccionar y entregar las llaves.
 
-> 🎙️ **El profesor dice:** la última clase del curso **Kotlin**: guardar datos en el teléfono (**DataStore** y **Room**), conectar **Firebase** en Android, probar con **JUnit**, armar el **AAB firmado** con Gradle y subirlo a Google Play. Y al final, la pregunta que te van a hacer: ¿React Native o Kotlin?
+> 🎙️ **El profesor dice:** la última clase de teoría del curso **Kotlin** (después vienen los proyectos): guardar datos en el teléfono (**DataStore** y **Room**), conectar **Firebase** en Android, probar con **JUnit**, armar el **AAB firmado** con Gradle y subirlo a Google Play. Y al final, la pregunta que te van a hacer: ¿React Native o Kotlin?
 
 ## Parte 1. Guardar datos
 

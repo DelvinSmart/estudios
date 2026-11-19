@@ -186,6 +186,8 @@ export async function vistaCertificado(curso) {
   emitir.addEventListener('click', async () => {
     const elegido = app.querySelector('#cert-nombre').value.trim().replace(/\s+/g, ' ');
     if (elegido.split(' ').length < 2) { avisar('✗ escribe tu nombre y tu apellido'); return; }
+    // Lo mismo que exigen las reglas de Firestore: solo letras, espacios, punto, apóstrofo y guion.
+    if (!/^[\p{L}\p{M}][\p{L}\p{M} .'-]*$/u.test(elegido) || elegido.length > 80) { avisar('✗ usa solo letras (sin números, emojis ni símbolos)'); return; }
     emitir.disabled = true;
     try { guardarNombre(elegido); await nube.emitirCertificado(curso, c.prefijo, elegido, total); redibujar(); }
     catch (e) { emitir.disabled = false; avisar('✗ el servidor no lo aceptó; recarga e intenta de nuevo'); }
@@ -206,7 +208,7 @@ export async function vistaVerificar(codigo) {
   };
 
   if (!codigo) {
-    pantallaAviso('🔎 Verificar un certificado', 'Escribe el código que aparece en el certificado (empieza con ME-, JS-, ND-, RN-, KT-, PY-, SE-, IA- o AG-).', formulario());
+    pantallaAviso('🔎 Verificar un certificado', `Escribe el código que aparece en el certificado (empieza con ${Object.values(CURSOS).map((c) => `${c.prefijo}-`).join(', ')}).`, formulario());
     conectar();
     return;
   }

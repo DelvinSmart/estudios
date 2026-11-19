@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { corregir, parteCompleta, puedeIntentar, cabeHoy, ESPERA_FALLO_MS } from './corregir.js';
+import { corregir, respuestasValidas, MAXIMO_RESPUESTAS, parteCompleta, puedeIntentar, cabeHoy, ESPERA_FALLO_MS } from './corregir.js';
 
 const ENTRADA = {
   parte: '15:CLASE-GUIADA.md:2',
@@ -17,12 +17,26 @@ test('todo bien: aprobada, y recién ahí llegan las explicaciones', () => {
   assert.deepEqual(r.resultados, [true, true, null]);
   assert.deepEqual(r.explicaciones, ['HTML no hace cuentas.', 'La pintura.', null]);
 });
-test('una mal: no aprobada, dice cuál falló pero NO la respuesta ni la explicación', () => {
+test('una mal: no aprobada, dice CUÁNTAS fallaron pero no cuáles, ni la respuesta ni la explicación', () => {
   const r = corregir(ENTRADA, { 0: 'V', 1: 1 });
   assert.equal(r.aprobada, false);
-  assert.deepEqual(r.resultados, [false, true, null]);
+  assert.equal(r.malas, 1);
+  assert.equal(r.resultados, null);
   assert.equal(r.explicaciones, null);
   assert.ok(!JSON.stringify(r).includes('HTML no hace cuentas'));
+});
+test('el ataque del oráculo ya no funciona: todo "V" no revela qué pregunta es verdadera', () => {
+  const todoV = corregir(ENTRADA, { 0: 'V', 1: 0 });
+  assert.equal(todoV.resultados, null);
+  assert.equal(todoV.malas, 2);
+});
+test('respuestas con forma rara o demasiado grandes se rechazan antes de corregir', () => {
+  assert.equal(respuestasValidas(undefined), true);
+  assert.equal(respuestasValidas({ 0: 'V' }), true);
+  assert.equal(respuestasValidas('x'.repeat(10)), false);
+  assert.equal(respuestasValidas([1, 2]), false);
+  const enorme = Object.fromEntries(Array.from({ length: MAXIMO_RESPUESTAS + 1 }, (_, i) => [i, 'V']));
+  assert.equal(respuestasValidas(enorme), false);
 });
 test('respuestas que faltan o con tipo raro cuentan como mal', () => {
   assert.equal(corregir(ENTRADA, {}).aprobada, false);

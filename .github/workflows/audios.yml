@@ -37,6 +37,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: Aprender
+          # Este checkout solo se lee: sin credenciales guardadas, los scripts no pueden hacer push aquí.
+          persist-credentials: false
 
       - name: ¿El motor de voz está encendido?
         id: motor

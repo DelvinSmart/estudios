@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** antes de abrir una tienda nueva, haces un ensayo con amigos; después, eliges un local y abres la puerta al público.
 
-> 🎙️ **El profesor dice:** la última clase del curso **Node.js**: probar la API con `node:test` y **supertest** (sin abrir el navegador), correr las pruebas en el CI, y **publicar** el servidor gratis: con Cloud Functions de Firebase (lo que usa este mapa) y otras opciones gratuitas. Al final, el mapa de todo lo que aprendiste.
+> 🎙️ **El profesor dice:** una de las clases finales del curso **Node.js**: probar la API con `node:test` y **supertest** (sin abrir el navegador), correr las pruebas en el CI, y **publicar** el servidor gratis: con Cloud Functions de Firebase (lo que usa este mapa) y otras opciones gratuitas. Al final, el mapa de todo lo que aprendiste.
 
 ## Parte 1. Probar la API
 
@@ -163,7 +163,7 @@ Las funciones tienen una **cuota gratis** mensual, y el de este mapa tiene una *
 - Las pruebas pasan, también en el **CI** (Tema 04: `npm test` en cada subida).
 - Los secretos están en el gestor de secretos, no en el código.
 - CORS, límites y helmet puestos (clases 72 y 73).
-- Un endpoint de salud (`GET /salud`) para comprobar que está vivo.
+- Un endpoint de salud (`GET /salud`) para comprobar que está vivo. (Un **endpoint** es una ruta concreta de la API con su método, como `GET /gastos`.)
 
 > 🌎 **En la vida real:** es la inspección de bomberos antes de abrir el local.
 

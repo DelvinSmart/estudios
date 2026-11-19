@@ -109,6 +109,13 @@ a:hover { text-decoration: underline; }
   font: 600 1.05rem var(--mono); cursor: pointer;
 }
 .boton-icono:hover { border-color: var(--acento); color: var(--acento); }
+/* En pantallas anchas, cada icono lleva su palabra: una persona no tiene que adivinar que 💡 es "progreso".
+   En el celular no cabe, y queda solo el icono (con su aria-label para lectores de pantalla). */
+.boton-icono-texto { display: none; }
+@media (min-width: 900px) {
+  .barra-acciones .boton-icono { width: auto; padding: 0 12px; display: inline-flex; align-items: center; gap: 6px; }
+  .boton-icono-texto { display: inline; font: 500 0.8rem var(--mono); }
+}
 
 .migas {
   max-width: 1180px; width: 100%; margin: 0 auto; padding: 18px 24px 0;
@@ -261,7 +268,8 @@ a:hover { text-decoration: underline; }
 .texto h1 { font-size: 1.7rem; }
 .texto h2 { font-size: 1.3rem; margin: var(--hueco-doble) 0 var(--hueco); }
 .texto h3 { font-size: 1rem; margin: var(--hueco-doble) 0 var(--hueco); color: var(--acento-2); scroll-margin-top: 90px; }
-.texto h3::before { content: '### '; color: var(--tenue); font-weight: 400; }
+/* Antes decía "### " (estilo terminal), pero quien no conoce Markdown creía que la página estaba rota. */
+.texto h3::before { content: '▸ '; color: var(--acento); font-weight: 400; }
 .texto h4 { font-size: 1rem; color: var(--morado); }
 .texto p, .texto li { max-width: 72ch; }
 .texto p, .texto ul, .texto ol { margin: var(--hueco) 0; }
@@ -1013,3 +1021,16 @@ body.con-reproductor { padding-bottom: 70px; }
 .ejercicio-pruebas small { display: block; margin-left: 1.2em; color: var(--tenue); font: 0.8rem var(--mono); }
 .ejercicio-consola, .ejercicio-solucion { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--codigo-fondo); color: #d8e0ea; font: 0.8rem/1.5 var(--mono); white-space: pre-wrap; overflow-x: auto; }
 .ejercicio-vista { width: 100%; min-height: 160px; border: 1px solid var(--borde); border-radius: 12px; background: #fff; }
+
+/* En el celular, las pestañas de cursos van en UNA fila que se desliza de lado.
+   Antes ocupaban casi toda la primera pantalla y el mapa quedaba muy abajo. */
+@media (max-width: 600px) {
+  .pestanas-cursos {
+    flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+    margin-inline: -16px; padding: 2px 16px 6px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 28px), transparent);
+            mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 28px), transparent);
+  }
+  .pestanas-cursos::-webkit-scrollbar { display: none; }
+  .pestanas-cursos .pestana { flex-shrink: 0; white-space: nowrap; }
+}

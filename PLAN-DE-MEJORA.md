@@ -16,7 +16,7 @@ alguien que empieza de cero listo para construir solo**:
 | Muchos ejercicios piden abrir Copiloto, que es privado | Otra persona no los puede hacer |
 | No se explica el sistema de diseño (motores, tokens) ni cómo lo "llama" un recuadro | Es lo que mantiene ordenado un proyecto real |
 
-Tamaño de hoy (clases · partes · bloques de código · prácticas):
+Tamaño al 16 de noviembre de 2026, antes de las mejoras (clases · partes · bloques de código · prácticas). Es una foto del "antes": la lista actual está en el README, que se genera sola.
 
 | Curso | Clases | Partes | Bloques de código | Prácticas |
 |---|---|---|---|---|
@@ -213,3 +213,44 @@ valores en orden, cada uno con su posición").
 7. G: el curso de Swift, desde cero.
 
 Cada paso se prueba en el teléfono y en la computadora antes de publicarlo.
+
+## K. Auditoría del 19 de noviembre de 2026 (sesión aparte, 7 agentes + revisión en el navegador)
+
+Hecho en esa sesión (todas las pruebas en verde, menos las de reglas, que necesitan Java 21 y quedaron en el CI):
+
+- [x] Certificados de Swift verificables (los prefijos salen de `cursos.js`)
+- [x] La solución de un ejercicio se abre tras 3 intentos con código propio (antes, con un clic)
+- [x] `revisar-ejercicios.mjs` ya no se queda mudo (la consola global se pisaba entre promesas)
+- [x] Seguridad: llave del panel en `sessionStorage`, SRI en las librerías del CDN, CSP en el panel,
+      Gmail normalizado para los límites (`ana.perez+1@gmail.com` = `anaperez@gmail.com`), tope por conexión,
+      la corrección ya no dice CUÁL pregunta falló (era un oráculo), nombre del certificado solo con letras,
+      tamaño máximo de las respuestas, respaldo al correo de Firebase si se acaba el tope del sitio
+- [x] Rendimiento: `web/indice.json` (al abrir ya no se bajan las 104 lecciones), progreso leído una vez
+- [x] El buscador no muestra las respuestas
+- [x] CI de pruebas (`.github/workflows/pruebas.yml`) y pruebas de que reglas, índice y README están al día
+- [x] README: la lista de clases se genera desde `cursos.js` (`node firebase/generar-reglas.mjs`)
+- [x] Aviso si se mueven partes de una clase publicada (los bombillos se guardan por posición)
+- [x] Mapa de izquierda a derecha (antes en serpiente), etiquetas en la barra, pestañas en una fila en el celular,
+      cuentas de avance claras, sin "###", emoji propio para Agentes (🦾), por qué solo Gmail
+- [x] Definiciones corregidas (44, 06, 14, 10, 72, 09) y agregadas (SQL, SwiftUI, endpoint, cookie, SDK, token)
+- [x] Textos de "última clase" que ya no eran ciertos
+- [x] Clase 78, parte 15: "Construir en una sesión, auditar en otra", con esta auditoría como caso real
+- [x] Una sola función `escapar` (`web/texto.js`)
+
+Pendiente (el informe completo está fuera del repositorio, en la carpeta Developer: `auditoria-mapa-de-estudios-2026-11-19.md`):
+
+- [ ] **Publicar el servidor:** `firebase deploy --only functions,firestore:rules` (los cambios de seguridad
+      del servidor y la parte nueva de la clase 78 no cuentan en la nube hasta publicarlos)
+- [ ] Clase 00 "Programar desde cero" y una ruta para quien nunca programó; revisar ejercicios que usan algo
+      antes de enseñarlo (45, 47, 36, 63)
+- [ ] Más práctica: 3 a 5 ejercicios por concepto, un reto final sin solución por curso, repaso espaciado
+- [ ] Seguridad: 2 o 3 clases más (modelado de amenazas, autenticación y JWT, registros e incidentes)
+- [ ] Curso "Lo que piden en el trabajo": algoritmos y estructuras de datos, SQL de verdad, el depurador,
+      conflictos de git y revisión de PR, leer documentación en inglés, prueba técnica en vivo
+- [ ] "Mi portafolio en voz alta": ficha de cada proyecto (pitch de 30 s, 1 min y 5 min, decisiones, un bug
+      con STAR, qué mejoraría) y versiones en **portugués** e **inglés básico**
+- [ ] Videos y lives: modo presentación, guion por clase (duración, qué mostrar, preguntas del chat)
+- [ ] Glosario central que el buscador muestre primero, y "📖 Palabras nuevas" al inicio de cada clase
+- [ ] Partir clases muy largas (78, 20, 77, 18, 01): ojo, mueve bombillos; hacerlo antes de tener alumnos
+- [ ] Código: partir `vistaParte` (162 líneas), módulo común para Kotlin y Swift, todo el almacenamiento por
+      `guardado.js`, ordenar el CSS (29 `!important`, 5 tamaños de botón)

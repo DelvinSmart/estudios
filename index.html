@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" integrity="sha384-wH75j6z1lH97ZOpMOInqhgKzFkAInZPPSPlZpYKYTOqsaizPvhQZmAtLcPKXpLyH" crossorigin="anonymous">
   <link rel="stylesheet" href="web/estilos.css">
   <script>
     // El tema se aplica antes de dibujar, para que no parpadee.
@@ -23,18 +23,18 @@
     </a>
     <div class="barra-acciones">
       <a class="boton-volver mono" id="boton-volver" href="#/" hidden title="Volver a donde estaba" aria-label="Volver a donde estaba"><span aria-hidden="true">←</span><span class="boton-volver-texto"> volver a donde estaba</span></a>
-      <button class="boton-icono" id="boton-menu" type="button" title="Todos los cursos" aria-label="Todos los cursos" aria-expanded="false">☰</button>
-      <a class="boton-icono" href="#/progreso" title="Mi progreso" aria-label="Mi progreso">💡</a>
-      <a class="boton-icono" id="boton-cuenta" href="#/entrar" title="Entrar o crear cuenta" aria-label="Mi cuenta">👤</a>
-      <button class="boton-icono" id="boton-buscar" title="Buscar en todas las clases" aria-label="Buscar">⌕</button>
-      <button class="boton-icono" id="boton-tema" title="Cambiar claro / oscuro" aria-label="Cambiar tema">◐</button>
+      <button class="boton-icono" id="boton-menu" type="button" title="Todos los cursos" aria-label="Todos los cursos" aria-expanded="false"><span aria-hidden="true">☰</span><span class="boton-icono-texto">cursos</span></button>
+      <a class="boton-icono" href="#/progreso" title="Mi progreso" aria-label="Mi progreso"><span aria-hidden="true">💡</span><span class="boton-icono-texto">progreso</span></a>
+      <a class="boton-icono" id="boton-cuenta" href="#/entrar" title="Entrar o crear cuenta" aria-label="Mi cuenta"><span aria-hidden="true">👤</span><span class="boton-icono-texto">cuenta</span></a>
+      <button class="boton-icono" id="boton-buscar" title="Buscar en todas las clases" aria-label="Buscar"><span aria-hidden="true">⌕</span><span class="boton-icono-texto">buscar</span></button>
+      <button class="boton-icono" id="boton-tema" title="Cambiar claro / oscuro" aria-label="Cambiar tema"><span aria-hidden="true">◐</span><span class="boton-icono-texto">tema</span></button>
     </div>
   </header>
 
   <div class="buscador" id="buscador" hidden>
     <div class="buscador-caja">
       <div class="buscador-entrada">
-        <span class="mono acento">grep&nbsp;-i</span>
+        <span class="mono acento" aria-hidden="true">⌕ buscar</span>
         <input id="entrada-buscar" type="search" placeholder="escribe una palabra: commit, función, agente…" autocomplete="off">
         <button class="boton-icono" id="cerrar-buscar" aria-label="Cerrar">✕</button>
       </div>
@@ -50,8 +50,8 @@
     <span>// el texto sale de los LECCION.md</span>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp" crossorigin="anonymous"></script>
   <script type="module" src="web/app.js"></script>
 </body>
 </html>

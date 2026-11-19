@@ -3,7 +3,7 @@
 
 import { CLASES, ETAPAS, cursoDeEtapa, clasesDelCurso } from './cursos.js';
 import { leerArchivo, partir } from './lector.js';
-import { idParte, estaEntendida } from './guardado.js';
+import { idParte, estaEntendida, versionProgreso } from './guardado.js';
 
 // Cuántas partes (bombillos) tiene cada clase: se cuenta al arrancar.
 export const conteo = {};
@@ -35,8 +35,14 @@ export function prendidos(num) {
 
 // El progreso sale SOLO de los bombillos de este navegador: cada persona ve el suyo.
 // "Voy aquí" es la primera clase del mapa que todavía no tiene todos sus bombillos prendidos.
+// Se recuerda mientras el progreso no cambie: la portada la pregunta una vez por cada clase,
+// y recalcularla cada vez recorría todas las clases de nuevo (un bucle dentro de otro bucle).
+let actual = { version: -1, num: undefined };
 export function claseActual() {
-  return ORDEN.find((n) => !conteo[n] || prendidos(n) < conteo[n]);
+  if (actual.version !== versionProgreso()) {
+    actual = { version: versionProgreso(), num: ORDEN.find((n) => !conteo[n] || prendidos(n) < conteo[n]) };
+  }
+  return actual.num;
 }
 
 export function estadoClase(num) {
@@ -47,9 +53,14 @@ export function estadoClase(num) {
 
 export const ETIQUETA_ESTADO = { hecha: '✓ hecha', actual: '▶ voy aquí', empezada: '◐ empezada', pendiente: '○ pendiente' };
 
-// Al arrancar: cuenta las partes de cada clase (leyendo su documento principal).
+// Al arrancar: cuántas partes tiene cada clase. Sale de web/indice.json (un archivo chico, generado
+// junto con las reglas). Antes se bajaban TODAS las lecciones (casi 3 MB) solo para contar sus "## ".
+// Si el índice no está o le falta una clase, esa clase se cuenta leyendo su archivo, como antes.
 export async function contarPartes() {
+  let indice = {};
+  try { const r = await fetch('web/indice.json'); if (r.ok) indice = (await r.json()).clases || {}; } catch (e) { /* sin índice */ }
   await Promise.all(ORDEN.map(async (num) => {
+    if (indice[num]) { conteo[num] = indice[num].partes; return; }
     try { conteo[num] = partir(await leerArchivo(rutaDoc(num))).partes.length; } catch (e) { conteo[num] = 0; }
   }));
 }

@@ -13,8 +13,9 @@ function leer(clave, porDefecto) {
   }
 }
 
+// Devuelve false si el navegador no dejó guardar (modo privado, almacenamiento lleno).
 function escribir(clave, valor) {
-  try { localStorage.setItem(clave, JSON.stringify(valor)); } catch (e) { /* sin guardar */ }
+  try { localStorage.setItem(clave, JSON.stringify(valor)); return true; } catch (e) { return false; }
 }
 
 const CLAVE_ENTENDIDO = 'mapa-entendido';
@@ -28,16 +29,34 @@ export function idParte(clase, doc, parte) {
   return `${clase}:${archivo}:${parte}`;
 }
 
+// Los bombillos se leen UNA vez y se guardan en memoria. Antes cada pregunta "¿esta parte está
+// entendida?" volvía a leer y convertir todo el JSON: dibujar la portada lo hacía miles de veces.
+// La memoria se borra al marcar un bombillo, y si otra pestaña cambió el progreso (evento "storage").
+let entendidas = null;
+let version = 0;
+function todasEntendidas() {
+  if (!entendidas) entendidas = leer(CLAVE_ENTENDIDO, {});
+  return entendidas;
+}
+function olvidarMemoria() { entendidas = null; version++; }
+try { window.addEventListener('storage', (ev) => { if (ev.key === CLAVE_ENTENDIDO || ev.key === null) olvidarMemoria(); }); } catch (e) { /* sin ventana (pruebas) */ }
+
+// Un número que cambia cada vez que cambia el progreso (para que otros recuerden cálculos mientras tanto).
+export const versionProgreso = () => version;
+
 export function estaEntendida(id) {
-  return Boolean(leer(CLAVE_ENTENDIDO, {})[id]);
+  return Boolean(todasEntendidas()[id]);
 }
 
+// Devuelve false si no se pudo guardar: así la pantalla no muestra ✓ mintiendo.
 export function marcarEntendida(id, si) {
-  const todo = leer(CLAVE_ENTENDIDO, {});
+  const todo = { ...todasEntendidas() };
   const recien = new Set(leer(CLAVE_RECIEN, []));
   if (si) { todo[id] = Date.now(); recien.add(id); } else { delete todo[id]; recien.delete(id); }
-  escribir(CLAVE_ENTENDIDO, todo);
+  const ok = escribir(CLAVE_ENTENDIDO, todo);
   escribir(CLAVE_RECIEN, [...recien]);
+  olvidarMemoria();
+  return ok;
 }
 
 // Los bombillos que se prendieron desde la última vez que miré "Mi progreso".
@@ -72,6 +91,7 @@ export function importarProgreso(codigo) {
   if (typeof datos !== 'object' || Array.isArray(datos) || datos === null) throw new Error('código inválido');
   const entendido = datos.e || datos;   // los códigos viejos solo traían los bombillos
   escribir(CLAVE_ENTENDIDO, { ...leer(CLAVE_ENTENDIDO, {}), ...entendido });
+  olvidarMemoria();
   if (datos.p) escribir(CLAVE_PRACTICA, { ...leer(CLAVE_PRACTICA, {}), ...datos.p });
   return Object.keys(entendido).length;
 }

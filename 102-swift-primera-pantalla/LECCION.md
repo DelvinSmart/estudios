@@ -4,6 +4,10 @@
 
 > 🎙️ **El profesor dice:** {{alumno}}, hoy tu primera app de iPhone: **"Mi jornada"**. Anotas lo que pagó cada viaje y ves el total del día y el promedio. Vas a crear el proyecto en Xcode, entender cómo SwiftUI dibuja una pantalla y por qué **la pantalla no hace cuentas**. Y lo que se encontró mirándola en el simulador.
 
+> 📖 **Palabra nueva: SwiftUI.** Es la forma de Apple de **dibujar pantallas** con Swift. En vez de decir paso a paso "pon un botón aquí, cámbiale el texto allá", **describes** cómo debe verse la pantalla según los datos, y SwiftUI la redibuja sola cuando los datos cambian. A eso se le llama **declarativo**. Es la misma idea que Jetpack Compose en Android y que React en la web.
+>
+> 🌎 **En la vida real:** es como darle al pintor una foto de cómo quieres la pared, en vez de dictarle cada pincelada.
+
 **Lo que hay** (en la carpeta `102-swift-primera-pantalla/proyecto` de este mismo repositorio):
 
 | Archivo | Qué es |

@@ -70,7 +70,7 @@ La página tiene cuatro pantallas, pero es **un solo archivo HTML**. Lo que camb
 
 | Dirección | Qué muestra |
 |---|---|
-| `#/` | El mapa grande: las 6 etapas |
+| `#/` | El mapa grande: todos los cursos con sus etapas |
 | `#/etapa/web` | El mapa de una etapa: sus clases |
 | `#/clase/15` | El mapa de una clase: sus partes (cada `##` del `.md`) |
 | `#/clase/15/0/3` | Leer la parte 3 del documento 0 de la clase 15 |
@@ -248,6 +248,9 @@ En internet, el servidor es **GitHub Pages** (parte 9).
 - Los comentarios grises `// clase 15` imitan comentarios de código.
 
 **El camino en zigzag:** una línea punteada (`border-left: 2px dashed`) y cada parada con un círculo encima. En la compu, las paradas pares van a la derecha (`.parada:nth-child(even) { margin-left: 50%; }`). En el celular, todo va en una sola columna (`@media`).
+
+> 🔧 **Lo que cambió después (una lección en sí misma):** con el tiempo, el mapa pasó a ser de **islas** (`web/mapa-islas.js`) y se acomodaba en **serpiente**: la segunda fila iba de derecha a izquierda. Se veía bonito, pero una revisión "como humano" mostró que la gente leía el 04 antes que el 03. Ahora cada fila se lee de izquierda a derecha, como un libro. Lo bonito no sirve si confunde el orden.
+
 
 **Preguntas**
 13. ¿Qué tienes que cambiar para que el acento sea morado en el tema oscuro?

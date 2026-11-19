@@ -1,5 +1,5 @@
 // Panel · la conexión con GitHub: lee y guarda los .md de las clases con la llave (token) del autor.
-// La llave se guarda solo en este aparato (localStorage). Sin una llave con permiso sobre el
+// La llave se guarda solo en esta pestaña (sessionStorage) y se borra al cerrarla. Sin una llave con permiso sobre el
 // repositorio, GitHub rechaza todo: el panel es público, pero sin la llave no sirve para nada.
 //
 // Guardar = un commit en la rama main. Después, GitHub Pages publica la página sola
@@ -9,14 +9,26 @@ export const REPO = 'DelvinSmart/estudios';
 const RAMA = 'main';
 const CLAVE = 'estudios-panel-llave';
 
+// La llave vive en sessionStorage: se borra sola al cerrar la pestaña. Antes estaba en localStorage,
+// que es compartido por TODAS las páginas de delvinsmart.github.io (otros proyectos incluidos):
+// un fallo de seguridad en cualquiera de ellos podía leerla y publicar código en este repositorio.
+// Si quedó una llave vieja en localStorage, se mueve aquí una vez y se borra de allá.
+function moverLlaveVieja() {
+  try {
+    const vieja = localStorage.getItem(CLAVE);
+    if (vieja) { sessionStorage.setItem(CLAVE, vieja); localStorage.removeItem(CLAVE); }
+  } catch (e) { /* sin almacenamiento */ }
+}
+moverLlaveVieja();
+
 export function llave() {
-  try { return localStorage.getItem(CLAVE) || ''; } catch (e) { return ''; }
+  try { return sessionStorage.getItem(CLAVE) || ''; } catch (e) { return ''; }
 }
 export function guardarLlave(valor) {
-  try { localStorage.setItem(CLAVE, valor.trim()); } catch (e) {}
+  try { sessionStorage.setItem(CLAVE, valor.trim()); } catch (e) {}
 }
 export function borrarLlave() {
-  try { localStorage.removeItem(CLAVE); } catch (e) {}
+  try { sessionStorage.removeItem(CLAVE); localStorage.removeItem(CLAVE); } catch (e) {}
 }
 
 async function pedir(ruta, opciones = {}) {

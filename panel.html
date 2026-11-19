@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex">
   <title>Panel · Mapa de estudios</title>
+  <!-- Seguridad: el panel maneja la llave de GitHub. Esta lista dice de dónde puede venir el código.
+       Un script inyectado (por ejemplo, un <img onerror> dentro de un .md) no corre. Si cambias el
+       script de arriba que pone el tema, hay que recalcular su sha256 (ver firebase/LEEME.md). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-hOKnNnt9raf/Tbd5UJuxia98CW/crl4LbGLFbJahDiU=' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.github.com; img-src 'self' data: https:; object-src 'none'; base-uri 'self'; form-action 'none'">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✏️</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" integrity="sha384-wH75j6z1lH97ZOpMOInqhgKzFkAInZPPSPlZpYKYTOqsaizPvhQZmAtLcPKXpLyH" crossorigin="anonymous">
   <link rel="stylesheet" href="web/estilos.css">
   <link rel="stylesheet" href="web/panel.css">
   <script>
@@ -24,14 +28,14 @@
     </a>
     <div class="barra-acciones">
       <a class="boton-icono" href="./" title="Ver la página de estudios" aria-label="Ver la página de estudios">🗺️</a>
-      <button class="boton-icono" id="boton-salir" type="button" title="Salir (borra la llave de este aparato)" aria-label="Salir" hidden>⏏</button>
+      <button class="boton-icono" id="boton-salir" type="button" title="Salir (borra la llave de esta pestaña)" aria-label="Salir" hidden>⏏</button>
     </div>
   </header>
 
   <main id="app" class="app"><p class="cargando">cargando el panel…</p></main>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp" crossorigin="anonymous"></script>
   <script type="module" src="web/panel.js"></script>
 </body>
 </html>

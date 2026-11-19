@@ -157,8 +157,8 @@ export function crearPractica(texto, id) {
       caja.dispatchEvent(new CustomEvent('practica-aprobada', { bubbles: true, detail: detalle }));
     };
     const reprobar = (malas) => {
-      pie.innerHTML = `<p class="practica-final mal">✗ Fallaste ${malas}. Todavía no está aprobada.
-        Vuelve a leer esa parte de la clase y repite.</p>
+      pie.innerHTML = `<p class="practica-final mal">✗ ${malas === 1 ? 'Una respuesta no es correcta' : `${malas} respuestas no son correctas`}. Todavía no está aprobada.
+        No te decimos cuáles a propósito: vuelve a leer esa parte de la clase y repite.</p>
         <button class="boton" type="button">↻ intentar de nuevo (en otro orden)</button>`;
       pie.querySelector('button').addEventListener('click', () => { dibujar(intento + 1); caja.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
     };
@@ -173,9 +173,10 @@ export function crearPractica(texto, id) {
       estado.textContent = '// corrigiendo en el servidor…';
       try {
         const r = await nube.corregirPractica(id, elegido);
-        marcar(r.resultados, r.explicaciones);
+        // Si no aprobó, el servidor solo dice CUÁNTAS fallaron (no cuáles): así no se puede adivinar probando.
+        marcar(r.aprobada ? r.resultados : null, r.explicaciones);
         if (r.aprobada) aprobar({ guardada: r.guardada, parteAprobada: r.parteAprobada });
-        else reprobar(r.resultados.filter((x) => x === false).length);
+        else reprobar(r.malas ?? (r.resultados || []).filter((x) => x === false).length);
       } catch (e) {
         estado.textContent = `✗ ${mensajeDeError(e)}`;
         revisar.disabled = false;

@@ -7,6 +7,8 @@
 //
 // Esta configuración NO es secreta: toda app web de Firebase la lleva a la vista.
 // Lo que protege los datos son las reglas, no esconder estos valores.
+import { CURSOS } from './cursos.js';
+
 const CONFIG = {
   apiKey: 'AIzaSyCjQqwQEaV2B_LBEf5TMWzPGnIiDaTb_FI',
   authDomain: 'mapa-estudios-ds.firebaseapp.com',
@@ -17,7 +19,8 @@ const CONFIG = {
 };
 const SDK = 'https://www.gstatic.com/firebasejs/11.10.0/';
 export const ESPERA_SEGUNDOS = 60; // igual que en firebase/generar-reglas.mjs
-const FORMATO_CODIGO = /^(ME|JS|ND|RN|KT|PY|SE|IA|AG)-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$/;
+// Los prefijos salen de cursos.js (una sola fuente de verdad): un curso nuevo no se puede olvidar aquí.
+const FORMATO_CODIGO = new RegExp(`^(${Object.values(CURSOS).map((c) => c.prefijo).join('|')})-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$`);
 const ES_GMAIL = /^[^@\s]+@gmail\.com$/i;
 
 let cargando = null;
@@ -113,7 +116,9 @@ async function mandarVerificacion() {
   try {
     await enviarCorreo({ tipo: 'verificar' });
   } catch (e) {
-    if (e?.code === 'functions/resource-exhausted') throw Object.assign(new Error('espera'), { code: 'auth/too-many-requests' });
+    // Si el que se acabó es el tope de ESTA persona o conexión, hay que esperar.
+    // Si se acabó el tope de todo el sitio (motivo "sitio"), se usa el correo simple de Firebase.
+    if (e?.code === 'functions/resource-exhausted' && e?.details?.motivo !== 'sitio') throw Object.assign(new Error('espera'), { code: 'auth/too-many-requests' });
     await A.sendEmailVerification(auth.currentUser, volverA('/entrar/listo'));
   }
 }

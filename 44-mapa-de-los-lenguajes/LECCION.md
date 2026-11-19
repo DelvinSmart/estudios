@@ -58,6 +58,8 @@ Fíjate: en ninguna parte escribiste "ejecuta la función de `/gastos`". Eso lo 
 | ¿Cambiarla es fácil? | Sí, suele estar en pocos lugares | No: tu app está armada con su forma |
 | Ejemplos | marked, highlight.js, date-fns, el SDK de Firebase | Express, Next.js, Expo, Angular |
 
+> 📖 **Palabra nueva: SDK** (*Software Development Kit*, "kit de desarrollo"). Es el paquete de librerías y herramientas que una empresa te da para usar su servicio desde tu código. El **SDK de Firebase** trae las funciones para entrar, leer y guardar en Firebase sin escribir tú los pedidos por internet. Es como la caja de herramientas que viene con un mueble para armar.
+
 **¿Y React?** Se presenta como librería, porque tú decides cómo armar tu app y la llamas para dibujar la pantalla. Pero en la práctica casi siempre se usa dentro de un framework, como Next.js en la web o Expo en el celular, que te dicen dónde va cada archivo y llaman a tus componentes.
 
 **Este mapa no usa ningún framework**, solo dos librerías: marked, para el Markdown, y highlight.js, para colorear el código. Por eso todo el control está en `web/app.js`, que decide qué pantalla mostrar.
@@ -127,7 +129,7 @@ escribe :: Explica con un ejemplo tuyo la diferencia entre una librería y un fr
 
 ### JavaScript: el idioma de la web
 
-**JavaScript** es el único lenguaje que el navegador entiende directamente. Con él la página responde a toques, cambia textos y pide datos. Gracias a **Node.js** también corre fuera del navegador, por ejemplo en servidores y herramientas. Este mapa de estudios está hecho en **HTML + CSS + JavaScript**.
+**JavaScript** es el lenguaje principal del navegador: todos lo entienden directamente, sin instalar nada. (Desde 2017 también corre **WebAssembly**, un formato de código compilado para tareas pesadas como juegos o editores de video; pero las páginas comunes se hacen con JavaScript.) Con él la página responde a toques, cambia textos y pide datos. Gracias a **Node.js** también corre fuera del navegador, por ejemplo en servidores y herramientas. Este mapa de estudios está hecho en **HTML + CSS + JavaScript**.
 
 > 🌎 **En la vida real:** es como el español en tu barrio: todos lo hablan, sin traductor.
 
@@ -135,7 +137,7 @@ escribe :: Explica con un ejemplo tuyo la diferencia entre una librería y un fr
 
 ### TypeScript: JavaScript con tipos
 
-**TypeScript** es JavaScript más **tipos**: le dices qué clase de dato va en cada lugar. Antes de correr, una herramienta lo **revisa** y lo **convierte en JavaScript** (el navegador y el teléfono solo ejecutan JavaScript). Si escribiste algo mal, te avisa **antes** de que lo vea un usuario.
+**TypeScript** es JavaScript más **tipos**: le dices qué clase de dato va en cada lugar. Antes de correr, una herramienta lo **revisa** y lo **convierte en JavaScript** (el navegador no entiende TypeScript, y React Native en el teléfono tampoco: los dos ejecutan JavaScript). Si escribiste algo mal, te avisa **antes** de que lo vea un usuario.
 
 ```ts
 function gananciaNeta(bruto: number, gastos: number): number {
@@ -285,7 +287,7 @@ escribe :: Explica con los proyectos del curso la diferencia entre React y React
 
 ### Kotlin y Swift: lo nativo
 
-- **Kotlin:** el lenguaje oficial para apps **Android** (con Jetpack Compose para las pantallas). Corre en la máquina virtual de Java.
+- **Kotlin:** el lenguaje oficial para apps **Android** (con Jetpack Compose para las pantallas). En una computadora o un servidor corre en la máquina virtual de Java (JVM); en Android se convierte a un formato propio (DEX) y lo ejecuta **ART** (Android Runtime), el motor de Android.
 - **Swift:** el lenguaje de Apple para apps de **iPhone** (con SwiftUI).
 
 Una app nativa se escribe dos veces (una en Kotlin, otra en Swift), pero tiene acceso directo a todo el teléfono. React Native escribe una vez y, cuando hace falta algo muy especial, se puede agregar una pieza nativa en Kotlin o Swift.

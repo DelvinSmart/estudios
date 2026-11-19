@@ -20,8 +20,8 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import nodemailer from 'nodemailer';
 import { correoVerificar, correoContrasena, enlaceDelSitio } from './correos.js';
-import { decidirPersona, decidirSitio } from './limites.js';
-import { corregir, parteCompleta, puedeIntentar, cabeHoy, MAXIMO_ANONIMO_DIA, MAXIMO_CUENTA_DIA } from './corregir.js';
+import { decidirPersona, decidirSitio, gmailCanonico, MAXIMO_CONEXION_DIA } from './limites.js';
+import { corregir, respuestasValidas, parteCompleta, puedeIntentar, cabeHoy, MAXIMO_ANONIMO_DIA, MAXIMO_CUENTA_DIA } from './corregir.js';
 
 initializeApp();
 const GMAIL_USUARIO = defineSecret('GMAIL_USUARIO');
@@ -62,6 +62,21 @@ async function permitirSitio(tipo) {
   });
 }
 
+// Tope por conexión: cuántos correos de verificación se pidieron hoy desde esta dirección.
+async function permitirConexion(direccion) {
+  const db = getFirestore();
+  const dia = hoy();
+  const ref = db.doc(`limites_correo/ip-${huella(direccion)}`);
+  return db.runTransaction(async (t) => {
+    const foto = await t.get(ref);
+    const d = foto.exists ? foto.data() : {};
+    const cuenta = d.dia === dia ? d.cuenta || 0 : 0;
+    if (cuenta >= MAXIMO_CONEXION_DIA) return false;
+    t.set(ref, { dia, cuenta: cuenta + 1 });
+    return true;
+  });
+}
+
 async function mandar(para, { asunto, html, texto }) {
   const usuario = GMAIL_USUARIO.value().trim();
   const transporte = nodemailer.createTransport({
@@ -82,8 +97,12 @@ export const enviarCorreoCuenta = onCall(
       const usuario = await getAuth().getUser(request.auth.uid);
       if (usuario.emailVerified) return { ok: true, yaVerificado: true };
       if (!ES_GMAIL.test(usuario.email || '')) throw new HttpsError('failed-precondition', 'Solo correos de Gmail.');
-      if (!(await permitirPersona(`uid-${usuario.uid}`))) throw new HttpsError('resource-exhausted', 'Espera un poco antes de pedir otro correo.');
-      if (!(await permitirSitio('verificar'))) throw new HttpsError('resource-exhausted', 'Hoy se mandaron demasiados correos. Intenta mañana.');
+      if (!(await permitirPersona(`uid-${usuario.uid}`))) throw new HttpsError('resource-exhausted', 'Espera un poco antes de pedir otro correo.', { motivo: 'persona' });
+      // La misma bandeja (variantes con puntos o "+algo") cuenta como una sola persona.
+      if (!(await permitirPersona(`correo-${huella(gmailCanonico(usuario.email))}`))) throw new HttpsError('resource-exhausted', 'Espera un poco antes de pedir otro correo.', { motivo: 'persona' });
+      if (!(await permitirConexion(conexion(request)))) throw new HttpsError('resource-exhausted', 'Demasiadas cuentas nuevas desde esta conexión hoy.', { motivo: 'conexion' });
+      // Si el tope del sitio se acabó, el navegador usa el correo simple de Firebase (ver nube.js): nadie queda trabado.
+      if (!(await permitirSitio('verificar'))) throw new HttpsError('resource-exhausted', 'Hoy se mandaron demasiados correos. Intenta mañana.', { motivo: 'sitio' });
       const enlace = await getAuth().generateEmailVerificationLink(usuario.email, { url: `${SITIO}#/entrar/listo` });
       await mandar(usuario.email, correoVerificar({ nombre: usuario.displayName, enlace: enlaceDelSitio(enlace, SITIO) }));
       return { ok: true };
@@ -93,7 +112,7 @@ export const enviarCorreoCuenta = onCall(
       const correo = String(request.data?.correo || '').trim().toLowerCase();
       if (!ES_GMAIL.test(correo)) throw new HttpsError('invalid-argument', 'Solo correos de Gmail.');
       // Siempre se responde lo mismo, exista o no la cuenta: así nadie averigua qué correos están registrados.
-      if (!(await permitirPersona(`correo-${huella(correo)}`))) return { ok: true };
+      if (!(await permitirPersona(`correo-${huella(gmailCanonico(correo))}`))) return { ok: true };
       try {
         // Si la cuenta no existe, esto falla y no se gasta nada del tope del sitio:
         // inventar miles de correos no sirve para bloquear a los demás.
@@ -131,6 +150,7 @@ export const corregirPractica = onCall({ region: 'us-central1', maxInstances: 10
   const id = String(request.data?.id || '');
   const entrada = ID_PRACTICA.test(id) ? respuestas()[id] : undefined;
   if (!entrada) throw new HttpsError('not-found', 'No conozco esa práctica.');
+  if (!respuestasValidas(request.data?.respuestas)) throw new HttpsError('invalid-argument', 'Respuestas con un formato que no entiendo.');
   const db = getFirestore();
   const dia = hoy();
   const ahora = Date.now();

@@ -128,7 +128,7 @@ vf :: `PROGRESO.md` es leído por la página para mostrar el progreso
 
 | Dirección | Qué muestra |
 |---|---|
-| `#/` | El mapa grande: las 6 etapas |
+| `#/` | El mapa grande: todos los cursos con sus etapas |
 | `#/etapa/web` | El mapa de una etapa: sus clases |
 | `#/clase/15` | El mapa de una clase: sus partes |
 | `#/clase/15/0/3` | Leer la parte 3 del documento 0 (la primera pestaña) de la clase 15 |
@@ -460,6 +460,9 @@ vf :: En internet, el servidor del mapa es GitHub Pages
 - Los comentarios grises `// clase 15` imitan comentarios de código.
 
 **El camino en zigzag:** una línea punteada y cada parada con un círculo. En la compu, las paradas pares van a la derecha (`.parada:nth-child(even) { margin-left: 50%; }`); en el celular, todo en una columna (`@media`).
+
+> 🔧 **Lo que cambió después (una lección en sí misma):** con el tiempo, el mapa pasó a ser de **islas** (`web/mapa-islas.js`) y se acomodaba en **serpiente**: la segunda fila iba de derecha a izquierda. Se veía bonito, pero una revisión "como humano" mostró que la gente leía el 04 antes que el 03. Ahora cada fila se lee de izquierda a derecha, como un libro. Lo bonito no sirve si confunde el orden.
+
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

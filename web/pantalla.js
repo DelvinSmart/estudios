@@ -5,7 +5,9 @@ export const app = document.getElementById('app');
 export const migas = document.getElementById('migas');
 const rutaTerminal = document.getElementById('ruta-terminal');
 
-export const escapar = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+import { escapar } from './texto.js';
+
+export { escapar };
 export const enLinea = (md) => window.marked.parseInline(md);
 export const dos = (n) => String(n).padStart(2, '0');
 

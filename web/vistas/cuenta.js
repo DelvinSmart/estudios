@@ -93,7 +93,8 @@ export async function vistaEntrar(paso) {
   if (paso === 'crear') {
     tarjetaCuenta('./crear-cuenta', 'Crear cuenta', `
       <p class="bajada">Con tu cuenta, cada bombillo queda guardado en el servidor y al final puedes emitir un
-        <b>certificado verificable</b>. Solo correo de <b>Gmail</b>.</p>
+        <b>certificado verificable</b>. Solo correo de <b>Gmail</b>: así Google confirma que el correo es tuyo
+        y nadie puede emitir un certificado con un correo inventado.</p>
       ${campo('c-nombre', 'nombre completo', 'text', 'autocomplete="name" maxlength="80"')}
       <p class="cuenta-nota">⚠️ Escríbelo <b>tal como aparece en tu documento</b>, con tildes y apellidos.
         Es el nombre que saldrá impreso en tu certificado.</p>

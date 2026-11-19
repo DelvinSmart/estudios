@@ -52,7 +52,7 @@ export async function vistaProgreso() {
     const ruta = c.id === 'programacion' ? '#/certificado' : `#/certificado/${c.id}`;
     return `
       <section class="curso-progreso">
-        <p class="mono comentario">// curso: ${escapar(c.corto.toLowerCase())}</p>
+        <p class="mono comentario">// curso: ${escapar(c.titulo.toLowerCase())}</p>
         <div class="gran-cuenta mono"><b>${listos}</b> de ${total} bombillos prendidos
           <span class="tenue nube-curso" data-curso="${c.id}"></span></div>
         <div class="barra-progreso ancha"><span style="width:${total ? (listos / total) * 100 : 0}%"></span></div>

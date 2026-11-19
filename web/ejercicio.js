@@ -33,9 +33,13 @@ import { cajaPython, ESPERA_PYTHON_MS, ESPERA_PYTHON_CORRER_MS } from './ejercic
 
 const CLAVE = 'mapa-ejercicio:';
 const CLAVE_OK = 'mapa-ejercicio-ok:';
+const CLAVE_INTENTOS = 'mapa-ejercicio-intentos:';
+// La solución se muestra después de 3 intentos de verdad (código distinto al del comienzo).
+// Así no se puede mirar con un solo clic en "probar" con el cuadro vacío.
+const INTENTOS_PARA_SOLUCION = 3;
 const ESPERA_MS = 3000;
 const ESPERA_TS_MS = 30000; // TypeScript: la primera vez baja el compilador
-const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+import { escapar as esc } from './texto.js';
 const enLinea = (md) => (window.marked ? window.marked.parseInline(md) : esc(md));
 const leer = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
 const escribir = (k, v) => { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) { /* sin almacenamiento */ } };
@@ -217,7 +221,7 @@ export function crearEjercicio(texto, id) {
     <div class="ejercicio-botones">
       <button class="boton-principal ejercicio-probar" type="button">▶ probar</button>
       <button class="boton ejercicio-reiniciar" type="button">reiniciar</button>
-      ${ej.solucion ? '<button class="boton ejercicio-ver" type="button" disabled title="Primero inténtalo">ver solución</button>' : ''}
+      ${ej.solucion ? '<button class="boton ejercicio-ver" type="button" disabled>ver solución</button>' : ''}
     </div>
     <div class="ejercicio-resultado" aria-live="polite"></div>
     <pre class="ejercicio-solucion" hidden></pre>`;
@@ -226,6 +230,15 @@ export function crearEjercicio(texto, id) {
   const resultado = caja.querySelector('.ejercicio-resultado');
   const botonVer = caja.querySelector('.ejercicio-ver');
   editor.value = leer(CLAVE + id) ?? ej.codigo;
+  // Cuántas veces probó con código propio. Si ya lo resolvió, la solución queda libre.
+  let intentos = Number(leer(CLAVE_INTENTOS + id)) || 0;
+  const ponerBotonVer = () => {
+    if (!botonVer) return;
+    const libre = resuelto || caja.classList.contains('resuelto') || intentos >= INTENTOS_PARA_SOLUCION;
+    botonVer.disabled = !libre;
+    botonVer.title = libre ? '' : `Primero inténtalo: se abre tras ${INTENTOS_PARA_SOLUCION} intentos con tu código (llevas ${intentos})`;
+  };
+  ponerBotonVer();
   const ajustarAlto = () => { editor.style.height = 'auto'; editor.style.height = `${Math.max(120, editor.scrollHeight + 4)}px`; };
   requestAnimationFrame(ajustarAlto);
   editor.addEventListener('input', () => { escribir(CLAVE + id, editor.value); ajustarAlto(); });
@@ -245,7 +258,9 @@ export function crearEjercicio(texto, id) {
       : ej.lenguaje === 'swift' ? await correrSwift(editor.value, ej.pruebas)
       : await correrEnCaja(ej, editor.value);
     boton.disabled = false;
-    if (botonVer) { botonVer.disabled = false; botonVer.title = ''; }
+    // Solo cuenta como intento si cambió algo respecto al código del comienzo.
+    const propio = editor.value.trim() !== '' && editor.value.trim() !== ej.codigo.trim();
+    if (propio) { intentos += 1; escribir(CLAVE_INTENTOS + id, String(intentos)); }
     // En html, la página del alumno se queda a la vista; en js, la caja se borra. Kotlin y Swift no usan caja.
     if (ej.lenguaje === 'html') { vista = r.caja; } else { r.caja?.remove(); }
     const total = r.resultados.length;
@@ -254,6 +269,7 @@ export function crearEjercicio(texto, id) {
     caja.classList.toggle('resuelto', todo);
     caja.querySelector('.ejercicio-estado').textContent = todo ? '✓ resuelto' : '';
     escribir(CLAVE_OK + id, todo ? '1' : null);
+    ponerBotonVer();
     resultado.innerHTML = `
       ${r.error ? `<p class="ejercicio-error">✗ ${esc(r.error)}</p>` : ''}
       ${total ? `<p class="ejercicio-cuenta mono ${todo ? 'bien' : ''}">${todo ? '✓ ¡Todas las pruebas pasan!' : `${bien} de ${total} pruebas pasan`}</p>` : ''}

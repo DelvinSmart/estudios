@@ -147,6 +147,13 @@ test('un código con otro formato no vale', async () => {
   const fechas = await sembrar('ana', TOTAL);
   await assertFails(emitir('ana', 'HOLA-MUNDO', {}, { inicio: fechas.inicio, fin: fechas.ultimo }));
 });
+test('el nombre solo admite letras: nada de símbolos, enlaces ni emojis', async () => {
+  const fechas = await sembrar('ana', TOTAL);
+  for (const nombre of ['Ana Pérez – Certificada por Google', 'Ana Pérez https://x.co', 'Ana Pérez 🎓', '<b>Ana</b> Pérez']) {
+    await assertFails(emitir('ana', COD, { nombre }, { inicio: fechas.inicio, fin: fechas.ultimo }));
+  }
+  await assertSucceeds(emitir('ana', COD, { nombre: "María O'Neil-Gómez Jr." }, { inicio: fechas.inicio, fin: fechas.ultimo }));
+});
 test('el certificado solo sin el registro de "emitidos" no vale', async () => {
   const fechas = await sembrar('ana', TOTAL);
   await assertFails(setDoc(doc(db('ana'), 'certificados', COD), { uid: 'ana', curso: 'programacion', nombre: 'Ana Pérez', emitido: serverTimestamp(), partes: TOTAL, inicio: fechas.inicio, fin: fechas.ultimo }));

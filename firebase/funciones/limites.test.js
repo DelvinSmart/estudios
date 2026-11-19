@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decidirPersona, decidirSitio, TOPE_SITIO, ESPERA_MS, MAXIMO_DIA } from './limites.js';
+import { decidirPersona, decidirSitio, gmailCanonico, TOPE_SITIO, ESPERA_MS, MAXIMO_DIA } from './limites.js';
 
 const DIA = '2026-11-16';
 
@@ -28,4 +28,13 @@ test('entre los dos topes no se pasa del límite diario de Gmail (~500)', () => 
 });
 test('un tipo de correo inventado nunca se manda', () => {
   assert.equal(decidirSitio('spam', 0), false);
+});
+
+test('las variantes de un mismo Gmail cuentan como una sola bandeja', () => {
+  const base = 'anaperez@gmail.com';
+  for (const v of ['anaperez@gmail.com', 'Ana.Perez@gmail.com', 'anaperez+1@gmail.com', 'a.n.a.perez+spam@GMAIL.com', 'anaperez@googlemail.com']) {
+    assert.equal(gmailCanonico(v), base, v);
+  }
+  assert.notEqual(gmailCanonico('otra@gmail.com'), base);
+  assert.equal(gmailCanonico('ana.perez@empresa.com'), 'ana.perez@empresa.com'); // fuera de Gmail los puntos sí importan
 });

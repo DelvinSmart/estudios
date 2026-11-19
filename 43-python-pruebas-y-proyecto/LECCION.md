@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** aprender a manejar no termina con la teoría: termina cuando sales a la calle y llegas a algún lado. Esta clase junta todo en un programa de verdad, y con pruebas que confirman que funciona.
 
-> 🎙️ **El profesor dice:** la última clase del curso **Python**. Primero, cómo se prueba el código con **pytest** (lo mismo que hiciste con Jest en los Temas 02 y 03, ahora en Python). Después, un proyecto completo y útil para tu trabajo: **un resumen de la semana de un conductor**, que lee los viajes y gastos de un archivo, calcula ganancias, y avisa del aceite. Al final, cómo llamar a una API.
+> 🎙️ **El profesor dice:** la última clase de teoría del curso **Python** (después viene el proyecto final). Primero, cómo se prueba el código con **pytest** (lo mismo que hiciste con Jest en los Temas 02 y 03, ahora en Python). Después, un proyecto completo y útil para tu trabajo: **un resumen de la semana de un conductor**, que lee los viajes y gastos de un archivo, calcula ganancias, y avisa del aceite. Al final, cómo llamar a una API.
 
 ## Parte 1. Pruebas con pytest
 

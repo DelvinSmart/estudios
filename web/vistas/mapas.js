@@ -70,9 +70,9 @@ export function vistaInicio(soloCurso) {
       <p class="bajada">Primero los fundamentos, después la web, los datos, la arquitectura y mis proyectos.
         Cada curso tiene su mapa y su certificado: elige uno en las pestañas o en el menú ☰.</p>
       <div class="contadores mono">
-        <span><b>${ETAPAS.length}</b> etapas</span>
+        <span><b>${Object.keys(CURSOS).length}</b> cursos</span>
         <span><b>${total}</b> clases</span>
-        <a class="contador-bombillos" href="#/progreso"><span class="bombillo-chico ${prendidosTodos ? 'prendido' : ''}">💡</span><b>${prendidosTodos}</b>/${totalBombillos} bombillos</a>
+        <a class="contador-bombillos" href="#/progreso" title="Cada bombillo es una parte de una clase que ya entendiste"><span class="bombillo-chico ${prendidosTodos ? 'prendido' : ''}">💡</span><b>${prendidosTodos}</b>/${totalBombillos} bombillos en todos los cursos</a>
       </div>
       ${actual ? `<div class="acciones">
         <a class="boton-principal boton-seguir" href="#/clase/${actual}">▶ ${prendidosTodos ? 'seguir' : 'empezar'}

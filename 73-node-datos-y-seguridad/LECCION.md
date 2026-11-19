@@ -12,6 +12,10 @@
 
 ### SQLite: una base en un archivo (gratis)
 
+> 📖 **Palabra nueva: SQL** (*Structured Query Language*, "lenguaje de consultas estructurado"). Es el idioma con el que se le habla a las bases de datos de **tablas** (filas y columnas, como una hoja de cálculo). `SELECT` lee, `INSERT` agrega, `UPDATE` cambia y `DELETE` borra. Lo usan SQLite, PostgreSQL y MySQL. Firestore **no** usa SQL: guarda documentos, no tablas.
+>
+> 🌎 **En la vida real:** SQL es como el formulario oficial para pedir algo en una oficina: siempre con las mismas casillas, y cualquier empleado (cualquier base de datos SQL) lo entiende.
+
 SQLite guarda toda la base en **un archivo**, sin instalar un servidor aparte. Ideal para aprender y para apps chicas. Con el paquete `better-sqlite3`:
 
 ```js

@@ -1157,3 +1157,77 @@ escribe :: Escribe con tus palabras un pedido a la IA para que deje un vigilante
 > 🌎 **En la vida real:** es como contar cómo organizaste una mudanza con dos camiones: qué iba en cada uno, quién llegaba primero, cómo evitaste que se mezclaran las cajas y quién revisó todo al final.
 
 > 🌎 **Otro ejemplo:** Es como explicar cómo se coordina una cocina en hora pico: cada cocinero en su puesto, el que pide los platos en orden, y nada sale a la mesa sin que alguien lo revise.
+
+## Parte 15. Construir en una sesión, auditar en otra (un caso real)
+
+> 🎙️ **El profesor dice:** {{alumno}}, esta parte cuenta algo que pasó de verdad con este mismo sitio. Una sesión de IA construía las clases. Otra sesión, aparte y con permiso **solo de lectura**, lo auditó con siete agentes: uno buscaba errores, otro atacaba como un hacker, otro medía si el sitio aguanta muchas clases… Lo que encontraron se arregló, y también se convirtió en esta lección.
+
+### Por qué una sesión aparte
+
+Quien construyó algo **defiende** su propio trabajo, aunque sea una IA: ya "sabe" por qué hizo cada cosa y no la vuelve a mirar con dudas. Una sesión nueva llega **sin ese contexto**: lee el código como lo leería un extraño.
+
+> 🌎 **En la vida real:** el que escribe un libro no es el mejor corrector de su propio libro. Lee lo que quiso escribir, no lo que escribió.
+
+> 🌎 **Otro ejemplo:** en una obra, el ingeniero que construye no firma su propia inspección: viene otro inspector.
+
+### El patrón, paso a paso
+
+1. **La sesión que construye** trabaja normal.
+2. **Esperas** a que termine o se detenga. El auditor **no edita** mientras el otro trabaja (Parte 2: dos agentes en los mismos archivos se pisan).
+3. **La sesión auditora** abre el proyecto con permiso de solo lectura y reparte el trabajo: **un agente por tema** (errores, seguridad, rendimiento, arquitectura, contenido, navegación). Así cada uno va a fondo en una sola cosa.
+4. **Cada hallazgo se verifica** antes de creerlo: se abre el archivo, se corre la prueba, se mide.
+5. **Tú decides** qué se arregla, en qué orden y quién lo arregla.
+
+### Lo que salió mal (y por qué la verificación es obligatoria)
+
+| Lo que dijo un agente | Lo que se midió | Lección |
+|---|---|---|
+| "La portada se **congela 4 segundos** con un alumno a la mitad del curso: crítico" | En el navegador real tardó **0,26 s**. El defecto existía (leía el progreso 7.600 veces), pero no era crítico | Los agentes **exageran**. Medir antes de alarmarse |
+| "El curso nunca explica el **hash** de contraseñas" | Sí lo explica, en la clase 22 | Un agente puede **no ver** algo que está. Buscar antes de escribir |
+| "Los certificados de **Swift** no se pueden verificar" | Cierto: faltaba `SW` en una lista escrita a mano | Las listas copiadas a mano envejecen: una sola fuente de verdad |
+| Cuatro de siete agentes se **detuvieron** a la mitad | Se acabó el límite de uso y hubo que reanudarlos | Más agentes = más consumo. Vale la pena para una auditoría grande, no para un cambio chico |
+
+### Los límites de esta estrategia
+
+- **El mismo modelo comparte puntos ciegos.** Si todos los agentes son la misma IA, pueden fallar en lo mismo. Ayuda usar otro modelo como segunda opinión, y siempre una **revisión humana**.
+- **Las pruebas no lo ven todo.** Las 48 pruebas del sitio pasaban, y aun así había fallos de seguridad y de navegación. Por eso también hubo una revisión "como humano" en el navegador: ¿encuentro los botones?, ¿entiendo el orden?
+- **Un hallazgo no es un hecho** hasta que lo verificas: clasifícalo en *confirmado*, *falsa alarma* o *duda*.
+
+> 💡 **La idea central:** programar con IA no es soltar prompts. La IA genera rápido; **la arquitectura, las pruebas y la verificación las pones tú**.
+
+✋ **Para y piensa:** si una IA te dice "encontré un error crítico", ¿qué haces antes de arreglarlo?
+
+<details><summary>Ver la respuesta</summary>
+
+Lo **verifico**: abro el archivo y la línea que dice, lo reproduzco (una prueba en rojo, una medición) y recién ahí decido. Si no lo puedo reproducir, es una duda o una falsa alarma, no un error.
+
+</details>
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
+
+```ejercicio
+titulo: Clasificar un hallazgo de auditoría
+lenguaje: js
+pide: Completa `clasificar(hallazgo)`. Recibe `{ reproducido, existeEnElCodigo }` (cada uno `true`, `false` o `null` si todavía no se revisó). Devuelve `'confirmado'` si se reprodujo; `'falsa alarma'` si se revisó y no existe en el código; y `'duda'` en cualquier otro caso.
+--- código
+function clasificar({ reproducido, existeEnElCodigo }) {
+  // tu código aquí
+}
+--- pruebas
+prueba('se reprodujo: confirmado', () => igual(clasificar({ reproducido: true, existeEnElCodigo: true }), 'confirmado'));
+prueba('no existe en el código: falsa alarma', () => igual(clasificar({ reproducido: false, existeEnElCodigo: false }), 'falsa alarma'));
+prueba('todavía sin revisar: duda', () => igual(clasificar({ reproducido: null, existeEnElCodigo: null }), 'duda'));
+prueba('está en el código pero no se pudo reproducir: duda', () => igual(clasificar({ reproducido: false, existeEnElCodigo: true }), 'duda'));
+--- solución
+function clasificar({ reproducido, existeEnElCodigo }) {
+  if (reproducido === true) return 'confirmado';
+  if (existeEnElCodigo === false) return 'falsa alarma';
+  return 'duda';
+}
+```
+
+```practica
+escribe :: ¿Por qué conviene que la auditoría la haga una sesión distinta de la que construyó? :: Porque la sesión que construyó ya tiene en la cabeza por qué hizo cada cosa y tiende a defender su trabajo; una sesión nueva lo mira sin ese contexto, como un extraño, y ve lo que la otra pasó por alto.
+escribe :: Nombra dos límites de usar varios agentes de IA para auditar. :: Por ejemplo: si son el mismo modelo comparten puntos ciegos (conviene otra IA y una revisión humana); pueden exagerar o inventar hallazgos (hay que verificarlos); gastan más uso y pueden detenerse por el límite; y el auditor no debe editar mientras otra sesión trabaja.
+escribe :: En una entrevista te preguntan "¿cómo sabes que el código que generó la IA está bien?". Responde en tres frases. :: Por ejemplo: "No lo doy por bueno porque pasen las pruebas. Lo audito con una sesión aparte, de solo lectura, que busca errores, fallos de seguridad y problemas de diseño. Cada hallazgo lo verifico yo antes de arreglarlo: en mi propio sitio, un agente dijo que algo era crítico y al medirlo vi que no lo era."
+```

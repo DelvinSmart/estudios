@@ -370,7 +370,7 @@ Con **Cmd + Option + I** (o F12) cualquiera ve:
 - **Elementos:** el HTML; puede cambiar textos y quitar el `disabled` de un botón.
 - **Consola:** puede ejecutar JavaScript y llamar a tus funciones.
 - **Red:** ve cada petición, sus datos y respuestas.
-- **Aplicación:** ve y cambia localStorage, cookies y la sesión.
+- **Aplicación:** ve y cambia localStorage, cookies y la sesión. (Una **cookie** es un dato pequeño que un sitio guarda en tu navegador y que el navegador le devuelve **solo** en cada pedido a ese sitio; muchas veces es tu sesión: "esta persona ya entró". Por eso robar una cookie de sesión es casi como robar la contraseña.)
 
 Úsalas en **tus** sitios para ver lo que vería un atacante.
 

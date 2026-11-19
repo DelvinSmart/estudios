@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** un chef no improvisa cada noche: tiene su forma de trabajar (preparar, cocinar, probar, servir), y por eso sale bien aunque haya mucha gente.
 
-> 🎙️ **El profesor dice:** la última clase del curso **IA para programadores** junta todo en un flujo que puedes repetir siempre, con un ejemplo real: cómo se hizo el certificado verificable de este mapa. Y una pregunta importante para el final: cómo seguir **aprendiendo de verdad** mientras la IA hace tanto por ti.
+> 🎙️ **El profesor dice:** esta clase del curso **IA para programadores** junta todo en un flujo que puedes repetir siempre, con un ejemplo real: cómo se hizo el certificado verificable de este mapa. Y una pregunta importante para el final: cómo seguir **aprendiendo de verdad** mientras la IA hace tanto por ti.
 
 ## Parte 1. El flujo en siete pasos
 
@@ -182,7 +182,7 @@ Pídele que **te explique**, no solo que haga: "explícame esta línea", "¿por 
 
 ### Tu plan con este mapa
 
-Programación primero (los fundamentos que te faltan), **seguridad** en paralelo, y con esto (IA para programadores) ya puedes trabajar mejor desde hoy. **Agentes de IA** al final, cuando quieras construir tus propios agentes. Una clase por semana, con sus prácticas, vale más que diez leídas rápido.
+Programación primero (los fundamentos que te faltan), **seguridad** en paralelo, y con esto (IA para programadores) ya puedes trabajar mejor desde hoy. **Agentes de IA** al final, cuando quieras construir tus propios agentes. Una clase por día como máximo (o por semana, si tienes poco tiempo), con sus prácticas, vale más que diez leídas rápido.
 
 > 🌎 **En la vida real:** es como un plan de entrenamiento: poco y constante gana a mucho y de vez en cuando.
 

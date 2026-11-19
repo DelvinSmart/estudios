@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** terminar de cocinar no es servir: falta probar el sabor, emplatar y llevarlo a la mesa. Una app terminada todavía tiene que probarse, firmarse y llegar a las tiendas.
 
-> 🎙️ **El profesor dice:** la última clase del curso **React Native**. Pruebas automáticas de componentes, cómo se arma la app final con **EAS Build** (y sin pagar), la diferencia entre un **AAB** y un **APK**, cómo llega a Google Play y al iPhone, y las actualizaciones. El Tema 20 tiene el paso a paso real de Copiloto; aquí ves el mapa completo.
+> 🎙️ **El profesor dice:** la última clase de teoría del curso **React Native** (después vienen los proyectos). Pruebas automáticas de componentes, cómo se arma la app final con **EAS Build** (y sin pagar), la diferencia entre un **AAB** y un **APK**, cómo llega a Google Play y al iPhone, y las actualizaciones. El Tema 20 tiene el paso a paso real de Copiloto; aquí ves el mapa completo.
 
 ## Parte 1. Probar componentes
 

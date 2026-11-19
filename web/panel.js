@@ -16,7 +16,7 @@ const app = document.getElementById('app');
 const rutaTerminal = document.getElementById('ruta-terminal');
 const botonSalir = document.getElementById('boton-salir');
 
-const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+import { escapar as esc } from './texto.js';
 const num = (n) => String(clasesDelCurso(cursoDe(n)).indexOf(n) + 1).padStart(2, '0');
 const cursoDe = (n) => Object.keys(CURSOS).find((c) => clasesDelCurso(c).includes(n));
 
@@ -33,7 +33,7 @@ function pantallaLlave(aviso = '') {
   app.innerHTML = `
     <section class="panel-llave">
       <h1 class="mono">Panel de clases</h1>
-      <p>Para editar, pega tu llave de GitHub. Se guarda <strong>solo en este aparato</strong>: sin ella, este panel no puede cambiar nada.</p>
+      <p>Para editar, pega tu llave de GitHub. Se guarda <strong>solo en esta pestaña</strong> y se borra al cerrarla: sin ella, este panel no puede cambiar nada.</p>
       <form id="form-llave" class="panel-form">
         <label for="campo-llave" class="mono">llave</label>
         <input id="campo-llave" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…" required>

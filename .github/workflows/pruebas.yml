@@ -1,0 +1,60 @@
+# Las pruebas, solas, en cada cambio (CI: integración continua, clase 04).
+# Antes este proyecto enseñaba CI pero no lo usaba: las pruebas solo corrían si alguien se acordaba.
+# Ahora, si algo se rompe, GitHub lo marca en rojo antes de que llegue a los alumnos.
+#
+# Qué revisa:
+#   1. herramientas: los motores de ejercicios, el panel, y que firestore.rules y web/indice.json
+#      estén al día (si fallan: node firebase/generar-reglas.mjs).
+#   2. funciones: las Cloud Functions (corregir, límites, correos).
+#   3. reglas: intenta hacer trampa contra las reglas de Firestore en un emulador (necesita Java 21).
+
+name: Pruebas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  herramientas-y-funciones:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Herramientas y archivos generados
+        run: node --test herramientas/*.test.mjs
+      - name: Cloud Functions
+        working-directory: firebase/funciones
+        run: |
+          npm ci
+          npm test
+
+  reglas-de-firestore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Reglas en el emulador
+        working-directory: firebase/pruebas
+        run: |
+          npm ci
+          npm install --no-save firebase-tools
+          npx firebase emulators:exec --only firestore --project demo-mapa "node --test reglas.test.mjs"

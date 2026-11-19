@@ -113,7 +113,7 @@ const esLBLA = ref => /\bLBLA\b/.test(ref || "");
 |---|---|
 | **YouVersion Platform** (el servicio de los de la app de la Biblia) | Creaste la cuenta de desarrollador. **No tiene la LBLA.** |
 | **Una IA o Ollama** que escriba los versículos | No sirve: un modelo escribe lo que "le suena". Cambia palabras o mezcla versiones. |
-| **Un programa que saque el texto** de Bible.com o de Lockman | Lockman **prohíbe por escrito** el *scraping* (sacar texto con programas). Además, el navegador no deja leer otras páginas (**CORS**). |
+| **Un programa que saque el texto** de Bible.com o de Lockman | Lockman **prohíbe por escrito** el *scraping* (sacar texto con programas). Además, el navegador no deja que una página lea las respuestas de otro sitio (la **política del mismo origen**; **CORS** es la forma en que un sitio da permiso, y Bible.com no lo da). |
 | **Un robot que tome foto** de la página y copie el texto | Es lo mismo que el scraping, disfrazado. No. |
 | **Mostrar Bible.com dentro** de la página | Bible.com no deja que otras páginas la muestren adentro. |
 | Lockman dice que **las IAs pueden citar la LBLA** | Es cierto, pero mis reglas no me dejan copiar texto con derechos de páginas web. |
@@ -415,7 +415,7 @@ if (abiertos.length) setTimeout(mostrar, duracionCierre()); else mostrar();
 6. Hasta 500, sin un libro completo, sin pasar del 25% del estudio y con el aviso y el link a LBLA.com.
 7. Porque la referencia termina en "LBLA" (`esLBLA`).
 8. Porque escribe lo que le suena: puede cambiar palabras o mezclar versiones.
-9. Es sacar texto de una página con un programa; Lockman lo prohíbe y el navegador no deja leer otras páginas.
+9. Es sacar texto de una página con un programa; Lockman lo prohíbe y el navegador no deja leer las respuestas de otro sitio sin su permiso (CORS).
 10. Lee varias capturas a la vez en el navegador, reconoce libro y capítulo, y llena los pasajes que corresponden.
 11. Cuántos versículos hay (máximo 500) y qué porcentaje del estudio es texto bíblico (máximo 25%).
 12. Porque si la Biblia es 1 parte de 4, lo tuyo son las otras 3.

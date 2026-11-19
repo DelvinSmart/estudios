@@ -285,7 +285,7 @@ f333022 feat(ganhos,painel): Minha empresa, textos de como registrar e foto por 
 9630e4a feat(cores): cores do veículo adicionadas pelo painel
 ```
 
-- `2ce8c04` es el **identificador** del commit (se llama *hash*). Es **único**: ningún otro commit del mundo tiene el mismo. Con él lo encuentras exactamente.
+- `2ce8c04` es el **identificador** del commit (se llama *hash*). El hash completo tiene 40 caracteres y en la práctica es **único**; Git te muestra solo los primeros 7, que alcanzan dentro de tu proyecto (si dos chocaran, Git te pediría más letras). Con él lo encuentras exactamente.
 - El resto de la línea es el **mensaje**.
 
 > 🌎 **En la vida real:** el identificador es el **número de seguimiento** de un paquete de Correios: único, y con él encuentras exactamente ese envío.

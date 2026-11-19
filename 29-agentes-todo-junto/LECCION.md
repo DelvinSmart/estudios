@@ -1,6 +1,6 @@
 # Agentes 6: todo junto
 
-> 🎙️ **El profesor dice:** la última clase del curso: la arquitectura completa, la lista para producción, las fallas comunes, las preguntas de entrevista y los proyectos para tu portafolio.
+> 🎙️ **El profesor dice:** la última clase de teoría del curso (después viene el proyecto final con Ollama): la arquitectura completa, la lista para producción, las fallas comunes, las preguntas de entrevista y los proyectos para tu portafolio.
 
 > 📌 **Nota:** esta clase es parte del curso **Agentes de IA**, que tiene su propio certificado. Está basada en la guía **"Agentic design patterns"** de **Bashiri Smith** (BASWE, edición 2026), explicada en español con mis palabras; los números (2.1, 4.3…) son los mismos de la guía.
 

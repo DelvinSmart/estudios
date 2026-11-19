@@ -2,7 +2,7 @@
 
 > 🌎 **En la vida real:** después del curso de manejo viene el primer viaje solo. Esta clase junta todo en un proyecto chico pero real, en TypeScript, con sus pruebas.
 
-> 🎙️ **El profesor dice:** la última clase del curso **JavaScript + TypeScript**. Vas a armar **"gastos del carro"**: un módulo en TypeScript con el CRUD del laboratorio, tipos, validación y cálculos, y lo vas a probar con **Vitest** (como Jest, que viste en los Temas 02 y 03). Al final, cómo lo usaría una pantalla de React.
+> 🎙️ **El profesor dice:** el primer proyecto del curso **JavaScript + TypeScript** (el último es la web de gastos, en la clase final). Vas a armar **"gastos del carro"**: un módulo en TypeScript con el CRUD del laboratorio, tipos, validación y cálculos, y lo vas a probar con **Vitest** (como Jest, que viste en los Temas 02 y 03). Al final, cómo lo usaría una pantalla de React.
 
 ## Parte 1. Crear el proyecto
 
