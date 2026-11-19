@@ -166,7 +166,7 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 08 | [Pruebas y un proyecto real](43-python-pruebas-y-proyecto/LECCION.md) | pytest, el resumen de la semana de un conductor y las APIs | `43` |
 | 09 | [Proyecto final: el resumen de la semana](90-python-proyecto-resumen-semanal/LECCION.md) | Un programa de terminal: revisar cada fila, juntar los problemas, argparse y 28 pruebas con pytest | `90` |
 
-### 🛡️ Seguridad · 10 clases · certificado `SE-…`
+### 🛡️ Seguridad · 11 clases · certificado `SE-…`
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
@@ -179,7 +179,8 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 07 | [Apps móviles](110-seguridad-apps-moviles/LECCION.md) | El archivo de la app se abre (jadx), la caja fuerte del teléfono, los deep links, y MobSF y Frida | `110` |
 | 08 | [Los programas del día a día](111-seguridad-programas-del-dia-a-dia/LECCION.md) | Gestores de contraseñas, segundo factor, Have I Been Pwned, VirusTotal, Let's Encrypt, gitleaks, Semgrep y ZAP | `111` |
 | 09 | [El maletín del pentester](112-seguridad-maletin-del-pentester/LECCION.md) | Kali, nmap, Shodan, Wireshark, Burp, sqlmap, Nikto, Hydra, hashcat, gobuster, ffuf y Metasploit | `112` |
-| 10 | [Proyecto final: auditar una API con errores](91-seguridad-proyecto-auditoria/LECCION.md) | Una API con 10 errores a propósito: trampas, arreglos sin romper nada y el informe | `91` |
+| 10 | [La práctica con las herramientas](114-seguridad-practica-con-las-herramientas/LECCION.md) | Atacar la app de la clase 91 con nmap, Hydra, sqlmap, un proxy y gitleaks, y probar que la arreglada ya no cae | `114` |
+| 11 | [Proyecto final: auditar una API con errores](91-seguridad-proyecto-auditoria/LECCION.md) | Una API con 10 errores a propósito: trampas, arreglos sin romper nada y el informe | `91` |
 
 ### 🧠 IA para programadores · 10 clases · certificado `IA-…`
 

@@ -45,6 +45,7 @@ export const CLASES = {
   '110': { carpeta: '110-seguridad-apps-moviles', titulo: 'Apps móviles', meta: 'El archivo de la app se abre (jadx), la caja fuerte del teléfono, los deep links, y MobSF y Frida', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '111': { carpeta: '111-seguridad-programas-del-dia-a-dia', titulo: 'Los programas del día a día', meta: 'Gestores de contraseñas, segundo factor, Have I Been Pwned, VirusTotal, Let\'s Encrypt, gitleaks, Semgrep y ZAP', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '112': { carpeta: '112-seguridad-maletin-del-pentester', titulo: 'El maletín del pentester', meta: 'Kali, nmap, Shodan, Wireshark, Burp, sqlmap, Nikto, Hydra, hashcat, gobuster, ffuf y Metasploit', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '114': { carpeta: '114-seguridad-practica-con-las-herramientas', titulo: 'La práctica con las herramientas', meta: 'Atacar la app de la clase 91 con nmap, Hydra, sqlmap, un proxy y gitleaks, y probar que la arreglada ya no cae', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '91': { carpeta: '91-seguridad-proyecto-auditoria', titulo: 'Proyecto final: auditar una API con errores', meta: 'Una API con 10 errores a propósito: trampas, arreglos sin romper nada y el informe', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '89': { carpeta: '89-kotlin-proyecto-app-de-gastos', titulo: 'Proyecto final: la app de gastos en Android', meta: 'Gradle, lógica en Kotlin puro, DataStore, ViewModel con StateFlow, Compose y el emulador', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '96': { carpeta: '96-kotlin-proyecto-calculadora', titulo: 'La misma calculadora, en Kotlin', meta: 'Las mismas decisiones y pruebas que la de React Native: familias sealed, BigDecimal exacto, ViewModel y cuál conviene elegir', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -139,7 +140,7 @@ const ICONOS = {
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁', '94': '🧮', '95': '📱',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁', '96': '⚖️', '97': '👋', '98': '🛟', '99': '🧰', '100': '🏗️', '101': '🚦', '102': '🖼️', '103': '🗂️', '104': '🎨', '105': '🧪', '106': '🏁',
-  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '109': '🔑', '110': '📲', '111': '🧰', '113': '🌉', '112': '💼', '91': '🏁',
+  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '109': '🔑', '110': '📲', '111': '🧰', '113': '🌉', '112': '💼', '114': '🎯', '91': '🏁',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
 
@@ -150,7 +151,7 @@ const LOGOS_CLASE = {
   '12': ['html', 'css', 'javascript'], '13': ['react', 'typescript', 'vite', 'tailwind', 'firebase'], '14': ['html', 'css', 'javascript'],
   '15': ['html'], '16': ['css'], '17': ['javascript'], '18': ['html', 'css', 'javascript', 'markdown'],
   '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'], '77': ['github', 'firebase', 'react'], '85': ['firebase', 'javascript', 'github'], '86': ['javascript', 'typescript', 'react'],
-  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '107': ['owasp', 'node'], '108': ['owasp', 'firebase', 'github'], '109': ['owasp', 'node'], '110': ['owasp', 'android', 'apple'], '113': ['expo', 'kotlin', 'swift'], '111': ['bitwarden', 'letsencrypt', 'github'], '112': ['owasp', 'bash'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'], '93': ['python', 'ollama'],
+  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '107': ['owasp', 'node'], '108': ['owasp', 'firebase', 'github'], '109': ['owasp', 'node'], '110': ['owasp', 'android', 'apple'], '113': ['expo', 'kotlin', 'swift'], '111': ['bitwarden', 'letsencrypt', 'github'], '112': ['owasp', 'bash'], '114': ['owasp', 'node'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'], '93': ['python', 'ollama'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
   '35': ['claude', 'git'], '79': ['claude'], '78': ['claude', 'git'], '80': ['claude', 'ollama'], '92': ['claude', 'javascript'],
   '44': ['javascript', 'typescript', 'react', 'kotlin'],
@@ -236,7 +237,7 @@ export const ETAPAS = [
   {
     id: 'seguridad', curso: 'seguridad', icono: '🛡️', titulo: 'Seguridad: pensar como hacker', logos: ['owasp'],
     desc: 'Un curso aparte, con su propio certificado: cómo atacan y cómo se defiende un sistema.',
-    clases: ['22', '23', '24', '107', '108', '109', '110', '111', '112', '91'],
+    clases: ['22', '23', '24', '107', '108', '109', '110', '111', '112', '114', '91'],
   },
   {
     id: 'ia-programadores', curso: 'ia', icono: '🧠', titulo: 'IA para programadores', logos: ['claude', 'gemini', 'ollama'],
