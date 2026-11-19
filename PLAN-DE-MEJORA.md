@@ -95,6 +95,7 @@ Cómo se construye un motor (colores, formas, efectos, separaciones), dónde se 
 - [x] JavaScript y TypeScript: un objeto de tema (clase 51, parte 5: una interfaz Tema que cumplen el oscuro y el claro)
 - [x] React Native: un archivo de tema, como `dash.*` de Copiloto (clase 56, parte 4: `motor.ts`, StyleSheet y `useColorScheme`)
 - [x] Kotlin: el tema de Jetpack Compose (clase 66, parte 4: `object Motor`, MaterialTheme, `isSystemInDarkTheme` y `copy`)
+- [x] Swift: el motor de SwiftUI (clase 104: un enum Motor, colores con modo claro y oscuro y un ViewModifier para cada tarjeta)
 - [x] Python y Node (sin pantallas): la misma idea con la configuración en un solo lugar (clase 41, parte 5, y clase 73, parte 4: leer una vez, revisar al arrancar y congelar)
 - [x] CSS dentro de JavaScript: el motor de la web de gastos (clase 84) y cómo lo llama cada elemento
 - [x] Qué es la **programación orientada a objetos**, en qué se parece y en qué no a un motor de diseño (clase 82)
@@ -126,7 +127,7 @@ de iPhone (y Kotlin en la de Android): se cuenta cómo encajan.
 
 - [x] Plan de clases del curso de Swift (abajo)
 - [ ] Las clases, con ejercicios (los cortos corren en la página con Compiler Explorer; las pantallas, en Xcode):
-  **6 de 10** (97 a 102, con 18 ejercicios de Swift probados con su solución en la Mac y en Compiler Explorer, y la app "Mi jornada" en SwiftUI probada en el simulador del iPhone)
+  **8 de 10** (97 a 104, con 24 ejercicios de Swift probados con su solución en la Mac y en Compiler Explorer, y la app "Mi jornada" en SwiftUI, que crece de la 102 a la 104: lista, detalle, guardar en el teléfono y su motor de diseño, probada en el simulador en modo claro y oscuro)
 - [x] El curso en el mapa, con su certificado (prefijo SW; las reglas lo aceptan y no le dejan prender partes de otro curso: 41 pruebas de reglas en verde con el emulador). Crece con cada tanda de clases.
 
 #### El plan del curso de Swift
