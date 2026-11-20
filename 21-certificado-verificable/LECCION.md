@@ -316,6 +316,19 @@ La regla de `update` exige, todo junto: que `n` suba exactamente en 1, que se ag
 
 El certificado se crea con dos documentos **a la vez** (un *lote*, `writeBatch`): `certificados/{codigo}` (público) y `cursos/{curso}/emitidos/{uid}` (cuál es tu código). Las reglas usan `getAfter()` para mirar "cómo quedaría el otro documento" y exigen que coincidan. Así cada persona tiene **un solo** certificado por curso.
 
+Además, para **crear** el certificado las reglas exigen todo esto junto (en `firebase/firestore.rules`):
+
+| La regla mira | Para que nadie pueda… |
+|---|---|
+| Que tengas **todos** los bombillos del curso (los cuenta la regla en la base, no le cree a la página) | emitirlo sin terminar |
+| Que la fecha de emisión sea `request.time`, la hora del servidor | poner una fecha falsa |
+| Que el inicio y el fin sean los de tu progreso guardado | inventar cuándo estudió |
+| Que el código tenga el formato de **ese** curso (`SE-…` para Seguridad) | usar un código de otro curso |
+| Que el nombre tenga solo letras, espacios, punto, apóstrofo y guion (de 5 a 80) | meter un enlace, emojis o un texto raro en un certificado público |
+| Que el documento tenga **solo** esos datos (`hasOnly`) | agregar campos de más |
+
+Y una vez creado, **nadie lo puede cambiar** (`allow update: if false`), ni su dueño. Lo único que puede hacer el dueño es **borrar el suyo** (por ejemplo, si escribió mal su nombre) y emitirlo de nuevo, pasando otra vez por todas las reglas.
+
 > 🌎 **En la vida real:** es como una compraventa de carro: se firma el contrato y se cambia el dueño en el registro **en el mismo acto**; si falta uno, no vale ninguno.
 
 > 🌎 **Otro ejemplo:** Es como un apretón de manos: si uno no extiende la mano, no hay apretón.
@@ -487,7 +500,7 @@ Las reglas dejan **leer un** certificado si sabes su código (`allow get: if tru
 ### Lo que la verificación garantiza y lo que no
 
 ✅ Garantiza: que el certificado lo **emitió este curso**, a ese nombre, después de registrar cada parte en el servidor con su hora, y las fechas en que la persona estudió.
-⚠️ No garantiza: que el nombre sea el del documento (lo escribe la persona) ni que no haya copiado respuestas (las prácticas están en GitHub). Lo decimos claro en la página: **no es un título oficial**.
+⚠️ No garantiza: que el nombre sea el del documento (lo escribe la persona) ni que haya estudiado sin ayuda (las respuestas ya no están en GitHub, pero alguien podría pasárselas). Lo decimos claro en la página: **no es un título oficial**.
 
 > 🌎 **En la vida real:** el comprobante de una transferencia prueba que la plata salió, no para qué se usó.
 
