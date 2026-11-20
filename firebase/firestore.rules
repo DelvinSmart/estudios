@@ -635,6 +635,11 @@ service cloud.firestore {
         '108:LECCION.md:4',
         '108:LECCION.md:5',
         '108:LECCION.md:6',
+        '124:LECCION.md:1',
+        '124:LECCION.md:2',
+        '124:LECCION.md:3',
+        '124:LECCION.md:4',
+        '124:LECCION.md:5',
         '109:LECCION.md:1',
         '109:LECCION.md:2',
         '109:LECCION.md:3',
@@ -844,7 +849,7 @@ service cloud.firestore {
         '123:LECCION.md:5'
       ] : [])))))))))));
     }
-    function total(curso) { return (curso == 'programacion' ? 281 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 79 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 64 : (curso == 'trabajo' ? 28 : -1))))))))))); }
+    function total(curso) { return (curso == 'programacion' ? 281 : (curso == 'javascript' ? 68 : (curso == 'node' ? 41 : (curso == 'reactnative' ? 54 : (curso == 'kotlin' ? 42 : (curso == 'swift' ? 41 : (curso == 'python' ? 47 : (curso == 'seguridad' ? 84 : (curso == 'ia' ? 70 : (curso == 'agentes' ? 64 : (curso == 'trabajo' ? 28 : -1))))))))))); }
     function conPractica(curso) {
       return (curso == 'programacion' ? [
         '10:CLASE-GUIADA.md:1',
@@ -1391,7 +1396,11 @@ service cloud.firestore {
         '115:LECCION.md:1',
         '115:LECCION.md:2',
         '115:LECCION.md:3',
-        '115:LECCION.md:4'
+        '115:LECCION.md:4',
+        '124:LECCION.md:1',
+        '124:LECCION.md:2',
+        '124:LECCION.md:3',
+        '124:LECCION.md:4'
       ] : (curso == 'ia' ? [
         '30:LECCION.md:1',
         '30:LECCION.md:2',
@@ -1588,7 +1597,8 @@ service cloud.firestore {
         '24:LECCION.md:1': '23:LECCION.md:9',
         '107:LECCION.md:1': '24:LECCION.md:9',
         '108:LECCION.md:1': '107:LECCION.md:5',
-        '109:LECCION.md:1': '108:LECCION.md:6',
+        '124:LECCION.md:1': '108:LECCION.md:6',
+        '109:LECCION.md:1': '124:LECCION.md:5',
         '110:LECCION.md:1': '109:LECCION.md:6',
         '111:LECCION.md:1': '110:LECCION.md:5',
         '112:LECCION.md:1': '111:LECCION.md:6',

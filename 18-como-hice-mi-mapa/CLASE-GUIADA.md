@@ -612,7 +612,7 @@ Es **honesto**: dice que lo emite el propio curso y que **no es un título ofici
 > 🎙️ **El profesor:** igual que la página de estudios (Tema 12), pero con dos detalles propios.
 
 1. **El archivo `.nojekyll`.** Por defecto, GitHub Pages pasa los archivos por **Jekyll**, un programa que **convierte los `.md` en páginas HTML**. Eso rompería el mapa, que necesita los `.md` **crudos**. Un archivo vacío llamado `.nojekyll` le dice "no toques nada".
-2. **Repositorio público o privado.** Con la cuenta gratis de GitHub, GitHub Pages **solo publica repositorios públicos**. Tu repositorio `estudios` es privado. Hay que decidir: hacerlo público, crear uno público aparte, o pagar GitHub Pro.
+2. **Repositorio público o privado.** Con la cuenta gratis de GitHub, GitHub Pages **solo publica repositorios públicos**. Al principio `estudios` era privado. Había que decidir: hacerlo público, crear uno público aparte, o pagar GitHub Pro. **Se hizo público**, y por eso antes se revisó que no quedara nada secreto adentro.
 
 > 📌 **Nota:** antes de publicar, revisa que no haya nada privado. El `.gitignore` de esta carpeta deja afuera claves, contraseñas y archivos de respaldo, y se revisó que las clases no tengan claves ni datos de usuarios.
 
@@ -649,7 +649,7 @@ function revisarPublicacion(archivos) {
 
 ```practica
 elige :: ¿Qué pasaría sin el archivo `.nojekyll`? :: Nada :: Jekyll convertiría los `.md` en HTML y el mapa no podría leerlos crudos :: La página sería más rápida
-elige :: ¿Por qué no se puede publicar `estudios` tal como está, con la cuenta gratis? :: Porque es muy grande :: Porque GitHub Pages gratis solo publica repositorios públicos, y `estudios` es privado :: Porque falta un archivo
+elige :: ¿Por qué hubo que hacer público `estudios` para publicarlo con la cuenta gratis? :: Porque era muy grande :: Porque GitHub Pages gratis solo publica repositorios públicos, y `estudios` era privado :: Porque faltaba un archivo
 vf :: Antes de publicar algo, hay que revisar que no tenga nada privado
 ```
 

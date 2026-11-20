@@ -4,7 +4,7 @@ Las clases y el código no viven solo en la Mac: están en GitHub.
 
 | Qué | Dónde |
 |---|---|
-| Este curso (lecciones y progreso) | `github.com/DelvinSmart/estudios` (privado) |
+| Este curso (lecciones y progreso) | `github.com/DelvinSmart/estudios` (público) |
 | El código de Copiloto Driver (app y web) | `github.com/DelvinSmart/copiloto-driver`, rama **`feature/smart-camera`** (la de `main` es vieja, de agosto, y no tiene la web) |
 
 Con **Claude en la nube** (claude.ai → Code), Claude abre esos repositorios en una computadora de la nube: lee las lecciones, abre el código del app y guarda el progreso en GitHub. La Mac puede estar apagada.

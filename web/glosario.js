@@ -30,7 +30,7 @@ export const GLOSARIO = [
     definicion: 'La carpeta de tu proyecto con toda su historia de cambios guardada por Git.' },
   { termino: 'terminal', alias: ['consola', 'línea de comandos', 'shell'], clase: '05',
     definicion: 'La pantalla donde le escribes órdenes a la computadora en texto (como "npm test"), en vez de usar botones. Responde con texto.' },
-  { termino: 'compilar', alias: ['compilación', 'compilador'], clase: '51',
+  { termino: 'compilar', alias: ['compilación', 'compilador'], clase: '44',
     definicion: 'Convertir el código que tú escribes en algo que la máquina (o el teléfono) puede ejecutar. TypeScript, Kotlin y Swift se compilan; JavaScript y Python no.' },
   { termino: 'npm', alias: ['npm install', 'npm run'], clase: '50',
     definicion: 'El "mercado" de Node.js: un programa para bajar librerías (código de otros) y correr los comandos de tu proyecto, como "npm test".' },
@@ -94,7 +94,13 @@ export const GLOSARIO = [
     definicion: 'Un programa que revisa tu código solo: le da una entrada y comprueba que el resultado sea el esperado. "Pasaron" = todas coincidieron.' },
   { termino: 'SDK', alias: ['sdk'], clase: '44',
     definicion: 'Un kit de herramientas para construir sobre algo (un sistema, un servicio): librerías, programas y ejemplos juntos.' },
-  { termino: 'App Check', alias: ['app check', 'appcheck'], clase: '108',
+  { termino: 'reCAPTCHA', alias: ['recaptcha', 'recaptcha enterprise', 'fraud defense'], clase: '124',
+    definicion: 'Un servicio de Google que distingue, sin que toques nada, a una persona real en tu sitio de un robot. App Check lo usa en la web para dar su sello.' },
+  { termino: 'configuración pública', alias: ['apikey', 'api key de firebase'], clase: '124',
+    definicion: 'Los datos con que tu página encuentra a Firebase (apiKey, projectId). Van a la vista y no son secretos: lo que protege los datos son las reglas.' },
+  { termino: 'modo mirar', alias: ['monitor', 'enforce', 'aplicar app check'], clase: '124',
+    definicion: 'Encender un control nuevo primero solo para observar (cuenta, pero no rechaza a nadie) y, cuando los números están bien, recién "aplicar" para que rechace.' },
+  { termino: 'App Check', alias: ['app check', 'appcheck'], clase: '124',
     definicion: 'Un control de Firebase que deja usar el servidor solo desde tu sitio de verdad, no desde un programa que copió tu configuración.' },
 
   // Pruebas (clase 02)
@@ -162,7 +168,7 @@ export const GLOSARIO = [
     definicion: 'La librería más usada para hacer un servidor web en Node.js: define las rutas (endpoints) y qué responde cada una.' },
   { termino: 'middleware', alias: ['middlewares'], clase: '71',
     definicion: 'Una función que se mete en medio de cada pedido al servidor para revisarlo o cambiarlo antes de responder (por ejemplo, ver si entraste).' },
-  { termino: 'DNS', alias: ['dns'], clase: '107',
+  { termino: 'DNS', alias: ['dns'], clase: '112',
     definicion: 'La "guía telefónica" de internet: convierte un nombre como google.com en la dirección numérica del servidor.' },
   { termino: 'webhook', alias: ['webhooks'], clase: '107',
     definicion: 'Un aviso automático que un servicio le manda a tu servidor cuando pasa algo (por ejemplo, "se hizo un pago"), llamando a una URL tuya.' },
@@ -334,7 +340,7 @@ export const GLOSARIO = [
     definicion: 'Una función corta sin nombre que se escribe ahí mismo, para pasarla a otra función (por ejemplo, a `map` o `filter`).' },
 
   // Node (clase 69)
-  { termino: 'stream', alias: ['streams', 'flujo'], clase: '69',
+  { termino: 'stream', alias: ['streams', 'flujo'],
     definicion: 'Leer o escribir datos por pedazos, en vez de cargar todo en memoria. Sirve para archivos grandes sin llenar la RAM.' },
 
   // React a fondo (clase 59)
@@ -380,7 +386,7 @@ export const GLOSARIO = [
     definicion: 'Consultar algo sin revelar qué buscas: mandas solo un pedacito (los primeros caracteres del hash) y filtras el resto en tu aparato. Lo usa Have I Been Pwned.' },
 
   // Herramientas y flujo (clases 04, 05, 35)
-  { termino: 'linter', alias: ['lint', 'linting'], clase: '04',
+  { termino: 'linter', alias: ['lint', 'linting'],
     definicion: 'Un programa que revisa tu código en busca de errores y malas costumbres (variables sin usar, un console.log olvidado) antes de correrlo. Suele correr en el CI.' },
   { termino: 'iterar', alias: ['iteración', 'iteracion', 'iteraciones'], clase: '35',
     definicion: 'Avanzar en vueltas cortas: haces un pedacito, lo pruebas, lo ajustas, y repites. Mejor que intentar todo perfecto de una.' },

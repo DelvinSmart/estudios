@@ -4,8 +4,10 @@ Si un día no tengo Claude, sigo estudiando con otra IA sin perder nada. Todo
 está en este repositorio: las clases, las reglas para la IA y mi progreso.
 Cuando vuelva a Claude, sigo desde donde diga [PROGRESO.md](PROGRESO.md).
 
-**Importante:** el repositorio es **privado**. Pasarle el link a una IA no
-sirve: no lo puede abrir. Hay que conectarla a GitHub o subirle los archivos.
+**Importante:** el repositorio es **público** (hace falta para que GitHub
+Pages publique el mapa gratis). Algunas IA pueden abrir el link directo, pero
+muchas no leen bien un repositorio entero desde un link: lo seguro es
+conectarla a GitHub o subirle los archivos.
 
 ---
 

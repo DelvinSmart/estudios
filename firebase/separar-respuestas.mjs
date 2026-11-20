@@ -29,7 +29,7 @@ export function separar({ revisar = false } = {}) {
       if (q.tipo === 'escribe') return { tipo: 'escribe' };
       if (q.correcta !== null) return { tipo: q.tipo, correcta: q.correcta, explicacion: q.explicacion, ...(q.tipo === 'elige' ? { opciones: q.opciones.length } : {}) };
       const guardada = anterior?.preguntas[i];
-      if (!guardada || guardada.tipo !== q.tipo) problemas.push(`${p.id}, pregunta ${i + 1}: no tiene respuesta (ni en el .md ni guardada)`);
+      if (!guardada || guardada.tipo !== q.tipo || guardada.correcta === null || guardada.correcta === undefined) problemas.push(`${p.id}, pregunta ${i + 1}: no tiene respuesta (ni en el .md ni guardada)`);
       return guardada || { tipo: q.tipo, correcta: null };
     });
     nuevo[p.id] = { curso: p.curso, parte: p.parte, firma: f, preguntas };

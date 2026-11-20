@@ -299,16 +299,18 @@ El id de cada bombillo usa **el nombre del archivo**, no su posición: `"15:LECC
 Es igual que con **¿Qué dice la Biblia?** (Tema 12, parte 9): GitHub Pages sirve los archivos tal cual, sin servidor propio. Dos detalles propios de esta página:
 
 1. **El archivo `.nojekyll`.** Por defecto, GitHub Pages pasa los archivos por un programa llamado **Jekyll**, que convierte los `.md` en páginas HTML. Eso rompería el mapa, que necesita los `.md` **crudos**. Un archivo vacío llamado `.nojekyll` le dice "no toques nada".
-2. **Repositorio público o privado.** Con la cuenta gratis de GitHub, GitHub Pages **solo publica repositorios públicos**. Tu repositorio `estudios` es privado. Hay tres caminos:
-   - Hacer público el repositorio (todo lo de esta carpeta se vería en internet, incluido `PROGRESO.md` y `AGENTS.md`).
+2. **Repositorio público o privado.** Con la cuenta gratis de GitHub, GitHub Pages **solo publica repositorios públicos**. Al principio `estudios` era privado, y había tres caminos:
+   - Hacer público el repositorio (todo lo de esta carpeta se ve en internet, incluido `PROGRESO.md` y `AGENTS.md`).
    - Crear un repositorio público aparte solo con la página y las clases.
    - Pagar GitHub Pro, que permite Pages en repositorios privados (pero la página igual queda visible para quien tenga el enlace).
+
+   **Se eligió el primero:** `estudios` hoy es **público**. Por eso, antes de hacerlo, se revisó que no quedara nada secreto adentro (y por eso las respuestas de las prácticas viven en un archivo aparte que no se sube).
 
 > 📌 **Nota:** antes de publicar algo, revisa que no haya nada privado. El `.gitignore` de esta carpeta ya deja afuera claves, contraseñas y archivos de respaldo.
 
 **Preguntas**
 17. ¿Qué pasaría sin el archivo `.nojekyll`?
-18. ¿Por qué no se puede publicar el repositorio `estudios` tal como está, con la cuenta gratis?
+18. ¿Por qué hubo que hacer público el repositorio `estudios` para publicar el mapa, con la cuenta gratis?
 
 ## 10. Cómo agregar una clase nueva
 
@@ -410,7 +412,7 @@ La misma idea —**una sola fuente de verdad, y lo demás se calcula**— se usa
 15. Tus bombillos: la parte 1 prendida y el "voy aquí" en tu clase. Lo de esa persona queda en su navegador.
 16. Porque `localStorage` es de cada navegador, en cada aparato. Se pasan con el código de **Mi progreso**: copiar en uno, pegar en el otro.
 17. Jekyll convertiría los `.md` en HTML y el mapa no podría leer las lecciones crudas.
-18. Porque con la cuenta gratis GitHub Pages solo publica repositorios públicos, y `estudios` es privado.
+18. Porque con la cuenta gratis GitHub Pages solo publica repositorios públicos, y `estudios` era privado. Se hizo público, después de revisar que no tuviera nada secreto.
 19. Agregarla en `web/cursos.js`: en `CLASES` y en su etapa.
 20. Porque el id no cambia nunca, y el número que se ve es la posición y cambia al reordenar. Si guardara por el número, cada clase nueva correría el progreso de todos. El id fijo evita migrar nada.
 21. En `web/glosario.js`, agregando un objeto a la lista con: `termino`, una `definicion` fácil, `alias` (otras formas de escribirlo) y la `clase` que lo introduce. Nada más: el buscador y la caja de esa clase lo toman solos.

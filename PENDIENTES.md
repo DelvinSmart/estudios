@@ -43,6 +43,13 @@ real de `delvinsmart.github.io`, usando reCAPTCHA (invisible: el alumno no tiene
 
 **Detalle (no urgente):** en producción, al pedir el token de App Check sale **un aviso 403** en la consola. **No rompe nada** (en modo "mirar" nada se bloquea, y los datos ya están protegidos por las reglas). Se revisó la clave: **los dominios `delvinsmart.github.io` y `localhost` YA están registrados** y la verificación de dominio está activa (correcto). Por eso el 403 **no es de dominio**: lo más probable es **propagación** (todo se armó el 2026-11-20 en pocos minutos: se activó la API de reCAPTCHA Enterprise, se registró Fraud Defense y se usó la clave). Una configuración nueva de App Check suele tardar de minutos a ~1 hora (a veces más) en empezar a validar.
 
+**Diagnóstico hecho el 2026-11-20 (≈1 h después de conectarlo):** se probó pieza por pieza desde `delvinsmart.github.io`:
+1. reCAPTCHA Enterprise con la clave `6LcFJCku…` **sí da token** en el dominio (2233 caracteres) → la clave y los dominios están bien.
+2. Canjear ese token en App Check (`exchangeRecaptchaEnterpriseToken`) responde **403 "App attestation failed"** → la falla está del lado de **App Check**, no de reCAPTCHA ni del dominio.
+3. La `apiKey` **no** bloquea la API de App Check (si la bloqueara, el error sería otro).
+
+Si el 403 sigue al día siguiente, revisar en <https://console.firebase.google.com/project/mapa-estudios-ds/appcheck/apps> que la app web esté registrada con el proveedor **reCAPTCHA Enterprise** y con **la misma clave** `6LcFJCkuAAAAAADv4IRGw0PI5DuE6SsQcStzIQ3W` (y no con la vieja de reCAPTCHA v3 del primer intento).
+
 **Qué falta (re-verificar):** volver a abrir <https://delvinsmart.github.io/estudios/#/entrar>, disparar la nube y mirar la consola. Si el 403 **ya no sale**, listo. Si **sigue** después de varias horas, hay un detalle más fino (que la clave registrada en App Check coincida con la que usa el cliente); se resuelve con calma. **No encender** "Desativar verificação de domínio" (bajaría la seguridad y no es el arreglo).
 
 **Pasos finales (tú, una semana después, SOLO si el 403 ya se resolvió):**
