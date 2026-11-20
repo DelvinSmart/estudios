@@ -137,7 +137,8 @@ function respuestas() {
   if (!RESPUESTAS) RESPUESTAS = JSON.parse(readFileSync(new URL('./respuestas.json', import.meta.url), 'utf8')).practicas;
   return RESPUESTAS;
 }
-const ID_PRACTICA = /^\d{2}:[\w.-]+\.md:\d{1,3}:practica\d{1,2}$/;
+// El id de la clase tiene 2 o 3 dígitos (06, 44, 124…).
+const ID_PRACTICA = /^\d{2,3}:[\w.-]+\.md:\d{1,3}:practica\d{1,2}$/;
 
 // La conexión de quien pregunta (para el tope de quien no tiene cuenta). El servidor de Google
 // agrega la dirección real AL FINAL de x-forwarded-for, así que se usa la última.
