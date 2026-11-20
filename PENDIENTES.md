@@ -39,29 +39,26 @@ real de `delvinsmart.github.io`, usando reCAPTCHA (invisible: el alumno no tiene
 > 🌎 **En la vida real:** la `apiKey` es la dirección del edificio (todos la saben). App Check es el portero
 > que mira que vengas de verdad a una oficina del edificio y no seas un robot tocando todos los timbres.
 
-**Pasos (tú):**
+**Estado (2026-11-19):** el reCAPTCHA "clásico" quedó **descontinuado** en la consola, así que App Check se registró con **Fraud Defense (reCAPTCHA Enterprise)**, y quedó **en verde (registrado)** en el proyecto `mapa-estudios-ds`. La API de reCAPTCHA Enterprise está **activada**. La clave v3 clásica que se creó al principio **no sirve** para Enterprise. El código del cliente (`web/nube.js`) quedó **limpio, sin App Check** a la espera de la clave de Enterprise (para no dejar nada a medias).
 
-1. Abre <https://www.google.com/recaptcha/admin/create>.
-2. **Etiqueta:** `Mapa de estudios`. **Tipo:** reCAPTCHA **v3** (por puntuación, invisible).
-3. **Dominios:** `delvinsmart.github.io` y `localhost` (para probar en la Mac). Acepta los términos. **Enviar**.
-4. Copia las dos claves que aparecen: la **clave del sitio** (pública) y la **clave secreta** (privada).
-5. Abre <https://console.firebase.google.com/project/mapa-estudios-ds/appcheck>.
-6. Pestaña **Apps** → tu app web → **reCAPTCHA v3** → pega la **clave secreta** → **Guardar**.
-7. Pásale a la IA **solo la clave del sitio** (la pública). La secreta no se la pases a nadie.
+**Lo que falta para terminarlo (tú, cuando tengas paciencia):**
 
-**Pasos (la IA) — ✅ HECHO (2026-11-19):**
+1. Entra a **<https://console.cloud.google.com/security/recaptcha?project=mapa-estudios-ds>** (reCAPTCHA Enterprise → **Chaves/Keys**). Debería haber una **clave** (empieza por `6L…`) creada por Fraud Defense.
+   - Si esa página te lleva a otra cosa, usa el menú ☰ → **Segurança** → **reCAPTCHA**, con el proyecto **Mapa de estudios** elegido arriba.
+2. Copia esa **clave de Enterprise** (es pública) y **pásasela a la IA**.
 
-- ✅ App Check agregado en `web/nube.js` con la clave del sitio (reCAPTCHA v3, modo "mirar": el sitio ya manda el token con cada llamada).
-- ⏳ **Todavía NO** se puso `enforceAppCheck: true` en las funciones, **a propósito**: primero se observa una semana que todo venga "verificado"; recién ahí se exige, para no bloquear a nadie por un error de configuración.
+**Lo que hará la IA con esa clave:**
 
-**Pasos finales (tú, una semana después):**
+- Agregar `initializeAppCheck(app, { provider: new ReCaptchaEnterpriseProvider('<clave>'), isTokenAutoRefreshEnabled: true })` en `web/nube.js` (importando `firebase-app-check.js`).
+- Publicar. Queda en **modo "mirar"** (el sitio manda el token, pero los servidores **no** lo exigen).
 
-1. En la consola de App Check (<https://console.firebase.google.com/project/mapa-estudios-ds/appcheck>), mira las métricas:
-   casi todo tiene que salir como **"verificado"** (*verified*). Si ves muchas "no verificadas", avísame **antes** de aplicar.
-2. Cuando esté casi todo verificado, **avísame**: yo pongo `enforceAppCheck: true` en las funciones y las publico, y tú tocas **Aplicar** (*Enforce*) en Cloud Firestore. Desde ese momento, lo que no venga del sitio queda bloqueado.
+**Pasos finales (tú, una semana después de eso):**
 
-> ⚠️ No actives "Aplicar" el primer día: si algo quedó mal configurado, bloquearías a los alumnos de verdad.
-> Primero se mira, después se aplica.
+1. En <https://console.firebase.google.com/project/mapa-estudios-ds/appcheck>, mira que casi todo venga **"verificado"**. Si hay muchas "no verificadas", avísale a la IA **antes** de aplicar.
+2. Cuando esté verificado, **avísale a la IA**: pone `enforceAppCheck: true` en las funciones y publica, y tú tocas **Aplicar** (*Enforce*) en Cloud Firestore. Desde ahí, lo que no venga del sitio queda bloqueado.
+
+> ⚠️ No actives "Aplicar" el primer día: si algo quedó mal configurado, bloquearías a los alumnos de verdad. Primero se mira, después se aplica.
+> 💡 Mientras tanto no pasa nada: tus datos ya están protegidos por las **reglas de Firestore** (`firebase/firestore.rules`). App Check es una **capa extra**.
 
 ---
 
