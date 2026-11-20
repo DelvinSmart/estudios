@@ -21,7 +21,7 @@ import { prepararMenu } from './menu.js';
 import * as nube from './nube.js';
 import { migas, mostrarError, alRedibujar } from './pantalla.js';
 import { contarPartes } from './avance.js';
-import { hayDatosDeSesion, recordarSesion, ponerPrompt } from './sesion.js';
+import { hayDatosDeSesion, recordarSesion, ponerPrompt, ponerPresentacion, CLAVE_PRESENTACION } from './sesion.js';
 import { vistaInicio, vistaEtapa, vistaClase } from './vistas/mapas.js';
 import { vistaParte } from './vistas/parte.js';
 import { vistaProgreso } from './vistas/progreso.js';
@@ -95,21 +95,15 @@ document.getElementById('boton-tema').addEventListener('click', () => {
 });
 if (!leerTema()) document.documentElement.dataset.theme = 'dark';
 
-// ---------- el modo presentación (para grabar videos y lives) ----------
-// Agranda el texto y oculta los menús y distracciones. Se recuerda entre sesiones.
-const CLAVE_PRESENTACION = 'mapa-presentacion';
+// ---------- el modo presentación ----------
+// Agranda el texto y oculta los menús y distracciones. Es una herramienta del dueño del sitio:
+// el botón solo aparece con su cuenta (ver mostrarHerramientasDelDueno en sesion.js).
 const botonPresentacion = document.getElementById('boton-presentacion');
-function ponerPresentacion(si) {
-  document.documentElement.dataset.presentacion = si ? 'si' : '';
-  botonPresentacion.setAttribute('aria-pressed', String(si));
-  botonPresentacion.title = si ? 'Salir del modo presentación' : 'Modo presentación (para grabar y lives)';
-}
 botonPresentacion.addEventListener('click', () => {
   const si = document.documentElement.dataset.presentacion !== 'si';
   ponerPresentacion(si);
   try { localStorage.setItem(CLAVE_PRESENTACION, si ? 'si' : ''); } catch (e) { /* sin almacenamiento */ }
 });
-try { if (localStorage.getItem(CLAVE_PRESENTACION) === 'si') ponerPresentacion(true); } catch (e) { /* nada */ }
 
 // ---------- arranque ----------
 

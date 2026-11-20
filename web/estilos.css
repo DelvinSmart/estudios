@@ -127,6 +127,8 @@ a:hover { text-decoration: underline; }
 .boton-icono:hover { border-color: var(--acento); color: var(--acento); }
 /* En pantallas anchas, cada icono lleva su palabra: una persona no tiene que adivinar que 💡 es "progreso".
    En el celular no cabe, y queda solo el icono (con su aria-label para lectores de pantalla). */
+/* Un botón escondido (por ejemplo, el de presentación para quien no es el dueño) no se dibuja. */
+.boton-icono[hidden] { display: none !important; }
 .boton-icono-texto { display: none; }
 @media (min-width: 900px) {
   .barra-acciones .boton-icono { width: auto; padding: 0 12px; display: inline-flex; align-items: center; gap: 6px; }
