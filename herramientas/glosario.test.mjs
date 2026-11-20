@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { GLOSARIO, buscarEnGlosario } from '../web/glosario.js';
 import { CLASES } from '../web/cursos.js';
+import { readdirSync, readFileSync } from 'node:fs';
 
 test('cada término tiene nombre y una definición corta', () => {
   for (const e of GLOSARIO) {
@@ -16,6 +17,20 @@ test('la clase de cada término existe en cursos.js', () => {
   for (const e of GLOSARIO) {
     if (e.clase === undefined) continue;
     assert.ok(CLASES[e.clase], `${e.termino} apunta a la clase ${e.clase}, que no existe`);
+  }
+});
+
+// Si el glosario manda a una clase, esa clase tiene que usar la palabra (o uno de sus alias).
+// Si no, el alumno llega y no encuentra lo que buscaba.
+test('cada término aparece en la clase a la que lleva', () => {
+  const raiz = new URL('..', import.meta.url);
+  for (const e of GLOSARIO) {
+    if (e.clase === undefined) continue;
+    const carpeta = new URL(CLASES[e.clase].carpeta + '/', raiz);
+    const texto = readdirSync(carpeta).filter((f) => f.endsWith('.md'))
+      .map((f) => readFileSync(new URL(f, carpeta), 'utf8')).join('\n').toLowerCase();
+    const formas = [e.termino, ...(e.alias || [])].map((x) => x.toLowerCase());
+    assert.ok(formas.some((x) => texto.includes(x)), `"${e.termino}" lleva a la clase ${e.clase}, pero esa clase no usa la palabra`);
   }
 });
 

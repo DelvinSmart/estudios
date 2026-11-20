@@ -14,6 +14,8 @@
 
 **Node.js** es un programa que **ejecuta JavaScript fuera del navegador**. Usa **V8**, el mismo motor de JavaScript de Chrome y Brave, y le agrega lo que el navegador no da: leer y escribir archivos, crear servidores, hablar con la red y con el sistema.
 
+A un programa así se le llama **runtime** ("entorno de ejecución"): el que hace correr tu código. En la página, el runtime de JavaScript es el navegador; fuera de ella, es Node.js.
+
 Lo que **no** tiene: `document`, `window` ni botones; no hay página. Lo que **sí** tiene: `process`, `fs` (archivos), `http` (servidores) y mucho más.
 
 > 🌎 **En la vida real:** el navegador es una vitrina: muestra y responde a toques. Node es la trastienda: guarda, organiza y atiende pedidos.

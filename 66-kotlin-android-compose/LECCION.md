@@ -97,6 +97,8 @@ fun TarjetaGasto(tipo: String, valor: Double, alTocar: () -> Unit) {
 }
 ```
 
+Fíjate que no le dices "pon un texto aquí y ahora cámbialo": **describes** cómo se ve la tarjeta con estos datos, y Compose la dibuja (y la vuelve a dibujar sola si los datos cambian). A ese estilo se le llama **declarativo**. Lo contrario, ir dando órdenes paso a paso, es **imperativo**.
+
 | React Native | Compose |
 |---|---|
 | componente (función) | función `@Composable` |

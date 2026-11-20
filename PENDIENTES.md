@@ -5,7 +5,7 @@ Cuando termines una, márcala con `[x]` y avísale a la IA si hay que cambiar al
 
 ---
 
-## [ ] 1. Alerta de presupuesto en Google Cloud (gratis, 5 minutos)
+## [x] 1. Alerta de presupuesto en Google Cloud (gratis, 5 minutos)
 
 **Qué es:** un aviso por correo cuando el proyecto de Firebase empieza a gastar dinero.
 **Por qué:** las Cloud Functions necesitan el plan Blaze (de pago por uso). Si alguien abusa del sitio

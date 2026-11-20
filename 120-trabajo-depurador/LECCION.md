@@ -49,6 +49,8 @@ Trucos útiles:
 
 > ⚠️ **Límite:** si tienes que imprimir diez cosas y volver a correr una y otra vez, pierdes tiempo. Ahí conviene el **depurador** de verdad, que te deja **pausar** y mirar **todo** a la vez. Y acuérdate de borrar los `console.log` antes de subir (un **linter** o la revisión del PR suelen avisarte).
 
+> 📌 **Nota:** un **linter** es un programa que **lee** tu código sin correrlo y avisa de errores y malas costumbres: una variable que nunca usas, un `==` donde querías `===`, o un `console.log` olvidado (si le activas esa regla, `no-console`). En JavaScript el más usado es **ESLint**: se corre con `npx eslint .` y casi siempre también en el CI, para que nada con esos avisos llegue a `main`. No reemplaza al depurador: el linter ve errores **de escritura**; el depurador, errores **de lo que pasa al correr**.
+
 ```practica
 elige :: ¿Cuándo conviene pasar de console.log al depurador? :: Nunca, console.log alcanza siempre :: Cuando tienes que imprimir muchas cosas y volver a correr una y otra vez :: Solo en Python
 vf :: Conviene dejar los console.log en el código que subes a producción

@@ -32,6 +32,8 @@ enum Motor {
 
 Y en la pantalla, **nunca un número**: `.padding(Motor.Espacio.grande)`, `VStack(spacing: Motor.Espacio.chico)`.
 
+Cada uno de esos valores con nombre (`Motor.Espacio.grande`, `Motor.Forma.radio`) es un **token de diseño**: el aspecto vive en un solo lugar, con nombre, y la pantalla solo lo nombra. Si mañana "grande" pasa de 20 a 24, cambia en toda la app.
+
 **¿Por qué un `enum` sin casos?** Porque nadie tiene que crear "un motor": solo leer sus valores. Un `enum` sin casos **no se puede crear** (no hay `Motor()`), y eso es justo lo que se quiere: un lugar para guardar constantes con nombre. Es el `object Motor` de Kotlin (clase 66) y el `as const` de TypeScript.
 
 **`CGFloat` y puntos.** Las medidas de SwiftUI son **puntos**, no píxeles: un punto se ve del mismo tamaño en un iPhone chico y en uno grande (en uno con más píxeles, un punto usa 3). Es el `dp` de Android.

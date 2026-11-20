@@ -28,6 +28,22 @@ Siempre `'utf8'` para que las tildes y la ñ salgan bien (igual que en Python 5)
 
 > 🌎 **Otro ejemplo:** Es como un cuaderno: arrancas hoja nueva o sigues donde quedaste.
 
+### Archivos muy grandes: streams
+
+`readFile` carga **todo** el archivo en memoria de una vez. Para un JSON de gastos está bien. Para un archivo de 2 GB (un video, un registro de un año entero), llenarías la memoria. Para eso existe el **stream** ("flujo"): leer o escribir **por pedazos**, uno detrás de otro.
+
+```js
+import { createReadStream } from 'node:fs';
+
+let lineas = 0;
+for await (const pedazo of createReadStream('registro-grande.txt', 'utf8')) {
+  lineas += pedazo.split('\n').length - 1; // cada pedazo se usa y se suelta
+}
+console.log(lineas);
+```
+
+> 🌎 **En la vida real:** `readFile` es llenar un balde entero y cargarlo; un stream es la manguera: el agua pasa de a poco y nunca cargas el peso de todo junto.
+
 ### Errores de archivos
 
 ```js

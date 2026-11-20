@@ -244,7 +244,7 @@ export const GLOSARIO = [
     definicion: 'Programar con "moldes" (clases) que crean objetos con sus datos y sus funciones (métodos). La herencia deja que un molde parta de otro.' },
   { termino: 'método', alias: ['metodo', 'métodos'], clase: '82',
     definicion: 'Una función que vive dentro de un objeto o una clase, y trabaja con sus datos. Por ejemplo, `lista.push(...)`: push es un método.' },
-  { termino: 'try/catch', alias: ['try catch', 'try/except', 'atrapar un error'], clase: '07',
+  { termino: 'try/catch', alias: ['try catch', 'try/except', 'atrapar un error'], clase: '82',
     definicion: 'La forma de "atrapar" un error para manejarlo en vez de que todo se caiga: intentas algo (try) y, si falla, haces otra cosa (catch, o except en Python).' },
 
   // Python a fondo (clase 42) y fechas (83)
@@ -300,13 +300,13 @@ export const GLOSARIO = [
     definicion: 'El archivo (Android App Bundle) que se sube a Google Play; la tienda arma desde él el APK para cada teléfono.' },
 
   // IA (clases 19, 25-35)
-  { termino: 'prompt', alias: ['prompts', 'instrucción'], clase: '30',
+  { termino: 'prompt', alias: ['prompts', 'instrucción'], clase: '31',
     definicion: 'El texto con el que le pides algo a un modelo de IA. Un buen prompt es claro y da el contexto necesario.' },
   { termino: 'contexto', alias: ['ventana de contexto', 'context window'], clase: '19',
     definicion: 'Todo lo que el modelo puede "ver" en una llamada: tus instrucciones, el historial y los datos que le pasas. Es limitado y cuesta.' },
 
   // Node (clases 68-76)
-  { termino: 'REST', alias: ['rest', 'api rest'], clase: '70',
+  { termino: 'REST', alias: ['rest', 'api rest'], clase: '72',
     definicion: 'Una forma común de diseñar una API: cada cosa tiene su dirección (endpoint) y se usan los verbos de HTTP (GET para leer, POST para crear…).' },
   { termino: 'BFF', alias: ['bff', 'backend for frontend'], clase: '76',
     definicion: 'Un servidor pequeño hecho a la medida de una app, que junta y acomoda lo que esa app necesita, para no cargarla de trabajo.' },
@@ -340,7 +340,7 @@ export const GLOSARIO = [
     definicion: 'Una función corta sin nombre que se escribe ahí mismo, para pasarla a otra función (por ejemplo, a `map` o `filter`).' },
 
   // Node (clase 69)
-  { termino: 'stream', alias: ['streams', 'flujo'],
+  { termino: 'stream', alias: ['streams', 'flujo'], clase: '69',
     definicion: 'Leer o escribir datos por pedazos, en vez de cargar todo en memoria. Sirve para archivos grandes sin llenar la RAM.' },
 
   // React a fondo (clase 59)
@@ -352,8 +352,8 @@ export const GLOSARIO = [
     definicion: 'Guardar un resultado ya calculado para no rehacerlo en cada dibujado, y así la app no se ponga lenta.' },
 
   // Swift a fondo (clases 101-103)
-  { termino: 'async/await', alias: ['async await', 'await de swift'], clase: '101',
-    definicion: 'La forma moderna de escribir tareas que tardan (bajar datos) como si fueran paso a paso, sin congelar la app. También existe en JavaScript.' },
+  { termino: 'async/await', alias: ['async await', 'await de swift'], clase: '49',
+    definicion: 'La forma moderna de escribir tareas que tardan (bajar datos) como si fueran paso a paso, sin congelar la app. Existe en JavaScript, Swift y Kotlin.' },
   { termino: '@Observable', alias: ['observable', 'observado'], clase: '103',
     definicion: 'En SwiftUI, marcar un dato para que, cuando cambie, las pantallas que lo usan se redibujen solas.' },
 
@@ -386,7 +386,7 @@ export const GLOSARIO = [
     definicion: 'Consultar algo sin revelar qué buscas: mandas solo un pedacito (los primeros caracteres del hash) y filtras el resto en tu aparato. Lo usa Have I Been Pwned.' },
 
   // Herramientas y flujo (clases 04, 05, 35)
-  { termino: 'linter', alias: ['lint', 'linting'],
+  { termino: 'linter', alias: ['lint', 'linting', 'eslint'], clase: '120',
     definicion: 'Un programa que revisa tu código en busca de errores y malas costumbres (variables sin usar, un console.log olvidado) antes de correrlo. Suele correr en el CI.' },
   { termino: 'iterar', alias: ['iteración', 'iteracion', 'iteraciones'], clase: '35',
     definicion: 'Avanzar en vueltas cortas: haces un pedacito, lo pruebas, lo ajustas, y repites. Mejor que intentar todo perfecto de una.' },
@@ -394,6 +394,77 @@ export const GLOSARIO = [
   // Diseño (clase 104)
   { termino: 'token de diseño', alias: ['design token'], clase: '104',
     definicion: 'Un valor con nombre para el aspecto (un color, un tamaño) guardado en un solo lugar. Cambias el token y cambia en toda la app; así el modo claro/oscuro es solo cambiar valores.' },
+  // Palabras de las clases que no tenían caja (2026-11-20)
+  { termino: 'expresión regular', alias: ['expresiones regulares', 'regex', 'regexp'], clase: '01',
+    definicion: 'Un patrón para buscar o revisar texto, escrito con símbolos: por ejemplo, "dos números, dos puntos y algo más". Sirve para validar o encontrar cosas dentro de un texto.' },
+  { termino: 'Jest', alias: ['jest'], clase: '03',
+    definicion: 'Una herramienta para escribir y correr pruebas en JavaScript. Tú escribes "espero que esto dé tal cosa" y Jest te dice si pasó o falló.' },
+  { termino: 'APK', alias: ['apk', 'archivo apk'], clase: '20',
+    definicion: 'El archivo que instala una app en Android, como un instalador. A Google Play se sube el AAB, y Play arma los APK para cada teléfono.' },
+  { termino: 'versionCode', alias: ['version code', 'código de versión'], clase: '20',
+    definicion: 'El número interno de cada versión de una app Android. Tiene que subir en cada versión que publicas; si repites uno, Google Play la rechaza.' },
+  { termino: 'autenticación', alias: ['autenticacion', 'firebase authentication', 'iniciar sesión'], clase: '21',
+    definicion: 'Comprobar quién eres antes de dejarte entrar, por ejemplo con tu cuenta de Google. Es distinto de decidir qué puedes hacer después (eso son los permisos o reglas).' },
+  { termino: 'enumeración de cuentas', alias: ['enumerar cuentas'], clase: '21',
+    definicion: 'Un ataque que averigua qué correos tienen cuenta mirando las respuestas del sitio ("ese correo no existe"). Se evita respondiendo siempre lo mismo.' },
+  { termino: 'modelo de lenguaje', alias: ['modelos de lenguaje', 'llm'], clase: '30',
+    definicion: 'El "cerebro" de una IA como Claude o Gemini: un programa entrenado con muchísimo texto que adivina, pedazo a pedazo, lo que sigue en una conversación.' },
+  { termino: 'alucinación', alias: ['alucinaciones', 'alucinar'], clase: '30',
+    definicion: 'Cuando una IA inventa algo y lo dice con seguridad, como una función que no existe. Por eso lo que te da la IA se prueba antes de confiar.' },
+  { termino: 'agente de código', alias: ['agentes de código'], clase: '32',
+    definicion: 'Una IA que no solo responde: lee tus archivos, cambia código y corre comandos en tu proyecto, pidiéndote permiso. Claude Code es uno.' },
+  { termino: 'diff', alias: ['diferencias'], clase: '32',
+    definicion: 'La lista de lo que cambió en el código: las líneas que se quitaron (en rojo) y las que se agregaron (en verde). Se lee antes de aceptar un cambio.' },
+  { termino: 'MCP', alias: ['mcp', 'model context protocol'], clase: '32',
+    definicion: 'Una forma estándar de conectar una IA con otras herramientas (el navegador, una base de datos, GitHub), para que pueda usarlas.' },
+  { termino: 'código abierto', alias: ['open source', 'codigo abierto'], clase: '33',
+    definicion: 'Software cuyo código cualquiera puede leer, usar y mejorar. Muchos modelos de IA y herramientas que se corren gratis en tu computadora son así.' },
+  { termino: 'prompt injection', alias: ['inyección de prompt', 'inyeccion de prompt'], clase: '34',
+    definicion: 'Un ataque que esconde instrucciones dentro de un texto que la IA va a leer (una página, un correo) para que haga algo que tú no pediste.' },
+  { termino: 'ciclo infinito', alias: ['bucle infinito', 'loop infinito'], clase: '37',
+    definicion: 'Una repetición que nunca termina porque la condición para parar nunca se cumple. El programa se queda pegado; en la terminal se corta con Ctrl + C.' },
+  { termino: 'docstring', alias: ['docstrings'], clase: '39',
+    definicion: 'El texto entre comillas triples al principio de una función de Python que explica qué hace, qué recibe y qué devuelve.' },
+  { termino: 'valor por defecto', alias: ['valores por defecto', 'parámetro por defecto'], clase: '39',
+    definicion: 'El valor que toma un parámetro cuando no le pasas nada al llamar la función. Por ejemplo, la moneda "BRL" si no dices otra.' },
+  { termino: 'variable local', alias: ['variables locales', 'variable global'], clase: '39',
+    definicion: 'Una variable creada dentro de una función: solo existe ahí y desaparece al terminar. La global se crea afuera y la ve todo el archivo.' },
+  { termino: 'traceback', alias: ['tracebacks'], clase: '40',
+    definicion: 'El mensaje largo que da Python cuando algo falla: dice qué error fue y en qué archivo y línea. Se lee de abajo hacia arriba.' },
+  { termino: 'supertest', alias: [], clase: '74',
+    definicion: 'Una librería para probar un servidor de Node sin abrirlo de verdad: le haces pedidos (GET, POST) desde la prueba y revisas lo que responde.' },
+  { termino: 'técnica Feynman', alias: ['tecnica feynman', 'feynman'], clase: '80',
+    definicion: 'Una forma de estudiar: explicas un tema con palabras simples, como a un niño. Donde te trabas, ahí está lo que todavía no entendiste.' },
+  { termino: 'OCR', alias: ['reconocimiento de texto'], clase: '80',
+    definicion: 'Sacar el texto de una imagen, como una captura de pantalla o una foto de un documento, para poder copiarlo o buscarlo.' },
+  { termino: 'modelo local', alias: ['modelos locales', 'ia local'], clase: '80',
+    definicion: 'Un modelo de IA que corre en tu propia computadora (por ejemplo con Ollama), sin internet y sin mandar tus datos afuera. Suele ser menos capaz que los grandes.' },
+  { termino: 'throws', alias: ['throw', 'do-catch', 'do catch'], clase: '101',
+    definicion: 'En Swift, una función marcada con "throws" puede lanzar un error. Quien la llama la usa con "try" dentro de un bloque "do-catch" para atraparlo.' },
+  { termino: 'Swift Testing', alias: ['swift testing'], clase: '105',
+    definicion: 'La herramienta de Apple para escribir pruebas en Swift: marcas una función con @Test y escribes #expect con lo que esperas.' },
+  { termino: 'target', alias: ['targets'], clase: '105',
+    definicion: 'En Xcode, cada "producto" que arma el proyecto: la app es un target y las pruebas son otro. Cada uno tiene sus archivos y su configuración.' },
+  { termino: 'bug', alias: ['bugs', 'error del programa'], clase: '116',
+    definicion: 'Un error en un programa: hace algo distinto de lo que querías. Encontrarlo y arreglarlo se llama depurar.' },
+  { termino: 'ejecutar', alias: ['ejecución', 'correr un programa'], clase: '116',
+    definicion: 'Hacer que la computadora siga las instrucciones de un programa. También se dice "correr" el programa.' },
+  { termino: 'JOIN', alias: ['join'], clase: '119',
+    definicion: 'En SQL, juntar dos tablas usando una columna que tienen en común, por ejemplo cada pedido con los datos de su cliente.' },
+  { termino: 'llave foránea', alias: ['clave foránea', 'foreign key', 'llave foranea'], clase: '119',
+    definicion: 'Una columna que guarda el número de una fila de otra tabla, como el número de cliente dentro de cada pedido. Es lo que conecta las tablas.' },
+  { termino: 'función de agregación', alias: ['funciones de agregación', 'count', 'sum'], clase: '119',
+    definicion: 'En SQL, una función que resume muchas filas en un solo número: COUNT (cuántas), SUM (suma), AVG (promedio), MAX y MIN.' },
+  { termino: 'documentación', alias: ['documentacion', 'docs'], clase: '122',
+    definicion: 'Las explicaciones oficiales de un lenguaje o una librería: qué hace cada función, qué recibe, qué devuelve y ejemplos. Se consulta todo el tiempo.' },
+  { termino: 'MDN', alias: ['mdn web docs'], clase: '122',
+    definicion: 'La documentación más usada de JavaScript, HTML y CSS, hecha por Mozilla. Gratis y también en español.' },
+  { termino: 'prueba técnica', alias: ['prueba tecnica', 'live coding', 'entrevista técnica'], clase: '123',
+    definicion: 'La parte de una entrevista de trabajo donde resuelves un problema de programación, muchas veces en vivo y explicando en voz alta lo que piensas.' },
+  { termino: 'etiquetas de Swift', alias: ['etiqueta de argumento', 'argument label'], clase: '99',
+    definicion: 'En Swift, el nombre que acompaña a cada dato al llamar una función, como ganancia(viajes: 12, porViaje: 9.75). Así se lee qué es cada número sin mirar la función.' },
+  { termino: 'trailing closure', alias: ['closure al final'], clase: '99',
+    definicion: 'En Swift, cuando el último dato de una función es una closure, se escribe afuera de los paréntesis. Por eso en SwiftUI ves tantas llaves { } seguidas.' },
 ];
 
 // Las palabras que introduce una clase (su id): las que se enseñan ahí. Sirve para la caja

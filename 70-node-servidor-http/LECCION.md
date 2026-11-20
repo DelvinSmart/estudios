@@ -41,6 +41,8 @@ La función se ejecuta **una vez por cada pedido**. `pedido` trae qué te pidier
 - `pedido.headers`: datos extra (qué formato manda, quién es).
 - El **cuerpo**: lo que manda en un `POST` (por ejemplo, el gasto nuevo en JSON).
 
+Cada pareja de verbo y ruta que tu servidor atiende (`GET /gastos`, `POST /gastos`) es un **endpoint**: una "ventanilla" del servidor que hace una sola cosa.
+
 > 🌎 **En la vida real:** el verbo es "quiero ver" o "quiero dejar"; la ruta es "en la ventanilla de gastos".
 
 > 🌎 **Otro ejemplo:** Es como un sobre: el remitente, la dirección y la carta adentro.

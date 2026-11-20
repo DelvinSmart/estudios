@@ -28,6 +28,8 @@
 
 El tiempo no se pierde escribiendo código (eso lo hace rápido la IA): se pierde en **pedidos confusos**, **cambios gigantes** que no se pueden revisar y **arreglos sin probar** que rompen otra cosa. Los pasos 2, 4 y 5 son los que más ahorran.
 
+> 💡 **Idea:** en un mismo trabajo, los pasos 4 a 6 se repiten muchas veces: un cambio chico, se revisa, se guarda, y otra vuelta. Avanzar así, en vueltas cortas, se llama **iterar** (cada vuelta es una **iteración**). Es mejor que intentar todo perfecto de una sola vez.
+
 > 🌎 **En la vida real:** en un viaje, el tiempo se pierde perdiéndose, no manejando.
 
 > 🌎 **Otro ejemplo:** Es como cocinar sin leer la receta: terminas yendo tres veces al mercado.
