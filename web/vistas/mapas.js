@@ -120,6 +120,7 @@ export function vistaInicio(soloCurso) {
           <span class="boton-detalle">clase ${numeroEnCurso(actual)}<span class="boton-titulo"> · ${escapar(CLASES[actual].titulo)}</span></span></a>
       </div>` : ''}</div>
       ${htmlProgreso(`${hechas} de ${total} clases terminadas`, hechas / total, '#/progreso')}
+      <p class="aviso-verificar">🎓 <b>¿Te mostraron un certificado de este sitio?</b> <a href="#/verificar">Verifícalo aquí con su código</a>: no necesitas cuenta.</p>
     </section>
     ${pestanasCursos}
     ${mapas}`;

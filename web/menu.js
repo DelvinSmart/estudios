@@ -65,7 +65,7 @@ export function prepararMenu() {
       <nav>${armarArbol()}</nav>
       <div class="arbol-pie mono">
         <a href="#/">🗺️ mapa completo</a><a href="#/progreso">💡 mi progreso</a>
-        <a href="#/certificado">🎓 certificados</a><a href="#/laboratorio">🧪 laboratorio</a></div>`;
+        <a href="#/certificado">🎓 certificados</a><a href="#/verificar">✅ verificar un certificado</a><a href="#/laboratorio">🧪 laboratorio</a></div>`;
     panel.hidden = false; fondo.hidden = false;
     bloquearFondo(true);
     boton.setAttribute('aria-expanded', 'true');
