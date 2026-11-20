@@ -370,6 +370,24 @@ export const GLOSARIO = [
     definicion: 'Una revisión que bloquea o marca una entrada, salida o acción del agente si rompe una regla. El "freno de mano".' },
   { termino: 'subagente', alias: ['subagentes', 'sub-agente'], clase: '78',
     definicion: 'Un agente que otro agente lanza para una parte del trabajo, con su propio contexto, para no llenar el del principal.' },
+
+  // Seguridad del día a día (clase 111)
+  { termino: 'segundo factor', alias: ['2fa', 'doble factor', 'mfa'], clase: '111',
+    definicion: 'Una segunda prueba además de la contraseña (un código de una app, una llave). Aunque roben tu clave, sin el segundo factor no entran.' },
+  { termino: 'TOTP', alias: ['totp', 'código de 6 cifras'], clase: '111',
+    definicion: 'El código de 6 cifras que cambia cada 30 segundos (Google Authenticator, Authy). El sitio y tu app lo calculan igual sin hablar entre ellos.' },
+  { termino: 'k-anonimato', alias: ['k-anonimato', 'k anonimato'], clase: '111',
+    definicion: 'Consultar algo sin revelar qué buscas: mandas solo un pedacito (los primeros caracteres del hash) y filtras el resto en tu aparato. Lo usa Have I Been Pwned.' },
+
+  // Herramientas y flujo (clases 04, 05, 35)
+  { termino: 'linter', alias: ['lint', 'linting'], clase: '04',
+    definicion: 'Un programa que revisa tu código en busca de errores y malas costumbres (variables sin usar, un console.log olvidado) antes de correrlo. Suele correr en el CI.' },
+  { termino: 'iterar', alias: ['iteración', 'iteracion', 'iteraciones'], clase: '35',
+    definicion: 'Avanzar en vueltas cortas: haces un pedacito, lo pruebas, lo ajustas, y repites. Mejor que intentar todo perfecto de una.' },
+
+  // Diseño (clase 104)
+  { termino: 'token de diseño', alias: ['design token'], clase: '104',
+    definicion: 'Un valor con nombre para el aspecto (un color, un tamaño) guardado en un solo lugar. Cambias el token y cambia en toda la app; así el modo claro/oscuro es solo cambiar valores.' },
 ];
 
 // Las palabras que introduce una clase (su id): las que se enseñan ahí. Sirve para la caja
