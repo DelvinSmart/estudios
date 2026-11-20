@@ -415,6 +415,12 @@ Después, las revisiones, en orden:
 
 > 🌎 **En la vida real:** "sin ciclos" es evitar el absurdo de "para abrir la caja necesito la llave, y la llave está dentro de la caja".
 
+> 🔁 **Repaso:** el CI de Copiloto tiene 6 trabajos que corren a la vez. El primero, `app`, prepara una máquina limpia (descarga el código, instala Node y las librerías con `npm ci`) y revisa tipos, diseño, ciclos, tamaño, secretos, pruebas y que la app se pueda armar.
+
+## 7. Los otros cinco trabajos
+
+> 🎙️ **El profesor:** ya viste el trabajo más grande. Los otros cinco son más cortos: cada uno revisa **una parte** del proyecto (el cartón de Android, las funciones, las reglas, el panel y la web).
+
 ### Trabajo 2: `carton-android`
 
 > 🌎 **En la vida real:** Es como el técnico especialista en una marca extranjera: necesita sus propias herramientas (Java) y armar su banco de trabajo (`prebuild`) antes de revisar.
@@ -547,7 +553,7 @@ escribe :: ¿Qué es un "ciclo" entre archivos y por qué es malo? :: Cuando el 
 
 > 🔁 **Repaso:** 6 trabajos en paralelo. `app` prepara la máquina (checkout, Node 22, `npm ci`) y revisa tipos, diseño, ciclos, tamaño, secretos, pruebas y bundle. Los demás: cartón (Kotlin), servidor, reglas (emulador), panel y web.
 
-## 7. ¿Cómo se ve en GitHub?
+## 8. ¿Cómo se ve en GitHub?
 
 > 🎙️ **El profesor:** todo esto lo puedes **ver**. Vamos a GitHub.
 
@@ -602,7 +608,7 @@ vf :: Para ver qué falló, entras a la corrida, después al trabajo, y buscas e
 
 > 🔁 **Repaso:** pestaña Actions: verde pasó, rojo falló, amarillo corriendo. Entras a la corrida → trabajo → paso en rojo → error. Desde la terminal: `gh run list`.
 
-## 8. ¿Cómo se construye un CI desde cero?
+## 9. ¿Cómo se construye un CI desde cero?
 
 > 🎙️ **El profesor:** en una entrevista te pueden pedir: "¿cómo armarías un CI para un proyecto nuevo?". Esta es la receta, y es la misma que se usó en Copiloto.
 
@@ -677,7 +683,7 @@ elige :: ¿Cómo nacieron los candados de diseño y de ciclos? :: Venían con Gi
 
 > 🔁 **Repaso:** decidir qué revisar → que sea un comando → crear `ci.yml` → trabajo mínimo → subir → agregar revisiones de a una, por cada error que se repite.
 
-## 9. Cómo "piensa" el CI
+## 10. Cómo "piensa" el CI
 
 > 🎙️ **El profesor:** este es el secreto más simple del CI, y te va a ayudar a entender todo: **el CI no entiende la app Copiloto**. Solo entiende **una cosa**.
 

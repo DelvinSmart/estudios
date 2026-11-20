@@ -109,6 +109,27 @@ TypeScript te marca un **error antes de correr el programa**: dijiste que en la 
 
 </details>
 
+```practica
+escribe :: Con tus palabras: ¿qué es un `string`? Da un ejemplo. :: Un texto. Va entre comillas, por ejemplo `'Thermomac'` o `'Uber'`.
+escribe :: Con tus palabras: ¿qué es un `number`? Da un ejemplo. :: Un número, con o sin decimales, sin comillas. Por ejemplo `45` litros o `5.89` de precio.
+escribe :: Con tus palabras: ¿qué es un `boolean`? Da un ejemplo. :: Un dato que solo puede ser sí o no: `true` o `false`. Por ejemplo, si el tanque está lleno.
+escribe :: Con tus palabras: ¿qué es `null`? :: "Nada", puesto a propósito: la respuesta "no hay", como poner "—" en segundo apellido.
+vf :: `'Uber'` es un `string`
+vf :: `45` es un `string`
+vf :: `'45'` es un `number`
+vf :: `true` es un `string`
+vf :: `'false'` es un `boolean`
+vf :: `3.5` es un `number`
+vf :: `null` quiere decir que hubo un error
+vf :: En `let litros: number = 45;` el signo `=` compara si litros es igual a 45
+elige :: ¿De qué tipo es `false`? :: string :: number :: boolean :: null
+elige :: ¿Qué tipo usarías para guardar el nombre de tu empresa? :: string :: number :: boolean
+elige :: ¿Qué tipo usarías para guardar si un viaje fue cancelado o no? :: string :: number :: boolean :: null
+elige :: ¿Qué es TypeScript? :: Un lenguaje distinto que no tiene nada que ver con JavaScript :: JavaScript con tipos, que avisa los errores antes de correr el programa :: Un programa para dibujar pantallas
+```
+
+> 🔁 **Repaso:** TypeScript es JavaScript con tipos. Cada caja dice qué clase de dato guarda: `string` (texto), `number` (número), `boolean` (sí o no) y `null` (nada, a propósito). Así los errores aparecen en tu computadora, no en el teléfono del conductor.
+
 ## 2. `null`: cuando no hay respuesta (y por qué no es cero)
 
 > 🎙️ **El profesor dice:** ya viste los cuatro tipos. Ahora, el que más confunde y más errores causa: `null`. Vale la pena ir despacio con este, porque entenderlo bien te ahorra muchos dolores de cabeza.
@@ -187,7 +208,19 @@ Ese aviso es lo que evita que la app de Copiloto se rompa al mostrar una propina
 
 </details>
 
-### La casilla "(opcional)" de un formulario
+```practica
+vf :: Una propina de 0 y una propina null significan lo mismo
+vf :: Si cuentas los null como si fueran 0, un promedio puede salir mal
+vf :: Con una caja number | null, TypeScript te obliga a revisar si es null antes de usarla como número
+elige :: El viaje todavía no terminó. ¿Cómo guardas su propina? :: 0 :: null :: ''
+elige :: ¿Qué promedio de propinas da [10, 0, null] si haces bien la cuenta? :: 3,33 :: 5 :: 10
+elige :: ¿Qué hace propina ?? 'todavía no se sabe'? :: Suma la propina :: Si propina es null, muestra 'todavía no se sabe' :: Borra la propina
+escribe :: Con tus palabras y un ejemplo tuyo: ¿por qué null no es lo mismo que 0? :: Porque 0 es una respuesta conocida (por ejemplo, el pasajero no dejó propina) y null es que todavía no hay dato (el viaje no terminó); si los confundo, las cuentas como el promedio salen mal.
+```
+
+> 🔁 **Repaso:** `null` quiere decir **"no hay dato"**, a propósito; `0` es una respuesta conocida. Antes de usar como número una caja que puede ser `null`, hay que revisarla (TypeScript te obliga), y `??` pone un valor por defecto cuando es `null`.
+
+## 3. `null` en un formulario de verdad: la casilla "(opcional)"
 
 > 🎙️ **El profesor:** piensa en una planilla que pide varios datos, y uno dice **"(opcional)"**. Si la persona lo deja en blanco, ¿qué guarda el programa? Esa es la forma más fácil de recordar `null`.
 
@@ -256,35 +289,6 @@ function precioPorLitro(total: number, litros: number): number {
 ```
 
 ```practica
-escribe :: Con tus palabras: ¿qué es un `string`? Da un ejemplo. :: Un texto. Va entre comillas, por ejemplo `'Thermomac'` o `'Uber'`.
-escribe :: Con tus palabras: ¿qué es un `number`? Da un ejemplo. :: Un número, con o sin decimales, sin comillas. Por ejemplo `45` litros o `5.89` de precio.
-escribe :: Con tus palabras: ¿qué es un `boolean`? Da un ejemplo. :: Un dato que solo puede ser sí o no: `true` o `false`. Por ejemplo, si el tanque está lleno.
-escribe :: Con tus palabras: ¿qué es `null`? :: "Nada", puesto a propósito: la respuesta "no hay", como poner "—" en segundo apellido.
-vf :: `'Uber'` es un `string`
-vf :: `45` es un `string`
-vf :: `'45'` es un `number`
-vf :: `true` es un `string`
-vf :: `'false'` es un `boolean`
-vf :: `3.5` es un `number`
-vf :: `null` quiere decir que hubo un error
-vf :: En `let litros: number = 45;` el signo `=` compara si litros es igual a 45
-elige :: ¿De qué tipo es `false`? :: string :: number :: boolean :: null
-elige :: ¿Qué tipo usarías para guardar el nombre de tu empresa? :: string :: number :: boolean
-elige :: ¿Qué tipo usarías para guardar si un viaje fue cancelado o no? :: string :: number :: boolean :: null
-elige :: ¿Qué es TypeScript? :: Un lenguaje distinto que no tiene nada que ver con JavaScript :: JavaScript con tipos, que avisa los errores antes de correr el programa :: Un programa para dibujar pantallas
-```
-
-```practica
-vf :: Una propina de 0 y una propina null significan lo mismo
-vf :: Si cuentas los null como si fueran 0, un promedio puede salir mal
-vf :: Con una caja number | null, TypeScript te obliga a revisar si es null antes de usarla como número
-elige :: El viaje todavía no terminó. ¿Cómo guardas su propina? :: 0 :: null :: ''
-elige :: ¿Qué promedio de propinas da [10, 0, null] si haces bien la cuenta? :: 3,33 :: 5 :: 10
-elige :: ¿Qué hace propina ?? 'todavía no se sabe'? :: Suma la propina :: Si propina es null, muestra 'todavía no se sabe' :: Borra la propina
-escribe :: Con tus palabras y un ejemplo tuyo: ¿por qué null no es lo mismo que 0? :: Porque 0 es una respuesta conocida (por ejemplo, el pasajero no dejó propina) y null es que todavía no hay dato (el viaje no terminó); si los confundo, las cuentas como el promedio salen mal.
-```
-
-```practica
 vf :: Una casilla opcional que la persona deja en blanco conviene guardarla como null
 vf :: Si la persona escribe 0 en "propina", eso es null
 elige :: En TypeScript, ¿qué significa foto?: string? :: Que es obligatoria :: Que es opcional: puede ni venir (undefined) :: Que es un número
@@ -294,7 +298,7 @@ escribe :: Explica con un formulario de tu vida por qué una casilla opcional en
 
 > 🔁 **Repaso:** el código son órdenes escritas para la computadora. La app Copiloto está en TypeScript, que es JavaScript con tipos. Los tipos (`string`, `number`, `boolean`, `null`) dicen qué clase de dato va en cada caja, y así los errores aparecen antes de llegar al teléfono. Y `null` no es cero: es **"no hay dato"** (como una casilla opcional en blanco), y TypeScript te obliga a revisarlo antes de usarlo.
 
-## 3. Las cinco piezas
+## 4. Las cinco piezas
 
 > 🎙️ **El profesor:** ahora te voy a contar un secreto que tranquiliza mucho: **casi todo el código del mundo se arma con las mismas cinco piezas**. Una app gigante como Uber y tu función más chica usan las mismas cinco. Si las reconoces, puedes empezar a leer cualquier archivo.
 
@@ -470,9 +474,9 @@ vf :: `carro.modelo` lee el dato `modelo` del objeto `carro`
 
 > 🔁 **Repaso:** constante (un valor fijo con nombre), función (una máquina que recibe y devuelve), `if` (una decisión), lista (varios en orden) y objeto (varios datos de una cosa). Con estas cinco se arma casi todo.
 
-## 4. Primer ejemplo real: el nombre de "Mi empresa"
+## 5. Primer ejemplo real: el nombre de "Mi empresa"
 
-> 📌 **Nota:** el código de Copiloto es privado, pero todo lo que lees en esta clase está también en el proyecto de práctica **[Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro)**, con nombres en español: esta función es `normalizarNombreEmpresa` en `src/datos/aplicaciones.ts`, y la de la parte 5 es `vehiculoTieneTanque` en `src/utils/combustible.ts`. Puedes abrirlos y leerlos con la clase al lado.
+> 📌 **Nota:** el código de Copiloto es privado, pero todo lo que lees en esta clase está también en el proyecto de práctica **[Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro)**, con nombres en español: esta función es `normalizarNombreEmpresa` en `src/datos/aplicaciones.ts`, y la de la parte 7 es `vehiculoTieneTanque` en `src/utils/combustible.ts`. Puedes abrirlos y leerlos con la clase al lado.
 
 > 🎙️ **El profesor:** basta de ejemplos inventados. Ahora vamos a leer **código real de Copiloto**, el que corre hoy en los teléfonos. No te asustes si al principio se ve raro: vamos a ir línea por línea, y al final lo vas a poder explicar tú.
 
@@ -546,6 +550,12 @@ A esta primera línea se le llama **la firma**. Te dice todo lo importante sin l
 - **Nombre:** `normalizeMyCompanyName` = "normalizar el nombre de Mi empresa". *Normalizar* es dejar algo en su forma limpia y correcta.
 - **Recibe:** `(text: string)` → un texto, que adentro se llama `text`. Es lo que escribió el conductor.
 - **Devuelve:** `: string | null` → **un texto o nada**. Si devuelve texto, es el nombre limpio. Si devuelve `null`, significa **"este nombre no sirve"**.
+
+> 🔁 **Repaso:** la función limpia el nombre que el conductor escribe en "Mi empresa". Las dos constantes de arriba guardan las reglas (`MY_COMPANY_NAME_MAX_WORDS`, 2 palabras, y `MY_COMPANY_NAME_MAX_LENGTH`, 24 letras), el comentario explica para qué sirve, y la firma dice el nombre, qué recibe (un texto) y qué devuelve (el nombre limpio, o `null` si no sirve).
+
+## 6. El nombre de "Mi empresa", línea por línea
+
+> 🎙️ **El profesor:** ya conoces el problema, las reglas y la firma. Ahora leemos el cuerpo de la función, **una línea a la vez**, como un colador con varios filtros.
 
 ### Línea 1: limpiar los espacios
 
@@ -731,7 +741,7 @@ vf :: Si quiero permitir 3 palabras, tengo que cambiar el `2` en el `if`
 
 > 🔁 **Repaso:** la función recibe lo que escribió el conductor, deja los espacios en uno solo y quita los de los lados; si quedó vacío devuelve `''` (usa "Mi empresa"); si pasa de 24 letras o de 2 palabras devuelve `null` (no sirve); si no, devuelve el nombre limpio. Las reglas son constantes con nombre, en un solo lugar.
 
-## 5. Segundo ejemplo real: ¿un ingreso es acumulativo?
+## 7. Segundo ejemplo real: ¿un ingreso es acumulativo?
 
 > 🎙️ **El profesor:** ahora una función cortita, de una sola línea… pero que decide **cómo se cuenta el dinero en toda la app Copiloto**. Es un buen ejemplo de que en programación lo corto puede ser lo más importante.
 
@@ -896,7 +906,7 @@ vf :: Una función de una sola línea no puede ser importante
 
 > 🔁 **Repaso:** la función recibe el id de una plataforma y responde sí o no: sí para Extras, Viajes particulares y Mi empresa (cada registro se suma aparte), no para el resto (acumulativas, como Uber). `===` compara exacto, `||` es "o", y por ser una regla de dinero tiene pruebas.
 
-## 6. Cómo leer cualquier archivo
+## 8. Cómo leer cualquier archivo
 
 > 🎙️ **El profesor:** ya leíste dos funciones reales. Ahora te doy **el método**, para que puedas leer cualquier otra tú solo. Y una tranquilidad: ni los programadores con 20 años de experiencia entienden cada símbolo de un archivo nuevo a la primera. Lo que hacen es seguir un orden.
 
@@ -1006,7 +1016,7 @@ vf :: Hay que entender cada símbolo antes de seguir leyendo
 
 > 🌎 **En la vida real:** Practicar es como los penales en el entrenamiento: no hay público, puedes errar, y cada error te enseña dónde apuntar.
 
-**A. ¿Qué devuelve `normalizeMyCompanyName`?** Sigue el colador de la parte 4.
+**A. ¿Qué devuelve `normalizeMyCompanyName`?** Sigue el colador de la parte 6.
 1. `"  Thermomac  "`
 2. `"Refrigeración   Silva"` (con muchos espacios en el medio)
 3. `""` (vacío)
@@ -1018,7 +1028,7 @@ vf :: Hay que entender cada símbolo antes de seguir leyendo
 7. ¿Por qué es mejor usar `MY_COMPANY_NAME_MAX_WORDS` que escribir `2` en el `if`?
 
 **C. Para practicar leer**
-8. Explica con tus palabras, en una frase, qué hace `vehicleHasFuelTank` (parte 5).
+8. Explica con tus palabras, en una frase, qué hace `vehicleHasFuelTank` (parte 7).
 
 **D. Un poco más difícil**
 9. ¿Qué devuelve `normalizeMyCompanyName('     ')` (solo espacios)? ¿Por qué no devuelve `null`?

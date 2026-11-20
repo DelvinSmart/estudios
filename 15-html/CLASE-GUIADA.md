@@ -8,6 +8,32 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 ## 1. Qué es HTML
 
+> 🔁 **Calentamiento: repaso de la clase 1.** Antes de empezar algo nuevo, un ejercicio corto con lo que ya sabes: variables, una lista, `for...of` y un `if`. Si te cuesta, vuelve a mirar la Parte 5 de [Programar desde cero](../116-programar-desde-cero/LECCION.md).
+
+```ejercicio
+titulo: Calentamiento: los viajes largos
+lenguaje: js
+pide: Completa `kilometrosLargos(viajes)`: recibe los kilómetros de cada viaje y devuelve la **suma** solo de los viajes de **más de 10** km (`>`).
+--- código
+function kilometrosLargos(viajes) {
+  // escribe aquí tu respuesta
+}
+--- pruebas
+prueba('solo cuentan 12 y 20', () => igual(kilometrosLargos([12, 4, 20, 10]), 32));
+prueba('ninguno largo', () => igual(kilometrosLargos([3, 5]), 0));
+prueba('sin viajes', () => igual(kilometrosLargos([]), 0));
+--- solución
+function kilometrosLargos(viajes) {
+  let total = 0;
+  for (const km of viajes) {
+    if (km > 10) {
+      total = total + km;
+    }
+  }
+  return total;
+}
+```
+
 > 🎙️ **El profesor:** {{alumno}}, empezamos una etapa nueva: **la web**. Tu página **¿Qué dice la Biblia?** y este mismo mapa están hechos con tres piezas: HTML, CSS y JavaScript. Hoy, la primera. Y te adelanto algo: es la más fácil de las tres.
 
 > 🌎 **En la vida real:** Es como el esqueleto de un edificio en construcción: ya se ven los pisos, las paredes y las ventanas, aunque todavía no tenga pintura ni luz.

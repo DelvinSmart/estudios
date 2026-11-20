@@ -2,7 +2,9 @@
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. El [resumen](LECCION.md) es para repasar después.
 
-**Cómo estudiarla:** es una clase **práctica**: necesitas la computadora, la carpeta de la app y el simulador. Calcula de 45 a 90 minutos. Al final **deshaces todo**: la app tiene que quedar como estaba.
+**Cómo estudiarla:** es una clase **práctica**: necesitas la computadora y la carpeta del proyecto. Calcula de 45 a 90 minutos. Al final **deshaces todo**: el proyecto tiene que quedar como estaba.
+
+> 📌 **No necesitas tener Copiloto.** Cada parte explica el cambio en Copiloto y después trae un **🧪 Hazlo tú en Gastos del carro**: el mismo cambio, con tus manos, en el proyecto de práctica que bajaste en el Tema 03 ([Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro)). Ahí no hace falta simulador: `npm run mostrar` dibuja la pantalla en la terminal. Si todavía no lo bajaste, su README dice cómo (tres comandos).
 
 **Lo que necesitas saber antes:** Temas 01 a 03. (El 04 ayuda para entender la parte 5.)
 
@@ -88,6 +90,20 @@ elige :: ¿En cuántos idiomas está la app Copiloto? :: 2 :: 3 :: 6
 vf :: Una pieza que se usa en varias pantallas va en `components/`
 escribe :: ¿Por qué los textos no se escriben directamente en la pantalla? :: Porque la app está en seis idiomas: la pantalla pide el texto por una clave y cada idioma tiene su archivo con el texto.
 ```
+
+### 🧪 Hazlo tú en Gastos del carro
+
+Abre la carpeta `gastos-del-carro` en VS Code y mira su `src/`. Es más chica que la de Copiloto, pero sigue la misma idea: cada cosa en su habitación.
+
+| Carpeta | Qué hay | Lo mismo en Copiloto |
+|---|---|---|
+| `src/i18n/locales/` | Los textos: `es.ts`, `pt.ts`, `en.ts` | `i18n/locales/` |
+| `src/i18n/tipos.ts` | El contrato: qué claves de texto existen | `i18n/types.ts` |
+| `src/tema/motor.ts` | El motor de diseño: medidas y separaciones | `theme/` |
+| `src/utils/` | Los cálculos: combustible, dinero, día de trabajo | `utils/` |
+| `scripts/mostrar.ts` | Dibuja la "pantalla" en la terminal | `screens/` |
+
+Fíjate en las carpetas `__tests__/`: al lado de cada pieza están sus pruebas (las del Tema 03).
 
 > 🔁 **Repaso:** `screens` (pantallas), `components` (piezas), `i18n/locales` (textos por idioma), `theme` (colores y medidas), `utils` (cálculos), `context` (datos), `services` (Firebase y teléfono), `ai-engine` (Copiloto). Los textos van por clave, nunca escritos en la pantalla.
 

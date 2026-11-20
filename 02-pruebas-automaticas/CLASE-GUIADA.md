@@ -8,6 +8,30 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 ## 1. ¿Qué es una prueba?
 
+> 🔁 **Calentamiento: repaso.** Antes de empezar, un ejercicio corto con lo que ya sabes de la clase 1 y de la web: una función, una comparación y un `if`. Hoy vas a ver que una **prueba** es justo esto que pasa cuando tocas **▶ probar**.
+
+```ejercicio
+titulo: Calentamiento: ¿llegaste a la meta?
+lenguaje: js
+pide: Completa `mensajeDeMeta(ganado, meta)`: si lo ganado es mayor o igual que la meta (`>=`), devuelve `'¡meta cumplida!'`; si no, devuelve `'faltan '` seguido de lo que falta (por ejemplo, `'faltan 30'`). Pista: lo que falta es `meta - ganado`, y los textos se pegan con `+`.
+--- código
+function mensajeDeMeta(ganado, meta) {
+  // escribe aquí tu respuesta
+}
+--- pruebas
+prueba('pasaste la meta', () => igual(mensajeDeMeta(250, 200), '¡meta cumplida!'));
+prueba('justo la meta también cuenta', () => igual(mensajeDeMeta(200, 200), '¡meta cumplida!'));
+prueba('te faltan 30', () => igual(mensajeDeMeta(170, 200), 'faltan 30'));
+--- solución
+function mensajeDeMeta(ganado, meta) {
+  if (ganado >= meta) {
+    return '¡meta cumplida!';
+  } else {
+    return 'faltan ' + (meta - ganado);
+  }
+}
+```
+
 > 🎙️ **El profesor:** {{alumno}}, hoy vamos a ver algo que separa a un programador aficionado de uno profesional: **las pruebas automáticas**. La app Copiloto tiene más de 400. Cuando termines esta clase, vas a poder explicar en una entrevista qué son, para qué sirven y cómo se escribe una.
 
 > 🌎 **En la vida real:** Es como el control de calidad de una fábrica de galletas: una máquina toma una galleta de cada lote, la pesa y la compara con el peso correcto. Si no coincide, se para la línea.
@@ -652,7 +676,9 @@ Fíjate que las pruebas 1 y 2 **siguen pasando**: con 300 da 200 y con 500 da 0,
 
 Vuelve a poner el `Math.max` y corre de nuevo hasta ver `fail 0`.
 
-### Cuando una prueba falla, revisa en este orden
+> 🔁 **Repaso:** regla en palabras → casos (lo esperado lo calculas **tú**) → código → pruebas → correr → sabotear a propósito → leer el error → corregir y repetir hasta ver `fail 0`.
+
+## 7. Cuando una prueba falla: qué revisar, en orden
 
 1. **¿La regla es correcta?**
 2. **¿Mi prueba está bien escrita?**
@@ -730,7 +756,7 @@ elige :: ¿Qué hace `module.exports = { faltaParaMeta }`? :: Borra la función 
 
 > 🔁 **Repaso:** regla → casos (lo esperado lo calculas tú) → código → prueba → correr → sabotear → leer el error → corregir. Si falla, sospecha primero de la regla, después de la prueba y por último del código.
 
-## 7. Las pruebas de Copiloto
+## 8. Las pruebas de Copiloto
 
 > 🎙️ **El profesor:** ahora mira una app real. Copiloto no tiene "algunas pruebas": tiene **más de 400**, en cuatro grupos. Saber explicar algo así es algo que vale mucho en una entrevista.
 
@@ -856,7 +882,7 @@ escribe :: Explica qué hace la prueba de `earningSourceRules` que leímos. :: R
 
 > 🔁 **Repaso:** la app Copiloto tiene más de 400 pruebas en cuatro grupos (app con Jest, servidor y reglas con node:test, Android con JUnit). Protegen el dinero, el día de Uber, el tanque, el San, el Copiloto y la privacidad.
 
-## 8. Cómo es en un proyecto real
+## 9. Cómo es en un proyecto real
 
 > 🎙️ **El profesor:** para cerrar, el recorrido completo de un cambio en una empresa. Esto es exactamente lo que te van a preguntar: "¿cómo trabajas?".
 

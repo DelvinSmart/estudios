@@ -86,6 +86,75 @@ function saludar(nombre) {
 
 > 🎙️ **El profesor dice:** si te salió en verde, acabas de programar. Si te salió en rojo, lee el mensaje, arregla y vuelve a probar: **eso también es programar**, y es lo que hacemos todo el día.
 
+### Las cajitas con nombre: variables
+
+> 🌎 **En la vida real:** en la cocina guardas el azúcar en un frasco con la etiqueta "azúcar". Cuando la receta dice "dos cucharadas de azúcar", no buscas por toda la cocina: vas al frasco con ese nombre.
+
+Una **variable** es eso: una cajita con un nombre, donde guardas un dato para usarlo después.
+
+```js
+const litros = 40;
+const precioPorLitro = 5;
+const total = litros * precioPorLitro;   // 200
+```
+
+- `const` quiere decir "crea una cajita que no va a cambiar".
+- `litros` es el **nombre**. Lo eliges tú, y conviene que diga qué guarda.
+- `=` aquí **no** es "igual" como en matemáticas: quiere decir **guardar**. "En la cajita `litros`, guarda 40".
+- `*` es multiplicar (el teclado no tiene ×). `+` suma, `-` resta y `/` divide.
+- Lo que va después de `//` es un **comentario**: una nota para las personas. La máquina lo ignora.
+
+> 💡 **Idea:** si mañana el litro cuesta 6, cambias **un solo número** (`precioPorLitro`) y el total se recalcula solo. Para eso sirven los nombres.
+
+✍️ **Ahora escribes tú:**
+
+```ejercicio
+titulo: ¿Cuánto cuesta llenar el tanque?
+lenguaje: js
+pide: Completa `costoDelTanque(litros, precioPorLitro)` para que devuelva cuánto cuesta cargar esos litros. Por ejemplo, 40 litros a 5 cuestan 200. Pista: guarda la cuenta en una variable y devuélvela con `return`.
+--- código
+function costoDelTanque(litros, precioPorLitro) {
+  // escribe aquí tu respuesta
+}
+--- pruebas
+prueba('40 litros a 5', () => igual(costoDelTanque(40, 5), 200));
+prueba('10 litros a 6', () => igual(costoDelTanque(10, 6), 60));
+prueba('sin litros no se paga nada', () => igual(costoDelTanque(0, 5), 0));
+--- solución
+function costoDelTanque(litros, precioPorLitro) {
+  const total = litros * precioPorLitro;
+  return total;
+}
+```
+
+Una más, para que la mano se acostumbre:
+
+```ejercicio
+titulo: Lo que te queda del día
+lenguaje: js
+pide: Completa `loQueQueda(cobrado, gastado)`: devuelve lo que te queda después de restar lo que gastaste a lo que cobraste. Por ejemplo, cobraste 150 y gastaste 40: te quedan 110.
+--- código
+function loQueQueda(cobrado, gastado) {
+  // escribe aquí tu respuesta
+}
+--- pruebas
+prueba('cobraste 150 y gastaste 40', () => igual(loQueQueda(150, 40), 110));
+prueba('un día sin gastos', () => igual(loQueQueda(90, 0), 90));
+prueba('un día malo: gastaste más de lo que cobraste', () => igual(loQueQueda(30, 50), -20));
+--- solución
+function loQueQueda(cobrado, gastado) {
+  const queda = cobrado - gastado;
+  return queda;
+}
+```
+
+```practica
+elige :: En `const litros = 40;`, ¿qué hace el `=`? :: Pregunta si litros es igual a 40 :: Guarda 40 en la cajita litros :: Suma 40 a litros
+vf :: En `const total = litros * precioPorLitro;`, el `*` quiere decir multiplicar
+elige :: ¿Por qué conviene llamar a una variable `precioPorLitro` y no `x`? :: Porque es obligatorio :: Porque así cualquiera entiende qué guarda :: Porque ocupa menos espacio
+vf :: La máquina lee y obedece lo que escribes después de `//`
+```
+
 ## Parte 5. Decisiones: el "sí" y el "no"
 
 > 🌎 **En la vida real:** le explicas a un niño cómo cruzar la calle. No le dices solo "cruza". Le dices: **"mira a los dos lados. SI viene un carro, NO cruces; si NO viene, entonces cruza."** Fíjate que tienes que decirle **las dos cosas**: qué hacer cuando **sí** viene y qué hacer cuando **no**. Si solo dices una, el niño se queda sin saber qué hacer en el otro caso.
@@ -129,6 +198,85 @@ function cruzar(vieneCarro) {
 }
 ```
 
+### Repetir: hacer lo mismo con cada cosa de una lista
+
+> 🌎 **En la vida real:** al final del día cuentas lo que ganaste viaje por viaje: el primero, 12; el segundo, 8; el tercero, 15. Haces **lo mismo** (sumar) con **cada** viaje. No das una instrucción por viaje: dices "por cada viaje, súmalo".
+
+Primero, una **lista**: varios datos juntos, entre corchetes `[ ]` y separados por comas.
+
+```js
+const viajes = [12, 8, 15];
+```
+
+Para repetir algo con cada elemento de la lista se usa **`for...of`** ("para cada… de…"):
+
+```js
+let total = 0;
+for (const viaje of viajes) {
+  total = total + viaje;
+}
+// al terminar, total vale 35
+```
+
+Léelo así: "empieza con `total` en 0. **Por cada** `viaje` **de** la lista `viajes`, súmale ese viaje al total".
+
+- `let` es como `const`, pero la cajita **sí puede cambiar**. Aquí `total` cambia en cada vuelta: 0 → 12 → 20 → 35.
+- Lo que está entre `{ }` se repite una vez por cada elemento. A cada repetición se le dice **vuelta**.
+- `total = total + viaje` se lee: "el total nuevo es el total de antes, más este viaje".
+- Para comparar números: `>` (mayor que), `<` (menor que), `>=` (mayor o igual) y `===` (igual). Cada comparación responde **sí o no** (`true` o `false`), justo lo que necesita un `if`.
+
+> 💡 **Idea:** decidir (`if`) y repetir (`for`) juntos son casi todo lo que hace un programa: "por cada viaje, **si** pagó más de 10, cuéntalo".
+
+✍️ **Ahora escribes tú:**
+
+```ejercicio
+titulo: Lo que ganaste hoy
+lenguaje: js
+pide: Completa `totalDelDia(viajes)`: recibe la lista de lo que pagó cada viaje y devuelve la suma. Usa una cajita con `let` que empiece en 0 y un `for...of` que le sume cada viaje.
+--- código
+function totalDelDia(viajes) {
+  // escribe aquí tu respuesta
+}
+--- pruebas
+prueba('tres viajes', () => igual(totalDelDia([12, 8, 15]), 35));
+prueba('un solo viaje', () => igual(totalDelDia([20]), 20));
+prueba('un día sin viajes da 0', () => igual(totalDelDia([]), 0));
+--- solución
+function totalDelDia(viajes) {
+  let total = 0;
+  for (const viaje of viajes) {
+    total = total + viaje;
+  }
+  return total;
+}
+```
+
+Y ahora las dos ideas juntas, repetir y decidir:
+
+```ejercicio
+titulo: ¿Cuántos viajes buenos?
+lenguaje: js
+pide: Completa `viajesBuenos(viajes, minimo)`: devuelve **cuántos** viajes pagaron `minimo` o más. Recorre la lista con `for...of` y, **si** el viaje es mayor o igual que `minimo` (`>=`), súmale 1 a una cajita que empieza en 0.
+--- código
+function viajesBuenos(viajes, minimo) {
+  // escribe aquí tu respuesta
+}
+--- pruebas
+prueba('dos de tres pagaron 10 o más', () => igual(viajesBuenos([12, 8, 15], 10), 2));
+prueba('justo 10 también cuenta', () => igual(viajesBuenos([10, 9], 10), 1));
+prueba('sin viajes, ninguno', () => igual(viajesBuenos([], 10), 0));
+--- solución
+function viajesBuenos(viajes, minimo) {
+  let cuantos = 0;
+  for (const viaje of viajes) {
+    if (viaje >= minimo) {
+      cuantos = cuantos + 1;
+    }
+  }
+  return cuantos;
+}
+```
+
 ```practica
 elige :: ¿Por qué no basta con decirle a la máquina "si viene un carro, espera", sin el "si no"? :: Porque es muy corto :: Porque no sabría qué hacer cuando NO viene un carro: hay que pensar los dos caminos :: Porque el carro no importa
 vf :: Una decisión (if) necesita una condición que se pueda responder con sí o no
@@ -168,7 +316,7 @@ La clase que sigue a esta, **Leer código**, ya te pone a leer el código de una
 
 > ⚠️ **Por qué este orden y no otro:** cada curso guarda su avance por separado, y dentro de un curso los bombillos se prenden **en orden**. Esta ruta respeta ese orden: nunca te pide saltarte una clase del mismo curso. Puedes **leer** cualquier clase cuando quieras; el orden solo importa para prender los bombillos.
 
-> 📌 **Nota:** la clase 05 (**Mi primer cambio**) se hace sobre la app Copiloto. Si no tienes esa app en tu computadora, léela igual: lo que enseña (dónde buscar, cambiar algo pequeño, romperlo a propósito y deshacerlo) lo vas a hacer con tu propio proyecto en la web de gastos.
+> 📌 **No necesitas tener Copiloto.** Las clases que usan el código de Copiloto traen un **🧪 Hazlo tú** con el proyecto de práctica [Gastos del carro](https://github.com/DelvinSmart/gastos-del-carro): el mismo ejercicio, en un proyecto que cualquiera puede bajar gratis.
 
 ```practica
 elige :: ¿Qué es programar, en una frase? :: Ser muy bueno en matemáticas :: Escribir instrucciones claras y en orden para que una máquina las siga :: Usar la computadora rápido

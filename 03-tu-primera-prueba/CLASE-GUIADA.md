@@ -45,7 +45,7 @@ vf :: Si en esta clase cambias algo del proyecto, lo tienes que devolver a como 
 - Si tiene más de 2 palabras, es inválido (`null`).
 - Si no, devuelve el nombre limpio.
 
-Si te olvidaste de alguna, vuelve a mirar la función en el Tema 01, parte 3.
+Si te olvidaste de alguna, vuelve a mirar la función en el Tema 01, parte 6.
 
 </details>
 
