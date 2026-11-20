@@ -134,6 +134,7 @@ export const CLASES = {
   '119': { carpeta: '119-trabajo-sql', titulo: 'SQL: pedirle datos a la base', meta: 'SELECT, WHERE, ORDER BY, JOIN y GROUP BY, conectados con filter/map/reduce; N+1 y consultas con parámetros', docs: LECCION },
   '120': { carpeta: '120-trabajo-depurador', titulo: 'El depurador', meta: 'Encontrar el error con método (no adivinar): reproducir, aislar, el depurador (breakpoints y ver variables) y dejar una prueba', docs: LECCION },
   '121': { carpeta: '121-trabajo-git-en-equipo', titulo: 'Git en equipo: conflictos y PR', meta: 'Ramas y Pull Requests, mantener main verde, resolver un conflicto de merge y revisar un PR con criterio', docs: LECCION },
+  '122': { carpeta: '122-trabajo-leer-documentacion', titulo: 'Leer documentación', meta: 'Nadie memoriza todo: cómo leer la ficha de una función (qué recibe, qué devuelve), dónde y cómo buscar, y no copiar sin entender', docs: LECCION },
   '78': { carpeta: '78-ia-varios-agentes', titulo: 'Uno o varios agentes, y dirigirlos', meta: 'Varios agentes sin pisarse, gastar menos tokens, subagentes, tu propio vigilante y la persona como director', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '80': { carpeta: '80-ia-maximo-provecho', titulo: 'Sacarle el máximo provecho', meta: 'Aprender mientras construyes, convertir lo repetitivo en herramientas y lo que no se delega', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '92': { carpeta: '92-ia-proyecto-dirigir-la-ia', titulo: 'Proyecto final: una app dirigiendo a la IA', meta: 'El plan, las reglas, un paso por pedido, la revisión que encuentra lo que las pruebas no ven y el cuaderno de pedidos', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -148,7 +149,7 @@ const ICONOS = {
   '44': '🗺️', '68': '⚙️', '69': '🗂️', '70': '🌐', '71': '🚂', '72': '🔌', '73': '🔐', '74': '🚀', '75': '🏠', '76': '🧭', '87': '🏁', '45': '🔤', '46': '🔀', '47': '🧩', '48': '📚', '49': '⏳', '50': '📦', '51': '🏷️', '52': '🧬', '53': '🧪', '81': '🖱️', '82': '🧱', '83': '📅', '84': '🏁',
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁', '94': '🧮', '95': '📱',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁', '96': '⚖️', '97': '👋', '98': '🛟', '99': '🧰', '100': '🏗️', '101': '🚦', '102': '🖼️', '103': '🗂️', '104': '🎨', '105': '🧪', '106': '🏁',
-  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '117': '🗣️', '118': '⏱️', '119': '🗃️', '120': '🐞', '121': '🔀', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '109': '🔑', '110': '📲', '111': '🧰', '113': '🌉', '112': '💼', '114': '🎯', '115': '🚨', '91': '🏁',
+  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '117': '🗣️', '118': '⏱️', '119': '🗃️', '120': '🐞', '121': '🔀', '122': '📖', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '109': '🔑', '110': '📲', '111': '🧰', '113': '🌉', '112': '💼', '114': '🎯', '115': '🚨', '91': '🏁',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
 
@@ -260,7 +261,7 @@ export const ETAPAS = [
   {
     id: 'trabajo', curso: 'trabajo', icono: '💼', titulo: 'Lo que piden en el trabajo',
     desc: 'Un curso aparte, con su propio certificado: lo que de verdad evalúan en una prueba técnica (algoritmos, SQL, el depurador, git en equipo).',
-    clases: ['118', '119', '120', '121'],
+    clases: ['118', '119', '120', '121', '122'],
   },
 ];
 

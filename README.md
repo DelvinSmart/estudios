@@ -212,7 +212,7 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 06 | [Todo junto](29-agentes-todo-junto/LECCION.md) | La arquitectura completa, la lista para producción y la entrevista | `29` |
 | 07 | [Proyecto final: un agente que corre gratis](93-agentes-proyecto-ollama/LECCION.md) | El Copiloto de gastos con Ollama: herramientas, frenos, controles, rastros y un set de evaluación con el modelo de verdad | `93` |
 
-### 💼 Lo que piden en el trabajo · 4 clases · certificado `TR-…`
+### 💼 Lo que piden en el trabajo · 5 clases · certificado `TR-…`
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
@@ -220,6 +220,7 @@ Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
 | 02 | [SQL: pedirle datos a la base](119-trabajo-sql/LECCION.md) | SELECT, WHERE, ORDER BY, JOIN y GROUP BY, conectados con filter/map/reduce; N+1 y consultas con parámetros | `119` |
 | 03 | [El depurador](120-trabajo-depurador/LECCION.md) | Encontrar el error con método (no adivinar): reproducir, aislar, el depurador (breakpoints y ver variables) y dejar una prueba | `120` |
 | 04 | [Git en equipo: conflictos y PR](121-trabajo-git-en-equipo/LECCION.md) | Ramas y Pull Requests, mantener main verde, resolver un conflicto de merge y revisar un PR con criterio | `121` |
+| 05 | [Leer documentación](122-trabajo-leer-documentacion/LECCION.md) | Nadie memoriza todo: cómo leer la ficha de una función (qué recibe, qué devuelve), dónde y cómo buscar, y no copiar sin entender | `122` |
 
 <!-- clases:fin -->
 
