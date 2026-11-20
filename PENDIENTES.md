@@ -49,17 +49,16 @@ real de `delvinsmart.github.io`, usando reCAPTCHA (invisible: el alumno no tiene
 6. Pestaña **Apps** → tu app web → **reCAPTCHA v3** → pega la **clave secreta** → **Guardar**.
 7. Pásale a la IA **solo la clave del sitio** (la pública). La secreta no se la pases a nadie.
 
-**Pasos (la IA, cuando le des la clave del sitio):**
+**Pasos (la IA) — ✅ HECHO (2026-11-19):**
 
-- Agregar App Check en `web/nube.js` con esa clave.
-- Poner `enforceAppCheck: true` en `corregirPractica` y `enviarCorreoCuenta` (`firebase/funciones/index.js`).
-- Publicar las funciones.
+- ✅ App Check agregado en `web/nube.js` con la clave del sitio (reCAPTCHA v3, modo "mirar": el sitio ya manda el token con cada llamada).
+- ⏳ **Todavía NO** se puso `enforceAppCheck: true` en las funciones, **a propósito**: primero se observa una semana que todo venga "verificado"; recién ahí se exige, para no bloquear a nadie por un error de configuración.
 
 **Pasos finales (tú, una semana después):**
 
-1. En la consola de App Check, pestaña **APIs**, mira las métricas de **Cloud Firestore**:
-   casi todo tiene que salir como "verificado".
-2. Si es así, toca **Aplicar** (*Enforce*) en Cloud Firestore. Desde ese momento, lo que no venga del sitio queda bloqueado.
+1. En la consola de App Check (<https://console.firebase.google.com/project/mapa-estudios-ds/appcheck>), mira las métricas:
+   casi todo tiene que salir como **"verificado"** (*verified*). Si ves muchas "no verificadas", avísame **antes** de aplicar.
+2. Cuando esté casi todo verificado, **avísame**: yo pongo `enforceAppCheck: true` en las funciones y las publico, y tú tocas **Aplicar** (*Enforce*) en Cloud Firestore. Desde ese momento, lo que no venga del sitio queda bloqueado.
 
 > ⚠️ No actives "Aplicar" el primer día: si algo quedó mal configurado, bloquearías a los alumnos de verdad.
 > Primero se mira, después se aplica.

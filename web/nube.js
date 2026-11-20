@@ -18,6 +18,11 @@ const CONFIG = {
   appId: '1:822754407981:web:6fb527bdc9312d6979aaa4',
 };
 const SDK = 'https://www.gstatic.com/firebasejs/11.10.0/';
+// App Check: le prueba a Firebase que la visita viene del sitio de verdad (con reCAPTCHA v3, invisible),
+// no de un programa que copió esta configuración pública. La clave del SITIO es pública (va aquí a la vista);
+// la secreta vive solo en la consola de Firebase. Por ahora el sitio MANDA el token, pero los servidores
+// todavía NO lo EXIGEN (modo "mirar"): primero se observa una semana, después se activa "Aplicar" (ver PENDIENTES.md).
+const APP_CHECK_SITE_KEY = '6LcFJCkuAAAAAADv4IRGw0PI5DuE6SsQcStzIQ3W';
 export const ESPERA_SEGUNDOS = 60; // igual que en firebase/generar-reglas.mjs
 // Los prefijos salen de cursos.js (una sola fuente de verdad): un curso nuevo no se puede olvidar aquí.
 const FORMATO_CODIGO = new RegExp(`^(${Object.values(CURSOS).map((c) => c.prefijo).join('|')})-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$`);
@@ -31,13 +36,22 @@ const oyentes = new Set();
 function cargar() {
   if (!cargando) {
     cargando = (async () => {
-      const [{ initializeApp }, A, F, Fn] = await Promise.all([
+      const [{ initializeApp }, A, F, Fn, AC] = await Promise.all([
         import(`${SDK}firebase-app.js`),
         import(`${SDK}firebase-auth.js`),
         import(`${SDK}firebase-firestore.js`),
         import(`${SDK}firebase-functions.js`),
+        import(`${SDK}firebase-app-check.js`),
       ]);
       const app = initializeApp(CONFIG);
+      // App Check: empieza a mandar el token de reCAPTCHA v3 con cada llamada. Si algo falla al
+      // armarlo (por ejemplo, el dominio no está en reCAPTCHA), no se cae la app: se sigue sin App Check.
+      try {
+        AC.initializeAppCheck(app, {
+          provider: new AC.ReCaptchaV3Provider(APP_CHECK_SITE_KEY),
+          isTokenAutoRefreshEnabled: true,
+        });
+      } catch (e) { /* sin App Check: la app sigue funcionando */ }
       const auth = A.getAuth(app);
       auth.languageCode = 'es'; // los correos (verificar, recuperar contraseña) llegan en español
       const db = F.getFirestore(app);
