@@ -192,14 +192,21 @@ for (const n of GUIADAS) {
 
 export const ETAPAS = [
   {
-    id: 'fundamentos', icono: '🧱', titulo: 'Fundamentos', logos: ['typescript', 'git', 'jest'],
-    desc: 'Leer código, probarlo, guardarlo y entender sus errores. La base de todo.',
-    clases: ['116', '01', '44', '02', '03', '04', '05', '06', '07'],
+    id: 'fundamentos', icono: '🧱', titulo: 'Fundamentos', logos: ['typescript'],
+    desc: 'Qué es programar, leer código de verdad y conocer los lenguajes. La base de todo.',
+    clases: ['116', '01', '44'],
   },
+  // La web va antes que pruebas, CI y Git: quien empieza ve primero una página suya funcionando,
+  // y después aprende a probarla, guardarla y corregirla. (Los bombillos se prenden en este orden.)
   {
     id: 'web', icono: '🌐', titulo: 'La web: HTML, CSS y JavaScript', logos: ['html', 'css', 'javascript'],
     desc: 'Las tres piezas con las que se hace cualquier página.',
     clases: ['15', '16', '17', '75'],
+  },
+  {
+    id: 'oficio', icono: '🧰', titulo: 'El oficio: probar, guardar y corregir', logos: ['jest', 'git', 'github'],
+    desc: 'Pruebas automáticas, CI, tu primer cambio, Git y leer errores: cómo se trabaja en un proyecto de verdad.',
+    clases: ['02', '03', '04', '05', '06', '07'],
   },
   {
     id: 'backend', icono: '🔥', titulo: 'Backend y datos', logos: ['firebase', 'node'],
@@ -324,12 +331,12 @@ export const CURSOS = {
 // Si cambias el orden de CURSOS, revisa que cada curso de ANTES quede con un número MENOR.
 export const ANTES = {
   programacion: [],
-  javascript: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar, leer código y probar', recomendado: true }],
+  javascript: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar y leer código', recomendado: true }],
   node: [{ curso: 'javascript', por: 'el curso completo: Node.js es JavaScript fuera del navegador, y se usa async/await desde la primera clase' }],
   reactnative: [{ curso: 'javascript', por: 'el curso completo, con TypeScript: React Native es JavaScript' }],
-  kotlin: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar, leer código y probar', recomendado: true }],
-  swift: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar, leer código y probar', recomendado: true }],
-  python: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar, leer código y probar', recomendado: true }],
+  kotlin: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar y leer código', recomendado: true }],
+  swift: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar y leer código', recomendado: true }],
+  python: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar y leer código', recomendado: true }],
   seguridad: [{ curso: 'javascript', por: 'el curso completo: los ejercicios están en JavaScript y usan objetos, funciones, fechas y async/await' }],
   ia: [{ curso: 'javascript', por: 'el curso completo: los ejercicios están en JavaScript (objetos, funciones, fechas)' }],
   agentes: [

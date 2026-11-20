@@ -673,4 +673,4 @@ elige :: `Missing or insufficient permissions` de Firebase quiere decir… :: Qu
 escribe :: Cuenta el "error difícil" del color en 3 frases. :: Al cambiar el color no pasaba nada y no había error; lo reproduje con la foto real y apareció un TypeError porque la detección del color devolvía null; lo corregí, agregué un aviso en pantalla y pruebas.
 ```
 
-> 🔁 **Repaso final de la clase:** verificar antes de adivinar; las partes de un error; los cuatro lugares (cuanto antes, más barato); seis errores reales leídos; el método de 8 pasos; qué hacer cuando no se entiende; y practicaste provocando errores. Con esto terminas los **Fundamentos**. Próxima etapa: **La web (Tema 15, HTML)**.
+> 🔁 **Repaso final de la clase:** verificar antes de adivinar; las partes de un error; los cuatro lugares (cuanto antes, más barato); seis errores reales leídos; el método de 8 pasos; qué hacer cuando no se entiende; y practicaste provocando errores. Con esto terminas **El oficio**. Próxima etapa: **Backend y datos (Tema 08, Firebase)**.

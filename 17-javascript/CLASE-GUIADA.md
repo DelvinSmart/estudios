@@ -4,7 +4,7 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 **Cómo estudiarla:** usa la carpeta `practica` de los Temas 15 y 16. Crea `practica/app.js` y conéctalo al final del `body` con `<script src="app.js"></script>`. Abre la **consola** del navegador (clic derecho → Inspeccionar → Consola) y déjala abierta: ahí vas a ver lo que imprimes y los errores.
 
-**Lo que necesitas saber antes:** Tema 01 (variables, funciones, `if`, listas, objetos), Temas 15 y 16.
+**Lo que necesitas saber antes:** Tema 01 y las clases 45 a 48 (variables, funciones, `if`, listas, objetos), y los Temas 15 y 16.
 
 ## 1. Repaso rápido: variables, datos y funciones
 
@@ -696,6 +696,12 @@ Este mapa está repartido así (es la arquitectura del Tema 10 en pequeño):
 
 > 🌎 **Otro ejemplo:** Como un equipo de fútbol: arquero, defensores, mediocampistas y delanteros; cada uno con su puesto, y se pasan la pelota.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`Object.keys(objeto)`**: te da la lista de los **nombres** (claves) de un objeto. `Object.keys({ a: 1, b: 2 })` → `['a', 'b']`. (También existen `Object.values`, que da los valores, y `Object.entries`, que da los pares.)
+> - **`.find()`**: busca en una lista el **primer** elemento que cumple la condición, o da `undefined` si no hay ninguno.
+> - **spread `...`**: "desparrama" los elementos de algo dentro de una lista nueva. `[...'abc']` → `['a', 'b', 'c']`. Sirve para convertir en lista lo que no lo es.
+> - **`??`**: "si lo de la izquierda no existe, usa lo de la derecha". `undefined ?? null` → `null`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -740,7 +746,7 @@ vf :: `export` permite que otro archivo use una función
 
 ## 10. Cuando algo falla: la consola
 
-> 🎙️ **El profesor:** para terminar, lo del Tema 07 aplicado a la web. La consola es tu tablero de luces.
+> 🎙️ **El profesor:** para terminar, un adelanto del Tema 07 (leer errores), aplicado a la web. La consola es tu tablero de luces.
 
 > 🌎 **En la vida real:** Es como el tablero del carro: cuando algo falla, se prende una luz con un símbolo. Hay que saber leerla antes de abrir el capó.
 
@@ -756,7 +762,7 @@ Abre la consola: clic derecho → **Inspeccionar** → **Consola** (o `Cmd + Opt
 | `Failed to fetch` / `404` | No encontró el archivo | Ruta mal escrita, o abriste con `file://` |
 | `Unexpected token` | Error al escribir | Falta una `}`, una `)` o una coma |
 
-**Lee el mensaje y la línea** antes de cambiar nada (Tema 07).
+**Lee el mensaje y la línea** antes de cambiar nada (lo practicas a fondo en el Tema 07).
 
 > ✋ **Para y piensa:** tu script dice `Cannot read properties of null (reading 'addEventListener')`. ¿Qué revisas primero?
 
@@ -766,6 +772,9 @@ Abre la consola: clic derecho → **Inspeccionar** → **Consola** (o `Cmd + Opt
 Que el **selector** esté bien escrito y que esa caja **exista** en el HTML. Y que el `<script>` esté **al final del `body`** (o sea `type="module"`), para que corra después de que exista la caja.
 
 </details>
+
+> 🧩 **Pieza nueva para este ejercicio** (todavía no la habías visto):
+> - **`?.` (encadenamiento opcional)**: "entra solo si existe". `caja?.texto` da `undefined` en vez de romper con el error `Cannot read properties of null` cuando `caja` no existe. Es justo el error de este ejercicio, pero evitado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -1086,3 +1086,8 @@ body.con-reproductor { padding-bottom: 70px; }
   .pestanas-cursos::-webkit-scrollbar { display: none; }
   .pestanas-cursos .pestana { flex-shrink: 0; white-space: nowrap; }
 }
+/* En la portada: la ruta para quien nunca programó. */
+.ruta-cero { grid-column: 1 / -1; margin-top: 16px; }
+.ruta-cero ol { margin: 6px 0 4px; padding-left: 22px; }
+.ruta-cero li { margin: 3px 0; }
+.ruta-cero a { color: var(--acento); font-weight: 600; }

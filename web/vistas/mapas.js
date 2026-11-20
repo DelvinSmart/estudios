@@ -9,6 +9,7 @@ import { htmlMapa, htmlProgreso, activarMapas } from '../mapa-islas.js';
 import { app, ponerMigas, escapar, enLinea, dos } from '../pantalla.js';
 import { conteo, ORDEN, rutaDoc, etapaDe, cursoDeClase, ordenDe, prendidos, claseActual, estadoClase, ETIQUETA_ESTADO, numeroEnCurso, numeroEtapa, migaEtapa, cortoClase } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
+import { hashDeClase } from '../rutas.js';
 import { palabrasDeClase } from '../glosario.js';
 
 // La caja "palabras nuevas en esta clase": se arma sola con las del glosario marcadas con esta clase.
@@ -48,6 +49,22 @@ function htmlAntes(cursoId, claseId) {
     ${necesarios.length || deClase.length ? `<b>📋 Antes de ${deClase.length && !necesarios.length ? 'esta clase' : 'este curso'}, necesitas:</b><ul>${[...necesarios, ...deClase].map(fila).join('')}</ul>` : ''}
     ${recomendados.length ? `<b>${necesarios.length ? 'Y te ayuda' : '💡 Este curso enseña desde cero, pero te ayuda'} haber visto:</b><ul>${recomendados.map(fila).join('')}</ul>` : ''}
     ${necesarios.length ? '<p class="tenue">Si ya lo sabes, puedes empezar aquí. Si no, ve primero ahí: aquí se usa sin volver a explicarlo.</p>' : ''}
+  </div>`;
+}
+
+// En la portada: el camino para quien nunca programó, a la vista sin tener que buscarlo.
+// Respeta el orden de los bombillos de cada curso; la explicación completa está en la clase 116, Parte 6.
+function htmlRutaDesdeCero() {
+  const paso = (id, texto) => `<li><a href="${hashDeClase(id)}">${texto}</a></li>`;
+  return `<div class="antes-curso listo ruta-cero">
+    <b>🌱 ¿Nunca programaste? Sigue esta ruta:</b>
+    <ol>
+      ${paso('116', 'Programar desde cero')}
+      ${paso('45', 'Lo básico del código: JavaScript, clases 01 a 04')}
+      ${paso('01', 'Vuelve a Programación: leer código, la web y el oficio')}
+      ${paso('84', 'Tu primera web publicada: el proyecto final de JavaScript')}
+    </ol>
+    <p><a href="${hashDeClase('116', '0', '6')}">Por qué este orden →</a></p>
   </div>`;
 }
 
@@ -120,6 +137,7 @@ export function vistaInicio(soloCurso) {
           <span class="boton-detalle">clase ${numeroEnCurso(actual)}<span class="boton-titulo"> · ${escapar(CLASES[actual].titulo)}</span></span></a>
       </div>` : ''}</div>
       ${htmlProgreso(`${hechas} de ${total} clases terminadas`, hechas / total, '#/progreso')}
+      ${htmlRutaDesdeCero()}
       <p class="aviso-verificar">🎓 <b>¿Te mostraron un certificado de este sitio?</b> <a href="#/verificar">Verifícalo aquí con su código</a>: no necesitas cuenta.</p>
     </section>
     ${pestanasCursos}

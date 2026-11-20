@@ -330,7 +330,7 @@ Abre la consola: clic derecho → **Inspeccionar** → **Consola** (o `Cmd + Opt
 | `Failed to fetch` / `404` | No encontró el archivo | Ruta mal escrita, o abriste con `file://` |
 | `Unexpected token` | Error al escribir | Falta una `}`, una `)` o una coma |
 
-Es lo mismo que aprendiste en el Tema 07: **lee el mensaje y la línea** antes de cambiar nada.
+Es lo que vas a practicar a fondo en el Tema 07: **lee el mensaje y la línea** antes de cambiar nada.
 
 **Preguntas**
 17. Tu script dice `Cannot read properties of null (reading 'addEventListener')`. ¿Qué revisas primero?

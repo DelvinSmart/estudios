@@ -320,7 +320,7 @@ Esto importa por dos razones:
 | Sin `meta charset` | Tildes y ñ salen raras. | Agrega `<meta charset="utf-8">`. |
 | Sin `alt` | Nadie lo nota… salvo quien no puede ver. | Siempre `alt` con una descripción corta. |
 
-> 💡 **Idea:** el validador oficial (`validator.w3.org`) revisa tu HTML y te dice cada error con su línea. Es como el CI del Tema 04, pero para HTML.
+> 💡 **Idea:** el validador oficial (`validator.w3.org`) revisa tu HTML y te dice cada error con su línea. Es un revisor automático para HTML (en el Tema 04 vas a conocer el CI, que revisa tu código solo en cada subida).
 
 **Preguntas**
 15. Tu imagen se ve en tu Mac pero no en GitHub Pages. El archivo se llama `Foto.PNG` y en el HTML escribiste `foto.png`. ¿Qué pasa?

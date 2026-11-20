@@ -33,21 +33,26 @@ recomendada (lo básico en JavaScript 01 a 04, luego el resto de Programación y
 | 01 | [Programar desde cero](116-programar-desde-cero/LECCION.md) | Qué es programar, las primeras palabras sin miedo y cómo usar este curso | `116` |
 | 02 | [Leer código](01-leer-codigo/CLASE-GUIADA.md) | Leer una función de la app y decir qué hace | `01` |
 | 03 | [El mapa de los lenguajes](44-mapa-de-los-lenguajes/LECCION.md) | JavaScript, TypeScript, Node, React, React Native, Expo, Kotlin y Swift: qué es cada uno | `44` |
-| 04 | [Pruebas automáticas](02-pruebas-automaticas/CLASE-GUIADA.md) | Entender las más de 400 pruebas de la app y correrlas | `02` |
-| 05 | [Mi primera prueba](03-tu-primera-prueba/CLASE-GUIADA.md) | Escribir una prueba yo solo | `03` |
-| 06 | [CI](04-ci/CLASE-GUIADA.md) | Explicar qué revisa la máquina en cada subida | `04` |
-| 07 | [Mi primer cambio](05-tu-primer-cambio/CLASE-GUIADA.md) | Cambiar algo en la app yo mismo | `05` |
-| 08 | [Git](06-git/CLASE-GUIADA.md) | Guardar y subir mis cambios sin el script | `06` |
-| 09 | [Leer errores](07-leer-errores/CLASE-GUIADA.md) | Encontrar la causa de un error leyendo el mensaje | `07` |
 
 **🌐 La web: HTML, CSS y JavaScript**
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
-| 10 | [HTML](15-html/CLASE-GUIADA.md) | Armar la estructura de una página | `15` |
-| 11 | [CSS](16-css/CLASE-GUIADA.md) | Darle colores, letras, espacios y forma | `16` |
-| 12 | [JavaScript en la página](17-javascript/CLASE-GUIADA.md) | Hacer que la página responda y cambie | `17` |
-| 13 | [¿Qué es un script y qué es una SPA?](75-script-y-spa/LECCION.md) | La casa, el guion y la página que cambia sin recargar: esta misma plataforma | `75` |
+| 04 | [HTML](15-html/CLASE-GUIADA.md) | Armar la estructura de una página | `15` |
+| 05 | [CSS](16-css/CLASE-GUIADA.md) | Darle colores, letras, espacios y forma | `16` |
+| 06 | [JavaScript en la página](17-javascript/CLASE-GUIADA.md) | Hacer que la página responda y cambie | `17` |
+| 07 | [¿Qué es un script y qué es una SPA?](75-script-y-spa/LECCION.md) | La casa, el guion y la página que cambia sin recargar: esta misma plataforma | `75` |
+
+**🧰 El oficio: probar, guardar y corregir**
+
+| # | Clase | Qué voy a saber hacer al terminar | Carpeta |
+|---|---|---|---|
+| 08 | [Pruebas automáticas](02-pruebas-automaticas/CLASE-GUIADA.md) | Entender las más de 400 pruebas de la app y correrlas | `02` |
+| 09 | [Mi primera prueba](03-tu-primera-prueba/CLASE-GUIADA.md) | Escribir una prueba yo solo | `03` |
+| 10 | [CI](04-ci/CLASE-GUIADA.md) | Explicar qué revisa la máquina en cada subida | `04` |
+| 11 | [Mi primer cambio](05-tu-primer-cambio/CLASE-GUIADA.md) | Cambiar algo en la app yo mismo | `05` |
+| 12 | [Git](06-git/CLASE-GUIADA.md) | Guardar y subir mis cambios sin el script | `06` |
+| 13 | [Leer errores](07-leer-errores/CLASE-GUIADA.md) | Encontrar la causa de un error leyendo el mensaje | `07` |
 
 **🔥 Backend y datos**
 

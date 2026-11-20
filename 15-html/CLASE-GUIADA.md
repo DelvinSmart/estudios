@@ -4,7 +4,7 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 **Cómo estudiarla:** abre al lado un editor (VS Code) y un navegador. Crea una carpeta `practica` dentro de esta clase con un archivo `practica/index.html`: todo lo que aprendas, escríbelo ahí y míralo con doble clic. Cada vez que cambies algo: guarda y recarga (`Cmd + R`).
 
-**Lo que necesitas saber antes:** los Fundamentos (Temas 01 a 07).
+**Lo que necesitas saber antes:** los Fundamentos (Temas 116, 01 y 44). Si nunca programaste, también las clases 45 a 48 (variables, decisiones, funciones y listas).
 
 ## 1. Qué es HTML
 
@@ -212,6 +212,13 @@ Línea por línea:
 Sin `charset="utf-8"`, el navegador no sabe cómo leer las letras especiales, y la "ó" sale como símbolos raros. Hay que volver a poner esa línea.
 
 </details>
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.toLowerCase()` y `.toUpperCase()`**: pasan un texto a minúsculas o a mayúsculas. `'DocType'.toLowerCase()` → `'doctype'`. Sirve para comparar sin que importen las mayúsculas.
+> - **`.includes()`**: pregunta si algo está adentro. En un texto: `'hola mundo'.includes('mundo')` → `true`. En una lista: `['a', 'b'].includes('c')` → `false`.
+> - **`.filter()`**: recorre una lista y se queda solo con los elementos que cumplen una condición, como un colador. `[3, 8, 1].filter((n) => n > 2)` → `[3, 8]`.
+> - **`.map()`**: recorre una lista y transforma cada elemento, como una máquina que pinta cada pieza que pasa. `[1, 2].map((n) => n * 10)` → `[10, 20]`.
+> - Fíjate en el `(n) => …`: es una **función corta** (función flecha). Recibe cada elemento y devuelve la respuesta. Lo verás a fondo en el curso de JavaScript.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -576,7 +583,7 @@ vf :: Con "Inspeccionar" del navegador puedes ver el DOM real de una página
 
 ## 8. Errores comunes y cómo encontrarlos
 
-> 🎙️ **El profesor:** dato curioso y peligroso: **HTML casi nunca da error**. El navegador adivina lo que quisiste decir. Por eso, cuando algo está mal, no aparece un mensaje rojo como en el Tema 07: la página **se ve rara** y ya.
+> 🎙️ **El profesor:** dato curioso y peligroso: **HTML casi nunca da error**. El navegador adivina lo que quisiste decir. Por eso, cuando algo está mal, no aparece un mensaje rojo como los que vas a aprender a leer en el Tema 07: la página **se ve rara** y ya.
 
 | Error | Qué pasa | Cómo se arregla |
 |---|---|---|
@@ -590,7 +597,7 @@ vf :: Con "Inspeccionar" del navegador puedes ver el DOM real de una página
 
 > 🌎 **Otro ejemplo:** Como escribir una dirección con el número mal: el cartero no te avisa del error; simplemente la carta no llega.
 
-> 💡 **Idea:** el validador oficial, **validator.w3.org**, revisa tu HTML y te dice cada error con su línea. Es como el CI del Tema 04, pero para HTML.
+> 💡 **Idea:** el validador oficial, **validator.w3.org**, revisa tu HTML y te dice cada error con su línea. Es un revisor automático para HTML (en el Tema 04 vas a conocer el CI, que revisa tu código solo en cada subida).
 
 > ✋ **Para y piensa:** tu imagen se ve en tu Mac pero no en GitHub Pages. El archivo se llama `Foto.PNG` y en el HTML escribiste `foto.png`. ¿Qué pasa?
 
@@ -600,6 +607,11 @@ vf :: Con "Inspeccionar" del navegador puedes ver el DOM real de una página
 El disco de la Mac **no distingue** mayúsculas, así que la encuentra. GitHub Pages **sí** distingue: busca `foto.png`, no existe, y la imagen no aparece. Hay que escribir exactamente `Foto.PNG` (o renombrar el archivo).
 
 </details>
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`for...of`**: repite un bloque **una vez por cada elemento** de una lista, como revisar las cartas de un mazo una por una. `for (const carta of mazo) { … }`.
+> - **`.push()`**: agrega un elemento al **final** de una lista. `pila.push('p')` pone `'p'` arriba de la pila.
+> - **`.pop()`**: saca el **último** elemento de la lista y te lo da, como sacar el plato de arriba de una pila de platos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

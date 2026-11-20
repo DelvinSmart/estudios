@@ -162,7 +162,7 @@ La clase que sigue a esta, **Leer código**, ya te pone a leer el código de una
    [Decisiones y ciclos](../46-js-decisiones-y-ciclos/LECCION.md) →
    [Funciones](../47-js-funciones/LECCION.md) →
    [Arrays y objetos](../48-js-arrays-y-objetos/LECCION.md).
-3. **Vuelve a Programación** y sigue en orden desde la clase 01: [Leer código](../01-leer-codigo/CLASE-GUIADA.md), pruebas, Git, leer errores, y la etapa de la web (HTML, CSS y JavaScript en la página). Ahora vas a reconocer cada pieza.
+3. **Vuelve a Programación** y sigue en orden desde la clase 01: [Leer código](../01-leer-codigo/CLASE-GUIADA.md), el mapa de los lenguajes, la web (HTML, CSS y JavaScript en la página) y después el oficio: pruebas, CI, Git y leer errores. Ahora vas a reconocer cada pieza, y primero vas a ver una página tuya funcionando.
 4. **Termina ese curso** desde la clase 49 hasta su proyecto final, [la web de gastos](../84-js-proyecto-web-de-gastos/LECCION.md): una página tuya, de una carpeta vacía a publicada en internet.
 5. **Elige un camino** según lo que quieras construir: apps de teléfono (React Native, Kotlin o Swift), servidores (Node.js), o [Python](../36-python-primeros-pasos/LECCION.md) si te gusta más ese lenguaje. Todos empiezan desde sus primeros pasos.
 
