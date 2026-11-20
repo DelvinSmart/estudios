@@ -39,20 +39,15 @@ real de `delvinsmart.github.io`, usando reCAPTCHA (invisible: el alumno no tiene
 > 🌎 **En la vida real:** la `apiKey` es la dirección del edificio (todos la saben). App Check es el portero
 > que mira que vengas de verdad a una oficina del edificio y no seas un robot tocando todos los timbres.
 
-**Estado (2026-11-19):** el reCAPTCHA "clásico" quedó **descontinuado** en la consola, así que App Check se registró con **Fraud Defense (reCAPTCHA Enterprise)**, y quedó **en verde (registrado)** en el proyecto `mapa-estudios-ds`. La API de reCAPTCHA Enterprise está **activada**. La clave v3 clásica que se creó al principio **no sirve** para Enterprise. El código del cliente (`web/nube.js`) quedó **limpio, sin App Check** a la espera de la clave de Enterprise (para no dejar nada a medias).
+**Estado (2026-11-20):** App Check quedó **conectado** en `web/nube.js` con **Fraud Defense (reCAPTCHA Enterprise)** y la clave `6LcFJCku…`, en **modo "mirar"** (el sitio manda el token; los servidores todavía NO lo exigen). Publicado.
 
-**Lo que falta para terminarlo (tú, cuando tengas paciencia):**
+**Detalle a resolver (no urgente, antes de "Aplicar"):** en producción, al pedir el token de App Check sale **un aviso 403** en la consola. **No rompe nada** (en modo "mirar" nada se bloquea, y los datos ya están protegidos por las reglas). Lo más probable: la **clave de reCAPTCHA Enterprise no tiene registrado el dominio `delvinsmart.github.io`** (o la verificación de origen está activada sin ese dominio). Para arreglarlo:
 
-1. Entra a **<https://console.cloud.google.com/security/recaptcha?project=mapa-estudios-ds>** (reCAPTCHA Enterprise → **Chaves/Keys**). Debería haber una **clave** (empieza por `6L…`) creada por Fraud Defense.
-   - Si esa página te lleva a otra cosa, usa el menú ☰ → **Segurança** → **reCAPTCHA**, con el proyecto **Mapa de estudios** elegido arriba.
-2. Copia esa **clave de Enterprise** (es pública) y **pásasela a la IA**.
+1. Entra a **<https://console.cloud.google.com/security/recaptcha?project=mapa-estudios-ds>**, abre la clave `6LcFJCku…`, **Editar**.
+2. En **Dominios** agrega `delvinsmart.github.io` (y `localhost` si quieres probar en la Mac). Guarda.
+3. Avísale a la IA y verificamos que el 403 desaparezca.
 
-**Lo que hará la IA con esa clave:**
-
-- Agregar `initializeAppCheck(app, { provider: new ReCaptchaEnterpriseProvider('<clave>'), isTokenAutoRefreshEnabled: true })` en `web/nube.js` (importando `firebase-app-check.js`).
-- Publicar. Queda en **modo "mirar"** (el sitio manda el token, pero los servidores **no** lo exigen).
-
-**Pasos finales (tú, una semana después de eso):**
+**Pasos finales (tú, una semana después, SOLO si el 403 ya se resolvió):**
 
 1. En <https://console.firebase.google.com/project/mapa-estudios-ds/appcheck>, mira que casi todo venga **"verificado"**. Si hay muchas "no verificadas", avísale a la IA **antes** de aplicar.
 2. Cuando esté verificado, **avísale a la IA**: pone `enforceAppCheck: true` en las funciones y publica, y tú tocas **Aplicar** (*Enforce*) en Cloud Firestore. Desde ahí, lo que no venga del sitio queda bloqueado.
