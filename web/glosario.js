@@ -219,6 +219,34 @@ export const GLOSARIO = [
   { termino: 'firewall', alias: ['cortafuegos'], clase: '112',
     definicion: 'Un portero de red que deja pasar solo las conexiones permitidas y bloquea el resto.' },
 
+  // Lo que piden en el trabajo (clases 118-123)
+  { termino: 'Big-O', alias: ['big o', 'notación big-o', 'complejidad'], clase: '118',
+    definicion: 'La forma de medir cómo crece el número de pasos de un algoritmo cuando crecen los datos (O(1), O(n), O(n²)…). No dice los segundos, dice cómo escala.' },
+  { termino: 'Set', alias: ['conjunto'], clase: '118',
+    definicion: 'Una colección de valores sin repetidos, que responde "¿está este?" al instante (O(1)). Ideal para "¿ya lo vi?".' },
+  { termino: 'Map', alias: ['mapa (estructura)', 'diccionario (js)'], clase: '118',
+    definicion: 'Una tabla de parejas clave→valor que busca por clave al instante (O(1)). Ideal para "dame el de este id". Baja muchos O(n²) a O(n).' },
+  { termino: 'breakpoint', alias: ['punto de parada'], clase: '120',
+    definicion: 'Una marca en una línea que hace que el programa se detenga ahí, para mirar el valor real de las variables. Es la pieza clave del depurador.' },
+  { termino: 'code review', alias: ['revisión de código', 'revisar un pr'], clase: '121',
+    definicion: 'Cuando alguien revisa el cambio de otro (un PR) antes de unirlo: que haga lo que dice, se entienda, tenga pruebas y no rompa nada. Se comenta sobre el código, no la persona.' },
+  { termino: 'conflicto de merge', alias: ['conflicto', 'merge conflict'], clase: '121',
+    definicion: 'Cuando dos ramas cambiaron las mismas líneas y Git te pide elegir qué queda. No es un error: se resuelve borrando las marcas y dejando el código final.' },
+
+  // Programación orientada a objetos y errores (clases 82, 07, 40)
+  { termino: 'POO', alias: ['poo', 'orientada a objetos', 'clase (poo)', 'herencia'], clase: '82',
+    definicion: 'Programar con "moldes" (clases) que crean objetos con sus datos y sus funciones (métodos). La herencia deja que un molde parta de otro.' },
+  { termino: 'método', alias: ['metodo', 'métodos'], clase: '82',
+    definicion: 'Una función que vive dentro de un objeto o una clase, y trabaja con sus datos. Por ejemplo, `lista.push(...)`: push es un método.' },
+  { termino: 'try/catch', alias: ['try catch', 'try/except', 'atrapar un error'], clase: '07',
+    definicion: 'La forma de "atrapar" un error para manejarlo en vez de que todo se caiga: intentas algo (try) y, si falla, haces otra cosa (catch, o except en Python).' },
+
+  // Python a fondo (clase 42) y fechas (83)
+  { termino: 'self', alias: ['self de python'], clase: '42',
+    definicion: 'En Python, dentro de una clase, `self` es "este objeto": se usa para leer y guardar sus propios datos.' },
+  { termino: 'fecha y hora', alias: ['date', 'timestamp', 'marca de tiempo'], clase: '83',
+    definicion: 'Cómo el programa guarda y compara momentos. Un timestamp es un número que cuenta los milisegundos desde una fecha fija; sirve para ordenar por tiempo.' },
+
   // La web (clases 15-17)
   { termino: 'HTML', alias: ['html'], clase: '15',
     definicion: 'El lenguaje que pone el contenido y la estructura de una página: títulos, párrafos, botones, imágenes. El "esqueleto".' },
