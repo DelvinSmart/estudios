@@ -143,10 +143,10 @@ Para que no te pierdas, así funciona todo:
 
 - **Los cursos y las etapas.** Arriba eliges un curso (empieza por **Programación**, donde estás). Cada curso tiene etapas, y cada etapa, clases como esta.
 - **Los bombillos 💡.** Cada clase está partida en pedazos. Cuando entiendes uno, lo marcas como "entendido" y se prende un bombillo. Así ves tu avance y sabes por dónde ibas.
-- **Las prácticas.** Al final de cada clase hay preguntas para comprobar que de verdad lo puedes explicar. No son para calificarte: son para que **tú** veas qué te falta. La respuesta solo aparece cuando aciertas, a propósito.
+- **Las prácticas.** Al final de cada clase hay preguntas para comprobar que de verdad lo puedes explicar. No son para calificarte: son para que **tú** veas qué te falta. La respuesta solo aparece cuando aciertas, a propósito. Puedes **leer todo el curso sin cuenta**; para **revisar tus respuestas** y guardar tu avance hace falta una cuenta gratis con tu Gmail (botón 👤 cuenta, arriba). Las preguntas de **escribir** son solo para ti: nadie las corrige y no cuentan.
 - **Los ejercicios de código** (como el de arriba): escribes tú, la máquina revisa.
 - **El buscador 🔎 y el glosario.** Si no sabes una palabra, búscala arriba: te sale su definición antes que nada.
-- **El certificado.** Cuando terminas un curso, el sitio te da un certificado que se puede verificar.
+- **El certificado.** Cuando terminas un curso, el sitio te da un certificado con un código. Cualquiera lo puede comprobar con el botón **🎓 verificar** de arriba, sin cuenta.
 
 > 💡 **Idea:** no corras. Es mejor **una** clase bien entendida que cinco a medias. Marca el bombillo solo cuando de verdad lo entendiste; si no, déjalo apagado y vuelve.
 
