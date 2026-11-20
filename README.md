@@ -19,7 +19,8 @@ en una entrevista.
 
 Cada curso tiene su mapa, su orden y su certificado. **#** es el lugar de la clase dentro de su curso
 (el que se ve en la página); **Carpeta** es el número de la carpeta, que no siempre es el orden.
-Si nunca programaste, empieza por el curso de **Programación** (Fundamentos).
+Si nunca programaste, empieza por [Programar desde cero](116-programar-desde-cero/LECCION.md): su Parte 6 tiene la ruta
+recomendada (lo básico en JavaScript 01 a 04, luego el resto de Programación y el proyecto de la web de gastos).
 
 <!-- clases:inicio (generado por firebase/generar-reglas.mjs: no editar a mano) -->
 

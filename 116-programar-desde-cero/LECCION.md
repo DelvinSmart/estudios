@@ -104,7 +104,7 @@ Dos ideas que te van a ahorrar muchos errores:
 1. **La condición tiene que ser completa y clara.** "Si viene un carro" está claro: o viene o no viene. La máquina necesita una pregunta que se pueda responder con **sí o no**, sin "más o menos".
 2. **Piensa siempre los dos caminos.** ¿Qué pasa si **sí**? ¿Y si **no**? Muchos errores de principiante son por olvidar el "si no": el programa funciona cuando todo va bien, pero no sabe qué hacer cuando algo falta.
 
-> 💡 **Idea:** cuando una decisión tiene **varios** casos (rojo, amarillo, verde), se encadenan: `si… si no, si… si no…`. Lo verás a fondo, con código de verdad, en la clase 46 (Decisiones y ciclos).
+> 💡 **Idea:** cuando una decisión tiene **varios** casos (rojo, amarillo, verde), se encadenan: `si… si no, si… si no…`. Lo verás a fondo, con código de verdad, en [Decisiones y ciclos](../46-js-decisiones-y-ciclos/LECCION.md) (la clase 02 del curso de JavaScript).
 
 ✍️ **Ahora escribes tú:**
 
@@ -149,6 +149,26 @@ Para que no te pierdas, así funciona todo:
 - **El certificado.** Cuando terminas un curso, el sitio te da un certificado con un código. Cualquiera lo puede comprobar con el botón **🎓 verificar** de arriba, sin cuenta.
 
 > 💡 **Idea:** no corras. Es mejor **una** clase bien entendida que cinco a medias. Marca el bombillo solo cuando de verdad lo entendiste; si no, déjalo apagado y vuelve.
+
+### Si nunca programaste: tu ruta, paso a paso
+
+> 🌎 **En la vida real:** para manejar, primero aprendes el volante, los pedales y los cambios en un estacionamiento vacío. Recién después sales a la calle, con tráfico y semáforos. Aquí es igual: primero las piezas básicas del código, después cómo se trabaja en una app de verdad.
+
+La clase que sigue a esta, **Leer código**, ya te pone a leer el código de una app real (Copiloto). Si nunca programaste, es mejor llegar ahí sabiendo lo básico: guardar datos, decidir, repetir y agrupar. Por eso este es el orden recomendado:
+
+1. **Esta clase**, la primera del curso de Programación. Ya estás aquí.
+2. **Lo básico del código**, clases 45 a 48, con ejercicios en la misma página:
+   [Variables, tipos y la consola](../45-js-variables-y-tipos/LECCION.md) →
+   [Decisiones y ciclos](../46-js-decisiones-y-ciclos/LECCION.md) →
+   [Funciones](../47-js-funciones/LECCION.md) →
+   [Arrays y objetos](../48-js-arrays-y-objetos/LECCION.md).
+3. **Vuelve a Programación** y sigue en orden desde la clase 01: [Leer código](../01-leer-codigo/CLASE-GUIADA.md), pruebas, Git, leer errores, y la etapa de la web (HTML, CSS y JavaScript en la página). Ahora vas a reconocer cada pieza.
+4. **Termina ese curso** desde la clase 49 hasta su proyecto final, [la web de gastos](../84-js-proyecto-web-de-gastos/LECCION.md): una página tuya, de una carpeta vacía a publicada en internet.
+5. **Elige un camino** según lo que quieras construir: apps de teléfono (React Native, Kotlin o Swift), servidores (Node.js), o [Python](../36-python-primeros-pasos/LECCION.md) si te gusta más ese lenguaje. Todos empiezan desde sus primeros pasos.
+
+> ⚠️ **Por qué este orden y no otro:** cada curso guarda su avance por separado, y dentro de un curso los bombillos se prenden **en orden**. Esta ruta respeta ese orden: nunca te pide saltarte una clase del mismo curso. Puedes **leer** cualquier clase cuando quieras; el orden solo importa para prender los bombillos.
+
+> 📌 **Nota:** la clase 05 (**Mi primer cambio**) se hace sobre la app Copiloto. Si no tienes esa app en tu computadora, léela igual: lo que enseña (dónde buscar, cambiar algo pequeño, romperlo a propósito y deshacerlo) lo vas a hacer con tu propio proyecto en la web de gastos.
 
 ```practica
 elige :: ¿Qué es programar, en una frase? :: Ser muy bueno en matemáticas :: Escribir instrucciones claras y en orden para que una máquina las siga :: Usar la computadora rápido

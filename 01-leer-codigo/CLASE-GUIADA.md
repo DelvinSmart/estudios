@@ -2,6 +2,8 @@
 
 Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo. La [lección](LECCION.md) es el resumen para repasar.
 
+> 📌 **Si nunca programaste:** antes de esta clase conviene hacer las clases 45 a 48, empezando por [Variables, tipos y la consola](../45-js-variables-y-tipos/LECCION.md). Aquí vas a leer código de una app real, y se entiende mucho mejor si ya sabes qué son una variable, un `if`, una función y una lista. La ruta completa está en [Programar desde cero](../116-programar-desde-cero/LECCION.md), Parte 6.
+
 **Cómo estudiarla:**
 1. Lee una parte por día (o dos, si vas bien). No corras.
 2. Cuando veas **✋ Para y piensa**, **detente**. Responde en voz alta o en un papel **antes** de abrir la respuesta. Ese momento es donde se aprende.
