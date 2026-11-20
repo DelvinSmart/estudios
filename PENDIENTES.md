@@ -41,11 +41,9 @@ real de `delvinsmart.github.io`, usando reCAPTCHA (invisible: el alumno no tiene
 
 **Estado (2026-11-20):** App Check quedó **conectado** en `web/nube.js` con **Fraud Defense (reCAPTCHA Enterprise)** y la clave `6LcFJCku…`, en **modo "mirar"** (el sitio manda el token; los servidores todavía NO lo exigen). Publicado.
 
-**Detalle a resolver (no urgente, antes de "Aplicar"):** en producción, al pedir el token de App Check sale **un aviso 403** en la consola. **No rompe nada** (en modo "mirar" nada se bloquea, y los datos ya están protegidos por las reglas). Lo más probable: la **clave de reCAPTCHA Enterprise no tiene registrado el dominio `delvinsmart.github.io`** (o la verificación de origen está activada sin ese dominio). Para arreglarlo:
+**Detalle (no urgente):** en producción, al pedir el token de App Check sale **un aviso 403** en la consola. **No rompe nada** (en modo "mirar" nada se bloquea, y los datos ya están protegidos por las reglas). Se revisó la clave: **los dominios `delvinsmart.github.io` y `localhost` YA están registrados** y la verificación de dominio está activa (correcto). Por eso el 403 **no es de dominio**: lo más probable es **propagación** (todo se armó el 2026-11-20 en pocos minutos: se activó la API de reCAPTCHA Enterprise, se registró Fraud Defense y se usó la clave). Una configuración nueva de App Check suele tardar de minutos a ~1 hora (a veces más) en empezar a validar.
 
-1. Entra a **<https://console.cloud.google.com/security/recaptcha?project=mapa-estudios-ds>**, abre la clave `6LcFJCku…`, **Editar**.
-2. En **Dominios** agrega `delvinsmart.github.io` (y `localhost` si quieres probar en la Mac). Guarda.
-3. Avísale a la IA y verificamos que el 403 desaparezca.
+**Qué falta (re-verificar):** volver a abrir <https://delvinsmart.github.io/estudios/#/entrar>, disparar la nube y mirar la consola. Si el 403 **ya no sale**, listo. Si **sigue** después de varias horas, hay un detalle más fino (que la clave registrada en App Check coincida con la que usa el cliente); se resuelve con calma. **No encender** "Desativar verificação de domínio" (bajaría la seguridad y no es el arreglo).
 
 **Pasos finales (tú, una semana después, SOLO si el 403 ya se resolvió):**
 
