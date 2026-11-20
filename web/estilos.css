@@ -365,6 +365,13 @@ a:hover { text-decoration: underline; }
 .resultado > .mono { flex-shrink: 0; font-size: 0.8rem; padding-top: 2px; }
 .resultado mark { background: color-mix(in srgb, var(--amarillo) 35%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; }
 .glosario-def { border-left: 3px solid var(--acento); background: color-mix(in srgb, var(--acento) 7%, transparent); margin: 2px 0; }
+/* "Antes de este curso": qué ver primero. */
+.antes-curso { margin: 12px 0 4px; border: 1px solid var(--borde); border-left: 4px solid var(--morado); border-radius: 10px; padding: 10px 14px; background: color-mix(in srgb, var(--morado) 6%, transparent); font-size: 0.95rem; }
+.antes-curso.listo { border-left-color: var(--acento); background: color-mix(in srgb, var(--acento) 6%, transparent); }
+.antes-curso ul { margin: 6px 0 8px; padding-left: 20px; }
+.antes-curso li { margin: 3px 0; }
+.antes-curso p { margin: 4px 0 0; }
+.antes-curso.corto { padding: 8px 12px; }
 .palabras-nuevas { margin: 14px 0; border: 1px solid var(--borde); border-radius: 10px; padding: 8px 14px; background: color-mix(in srgb, var(--acento) 5%, transparent); }
 .palabras-nuevas > summary { cursor: pointer; font-size: 0.85rem; }
 .palabras-nuevas dl { margin: 10px 0 2px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; }

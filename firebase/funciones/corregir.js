@@ -7,7 +7,6 @@
 //   - escribir: no se manda (se autoevalúa en el navegador)
 
 export const ESPERA_FALLO_MS = 15 * 1000; // después de fallar, 15 s antes de volver a intentar (con cuenta)
-export const MAXIMO_ANONIMO_DIA = 400;    // intentos por día sin cuenta, por conexión
 export const MAXIMO_CUENTA_DIA = 600;     // intentos por día con cuenta
 
 // Ninguna práctica tiene tantas preguntas: más claves que esto es basura o un ataque.

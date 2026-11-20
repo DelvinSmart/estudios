@@ -10,7 +10,8 @@
 //
 // vf      = verdadero o falso.
 // elige   = varias opciones; eliges una.
-// escribe = respondes con tus palabras, comparas con la respuesta modelo y te autoevalúas (esa no la corrige el servidor).
+// escribe = respondes con tus palabras y lo comparas con una respuesta modelo. Es SOLO PARA TI: nadie la corrige,
+// así que no cuenta para aprobar ni para el certificado, y la página lo dice claro (no hay "sé honesto").
 //
 // La regla: eliges TODAS tus respuestas y tocas "revisar". Para aprobar hay que acertar todas en el mismo intento.
 // Si fallas, ves cuáles fallaste (no cuál era la correcta) y vuelves a intentar el bloque (en otro orden).
@@ -45,6 +46,7 @@ function leerPreguntas(texto) {
 
 // Lo que dice la pantalla cuando el servidor no puede corregir.
 function mensajeDeError(e) {
+  if (e?.code === 'functions/unauthenticated') return 'Para revisar tus respuestas necesitas entrar con tu cuenta.';
   if (e?.code === 'functions/resource-exhausted') return e.message || 'Demasiados intentos. Espera un poco.';
   if (e?.code === 'functions/not-found') return 'El servidor no conoce esta práctica todavía. Avísale a quien mantiene el curso.';
   return 'No pude conectar con el servidor que corrige. Revisa tu internet y vuelve a intentar.';
@@ -61,7 +63,6 @@ export function crearPractica(texto, id) {
     const yaAprobada = practicaAprobada(id);
     const orden = intento > 1 ? mezclar(preguntas) : preguntas;
     const elegido = {};    // índice de la pregunta → 'V' | 'F' | número de opción
-    const autoeval = {};   // índice de la pregunta (escribe) → true | false
 
     caja.classList.toggle('aprobada', yaAprobada);
     caja.innerHTML = `
@@ -71,7 +72,7 @@ export function crearPractica(texto, id) {
       </div>
       <p class="practica-regla tenue">${yaAprobada
         ? '✓ Ya la aprobaste. Puedes repasarla las veces que quieras.'
-        : 'Elige todas tus respuestas y toca <b>revisar</b>. Para aprobar tienes que acertar <b>todas</b>.'}</p>
+        : 'Elige todas tus respuestas y toca <b>revisar</b>. Para aprobar tienes que acertar <b>todas</b> las de elegir (las de escribir son solo para ti).'}</p>
       <ol class="practica-lista"></ol>
       <div class="practica-pie">
         <button class="boton-principal revisar" type="button" disabled>revisar mis respuestas</button>
@@ -83,7 +84,8 @@ export function crearPractica(texto, id) {
     const estado = caja.querySelector('.practica-estado');
     const cuenta = caja.querySelector('.practica-cuenta');
 
-    const respondida = (p) => (p.tipo === 'escribe' ? p.indice in autoeval : p.indice in elegido);
+    // Las de escribir son opcionales: no hace falta responderlas para revisar.
+    const respondida = (p) => (p.tipo === 'escribe' ? true : p.indice in elegido);
     const actualizar = () => {
       cuenta.textContent = `${preguntas.filter(respondida).length}/${preguntas.length}`;
       revisar.disabled = !preguntas.every(respondida);
@@ -111,6 +113,7 @@ export function crearPractica(texto, id) {
         li.querySelectorAll('[data-n]').forEach((b) => b.addEventListener('click', () => elegir(b, Number(b.dataset.n))));
       } else {
         li.innerHTML = `<p class="enunciado">${enLinea(p.enunciado)}</p>
+          <p class="tenue solo-para-ti">✍️ <b>Para ti:</b> practica decirlo con tus palabras. Nadie la corrige, así que <b>no cuenta</b> para aprobar ni para el certificado.</p>
           <textarea rows="3" placeholder="Escríbelo con tus palabras, sin mirar arriba…"></textarea>
           <button type="button" class="boton comparar" disabled>comparar con la respuesta</button>`;
         const area = li.querySelector('textarea');
@@ -121,13 +124,7 @@ export function crearPractica(texto, id) {
           comparar.remove();
           li.insertAdjacentHTML('beforeend', `
             <div class="modelo"><span class="mono tenue">// una buena respuesta:</span><br>${enLinea(p.modelo)}</div>
-            <p class="tenue autoevaluacion">Sé honesto: ¿tu respuesta dice lo mismo (aunque sea con otras palabras)?</p>
-            <div class="opciones"><button type="button" data-a="si">✓ sí, dije lo mismo</button><button type="button" data-a="no">✗ me faltó algo</button></div>`);
-          li.querySelectorAll('[data-a]').forEach((b) => b.addEventListener('click', () => {
-            li.querySelectorAll('[data-a]').forEach((x) => x.classList.toggle('elegida', x === b));
-            autoeval[p.indice] = b.dataset.a === 'si';
-            actualizar();
-          }));
+            <p class="tenue autoevaluacion">Compáralo tú: ¿dijiste lo mismo, aunque sea con otras palabras? Si te faltó algo, vuelve a leer esa parte. Esto es solo para ti.</p>`);
         });
       }
       lista.appendChild(li);
@@ -139,13 +136,14 @@ export function crearPractica(texto, id) {
       preguntas.forEach((p) => {
         const li = items[p.indice];
         li.querySelectorAll('button, textarea').forEach((b) => { b.disabled = true; });
-        if (p.tipo !== 'escribe' && !resultados) return; // no se mandó al servidor: sin veredicto
-        const ok = p.tipo === 'escribe' ? autoeval[p.indice] : resultados[p.indice];
+        if (p.tipo === 'escribe') return; // es solo para ti: no lleva veredicto
+        if (!resultados) return; // no se mandó al servidor: sin veredicto
+        const ok = resultados[p.indice];
         li.classList.remove('bien', 'mal');
         li.classList.add(ok ? 'bien' : 'mal');
         li.querySelector('.veredicto')?.remove();
         const porque = ok && explicaciones?.[p.indice] ? enLinea(explicaciones[p.indice]) : '';
-        const texto = ok ? `✓ Correcto. ${porque}` : (p.tipo === 'escribe' ? '✗ Vuelve a leer esa parte y escríbelo otra vez.' : '✗ No.');
+        const texto = ok ? `✓ Correcto. ${porque}` : '✗ No.';
         li.insertAdjacentHTML('beforeend', `<p class="veredicto">${texto}</p>`);
       });
     };
@@ -164,11 +162,21 @@ export function crearPractica(texto, id) {
     };
 
     revisar.addEventListener('click', async () => {
-      const malasEscribe = preguntas.filter((p) => p.tipo === 'escribe' && !autoeval[p.indice]).length;
-      // Si te faltó algo en las de escribir, ya hay que repetir: no se gasta un intento en el servidor.
-      if (malasEscribe) { marcar(null, null); reprobar(malasEscribe); return; }
       // Solo preguntas para escribir: no hay nada que mandar al servidor.
       if (!seCorrige) { marcar(null, null); aprobar({ guardada: false, parteAprobada: false }); return; }
+      // Para revisar hace falta cuenta (el curso se puede leer entero sin ella). Así nadie sin cuenta
+      // puede usar el servidor que corrige. Ver la clase 124.
+      const u = await nube.usuario().catch(() => null);
+      if (!nube.cuentaLista(u)) {
+        const destino = u ? '#/entrar/verificar' : '#/entrar';
+        estado.innerHTML = u
+          ? `Para revisar tus respuestas, primero <b>verifica tu correo</b>. <a class="boton" href="${destino}">verificar mi correo</a>`
+          : `Para revisar tus respuestas necesitas una <b>cuenta</b> (gratis, con tu Gmail). Puedes leer todo el curso sin cuenta. <a class="boton" href="${destino}">entrar o crear cuenta</a>`;
+        estado.querySelector('a').addEventListener('click', () => {
+          try { sessionStorage.setItem('mapa-volver', location.hash); } catch (e) { /* nada */ }
+        });
+        return;
+      }
       revisar.disabled = true;
       estado.textContent = '// corrigiendo en el servidor…';
       try {

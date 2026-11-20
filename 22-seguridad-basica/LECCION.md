@@ -33,7 +33,37 @@ En Brasil, entrar sin permiso en un aparato ajeno es delito (**Ley 12.737/2012**
 
 > 🌎 **Otro ejemplo:** Es como un periodista y un espía: los dos buscan información, pero uno pide permiso y cita la fuente.
 
-✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
+### Antes del ejercicio: las piezas, una por una
+
+> 📋 **Para este ejercicio necesitas JavaScript** (el curso 2 del mapa): objetos, `if`, `&&` y fechas. Si todavía no lo viste, haz primero las preguntas de la práctica de abajo, que no tienen código, y vuelve a este ejercicio después.
+
+El ejercicio convierte la regla de arriba en código. Antes de escribir, mira qué es cada pieza:
+
+**1. El sistema llega como un objeto.** Un objeto es una ficha con datos (clase 48). Por ejemplo:
+
+```js
+{ dueno: 'cliente', permiso: { porEscrito: true, hasta: '2026-12-01' } }
+```
+
+| Dato | Qué quiere decir | Ejemplo |
+|---|---|---|
+| `dueno` | De quién es el sistema | `'yo'` si es tuyo |
+| `laboratorio` | Si es un sitio hecho para practicar | `true` en OWASP Juice Shop |
+| `permiso` | El permiso que te dieron. **Puede no venir**: si nadie te dio permiso, no está | `{ porEscrito: true, hasta: '2026-12-01' }` |
+| `permiso.porEscrito` | Si el permiso está por escrito (de palabra no vale) | `true` o `false` |
+| `permiso.hasta` | Hasta qué día vale el permiso | `'2026-12-01'` |
+| `intencion` | Lo que dices que querías hacer. **No cambia nada** | `'buena'` |
+
+**2. La regla, en tres preguntas.** Respondes `true` si **cualquiera** de estas es verdad:
+- ¿Es tuyo? (`dueno === 'yo'`)
+- ¿Es un laboratorio? (`laboratorio === true`)
+- ¿Hay permiso, por escrito y que todavía no venció? Aquí las **tres** cosas tienen que cumplirse a la vez: por eso se unen con `&&` ("y").
+
+**3. Las fechas.** Vienen como texto ISO (`'AAAA-MM-DD'`, clase 83). En ese formato, comparar los textos con `>=` funciona igual que comparar las fechas: `'2026-12-01' >= '2026-11-18'` es `true`, porque el permiso vence **después** de hoy.
+
+> 💡 **Idea:** si `permiso` no viene, preguntar por `permiso.porEscrito` da error. Por eso primero se pregunta si **existe** el permiso (`p && …`) y después por sus datos.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide. Si te trabas, usa **ver solución** y compárala con las tres preguntas de arriba.
 
 ```ejercicio
 titulo: ¿Puedo probar este sistema?

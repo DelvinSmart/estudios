@@ -2,7 +2,7 @@
 // En la computadora sale de costado; en el celular, como un panel que se desliza.
 // Se arma cada vez que se abre, así siempre muestra el avance del momento.
 
-import { CLASES, ETAPAS, CURSOS, cursoDeEtapa } from './cursos.js';
+import { CLASES, ETAPAS, CURSOS, cursoDeEtapa, numeroCurso } from './cursos.js';
 import { escapar } from './pantalla.js';
 import { conteo, prendidos, estadoClase, etapaDe, numeroEnCurso } from './avance.js';
 
@@ -36,7 +36,7 @@ function armarArbol() {
         <ul class="arbol-clases">${lista}</ul></details>`;
     }).join('');
     return `<details class="arbol-curso" ${aqui.curso === curso.id ? 'open' : ''}>
-      <summary><span class="emoji">${curso.icono}</span> <b>${escapar(curso.titulo)}</b>
+      <summary><span class="emoji">${curso.icono}</span> <b>${numeroCurso(curso.id)}. ${escapar(curso.titulo)}</b>
         <span class="mono tenue arbol-cuenta">${hechas}/${clases.length}</span></summary>
       <a class="arbol-ir mono" href="#/curso/${curso.id}">→ ver el mapa del curso</a>
       ${ramas}</details>`;

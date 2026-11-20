@@ -317,6 +317,42 @@ export const CURSOS = {
   },
 };
 
+// ---------- el orden de los cursos y lo que hay que saber antes ----------
+// Los cursos van en el orden de CURSOS: ese es su número (1. Programación, 2. JavaScript…).
+// ANTES dice qué curso hay que ver primero y por qué. "recomendado: true" = ayuda, pero el curso
+// enseña desde cero; sin eso = el curso USA ese lenguaje desde la primera clase y no lo explica.
+// Si cambias el orden de CURSOS, revisa que cada curso de ANTES quede con un número MENOR.
+export const ANTES = {
+  programacion: [],
+  javascript: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar, leer código y probar', recomendado: true }],
+  node: [{ curso: 'javascript', por: 'el curso completo: Node.js es JavaScript fuera del navegador, y se usa async/await desde la primera clase' }],
+  reactnative: [{ curso: 'javascript', por: 'el curso completo, con TypeScript: React Native es JavaScript' }],
+  kotlin: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar, leer código y probar', recomendado: true }],
+  swift: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar, leer código y probar', recomendado: true }],
+  python: [{ curso: 'programacion', por: 'la etapa Fundamentos: qué es programar, leer código y probar', recomendado: true }],
+  seguridad: [{ curso: 'javascript', por: 'el curso completo: los ejercicios están en JavaScript y usan objetos, funciones, fechas y async/await' }],
+  ia: [{ curso: 'javascript', por: 'el curso completo: los ejercicios están en JavaScript (objetos, funciones, fechas)' }],
+  agentes: [
+    { curso: 'javascript', por: 'el curso completo: la mitad de los ejercicios están en JavaScript' },
+    { curso: 'python', por: 'el curso completo: la otra mitad están en Python, el lenguaje más usado para IA' },
+    { curso: 'ia', por: 'cómo funciona un modelo y cómo pedirle bien', recomendado: true },
+  ],
+  trabajo: [{ curso: 'javascript', por: 'el curso completo: los ejercicios y la prueba técnica están en JavaScript' }],
+};
+
+// Clases sueltas que usan algo que su curso no enseña.
+export const ANTES_CLASE = {
+  '113': [
+    { curso: 'kotlin', por: 'el lado Android del puente está en Kotlin' },
+    { curso: 'swift', por: 'el lado iPhone del puente está en Swift' },
+  ],
+};
+
+// El número del curso (1, 2, 3…): su lugar en la ruta.
+export function numeroCurso(id) {
+  return Object.keys(CURSOS).indexOf(id) + 1;
+}
+
 export function cursoDeEtapa(etapa) {
   return etapa.curso || 'programacion';
 }

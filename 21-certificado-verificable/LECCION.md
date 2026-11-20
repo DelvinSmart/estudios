@@ -624,7 +624,7 @@ node firebase/separar-respuestas.mjs --revisar  # falla si alguna respuesta qued
 ```js
 export function corregir(entrada, respuestas) {
   const resultados = entrada.preguntas.map((p, i) => {
-    if (p.tipo === 'escribe') return null; // esa se autoevalúa
+    if (p.tipo === 'escribe') return null; // esa es solo para el alumno: no cuenta
     const dada = respuestas[i];
     if (p.tipo === 'vf') return dada === p.correcta;
     return Number.isInteger(dada) && dada === p.correcta;
@@ -663,20 +663,22 @@ O sea: si la parte tiene práctica, el bombillo solo se prende en la nube si **e
 
 > 🌎 **Otro ejemplo:** Es como la nota final de la escuela: la escribe la secretaría en el sistema, no el alumno en su cuaderno.
 
-### Sin cuenta también se corrige
+### Sin cuenta se lee, pero no se corrige
 
-Quien estudia sin cuenta también manda sus respuestas a la función: así aprende igual. La diferencia es que **no se guarda nada** en el servidor (la aprobación queda solo en su navegador) y hay un tope de intentos por día por conexión. Por eso las prácticas ahora **necesitan internet**.
+Al principio, quien estudiaba sin cuenta también mandaba sus respuestas a la función, con un tope de 400 intentos por día por conexión. Funcionaba, pero dejaba una puerta: cualquiera, **sin registrarse**, podía hacer que el servidor trabajara (y gastara). Un robot con muchas conexiones podía multiplicar ese tope.
 
-> 🌎 **En la vida real:** es como un simulador de examen en una autoescuela: puedes practicar todo lo que quieras, pero el que vale para la licencia es el examen oficial con tu documento.
+Ahora la regla es otra: **el curso se puede leer entero sin cuenta**, pero para **revisar las respuestas** hace falta una cuenta de Gmail verificada. La página lo avisa antes de llamar al servidor ("necesitas una cuenta"), y el servidor también lo exige: si llega una llamada sin cuenta, responde `unauthenticated` y no corrige nada. Se revisa en los dos lados porque la página la controla el alumno; el servidor no.
 
-> 🌎 **Otro ejemplo:** Es como probarte ropa en la tienda: puedes probarte todo, pero solo lo que pasas por la caja queda registrado como tuyo.
+> 🌎 **En la vida real:** es como una biblioteca: cualquiera entra y lee los libros, pero para llevarte uno o rendir un examen necesitas el carné.
+
+> 🌎 **Otro ejemplo:** Es como una autoescuela: el manual se lee gratis, pero el simulador de examen te pide tu documento para saber quién lo usa.
 
 ### Lo que todavía no protege
 
 Ser honesto con los límites también es parte de la seguridad:
 
 - **El historial de Git.** Las respuestas estuvieron en GitHub antes de este cambio, y el historial guarda las versiones viejas. Quien busque ahí todavía las encuentra. Borrarlas del historial exige reescribirlo, y eso es una decisión aparte.
-- **Las de "escribe con tus palabras"** siguen siendo autoevaluadas: ninguna máquina las corrige con seguridad sin usar IA.
+- **Las de "escribe con tus palabras"** no las corrige nadie: ninguna máquina las corrige con seguridad sin usar IA. Por eso la página dice que son **solo para ti** y **no cuentan** para aprobar ni para el certificado. Antes había un botón de "sé honesto: ¿dijiste lo mismo?", pero alguien podía escribir letras al azar y decir que sí: era una nota que no medía nada. Decirlo claro es más honesto que fingir que se corrige.
 - **La fuerza bruta lenta.** Alguien con mucha paciencia puede probar combinaciones, pero con 15 segundos por intento fallado y 60 segundos por bombillo, terminar sin estudiar lleva más tiempo que estudiar.
 - **El archivo privado vive en tu disco.** Si se pierde, se pierden las respuestas: hay que tener un respaldo fuera de GitHub.
 

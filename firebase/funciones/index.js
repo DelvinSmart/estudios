@@ -21,7 +21,7 @@ import { readFileSync } from 'node:fs';
 import nodemailer from 'nodemailer';
 import { correoVerificar, correoContrasena, enlaceDelSitio } from './correos.js';
 import { decidirPersona, decidirSitio, gmailCanonico, MAXIMO_CONEXION_DIA } from './limites.js';
-import { corregir, respuestasValidas, parteCompleta, puedeIntentar, cabeHoy, MAXIMO_ANONIMO_DIA, MAXIMO_CUENTA_DIA } from './corregir.js';
+import { corregir, respuestasValidas, parteCompleta, puedeIntentar, cabeHoy, MAXIMO_CUENTA_DIA } from './corregir.js';
 
 initializeApp();
 const GMAIL_USUARIO = defineSecret('GMAIL_USUARIO');
@@ -141,7 +141,7 @@ function respuestas() {
 // El id de la clase tiene 2 o 3 dígitos (06, 44, 124…).
 const ID_PRACTICA = /^\d{2,3}:[\w.-]+\.md:\d{1,3}:practica\d{1,2}$/;
 
-// La conexión de quien pregunta (para el tope de quien no tiene cuenta). El servidor de Google
+// La conexión de quien pregunta (para el tope de cuentas nuevas por conexión). El servidor de Google
 // agrega la dirección real AL FINAL de x-forwarded-for, así que se usa la última.
 function conexion(request) {
   const lista = String(request.rawRequest?.headers?.['x-forwarded-for'] || '').split(',').map((x) => x.trim()).filter(Boolean);
@@ -160,17 +160,11 @@ export const corregirPractica = onCall({ region: 'us-central1', maxInstances: 10
   const token = request.auth?.token;
   const conCuenta = Boolean(request.auth && token?.email_verified === true && ES_GMAIL.test(token?.email || ''));
 
-  // Sin cuenta: se corrige igual (para estudiar), pero no se guarda nada y hay un tope por día.
+  // Sin cuenta no se corrige: el curso se puede LEER entero sin cuenta, pero para revisar respuestas
+  // hace falta una cuenta de Gmail verificada. Así ningún robot sin cuenta puede llamar a la función
+  // miles de veces (antes había un tope de 400 por día por conexión). Clase 124.
   if (!conCuenta) {
-    const ref = db.doc(`limites_practica/ip-${huella(conexion(request))}`);
-    const cabe = await db.runTransaction(async (t) => {
-      const foto = await t.get(ref);
-      const d = cabeHoy(foto.exists ? foto.data() : null, dia, MAXIMO_ANONIMO_DIA);
-      if (d.ok) t.set(ref, d.guardar);
-      return d.ok;
-    });
-    if (!cabe) throw new HttpsError('resource-exhausted', 'Demasiados intentos por hoy desde esta conexión. Vuelve mañana.');
-    return { ...corregir(entrada, request.data?.respuestas), guardada: false };
+    throw new HttpsError('unauthenticated', 'Para revisar tus respuestas necesitas entrar con tu cuenta de Gmail verificada.');
   }
 
   // Con cuenta: espera después de fallar, tope por día, y si aprueba, se guarda (con la hora del servidor).

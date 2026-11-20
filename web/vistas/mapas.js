@@ -2,7 +2,7 @@
 // y el de una clase (sus partes). Las tres usan el mapa de islas.
 
 import { htmlLogo, htmlLogos } from '../logos.js';
-import { CLASES, ETAPAS, CURSOS, cursoDeEtapa } from '../cursos.js';
+import { CLASES, ETAPAS, CURSOS, cursoDeEtapa, ANTES, ANTES_CLASE, numeroCurso } from '../cursos.js';
 import { leerArchivo, partir } from '../lector.js';
 import { idParte, estaEntendida } from '../guardado.js';
 import { htmlMapa, htmlProgreso, activarMapas } from '../mapa-islas.js';
@@ -19,6 +19,36 @@ function cajaPalabras(num) {
     <summary class="mono">📖 palabras nuevas en esta clase (${ps.length})</summary>
     <dl>${ps.map((e) => `<dt>${escapar(e.termino)}</dt><dd>${escapar(e.definicion)}</dd>`).join('')}</dl>
   </details>`;
+}
+
+// La caja "antes de este curso": qué curso ver primero y por qué. Con un motor no se empieza
+// desmontándolo: primero las piezas. Si el curso no pide nada, lo dice ("empieza aquí").
+function enlaceCurso(id) {
+  const c = CURSOS[id];
+  return `<a href="#/curso/${id}">${numeroCurso(id)}. ${c.icono} ${escapar(c.titulo)}</a>`;
+}
+const enLista = (xs) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} y ${xs.at(-1)}`);
+function htmlAntes(cursoId, claseId) {
+  const delCurso = ANTES[cursoId] || [];
+  const deClase = (claseId && ANTES_CLASE[claseId]) || [];
+  if (!delCurso.length && !deClase.length) {
+    return claseId ? '' : '<div class="antes-curso listo"><b>✅ Empieza aquí.</b> No necesitas saber nada antes: este curso parte de cero.</div>';
+  }
+  const necesarios = delCurso.filter((a) => !a.recomendado);
+  const recomendados = delCurso.filter((a) => a.recomendado);
+  const fila = (a) => `<li>${enlaceCurso(a.curso)}: ${escapar(a.por)}.</li>`;
+  // Dentro de una clase que no es la primera: solo un recordatorio corto de lo necesario.
+  const primera = claseId && ordenDe(cursoId)[0] === claseId;
+  if (claseId && !primera) {
+    const lista = [...necesarios, ...deClase];
+    if (!lista.length) return '';
+    return `<p class="antes-curso corto">📋 ${deClase.length ? 'Esta clase' : 'Este curso'} usa lo que se enseña en ${enLista(lista.map((a) => enlaceCurso(a.curso)))}. Si todavía no lo sabes, empieza por ahí.</p>`;
+  }
+  return `<div class="antes-curso">
+    ${necesarios.length || deClase.length ? `<b>📋 Antes de ${deClase.length && !necesarios.length ? 'esta clase' : 'este curso'}, necesitas:</b><ul>${[...necesarios, ...deClase].map(fila).join('')}</ul>` : ''}
+    ${recomendados.length ? `<b>${necesarios.length ? 'Y te ayuda' : '💡 Este curso enseña desde cero, pero te ayuda'} haber visto:</b><ul>${recomendados.map(fila).join('')}</ul>` : ''}
+    ${necesarios.length ? '<p class="tenue">Si ya lo sabes, puedes empezar aquí. Si no, ve primero ahí: aquí se usa sin volver a explicarlo.</p>' : ''}
+  </div>`;
 }
 
 // ---------- pantalla 1: el mapa grande ----------
@@ -58,14 +88,14 @@ export function vistaInicio(soloCurso) {
       };
     });
     const logos = [...new Set(etapas.flatMap((e) => e.logos || []))].slice(0, 4);
-    const cabeza = `<h2 class="titulo-mapa-curso"><a href="#/curso/${curso.id}"><span class="emoji">${curso.icono}</span> Curso: ${escapar(curso.titulo)}</a>${htmlLogos(logos, 'medio')}
+    const cabeza = `<h2 class="titulo-mapa-curso"><a href="#/curso/${curso.id}"><span class="emoji">${curso.icono}</span> Curso ${numeroCurso(curso.id)}: ${escapar(curso.titulo)}</a>${htmlLogos(logos, 'medio')}
       <span class="mono tenue">${listas}/${clases.length} clases</span></h2>`;
-    return `<section class="curso-mapa" id="curso-${curso.id}">${cabeza}${htmlMapa({ paradas, final })}</section>`;
+    return `<section class="curso-mapa" id="curso-${curso.id}">${cabeza}${htmlAntes(curso.id)}${htmlMapa({ paradas, final })}</section>`;
   }).join('');
   // Las pestañas para saltar de un curso a otro.
   const pestanasCursos = `<nav class="pestanas pestanas-cursos" aria-label="Cursos">
     <a class="pestana ${soloCurso ? '' : 'activa'}" href="#/">Todos</a>
-    ${Object.values(CURSOS).map((c) => `<a class="pestana ${soloCurso === c.id ? 'activa' : ''}" href="#/curso/${c.id}">${c.icono} ${escapar(c.titulo)}</a>`).join('')}
+    ${Object.values(CURSOS).map((c) => `<a class="pestana ${soloCurso === c.id ? 'activa' : ''}" href="#/curso/${c.id}">${numeroCurso(c.id)}. ${c.icono} ${escapar(c.titulo)}</a>`).join('')}
   </nav>`;
 
   // Un solo curso: sin la portada grande, directo a su mapa.
@@ -78,8 +108,8 @@ export function vistaInicio(soloCurso) {
     <section class="portada cabeza-mapa"><div>
       <p class="mono comentario">// mi carrera de programación</p>
       <h1 class="titulo-grande">Mapa de <span class="acento">estudios</span></h1>
-      <p class="bajada">Primero los fundamentos, después la web, los datos, la arquitectura y mis proyectos.
-        Cada curso tiene su mapa y su certificado: elige uno en las pestañas o en el menú ☰.</p>
+      <p class="bajada">Los cursos van en orden: el número dice cuál va primero. Si nunca programaste, empieza por el 1.
+        Cada curso dice qué necesitas saber antes, y tiene su mapa y su certificado.</p>
       <div class="contadores mono">
         <span><b>${Object.keys(CURSOS).length}</b> cursos</span>
         <span><b>${total}</b> clases</span>
@@ -214,6 +244,7 @@ export async function vistaClase(num, doc) {
         ${num === '09' ? '<a class="boton" href="#/laboratorio">🧪 laboratorio de CRUD</a>' : ''}
       </div>
     </section>
+    ${htmlAntes(cursoDeClase(num), num)}
     ${cajaPalabras(num)}
     <div id="intro"></div>
     ${htmlMapa({ paradas, final, clase: 'mapa-partes' })}
