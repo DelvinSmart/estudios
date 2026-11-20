@@ -40,6 +40,9 @@ Cada uno de esos valores con nombre (`Motor.Espacio.grande`, `Motor.Forma.radio`
 
 **Lo que se encontró releyendo el código.** Con la app andando, se releyó la lista con una sola pregunta: "¿hay algún número escrito a mano?". Había uno: el puntito de color de cada app tenía `.frame(width: 10, height: 10)`. Se fue al motor como `Motor.Forma.punto`. **El motor solo sirve si no se le escapa nada**: un solo número suelto, y cambiar el diseño ya no es cambiar un archivo.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **la tupla**: junta varios valores en uno, sin crear un `struct`: `let hallazgo = (linea: 12, valor: 10)` y se lee `hallazgo.linea` o `hallazgo.valor`. Sirve para devolver dos cosas a la vez.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

@@ -47,6 +47,9 @@ Fíjate: la **app** es un `struct`, la **pantalla** es un `struct` (clase 100). 
 
 > 📌 **Nota:** la carpeta del proyecto en este repositorio se puede abrir directo: doble clic en `MiJornada.xcodeproj`, elige un simulador y **▶**. Así puedes comparar el tuyo con el del curso.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.count` y `.isEmpty`**: `viajes.count` dice cuántos elementos tiene la lista; `viajes.isEmpty` es `true` si no tiene ninguno. Se prefiere `isEmpty` a preguntar `count == 0`: se lee mejor.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

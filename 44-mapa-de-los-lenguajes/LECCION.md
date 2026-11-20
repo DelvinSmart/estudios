@@ -247,6 +247,9 @@ Por eso todo cabe en una sola frase: **"Escribí las órdenes en TypeScript, con
 
 > 🌎 **Otro ejemplo:** Es como decir que una carta está escrita en español, con un modelo de carta y enviada por correo: una sola carta.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`??`**: pone un valor de repuesto cuando el dato **no existe** (`undefined` o `null`): `config.color ?? 'azul'` da el color de la configuración y, si no hay, `'azul'`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -475,6 +478,9 @@ Porque lo hizo **una persona**, y tenía que llegar a conductores con iPhone **y
 | Solo Android, con lo último de Google | **Kotlin** con Compose |
 
 > 🎙️ **El profesor dice:** la pregunta nunca es "¿cuál es el mejor lenguaje?". Es **"¿para quién es la app, y quién la va a mantener?"**.
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **el `if` corto: `condición ? A : B`**: devuelve un valor según una condición: si es verdad da `A`, si no da `B`. `ganancia >= 250 ? 'meta cumplida' : 'sigue'`. Es lo mismo que un `if`/`else`, pero en una línea.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 

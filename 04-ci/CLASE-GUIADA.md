@@ -112,6 +112,9 @@ En Copiloto, la copia limpia del CI **encontró un fallo que en tu Mac no se ve�
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **los tres puntos `...`**: copian lo que hay adentro. `[...lista]` es una lista **nueva** con los mismos elementos; `{ ...ficha }` es una ficha **nueva** con los mismos datos. Así cambias la copia sin tocar el original.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.filter()`**: crea una lista **nueva** solo con los elementos que cumplen la condición: `[3, 8, 1].filter((n) => n > 2)` → `[3, 8]`. La original no cambia.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

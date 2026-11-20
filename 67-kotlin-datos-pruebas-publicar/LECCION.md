@@ -37,6 +37,9 @@ Las consultas con parámetros evitan la inyección SQL (Tema 23). Para los secre
 
 > 🌎 **Otro ejemplo:** Es como pasar de una libreta a una planilla con filtros.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`sortedBy { }`**: da una lista **nueva** ordenada por el dato que dices: `gastos.sortedBy { it.valor }` (de menor a mayor). `sortedByDescending` ordena al revés. La lista original no cambia.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -195,6 +198,10 @@ Saber los dos te deja escribir un módulo nativo en Kotlin para tu app de React 
 > 🌎 **En la vida real:** es como saber manejar auto y moto: eliges según el viaje.
 
 > 🌎 **Otro ejemplo:** Es como hablar portugués y español: según con quién conversas.
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`joinToString()`**: une una lista en un solo texto, con lo que pongas entre medio: `listOf("uber", "99").joinToString(", ")` → `"uber, 99"`.
+> - **`toInt()`, `toDouble()` y `toString()`**: convierten entre texto y número: `"12".toInt()` → `12`, `"12.5".toDouble()` → `12.5`, `12.toString()` → `"12"`. Si el texto no es un número, `toInt()` rompe el programa; `toIntOrNull()` da `null` en vez de romperse.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

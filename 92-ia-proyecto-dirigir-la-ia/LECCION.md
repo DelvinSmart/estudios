@@ -158,6 +158,9 @@ Para cada una: un pedido de corrección, **primero la prueba en rojo**, después
 
 > 🌎 **Otro ejemplo:** el día 0 es como preguntar "¿qué día es el anterior al 1 de marzo?": no hace falta saber si febrero tiene 28 o 29, el calendario te lo dice.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.padStart()`**: rellena un texto por la izquierda hasta que tenga el largo que pides: `'7'.padStart(2, '0')` → `'07'`. Sirve para fechas y códigos. `.padEnd()` rellena por la derecha.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

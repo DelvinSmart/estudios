@@ -120,6 +120,9 @@ registrar(tipo="lavado", valor=30)
 
 > 🌎 **Otro ejemplo:** Es como una lista de invitados abierta: vengan los que vengan, entran.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.items()`**: da las parejas (clave, valor) de un diccionario para recorrerlas juntas: `for app, total in ganancias.items():` te da `"uber"` y su total en cada vuelta.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

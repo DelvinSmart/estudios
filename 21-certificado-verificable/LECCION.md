@@ -493,6 +493,9 @@ Las reglas dejan **leer un** certificado si sabes su código (`allow get: if tru
 
 > 🌎 **Otro ejemplo:** Es como el sello de "revisado" de un mecánico: dice que lo revisó, no que el carro nunca se va a dañar.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.padStart()`**: rellena un texto por la izquierda hasta que tenga el largo que pides: `'7'.padStart(2, '0')` → `'07'`. Sirve para fechas y códigos. `.padEnd()` rellena por la derecha.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

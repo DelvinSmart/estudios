@@ -342,6 +342,9 @@ Card(shape = RoundedCornerShape(Motor.Forma.radio)) {
 
 > 💡 **Idea:** `.dp` (*density-independent pixels*) es la medida de Android que se ve del mismo tamaño en una pantalla chica y en una grande. Por eso el motor guarda `14.dp` y no `14` píxeles.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`if` que devuelve un valor**: en Kotlin, `if` **da un resultado**, así que se puede guardar: `val nivel = if (ganancia >= 250) "buena" else "normal"`. `when` funciona igual. Por eso Kotlin no necesita el `? :` de JavaScript.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
