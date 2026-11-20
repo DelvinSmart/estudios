@@ -20,9 +20,9 @@ const CONFIG = {
 const SDK = 'https://www.gstatic.com/firebasejs/11.10.0/';
 // App Check con Fraud Defense (reCAPTCHA Enterprise): le prueba a Firebase que la visita viene
 // del sitio de verdad, no de un programa que copió esta configuración pública. La clave del SITIO
-// es pública (va aquí a la vista). Por ahora el sitio MANDA el token, pero los servidores todavía
-// NO lo EXIGEN (modo "mirar"): se observa una semana en la consola y después se activa "Aplicar"
-// (poner enforceAppCheck en las funciones y "Enforce" en Firestore). Ver PENDIENTES.md.
+// es pública (va aquí a la vista). Desde el 2026-11-20 está APLICADO: las funciones tienen
+// enforceAppCheck y Firestore tiene "Enforce", así que sin este token no se corrigen prácticas ni
+// se lee o guarda en la nube. Ver la clase 124 y PENDIENTES.md.
 const APP_CHECK_SITE_KEY = '6LcFJCkuAAAAAADv4IRGw0PI5DuE6SsQcStzIQ3W';
 export const ESPERA_SEGUNDOS = 60; // igual que en firebase/generar-reglas.mjs
 // Los prefijos salen de cursos.js (una sola fuente de verdad): un curso nuevo no se puede olvidar aquí.

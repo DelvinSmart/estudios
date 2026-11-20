@@ -28,7 +28,7 @@ el gasto, pero te avisa a tiempo para reaccionar.
 
 ---
 
-## [ ] 2. App Check (gratis, 15 minutos; la IA hace la parte del código después)
+## [x] 2. App Check (gratis, 15 minutos; la IA hace la parte del código después)
 
 **Qué es:** un control que deja usar el servidor y la base de datos **solo desde tu sitio**, no desde un
 programa que alguien escribió copiando tu configuración pública.
@@ -50,7 +50,9 @@ real de `delvinsmart.github.io`, usando reCAPTCHA (invisible: el alumno no tiene
 
 **✅ Resuelto el 2026-11-20 (al día siguiente, seguía el 403):** no era propagación. En App Check → Apps → Fraud Defense estaba registrada la clave `6LcFJCkuAAAAABa70h97…`, que **no existe** en el proyecto (en Google Cloud → Fraud Defense → Claves hay una sola, `6LcFJCkuAAAAAADv4IRGw0PI5DuE6SsQcStzIQ3W`, la de `web/nube.js`). Las dos empiezan igual. Se cambió en la consola por la correcta y el canje respondió **200** (sello con ttl de 1 h); el sitio real también lo recibe con 200. La historia completa quedó en la clase 124, parte 4.
 
-**Pasos finales (tú, una semana después, hacia el 2026-11-27):**
+**✅ Aplicado el 2026-11-20.** Con tan pocas visitas, en vez de esperar una semana se probó en iPhone, iPad y navegador (registro de la función: `app: VALID` y `auth: VALID`). Después: `enforceAppCheck: true` en las dos funciones (publicadas) y **Aplicar** en Cloud Firestore. Comprobado desde afuera: la función responde 401 y Firestore 403 sin sello; el sitio sigue funcionando. Para deshacerlo: App Check → APIs → Cloud Firestore → Desaplicar, y quitar `enforceAppCheck` de `firebase/funciones/index.js`.
+
+**Pasos finales (ya hechos, se dejan como referencia):**
 
 1. En <https://console.firebase.google.com/project/mapa-estudios-ds/appcheck>, mira que casi todo venga **"verificado"**. Si hay muchas "no verificadas", avísale a la IA **antes** de aplicar.
 2. Cuando esté verificado, **avísale a la IA**: pone `enforceAppCheck: true` en las funciones y publica, y tú tocas **Aplicar** (*Enforce*) en Cloud Firestore. Desde ahí, lo que no venga del sitio queda bloqueado.

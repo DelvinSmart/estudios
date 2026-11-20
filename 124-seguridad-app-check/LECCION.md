@@ -61,7 +61,7 @@ escribe :: Explica con tus palabras por qué no sirve esconder la apiKey. :: Por
 | Qué mira | La cuenta (el pase de Firebase Auth) | El **sello** de App Check |
 | Qué frena | Leer o cambiar lo que no es tuyo | Programas de afuera, robots, gastar de más |
 | Dónde está | `firebase/firestore.rules` (clase 21) | La consola de Firebase + `web/nube.js` |
-| ¿Ya está puesto? | **Sí**, y es fuerte | Sí, **en modo mirar** |
+| ¿Ya está puesto? | **Sí**, y es fuerte | Sí, **aplicado** (desde el 20 de noviembre de 2026) |
 
 > ⚠️ **Cuidado:** el portero **no reemplaza** la cerradura. Una persona real, desde tu página, recibe su sello sin problema; si las reglas fueran malas, igual podría leer lo de otro. Por eso la cerradura es la protección principal y el portero es la segunda.
 
@@ -134,7 +134,7 @@ try {
 | `APP_CHECK_SITE_KEY` | La clave del **sitio**. Es **pública**, como la `apiKey`. La clave **secreta** de reCAPTCHA vive en Google, nunca en la página. |
 | `ReCaptchaEnterpriseProvider` | El "portero" que usa: reCAPTCHA Enterprise. |
 | `isTokenAutoRefreshEnabled` | El sello dura un rato (por defecto, una hora). Esto pide uno nuevo antes de que venza. |
-| `try { … } catch` | Si App Check falla al arrancar, **la app sigue andando**. En modo mirar, perder el sello no rompe nada. |
+| `try { … } catch` | Si App Check falla al arrancar, **la app sigue andando**: se ven las clases y el progreso del navegador. Pero como App Check ya está **aplicado**, sin sello no se corrigen prácticas ni se guarda en la nube. |
 
 > 💡 **Idea:** para que el portero sepa cuál es **tu** tienda, la clave se registra con tus **dominios** (`delvinsmart.github.io` y `localhost`). Si alguien copia tu clave del sitio y la usa en su página, reCAPTCHA se niega a darle el puntaje, porque el dominio no es el tuyo.
 
@@ -180,8 +180,8 @@ App Check se enciende en **dos tiempos**:
 
 | Tiempo | Qué pasa | En este sitio |
 |---|---|---|
-| **1. Mirar** (*monitor*) | La página manda el sello. La consola de Firebase **cuenta** cuántas llamadas vienen "verificadas" y cuántas no. Nadie es rechazado. | Donde está ahora |
-| **2. Aplicar** (*enforce*) | Lo que llega sin sello válido **se rechaza**. | Cuando casi todo venga verificado, después de una semana |
+| **1. Mirar** (*monitor*) | La página manda el sello. La consola de Firebase **cuenta** cuántas llamadas vienen "verificadas" y cuántas no. Nadie es rechazado. | Donde estuvo al principio |
+| **2. Aplicar** (*enforce*) | Lo que llega sin sello válido **se rechaza**. | **Donde está ahora**, desde el 20 de noviembre de 2026 |
 
 Para aplicar, se cambian **dos** cosas:
 
@@ -196,6 +196,14 @@ export const corregirPractica = onCall(
 Y en la consola de Firebase, en App Check → Cloud Firestore, el botón **Aplicar** (*Enforce*).
 
 > ⚠️ **Cuidado:** si aplicas el primer día y algo quedó mal configurado, **los alumnos de verdad** se quedan sin poder guardar su progreso. Por eso primero se mira y se revisan los números.
+
+> 🎙️ **El profesor dice:** la regla de "una semana mirando" sirve cuando **entra gente**: los números de la consola te dicen si algo falla. Pero este sitio todavía tiene muy pocas visitas, y una semana esperando no iba a dar números. Así que hicimos lo contrario: **fuimos nosotros los alumnos**. Abrimos el sitio en el iPhone, el iPad y el navegador del Mac, respondimos una práctica en cada uno y miramos en el registro de la función que cada llamada llegara con `app: VALID` (el sello) y, con la cuenta abierta, `auth: VALID`. Recién ahí aplicamos, y lo comprobamos desde afuera:
+>
+> - Llamar a la función con `curl`, sin sello → **401** "Unauthenticated".
+> - Leer Firestore desde afuera, sin sello → **403** "permiso denegado".
+> - Desde el sitio de verdad → todo sigue funcionando.
+>
+> La idea de fondo no es "esperar siete días": es **tener pruebas de que los alumnos reales reciben su sello** antes de echar a los que no lo traen. Si no hay tráfico que mire por ti, las pruebas las haces tú, con los aparatos que usan tus alumnos. Y si algo sale mal, "Aplicar" se deshace en un minuto.
 
 > 🎙️ **El profesor dice:** te cuento lo que pasó de verdad. Al conectarlo, la consola mostró un **error 403**. La tentación era tocar botones hasta que se fuera, por ejemplo apagar la "verificación de dominio". Eso **baja la seguridad** y no arregla nada. Lo que hicimos fue **separar las piezas** y probar cada una sola:
 >

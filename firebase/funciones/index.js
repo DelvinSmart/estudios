@@ -87,7 +87,8 @@ async function mandar(para, { asunto, html, texto }) {
 }
 
 export const enviarCorreoCuenta = onCall(
-  { secrets: [GMAIL_USUARIO, GMAIL_CLAVE], region: 'us-central1', maxInstances: 5 },
+  // enforceAppCheck: solo se aceptan llamadas con el sello de App Check (que vengan del sitio de verdad). Clase 124.
+  { secrets: [GMAIL_USUARIO, GMAIL_CLAVE], region: 'us-central1', maxInstances: 5, enforceAppCheck: true },
   async (request) => {
     const tipo = request.data?.tipo;
 
@@ -147,7 +148,8 @@ function conexion(request) {
   return lista.at(-1) || request.rawRequest?.ip || 'desconocida';
 }
 
-export const corregirPractica = onCall({ region: 'us-central1', maxInstances: 10 }, async (request) => {
+// enforceAppCheck: solo se aceptan llamadas con el sello de App Check (que vengan del sitio de verdad). Clase 124.
+export const corregirPractica = onCall({ region: 'us-central1', maxInstances: 10, enforceAppCheck: true }, async (request) => {
   const id = String(request.data?.id || '');
   const entrada = ID_PRACTICA.test(id) ? respuestas()[id] : undefined;
   if (!entrada) throw new HttpsError('not-found', 'No conozco esa práctica.');
