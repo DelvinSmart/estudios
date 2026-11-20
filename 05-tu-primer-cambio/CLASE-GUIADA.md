@@ -261,6 +261,9 @@ En el simulador abre **Mi vehículo → el lápiz → baja hasta Capacidad del t
 3. **Cámbialo** en `es.ts`, por ejemplo a `'Aún no hay gastos. ¡Anota el primero!'`, y guarda.
 4. **Míralo:** `npm run mostrar`. Y después `npm run mostrar -- pt`: en portugués **no** cambió, porque cada idioma tiene su archivo.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`?.` y `??`**: `a?.b` lee `b` solo si `a` existe; si `a` no existe da `undefined` en vez de romper el programa. `x ?? 'otro'` usa `'otro'` cuando `x` es `undefined` o `null`. Juntos: `IDIOMAS[idioma]?.[clave] ?? 'texto por defecto'`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -436,6 +439,9 @@ npx tsc --noEmit -p .
 3. `npm test` → falla la prueba **"cada idioma tiene las mismas llaves"**.
 
 Dos guardianes distintos atraparon el mismo error, antes de que llegara a una persona.
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`Object.keys()`, `Object.values()` y `Object.entries()`**: sacan listas de una ficha (objeto). Con `const f = { uber: 120, app99: 80 }`: `Object.keys(f)` → `['uber', 'app99']` (los nombres), `Object.values(f)` → `[120, 80]` (los valores) y `Object.entries(f)` → `[['uber', 120], ['app99', 80]]` (las parejas).
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

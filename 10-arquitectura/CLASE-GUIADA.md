@@ -23,6 +23,9 @@ Una buena arquitectura logra cuatro cosas:
 | **Entender rápido** | Una persona nueva sabe dónde buscar cada cosa | Los lácteos siempre en la heladera del fondo |
 | **Trabajar en equipo** | Dos personas cambian partes distintas sin pisarse | Cada repositor en su pasillo |
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.sort()`**: ordena una lista. Para números: `lista.sort((a, b) => a - b)` (de menor a mayor). La función compara dos y devuelve un número negativo si `a` va primero. **Ojo:** `sort` cambia la lista original; por eso se suele copiar antes: `[...lista].sort(…)`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

@@ -29,6 +29,9 @@ Y antes de todo, la regla de oro, que está escrita en el documento principal de
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`try` / `catch`**: `try { … } catch (error) { … }` intenta lo de adentro del `try`; si algo falla, en vez de romper todo salta al `catch`, y ahí decides qué hacer con el error.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -109,6 +112,9 @@ elige :: ¿Qué se hace primero ante un problema? :: Cambiar algo a ver si se ar
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`Number()`, `String()` y `Boolean()`**: convierten un valor en otro tipo. `Number('12')` → `12` (si no se puede, da `NaN`, "no es un número"); `String(12)` → `'12'`; `Boolean('')` → `false` y `Boolean('hola')` → `true`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -167,6 +173,9 @@ Cuanto más arriba en la tabla, **más barato**. Un error de TypeScript **nunca*
 > 🌎 **Otro ejemplo:** Como encontrar un error en un vestido: en el molde (gratis), en la tela cortada (barato), en la prueba (caro) o en la fiesta, puesto (carísimo).
 
 > 💡 **Idea:** por eso la app Copiloto usa TypeScript y tiene tantas pruebas: para que los errores aparezcan **arriba** en la tabla, y no en el teléfono de un conductor.
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.find()`**: devuelve el **primer** elemento que cumple la condición, o `undefined` si ninguno cumple: `[5, 12, 8].find((n) => n > 10)` → `12`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

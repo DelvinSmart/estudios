@@ -425,6 +425,9 @@ Un **objeto** guarda **varios datos de una misma cosa**, cada uno con su nombre.
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.split()` y `.join()`**: `texto.split(' ')` corta un texto donde hay un espacio y te da una lista: `'hola mundo'.split(' ')` → `['hola', 'mundo']`. `.join(' ')` hace lo contrario: une la lista en un solo texto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -842,6 +845,9 @@ return appId === 'extras' || appId === 'particular_trips' || appId === 'my_compa
 Y, como es una regla de dinero, agregarías una prueba para `'deliveries'`.
 
 </details>
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.reduce()`**: recorre una lista y va juntando un resultado. `[10, 20, 5].reduce((suma, x) => suma + x, 0)` empieza en `0` y en cada vuelta suma el siguiente: da `35`. El `0` del final es el valor con que empieza.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

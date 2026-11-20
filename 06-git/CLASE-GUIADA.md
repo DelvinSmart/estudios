@@ -50,6 +50,9 @@ Git funciona **sin internet**: guarda la historia en tu Mac. GitHub es un lugar 
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.push()`**: agrega algo al **final** de una lista: si `viajes` es `[1, 2]`, después de `viajes.push(3)` es `[1, 2, 3]`. Ojo: cambia la lista misma, no crea otra.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -291,6 +294,9 @@ f333022 feat(ganhos,painel): Minha empresa, textos de como registrar e foto por 
 > 🌎 **En la vida real:** el identificador es el **número de seguimiento** de un paquete de Correios: único, y con él encuentras exactamente ese envío.
 
 > 🌎 **Otro ejemplo:** Como el número de un boleto de avión: con ese código encuentras exactamente tu vuelo, aunque haya miles ese día.
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.slice()`**: copia un pedazo sin tocar el original. `lista.slice(0, 3)` va desde la posición 0 hasta **antes** de la 3; `lista.slice(-2)` son los dos últimos. En textos igual: `'Copiloto'.slice(0, 4)` → `'Copi'`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

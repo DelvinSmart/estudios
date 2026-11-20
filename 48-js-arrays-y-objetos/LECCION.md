@@ -112,6 +112,34 @@ Se encadenan: `viajes.filter(...).map(...)`.
 
 > 🌎 **Otro ejemplo:** Es como buscar en la agenda el primer contacto que empiece con "A".
 
+### Más preguntas a la lista: some, every, includes, slice y sort
+
+Además de los cuatro grandes, hay cinco que vas a ver en casi todo el curso:
+
+```js
+const ganancias = [120, 95, 180, 210];
+
+ganancias.some((g) => g > 200);   // true: ¿ALGUNA pasa de 200?
+ganancias.every((g) => g > 100);  // false: ¿TODAS pasan de 100? (95 no)
+ganancias.includes(180);          // true: ¿está el 180?
+ganancias.slice(0, 2);            // [120, 95]: un pedazo, de la posición 0 hasta ANTES de la 2
+ganancias.slice(-1);              // [210]: el último
+
+const ordenadas = [...ganancias].sort((a, b) => a - b); // [95, 120, 180, 210]
+```
+
+| Método | Qué responde | ¿Cambia la lista? |
+|---|---|---|
+| `some` | ¿Alguno cumple? (`true`/`false`) | No |
+| `every` | ¿Todos cumplen? (`true`/`false`) | No |
+| `includes` | ¿Está este valor? (`true`/`false`) | No |
+| `slice` | Una copia de un pedazo | No |
+| `sort` | La lista ordenada | **Sí**: por eso se copia antes con `[...lista]` |
+
+**Cómo se lee el `sort`:** la función recibe dos elementos (`a` y `b`) y devuelve un número. Si es **negativo**, `a` va primero. `a - b` ordena de menor a mayor; `b - a`, de mayor a menor. Para textos se usa `(a, b) => a.localeCompare(b)`, que respeta las tildes.
+
+> 🌎 **En la vida real:** `some` es preguntar en la fila "¿alguien tiene cambio?"; `every`, "¿todos tienen su boleto?"; `slice`, sacar una foto de una parte de la fila sin mover a nadie; y `sort`, pedirle a la fila que se reordene por estatura (la fila cambia).
+
 ### map en React
 
 En React, `map` convierte una lista de datos en una lista de componentes:

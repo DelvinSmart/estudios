@@ -58,6 +58,9 @@ python3 hola.py
 
 > 🌎 **Otro ejemplo:** Es como la diferencia entre improvisar una receta y tenerla escrita en un cuaderno.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **el texto con `f`**: `f"Hola, {nombre}"` pone el valor de `nombre` dentro del texto. La `f` antes de las comillas es la que avisa a Python que mire las llaves `{ }`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

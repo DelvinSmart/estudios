@@ -109,6 +109,9 @@ En Copiloto, la copia limpia del CI **encontró un fallo que en tu Mac no se ve�
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **los tres puntos `...`**: copian lo que hay adentro. `[...lista]` es una lista **nueva** con los mismos elementos; `{ ...ficha }` es una ficha **nueva** con los mismos datos. Así cambias la copia sin tocar el original.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -150,6 +153,10 @@ vf :: Si todo pasa en mi Mac, seguro que pasa en cualquier computadora
    > 🌎 **En la vida real:** si la lista del aeropuerto olvidó prohibir algo, el guardia lo deja pasar.
 3. **No publica en Google Play.** Solo **revisa**. Publicar lo haces tú. (Esto es lo que confunde.)
    > 🌎 **En la vida real:** el inspector de la fábrica aprueba el carro, pero no lo lleva a la concesionaria.
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.some()` y `.every()`**: preguntan algo a toda la lista. `lista.some((x) => …)` da `true` si **alguno** cumple; `lista.every((x) => …)` si **todos** cumplen. `[3, 8, 1].some((n) => n > 5)` → `true`; `[3, 8, 1].every((n) => n > 5)` → `false`.
+> - **`.includes()`**: dice si algo está adentro. En una lista: `['a', 'b'].includes('b')` → `true`. En un texto, si un pedazo está dentro: `'la prueba falla'.includes('falla')` → `true`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -499,6 +506,9 @@ Arma el panel web. Si no se puede armar, no se podría publicar.
 El trabajo **`app`**, en el paso **Candado de diseño** (`check:design`).
 
 </details>
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.map()`**: crea una lista **nueva** cambiando cada elemento: `[1, 2, 3].map((n) => n * 2)` → `[2, 4, 6]`. La lista original no cambia.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -182,6 +182,9 @@ Las dos reglas de `p` tienen la **misma especificidad** (son etiquetas), así qu
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **el `for` que cuenta**: `for (let i = 0; i < lista.length; i++) { … }` repite contando: empieza en `0`, sigue mientras `i` sea menor que el largo de la lista y suma 1 en cada vuelta (`i++`). Sirve cuando necesitas saber la **posición** de cada elemento.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

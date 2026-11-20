@@ -147,6 +147,9 @@ En Copiloto, las pruebas encontraron esto: si una cuenta tenía registros con `U
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.toLowerCase()` y `.toUpperCase()`**: `'Hola'.toLowerCase()` → `'hola'` (todo en minúsculas) y `'Hola'.toUpperCase()` → `'HOLA'`. Sirven para comparar textos sin que importen las mayúsculas.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

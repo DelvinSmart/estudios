@@ -296,6 +296,9 @@ const caros = viajes.filter((v) => v > 20);
 
 > 🌎 **Otro ejemplo:** Es como el filtro de una búsqueda en una tienda online: "solo los de menos de 100".
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`round()`**: redondea un número: `round(3.456, 2)` → `3.46` (con 2 decimales) y `round(3.6)` → `4`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
