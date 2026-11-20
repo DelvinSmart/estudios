@@ -18,10 +18,12 @@ const CONFIG = {
   appId: '1:822754407981:web:6fb527bdc9312d6979aaa4',
 };
 const SDK = 'https://www.gstatic.com/firebasejs/11.10.0/';
-// App Check (pendiente de terminar, ver PENDIENTES.md): el proyecto quedó registrado con
-// Fraud Defense (reCAPTCHA Enterprise). Para conectarlo falta la CLAVE del sitio de Enterprise;
-// cuando se tenga, aquí se agrega initializeAppCheck con ReCaptchaEnterpriseProvider(clave).
-// Mientras tanto, los datos están protegidos por las reglas de Firestore (firebase/firestore.rules).
+// App Check con Fraud Defense (reCAPTCHA Enterprise): le prueba a Firebase que la visita viene
+// del sitio de verdad, no de un programa que copió esta configuración pública. La clave del SITIO
+// es pública (va aquí a la vista). Por ahora el sitio MANDA el token, pero los servidores todavía
+// NO lo EXIGEN (modo "mirar"): se observa una semana en la consola y después se activa "Aplicar"
+// (poner enforceAppCheck en las funciones y "Enforce" en Firestore). Ver PENDIENTES.md.
+const APP_CHECK_SITE_KEY = '6LcFJCkuAAAAAADv4IRGw0PI5DuE6SsQcStzIQ3W';
 export const ESPERA_SEGUNDOS = 60; // igual que en firebase/generar-reglas.mjs
 // Los prefijos salen de cursos.js (una sola fuente de verdad): un curso nuevo no se puede olvidar aquí.
 const FORMATO_CODIGO = new RegExp(`^(${Object.values(CURSOS).map((c) => c.prefijo).join('|')})-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$`);
@@ -35,13 +37,22 @@ const oyentes = new Set();
 function cargar() {
   if (!cargando) {
     cargando = (async () => {
-      const [{ initializeApp }, A, F, Fn] = await Promise.all([
+      const [{ initializeApp }, A, F, Fn, AC] = await Promise.all([
         import(`${SDK}firebase-app.js`),
         import(`${SDK}firebase-auth.js`),
         import(`${SDK}firebase-firestore.js`),
         import(`${SDK}firebase-functions.js`),
+        import(`${SDK}firebase-app-check.js`),
       ]);
       const app = initializeApp(CONFIG);
+      // App Check (Fraud Defense / reCAPTCHA Enterprise): empieza a mandar el token con cada llamada.
+      // Si algo falla al armarlo (dominio no registrado, etc.), no se cae la app: sigue sin App Check.
+      try {
+        AC.initializeAppCheck(app, {
+          provider: new AC.ReCaptchaEnterpriseProvider(APP_CHECK_SITE_KEY),
+          isTokenAutoRefreshEnabled: true,
+        });
+      } catch (e) { /* sin App Check: la app sigue funcionando */ }
       const auth = A.getAuth(app);
       auth.languageCode = 'es'; // los correos (verificar, recuperar contraseña) llegan en español
       const db = F.getFirestore(app);
