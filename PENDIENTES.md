@@ -48,11 +48,9 @@ real de `delvinsmart.github.io`, usando reCAPTCHA (invisible: el alumno no tiene
 2. Canjear ese token en App Check (`exchangeRecaptchaEnterpriseToken`) responde **403 "App attestation failed"** → la falla está del lado de **App Check**, no de reCAPTCHA ni del dominio.
 3. La `apiKey` **no** bloquea la API de App Check (si la bloqueara, el error sería otro).
 
-Si el 403 sigue al día siguiente, revisar en <https://console.firebase.google.com/project/mapa-estudios-ds/appcheck/apps> que la app web esté registrada con el proveedor **reCAPTCHA Enterprise** y con **la misma clave** `6LcFJCkuAAAAAADv4IRGw0PI5DuE6SsQcStzIQ3W` (y no con la vieja de reCAPTCHA v3 del primer intento).
+**✅ Resuelto el 2026-11-20 (al día siguiente, seguía el 403):** no era propagación. En App Check → Apps → Fraud Defense estaba registrada la clave `6LcFJCkuAAAAABa70h97…`, que **no existe** en el proyecto (en Google Cloud → Fraud Defense → Claves hay una sola, `6LcFJCkuAAAAAADv4IRGw0PI5DuE6SsQcStzIQ3W`, la de `web/nube.js`). Las dos empiezan igual. Se cambió en la consola por la correcta y el canje respondió **200** (sello con ttl de 1 h); el sitio real también lo recibe con 200. La historia completa quedó en la clase 124, parte 4.
 
-**Qué falta (re-verificar):** volver a abrir <https://delvinsmart.github.io/estudios/#/entrar>, disparar la nube y mirar la consola. Si el 403 **ya no sale**, listo. Si **sigue** después de varias horas, hay un detalle más fino (que la clave registrada en App Check coincida con la que usa el cliente); se resuelve con calma. **No encender** "Desativar verificação de domínio" (bajaría la seguridad y no es el arreglo).
-
-**Pasos finales (tú, una semana después, SOLO si el 403 ya se resolvió):**
+**Pasos finales (tú, una semana después, hacia el 2026-11-27):**
 
 1. En <https://console.firebase.google.com/project/mapa-estudios-ds/appcheck>, mira que casi todo venga **"verificado"**. Si hay muchas "no verificadas", avísale a la IA **antes** de aplicar.
 2. Cuando esté verificado, **avísale a la IA**: pone `enforceAppCheck: true` en las funciones y publica, y tú tocas **Aplicar** (*Enforce*) en Cloud Firestore. Desde ahí, lo que no venga del sitio queda bloqueado.

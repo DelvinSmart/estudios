@@ -203,6 +203,50 @@ Y en la consola de Firebase, en App Check → Cloud Firestore, el botón **Aplic
 > 2. ¿App Check acepta ese token? → **No**: respondía "App attestation failed".
 >
 > Con eso quedó claro que reCAPTCHA y el dominio estaban bien, y que lo que faltaba estaba del lado de App Check (una configuración recién hecha tarda en activarse, o la clave registrada en App Check no es la misma que usa la página). Es el método de la clase 120: **reproducir y aislar**, no adivinar.
+>
+> **Y aquí viene la segunda lección.** Primero pensamos: "es que la configuración es nueva, ya se activará sola". Esperamos **un día entero**. Al otro día repetimos la misma prueba: **el mismo 403**. Una configuración no tarda un día en activarse, así que esa idea estaba mal. Fuimos a mirar las dos claves, una al lado de la otra.
+
+| Dónde | La clave |
+|---|---|
+| La página (`web/nube.js`) | `6LcFJCkuAAAAA` **`ADv4IRGw0PI5DuE6SsQcStzIQ3W`** |
+| Registrada en App Check | `6LcFJCkuAAAAA` **`Ba70h97wvUEKP78zhxgukwPAEjn`** |
+
+**Empiezan igual** y por eso, a simple vista, parecían la misma. En Google Cloud → Fraud Defense → Claves había **una sola** clave: la de la página. La que tenía App Check **no existía**. Era como un portero que espera la pulsera de un color que nadie fabrica: rechaza a todo el mundo. Se cambió la clave en la consola (sin tocar el código) y, a los 40 segundos, App Check respondió **200** y dio el sello.
+
+> 💡 **Idea:** dos cosas para llevarte. **Una:** "ya se arreglará solo" es una **suposición**, no un diagnóstico; si dices eso, pon una fecha para volver a probar, y si no se arregló, la suposición estaba mal. **Dos:** las claves, los ids y las contraseñas se comparan **enteros**, letra por letra (o con el computador: `a === b`), nunca mirando cómo empiezan.
+
+> 🎙️ **El profesor dice:** ese mismo día, probando que las prácticas de esta clase se corrigieran en el sitio de verdad, apareció **otro error**, que no tenía nada que ver con App Check. Todas las pruebas automáticas pasaban, pero la práctica respondía "No conozco esa práctica". El servidor revisa el id de cada práctica con un filtro, y el filtro era este:
+
+```js
+// firebase/funciones/index.js (antes del arreglo)
+const ID_PRACTICA = /^\d{2}:[\w.-]+\.md:\d{1,3}:practica\d{1,2}$/;
+```
+
+`\d{2}` quiere decir "**exactamente dos** números". El id de esta clase empieza con `124`, que tiene tres. Así que las **96 prácticas** de las clases 100 a 124 nunca se habían podido corregir, y nadie se dio cuenta porque las pruebas solo usaban clases viejas, de dos números. El arreglo fue cambiar `\d{2}` por `\d{2,3}` ("dos o tres números") y comprobar que el filtro aceptara las 659 prácticas, **todas**, no solo una.
+
+> 📌 **Nota:** "las pruebas pasan" quiere decir "lo que probamos funciona", no "todo funciona". Cuando agregas algo nuevo (aquí, clases con un número más largo), **pruébalo en el sitio de verdad**, como lo usaría un alumno.
+
+✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
+
+```ejercicio
+titulo: El filtro de las prácticas
+lenguaje: js
+pide: Completa `idValido(id)` para que devuelva `true` si el id tiene la forma `CLASE:ARCHIVO.md:PARTE:practicaN`, donde CLASE tiene **2 o 3** números, PARTE de 1 a 3 números y N 1 o 2 números. Si no, `false`. Usa una expresión regular con `.test(id)`.
+--- código
+function idValido(id) {
+  // tu código aquí
+}
+--- pruebas
+prueba('una clase de dos números', () => igual(idValido('18:CLASE-GUIADA.md:1:practica1'), true));
+prueba('una clase de tres números (el error de verdad)', () => igual(idValido('124:LECCION.md:4:practica1'), true));
+prueba('cuatro números ya no', () => igual(idValido('1240:LECCION.md:1:practica1'), false));
+prueba('sin el .md', () => igual(idValido('124:LECCION:1:practica1'), false));
+prueba('con algo pegado al final', () => igual(idValido('124:LECCION.md:1:practica1x'), false));
+--- solución
+function idValido(id) {
+  return /^\d{2,3}:[\w.-]+\.md:\d{1,3}:practica\d{1,2}$/.test(id);
+}
+```
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
@@ -241,6 +285,6 @@ escribe :: Cuenta cómo buscarías la causa de un 403 de App Check sin adivinar.
 
 > 🎤 **Si te preguntan "¿qué es App Check y cómo lo encendiste?":** "Es un portero que comprueba que cada llamada viene de mi sitio de verdad. En la web usa reCAPTCHA Enterprise, invisible: le da a cada visita real un token que vence y se renueva solo. Las reglas son la cerradura, porque deciden qué es de quién, y App Check es el portero de la entrada: se suman. Lo encendí en dos tiempos: primero en modo mirar, para ver en la consola que casi todas las llamadas vinieran verificadas, y después aplicar, con enforceAppCheck en las funciones y Enforce en Firestore. Así no dejaba afuera a un alumno real por un error de configuración."
 
-> 🎤 **Si te preguntan por un problema que resolviste:** "Al conectarlo apareció un 403. En vez de apagar la verificación de dominio, que bajaba la seguridad, separé las piezas: el token de reCAPTCHA salía bien en mi dominio, pero App Check lo rechazaba. Eso me dijo que el problema estaba en la configuración de App Check y no en el dominio."
+> 🎤 **Si te preguntan por un problema que resolviste:** "Al conectarlo apareció un 403. En vez de apagar la verificación de dominio, que bajaba la seguridad, separé las piezas: el token de reCAPTCHA salía bien en mi dominio, pero App Check lo rechazaba. Eso me dijo que el problema estaba en la configuración de App Check y no en el dominio. Primero creí que solo faltaba que se activara; al otro día seguía igual, así que comparé las claves enteras: App Check tenía registrada una clave que empezaba igual que la mía pero no existía. La cambié y respondió 200 en menos de un minuto. Aprendí a no dejar un 'ya se arreglará solo' sin volver a probar."
 
 > 🌎 **En la vida real:** la cerradura de cada oficina, el portero de la entrada y, por si acaso, una alarma que avisa si se gasta de más (la alerta de presupuesto). Tres capas, ninguna sola.
