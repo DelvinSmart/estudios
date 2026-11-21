@@ -1,5 +1,8 @@
 import UIKit
 import Capacitor
+import FirebaseAppCheck
+import FirebaseCore
+import RecaptchaEnterprise
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -7,7 +10,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        if let key = Bundle.main.object(forInfoDictionaryKey: "AprenderAppCheckSiteKey") as? String, !key.isEmpty {
+            AppCheck.setAppCheckProviderFactory(RecaptchaProviderFactory(siteKey: key))
+        }
+        FirebaseApp.configure()
+#if DEBUG
+        AppCheck.appCheck().token(forcingRefresh: false) { result, error in
+            if result != nil {
+                print("APR_APP_CHECK: aprobado")
+            } else if let error = error as NSError? {
+                print("APR_APP_CHECK: rechazado (\(error.domain), \(error.code))")
+            }
+        }
+#endif
         return true
     }
 

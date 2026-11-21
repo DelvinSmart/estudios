@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "822754407981",
+    "project_id": "mapa-estudios-ds",
+    "storage_bucket": "mapa-estudios-ds.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822754407981:android:54d40d969303ebb679aaa4",
+        "android_client_info": {
+          "package_name": "com.delvinsmart.aprender"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822754407981-8i470i880frievgttomcstc7g84ebrs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuATR_GMu0nKfhs0b-tGix_8b0hwh23oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822754407981-8i470i880frievgttomcstc7g84ebrs4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "822754407981-jk9rt14feeeejgrt1gfbh2a8cd7s0995.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.delvinsmart.aprender"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
