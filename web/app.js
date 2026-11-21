@@ -19,10 +19,10 @@ import { leerTema, guardarTema } from './guardado.js';
 import { prepararBuscador } from './buscar.js';
 import { prepararMenu } from './menu.js';
 import * as nube from './nube.js';
-import { app, migas, ponerMigas, escapar, mostrarError, alRedibujar } from './pantalla.js';
+import { app, migas, mostrarError, alRedibujar } from './pantalla.js';
 import { desactivarMapas } from './mapa-islas.js';
 import { contarPartes } from './avance.js';
-import { hayDatosDeSesion, recordarSesion, ponerPrompt, ponerPresentacion, CLAVE_PRESENTACION } from './sesion.js';
+import { hayDatosDeSesion, ponerPrompt, ponerPresentacion, CLAVE_PRESENTACION } from './sesion.js';
 import { vistaInicio, vistaEtapa, vistaClase } from './vistas/mapas.js';
 import { vistaParte } from './vistas/parte.js';
 import { vistaProgreso } from './vistas/progreso.js';
@@ -57,17 +57,7 @@ async function dibujar() {
   }
   ponerBotonVolver(fueraDelEstudio);
   try {
-    const cuentaWeb = ['entrar', 'cuenta', 'certificado', 'verificar'].includes(partesRuta[0]);
-    if (cuentaWeb && globalThis.Capacitor?.isNativePlatform?.()) {
-      const ruta = encodeURI(partesRuta.join('/'));
-      ponerMigas([{ texto: 'mapa', href: '#/' }, { texto: 'versión web' }]);
-      app.innerHTML = `<section class="cabeza">
-        <h1 class="titulo-medio">Continúa en la versión web</h1>
-        <p>La cuenta y los certificados se abren en el navegador. El progreso guardado en esta app es local.</p>
-        <a class="boton-principal" href="https://delvinsmart.github.io/estudios/#/${escapar(ruta)}">Abrir Aprender en el navegador</a>
-      </section>`;
-    }
-    else if (partesRuta[0] === 'progreso') await vistaProgreso();
+    if (partesRuta[0] === 'progreso') await vistaProgreso();
     else if (partesRuta[0] === 'certificado') {
       const curso = CURSOS[partesRuta[1]] ? partesRuta[1] : 'programacion';
       await vistaCertificado(curso); // …/muestra también abre esta misma pantalla
@@ -80,7 +70,15 @@ async function dibujar() {
     else if (partesRuta[0] === 'etapa') await vistaEtapa(partesRuta[1]);
     else if (partesRuta[0] === 'clase' && partesRuta[3]) await vistaParte(partesRuta[1], +partesRuta[2] || 0, partesRuta[3]);
     else if (partesRuta[0] === 'clase') await vistaClase(partesRuta[1], +partesRuta[2] || 0);
-    else vistaInicio();
+    else {
+      vistaInicio();
+      if (hayDatosDeSesion()) {
+        const rutaActual = location.hash;
+        nube.recuperarProgresoDeCuenta().then(() => {
+          if (location.hash === rutaActual) vistaInicio();
+        }).catch(() => {});
+      }
+    }
   } catch (err) {
     mostrarError(err);
   }
@@ -125,11 +123,22 @@ async function empezar() {
   prepararBuscador();
   prepararMenu();
   window.addEventListener('hashchange', dibujar);
+  const enviarPendientes = () => nube.pendientesNube?.procesar();
+  window.addEventListener('online', enviarPendientes);
+  window.addEventListener('progreso-en-nube', ({ detail }) => {
+    const aviso = app.querySelector('#nube-parte');
+    if (aviso?.dataset.parte === detail.id) aviso.textContent = '☁ guardado en la nube';
+    if (!location.hash || location.hash === '#/') dibujar();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') enviarPendientes();
+  });
+  enviarPendientes();
   // ¿Llegó desde un enlace del correo? (…/estudios/?mode=resetPassword&oobCode=…)
   const enlace = new URLSearchParams(location.search);
   if (enlace.get('mode') && enlace.get('oobCode')) { vistaAccion(enlace.get('mode'), enlace.get('oobCode')); return; }
   // Solo carga Firebase al abrir si esta persona ya había entrado alguna vez.
-  if (hayDatosDeSesion()) nube.alCambiarSesion((u) => { ponerPrompt(u); if (!u) recordarSesion(false); });
+  if (hayDatosDeSesion()) nube.alCambiarSesion(ponerPrompt);
   dibujar();
 }
 

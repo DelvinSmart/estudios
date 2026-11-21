@@ -136,7 +136,16 @@ export async function vistaParte(num, doc, cual) {
     // Para el certificado solo cuentan las partes del documento principal (la primera pestaña);
     // las de "Resumen", "Informe" o "Para la entrevista" quedan solo en este navegador.
     const cuentaEnNube = doc === 0;
+    const encolar = () => {
+      try {
+        if (!nube.pendientesNube?.agregar(curso, id)) return false;
+        cajaNube.textContent = '☁ guardado en este dispositivo · pendiente de sincronizar';
+        return true;
+      } catch { return false; }
+    };
+    if (cuentaEnNube) cajaNube.dataset.parte = id;
     const subirANube = async (ponerAviso) => {
+      if (encolar()) return;
       const r = await nube.prenderEnNube(curso, id).catch(() => ({ ok: false, motivo: 'error' }));
       if (r.motivo === 'sin-sesion') return;
       if (r.motivo === 'sin-verificar') { cajaNube.innerHTML = '☁ verifica tu correo para que cuente en la nube · <a href="#/entrar/verificar">verificar</a>'; return; }
@@ -160,8 +169,11 @@ export async function vistaParte(num, doc, cual) {
       if (cuentaEnNube && ev.detail?.parteAprobada && estaEntendida(id)) subirANube(false);
     });
     // Al abrir la parte: si está prendida aquí pero no en la nube, ofrecer contarla.
+    if (cuentaEnNube && nube.pendientesNube?.tiene(curso, id)) {
+      cajaNube.textContent = '☁ guardado en este dispositivo · pendiente de sincronizar';
+    }
     (cuentaEnNube && hayDatosDeSesion() ? nube.usuario() : Promise.resolve(null)).then(async (quien) => {
-      if (!nube.cuentaLista(quien) || !estaEntendida(id)) return;
+      if (!navigator.onLine || !nube.cuentaLista(quien) || !estaEntendida(id) || nube.pendientesNube?.tiene(curso, id)) return;
       await nube.leerProgresoNube(curso);
       if (nube.estaEnNube(curso, id)) { cajaNube.innerHTML = '☁ contado en la nube'; return; }
       cajaNube.innerHTML = '<button class="boton" type="button">☁ contar en la nube</button>';
@@ -178,7 +190,14 @@ export async function vistaParte(num, doc, cual) {
       ev.currentTarget.classList.toggle('activo', ahora);
       ev.currentTarget.textContent = ahora ? '✓ ya lo entendí' : '¿lo entendiste? márcalo';
       app.querySelector('.indice nav a.activa span').textContent = ahora ? '✓' : dos(i);
-      if (!ahora) { cajaNube.textContent = ''; return; }
+      if (!ahora) {
+        if (cuentaEnNube) {
+          try { nube.pendientesNube?.quitar(curso, id); } catch { /* sin almacenamiento */ }
+        }
+        cajaNube.textContent = '';
+        return;
+      }
+      if (cuentaEnNube && encolar()) return;
       const quien = cuentaEnNube && hayDatosDeSesion() ? await nube.usuario().catch(() => null) : null;
       if (quien) subirANube(true);
       else avisar('💡 se prendió un bombillo <span class="tenue">· ver mi progreso →</span>');

@@ -34,6 +34,7 @@ export function idParte(clase, doc, parte) {
 // La memoria se borra al marcar un bombillo, y si otra pestaña cambió el progreso (evento "storage").
 let entendidas = null;
 let version = 0;
+let confirmadasEnNube = new Set();
 function todasEntendidas() {
   if (!entendidas) entendidas = leer(CLAVE_ENTENDIDO, {});
   return entendidas;
@@ -44,8 +45,15 @@ try { window.addEventListener('storage', (ev) => { if (ev.key === CLAVE_ENTENDID
 // Un número que cambia cada vez que cambia el progreso (para que otros recuerden cálculos mientras tanto).
 export const versionProgreso = () => version;
 
+export function reflejarPartesEnNube(ids) {
+  const nuevas = new Set(ids);
+  if (nuevas.size === confirmadasEnNube.size && [...nuevas].every((id) => confirmadasEnNube.has(id))) return;
+  confirmadasEnNube = nuevas;
+  version++;
+}
+
 export function estaEntendida(id) {
-  return Boolean(todasEntendidas()[id]);
+  return confirmadasEnNube.has(id) || Boolean(todasEntendidas()[id]);
 }
 
 // Devuelve false si no se pudo guardar: así la pantalla no muestra ✓ mintiendo.

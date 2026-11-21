@@ -8,6 +8,8 @@
 // Esta configuración NO es secreta: toda app web de Firebase la lleva a la vista.
 // Lo que protege los datos son las reglas, no esconder estos valores.
 import { CURSOS } from './cursos.js';
+import { reflejarPartesEnNube } from './guardado.js';
+import { crearColaNube } from './pendientes-nube.js';
 
 const CONFIG = {
   apiKey: 'AIzaSyCjQqwQEaV2B_LBEf5TMWzPGnIiDaTb_FI',
@@ -27,11 +29,33 @@ const APP_CHECK_SITE_KEY = '6LcFJCkuAAAAAADv4IRGw0PI5DuE6SsQcStzIQ3W';
 export const ESPERA_SEGUNDOS = 60; // igual que en firebase/generar-reglas.mjs
 // Los prefijos salen de cursos.js (una sola fuente de verdad): un curso nuevo no se puede olvidar aquí.
 const FORMATO_CODIGO = new RegExp(`^(${Object.values(CURSOS).map((c) => c.prefijo).join('|')})-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$`);
+const esAplicacion = () => globalThis.Capacitor?.isNativePlatform?.() === true;
 const ES_GMAIL = /^[^@\s]+@gmail\.com$/i;
 
 let cargando = null;
 const progresoCache = {}; // { curso: datos } — el último progreso leído de la nube
 const oyentes = new Set();
+
+export const pendientesNube = typeof window === 'undefined' ? null : crearColaNube({
+  almacenamiento: {
+    getItem: (key) => localStorage.getItem(key),
+    setItem: (key, value) => localStorage.setItem(key, value),
+    removeItem: (key) => localStorage.removeItem(key),
+  },
+  enviar: ({ uid, curso, id }) => prenderEnNube(curso, id, uid),
+  avisar: (parte) => window.dispatchEvent(new CustomEvent('progreso-en-nube', { detail: parte })),
+  conectado: () => navigator.onLine,
+  esperar: setTimeout,
+  cancelar: clearTimeout,
+});
+
+function actualizarCola(usuario) {
+  try {
+    pendientesNube?.asociar(cuentaLista(usuario) ? usuario.uid : null);
+    pendientesNube?.procesar();
+  } catch { /* la app todavía puede funcionar sin almacenamiento */ }
+}
+
 
 // Carga Firebase solo cuando hace falta (la primera vez que alguien lo usa).
 function cargar() {
@@ -45,14 +69,24 @@ function cargar() {
         import(`${SDK}firebase-app-check.js`),
       ]);
       const app = initializeApp(CONFIG);
-      // App Check (Fraud Defense / reCAPTCHA Enterprise): empieza a mandar el token con cada llamada.
-      // Si algo falla al armarlo (dominio no registrado, etc.), no se cae la app: sigue sin App Check.
-      try {
+      if (esAplicacion()) {
+        const comprobacion = globalThis.Capacitor.Plugins.FirebaseAppCheck;
+        if (!comprobacion) throw new Error('Esta versión de Aprender no puede verificar la aplicación.');
+        if (globalThis.Capacitor.getPlatform() === 'android') {
+          await comprobacion.initialize({ debug: false });
+        }
         AC.initializeAppCheck(app, {
-          provider: new AC.ReCaptchaEnterpriseProvider(APP_CHECK_SITE_KEY),
+          provider: new AC.CustomProvider({ getToken: () => comprobacion.getToken() }),
           isTokenAutoRefreshEnabled: true,
         });
-      } catch (e) { /* sin App Check: la app sigue funcionando */ }
+      } else {
+        try {
+          AC.initializeAppCheck(app, {
+            provider: new AC.ReCaptchaEnterpriseProvider(APP_CHECK_SITE_KEY),
+            isTokenAutoRefreshEnabled: true,
+          });
+        } catch (e) { /* si App Check no está disponible, el servidor sigue protegido */ }
+      }
       const auth = A.getAuth(app);
       auth.languageCode = 'es'; // los correos (verificar, recuperar contraseña) llegan en español
       const db = F.getFirestore(app);
@@ -63,7 +97,12 @@ function cargar() {
       const corregir = Fn.httpsCallable(funciones, 'corregirPractica');
       // Esperar a saber si ya había una sesión abierta; después, avisar de cada cambio.
       await new Promise((listo) => { const parar = A.onAuthStateChanged(auth, () => { parar(); listo(); }); });
-      A.onAuthStateChanged(auth, (u) => { for (const k in progresoCache) delete progresoCache[k]; oyentes.forEach((f) => f(u)); });
+      A.onAuthStateChanged(auth, (u) => {
+        for (const k in progresoCache) delete progresoCache[k];
+        reflejarPartesEnNube([]);
+        actualizarCola(u);
+        oyentes.forEach((f) => f(u));
+      });
       return { A, F, auth, db, enviarCorreo, corregir };
     })();
     cargando.catch(() => { cargando = null; });
@@ -94,7 +133,8 @@ export function alCambiarSesion(funcion) {
 
 // A dónde vuelve la persona cuando toca el enlace del correo.
 function volverA(ruta) {
-  return { url: `${location.origin}${location.pathname}#${ruta}` };
+  const base = esAplicacion() ? 'https://delvinsmart.github.io/estudios/' : location.origin + location.pathname;
+  return { url: `${base}#${ruta}` };
 }
 
 export async function entrarConCorreo(correo, contrasena) {
@@ -114,9 +154,16 @@ export async function crearCuenta(nombre, correo, contrasena) {
 
 export async function entrarConGoogle() {
   const { A, auth } = await cargar();
-  const proveedor = new A.GoogleAuthProvider();
-  proveedor.setCustomParameters({ prompt: 'select_account' });
-  const r = await A.signInWithPopup(auth, proveedor);
+  let r;
+  if (esAplicacion()) {
+    const { credential } = await globalThis.Capacitor.Plugins.FirebaseAuthentication.signInWithGoogle();
+    const credencial = A.GoogleAuthProvider.credential(credential?.idToken, credential?.accessToken);
+    r = await A.signInWithCredential(auth, credencial);
+  } else {
+    const proveedor = new A.GoogleAuthProvider();
+    proveedor.setCustomParameters({ prompt: 'select_account' });
+    r = await A.signInWithPopup(auth, proveedor);
+  }
   if (!esGmail(r.user.email)) {
     await A.signOut(auth);
     throw Object.assign(new Error('solo gmail'), { code: 'propio/no-gmail' });
@@ -149,6 +196,7 @@ export async function refrescarCuenta() {
   if (!auth.currentUser) return null;
   await auth.currentUser.reload();
   await auth.currentUser.getIdToken(true);
+  actualizarCola(auth.currentUser);
   return auth.currentUser;
 }
 
@@ -198,9 +246,25 @@ export async function salir() {
 export async function leerProgresoNube(curso) {
   const { F, auth, db } = await cargar();
   if (!cuentaLista(auth.currentUser)) return null;
-  const foto = await F.getDoc(F.doc(db, 'cursos', curso, 'progreso', auth.currentUser.uid));
+  const uid = auth.currentUser.uid;
+  const foto = await F.getDoc(F.doc(db, 'cursos', curso, 'progreso', uid));
+  if (auth.currentUser?.uid !== uid) return null;
   progresoCache[curso] = foto.exists() ? foto.data() : null;
   return progresoCache[curso];
+}
+
+// La portada usa el avance confirmado de la cuenta. Nunca se copia a los datos de invitado.
+export async function recuperarProgresoDeCuenta() {
+  const { auth } = await cargar();
+  const usuario = auth.currentUser;
+  if (!cuentaLista(usuario)) {
+    reflejarPartesEnNube([]);
+    return;
+  }
+  const resultados = await Promise.allSettled(Object.keys(CURSOS).map(leerProgresoNube));
+  if (auth.currentUser?.uid !== usuario.uid) return;
+  if (resultados.every((r) => r.status === 'rejected')) throw resultados[0].reason;
+  reflejarPartesEnNube(Object.values(progresoCache).flatMap((curso) => Object.keys(curso?.partes || {})));
 }
 
 export function estaEnNube(curso, id) {
@@ -209,12 +273,15 @@ export function estaEnNube(curso, id) {
 
 // Prende un bombillo en la nube.
 // Devuelve { ok: true } o { ok: false, motivo: 'sin-sesion' | 'sin-verificar' | 'ya' | 'espera' | 'error', segundos }.
-export async function prenderEnNube(curso, id) {
+export async function prenderEnNube(curso, id, uidEsperado) {
   const { F, auth, db } = await cargar();
   if (!auth.currentUser) return { ok: false, motivo: 'sin-sesion' };
   if (!cuentaLista(auth.currentUser)) return { ok: false, motivo: 'sin-verificar' };
-  const ref = F.doc(db, 'cursos', curso, 'progreso', auth.currentUser.uid);
+  const uid = auth.currentUser.uid;
+  if (uidEsperado && uidEsperado !== uid) return { ok: false, motivo: 'sin-sesion' };
+  const ref = F.doc(db, 'cursos', curso, 'progreso', uid);
   const actual = progresoCache[curso] ?? (await leerProgresoNube(curso));
+  if (auth.currentUser?.uid !== uid) return { ok: false, motivo: 'sin-sesion' };
   const ahora = F.serverTimestamp();
   const faltan = (p) => Math.ceil(ESPERA_SEGUNDOS - (Date.now() - p.ultimo.toMillis()) / 1000);
   try {
