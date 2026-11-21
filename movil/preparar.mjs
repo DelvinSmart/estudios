@@ -25,9 +25,23 @@ for (const carpeta of lecciones) {
   }
 }
 
-const index = await readFile(new URL('index.html', raiz), 'utf8');
-await copyFile(new URL('node_modules/marked/marked.min.js', import.meta.url), new URL('web/marked.min.js', destino));
-await writeFile(new URL('index.html', destino), index.replace(
-  'https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js',
-  'web/marked.min.js',
-));
+const recursosLocales = [
+  ['https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js', 'marked/marked.min.js', 'marked.min.js'],
+  ['https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js', '@highlightjs/cdn-assets/highlight.min.js', 'highlight.min.js'],
+  ['https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css', '@highlightjs/cdn-assets/styles/github-dark.min.css', 'github-dark.min.css'],
+];
+
+let index = await readFile(new URL('index.html', raiz), 'utf8');
+for (const [remoto, paquete, archivo] of recursosLocales) {
+  await copyFile(new URL('node_modules/' + paquete, import.meta.url), new URL('web/' + archivo, destino));
+  index = index.replace(remoto, 'web/' + archivo);
+}
+await writeFile(new URL('index.html', destino), index
+  .replace('initial-scale=1', 'initial-scale=1, viewport-fit=cover')
+  .replace(/^ *<link [^\n]*https:\/\/fonts\.(?:googleapis|gstatic)\.com[^\n]*>\n/gm, '')
+  .replace('</head>', `  <style>
+    .barra { border-top: env(safe-area-inset-top) solid var(--fondo); }
+    body { padding-bottom: env(safe-area-inset-bottom); }
+    #cursos-mapa, .mapa-islas { scroll-margin-top: calc(76px + env(safe-area-inset-top)); }
+  </style>
+</head>`));
