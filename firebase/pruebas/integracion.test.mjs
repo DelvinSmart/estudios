@@ -3,12 +3,12 @@ import { listarPartes } from '../partes.mjs';
 // una persona crea su cuenta, falla una práctica, espera, la aprueba en el servidor
 // y recién ahí puede prender el bombillo de esa parte.
 // Correr:  cd firebase/pruebas && npm run integracion   (necesita Java y firebase/funciones/respuestas.json)
-import { test, before } from 'node:test';
+import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { initializeApp } from 'firebase/app';
+import { initializeApp, deleteApp } from 'firebase/app';
 import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, connectFirestoreEmulator, doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { getFirestore, connectFirestoreEmulator, doc, setDoc, serverTimestamp, terminate } from 'firebase/firestore';
 import { getFunctions, connectFunctionsEmulator, httpsCallable } from 'firebase/functions';
 
 const PROYECTO = 'demo-mapa';
@@ -16,13 +16,21 @@ const ARCHIVO = new URL('../funciones/respuestas.json', import.meta.url);
 const hay = existsSync(ARCHIVO);
 const RESPUESTAS = hay ? JSON.parse(readFileSync(ARCHIVO, 'utf8')).practicas : {};
 
-// La PRIMERA parte del curso de programación (el primer bombillo de un curso tiene que ser su primera parte:
-// las partes se prenden en orden) y TODAS sus prácticas que se corrigen (una parte puede tener varias).
-const PRIMERA = listarPartes().programacion[0];
-const PRACTICAS = Object.entries(RESPUESTAS)
-  .filter(([, e]) => e.parte === PRIMERA && e.preguntas.some((p) => p.tipo !== 'escribe'))
+// El primer bombillo de un curso tiene que ser su PRIMERA parte (las partes se prenden en orden).
+// Para probar el camino completo hace falta un curso cuya primera parte TENGA prácticas que se corrigen:
+// se busca el primero que cumpla, en vez de fijar uno (Programación empieza con "Programar desde cero",
+// cuya Parte 1 no tiene práctica, y antes la prueba se rompía por eso). Se toman TODAS las prácticas
+// de esa parte (una parte puede tener varias).
+const PARTES = listarPartes();
+const corregibles = (parte) => Object.entries(RESPUESTAS)
+  .filter(([, e]) => e.parte === parte && e.preguntas.some((p) => p.tipo !== 'escribe'))
   .sort(([a], [b]) => a.localeCompare(b, 'es', { numeric: true }));
+const CURSO = Object.keys(PARTES).find((c) => corregibles(PARTES[c][0]).length > 0);
+const PRACTICAS = CURSO ? corregibles(PARTES[CURSO][0]) : [];
 const [ID, ENTRADA] = PRACTICAS[0] || [];
+// Y un curso cuya primera parte NO tiene práctica: ese bombillo se prende sin aprobar nada.
+const CURSO_SIN = Object.keys(PARTES).find((c) => PARTES[c].length && corregibles(PARTES[c][0]).length === 0);
+const falta = !hay ? 'falta respuestas.json' : !ENTRADA && 'ningún curso empieza con una parte que tenga práctica';
 const bien = (entrada = ENTRADA) => Object.fromEntries(entrada.preguntas.map((p, i) => [i, p.correcta]).filter(([, v]) => v !== undefined && v !== null));
 const mal = () => { const r = bien(); const i = Object.keys(r)[0]; r[i] = typeof r[i] === 'number' ? (r[i] + 1) % 2 : (r[i] === 'V' ? 'F' : 'V'); return r; };
 
@@ -34,6 +42,9 @@ before(async () => {
   const fn = getFunctions(app, 'us-central1'); connectFunctionsEmulator(fn, '127.0.0.1', 5001);
   corregir = httpsCallable(fn, 'corregirPractica');
 });
+
+// Cerrar la conexión con Firestore: si queda abierta, el programa nunca termina y la prueba se cuelga.
+after(async () => { await terminate(db); await deleteApp(app); });
 
 async function cuentaVerificada(correo) {
   const { user } = await createUserWithEmailAndPassword(auth, correo, 'clave-de-prueba-123');
@@ -47,9 +58,9 @@ async function cuentaVerificada(correo) {
   return auth.currentUser;
 }
 
-test('de punta a punta: fallar, esperar, aprobar en el servidor y recién ahí prender el bombillo', { skip: !hay && 'falta respuestas.json' }, async () => {
+test('de punta a punta: fallar, esperar, aprobar en el servidor y recién ahí prender el bombillo', { skip: falta }, async () => {
   const u = await cuentaVerificada('carla.prueba@gmail.com');
-  const progreso = doc(db, 'cursos', 'programacion', 'progreso', u.uid);
+  const progreso = doc(db, 'cursos', CURSO, 'progreso', u.uid);
   const bombillo = { n: 1, inicio: serverTimestamp(), ultimo: serverTimestamp(), ultimaParte: ENTRADA.parte, partes: { [ENTRADA.parte]: serverTimestamp() } };
 
   // 1. Sin aprobar, el bombillo no se prende.
@@ -84,13 +95,20 @@ test('de punta a punta: fallar, esperar, aprobar en el servidor y recién ahí p
   await setDoc(progreso, bombillo);
 });
 
-test('sin cuenta, la práctica se corrige pero no se guarda nada', { skip: !hay && 'falta respuestas.json' }, async () => {
+// Sin cuenta NO se corrige: el curso se lee entero sin cuenta, pero revisar respuestas pide una cuenta de Gmail
+// verificada, así ningún robot sin cuenta llama a la función miles de veces (clase 124).
+test('sin cuenta, la práctica no se corrige', { skip: falta }, async () => {
   await auth.signOut();
-  const r = (await corregir({ id: ID, respuestas: bien() })).data;
-  assert.equal(r.aprobada, true);
-  assert.equal(r.guardada, false);
+  await assert.rejects(corregir({ id: ID, respuestas: bien() }), (e) => e.code === 'functions/unauthenticated');
 });
 
 test('una práctica inventada da error', { skip: !hay && 'falta respuestas.json' }, async () => {
   await assert.rejects(corregir({ id: '99:FALSO.md:1:practica1', respuestas: {} }), (e) => e.code === 'functions/not-found');
+});
+
+test('una primera parte SIN práctica se prende sin aprobar nada', { skip: !CURSO_SIN && 'todos los cursos empiezan con práctica' }, async () => {
+  const u = await cuentaVerificada('beto.prueba@gmail.com');
+  const parte = PARTES[CURSO_SIN][0];
+  const progreso = doc(db, 'cursos', CURSO_SIN, 'progreso', u.uid);
+  await setDoc(progreso, { n: 1, inicio: serverTimestamp(), ultimo: serverTimestamp(), ultimaParte: parte, partes: { [parte]: serverTimestamp() } });
 });
