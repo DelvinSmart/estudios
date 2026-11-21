@@ -724,7 +724,8 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
 }
 .mapa-camino { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
 .mapa-camino path { fill: none; stroke-linecap: round; }
-.camino-pendiente { stroke: color-mix(in srgb, var(--acento-2) 40%, transparent); stroke-width: 4; stroke-dasharray: 12 12; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--acento-2) 60%, transparent)); }
+.camino-pendiente { stroke: color-mix(in srgb, var(--acento-2) 40%, transparent); stroke-width: 4; stroke-dasharray: 12 12; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--acento-2) 60%, transparent)); animation: camino-andar 1.8s linear infinite; }
+@keyframes camino-andar { to { stroke-dashoffset: -24; } }
 .camino-hecho { stroke: var(--acento); stroke-width: 6; stroke-dasharray: 12 12; filter: drop-shadow(0 0 8px color-mix(in srgb, var(--acento) 70%, transparent)); }
 
 .mapa-rejilla { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 46px 30px; align-items: start; }
@@ -823,7 +824,7 @@ a.boton-icono { display: grid; place-items: center; text-decoration: none; font-
   .isla-tarjeta { margin-left: -10px; padding: 12px 12px 10px 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .isla-parada.actual .isla, .isla-parada.actual .isla-pasto { animation: none; }
+  .camino-pendiente, .isla-parada.actual .isla, .isla-parada.actual .isla-pasto { animation: none; }
 }
 .bombillo-apagado { filter: grayscale(1) brightness(0.75); opacity: 0.7; }
 
