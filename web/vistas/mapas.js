@@ -52,6 +52,26 @@ function htmlAntes(cursoId, claseId) {
   </div>`;
 }
 
+function enlaceMaterial(id, archivo) {
+  return `#/clase/${id}/${CLASES[id].docs.findIndex((doc) => doc.archivo === archivo)}`;
+}
+
+function htmlCaminos() {
+  return `<section class="ruta-cero">
+    <h2>¿Qué quieres construir?</h2>
+    <div class="acciones">
+      <a class="boton" href="#/etapa/web">Un sitio web</a>
+      <a class="boton" href="#/curso/reactnative">Una app móvil</a>
+      <a class="boton" href="${enlaceMaterial('116', 'PREPARA-TU-COMPUTADORA.md')}">Prepara tu Mac o PC</a>
+      <a class="boton" href="${enlaceMaterial('20', 'CAPACITOR.md')}">Empaqueta tu web con Capacitor</a>
+    </div>
+    ${globalThis.Capacitor?.isNativePlatform?.() ? '' : `<details>
+      <summary>Usar Aprender desde la pantalla de inicio</summary>
+      <p>En iPhone o iPad, abre Aprender en Safari y elige Compartir → Añadir a pantalla de inicio. En Android, abre Chrome y busca Añadir a pantalla de inicio en el menú.</p>
+    </details>`}
+  </section>`;
+}
+
 function htmlRutaDesdeCero() {
   return `<section class="ruta-cero">
     <h2>De tu primera línea a una web de gastos</h2>
@@ -133,6 +153,7 @@ export function vistaInicio(soloCurso) {
       </div>
       </div>
       ${htmlProgreso(`${hechas} de ${total} clases terminadas`, hechas / total, '#/progreso')}
+      ${htmlCaminos()}
       ${htmlRutaDesdeCero()}
     </section>
     <div id="cursos-mapa" tabindex="-1">${pestanasCursos}${mapas}</div>

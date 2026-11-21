@@ -76,7 +76,7 @@ recomendada (lo básico en JavaScript 01 a 04, luego el resto de Programación y
 | 19 | [Cómo hice la web de Copiloto](13-como-hice-la-web/CLASE-GUIADA.md) | React, TypeScript, Vite, Tailwind y Firebase | `13` |
 | 20 | [¿Qué dice la Biblia? por dentro](14-que-dice-la-biblia-por-dentro/CLASE-GUIADA.md) | Versículos sin copiarlos, el medidor, el griego y el motor de diseño | `14` |
 | 21 | [Cómo hice mi mapa de estudios](18-como-hice-mi-mapa/CLASE-GUIADA.md) | Esta misma página, explicada por dentro | `18` |
-| 22 | [Publicar e instalar](20-publicar-e-instalar/CLASE-GUIADA.md) | Subir a GitHub, a Pages, a Firebase, a tus teléfonos y a Google Play | `20` |
+| 22 | [Publicar e instalar](20-publicar-e-instalar/CLASE-GUIADA.md) | Publica tu web y empaquétala para Android, iPhone y iPad | `20` |
 | 23 | [El certificado verificable](21-certificado-verificable/LECCION.md) | Login con correo, Firebase y reglas que no se dejan engañar | `21` |
 | 24 | [Cómo hice los paneles](77-como-hice-los-paneles/LECCION.md) | La trastienda de mis tres proyectos: la llave, GitHub, Firebase y cómo viaja cada cambio | `77` |
 | 25 | [El recorrido de cada proyecto](85-recorrido-de-cada-proyecto/LECCION.md) | De punta a punta: Copiloto (app e IA), ¿Qué dice la Biblia? y este mapa, en 30 segundos y en detalle | `85` |

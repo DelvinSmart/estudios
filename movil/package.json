@@ -1,0 +1,19 @@
+{
+  "name": "aprender-movil",
+  "version": "1.0.0",
+  "description": "Aplicación móvil del curso Aprender",
+  "scripts": {
+    "preparar": "node preparar.mjs",
+    "sincronizar": "npm run preparar && cap sync"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.6.2",
+    "@capacitor/core": "8.6.2",
+    "@capacitor/ios": "8.6.2",
+    "marked": "12.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.6.2"
+  },
+  "private": true
+}

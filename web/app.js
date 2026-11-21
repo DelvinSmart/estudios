@@ -19,7 +19,7 @@ import { leerTema, guardarTema } from './guardado.js';
 import { prepararBuscador } from './buscar.js';
 import { prepararMenu } from './menu.js';
 import * as nube from './nube.js';
-import { app, migas, mostrarError, alRedibujar } from './pantalla.js';
+import { app, migas, ponerMigas, escapar, mostrarError, alRedibujar } from './pantalla.js';
 import { desactivarMapas } from './mapa-islas.js';
 import { contarPartes } from './avance.js';
 import { hayDatosDeSesion, recordarSesion, ponerPrompt, ponerPresentacion, CLAVE_PRESENTACION } from './sesion.js';
@@ -57,7 +57,17 @@ async function dibujar() {
   }
   ponerBotonVolver(fueraDelEstudio);
   try {
-    if (partesRuta[0] === 'progreso') await vistaProgreso();
+    const cuentaWeb = ['entrar', 'cuenta', 'certificado', 'verificar'].includes(partesRuta[0]);
+    if (cuentaWeb && globalThis.Capacitor?.isNativePlatform?.()) {
+      const ruta = encodeURI(partesRuta.join('/'));
+      ponerMigas([{ texto: 'mapa', href: '#/' }, { texto: 'versión web' }]);
+      app.innerHTML = `<section class="cabeza">
+        <h1 class="titulo-medio">Continúa en la versión web</h1>
+        <p>La cuenta y los certificados se abren en el navegador. El progreso guardado en esta app es local.</p>
+        <a class="boton-principal" href="https://delvinsmart.github.io/estudios/#/${escapar(ruta)}">Abrir Aprender en el navegador</a>
+      </section>`;
+    }
+    else if (partesRuta[0] === 'progreso') await vistaProgreso();
     else if (partesRuta[0] === 'certificado') {
       const curso = CURSOS[partesRuta[1]] ? partesRuta[1] : 'programacion';
       await vistaCertificado(curso); // …/muestra también abre esta misma pantalla

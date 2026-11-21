@@ -9,7 +9,7 @@ const CON_ENTREVISTA = [
 ];
 
 export const CLASES = {
-  '116': { carpeta: '116-programar-desde-cero', titulo: 'Programar desde cero', meta: 'Qué es programar, las primeras palabras sin miedo y cómo usar este curso', docs: LECCION },
+  '116': { carpeta: '116-programar-desde-cero', titulo: 'Programar desde cero', meta: 'Qué es programar, las primeras palabras sin miedo y cómo usar este curso', docs: [...LECCION, { archivo: 'PREPARA-TU-COMPUTADORA.md', titulo: 'Prepara tu computadora' }] },
   '01': { carpeta: '01-leer-codigo', titulo: 'Leer código', meta: 'Leer una función de la app y decir qué hace', docs: LECCION },
   '02': { carpeta: '02-pruebas-automaticas', titulo: 'Pruebas automáticas', meta: 'Entender las más de 400 pruebas de la app y correrlas', docs: LECCION },
   '03': { carpeta: '03-tu-primera-prueba', titulo: 'Mi primera prueba', meta: 'Escribir una prueba yo solo', docs: LECCION },
@@ -35,7 +35,7 @@ export const CLASES = {
   '16': { carpeta: '16-css', titulo: 'CSS', meta: 'Darle colores, letras, espacios y forma', docs: LECCION },
   '17': { carpeta: '17-javascript', titulo: 'JavaScript en la página', meta: 'Hacer que la página responda y cambie', docs: LECCION },
   '18': { carpeta: '18-como-hice-mi-mapa', titulo: 'Cómo hice mi mapa de estudios', meta: 'Esta misma página, explicada por dentro', docs: LECCION },
-  '20': { carpeta: '20-publicar-e-instalar', titulo: 'Publicar e instalar', meta: 'Subir a GitHub, a Pages, a Firebase, a tus teléfonos y a Google Play', docs: LECCION },
+  '20': { carpeta: '20-publicar-e-instalar', titulo: 'Publicar e instalar', meta: 'Publica tu web y empaquétala para Android, iPhone y iPad', docs: [...LECCION, { archivo: 'CAPACITOR.md', titulo: 'Taller de Capacitor' }] },
   '21': { carpeta: '21-certificado-verificable', titulo: 'El certificado verificable', meta: 'Login con correo, Firebase y reglas que no se dejan engañar', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '22': { carpeta: '22-seguridad-basica', titulo: 'Seguridad básica', meta: 'Pensar como atacante: contraseñas, secretos, phishing y el navegador', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '23': { carpeta: '23-seguridad-intermedia', titulo: 'Seguridad intermedia', meta: 'Las vulnerabilidades web más comunes y cómo se cierran', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
