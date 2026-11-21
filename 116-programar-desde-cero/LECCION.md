@@ -6,6 +6,29 @@
 
 ## Parte 1. ¿Qué es programar, de verdad?
 
+Vas a calcular cuánto cuesta echar 10 litros de combustible. El precio por litro está en una caja con nombre: `precioPorLitro`. El asterisco `*` multiplica y `console.log` muestra el resultado debajo del editor.
+
+Antes de tocar **▶ probar**, predice cuánto pagarías si cada litro cuesta 6. Cambia el precio de 5 a 6, ejecuta el código y compara tu predicción con la salida. Después prueba otro precio y explica por qué cambió el total. La prueba seguirá esperando 60, pero la consola mostrará el resultado de tu experimento. Puedes hacer todos los ejercicios de este proyecto sin cuenta.
+
+```ejercicio
+titulo: Calcula tu primer gasto de combustible
+lenguaje: js
+pide: Cambia el precio por litro a 6 y prueba tu cálculo.
+pista: Busca la línea que empieza con `const precioPorLitro`. Ahí está el número que debes cambiar. La línea que multiplica los litros por el precio ya funciona.
+--- código
+const litros = 10;
+const precioPorLitro = 5;
+const total = litros * precioPorLitro;
+console.log(total);
+--- pruebas
+prueba('10 litros a 6 dan 60', () => igual(total, 60));
+--- solución
+const litros = 10;
+const precioPorLitro = 6;
+const total = litros * precioPorLitro;
+console.log(total);
+```
+
 > 🌎 **En la vida real:** imagina que le explicas a alguien, por teléfono, cómo hacer un sándwich, pero esa persona **nunca vio comida** y hace todo al pie de la letra. Si dices "pon el jamón", lo pone sobre la mesa, no sobre el pan, porque no lo dijiste. Esa persona es la computadora.
 
 > 🌎 **Otro ejemplo:** es como las instrucciones de un mueble para armar: paso 1, paso 2, paso 3. Si cambias el orden, el mueble queda mal.
@@ -277,6 +300,68 @@ function viajesBuenos(viajes, minimo) {
 }
 ```
 
+### Miniproyecto · ¿Me alcanza para el combustible?
+
+Ya calculaste cuánto cuesta llenar parte del tanque. Ahora vas a decidir si el gasto cabe en el presupuesto y después vas a sumar varios viajes.
+
+Si tienes 100 y gastas justo 100, ¿te alcanza? Predice qué debería mostrar el programa para 99, 100 y 101 antes de revisarlo.
+
+```ejercicio
+titulo: Comprueba el presupuesto
+lenguaje: js
+pide: Haz que `revisarPresupuesto` diga «Te pasaste» solo cuando el total sea mayor que el presupuesto. Si son iguales o sobra dinero, debe decir «Alcanza».
+pista: Oralmente, completa «si el total es mayor que el presupuesto…». En código, la comparación se escribe dentro de los paréntesis del `if`.
+--- código
+function revisarPresupuesto(total, presupuesto) {
+  if (false) {
+    return 'Te pasaste';
+  }
+  return 'Alcanza';
+}
+--- pruebas
+prueba('99 de 100 alcanza', () => igual(revisarPresupuesto(99, 100), 'Alcanza'));
+prueba('100 de 100 alcanza', () => igual(revisarPresupuesto(100, 100), 'Alcanza'));
+prueba('101 de 100 se pasa', () => igual(revisarPresupuesto(101, 100), 'Te pasaste'));
+--- solución
+function revisarPresupuesto(total, presupuesto) {
+  if (total > presupuesto) {
+    return 'Te pasaste';
+  }
+  return 'Alcanza';
+}
+```
+
+Imagina tres viajes de 10, 5 y 2 litros, a 6 por litro. Calcula el total a mano. Después completa el ciclo y compara los resultados.
+
+```ejercicio
+titulo: Suma el combustible de varios viajes
+lenguaje: js
+pide: En cada vuelta del ciclo, calcula lo que costó ese viaje y súmalo a `total`. Una lista vacía debe sumar cero.
+pista: `litros` es la cantidad de un viaje. Multiplica esa cantidad por `precioPorLitro` y añádela al valor que ya tengas en `total`.
+--- código
+function sumarViajes(viajes, precioPorLitro) {
+  let total = 0;
+  for (const litros of viajes) {
+    // agrega aquí el costo de este viaje
+  }
+  return total;
+}
+console.log(sumarViajes([10, 5, 2], 6));
+--- pruebas
+prueba('tres viajes a 6 por litro suman 102', () => igual(sumarViajes([10, 5, 2], 6), 102));
+prueba('usa el precio que recibe', () => igual(sumarViajes([2, 3], 4), 20));
+prueba('sin viajes no hay gastos', () => igual(sumarViajes([], 6), 0));
+--- solución
+function sumarViajes(viajes, precioPorLitro) {
+  let total = 0;
+  for (const litros of viajes) {
+    total = total + litros * precioPorLitro;
+  }
+  return total;
+}
+console.log(sumarViajes([10, 5, 2], 6));
+```
+
 ```practica
 elige :: ¿Por qué no basta con decirle a la máquina "si viene un carro, espera", sin el "si no"? :: Porque es muy corto :: Porque no sabría qué hacer cuando NO viene un carro: hay que pensar los dos caminos :: Porque el carro no importa
 vf :: Una decisión (if) necesita una condición que se pueda responder con sí o no
@@ -297,6 +382,85 @@ Para que no te pierdas, así funciona todo:
 - **El certificado.** Cuando terminas un curso, el sitio te da un certificado con un código. Cualquiera lo puede comprobar con el botón **🎓 verificar** de arriba, sin cuenta.
 
 > 💡 **Idea:** no corras. Es mejor **una** clase bien entendida que cinco a medias. Marca el bombillo solo cuando de verdad lo entendiste; si no, déjalo apagado y vuelve.
+
+### Miniproyecto · Muestra los gastos en una página
+
+El navegador dibuja títulos y párrafos a partir del **HTML**. En este ejemplo, `id="total"` es el nombre del espacio reservado para el total. JavaScript coloca el resultado ahí con `textContent`. Ese código ya está preparado.
+
+Une lo que hiciste antes. Con 10, 5 y 2 litros a 6 por litro tienes un gasto de 102 y un presupuesto de 100. Predice el aviso, completa la condición y toca **▶ probar** para ver la página. Luego añade otro viaje a la lista y explica qué cambió en el cálculo. También puedes subir el presupuesto y comprobar cuándo cambia el aviso.
+
+```ejercicio
+titulo: Tu primera página de gastos de combustible
+lenguaje: html
+pide: Sustituye `false` por la condición del presupuesto. Comprueba que la página muestre 102 y «Te pasaste» con los datos de inicio.
+pista: La suma ya está en `total` y el límite en `presupuesto`. Compara esos dos nombres dentro del `if`, como en la práctica anterior.
+--- código
+<h2>Mis gastos de combustible</h2>
+<p>Precio por litro: <strong id="precio"></strong></p>
+<p>Total: <strong id="total"></strong></p>
+<p>Presupuesto: <strong id="presupuesto"></strong></p>
+<p id="mensaje"></p>
+
+<script>
+  const viajes = [10, 5, 2];
+  const precioPorLitro = 6;
+  const presupuesto = 100;
+
+  let total = 0;
+  for (const litros of viajes) {
+    total = total + litros * precioPorLitro;
+  }
+
+  let mensaje = 'Alcanza';
+  if (false) {
+    mensaje = 'Te pasaste';
+  }
+
+  document.getElementById('precio').textContent = precioPorLitro;
+  document.getElementById('total').textContent = total;
+  document.getElementById('presupuesto').textContent = presupuesto;
+  document.getElementById('mensaje').textContent = mensaje;
+</script>
+--- pruebas
+prueba('muestra el total y el presupuesto', () => {
+  const precio = Number($('#precio').textContent);
+  const presupuesto = Number($('#presupuesto').textContent);
+  ok(precio > 0 && presupuesto > 0, 'El precio y el presupuesto deben aparecer en la página');
+  ok(Number($('#total').textContent) > 0, 'Falta mostrar el gasto total');
+});
+prueba('el aviso corresponde a los importes de la página', () => {
+  const total = Number($('#total').textContent);
+  const presupuesto = Number($('#presupuesto').textContent);
+  igual($('#mensaje').textContent, total > presupuesto ? 'Te pasaste' : 'Alcanza');
+});
+--- solución
+<h2>Mis gastos de combustible</h2>
+<p>Precio por litro: <strong id="precio"></strong></p>
+<p>Total: <strong id="total"></strong></p>
+<p>Presupuesto: <strong id="presupuesto"></strong></p>
+<p id="mensaje"></p>
+
+<script>
+  const viajes = [10, 5, 2];
+  const precioPorLitro = 6;
+  const presupuesto = 100;
+
+  let total = 0;
+  for (const litros of viajes) {
+    total = total + litros * precioPorLitro;
+  }
+
+  let mensaje = 'Alcanza';
+  if (total > presupuesto) {
+    mensaje = 'Te pasaste';
+  }
+
+  document.getElementById('precio').textContent = precioPorLitro;
+  document.getElementById('total').textContent = total;
+  document.getElementById('presupuesto').textContent = presupuesto;
+  document.getElementById('mensaje').textContent = mensaje;
+</script>
+```
 
 ### Si nunca programaste: tu ruta, paso a paso
 

@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
-import { CLASES, CURSOS, ANTES, ANTES_CLASE, numeroCurso, clasesDelCurso } from '../web/cursos.js';
+import { CLASES, CURSOS, RUTA_INICIAL, ANTES, ANTES_CLASE, numeroCurso, clasesDelCurso } from '../web/cursos.js';
 
 const raiz = new URL('..', import.meta.url);
 const LENGUAJE_DEL_CURSO = { javascript: 'javascript', node: 'javascript', reactnative: 'javascript', kotlin: 'kotlin', swift: 'swift', python: 'python' };
@@ -39,5 +39,15 @@ test('ningún curso usa en sus ejercicios un lenguaje que no enseña ni pide ant
           `la clase ${clase} (curso ${id}) tiene ejercicios en ${l}, pero ni el curso ni la clase piden ver antes ${ensena}`);
       }
     }
+  }
+});
+
+test('la ruta inicial intercala los cursos sin saltarse sus requisitos de avance', () => {
+  const ruta = RUTA_INICIAL.flatMap((paso) => paso.clases);
+  assert.deepEqual(ruta.slice(0, 6), ['116', '45', '46', '47', '48', '01']);
+  assert.equal(ruta.at(-1), '84');
+  for (const curso of ['programacion', 'javascript']) {
+    const orden = clasesDelCurso(curso);
+    assert.deepEqual(ruta.filter((id) => orden.includes(id)), orden);
   }
 });

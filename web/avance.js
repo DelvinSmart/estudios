@@ -1,13 +1,27 @@
 // El avance en este navegador: cuántas partes tiene cada clase, cuántas están prendidas
 // y en qué estado está cada clase. Solo datos: no dibuja nada.
 
-import { CLASES, ETAPAS, cursoDeEtapa, clasesDelCurso } from './cursos.js';
+import { CLASES, ETAPAS, RUTA_INICIAL, cursoDeEtapa, clasesDelCurso } from './cursos.js';
 import { leerArchivo, partir } from './lector.js';
 import { idParte, estaEntendida, versionProgreso } from './guardado.js';
 
 // Cuántas partes (bombillos) tiene cada clase: se cuenta al arrancar.
 export const conteo = {};
 export const ORDEN = ETAPAS.flatMap((e) => e.clases);
+const rutaInicial = RUTA_INICIAL.flatMap((paso) => paso.clases);
+const ordenEstudio = [...new Set([...rutaInicial, ...ORDEN])];
+
+export function siguienteDeRutaInicial(num) {
+  const i = rutaInicial.indexOf(num);
+  return i < 0 ? undefined : rutaInicial[i + 1];
+}
+
+export function primeraPartePendiente(num, doc, total) {
+  for (let i = 1; i <= total; i++) {
+    if (!estaEntendida(idParte(num, doc, i))) return i;
+  }
+  return 1;
+}
 
 export function rutaDoc(num, doc = 0) {
   const c = CLASES[num];
@@ -34,13 +48,13 @@ export function prendidos(num) {
 }
 
 // El progreso sale SOLO de los bombillos de este navegador: cada persona ve el suyo.
-// "Voy aquí" es la primera clase del mapa que todavía no tiene todos sus bombillos prendidos.
+// "Voy aquí" es la primera clase del recorrido de estudio que todavía no tiene todos sus bombillos prendidos.
 // Se recuerda mientras el progreso no cambie: la portada la pregunta una vez por cada clase,
 // y recalcularla cada vez recorría todas las clases de nuevo (un bucle dentro de otro bucle).
 let actual = { version: -1, num: undefined };
 export function claseActual() {
   if (actual.version !== versionProgreso()) {
-    actual = { version: versionProgreso(), num: ORDEN.find((n) => !conteo[n] || prendidos(n) < conteo[n]) };
+    actual = { version: versionProgreso(), num: ordenEstudio.find((n) => !conteo[n] || prendidos(n) < conteo[n]) };
   }
   return actual.num;
 }

@@ -17,7 +17,6 @@ function htmlParada(p, i) {
       <a class="isla-enlace" href="${p.href}">
         <span class="isla" aria-hidden="true">
           <span class="isla-roca"></span><span class="isla-pasto"></span>
-          <span class="isla-arbol a1">🌲</span><span class="isla-arbol a2">🌲</span>
           <span class="isla-icono">${p.icono}</span>
           ${i === 0 ? '<span class="isla-inicio mono">📍 INICIO</span>' : ''}
         </span>
@@ -105,9 +104,9 @@ function dibujarCamino(mapa) {
   svg.setAttribute('width', caja.width);
   svg.setAttribute('height', caja.height);
   svg.setAttribute('viewBox', `0 0 ${caja.width} ${caja.height}`);
-  const puntos = [...mapa.querySelectorAll('.isla')].map((el) => {
+  const puntos = [...mapa.querySelectorAll('.isla-enlace')].map((el) => {
     const r = el.getBoundingClientRect();
-    return { x: r.left - caja.left + r.width / 2, y: r.top - caja.top + r.height * 0.62 };
+    return { x: r.left - caja.left + el.firstElementChild.offsetWidth / 2, y: r.top - caja.top + r.height / 2 };
   });
   if (puntos.length < 2) return;
   // Curvas suaves entre isla e isla.
@@ -127,14 +126,22 @@ function dibujarCamino(mapa) {
   svg.querySelector('.camino-hecho').setAttribute('d', recorrido > 0 ? hecho : '');
 }
 
+const observadores = new WeakMap();
+
+export function desactivarMapas(raiz) {
+  observadores.get(raiz)?.disconnect();
+  observadores.delete(raiz);
+}
+
 // Se llama después de poner el HTML en la página.
 export function activarMapas(raiz) {
+  desactivarMapas(raiz);
+  const observar = new ResizeObserver((entradas) => {
+    for (const { target } of entradas) acomodar(target);
+  });
+  observadores.set(raiz, observar);
   raiz.querySelectorAll('.mapa-islas').forEach((mapa) => {
     acomodar(mapa);
-    // Si cambia el ancho (girar el celular, achicar la ventana), se vuelve a acomodar.
-    const observar = new ResizeObserver(() => acomodar(mapa));
     observar.observe(mapa);
-    // Las letras pueden cargar después y cambiar los tamaños: se redibuja el camino.
-    document.fonts?.ready.then(() => dibujarCamino(mapa));
   });
 }

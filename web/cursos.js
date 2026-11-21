@@ -355,7 +355,15 @@ export const ANTES_CLASE = {
   ],
 };
 
-// El número del curso (1, 2, 3…): su lugar en la ruta.
+// Itinerario recomendado sin alterar el orden interno de cada curso.
+export const RUTA_INICIAL = [
+  { clases: ['116'], titulo: 'Escribe tus primeras instrucciones' },
+  { clases: clasesDelCurso('javascript').slice(0, 4), titulo: 'Practica variables, decisiones, funciones y listas' },
+  { clases: clasesDelCurso('programacion').slice(1), titulo: 'Lee código real y construye tus primeras páginas' },
+  { clases: clasesDelCurso('javascript').slice(4), titulo: 'Publica tu web de gastos' },
+];
+
+// El número del curso (1, 2, 3…): su lugar en el catálogo.
 export function numeroCurso(id) {
   return Object.keys(CURSOS).indexOf(id) + 1;
 }

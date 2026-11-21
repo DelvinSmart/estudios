@@ -6,7 +6,8 @@ import { leerArchivo, partir } from '../lector.js';
 import { idParte, estaEntendida, marcarEntendida } from '../guardado.js';
 import * as nube from '../nube.js';
 import { app, ponerMigas, avisar, enLinea, escapar, dos } from '../pantalla.js';
-import { rutaDoc, etapaDe, cursoDeClase, numeroEnCurso, migaEtapa, cortoClase, parteAnterior } from '../avance.js';
+import { rutaDoc, etapaDe, cursoDeClase, numeroEnCurso, migaEtapa, cortoClase, parteAnterior, siguienteDeRutaInicial } from '../avance.js';
+import { hashDeClase } from '../rutas.js';
 import { pintarMarkdown } from '../markdown.js';
 import { ponerBarraDeVoz } from '../voz.js';
 import { ponerBotonAudio } from '../audio.js';
@@ -60,9 +61,10 @@ export async function vistaParte(num, doc, cual) {
     hoja.insertAdjacentHTML('beforeend', `<nav class="pasos"><a class="paso" href="#/clase/${num}/${doc}">← volver al mapa de la clase</a><span></span></nav>`);
   } else if (parte) {
     const id = idParte(num, doc, i);
+    const siguiente = doc === 0 && i === partes.length ? siguienteDeRutaInicial(num) : null;
     hoja.insertAdjacentHTML('beforeend', `
       <nav class="pasos pasos-arriba">
-        <a class="paso" href="#/clase/${num}/${doc}">← volver<span class="medio"> al mapa</span><span class="largo"> de la clase</span></a>
+        <a class="paso" href="#/clase/${num}/${doc}">← volver<span class="medio"> al índice</span><span class="largo"> de la clase</span></a>
         <span class="pasos-lados">
           ${i > 1 ? `<a class="paso" href="#/clase/${num}/${doc}/${i - 1}">‹ anterior</a>` : ''}
           ${i < partes.length ? `<a class="paso" href="#/clase/${num}/${doc}/${i + 1}">siguiente ›</a>` : ''}
@@ -100,8 +102,10 @@ export async function vistaParte(num, doc, cual) {
         <span class="nube-parte mono tenue" id="nube-parte"></span>
       </div>
       <nav class="pasos">
-        ${i > 1 ? `<a class="paso" href="#/clase/${num}/${doc}/${i - 1}">← ${enLinea(partes[i - 2].titulo)}</a>` : `<a class="paso" href="#/clase/${num}/${doc}">← mapa de la clase</a>`}
-        ${i < partes.length ? `<a class="paso derecha" href="#/clase/${num}/${doc}/${i + 1}">${enLinea(partes[i].titulo)} →</a>` : `<a class="paso derecha" href="#/clase/${num}/${doc}">terminé: volver al mapa ✓</a>`}
+        ${i > 1 ? `<a class="paso" href="#/clase/${num}/${doc}/${i - 1}">← ${enLinea(partes[i - 2].titulo)}</a>` : `<a class="paso" href="#/clase/${num}/${doc}">← índice de la clase</a>`}
+        ${i < partes.length ? `<a class="paso derecha" href="#/clase/${num}/${doc}/${i + 1}">${enLinea(partes[i].titulo)} →</a>` : siguiente
+          ? `<a class="paso derecha" href="${hashDeClase(siguiente)}">Sigue: ${escapar(CLASES[siguiente].titulo)} →</a>`
+          : `<a class="paso derecha" href="#/clase/${num}/${doc}">Volver al índice ✓</a>`}
       </nav>`);
     // Si la parte tiene prácticas, el bombillo no se prende hasta aprobarlas todas.
     const botonEntendido = hoja.querySelector('#boton-entendido');

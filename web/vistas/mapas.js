@@ -2,12 +2,12 @@
 // y el de una clase (sus partes). Las tres usan el mapa de islas.
 
 import { htmlLogo, htmlLogos } from '../logos.js';
-import { CLASES, ETAPAS, CURSOS, cursoDeEtapa, ANTES, ANTES_CLASE, numeroCurso } from '../cursos.js';
+import { CLASES, ETAPAS, CURSOS, RUTA_INICIAL, cursoDeEtapa, ANTES, ANTES_CLASE, numeroCurso } from '../cursos.js';
 import { leerArchivo, partir } from '../lector.js';
 import { idParte, estaEntendida } from '../guardado.js';
 import { htmlMapa, htmlProgreso, activarMapas } from '../mapa-islas.js';
 import { app, ponerMigas, escapar, enLinea, dos } from '../pantalla.js';
-import { conteo, ORDEN, rutaDoc, etapaDe, cursoDeClase, ordenDe, prendidos, claseActual, estadoClase, ETIQUETA_ESTADO, numeroEnCurso, numeroEtapa, migaEtapa, cortoClase } from '../avance.js';
+import { conteo, ORDEN, primeraPartePendiente, siguienteDeRutaInicial, rutaDoc, etapaDe, cursoDeClase, ordenDe, prendidos, claseActual, estadoClase, ETIQUETA_ESTADO, numeroEnCurso, numeroEtapa, migaEtapa, cortoClase } from '../avance.js';
 import { pintarMarkdown } from '../markdown.js';
 import { hashDeClase } from '../rutas.js';
 import { palabrasDeClase } from '../glosario.js';
@@ -52,20 +52,13 @@ function htmlAntes(cursoId, claseId) {
   </div>`;
 }
 
-// En la portada: el camino para quien nunca programó, a la vista sin tener que buscarlo.
-// Respeta el orden de los bombillos de cada curso; la explicación completa está en la clase 116, Parte 6.
 function htmlRutaDesdeCero() {
-  const paso = (id, texto) => `<li><a href="${hashDeClase(id)}">${texto}</a></li>`;
-  return `<div class="antes-curso listo ruta-cero">
-    <b>🌱 ¿Nunca programaste? Sigue esta ruta:</b>
+  return `<section class="ruta-cero">
+    <h2>De tu primera línea a una web de gastos</h2>
     <ol>
-      ${paso('116', 'Programar desde cero')}
-      ${paso('45', 'Lo básico del código: JavaScript, clases 01 a 04')}
-      ${paso('01', 'Vuelve a Programación: leer código, la web y el oficio')}
-      ${paso('84', 'Tu primera web publicada: el proyecto final de JavaScript')}
+      ${RUTA_INICIAL.map(({ clases, titulo }) => `<li><a href="${hashDeClase(clases[0])}">${escapar(titulo)}</a></li>`).join('')}
     </ol>
-    <p><a href="${hashDeClase('116', '0', '6')}">Por qué este orden →</a></p>
-  </div>`;
+  </section>`;
 }
 
 // ---------- pantalla 1: el mapa grande ----------
@@ -107,7 +100,7 @@ export function vistaInicio(soloCurso) {
     const logos = [...new Set(etapas.flatMap((e) => e.logos || []))].slice(0, 4);
     const cabeza = `<h2 class="titulo-mapa-curso"><a href="#/curso/${curso.id}"><span class="emoji">${curso.icono}</span> Curso ${numeroCurso(curso.id)}: ${escapar(curso.titulo)}</a>${htmlLogos(logos, 'medio')}
       <span class="mono tenue">${listas}/${clases.length} clases</span></h2>`;
-    return `<section class="curso-mapa" id="curso-${curso.id}">${cabeza}${htmlAntes(curso.id)}${htmlMapa({ paradas, final })}</section>`;
+    return `<section class="curso-mapa" id="curso-${curso.id}">${cabeza}${htmlAntes(curso.id)}${htmlMapa({ paradas, final, clase: `mapa-${curso.id}` })}</section>`;
   }).join('');
   // Las pestañas para saltar de un curso a otro.
   const pestanasCursos = `<nav class="pestanas pestanas-cursos" aria-label="Cursos">
@@ -121,27 +114,34 @@ export function vistaInicio(soloCurso) {
     activarMapas(app);
     return;
   }
+  const parteActual = actual && conteo[actual] ? primeraPartePendiente(actual, 0, conteo[actual]) : null;
+  const destino = parteActual ? hashDeClase(actual, 0, parteActual) : hashDeClase(actual);
   app.innerHTML = `
     <section class="portada cabeza-mapa"><div>
       <p class="mono comentario">// mi carrera de programación</p>
       <h1 class="titulo-grande">Mapa de <span class="acento">estudios</span></h1>
-      <p class="bajada">Los cursos van en orden: el número dice cuál va primero. Si nunca programaste, empieza por el 1.
-        Cada curso dice qué necesitas saber antes, y tiene su mapa y su certificado.</p>
+      <p class="bajada">Empieza con un cálculo de combustible. Cambia el precio, ejecuta el código y comprueba el total en tu navegador.</p>
+      <div class="acciones">
+        ${actual ? `<a class="boton-principal boton-seguir" href="${destino}">${prendidosTodos ? 'Continuar' : 'Escribe tu primera línea de código'}</a>` : ''}
+        <button class="boton" type="button" data-ver-cursos>Explorar cursos</button>
+      </div>
+      ${actual && prendidosTodos ? `<p class="tenue">${escapar(CLASES[actual].titulo)}${parteActual ? ` · parte ${parteActual} de ${conteo[actual]}` : ''}</p>` : ''}
       <div class="contadores mono">
         <span><b>${Object.keys(CURSOS).length}</b> cursos</span>
         <span><b>${total}</b> clases</span>
         <a class="contador-bombillos" href="#/progreso" title="Cada bombillo es una parte de una clase que ya entendiste"><span class="bombillo-chico ${prendidosTodos ? 'prendido' : ''}">💡</span><b>${prendidosTodos}</b>/${totalBombillos} bombillos en todos los cursos</a>
       </div>
-      ${actual ? `<div class="acciones">
-        <a class="boton-principal boton-seguir" href="#/clase/${actual}">▶ ${prendidosTodos ? 'seguir' : 'empezar'}
-          <span class="boton-detalle">clase ${numeroEnCurso(actual)}<span class="boton-titulo"> · ${escapar(CLASES[actual].titulo)}</span></span></a>
-      </div>` : ''}</div>
+      </div>
       ${htmlProgreso(`${hechas} de ${total} clases terminadas`, hechas / total, '#/progreso')}
       ${htmlRutaDesdeCero()}
-      <p class="aviso-verificar">🎓 <b>¿Te mostraron un certificado de este sitio?</b> <a href="#/verificar">Verifícalo aquí con su código</a>: no necesitas cuenta.</p>
     </section>
-    ${pestanasCursos}
-    ${mapas}`;
+    <div id="cursos-mapa" tabindex="-1">${pestanasCursos}${mapas}</div>
+    <p class="aviso-verificar"><a href="#/verificar">Verificar un certificado</a></p>`;
+  app.querySelector('[data-ver-cursos]').addEventListener('click', () => {
+    const cursos = app.querySelector('#cursos-mapa');
+    cursos.focus({ preventScroll: true });
+    cursos.scrollIntoView();
+  });
   activarMapas(app);
 }
 
@@ -192,7 +192,7 @@ export async function vistaEtapa(id) {
       <p class="bajada">${escapar(etapa.desc)}</p></div>
       ${htmlProgreso(`${hechas} de ${etapa.clases.length} clases`, hechas / etapa.clases.length)}
     </section>
-    ${htmlMapa({ paradas: paradasDeClases(etapa), final })}
+    ${htmlMapa({ paradas: paradasDeClases(etapa), final, clase: `mapa-${cursoDeEtapa(etapa)}` })}
     ${navegarEtapas(etapa)}`;
   activarMapas(app);
 }
@@ -222,30 +222,15 @@ export async function vistaClase(num, doc) {
       `<a role="tab" class="pestana ${i === doc ? 'activa' : ''}" href="#/clase/${num}/${i}">${escapar(d.titulo)}</a>`).join('')}</div>`
     : '';
 
-  const enCurso = primeraPendiente(num, doc, partes.length);
+  const enCurso = primeraPartePendiente(num, doc, partes.length);
   const paradas = partes.map((p, i) => {
     const hecha = estaEntendida(idParte(num, doc, i + 1));
-    const marcas = [
-      p.tieneEjemplo ? '<span title="tiene ejemplos de la vida real">🌎 ejemplos</span>' : '',
-      p.tieneCodigo ? '<span title="tiene código">&lt;/&gt; código</span>' : '',
-    ].join('');
     return {
       num: dos(i + 1), titulo: enLinea(p.titulo), desc: p.resumen ? escapar(p.resumen) : '',
-      extra: p.sub.length ? `<ul class="isla-subs">${p.sub.map((t) => `<li>${enLinea(t)}</li>`).join('')}</ul>` : '',
       href: `#/clase/${num}/${doc}/${i + 1}`,
       estado: hecha ? 'hecha' : i + 1 === enCurso ? 'actual' : 'pendiente',
-      icono: hecha ? '💡' : '<span class="bombillo-apagado">💡</span>',
-      pie: `${marcas}${!hecha && i + 1 === enCurso ? '<span class="insignia actual">▶ sigue aquí</span>' : ''}`,
     };
   });
-  const siguienteClase = ORDEN[ORDEN.indexOf(num) + 1];
-  const final = {
-    titulo: listas === partes.length && partes.length ? '¡Clase completa!' : 'Fin de la clase',
-    texto: siguienteClase && cursoDeClase(siguienteClase) === cursoDeClase(num) ? `Sigue: clase ${numeroEnCurso(siguienteClase)}, ${escapar(CLASES[siguienteClase].titulo)} →` : '🎓 el certificado del curso',
-    hecho: listas === partes.length && partes.length > 0,
-    href: siguienteClase && cursoDeClase(siguienteClase) === cursoDeClase(num) ? `#/clase/${siguienteClase}` : (cursoDeClase(num) === 'programacion' ? '#/certificado' : `#/certificado/${cursoDeClase(num)}`),
-  };
-
   const est = estadoClase(num);
   app.innerHTML = `
     <section class="cabeza">
@@ -258,7 +243,7 @@ export async function vistaClase(num, doc) {
         <span>${listas}/${partes.length} partes entendidas</span>
       </div>
       <div class="acciones">
-        ${partes.length ? `<a class="boton-principal" href="#/clase/${num}/${doc}/${primeraPendiente(num, doc, partes.length)}">▶ ${listas ? 'seguir' : 'empezar'}</a>` : ''}
+        ${partes.length ? `<a class="boton-principal" href="#/clase/${num}/${doc}/${enCurso}">▶ ${listas ? 'seguir' : 'empezar'}</a>` : ''}
         ${conPracticas ? '' : `<a class="boton" href="#/clase/${num}/${doc}/todo">leer todo de corrido</a>`}
         ${num === '09' ? '<a class="boton" href="#/laboratorio">🧪 laboratorio de CRUD</a>' : ''}
       </div>
@@ -266,9 +251,13 @@ export async function vistaClase(num, doc) {
     ${htmlAntes(cursoDeClase(num), num)}
     ${cajaPalabras(num)}
     <div id="intro"></div>
-    ${htmlMapa({ paradas, final, clase: 'mapa-partes' })}
+    <ol class="indice-partes" aria-label="Partes de la clase">
+      ${paradas.map((p) => `<li><a href="${p.href}" class="${p.estado}">
+        <span class="mono acento">${p.estado === 'hecha' ? '✓' : p.num}</span>
+        <span>${p.titulo}<small>${p.estado === 'actual' ? 'Continúa aquí' : p.desc}</small></span>
+      </a></li>`).join('')}
+    </ol>
     ${navegarClases(num)}`;
-  activarMapas(app);
 
   if (intro) {
     const det = document.createElement('details');
@@ -280,22 +269,19 @@ export async function vistaClase(num, doc) {
   }
 }
 
-function primeraPendiente(num, doc, total) {
-  for (let i = 1; i <= total; i++) if (!estaEntendida(idParte(num, doc, i))) return i;
-  return 1;
-}
-
 // ¿El documento tiene algún bloque ```practica?
 export const tienePracticas = (md) => /^\s*```practica\b/m.test(md);
 
-// Anterior y siguiente, solo dentro del mismo curso y con el número que se ve (01, 02…).
+// La salida sigue el itinerario inicial cuando la clase forma parte de él.
 function navegarClases(num) {
   const orden = ordenDe(cursoDeClase(num));
   const i = orden.indexOf(num);
   const antes = orden[i - 1];
-  const despues = orden[i + 1];
+  const despues = siguienteDeRutaInicial(num) || orden[i + 1];
   return `<nav class="pasos">
     ${antes ? `<a class="paso" href="#/clase/${antes}">← ${numeroEnCurso(antes)} ${escapar(CLASES[antes].titulo)}</a>` : '<span></span>'}
-    ${despues ? `<a class="paso derecha" href="#/clase/${despues}">${numeroEnCurso(despues)} ${escapar(CLASES[despues].titulo)} →</a>` : '<span></span>'}
+    ${despues
+      ? `<a class="paso derecha" href="${hashDeClase(despues)}">${escapar(CLASES[despues].titulo)} →</a>`
+      : `<a class="paso derecha" href="#/certificado/${cursoDeClase(num)}">Certificado del curso →</a>`}
   </nav>`;
 }

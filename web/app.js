@@ -19,7 +19,8 @@ import { leerTema, guardarTema } from './guardado.js';
 import { prepararBuscador } from './buscar.js';
 import { prepararMenu } from './menu.js';
 import * as nube from './nube.js';
-import { migas, mostrarError, alRedibujar } from './pantalla.js';
+import { app, migas, mostrarError, alRedibujar } from './pantalla.js';
+import { desactivarMapas } from './mapa-islas.js';
 import { contarPartes } from './avance.js';
 import { hayDatosDeSesion, recordarSesion, ponerPrompt, ponerPresentacion, CLAVE_PRESENTACION } from './sesion.js';
 import { vistaInicio, vistaEtapa, vistaClase } from './vistas/mapas.js';
@@ -45,6 +46,7 @@ function ponerBotonVolver(mostrar) {
 }
 
 async function dibujar() {
+  desactivarMapas(app);
   // Acepta la URL bonita (#/programacion/5) y la vieja (#/clase/44): las dos llevan a la misma clase.
   const partesRuta = normalizarRuta(location.hash.replace(/^#\/?/, '').split('/').filter(Boolean));
   // Recordar la última pantalla de estudio (mapa, etapa, clase o parte) para poder volver a ella.

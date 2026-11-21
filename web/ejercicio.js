@@ -57,7 +57,7 @@ export function leerEjercicio(texto) {
   const campos = {};
   let actual = null;
   for (const linea of cabeza.split('\n')) {
-    const m = linea.match(/^(titulo|título|lenguaje|pide):\s*(.*)$/i);
+    const m = linea.match(/^(titulo|título|lenguaje|pide|pista):\s*(.*)$/i);
     if (m) { actual = m[1].toLowerCase().replace('í', 'i'); campos[actual] = m[2]; }
     else if (actual && linea.trim()) campos[actual] += `\n${linea}`;
   }
@@ -66,6 +66,7 @@ export function leerEjercicio(texto) {
     titulo: campo('titulo') || 'Ejercicio',
     lenguaje: (campo('lenguaje') || 'js').toLowerCase(),
     pide: campo('pide'),
+    pista: campo('pista'),
     codigo: secciones.codigo || '',
     pruebas: secciones.pruebas || '',
     solucion: secciones.solucion || '',
@@ -274,6 +275,7 @@ export function crearEjercicio(texto, id) {
       ${r.error ? `<p class="ejercicio-error">✗ ${esc(r.error)}</p>` : ''}
       ${total ? `<p class="ejercicio-cuenta mono ${todo ? 'bien' : ''}">${todo ? '✓ ¡Todas las pruebas pasan!' : `${bien} de ${total} pruebas pasan`}</p>` : ''}
       <ul class="ejercicio-pruebas">${r.resultados.map((x) => `<li class="${x.paso ? 'bien' : 'mal'}"><span>${x.paso ? '✓' : '✗'}</span> ${esc(x.nombre)}${x.paso || !x.mensaje ? '' : `<small>${esc(x.mensaje)}</small>`}</li>`).join('')}</ul>
+      ${ej.pista && (r.error || total > bien) ? `<details class="ejercicio-pista"><summary>¿Necesitas una pista?</summary><p>${enLinea(ej.pista)}</p></details>` : ''}
       ${r.logs?.length ? `<pre class="ejercicio-consola">${esc(r.logs.join('\n'))}</pre>` : ''}`;
     if (vista) resultado.after(vista);
   };
