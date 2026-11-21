@@ -45,6 +45,7 @@ function tarjetaCuenta(comando, titulo, cuerpo) {
         <div class="cuenta-cuerpo">
           <h1 class="titulo-medio">${titulo}</h1>
           ${cuerpo}
+          <p class="cuenta-estado" id="cuenta-estado" role="status"></p>
           <p class="cuenta-error mono" id="cuenta-error" role="alert"></p>
         </div>
       </div>
@@ -67,24 +68,38 @@ function conectarCuenta() {
     b.textContent = ver ? 'ocultar' : 'ver';
   }));
   const g = app.querySelector('#cuenta-google');
-  if (g) g.addEventListener('click', () => intentar(g, async () => { await nube.entrarConGoogle(); despuesDeEntrar(); }));
+  if (g) g.addEventListener('click', () => intentar(g, async () => despuesDeEntrar(await nube.entrarConGoogle()), 'Abriendo Google…'));
 }
 const errorCuenta = (texto) => { const p = app.querySelector('#cuenta-error'); if (p) p.textContent = texto ? `✗ ${texto}` : ''; };
 
 // Ejecuta una acción con el botón deshabilitado y muestra el error si falla.
-async function intentar(boton, accion) {
-  errorCuenta('');
+async function intentar(boton, accion, mensaje = 'Conectando con Aprender…') {
+  const tarjeta = boton.closest('.cuenta-tarjeta');
+  const estado = tarjeta?.querySelector('#cuenta-estado');
+  const error = tarjeta?.querySelector('#cuenta-error');
+  if (tarjeta?.dataset.ocupada || boton.disabled) return;
+  if (tarjeta) tarjeta.dataset.ocupada = 'si';
+  if (estado) estado.textContent = mensaje;
+  if (error) error.textContent = '';
   boton.disabled = true;
-  try { await accion(); } catch (e) { console.warn('cuenta:', e?.code, e?.message); errorCuenta(mensajeDe(e)); } finally { if (document.body.contains(boton)) boton.disabled = false; }
+  try {
+    if (!navigator.onLine) throw { code: 'auth/network-request-failed' };
+    await accion();
+  } catch (e) {
+    if (error) error.textContent = `✗ ${mensajeDe(e)}`;
+    else errorCuenta(mensajeDe(e));
+  } finally {
+    boton.disabled = false;
+    if (tarjeta) delete tarjeta.dataset.ocupada;
+    if (estado) estado.textContent = '';
+  }
 }
 
-function despuesDeEntrar() {
+function despuesDeEntrar(u) {
   recordarSesion(true);
-  nube.usuario().then((u) => {
-    ponerPrompt(u);
-    location.hash = nube.cuentaLista(u) ? (sessionStorage.getItem('mapa-volver') || '#/') : '#/entrar/verificar';
-    try { sessionStorage.removeItem('mapa-volver'); } catch (e) { /* nada */ }
-  });
+  ponerPrompt(u);
+  location.hash = nube.cuentaLista(u) ? (sessionStorage.getItem('mapa-volver') || '#/') : '#/entrar/verificar';
+  try { sessionStorage.removeItem('mapa-volver'); } catch (e) { /* nada */ }
 }
 
 export async function vistaEntrar(paso) {
@@ -213,8 +228,12 @@ export async function vistaEntrar(paso) {
   conectarCuenta();
   const entrar = app.querySelector('#e-entrar');
   const hacer = () => intentar(entrar, async () => {
-    await nube.entrarConCorreo(app.querySelector('#e-correo').value, app.querySelector('#e-clave').value);
-    despuesDeEntrar();
+    const correo = app.querySelector('#e-correo').value.trim();
+    const clave = app.querySelector('#e-clave').value;
+    if (!nube.esGmail(correo)) throw { code: 'propio/no-gmail' };
+    if (!clave) throw { code: 'auth/missing-password' };
+    document.activeElement?.blur();
+    despuesDeEntrar(await nube.entrarConCorreo(correo, clave));
   });
   entrar.addEventListener('click', hacer);
   app.querySelector('#e-clave').addEventListener('keydown', (ev) => { if (ev.key === 'Enter') hacer(); });

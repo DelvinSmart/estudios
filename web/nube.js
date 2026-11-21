@@ -61,13 +61,19 @@ function actualizarCola(usuario) {
 function cargar() {
   if (!cargando) {
     cargando = (async () => {
-      const [{ initializeApp }, A, F, Fn, AC] = await Promise.all([
-        import(`${SDK}firebase-app.js`),
-        import(`${SDK}firebase-auth.js`),
-        import(`${SDK}firebase-firestore.js`),
-        import(`${SDK}firebase-functions.js`),
-        import(`${SDK}firebase-app-check.js`),
-      ]);
+      let App, A, F, Fn, AC;
+      if (esAplicacion()) {
+        ({ App, Auth: A, Firestore: F, Functions: Fn, AppCheck: AC } = await import('./firebase-sdk.js'));
+      } else {
+        [App, A, F, Fn, AC] = await Promise.all([
+          import(`${SDK}firebase-app.js`),
+          import(`${SDK}firebase-auth.js`),
+          import(`${SDK}firebase-firestore.js`),
+          import(`${SDK}firebase-functions.js`),
+          import(`${SDK}firebase-app-check.js`),
+        ]);
+      }
+      const { initializeApp } = App;
       const app = initializeApp(CONFIG);
       if (esAplicacion()) {
         const comprobacion = globalThis.Capacitor.Plugins.FirebaseAppCheck;
@@ -87,7 +93,10 @@ function cargar() {
           });
         } catch (e) { /* si App Check no está disponible, el servidor sigue protegido */ }
       }
-      const auth = A.getAuth(app);
+      // Google usa el selector nativo. El WebView no necesita preparar el iframe OAuth de una web.
+      const auth = esAplicacion()
+        ? A.initializeAuth(app, { persistence: A.browserLocalPersistence })
+        : A.getAuth(app);
       auth.languageCode = 'es'; // los correos (verificar, recuperar contraseña) llegan en español
       const db = F.getFirestore(app);
       // La función que manda los correos con el diseño del sitio (firebase/funciones/index.js).
@@ -96,7 +105,7 @@ function cargar() {
       // La que corrige las prácticas con las respuestas privadas (firebase/funciones/index.js).
       const corregir = Fn.httpsCallable(funciones, 'corregirPractica');
       // Esperar a saber si ya había una sesión abierta; después, avisar de cada cambio.
-      await new Promise((listo) => { const parar = A.onAuthStateChanged(auth, () => { parar(); listo(); }); });
+      await auth.authStateReady();
       A.onAuthStateChanged(auth, (u) => {
         for (const k in progresoCache) delete progresoCache[k];
         reflejarPartesEnNube([]);

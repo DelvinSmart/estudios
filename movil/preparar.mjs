@@ -1,3 +1,4 @@
+import { build } from 'esbuild';
 import { copyFile, cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join, relative } from 'node:path';
@@ -25,6 +26,16 @@ for (const carpeta of lecciones) {
   }
 }
 
+await build({
+  entryPoints: [fileURLToPath(new URL('firebase-sdk.mjs', import.meta.url))],
+  outfile: fileURLToPath(new URL('web/firebase-sdk.js', destino)),
+  bundle: true,
+  minify: true,
+  format: 'esm',
+  platform: 'browser',
+  target: 'safari15',
+});
+
 const recursosLocales = [
   ['https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js', 'marked/marked.min.js', 'marked.min.js'],
   ['https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js', '@highlightjs/cdn-assets/highlight.min.js', 'highlight.min.js'],
@@ -41,7 +52,7 @@ await writeFile(new URL('index.html', destino), index
   .replace(/^ *<link [^\n]*https:\/\/fonts\.(?:googleapis|gstatic)\.com[^\n]*>\n/gm, '')
   .replace('</head>', `  <style>
     .barra { border-top: env(safe-area-inset-top) solid var(--fondo); }
-    body { padding-bottom: env(safe-area-inset-bottom); }
+    body { padding-inline: env(safe-area-inset-left) env(safe-area-inset-right); padding-bottom: env(safe-area-inset-bottom); }
     #cursos-mapa, .mapa-islas { scroll-margin-top: calc(76px + env(safe-area-inset-top)); }
   </style>
 </head>`));
