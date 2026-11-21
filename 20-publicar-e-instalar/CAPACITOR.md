@@ -95,4 +95,11 @@ En Aprender, el progreso oficial se guarda en Firestore por curso y por UID. Al 
 
 **Prueba de principio a fin:** entra con una cuenta de prueba en el iPad, termina una parte y espera que la app confirme que se guardó. Abre el mismo curso con esa cuenta en el iPhone y en la web. Comprueba que «Continuar» ofrece la misma parte. Cierra la sesión y verifica que el siguiente visitante no vea los datos de esa cuenta.
 
-**Estado de Aprender:** las tres apps ya están registradas en el mismo proyecto. La integración de los complementos móviles y la prueba de inicio de sesión, App Check y avance compartido todavía están en desarrollo.
+### Qué comprobamos en Aprender
+
+1. Firebase registró la app web, la app de Apple y la de Android en el mismo proyecto. Descargamos las configuraciones de los dos paquetes y comprobamos que coinciden con el identificador de Aprender.
+2. La primera compilación de iOS con Firebase encontró dos paquetes de Swift con el mismo nombre interno. Pudimos compilar para el simulador al instalar el complemento de App Check con el alias npm `capacitor-firebase-app-check`. Un alias le da otro nombre a la carpeta de la dependencia y conserva el complemento que se ejecuta.
+3. Para comprobar App Attest hicimos una compilación firmada para un dispositivo real. **Xcode rechazó la firma con el equipo personal de Apple** porque su perfil no admite esa capacidad. Por eso el ejemplo de App Attest requiere comprobar primero qué capacidades autoriza el equipo de firma. Una compilación que funciona en el simulador no verifica ese requisito.
+4. Registramos una clave de reCAPTCHA Enterprise para iOS limitada al identificador de Aprender. Este proveedor nativo de Firebase está en vista previa. En Xcode añadimos la biblioteca de reCAPTCHA Enterprise y configuramos su proveedor antes de iniciar Firebase. Compilamos, firmamos e instalamos la app en un iPhone físico. Allí Firebase devolvió un token de App Check usando reCAPTCHA nativo. Falta completar la prueba de cuenta y progreso del paso anterior. [Proveedor de reCAPTCHA para iOS](https://firebase.google.com/docs/app-check/ios/recaptcha-enterprise-provider)
+
+El registro, la compilación, la instalación y el inicio de sesión son comprobaciones distintas. La parte de cuenta y progreso se considera lista cuando el servidor acepta la conexión y los dispositivos muestran el mismo avance tras iniciar sesión con la misma cuenta.
