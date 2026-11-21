@@ -53,3 +53,46 @@ Abre la portada, entra a una lección y ejecuta un ejercicio. Prueba el teclado,
 En esta primera versión móvil de Aprender, la cuenta y el certificado se abren en el sitio web. El progreso local de la app y el del navegador se guardan por separado. Integrar la cuenta en el paquete requiere validar la autenticación y la protección de Firebase en cada plataforma.
 
 Para explicar lo aprendido, contesta en voz alta: ¿qué copia `cap sync`?, ¿qué usarías para instalar una prueba en Android?, ¿qué subirías a Play Console?, ¿cómo llegaría la beta al iPad?
+
+## 6. Conecta la app con el mismo Firebase de la web
+
+Imagina que estudias en una biblioteca. El navegador, el iPad y el iPhone son tres entradas al mismo edificio. Tu tarjeta de biblioteca identifica qué libros tienes prestados, aunque mañana entres por otra puerta. En Aprender, la tarjeta equivale al identificador de tu cuenta, llamado **UID**. Firestore es donde queda anotado el avance. Tener el mismo edificio de fondo es lo que permite continuar en otro dispositivo.
+
+### Paso 1. Registrar cada app
+
+En [Firebase Console](https://console.firebase.google.com/), abre **Configuración del proyecto → General → Tus apps**. Aprender ya tenía una app web. En ese mismo proyecto registramos dos más. Usamos `com.delvinsmart.aprender` como identificador de paquete en Android y como identificador de la app en Apple. El registro de Apple sirve para iPhone y iPad.
+
+Para entenderlo, abre `movil/capacitor.config.json` y busca `appId`. Compáralo con el registro en Firebase. Si una letra cambia, estás presentando la identificación de otra app.
+
+### Paso 2. Llevar la configuración al código que se instala
+
+Firebase genera dos archivos de configuración del SDK, las herramientas con las que nuestra app habla con Firebase:
+
+| Plataforma | Archivo | Dónde se incluye |
+|---|---|---|
+| iPhone y iPad | `GoogleService-Info.plist` | En el proyecto de Xcode, como recurso del destino App |
+| Android | `google-services.json` | En `movil/android/app/`, donde lo lee el complemento de Google Services |
+
+Son como la dirección y los datos de contacto de la biblioteca. El código los usa para llegar al proyecto correcto. Las claves privadas de administración se guardan fuera del código que se instala.
+
+**Comprueba:** en la consola, las tres apps deben verse bajo el mismo proyecto. En Xcode, revisa que el archivo de Apple esté incluido en el destino App. Luego sincroniza y vuelve a compilar. Cambiar la copia del archivo en la computadora por sí solo no cambia lo que ya está instalado en el iPad.
+
+### Paso 3. Entrar con la cuenta y volver a la misma pantalla
+
+**Firebase Authentication** comprueba la identidad. Al entrar con correo o Google, Firebase entrega una sesión. Con Google, la pantalla que permite elegir la cuenta puede abrirse fuera de Aprender. Cuando termina, la app debe recibir el resultado y completar el inicio de sesión. La sesión del navegador y la de la app se guardan en lugares distintos.
+
+Capacitor permite usar un complemento para que iOS y Android abran el selector de Google de su plataforma. En iOS se configura el esquema de retorno que figura en el archivo de Firebase. En Android se registra la huella del certificado con el que se firma el paquete. La firma de pruebas y la firma de Play pueden ser distintas. [Configuración de Google para Capacitor](https://github.com/capawesome-team/capacitor-firebase/blob/main/packages/authentication/docs/setup-google.md)
+
+### Paso 4. Dejar que el servidor controle el acceso
+
+En la biblioteca te pueden pedir dos cosas. Tu tarjeta dice **quién eres**. El lector de la entrada confirma **por qué puerta llegaste**. En Aprender, Authentication verifica la cuenta y **App Check** verifica que la solicitud venga de una app autorizada. Después, las reglas de Firestore deciden qué puede leer o escribir esa cuenta.
+
+La web usa reCAPTCHA Enterprise para App Check. En el paquete móvil, el proveedor debe configurarse y probarse para la forma real de distribución. Los registros de Firebase por sí solos todavía no activan esa protección. En Aprender, el servidor también valida si aprobaste la práctica antes de contarla para el avance. [App Check en Apple](https://firebase.google.com/docs/app-check/ios/app-attest-provider) · [App Check en Android](https://firebase.google.com/docs/app-check/android/play-integrity-provider)
+
+### Paso 5. Hacer que «Continuar» siga a la cuenta
+
+En Aprender, el progreso oficial se guarda en Firestore por curso y por UID. Al iniciar sesión, la pantalla debe leer las partes confirmadas y ofrecer la siguiente. Al acabar una parte, hay que distinguir entre **guardada en este dispositivo** y **guardada en la nube**. Si la conexión falla, el usuario necesita saber qué quedó pendiente. El servidor sigue decidiendo si la parte puede registrarse.
+
+**Prueba de principio a fin:** entra con una cuenta de prueba en el iPad, termina una parte y espera que la app confirme que se guardó. Abre el mismo curso con esa cuenta en el iPhone y en la web. Comprueba que «Continuar» ofrece la misma parte. Cierra la sesión y verifica que el siguiente visitante no vea los datos de esa cuenta.
+
+**Estado de Aprender:** las tres apps ya están registradas en el mismo proyecto. La integración de los complementos móviles y la prueba de inicio de sesión, App Check y avance compartido todavía están en desarrollo.
