@@ -77,24 +77,39 @@ escribe :: Nombra tres lugares donde puedes correr JavaScript. :: La consola del
 
 ## Parte 2. const y let
 
-> 🌎 **En la vida real:** `const` es tu fecha de nacimiento (no cambia); `let` es tu kilometraje (cambia todos los días).
+### Darle un nombre a un dato
 
-> 🌎 **Otro ejemplo:** Es como una etiqueta permanente frente a una etiqueta de pizarra que se borra.
+Una **variable** es un nombre que utilizas para guardar y luego leer un dato. **Declarar** la variable significa crear ese nombre. En `const precioPorLitro = 5;`, `precioPorLitro` es el nombre y `5` es el valor inicial. **Asignar** es darle un valor a ese nombre con `=`.
 
-### Cuál usar
+### Cuándo usar const
+
+> 🌎 **En la vida real:** imagina un presupuesto de combustible. Anotas el precio de hoy en una línea y lo usas para calcular cuánto cuestan 10, 20 o 30 litros. Mañana puedes hacer otro presupuesto con otro precio. Dentro de cada presupuesto, usas el precio que anotaste para ese día.
+
+Con `const` le das un valor al nombre al declararlo. A partir de ahí puedes leerlo cuantas veces quieras. Si el programa intenta darle otro valor a ese mismo nombre, JavaScript da un error. Puedes editar el código y volver a ejecutarlo con otro valor inicial, como hiciste en el Tema 116.
+
+En el código vas a ver constantes que representan cosas distintas:
+
+| Ejemplo | Por qué queda fijo |
+|---|---|
+| `const MINUTOS_POR_HORA = 60;` | Es una equivalencia que siempre vale. |
+| `const precioPorLitro = 5;` | Es el dato que elegiste para esta cuenta. En otra cuenta puedes empezar con otro precio. |
+| `const total = 10 * precioPorLitro;` | Es un resultado calculado una vez y guardado para mostrarlo o usarlo después. |
+
+Las tres usan el mismo `const`. La tabla muestra tres razones para elegirlo. Cuando una constante contiene una lista, `const` protege el nombre: el programa no puede asignarle otra lista. Los elementos de la lista todavía pueden cambiar. Verás esa diferencia en el Tema 48.
+
+### Cuándo usar let
+
+> 🌎 **En la vida real:** en una hoja de control de viajes, empiezas con cero. Cada vez que terminas un viaje, actualizas el contador.
+
+Con `let` puedes **reasignar** el nombre: darle otro valor después de declararlo.
 
 ```js
-const nombre = 'Delvin';   // no se puede volver a asignar
-let viajes = 0;            // sí cambia
-viajes = viajes + 1;
-viajes += 1;               // lo mismo, más corto
+let viajes = 0;           // declara el contador y empieza en cero
+viajes = viajes + 1;      // lee el 0, suma 1 y guarda el 1 en viajes
+viajes += 1;              // otra forma de decir lo mismo: ahora vale 2
 ```
 
-Regla: **usa `const` siempre**, y `let` solo si el valor va a cambiar. `var` es la forma vieja: no la uses (tiene reglas raras de alcance).
-
-> 🌎 **En la vida real:** es como guardar en una caja fuerte lo que no debe cambiar y en el bolsillo lo que usas todo el día.
-
-> 🌎 **Otro ejemplo:** Es como un contrato firmado (const) frente a una lista de compras (let).
+Para decidir, pregúntate si el programa tendrá que asignarle otro valor a ese nombre. Usa `let` cuando tenga que hacerlo y `const` cuando pueda conservar el valor inicial. En código antiguo también verás `var`. Para los ejercicios de este curso usa `const` y `let`.
 
 ### Nombres en camelCase
 

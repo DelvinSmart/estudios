@@ -20,7 +20,9 @@ Tres ideas para toda la vida:
 
 > 💡 **Idea:** si alguna vez seguiste una receta, armaste un mueble o explicaste cómo llegar a tu casa, ya pensaste "como programador". Ahora vas a aprender a escribirlo en un idioma que la máquina entiende.
 
-### Una instrucción de verdad, palabra por palabra
+### Una primera mirada a un programa
+
+> 💡 **Idea:** aquí vas a ver cómo una instrucción escrita se convierte en una acción de la computadora. Lee el ejemplo con calma y prueba qué pasa al cambiar el precio. Si `const` todavía te resulta confuso, basta con entender qué hace en esta cuenta. En el Tema 45, en la parte **const y let**, vas a aprender con más ejemplos cuándo usar `const` y cuándo usar `let`.
 
 Imagina que vas a echar **10 litros** de combustible y cada litro cuesta **5**. A mano harías: 10 × 5 = 50. Ahora le vas a enseñar esa misma cuenta a la máquina. Como ella no recuerda nada por su cuenta, lo primero es **guardar el precio** en un lugar con nombre.
 
@@ -28,7 +30,7 @@ Imagina que vas a echar **10 litros** de combustible y cada litro cuesta **5**. 
 
 > 📖 **Palabra nueva: variable.** Es esa cajita con nombre que guarda un dato. Aquí la variable se llama `precioPorLitro` y va a guardar el número `5`.
 
-> 📖 **Palabra nueva: constante.** En este ejemplo, es una variable a la que el programa le da un valor al crearla y que ya no puede recibir otro mientras corre. Si `precioPorLitro` empieza con el número `5`, el programa usará ese mismo precio cada vez que lea ese nombre.
+> 📖 **Palabra nueva: constante.** En esta cuenta, el precio por litro queda fijo mientras la computadora calcula. Cuando lee el nombre `precioPorLitro`, usa el `5` que pusiste en la instrucción.
 
 En JavaScript, la palabra `const` viene de «constante». Así se usa para crear `precioPorLitro` con el valor `5`:
 
