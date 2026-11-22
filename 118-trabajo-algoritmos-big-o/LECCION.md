@@ -94,7 +94,7 @@ Elegir una estructura de datos cambia cuánto cuesta cada operación. En la tabl
 
 > 💡 **Idea clave de entrevista:** cuando veas que recorres una lista **dentro** de otro bucle para "buscar si está" o "buscar por id", casi siempre un **Set** o un **Map** lo convierte en una sola pasada. Eso es pasar de O(n²) a O(n).
 
-Un caso clásico: **"¿hay algún repetido en esta lista?"**. La forma lenta compara cada elemento con todos los demás (O(n²)). La rápida usa un **Set**, una colección de valores únicos (Tema 38). `new Set()` empieza vacío. `.has(valor)` comprueba si ya guardaste ese valor y `.add(valor)` lo registra. En `[4, 7, 4]`, el primer `4` se registra. Cuando llega el último `4`, ya está en el conjunto.
+Un caso clásico: **"¿hay algún repetido en esta lista?"**. La forma lenta compara cada elemento con todos los demás (O(n²)). La rápida usa un **Set**, una colección de valores únicos. Aquí se usa en JavaScript; la versión de Python aparece en el Tema 38. `new Set()` empieza vacío. `.has(valor)` comprueba si ya guardaste ese valor y `.add(valor)` lo registra. En `[4, 7, 4]`, el primer `4` se registra. Cuando llega el último `4`, ya está en el conjunto.
 
 En el análisis habitual, suponemos que consultar o agregar al `Set` cuesta O(1) en promedio. El recorrido completo cuesta O(n) y puede guardar hasta n valores distintos, así que usa O(n) de memoria adicional.
 
