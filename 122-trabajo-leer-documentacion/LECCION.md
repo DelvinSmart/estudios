@@ -12,7 +12,7 @@ La **documentación** (la "doc") es el manual oficial de un lenguaje, una librer
 
 Dos verdades que te quitan un peso de encima:
 
-1. **Nadie memoriza las funciones.** Buscar "cómo ordenar una lista en JavaScript" no es de principiante: es lo normal. Lo de principiante es **copiar sin entender**.
+1. **Consultar una función forma parte del trabajo.** Después de leerla, prueba un caso pequeño y explica qué hizo antes de usarla en tu código.
 2. **La doc oficial es la fuente de verdad.** Antes que un video o un foro, está el manual del que hizo la herramienta. Ahí está lo correcto y lo actual.
 
 > 💡 **Idea:** tu valor no es cuántas funciones te sabes de memoria, sino qué tan rápido entiendes algo nuevo leyéndolo. Eso **mejora con la práctica**, como todo.
@@ -39,11 +39,13 @@ array.slice(inicio, fin)
 Lo que tienes que sacar, en orden:
 
 1. **Qué recibe** (los parámetros) y en qué orden. ¿Cuáles son obligatorios y cuáles opcionales?
-2. **Qué devuelve.** ¿Un valor nuevo o cambia el original? (Confundir esto es un bug clásico.)
+2. **Qué devuelve y qué modifica.** Son preguntas distintas. Por ejemplo, `push` devuelve la nueva longitud y además modifica el array. `slice` devuelve un array nuevo con los elementos elegidos.
 3. **El ejemplo.** Casi siempre, el ejemplo te lo deja claro más rápido que el texto.
 4. **Los casos borde.** ¿Qué pasa si le das algo vacío, o un número negativo?
 
 > ⚠️ **Cuidado con una trampa común:** algunas funciones **devuelven algo nuevo** (como `slice`, `map`, `filter`) y otras **cambian el original** (como `sort`, `push`). Leer bien esto te ahorra bugs raros.
+
+Con `['a', 'b', 'c', 'd']`, los índices son 0, 1, 2 y 3. Para conservar hasta el índice 2, el límite final debe quedar justo después del 2. Si el límite pasa del final de la lista, `slice` se detiene donde terminan los elementos.
 
 ✍️ **Ahora escribes tú:** usa una función leyendo solo su ficha.
 

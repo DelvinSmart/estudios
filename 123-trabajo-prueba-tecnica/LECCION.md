@@ -47,15 +47,19 @@ escribe :: Enumera los seis pasos del guion para una prueba técnica en vivo. ::
 
 > 🎙️ **El profesor dice:** este es de los problemas más preguntados del mundo. Vamos a aplicarle el guion.
 
-**El problema:** dada una lista de números y un objetivo, devuelve las **posiciones** de los dos que sumen el objetivo. Ejemplo: `[2, 7, 11, 15]` con objetivo `9` → `[0, 1]` (porque 2 + 7 = 9).
+**El problema:** dada una lista de números y un objetivo, devuelve las **posiciones** de dos elementos distintos que sumen el objetivo. Las posiciones empiezan en 0. Si ninguna pareja sirve, devuelve `[]`. Ejemplo: `[2, 7, 11, 15]` con objetivo `9` → `[0, 1]` (porque 2 + 7 = 9).
 
 Siguiendo el guion:
 
-- **Entender:** ¿puede no haber solución? (Supongamos que siempre hay una.) ¿Un número consigo mismo? (No, dos posiciones distintas.)
+- **Entender:** si el ejercicio admite repetidos, dos posiciones con el mismo valor sí pueden formar una pareja. Con `[3, 3]` y objetivo `6`, sirven las posiciones `[0, 1]`.
 - **Bruta (O(n²)):** por cada número, recorrer el resto buscando el que falta. Funciona, pero con muchos datos es lento.
 - **Mejor (O(n)):** recorrer una vez con un **Map**. Por cada número, calculo **lo que me falta** (`objetivo - número`) y pregunto al Map si ya lo vi. Si sí, encontré la pareja; si no, guardo este número con su posición. Pasé de O(n²) a O(n), como en la clase 118.
 
-✍️ **Ahora escribes tú:** la versión O(n), con un Map.
+En `[8, 1, 4]` con objetivo `5`, guardas el 8 con posición 0 y el 1 con posición 1. Cuando llegas al 4, buscas el 1 y lo encuentras en el mapa. Busca primero y guarda después para usar dos posiciones distintas. `Map.has(valor)` comprueba si guardaste el valor, incluso cuando su posición es 0. `Map.get(valor)` te devuelve esa posición.
+
+El recorrido es O(n) con el supuesto habitual de búsquedas e inserciones de costo promedio constante. El espacio extra también puede llegar a O(n), porque puedes guardar hasta un registro por elemento.
+
+✍️ **Ahora escribes tú:** la versión con un Map.
 
 ```ejercicio
 titulo: Dos números que suman el objetivo (O(n))
@@ -70,6 +74,8 @@ function dosQueSuman(nums, objetivo) {
 prueba('2+7=9', () => igual(dosQueSuman([2, 7, 11, 15], 9), [0, 1]));
 prueba('3+5=8 (posiciones 1 y 3)', () => igual(dosQueSuman([4, 3, 2, 5], 8), [1, 3]));
 prueba('sin pareja', () => igual(dosQueSuman([1, 2, 3], 100), []));
+prueba('dos valores iguales en posiciones distintas', () => igual(dosQueSuman([3, 3], 6), [0, 1]));
+prueba('un elemento no forma pareja consigo mismo', () => igual(dosQueSuman([3], 6), []));
 --- solución
 function dosQueSuman(nums, objetivo) {
   const visto = new Map();
@@ -119,6 +125,6 @@ elige :: El entrevistador corrige algo de tu solución. ¿Qué haces? :: Defiend
 
 > 🎤 **Tu resumen para la prueba técnica, en una frase:** "Entiendo y repito el problema, doy ejemplos con un caso borde, digo la forma simple y la mejoro pensando en el costo, escribo hablando lo que hago, y pruebo al final. Si me trabo, razono en voz alta; si me corrigen, lo tomo; y si no sé algo, lo digo y cuento cómo lo buscaría."
 
-> 🎉 **¡Terminaste el curso "Lo que piden en el trabajo"!** Ya tienes lo que de verdad evalúan: medir el costo (Big-O), pedirle datos a una base (SQL), encontrar errores con el depurador, trabajar en equipo con Git y PRs, leer documentación, y resolver un problema en vivo pensando en voz alta. Eso, con tus proyectos bien contados (clase 117), es un perfil listo para entrevistar.
+> 🎉 **¡Terminaste el curso "Lo que piden en el trabajo"!** Ya tienes lo que de verdad evalúan: medir el costo (Big-O), pedirle datos a una base (SQL), encontrar errores con el depurador, trabajar en equipo con Git y PRs, leer documentación, y resolver un problema en vivo pensando en voz alta. Puedes practicar la entrevista aplicando estos pasos a un problema nuevo y explicando una decisión técnica de uno de tus proyectos (Tema 117).
 
 > 🌎 **En la vida real:** la prueba técnica no es una trampa para ver si fallas; es una conversación para ver cómo sería trabajar contigo. Si piensas en voz alta, con calma y honestidad, ya ganaste la mitad.

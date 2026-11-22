@@ -34,7 +34,7 @@ vf :: SQL le dice a la base QUÉ datos quieres, no el paso a paso de cómo busca
 
 > 🌎 **En la vida real:** es como pedir en una biblioteca: "deme (SELECT) los títulos y autores (columnas) de los libros de la sección cocina (WHERE), ordenados por año (ORDER BY)".
 
-La consulta más común lee filas. Tiene estas partes, **siempre en este orden**:
+Esta consulta usa cuatro cláusulas. Léelas así: `FROM` elige la tabla, `WHERE` deja pasar las filas, `SELECT` indica las columnas que verás y `ORDER BY` ordena la salida. Al escribir la consulta, `SELECT` va primero.
 
 ```sql
 SELECT tipo, valor      -- qué columnas quiero
@@ -43,7 +43,9 @@ WHERE valor > 100       -- qué filas (el filtro)
 ORDER BY valor DESC;    -- cómo ordenarlas (DESC = de mayor a menor)
 ```
 
-**Esto ya lo sabes hacer en JavaScript** (clase 48). Es lo mismo:
+Con los gastos del ejemplo, el peaje de 12 queda fuera del filtro. Salen dos filas, una de 200 y otra de 150, en ese orden. El `id` y la `fecha` quedan fuera de la salida porque la consulta solo pide `tipo` y `valor`.
+
+Puedes reproducir ese resultado en JavaScript con los métodos del Tema 48:
 
 | SQL | JavaScript | Qué hace |
 |---|---|---|
@@ -101,12 +103,13 @@ FROM pedidos
 JOIN clientes ON clientes.id = pedidos.cliente_id;
 ```
 
-- `pedidos.cliente_id` guarda **a qué** cliente pertenece el pedido (se llama **llave foránea**).
+- `clientes.id` identifica a cada cliente. A esa columna se le llama **clave primaria** cuando la tabla garantiza que identifica una sola fila.
+- `pedidos.cliente_id` guarda **a qué** cliente pertenece el pedido. Un pedido con `cliente_id = 7` se empareja con el cliente cuyo `id` es `7`. Una **clave foránea** puede hacer que la base compruebe esa relación.
 - `ON clientes.id = pedidos.cliente_id` dice cómo emparejar las filas.
 
 > 💡 **Idea:** es como el buscador del glosario de este curso: cada palabra tiene el **id** de su clase; para mostrar el **título** de la clase, se cruza con la lista de clases por ese id.
 
-> 📌 **Nota:** hay `INNER JOIN` (solo los que tienen pareja en las dos tablas) y `LEFT JOIN` (todos los de la izquierda, aunque no tengan pareja). Si te preguntan la diferencia: *inner* deja fuera a los solitarios; *left* los mantiene, con vacío en lo que falta.
+> 📌 **Nota:** hay `INNER JOIN` (solo los que tienen pareja en las dos tablas) y `LEFT JOIN` (todos los de la izquierda, aunque no tengan pareja). Si te preguntan la diferencia: *inner* deja fuera a los solitarios; *left* conserva las filas de la tabla izquierda y devuelve `NULL` para las columnas de la derecha cuando falta la pareja.
 
 ```practica
 elige :: ¿Para qué sirve un JOIN? :: Para borrar filas :: Para juntar filas de dos tablas que se relacionan por una columna (por ejemplo, pedido con su cliente) :: Para ordenar
@@ -127,7 +130,9 @@ GROUP BY tipo;
 
 Esto da **una fila por tipo**, con cuántos hay y la suma. Las agregaciones más usadas: `COUNT` (cuántos), `SUM` (suma), `AVG` (promedio), `MIN`, `MAX`.
 
-**En JavaScript es un `reduce`** (clase 48): recorres y vas juntando en un acumulador por grupo.
+Con la tabla de arriba, combustible tiene dos gastos y suma 350. Peaje tiene uno y suma 12. `COUNT(*)` cuenta filas de cada grupo y `SUM(valor)` suma la columna `valor`.
+
+En JavaScript, `reduce` puede llevar un objeto con las sumas. La clave es el tipo del gasto actual. La primera vez que aparece un tipo, empieza en cero. Después usa el total que quedó guardado en la vuelta anterior.
 
 > ⚠️ **Dato de entrevista:** para filtrar **antes** de agrupar se usa `WHERE`; para filtrar **sobre el resultado ya agrupado** (por ejemplo, "solo los tipos con total mayor a 500") se usa `HAVING`. Confundirlos es un error típico.
 
@@ -166,10 +171,10 @@ escribe :: ¿Qué hace esta consulta? SELECT tipo, SUM(valor) AS total FROM gast
 
 ## Para la entrevista
 
-> 🎤 **Si te piden escribir una consulta:** di en voz alta las partes en orden — "SELECT las columnas, FROM la tabla, WHERE el filtro, y si hace falta JOIN para traer el nombre, GROUP BY para resumir". Pensar en ese orden evita que te trabes.
+> 🎤 **Si te piden escribir una consulta:** di en voz alta las partes en orden — «Identifico la tabla y las columnas. Si necesito datos de otra tabla, explico con qué claves hago el `JOIN`. Luego decido qué filas filtra `WHERE` y si necesito agrupar con `GROUP BY`». Pensar en ese orden evita que te trabes.
 
 > 🎤 **Si te preguntan por rendimiento:** menciona dos clásicos. **(1)** Evitar `SELECT *` y pedir solo las columnas que usas. **(2)** El problema **N+1**: hacer una consulta y después **una por cada fila** del resultado (cientos de viajes a la base); se arregla con un **JOIN** o pidiendo todo de una. Saber esto impresiona.
 
-> ⚠️ **Y lo más importante de seguridad** (clase 23): **nunca** pegues lo que escribe el usuario dentro de la consulta con `+`. Usa **consultas con parámetros** (`?`), o te exponen a inyección SQL. En la clase 114 lo atacaste con sqlmap y lo arreglaste así.
+> ⚠️ **Y lo más importante de seguridad** (clase 23): **nunca** pegues lo que escribe el usuario dentro de la consulta con `+`. Usa **consultas con parámetros** (`?`), o te exponen a inyección SQL. El Tema 23 explica cómo separar la consulta de los valores.
 
 > 🌎 **En la vida real:** saber SQL es como saber pedir bien en una ferretería enorme: si sabes nombrar lo que quieres, sales en un minuto con exactamente eso; si no, das vueltas entre los pasillos.

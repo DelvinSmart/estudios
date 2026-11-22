@@ -12,7 +12,7 @@
 
 El método, en cinco pasos:
 
-1. **Reprodúcelo.** Encuentra los pasos exactos que hacen fallar. Un bug que no puedes repetir no lo puedes arreglar con seguridad.
+1. **Reprodúcelo.** Encuentra los pasos exactos que hacen fallar. Si ocurre de forma intermitente, apunta los datos, la hora y el estado que observaste para poder investigarlo.
 2. **Lee el error.** El mensaje y el *stack trace* (clase 07) dicen **dónde** y **qué**. Léelo antes que nada; muchas veces ya dice la respuesta.
 3. **Aísla.** Reduce el problema: ¿falla con todos los datos o solo con algunos? ¿desde cuándo? Parte el problema por la mitad.
 4. **Forma una hipótesis y compruébala.** "Creo que `valor` llega vacío." Míralo. Si era eso, bien; si no, otra hipótesis.
@@ -66,7 +66,7 @@ Un **depurador** está en el navegador (las *DevTools*, pestaña *Sources*) y en
 |---|---|
 | **Breakpoint** (punto de parada) | Marcas una línea y el programa **se detiene** justo ahí. Se pone haciendo clic al lado del número de línea. |
 | **Ver las variables** | Con el programa pausado, ves **cuánto vale cada cosa** en ese momento. Sin imaginar: el valor real. |
-| **Step over** (pasar por encima) | Ejecuta la línea actual y para en la siguiente. |
+| **Step over** (pasar por encima) | Ejecuta la instrucción actual sin entrar a las funciones que llama y pausa en el siguiente punto del mismo nivel. |
 | **Step into** (entrar) | Si la línea llama a una función, **entra** a verla por dentro. |
 | **Continuar** | Sigue hasta el próximo breakpoint. |
 | **La pila de llamadas** (*call stack*) | Qué función llamó a cuál para llegar hasta aquí. |
@@ -82,6 +82,8 @@ escribe :: ¿Cuál es el superpoder del depurador frente a imaginar qué pasa? :
 ```
 
 ## Parte 4. Practica: caza el bug
+
+En el primer ejercicio, ejecuta la prueba antes de editar. Para `[2, 4, 6]`, observa que la suma vale `12` y la cantidad vale `3`. Para `[]`, la suma inicial de `reduce` sigue en `0` y la cantidad también es `0`. En JavaScript, `0 / 0` da `NaN`. La consigna fija `0` como resultado de la función cuando no hay datos.
 
 > 🎙️ **El profesor dice:** aquí tienes una función con un error de verdad, de los que pasan todo el tiempo. No la reescribas entera: **léela, forma una hipótesis** (¿qué valor no es el que crees?) y arregla la causa. Las pruebas te dicen qué esperaba.
 
@@ -107,6 +109,8 @@ function promedio(valores) {
   return suma / valores.length;
 }
 ```
+
+> 🧩 **Antes de corregir:** separa la operación en dos. Con precio `100` y porcentaje `20`, el monto del descuento es `100 × 20 / 100 = 20`. Ahora sigue qué hace el programa con ese `20` y comprueba si el precio final debe quedar por debajo o por encima de `100`.
 
 ```ejercicio
 titulo: El descuento al revés

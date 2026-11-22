@@ -8,7 +8,7 @@
 
 > 🌎 **En la vida real:** en un restaurante, el cocinero nuevo no sirve su plato directo al cliente; primero lo prueba el jefe de cocina. En código, `main` es lo que llega al cliente, y el jefe de cocina es la **revisión del PR**.
 
-El flujo de equipo, que es el de casi todas las empresas:
+En un equipo que usa ramas y revisión por PR, el cambio suele seguir este camino:
 
 1. **Creas una rama** para tu tarea: `git switch -c arreglo-login` (clase 06).
 2. Haces tus **commits** ahí, sin tocar `main`.
@@ -31,7 +31,7 @@ escribe :: Describe el flujo de un cambio en equipo, de la rama a main. :: Creo 
 
 > 🌎 **En la vida real:** tú y un compañero editaron **la misma frase** del mismo documento, cada uno a su manera. Al juntar, el sistema no sabe cuál vale, así que te muestra las dos y te pregunta a ti. Eso es un conflicto.
 
-Un **conflicto** pasa cuando dos ramas cambiaron **las mismas líneas** y Git no puede decidir solo. No es un error ni rompiste nada: Git te pide que **elijas**. Lo verás así en el archivo:
+Un **conflicto** aparece cuando Git encuentra cambios que no puede combinar por su cuenta. Por ejemplo, dos ramas editaron el mismo saludo de formas distintas. No es un error ni rompiste nada: Git te pide que **elijas**. Lo verás así en el archivo:
 
 ```text
 <<<<<<< HEAD
@@ -46,7 +46,9 @@ Para resolverlo:
 1. Abres el archivo y buscas esas marcas (`<<<<<<<`, `=======`, `>>>>>>>`).
 2. Decides qué debe quedar: lo tuyo, lo de ellos, o una **mezcla** de los dos.
 3. **Borras las tres marcas** y dejas solo el código final correcto.
-4. Guardas, `git add` el archivo y terminas el merge con un commit.
+4. Guarda el archivo y revisa el resultado. Ejecuta `git add` sobre ese archivo para registrar que quedó resuelto. Consulta `git status` y sigue lo que indique para terminar la integración.
+
+En el ejercicio vas a recibir las dos versiones ya separadas. Las marcas del ejemplo son separadores que Git puso en el archivo. Tu función devuelve el contenido elegido según la regla de la práctica.
 
 > ⚠️ **El error más común:** dejar una marca (`=======` o `>>>>>>>`) olvidada en el código. Eso no compila. Revisa que **no quede ninguna** antes de guardar. (El CI suele atraparlo, pero mejor tú.)
 
@@ -102,7 +104,7 @@ Cuando te toca **revisar** el PR de otro (o te revisan el tuyo), esto es lo que 
 - **Marca lo que está bien,** no solo lo malo.
 - **Separa lo importante de lo opcional:** di si algo **bloquea** el merge o es solo una sugerencia ("nit", de *nitpick*, un detalle menor).
 
-> 💡 **Idea:** un buen comentario de revisión **enseña**. "Aquí un `Set` sería O(1) en vez de O(n²)" (clase 118) ayuda y demuestra que sabes, sin pelear.
+> 💡 **Idea:** un buen comentario de revisión **enseña**. "Aquí un `Set` evitaría buscar en toda la lista en cada vuelta. El recorrido completo pasaría de O(n²) a O(n) en el modelo habitual" (clase 118) ayuda y demuestra que sabes, sin pelear.
 
 ```practica
 elige :: Revisando un PR, ves una función con un nombre confuso. ¿Qué comentario es mejor? :: "Esto está mal, no sabes nombrar" :: "Este nombre no me dice qué hace, ¿lo cambiamos por algo como calcularTotal?" :: No decir nada

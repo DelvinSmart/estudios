@@ -15,7 +15,7 @@ La clave es **cómo crece** ese costo cuando los datos crecen:
 - Si tienes **10** datos, casi todo es rápido.
 - Si tienes **10 millones**, la diferencia entre una solución y otra puede ser **instantáneo vs. minutos** (o el programa que se cuelga).
 
-Por eso no se mide en segundos (dependen de la máquina), sino en **cómo crece el número de pasos**. A esa forma de medir se le llama **Big-O** (se dice "big o", la "O grande").
+Usamos **Big-O** para describir cómo crece un costo al aumentar los datos. La letra `n` representa el tamaño de la entrada. Si revisas una lista de 100 gastos, `n` vale 100. Si la duplicas, puedes preguntarte cuánto crecen el trabajo y la memoria que usa tu solución.
 
 > 💡 **Idea:** Big-O no dice cuánto tarda; dice **cómo empeora** cuando hay más datos. Es la pregunta "¿esto aguanta si la app crece?".
 
@@ -41,9 +41,11 @@ vf :: Dos soluciones que dan el mismo resultado correcto siempre cuestan lo mism
 
 - ¿Un bucle que recorre los datos una vez? → **O(n)**.
 - ¿Un bucle **dentro** de otro, los dos sobre los datos? → **O(n²)**. ⚠️ Es la señal de alarma más común.
-- ¿Sin bucles, o partes por la mitad cada vez? → **O(1)** u **O(log n)**: lo mejor.
+- ¿Solo consultas una posición conocida de un array? En este modelo, ese acceso es **O(1)**.
+- ¿Reduces a la mitad lo que queda en cada paso? Eso da **O(log n)**. En una búsqueda binaria, esto funciona porque los datos están ordenados.
+- Cuenta también el trabajo que hace cada llamada. Un solo bucle que llama a `includes` sobre una lista de tamaño `n` en cada vuelta puede acabar haciendo trabajo **O(n²)**.
 
-> 📌 **Nota:** siempre se piensa en el **peor caso** (el más lento posible), porque es el que te puede tumbar la app. Lo viste en la clase 17 al medir el rendimiento.
+> 📌 **Nota:** empieza analizando el **peor caso**, salvo que la pregunta pida el promedio u otro caso. Big-O describe el crecimiento. Puedes medir tiempos después para conocer el efecto real en la app.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
@@ -82,7 +84,7 @@ escribe :: Explica con el ejemplo del diccionario la diferencia entre O(n) y O(l
 
 > 🌎 **En la vida real:** para saber si alguien ya entró a una fiesta, el portero puede (a) recorrer la lista de invitados nombre por nombre cada vez (`O(n)`), o (b) marcar a cada uno en una tabla al entrar y solo **mirar la marca** (`O(1)`). La segunda es instantánea por más gente que haya.
 
-El truco de entrevista más común para que algo lento se vuelva rápido es **elegir otra estructura de datos**:
+Elegir una estructura de datos cambia cuánto cuesta cada operación. En la tabla, los costos de consulta de `Set` y `Map` son los que se suelen usar en el análisis promedio de entrevista. Crear la estructura también requiere recorrer y guardar los datos.
 
 | Quiero… | Estructura lenta | Estructura rápida | De… a… |
 |---|---|---|---|
@@ -92,7 +94,9 @@ El truco de entrevista más común para que algo lento se vuelva rápido es **el
 
 > 💡 **Idea clave de entrevista:** cuando veas que recorres una lista **dentro** de otro bucle para "buscar si está" o "buscar por id", casi siempre un **Set** o un **Map** lo convierte en una sola pasada. Eso es pasar de O(n²) a O(n).
 
-Un caso clásico: **"¿hay algún repetido en esta lista?"**. La forma lenta compara cada elemento con todos los demás (O(n²)). La rápida usa un Set: recorres una vez y, por cada valor, preguntas si ya lo viste.
+Un caso clásico: **"¿hay algún repetido en esta lista?"**. La forma lenta compara cada elemento con todos los demás (O(n²)). La rápida usa un **Set**, una colección de valores únicos (Tema 38). `new Set()` empieza vacío. `.has(valor)` comprueba si ya guardaste ese valor y `.add(valor)` lo registra. En `[4, 7, 4]`, el primer `4` se registra. Cuando llega el último `4`, ya está en el conjunto.
+
+En el análisis habitual, suponemos que consultar o agregar al `Set` cuesta O(1) en promedio. El recorrido completo cuesta O(n) y puede guardar hasta n valores distintos, así que usa O(n) de memoria adicional.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
@@ -151,7 +155,7 @@ escribe :: Enumera los pasos para resolver un problema en vivo en una entrevista
 
 ## Para la entrevista
 
-> 🎤 **Si te preguntan "¿cuál es la complejidad de tu solución?":** "Esta recorre la lista una vez, así que es O(n). Si en vez de un Set usara includes en un array dentro del bucle, sería O(n²), porque includes vuelve a recorrer cada vez; por eso uso un Set, que responde en O(1)." (Nombrar el costo y por qué elegiste la estructura es lo que buscan.)
+> 🎤 **Si te preguntan "¿cuál es la complejidad de tu solución?":** "Esta recorre la lista una vez, así que es O(n). Si en vez de un Set usara includes en un array dentro del bucle, sería O(n²), porque includes puede recorrer los datos vistos en cada vuelta. Con el supuesto de que buscar y agregar al Set cuesta O(1) en promedio, el recorrido completo es O(n) y usa O(n) de memoria adicional." (Nombrar el costo y por qué elegiste la estructura es lo que buscan.)
 
 > 🎤 **Si te preguntan "¿qué estructura usarías para X?":** piensa qué operación harás **muchas veces**: si es "¿está?", un Set; si es "dame el de este id", un Map; si es recorrer en orden, un array. La estructura correcta suele ser la diferencia entre O(n²) y O(n).
 
