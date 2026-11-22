@@ -20,6 +20,16 @@ export function Saludo() {
 }
 ```
 
+Léelo línea por línea:
+
+| Pieza | Qué significa |
+|---|---|
+| `import { Text } from 'react-native'` | **Trae** la pieza `Text`, que sirve para mostrar texto en el teléfono. |
+| `export` | Permite que **otros archivos** usen este componente. |
+| `function Saludo()` | Crea una función llamada `Saludo`. |
+| `return` | **Entrega** lo que se va a dibujar. |
+| `<Text>…</Text>` | Se escribe parecido a HTML y dice: «muestra este texto». A esta forma de escribir se le llama **JSX**. |
+
 Un componente es una **función** que devuelve lo que se dibuja. Su nombre empieza con **mayúscula**. Se usa como una etiqueta: `<Saludo />`.
 
 > 🌎 **En la vida real:** es como una receta con nombre propio: "Torta de la abuela". La pides por su nombre.

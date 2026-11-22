@@ -152,6 +152,13 @@ gananciaNeta('300', 80);   // ❌ TypeScript avisa: '300' es texto, no número
 
 > 🌎 **Otro ejemplo:** Es como la etiqueta "frágil" en una caja: no cambia la caja, pero evita que la traten mal.
 
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`string`** significa texto y **`number`** significa número. Ojo: `'12'` con comillas es texto; `12` sin comillas es número.
+> - **`interface Viaje { ... }`** es como un **formulario**: dice que todo viaje debe tener `app`, que es texto, y `valor`, que es número.
+> - **`Viaje[]`** significa «una lista de viajes».
+> - **`{ app: 'Uber', valor: 12 }`** es un viaje con sus dos datos.
+> - La función `total` ya funciona y suma los valores. **No la toques:** solo tienes que arreglar la línea de `hoy`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

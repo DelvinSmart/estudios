@@ -234,6 +234,8 @@ async function cargarEstudio() {
 | **Promesa** | Un recibo de "esto va a llegar". Como el número de tu pedido. |
 | `await` | "Espera aquí hasta que llegue" (sin congelar la página). |
 | `async` | Marca una función que usa `await` por dentro. |
+| `respuesta.ok` | `true` si el archivo llegó bien. El signo `!` significa **no**: `!respuesta.ok` se lee «si **no** llegó bien». |
+| `throw new Error(...)` | **Detiene** la función y avisa que hubo un error, con ese mensaje. |
 | `.json()` | Convierte el texto JSON en un objeto de JavaScript. |
 | `.text()` | Lo deja como texto (este mapa lo usa para leer los `.md`). |
 

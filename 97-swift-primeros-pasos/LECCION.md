@@ -32,6 +32,29 @@ Para las apps del iPhone (desde la clase 102) se usa **Xcode**: gratis, desde la
 
 Copiloto es una app de **React Native** (TypeScript), pero algunas cosas solo las puede hacer el iPhone **por dentro**: leer la pantalla compartida, sacar el texto de una imagen, mostrar una notificación con botones. Para eso tiene un **módulo nativo**, escrito en Swift, que la parte de TypeScript llama como si fuera una función más. En Android, ese mismo módulo está escrito en Kotlin. Lo vas a ver en la clase 106.
 
+### Antes del ejercicio: cómo se lee una función en Swift
+
+Una función es como una licuadora: **recibe** algo, hace su trabajo y **devuelve** un resultado. En Swift se escribe así:
+
+```swift
+func saludo(_ nombre: String) -> String {
+    return "Hola, \(nombre)"
+}
+
+print(saludo("Delvin"))   // muestra Hola, Delvin
+```
+
+| Pieza | Qué significa |
+|---|---|
+| `func` | «Voy a crear una función». |
+| `saludo` | El **nombre** de la función. |
+| `nombre: String` | Lo que **recibe**: una cajita llamada `nombre` que guarda texto. `String` significa **texto**. |
+| `_` | Permite usarla sin escribir la etiqueta: `saludo("Delvin")`. Sin `_` sería `saludo(nombre: "Delvin")`. |
+| `-> String` | La flecha dice qué **devuelve**. Aquí, un texto. |
+| `{ }` | Entre las llaves va el **trabajo** de la función. |
+| `return` | **Entrega** el resultado. |
+| `\(nombre)` | Mete el valor de `nombre` dentro del texto. |
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio

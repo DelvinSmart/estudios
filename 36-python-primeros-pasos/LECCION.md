@@ -60,6 +60,11 @@ python3 hola.py
 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **el texto con `f`**: `f"Hola, {nombre}"` pone el valor de `nombre` dentro del texto. La `f` antes de las comillas es la que avisa a Python que mire las llaves `{ }`.
+> - **`def`**: viene de *define*. Significa «voy a crear una función». En `def saludo(nombre):`, `saludo` es su nombre y `nombre` es el dato que **recibe**.
+> - **Los dos puntos `:`**: avisan que ahora viene el trabajo de la función.
+> - **Los espacios al inicio de la línea**: en Python indican qué líneas están **dentro** de la función. No son decoración: si los quitas, da error.
+> - **`return`**: **entrega** el resultado a quien usó la función.
+> - **`pass`**: significa «aquí todavía no hago nada». Es un espacio reservado: bórralo y escribe tu código.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

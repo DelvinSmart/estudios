@@ -89,6 +89,10 @@ console.log('2. sigo atendiendo');
 console.log('3. llegó:', (await texto).length, 'letras');
 ```
 
+- `import { readFile } from 'node:fs/promises'` **trae** a tu archivo la herramienta `readFile`, que sirve para leer archivos.
+- `readFile(...)` no entrega el archivo de inmediato. Entrega una **promesa**: un recibo de «esto va a llegar», como el número de tu pedido.
+- `await` significa **«espera aquí hasta que llegue»**. Mientras tanto, Node puede atender otras cosas.
+
 Por eso un servidor de Node atiende **miles de pedidos** con un solo hilo: casi todo el tiempo está esperando a la red o al disco, no calculando.
 
 > 🌎 **En la vida real:** es como un recepcionista de hotel con varias llamadas en espera: atiende una, pone otra en espera y vuelve.
@@ -102,6 +106,13 @@ Un cálculo **largo y pesado** (por ejemplo, un ciclo de mil millones de vueltas
 > 🌎 **En la vida real:** si el único mesero se pone a pelar 100 kilos de papas, ninguna mesa es atendida.
 
 > 🌎 **Otro ejemplo:** Es como un auto parado en medio de una calle de un solo carril.
+
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`leerArchivoDeMentira`** ya viene hecha. Imita un archivo que tarda un momento y entrega el texto `'gastos'`. No tienes que entender su interior todavía.
+> - **`async`** se pone delante de una función para que pueda usar `await` por dentro.
+> - **`const pedido = leerArchivoDeMentira();`** hace el pedido y guarda el recibo, **sin esperar**.
+> - **`const texto = await pedido;`** espera el resultado y lo guarda en `texto`.
+> - **`pasos.push('algo')`** agrega `'algo'` al final de la lista `pasos`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
