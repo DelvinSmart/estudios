@@ -155,13 +155,29 @@ const precioPorLitro = 5;
 const total = litros * precioPorLitro;   // 200
 ```
 
-- `const` crea una cajita. Mientras el programa corre, su valor **no cambia**. Tú sí puedes editar el código antes de ejecutarlo.
+- `const` crea una cajita y le da su valor **una sola vez**. Abajo vemos qué significa eso exactamente.
 - `litros` es el **nombre**. Lo eliges tú, y conviene que diga qué guarda.
 - `=` aquí **no** es "igual" como en matemáticas: quiere decir **guardar**. "En la cajita `litros`, guarda 40".
 - `*` es multiplicar (el teclado no tiene ×). `+` suma, `-` resta y `/` divide.
 - Lo que va después de `//` es un **comentario**: una nota para las personas. La máquina lo ignora.
 
-> 💡 **Idea:** si mañana el litro cuesta 6, cambias **un solo número** (`precioPorLitro`) y el total se recalcula solo. Para eso sirven los nombres.
+### ¿Qué es exactamente lo que «no se puede cambiar»?
+
+`const` **no** quiere decir que los litros serán 40 para toda la vida. Quiere decir esto: **una vez creada la cajita, el programa no le puede poner otro valor mientras está corriendo.**
+
+| Qué intentas hacer | ¿Se puede? | Qué pasa |
+|---|---|---|
+| Editar el código: cambias `40` por `50` y vuelves a tocar **▶ probar** | **Sí** | El programa empieza de cero y crea la cajita con `50`. |
+| Escribir otra línea que le da un valor nuevo a la misma cajita: `litros = 50;` | **No** | JavaScript se detiene con un error. |
+
+```js
+const litros = 40;
+litros = 50;   // ❌ error: Assignment to constant variable
+```
+
+Ese mensaje en inglés quiere decir **«intentaste darle otro valor a una constante»**.
+
+> 💡 **Idea:** si mañana el litro cuesta 6, cambias **un solo número** (`precioPorLitro`) y **vuelves a ejecutar**. Como la cuenta usa el nombre, `total` se calcula otra vez con el 6. No se actualiza por su cuenta: `total` guarda el resultado del momento en que se hizo la multiplicación.
 
 ### Las funciones: una máquina con nombre
 
@@ -187,6 +203,18 @@ console.log(doble(4));   // muestra 8
 | `doble(4)` | **Usa** la función y le entrega un 4. Dentro, `numero` vale 4. |
 
 Crear la función es como comprar la licuadora: todavía no hizo nada. Trabaja cuando la **usas**, escribiendo su nombre con paréntesis.
+
+#### ¿Le puedo poner cualquier nombre?
+
+Casi cualquiera. En vez de `doble` podrías escribir `duplicar`, y en vez de `numero` podrías escribir `cantidad`. Solo hay que cumplir estas reglas:
+
+- **Sin espacios:** `precioPorLitro` sí, `precio por litro` no.
+- **No puede empezar con un número:** `carga2` sí, `2carga` no.
+- **No puede ser una palabra reservada**, es decir, una que JavaScript ya usa para algo, como `function`, `const` o `return`.
+- **Mayúsculas y minúsculas cuentan:** `doble` y `Doble` son dos nombres distintos.
+- **Se escribe igual cada vez:** si la creas como `doble`, la usas como `doble`.
+
+> ⚠️ **Cuidado:** la máquina no entiende lo que el nombre significa. Si llamas `triple` a una función que multiplica por 2, seguirá multiplicando por 2. El nombre es para que las personas entiendan, por eso debe decir la verdad.
 
 En el próximo ejercicio vas a trabajar con **texto**. El texto va entre comillas, como `'Hola, '`, para que la máquina no lo confunda con el nombre de una cajita. El signo `+` sirve para **pegar** textos: `'Hola, ' + 'Ana'` da `'Hola, Ana'`.
 
@@ -234,6 +262,44 @@ function costoDelTanque(litros, precioPorLitro) {
   return total;
 }
 ```
+
+### Cada carga de combustible tiene sus propios datos
+
+Lee esta parte después de intentar el ejercicio de arriba, porque aquí se ve una forma de resolverlo.
+
+> 🌎 **En la vida real:** en Copiloto Driver, cuando echas gasolina, escribes los litros y el precio, y la app hace la cuenta. Hoy echas 20 litros, otro día 50. **Los datos cambian de una carga a otra**, pero cada carga conserva los suyos.
+
+En el código, cada carga es **un uso nuevo** de la función:
+
+```js
+function costoDelTanque(litros, precioPorLitro) {
+  const total = litros * precioPorLitro;
+  return total;
+}
+
+const cargaDelLunes = costoDelTanque(20, 5);     // 100
+const cargaDelViernes = costoDelTanque(50, 6);   // 300
+
+console.log(cargaDelLunes);     // sigue mostrando 100
+console.log(cargaDelViernes);   // muestra 300
+```
+
+- **`litros` y `precioPorLitro` reciben valores distintos en cada uso.** El lunes valen 20 y 5. El viernes valen 50 y 6.
+- **`total` no pasó de 100 a 300.** Cada uso de la función crea su **propio** `total`, y ese `total` desaparece cuando la función termina.
+- **`cargaDelLunes` se queda con 100.** Hacer la carga del viernes no la toca, porque es otra cajita con otro nombre.
+
+¿Y si te equivocaste y el lunes fueron 25 litros? Entonces esa cuenta sí tiene que cambiar. Para una cajita que va a recibir otro valor se usa **`let`** en lugar de `const`:
+
+```js
+let cargaDelLunes = costoDelTanque(20, 5);   // 100
+cargaDelLunes = costoDelTanque(25, 5);       // corregida: ahora guarda 125
+```
+
+Fíjate que el resultado no se arregló solo: hubo que **hacer la cuenta otra vez** con el dato correcto y guardarla.
+
+> 📖 **Palabra nueva: `let`.** Crea una cajita a la que el programa **sí** le puede dar otro valor después. Usa `const` cuando el valor no deba cambiar y `let` cuando sepas que va a cambiar.
+
+> ⚠️ **Una cosa más:** estas cajitas viven solo mientras el programa corre. Cuando se cierra, se borran. Para que tus cargas sigan ahí mañana, una app las guarda en una **base de datos**, que es como un cuaderno permanente. Eso lo verás más adelante.
 
 Una más, para que la mano se acostumbre:
 

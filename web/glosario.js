@@ -117,7 +117,7 @@ export const GLOSARIO = [
   { termino: 'variable', alias: ['variables'], clase: '45',
     definicion: 'Una cajita con un nombre donde guardas un dato para usarlo después, como `edad = 30`.' },
   { termino: 'constante', alias: ['const', 'constantes'], clase: '45',
-    definicion: 'Una cajita cuyo valor no va a cambiar. En JavaScript se crea con `const`. Si intentas cambiarla, avisa el error.' },
+    definicion: 'Una cajita que, ya creada, no recibe otro valor mientras el programa corre. En JavaScript se crea con `const`. Si el programa intenta darle otro valor, da error. Al ejecutar de nuevo, o en otro uso de una función, se puede crear con un valor distinto.' },
   { termino: 'tipo', alias: ['tipos', 'tipo de dato'], clase: '45',
     definicion: 'Qué clase de cosa es un dato: número, texto, sí/no (booleano), lista… Saber el tipo evita mezclar peras con manzanas.' },
   { termino: 'función', alias: ['funcion', 'funciones', 'function'], clase: '47',

@@ -12,7 +12,7 @@ Para practicar, crea `practica/app.js` y conéctalo al final del `body` de `prac
 
 ## 1. Repaso rápido: variables, datos y funciones
 
-> 🌎 **En la vida real:** una variable es un frasco con etiqueta. `const` es un frasco **sellado** (el contenido no cambia); `let` es un frasco con tapa de rosca (lo puedes vaciar y volver a llenar).
+> 🌎 **En la vida real:** una variable es un frasco con etiqueta. `const` es un frasco **sellado**: mientras el programa corre, no le puedes poner otro valor; `let` es un frasco con tapa de rosca (lo puedes vaciar y volver a llenar).
 
 > 🌎 **Otro ejemplo:** Es como el marcador de un partido: el nombre del equipo no cambia (`const`), los goles sí (`let`), y el tablero que suma un gol es la función.
 
