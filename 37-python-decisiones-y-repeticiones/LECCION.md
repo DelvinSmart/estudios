@@ -40,6 +40,9 @@ Configura tu editor (VS Code) para que la tecla Tab ponga 4 espacios. No mezcles
 
 > 🌎 **Otro ejemplo:** Es como escribir con la misma letra toda la carta.
 
+> 🧩 **Piezas para este ejercicio**
+> - La sangría son los espacios al principio de la línea. Las instrucciones con la misma sangría dentro de un `if` pertenecen al mismo bloque.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -128,6 +131,9 @@ if not gastos:
 > 🌎 **En la vida real:** una caja vacía cuenta como "no hay nada", aunque la caja exista.
 
 > 🌎 **Otro ejemplo:** Es como un tanque en cero: el tanque está, pero para manejar cuenta como vacío.
+
+> 🧩 **Piezas para este ejercicio**
+> - `elif` comprueba el siguiente caso solo si el anterior no se cumplió. `or` permite comprobar dos días distintos. Una lista vacía cuenta como falsa, así que `not gastos` la detecta.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -227,6 +233,9 @@ for i, app in enumerate(apps, start=1):
 
 > 🌎 **Otro ejemplo:** Es como las páginas numeradas de un libro.
 
+> 🧩 **Piezas para este ejercicio**
+> - `range` termina antes del segundo límite. `enumerate` devuelve pares con el número y el elemento. En una suma, el acumulador empieza en cero antes del recorrido.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -321,6 +330,9 @@ for g in [120, -5, 90, 0, 200]:
 > 🌎 **En la vida real:** `continue` es saltar una canción que no te gusta; `break` es apagar la radio.
 
 > 🌎 **Otro ejemplo:** Es como revisar facturas: si una está rota, pasas a la siguiente (continue); si se acabó la jornada, paras (break).
+
+> 🧩 **Piezas para este ejercicio**
+> - `while` comprueba la condición antes de ejecutar el bloque. En un recorrido, `continue` abandona la vuelta actual y `break` termina todo el ciclo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -73,6 +73,9 @@ python -m pip install -r requirements.txt
 
 > 🌎 **Otro ejemplo:** el nombre `detalle` en vez de `app` es como el rótulo de una carpeta: si dice "Uber" y adentro hay facturas de lavado, el próximo que la abra se confunde.
 
+> 🧩 **Piezas para este ejercicio**
+> - La marca invisible debe quitarse antes de separar la primera columna. Después de dividir la línea, `.strip()` quita espacios de cada nombre.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -146,6 +149,9 @@ def leer_fila(fila: dict[str, str], numero: int) -> Movimiento:
 > 🌎 **En la vida real:** revisar una fila es como el cajero del banco con un cheque: mira la fecha, el monto y la firma, y si algo no está, te lo devuelve diciendo **qué** y **dónde**, no "cheque malo".
 
 > 🌎 **Otro ejemplo:** `frozen=True` es como una factura impresa: si hay que corregirla, se hace otra; no se borra con corrector.
+
+> 🧩 **Piezas para este ejercicio**
+> - Convierte y valida cada campo antes de devolver la tupla. Usa el número de línea en el mensaje para señalar dónde debe corregirse la planilla.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -238,6 +244,9 @@ def leer_movimientos(texto: str) -> list[Movimiento]:
 > 🌎 **En la vida real:** es la diferencia entre el mecánico que te llama cinco veces ("falta una pieza", y al otro día "falta otra"…) y el que revisa todo el carro y te da la lista completa de una vez.
 
 > 🌎 **Otro ejemplo:** `start=2` es como numerar las filas de una planilla impresa contando la fila de los títulos: si le dices al cliente "la fila 3", tiene que ser la fila 3 que él ve.
+
+> 🧩 **Piezas para este ejercicio**
+> - `enumerate(filas, start=2)` conserva la numeración original. Mantén dos listas: una para filas válidas y otra para mensajes. Atrapa los errores de cada fila dentro del recorrido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -344,6 +353,9 @@ def resumir(movimientos: list[Movimiento]) -> dict:
 
 > 🌎 **Otro ejemplo:** el `if viajes else 0.0` es como el contador que, en un mes sin ventas, escribe "0" en el promedio en vez de dejar el informe sin terminar porque "no se puede dividir".
 
+> 🧩 **Piezas para este ejercicio**
+> - Cada tupla trae día, app y valor. Acumula por el campo que corresponde y redondea después. En el caso vacío, el mejor día no existe.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -436,6 +448,9 @@ if __name__ == "__main__":
 
 > 🌎 **Otro ejemplo:** el código de salida es como el semáforo del lavadero: verde (0) el carro está listo, rojo (1) algo pasó. El que espera no tiene que leer el cartel entero.
 
+> 🧩 **Piezas para este ejercicio**
+> - Separa el signo del valor absoluto. Al cambiar separadores, usa una marca temporal para distinguir los miles de los centavos. Comprueba la cantidad antes de dividir para el promedio.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -526,6 +541,9 @@ Que las pruebas pasen no quiere decir que **atrapen** errores. Para saberlo, se 
 > 🌎 **En la vida real:** es como probar la alarma de la casa abriendo una ventana a propósito: si no suena, no sirve, aunque la luz verde diga que está prendida.
 
 > 🌎 **Otro ejemplo:** la marca invisible de Excel es como una etiqueta transparente pegada en la primera hoja: no la ves, pero la máquina que lee el código de barras se traba con ella.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una lista vacía, una lista con un último valor importante y una suma que requiera redondeo comprueban comportamientos distintos. Para cada entrada, anota el resultado que debería dar la función correcta.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

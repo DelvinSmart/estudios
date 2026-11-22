@@ -42,6 +42,9 @@ Un error común: usar `print` adentro de la función en vez de `return`. `print`
 
 > 🌎 **Otro ejemplo:** Es como ver una foto en la pantalla de otro: la viste, pero no la guardaste.
 
+> 🧩 **Piezas para este ejercicio**
+> - `print` escribe en la consola. Una función que llega al final sin `return` entrega `None`. Reúne los resultados con `return` para que otra función pueda sumarlos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -123,6 +126,9 @@ registrar(tipo="lavado", valor=30)
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`.items()`**: da las parejas (clave, valor) de un diccionario para recorrerlas juntas: `for app, total in ganancias.items():` te da `"uber"` y su total en cada vuelta.
 
+> 🧩 **Piezas para este ejercicio**
+> - `*montos` recoge argumentos sin nombre en una tupla. `**datos` recoge argumentos con nombre en un diccionario. `.items()` permite recorrer cada nombre junto a su valor.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -198,6 +204,9 @@ Una función **pura** solo usa sus parámetros y solo devuelve un resultado, sin
 > 🌎 **En la vida real:** es como una calculadora: misma cuenta, mismo resultado, y no te cambia nada de la mesa.
 
 > 🌎 **Otro ejemplo:** Es como una receta exacta: mismos ingredientes, misma torta.
+
+> 🧩 **Piezas para este ejercicio**
+> - Para mantener intacta la lista que recibiste, crea una nueva al agregar. Leer una constante de configuración es distinto de modificar estado compartido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -282,6 +291,9 @@ Los tipos ayudan al editor y a herramientas como `mypy` a encontrar errores, y a
 > 🌎 **En la vida real:** es como la etiqueta de un enchufe: "110 V". El enchufe funciona igual, pero la etiqueta evita que lo conectes mal.
 
 > 🌎 **Otro ejemplo:** Es como el prospecto de un remedio: dice para qué sirve y cómo se usa.
+
+> 🧩 **Piezas para este ejercicio**
+> - `key` indica qué dato se usa al ordenar. La lambda extrae el valor de cada viaje. Un docstring va al principio del cuerpo de la función y las anotaciones describen tipos de entrada y salida.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

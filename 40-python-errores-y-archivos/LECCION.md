@@ -44,6 +44,9 @@ Aquí: en el archivo `ganancias.py`, línea 7, se dividió por cero (`viajes` va
 
 > 🌎 **Otro ejemplo:** Es como los códigos del médico: "fractura", "torcedura"… cada nombre dice qué pasó.
 
+> 🧩 **Piezas para este ejercicio**
+> - En un traceback, la última línea contiene el tipo y el mensaje. Usa el primer `:` como separador para conservar cualquier otro `:` que aparezca dentro del mensaje. La última referencia a `File` apunta al marco más cercano al error.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -118,6 +121,9 @@ Nunca escribas `except:` vacío que se trague **todo**: esconde errores de verda
 > 🌎 **En la vida real:** si suena una alarma, no le sacas las pilas: ves qué la hizo sonar.
 
 > 🌎 **Otro ejemplo:** Es como un médico que da calmante sin buscar qué duele: el dolor se va, la enfermedad no.
+
+> 🧩 **Piezas para este ejercicio**
+> - `float` puede lanzar `ValueError` si el texto no tiene la forma de un número. Un `except` con tipo reacciona únicamente al error indicado. Usa un bloque separado para la división.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -198,6 +204,9 @@ La regla de oro (la misma de seguridad, Tema 22): **valida los datos donde entra
 > 🌎 **En la vida real:** en el aeropuerto revisan las maletas en la entrada, no en el avión.
 
 > 🌎 **Otro ejemplo:** Es como lavar las verduras al traerlas del mercado, no en el plato.
+
+> 🧩 **Piezas para este ejercicio**
+> - `isinstance` comprueba el tipo. Valida el tipo antes de comparar el valor con cero. `raise` detiene la función y entrega el error a quien la llamó.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -296,6 +305,9 @@ print(leidos["gastos"])
 > 🌎 **En la vida real:** es como una ficha con campos y subcampos que cualquier sistema entiende.
 
 > 🌎 **Otro ejemplo:** Es como un idioma internacional de los datos: Python, JavaScript y Firebase lo hablan.
+
+> 🧩 **Piezas para este ejercicio**
+> - `DictReader` usa los títulos de la primera fila como claves y entrega los campos como texto. `with open(...)` cierra el archivo al salir del bloque. Termina la escritura antes de abrirlo para leer.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

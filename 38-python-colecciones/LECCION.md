@@ -55,6 +55,9 @@ print(semana[::-1])   # al revés
 
 > 🌎 **Otro ejemplo:** Es como elegir capítulos de un libro: del 3 al 6.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una rebanada `lista[inicio:fin]` incluye el inicio y termina antes del final. Un índice negativo cuenta desde el final. `max` y `sum` leen la lista.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -123,6 +126,9 @@ Desarmar también sirve para intercambiar valores: `a, b = b, a`.
 > 🌎 **En la vida real:** la lista del supermercado cambia; tu dirección (calle, número, ciudad) no.
 
 > 🌎 **Otro ejemplo:** Es como un menú del día (cambia) y la receta original de la casa (fija).
+
+> 🧩 **Piezas para este ejercicio**
+> - En Python, la coma reúne valores en una tupla. Una asignación como `a, b = par` toma el primer y el segundo elemento en ese orden.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -216,6 +222,9 @@ total = sum(g["valor"] for g in gastos)
 
 > 🌎 **Otro ejemplo:** Es como una caja de fichas de pacientes: cada ficha con los mismos campos.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.get(llave, respaldo)` elige el respaldo si falta la llave. Al acumular por tipo, usa como respaldo cero para la primera suma de ese tipo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -298,6 +307,9 @@ const caros = viajes.filter((v) => v > 20);
 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`round()`**: redondea un número: `round(3.456, 2)` → `3.46` (con 2 decimales) y `round(3.6)` → `4`.
+
+> 🧩 **Piezas para este ejercicio**
+> - `set` elimina repetidos y `sorted` devuelve una lista ordenada. Una comprensión usa el orden `[resultado for elemento in lista if condición]`. El `if` se puede omitir si conservas todos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

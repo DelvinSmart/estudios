@@ -59,6 +59,9 @@ Lo normal (el caso de todos los días), los **bordes** (cero, vacío, el máximo
 
 > 🌎 **Otro ejemplo:** Es como probar una receta con la cantidad normal, el doble y sin sal.
 
+> 🧩 **Piezas para este ejercicio**
+> - Primero comprueba una salida normal. Para el caso de error, una prueba pasa solo si observa la excepción esperada. En `try/except`, `else` corre si el bloque salió sin excepción.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -215,6 +218,9 @@ def test_semana_vacia():
 
 > 🌎 **Otro ejemplo:** Es como ensayar la mudanza con una caja antes de mover todo.
 
+> 🧩 **Piezas para este ejercicio**
+> - Separa los viajes de los gastos con el tipo de cada movimiento. El diccionario por app solo acumula las entradas de viaje. Redondea los totales después de sumarlos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -311,6 +317,9 @@ Muchos proyectos usan el paquete **requests**, que hace lo mismo con menos líne
 
 > 🌎 **Otro ejemplo:** Es como la llave de tu casa: no la dejas pegada en la puerta para que cualquiera la use.
 
+> 🧩 **Piezas para este ejercicio**
+> - Llama a `pedir` dentro de `try` porque la conexión y la lectura de JSON son operaciones distintas que pueden fallar. La configuración de una clave ausente usa el error explícito de la consigna.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -392,6 +401,9 @@ Un proyecto por semana, chico y tuyo: el resumen de la semana con gráficos, un 
 > 🌎 **En la vida real:** es como el músico que toca una canción nueva cada semana.
 
 > 🌎 **Otro ejemplo:** Es como el que va al gimnasio poco pero siempre: a los meses se nota.
+
+> 🧩 **Piezas para este ejercicio**
+> - Recorre una lista fija de requisitos para garantizar el orden de salida. `.get(...)` trata una clave ausente como un valor por defecto y permite incluirla entre las faltantes.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

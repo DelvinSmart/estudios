@@ -53,6 +53,9 @@ print(mi_carro)   # Toyota Corolla (85120 km)
 
 > 🌎 **Otro ejemplo:** Es como la tarjeta de presentación de una persona.
 
+> 🧩 **Piezas para este ejercicio**
+> - `self` se refiere al objeto que recibe la llamada. En `__init__`, escribe las propiedades que ese objeto necesitará en otros métodos. `__str__` devuelve el texto que lo representa.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -149,6 +152,9 @@ Si dudas, es mejor **componer** (un objeto que tiene otro adentro: "el conductor
 > 🌎 **En la vida real:** un conductor no "es" un carro: "tiene" un carro.
 
 > 🌎 **Otro ejemplo:** Es como una casa: "tiene" una cocina; no "es" una cocina.
+
+> 🧩 **Piezas para este ejercicio**
+> - `super().__init__(...)` reutiliza la preparación de la clase base. La subclase añade las apps. Usa una lista creada en esa llamada cuando el argumento no llegó.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -256,6 +262,9 @@ print(dia.total_gastos(), dia)
 > 🌎 **En la vida real:** una nota en un papel, un formulario o un contrato: según cuánto importa el dato.
 
 > 🌎 **Otro ejemplo:** Es como una bolsa, una mochila o una maleta: según lo que lleves.
+
+> 🧩 **Piezas para este ejercicio**
+> - `default_factory=list` llama a `list()` por cada instancia. Así cada día tiene su propia lista. Para el total, recorre los gastos y suma `gasto.valor`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

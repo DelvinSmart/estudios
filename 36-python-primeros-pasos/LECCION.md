@@ -66,6 +66,9 @@ python3 hola.py
 > - **`return`**: **entrega** el resultado a quien usó la función.
 > - **`pass`**: significa «aquí todavía no hago nada». Es un espacio reservado: bórralo y escribe tu código.
 
+> 🧩 **Piezas para este ejercicio**
+> - `def` declara una función. `return` da un resultado a quien la llama. `pass` es un espacio provisional que deja el bloque vacío. En Python, multiplicar un texto por un entero lo repite.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -146,6 +149,9 @@ total = 10  # también al final de una línea
 > 🌎 **En la vida real:** es como las notas al margen de un libro: el libro no cambia, pero te ayudan a entender.
 
 > 🌎 **Otro ejemplo:** Es como el post-it en la nevera: "no comer, es para mañana".
+
+> 🧩 **Piezas para este ejercicio**
+> - Las MAYÚSCULAS en `IMPUESTO` indican que el equipo espera mantener ese valor fijo. Python sigue permitiendo reasignarlo. `0.15` representa el 15 por cada 100.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -253,6 +259,9 @@ print(type(tiene_carro_propio))   # <class 'bool'>
 
 > 🌎 **Otro ejemplo:** Es como pasar una receta de tazas a gramos.
 
+> 🧩 **Piezas para este ejercicio**
+> - `//` da el cociente entero y `%` el resto. Para devolver ambos valores puedes escribirlos separados por coma. `int` lee enteros y `float` permite decimales.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -323,6 +332,9 @@ print(f"Rendimiento: {km / litros:.1f} km por litro")
 > 🌎 **En la vida real:** es como un formulario en papel: lo que escribes es texto hasta que alguien lo pasa a la calculadora.
 
 > 🌎 **Otro ejemplo:** Es como dictar un número por teléfono: el otro lo anota como palabras y después lo convierte en cifras.
+
+> 🧩 **Piezas para este ejercicio**
+> - Convierte ambos textos antes de dividir. En una cadena con prefijo `f`, `{resultado:.1f}` inserta el número con una cifra decimal.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

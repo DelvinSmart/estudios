@@ -53,6 +53,9 @@ if __name__ == "__main__":
 
 > 🌎 **Otro ejemplo:** Es como un actor que ensaya en su casa: el ensayo no sale en la función.
 
+> 🧩 **Piezas para este ejercicio**
+> - Haz el cálculo llamando primero a `ganancia_neta`. Su resultado es la entrada de `formatear`. El informe solo agrega el texto que lo acompaña.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -149,6 +152,9 @@ print(archivo.exists())
 
 > 🌎 **Otro ejemplo:** Es como las direcciones con calle y número en vez de "la casa azul después del árbol".
 
+> 🧩 **Piezas para este ejercicio**
+> - `date.fromisoformat` interpreta una fecha AAAA-MM-DD. `timedelta` representa una cantidad de días. `strftime` aplica el formato de salida después de sumar la duración.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -239,6 +245,9 @@ Es el equivalente a `package.json` + `npm install`.
 
 > 🌎 **Otro ejemplo:** Es como la lista de útiles escolares: todos llevan los mismos cuadernos.
 
+> 🧩 **Piezas para este ejercicio**
+> - Limpia las líneas antes de decidir si cuentan. Divide la declaración por `==` una sola vez. Un valor `None` permite recordar cuáles paquetes llegaron sin versión fija.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -318,6 +327,9 @@ Cuando está activo, la terminal muestra `(.venv)` al principio. La carpeta `.ve
 > 🌎 **En la vida real:** activar es como ponerte el uniforme del trabajo: mientras lo tienes puesto, todo lo que haces es "de ese trabajo".
 
 > 🌎 **Otro ejemplo:** Es como entrar a una habitación: lo que dejas adentro se queda ahí cuando sales.
+
+> 🧩 **Piezas para este ejercicio**
+> - Quitar una barra final permite comparar dos formas del mismo directorio. Conserva el orden de los nombres requeridos al recorrerlos y elige el comando según el sistema.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -406,6 +418,9 @@ Tres decisiones que importan:
 - **`frozen=True`**: nadie la cambia por accidente en medio del programa (intentarlo da `FrozenInstanceError`).
 
 > 💡 **Idea:** `env=os.environ` como parámetro es lo que hace que se pueda **probar**: en la prueba le pasas un diccionario común, sin tocar las variables de tu computadora.
+
+> 🧩 **Piezas para este ejercicio**
+> - Lee las claves del diccionario con valores por defecto. Convierte el límite dentro de `try` y atrapa `ValueError` para poder indicar qué dato de configuración falló.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
