@@ -50,6 +50,9 @@ En tu vida de programador, "subir" puede querer decir cinco cosas distintas:
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - Un objeto sirve como tabla de acciones. En `destinos[accion]`, los corchetes buscan la propiedad cuyo nombre recibió la función.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -145,6 +148,10 @@ El nombre del commit dice **qué cambió y por qué** (Tema 06, parte 5), no "ca
 `git status` siempre lo dice. Si muestra **`nothing to commit, working tree clean`** y **`Your branch is up to date with 'origin/main'`**, no hay nada sin guardar ni sin subir.
 
 > 💡 **Idea:** con tu página de estudios bíblicos esto pasa mucho: si guardaste algo desde el **panel**, el panel lo subió directo a GitHub. Si después quieres hacer push desde la Mac, primero tienes que **bajar** lo del panel. Es lo que hicimos con el `git pull`.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.includes(...)` comprueba si un mensaje contiene una frase. `&&` exige las dos señales de un árbol limpio y al día. `||` admite cualquiera de las dos señales de cambios pendientes.
+> - Devuelve la decisión al reconocer un caso. Este ejercicio clasifica el texto recibido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -286,6 +293,10 @@ Si publicaste y ves la versión vieja, no es que falló: GitHub Pages deja que e
 
 > 🌎 **Otro ejemplo:** Como una foto vieja en la pantalla del teléfono que no se actualiza hasta que deslizas para refrescar.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.toLowerCase()` convierte el nombre a minúsculas. Construye primero la dirección base. Un repositorio de proyecto añade un tramo después del dominio.
+> - `repo.publico` es una propiedad booleana. En este ejercicio indica si el repositorio encaja en el caso gratuito que se está simulando.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -350,6 +361,10 @@ elige :: Cambiaste los textos de un estudio. ¿Desde dónde lo subes? :: Solo de
 > 🌎 **Otro ejemplo:** Como cambiar el precio en el sistema central de una cadena de tiendas: todas las cajas lo ven al momento, sin que cada cliente haga nada.
 
 > 💡 **Idea:** si `firebase` no está instalado en la terminal, se usa `npx firebase-tools deploy ...` (como en el Tema 08): `npx` lo corre sin instalarlo.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.includes('firestore.rules')` busca un nombre exacto en la lista. `.some(...)` con `.startsWith(...)` busca si al menos un archivo pertenece a una carpeta.
+> - Agrega cada destino en el orden pedido. `.join(',')` forma una lista de destinos separada por comas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -417,6 +432,9 @@ ls -lh android/app/build/outputs/apk/release/app-release.apk
 ```
 
 `ls -lh` muestra el archivo con su tamaño y su fecha. Si la hora es **anterior** a tu último cambio, vas a instalar un APK **viejo** y probar algo que no es lo que arreglaste. (Es el Tema 07: verificar antes de suponer.)
+
+> 🧩 **Piezas para este ejercicio**
+> - `.endsWith(...)` distingue las extensiones. En horas del mismo día con dos dígitos por parte, comparar `'09:45'` con `'10:00'` respeta el orden cronológico.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -539,6 +557,10 @@ Probablemente faltaba `gradle.properties` (o sus líneas), y el proyecto firmó 
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - Recorre los nombres de propiedades requeridas. En `propiedades[nombre]`, el nombre se decide en cada vuelta.
+> - Una propiedad ausente da `undefined`. Comprueba que haya una ruta antes de usar `.startsWith(...)` para ver si empieza dentro del proyecto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -658,6 +680,10 @@ Cada vez que apagas el Wi-Fi o reinicias el Samsung, **el puerto cambia**: mira 
 
 > 🌎 **Otro ejemplo:** Como emparejar unos auriculares Bluetooth: la primera vez con código, y después se conectan solos.
 
+> 🧩 **Piezas para este ejercicio**
+> - Separa la salida por saltos de línea. Después de quitar espacios de las puntas, `.split(/\s+/)` separa columnas aunque haya tabulaciones o varios espacios.
+> - Compara el estado completo con `'device'`. El id de la primera fila que cumple la condición queda en la posición `0` de la lista filtrada.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -760,6 +786,10 @@ La primera vez, el iPhone puede bloquear la app. Se arregla en **Ajustes → Gen
 
 > 💡 **Idea:** un error real de la guía de Copiloto: el comando de Wi-Fi estaba **mal escrito** (decía una letra suelta en vez de `./scripts/instalar-iphone.sh`), y por eso "a la IA le funcionaba y a ti no": pegabas otra cosa. Cuando algo funciona para uno y no para otro, compara **exactamente** qué corre cada uno (Tema 07).
 
+> 🧩 **Piezas para este ejercicio**
+> - `Date.parse(...)` convierte la fecha en milisegundos. Divide la diferencia por `86_400_000` para pasarla a días.
+> - `Math.max(0, restante)` conserva el resultado si es positivo y devuelve 0 si ya pasó el plazo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -816,6 +846,9 @@ El **modo Expo** es el del Tema 05: cada cambio que guardas aparece solo, en seg
 > 🌎 **En la vida real:** el simulador de manejo de la autoescuela: practicas rápido y sin riesgo, pero el examen de verdad es en la calle (tu teléfono real).
 
 > 🌎 **Otro ejemplo:** Como practicar penales en un videojuego de fútbol: rápido y sin riesgo, pero el partido de verdad es en la cancha.
+
+> 🧩 **Piezas para este ejercicio**
+> - Puedes guardar las tareas que requieren un teléfono en una lista y consultarla con `.includes(paso)`. Cada texto de la consigna representa un caso distinto.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -928,6 +961,10 @@ El cartón automático necesita leer la pantalla de las apps de viajes, y en And
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - `'1.4.2'.split('.').map(Number)` da `[1, 4, 2]`. Trabaja con números para que sumar 1 no pegue otro carácter al final.
+> - `.join('.')` vuelve a formar el texto de versión. El `versionCode` se incrementa aparte, sea cual sea el tipo de cambio.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -999,6 +1036,9 @@ La app Copiloto tiene un script que hace el ciclo completo, en orden, y **se det
 
 > 🌎 **Otro ejemplo:** Como el botón de "un toque" de algunas cafeteras: muele, calienta, sirve y limpia, en orden, y se detiene si falta agua.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un `for...of` recorre los pasos en orden. Agrega el resultado del paso que estás revisando y usa `break` cuando deba ser el último.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -1050,6 +1090,10 @@ vf :: `release.sh` genera el AAB e instala en el iPhone al mismo tiempo
 > 🌎 **En la vida real:** antes de llamar al mecánico, revisa lo simple: ¿tiene nafta?, ¿está la llave puesta?, ¿el teléfono está desbloqueado? La mitad de los "errores" son eso.
 
 > 🌎 **Otro ejemplo:** Como cuando el teléfono no carga: antes de cambiarlo, pruebas otro enchufe, otro cable y si estaba bien conectado.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.split('\n')` divide el registro en líneas. Puedes recorrerlo desde la última posición o invertir la lista antes de usar `.find(...)`.
+> - Pasa cada línea a minúsculas para comprobar si contiene las palabras buscadas. Devuelve el texto de la línea original con `.trim()`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
