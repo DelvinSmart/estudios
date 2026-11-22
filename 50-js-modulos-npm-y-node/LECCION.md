@@ -10,6 +10,8 @@
 
 > 🌎 **Otro ejemplo:** Es como pedir prestada una herramienta al vecino.
 
+Un **módulo** reúne código en un archivo. `export` indica qué piezas pueden usar otros archivos. `import` dice qué pieza quieres traer y desde qué archivo. El ejercicio simula esa idea con un objeto: las propiedades que devuelves quedan disponibles para quien lo recibe.
+
 ### Exportar e importar
 
 ```js
@@ -81,6 +83,8 @@ escribe :: Escribe cómo exportar la función rendimiento y cómo importarla en 
 > 🌎 **En la vida real:** npm es la ferretería más grande del mundo para JavaScript; `package.json` es tu lista de compras.
 
 > 🌎 **Otro ejemplo:** Es como la tienda de apps del celular, para código.
+
+`package.json` es el archivo que describe el proyecto. Sus propiedades `dependencies` y `devDependencies` son objetos: cada clave es el nombre de un paquete y cada valor indica su versión o rango de versiones. `Object.keys` toma solo los nombres. Si falta uno de esos objetos, puedes usar `?? {}` antes de leerlo.
 
 ### Instalar paquetes
 
@@ -184,6 +188,8 @@ En Copiloto, `npm test` corre cientos de pruebas (Tema 02).
 
 > 🌎 **Otro ejemplo:** Es como un control remoto con botones programados.
 
+En el ejercicio vas a construir el texto del comando. Para insertar el nombre de un script en un texto, usa una plantilla entre acentos graves con `${script}` o concatena con `+`.
+
 ### Node.js: JavaScript en el servidor y en la terminal
 
 Node.js corre JavaScript fuera del navegador: servidores (clase 09), herramientas (Vite, ESLint), scripts (este mapa tiene `firebase/generar-reglas.mjs`). Tiene módulos propios: `node:fs` (archivos), `node:path`, `node:http`.
@@ -245,7 +251,7 @@ mi-proyecto/
   .gitignore      → node_modules, .env
 ```
 
-Es la idea de la clase 10 (arquitectura): separar **datos**, **lógica** y **pantallas**, para que un cambio en uno no rompa los otros.
+Es la idea de la clase 10 (arquitectura): separar **datos**, **lógica** y **pantallas**, para que un cambio en uno no rompa los otros. En el ejercicio, `.includes(...)` te permite reconocer el verbo de la descripción. `||` sirve cuando dos verbos distintos llevan a la misma carpeta.
 
 > 🌎 **En la vida real:** es como separar el depósito, la cocina y el salón en un restaurante.
 

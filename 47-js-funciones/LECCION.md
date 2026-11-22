@@ -22,7 +22,7 @@ function gananciaNeta(bruto, gastos) {
 const gananciaNeta2 = (bruto, gastos) => bruto - gastos;   // si es una sola expresión, return implícito
 ```
 
-Las dos se usan igual: `gananciaNeta(300, 80)`. En React vas a ver muchas flechas.
+Las dos se llaman escribiendo su nombre y los argumentos entre paréntesis. `gananciaNeta(300, 80)` le pasa `300` a `bruto` y `80` a `gastos`. Para obtener un porcentaje, divide la parte entre el total y multiplica por 100. `Math.round(24.6)` redondea a `25`. En React vas a ver muchas flechas.
 
 > 🌎 **En la vida real:** son como escribir una receta en un cuaderno o en una ficha corta: misma receta.
 
@@ -83,6 +83,8 @@ escribe :: Escribe una función flecha que reciba km y litros y devuelva el rend
 
 ### Valores por defecto y objeto de opciones
 
+En `tarifaKm = 1.8`, el número es un valor por defecto. Se usa si no pasas ese argumento o le pasas `undefined`. `Math.max(4, 8)` devuelve el mayor de los dos, así que sirve para respetar un mínimo.
+
 ```js
 function precioViaje(km, tarifaKm = 1.8, minimo = 8) {
   return Math.max(km * tarifaKm, minimo);
@@ -100,6 +102,8 @@ precioViaje2({ km: 12, tarifaKm: 2.1 });
 > 🌎 **Otro ejemplo:** Es como el control del aire: arranca en 23 grados y cambias solo lo que quieres.
 
 ### El resto: ...
+
+`...montos` reúne todos los argumentos en una lista. Para sumarlos, puedes recorrerla con `for...of` y empezar la suma en `0`. El ejemplo usa `reduce`, que también empieza en `0` y va acumulando lo que suma en cada vuelta.
 
 ```js
 function total(...montos) {          // recibe cuantos quieras como array
@@ -189,7 +193,7 @@ siguienteViaje();   // 1
 siguienteViaje();   // 2
 ```
 
-Los *hooks* de React (como `useState`) se apoyan en esta idea.
+Cada llamada a `crearContador()` crea su propia variable `cuenta`. Si creas dos contadores, llamar a uno cambia solo la cuenta que recuerda ese contador. Las funciones que creas al renderizar una pantalla de React también pueden recordar las variables de ese renderizado.
 
 > 🌎 **En la vida real:** es como una mochila: la función se lleva sus cosas a donde vaya.
 
@@ -235,7 +239,7 @@ escribe :: Explica con tus palabras qué es un closure. :: Es una función que r
 
 ### Callbacks
 
-Una función que se pasa a otra para que la llame después se llama **callback**:
+Un **callback** es una función que pasas a otra para que la llame cuando corresponda. Por ejemplo, `fn` es la función que recibiste y `fn(valor)` la ejecuta con ese valor. En un recorrido puedes usar lo que devuelve para llenar una lista nueva o para decidir si incrementas un contador.
 
 ```js
 const viajes = [18.5, 22, 9.75];

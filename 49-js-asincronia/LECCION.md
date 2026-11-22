@@ -12,6 +12,8 @@
 
 ### Por qué no se puede "esperar parado"
 
+**Asincronía** significa que puedes iniciar una tarea y dejar indicado qué hacer cuando termine. Mientras llega ese momento, otras instrucciones pueden avanzar.
+
 JavaScript hace **una cosa a la vez** (un solo hilo, como viste en la clase 11 con Copiloto). Si se quedara esperando a internet, la pantalla se congelaría. Por eso, lo que tarda se **pide** y JavaScript sigue; cuando llega la respuesta, ejecuta lo que dejaste preparado.
 
 ```js
@@ -83,10 +85,15 @@ fetch('https://api.github.com/repos/DelvinSmart/estudios')
 
 > 🌎 **Otro ejemplo:** Es como un plan A y un plan B escritos de antemano.
 
+Para crear una promesa, `new Promise((resolve) => { ... })` te entrega una función llamada `resolve`. Al llamar a `resolve(valor)`, la promesa se cumple con ese valor. `setTimeout(fn, ms)` programa la llamada a `fn` después de la espera. Pasa la función que quieres llamar al final de la espera.
+
 ### Varias a la vez: Promise.all
 
 ```js
-const [carro, gastos] = await Promise.all([leerCarro(), leerGastos()]);   // espera las dos en paralelo
+async function leerAmbos() {
+  const [carro, gastos] = await Promise.all([leerCarro(), leerGastos()]);
+  return { carro, gastos };
+}
 ```
 
 > 🌎 **En la vida real:** es como poner a cocinar el arroz y la carne al mismo tiempo en vez de uno después del otro.
@@ -137,6 +144,8 @@ elige :: ¿Qué devuelve fetch? :: El texto directamente :: Una promesa de la re
 escribe :: ¿Qué es una promesa en JavaScript? :: Un objeto que representa un resultado que todavía no llegó; puede quedar cumplida con un valor o rechazada con un error.
 ```
 
+Las dos llamadas empiezan al construir la lista. `Promise.all` reúne sus resultados en el orden de esa lista. Si una promesa falla, la promesa del conjunto se rechaza.
+
 ## Parte 3. async y await
 
 > 🌎 **En la vida real:** `await` es "espera aquí a que llegue, pero sin congelar el restaurante".
@@ -170,8 +179,8 @@ Una función `async` **siempre devuelve una promesa**.
 ### Los errores típicos
 
 - Olvidar `await`: tienes una promesa en vez del dato (`Promise {<pending>}`).
-- No revisar `respuesta.ok`: `fetch` **no** falla con un 404 o 500; solo falla si no hay red.
-- No poner `try/catch`: un error sin atrapar rompe silenciosamente.
+- No revisar `respuesta.ok`: un 404 o un 500 da una respuesta HTTP con `ok` en `false`. La promesa puede rechazarse si la solicitud falla, por ejemplo por un problema de red.
+- Si quieres recuperar un valor cuando la lectura falla, pon el `await` dentro de `try` y devuelve el valor de respaldo en `catch`.
 
 > 🌎 **En la vida real:** olvidar `await` es como irte del restaurante con el ticket y sin el plato.
 
@@ -230,6 +239,8 @@ Este mismo mapa lo hace en `web/nube.js` para tus bombillos y el certificado.
 > 🌎 **En la vida real:** es como el banco por internet: pides la transferencia y te avisa cuando quedó hecha.
 
 > 🌎 **Otro ejemplo:** Es como dejar un pedido en la farmacia y recibir el mensaje "listo para retirar".
+
+En el simulador de abajo, `db.guardar(gasto)` termina de escribir cuando se cumple su promesa. Si llamas a `db.contar()` antes, el recuento puede empezar con los datos anteriores. Usa `await` donde una operación dependa del resultado de otra.
 
 ### Mostrar "cargando" y los errores
 

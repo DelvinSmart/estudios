@@ -28,7 +28,7 @@ viajes.indexOf(9.75);   // 2
 
 ### No cambiar el original
 
-En React **no se cambia** un array: se crea uno nuevo. Por eso conviene `[...viajes, 30]` en vez de `push`, y `toSorted()` en vez de `sort()` (que cambia el original).
+Cuando una lista forma parte del estado de React, crea otra lista para actualizarla. Los `...` dentro de `[...viajes, 30]` copian los elementos de `viajes` y dejan espacio para el nuevo valor al final. Por eso conviene `[...viajes, 30]` en vez de `push`, y `toSorted()` en vez de `sort()` (que cambia el original).
 
 ```js
 const conNuevo = [...viajes, 30];          // copia + agrega
@@ -105,6 +105,10 @@ const total = viajes.reduce((suma, v) => suma + v.valor, 0); // 95.5
 const caro = viajes.find((v) => v.valor > 40);              // { app: 'Uber', valor: 45 }
 const hayCaros = viajes.some((v) => v.valor > 40);          // true
 ```
+
+En `reduce`, el `0` de la derecha es el total inicial. En cada vuelta, `suma` trae el total de la vuelta anterior y lo que devuelve la flecha se convierte en el total para la siguiente. Si la lista está vacía, el resultado es ese `0`.
+
+En `filter`, la flecha responde qué elementos se quedan. `>=` incluye también los valores iguales al mínimo. Mira el tipo de dato: si la lista contiene números, la flecha compara el número recibido. Si contiene objetos, mira la propiedad que te interesa.
 
 Se encadenan: `viajes.filter(...).map(...)`.
 
@@ -218,6 +222,8 @@ Object.entries(carro);       // [['marca', 'Toyota'], …]
 
 > 🌎 **Otro ejemplo:** Es como una plantilla de contrato donde cambias solo el nombre.
 
+En `{ ...carro, km: 85320 }`, primero se copian las propiedades y luego se escribe `km` en el objeto nuevo. Si el mismo nombre aparece dos veces, cuenta el valor que aparece al final.
+
 ### Desestructuración
 
 Sacar valores de un objeto o array en variables, en una línea. React la usa todo el tiempo:
@@ -283,6 +289,8 @@ const texto = JSON.stringify({ app: 'Uber', valor: 32.5 });   // '{"app":"Uber",
 const dato = JSON.parse(texto);                                 // vuelve a ser objeto
 JSON.parse('esto no es json');                                  // SyntaxError → usa try/catch
 ```
+
+Pon la lectura dentro de `try { ... }`. Si `JSON.parse` lanza un error, JavaScript salta al bloque `catch { ... }`. Ese bloque puede devolver un valor que represente una lectura fallida, como `null`.
 
 `localStorage` solo guarda texto: por eso este mapa usa `JSON.stringify` para guardar tus bombillos y `JSON.parse` para leerlos.
 
