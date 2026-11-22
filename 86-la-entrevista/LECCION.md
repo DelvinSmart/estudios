@@ -137,6 +137,10 @@ Cada término en dos versiones. **Con tus palabras** es para RH (y para entender
 
 > 🌎 **En la vida real:** el glosario es como un diccionario de dos columnas para un viaje: cómo lo dices con tus palabras y cómo se dice "oficialmente". Con los dos, te entienden en la calle y en la oficina.
 
+> 🧩 **Piezas para este ejercicio**
+> - En `totales[app]`, la app funciona como clave. Si todavía no tiene total, `?? 0` permite empezar a sumar desde cero.
+> - `Object.entries(totales)` devuelve pares `[app, total]`. Puedes recorrerlos recordando el nombre y el monto mayor encontrado.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -201,6 +205,10 @@ escribe :: Define "estructura de datos" en las dos versiones: con tus palabras y
 | **Patrón repositorio** | El encargado de guardar y leer los datos | Una capa que abstrae el acceso a datos detrás de una interfaz, para que la lógica no dependa de dónde se guardan | El San de Copiloto |
 | **Inyección de dependencias** | Darle a una pieza lo que necesita, en vez de que lo busque | Pasar las dependencias desde afuera (por el constructor o parámetros), lo que facilita probar y cambiar implementaciones | `new ServicioCaja(repositorio)` |
 | **Separación de responsabilidades** | Cada pieza, una sola tarea | Un principio de diseño: cada módulo tiene una sola razón para cambiar | Datos, lógica y pantalla |
+
+> 🧩 **Piezas para este ejercicio**
+> - Una `interface` describe los métodos que espera el servicio. `implements` pide a TypeScript comprobar que la clase cumpla esa forma.
+> - El constructor recibe un repositorio y lo guarda para que `registrar` pueda usarlo. `void` indica que el método no devuelve un resultado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -283,6 +291,10 @@ escribe :: Explica el patrón repositorio en las dos versiones, y dónde lo usas
 | **Alucinación** | Cuando la IA inventa algo con seguridad | Una respuesta incorrecta o inventada que el modelo presenta como verdadera | Por eso se piden fuentes |
 | **Prompt injection** | Un intento de engañar a la IA con instrucciones escondidas | Un ataque que mete instrucciones en la entrada para cambiar el comportamiento del modelo | El filtro de `aiCopilot` |
 | **Agente** | Una IA que puede hacer cosas, no solo responder | Un sistema donde un modelo decide acciones y usa herramientas en un ciclo hasta cumplir un objetivo | Las herramientas del Copiloto |
+
+> 🧩 **Piezas para este ejercicio**
+> - `[...estado.ganancias, nueva]` crea una lista nueva. `.filter(...)` también devuelve una lista nueva y deja la anterior disponible.
+> - Calcula el total a partir de la lista que acabas de crear. Devuelve esa lista y su total juntos en un objeto nuevo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

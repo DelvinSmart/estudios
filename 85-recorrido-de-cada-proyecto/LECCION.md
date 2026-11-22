@@ -29,6 +29,10 @@ Y una sexta, que muestra que lo entiendes de verdad: **¿qué pasa si algo falla
 
 > 🌎 **Otro ejemplo:** Es como explicar cómo llega el agua a la llave de tu casa: del río a la planta, de la planta al tanque, del tanque a las tuberías, de las tuberías a tu llave. Y qué pasa si se rompe un tubo.
 
+> 🧩 **Piezas para este ejercicio**
+> - El resultado de la pantalla pasa a las reglas y después al guardado. Guarda resultados intermedios con nombres que indiquen qué contienen.
+> - `try` ejecuta el recorrido. Si una función lanza un error, `catch (error)` recibe ese error y `error.message` da el mensaje.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -122,6 +126,10 @@ escribe :: Escribe las cinco preguntas para contar un recorrido. :: ¿Qué hace 
 
 > 🌎 **Otro ejemplo:** Es como un pedido en línea: armas el carrito, se calcula el total con las promociones, se manda al depósito, se verifica tu cuenta, se guarda, y te llega la notificación al celular.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una función recibida como `fn` se puede guardar en una lista y llamar después. Una copia como `[...lista]` entrega una lista separada.
+> - `escuchar` puede devolver otra función que conserva la referencia a `fn`. Esa función permite quitar del registro al oyente correcto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -205,6 +213,10 @@ escribe :: Cuenta con tus palabras, en 30 segundos, el recorrido de una ganancia
 
 > 🌎 **Otro ejemplo:** Es como hablar con un asistente por medio de una secretaria: la secretaria decide qué pasa y qué no, le da las instrucciones al asistente, y anota cuánto tiempo usaste.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un `return` temprano detiene la función al primer problema. `.trim()` detecta una pregunta que solo trae espacios.
+> - En la simulación, pasar a minúsculas sirve para reconocer la frase de prueba. El ejercicio modela el orden de las comprobaciones.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -279,6 +291,10 @@ escribe :: Cuenta con tus palabras, en 30 segundos, el recorrido de una pregunta
 
 > 🌎 **Otro ejemplo:** Es como una panadería que hornea de madrugada: la receta llega a la cocina, se hornea, se empaca y se pone en el estante; el cliente solo ve el pan listo.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.endsWith('.json')` reconoce la extensión. El índice generado se excluye por su nombre aunque tenga esa extensión.
+> - `leer(nombre)` devuelve el objeto. `.slice(0, -5)` quita los cinco caracteres de `.json` y `.localeCompare(...)` permite ordenar títulos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -339,6 +355,10 @@ escribe :: Cuenta con tus palabras, en 30 segundos, el recorrido de un estudio. 
 > 🌎 **En la vida real:** es como un examen con notario: tú respondes, el profesor corrige con su plantilla (que nunca te muestra), la secretaría anota la nota en el sistema, y el diploma solo sale si el sistema dice que aprobaste todo. Cualquiera puede llamar a la escuela y preguntar si tu diploma es verdadero.
 
 > 🌎 **Otro ejemplo:** Es como el examen de manejo: practicas lo que quieras, pero la licencia solo la da el examinador oficial, y la policía puede comprobarla en el sistema.
+
+> 🧩 **Piezas para este ejercicio**
+> - Con `.map((correcta, i) => ...)` puedes producir un booleano por pregunta. `i` señala la respuesta enviada que corresponde.
+> - `.every(...)` comprueba si todos esos resultados pasan. El objeto devuelto puede contener solo los resultados y el estado general.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -411,6 +431,10 @@ LA VERSIÓN LARGA:
 > 🌎 **En la vida real:** es como aprenderte el camino a tu casa para explicárselo a un taxista: primero lo dices completo ("por la avenida hasta el mercado, a la derecha"), y si pregunta, das los detalles.
 
 > 🌎 **Otro ejemplo:** Es como el guía de turismo que ensaya el recorrido antes de llevar al primer grupo: sabe el camino, sabe qué contar en cada parada y qué hacer si una calle está cerrada.
+
+> 🧩 **Piezas para este ejercicio**
+> - Los cinco campos describen un mismo dato en orden. Empieza por lo que hace la persona y sigue hasta lo que ve al final.
+> - En `siFalla`, escribe ejemplos que ocurran en etapas distintas y cómo se manifiestan.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

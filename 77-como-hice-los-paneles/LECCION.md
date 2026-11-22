@@ -54,6 +54,10 @@ Todo sitio con panel tiene dos caras:
 
 > 🌎 **Otro ejemplo:** Es como un mural de anuncios de una iglesia: todos pueden leerlo, pero solo el secretario tiene la llave del vidrio para poner y quitar papeles.
 
+> 🧩 **Piezas para este ejercicio**
+> - `{ ...precios }` copia las propiedades en otro objeto. Si los valores son números, cambiar el precio en la copia deja intacto el del objeto original.
+> - Aquí la llave es un valor de ejemplo. Se compara antes de escribir y el método devuelve un booleano para indicar si cambió el precio.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -129,6 +133,9 @@ Fíjate en algo: los dos primeros se parecen mucho, y Copiloto es distinto. No e
 > 🌎 **En la vida real:** para cambiar el menú escrito en la pizarra de un café basta con tener la tiza. Para cambiar la clave de la caja fuerte, el banco te pide documento, clave y a veces que vayas en persona.
 
 > 🌎 **Otro ejemplo:** Es como la diferencia entre la llave de tu cuarto y la llave de un banco: las dos son llaves, pero la del banco tiene alarmas, cámaras y un registro de quién entró.
+
+> 🧩 **Piezas para este ejercicio**
+> - Puedes representar cada plan como un objeto con tres propiedades. `datos === 'archivos'` distingue un caso del otro antes de devolver el plan.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -221,6 +228,9 @@ Copiloto, en el teléfono del conductor
 |---|---|---|
 | Textos o archivos que se publican para todos | **A: GitHub** | Gratis, sencillo, y cada cambio queda guardado en el historial |
 | Datos de personas, pagos, permisos | **B: Firebase con funciones** | Un servidor revisa cada pedido y nadie toca la base de datos directo |
+
+> 🧩 **Piezas para este ejercicio**
+> - Las propiedades de `panel` indican condiciones separadas. `||` permite elegir el servidor si cualquiera de ellas vale `true`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -317,6 +327,10 @@ El botón **⏏ Salir** borra la llave del aparato. Si usas un aparato prestado,
 No pasa nada. Ve la pantalla que pide la llave, y sin llave, cualquier cosa que intente, GitHub la rechaza. **Esconder la dirección no es seguridad; la llave sí.**
 
 > 🌎 **En la vida real:** todo el mundo sabe dónde está la puerta del banco. Lo que protege la plata no es esconder la puerta, sino la bóveda y el guardia.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.some(...)` permite detectar un permiso cuyo texto sea distinto del permitido.
+> - Una fecha ausente se comprueba por separado. Para textos con formato `AAAA-MM-DD`, comparar fechas de esa misma forma conserva el orden cronológico.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -432,6 +446,10 @@ export async function guardar(ruta, texto, sha, mensaje) {
 
 > 🌎 **Otro ejemplo más:** Es como el número de versión de una receta en un restaurante: "estoy corrigiendo la versión 7". Si en la cocina ya están usando la 8, tu corrección de la 7 se revisa antes de usarla.
 
+> 🧩 **Piezas para este ejercicio**
+> - `TextEncoder` convierte el texto en bytes UTF-8. Base64 representa esos bytes como texto para enviarlos. Por eso se convierten los bytes antes de codificar, incluso cuando el texto trae tildes.
+> - El `sha` identifica la versión leída. Entre leer y guardar alguien pudo cambiar el archivo. Compara la versión antes de escribir.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -523,6 +541,10 @@ La página pública lee esos archivos y los dibuja como un mapa. El panel lee **
 | Pasarse del límite de citas de la LBLA | El medidor no deja publicar |
 | Perder lo escrito | Borrador automático en el aparato |
 | Pisar un cambio hecho en otro lado | La huella (sha) del archivo |
+
+> 🧩 **Piezas para este ejercicio**
+> - `getItem(clave)` devuelve `null` si no hay borrador. Un borrador vacío sí existe, así que `??` distingue ambos casos.
+> - Los tres métodos comparten la misma clave. `removeItem(clave)` elimina el valor que quedó guardado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -655,6 +677,10 @@ test('separar y unir devuelven cada clase exactamente igual', () => {
 6. Las reglas de Firebase **no se tocan**: el número de partes es el mismo y las prácticas son las mismas.
 
 > 🌎 **En la vida real:** es como corregir un error de ortografía en un libro ya publicado: en la reimpresión cambias esa palabra, pero el índice, el número de páginas y el código del libro siguen iguales.
+
+> 🧩 **Piezas para este ejercicio**
+> - Separa el Markdown por líneas para contar encabezados. Para comparar las prácticas identifica cada bloque completo, desde su cerca de apertura hasta su cierre.
+> - Dos listas pueden tener el mismo tamaño y contenido distinto. Compara también el texto exacto de sus bloques.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -797,6 +823,10 @@ Hay acciones que pueden hacer mucho daño si caen en malas manos, como **definir
 
 > 🌎 **Otro ejemplo:** El registro es como el libro de visitas de un edificio: no impide entrar, pero si algo pasa, se sabe quién fue y a qué hora.
 
+> 🧩 **Piezas para este ejercicio**
+> - `Object.keys(cambios)` devuelve los nombres de los campos que llegaron. Puedes comprobar cada nombre en `PERMITIDOS`.
+> - Revisa al dueño y todos los campos antes de aplicar cambios. Así un error en el último campo tampoco deja guardado el primero.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -875,6 +905,9 @@ Ahora junta todo. Así viaja un cambio en cada panel, de punta a punta:
 > 🌎 **En la vida real:** los dos primeros son como mandar un artículo a un periódico (lo escribes, la redacción comprueba que eres tú, se imprime y se reparte). El tercero es como pedirle al banco que cambie algo de tu cuenta (te identificas, el cajero revisa y el cambio aparece en la app de todos los que usan esa cuenta).
 
 > ✋ **Pausa:** antes de seguir, intenta contar en voz alta uno de los tres viajes sin mirar las tablas.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una tabla puede asociar cada nombre de panel con su lista de pasos. El orden de los elementos de la lista es el orden del recorrido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -991,6 +1024,10 @@ Si el sitio está en GitHub Pages, se publica solo. Avísale a la persona: "Publ
 
 Entonces el camino A no alcanza. Usa el camino B: cuentas de Firebase, **funciones del servidor que revisan cada pedido** (como `assertOwner`), reglas que cierran la base de datos (`if false`) y un registro de lo que se hace. Es lo que hace Copiloto.
 
+> 🧩 **Piezas para este ejercicio**
+> - El evento `submit` ocurre al enviar el formulario. `preventDefault()` evita que el navegador salga de la página y deja que tu código procese el valor.
+> - `input.valueAsNumber` da un número o `NaN` si el campo está vacío o es inválido. Usa `textContent` para mostrar el aviso y el precio como texto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -1060,6 +1097,10 @@ escribe :: Escribe, en orden y con tus palabras, los pasos para hacer un panel q
 > 🌎 **En la vida real:** son los mismos errores de la seguridad de una casa: dejar la llave debajo del felpudo (la llave en el código), confiar en que nadie conoce tu calle (esconder la dirección), o darle al plomero la llave de todo el edificio (una llave con acceso a todo).
 
 > 🔁 **Repaso:** tres preguntas (dónde viven los datos, cómo sabe que eres tú, quién revisa) → dos caminos (GitHub con llave, o Firebase con funciones) → la llave limitada y guardada en el aparato → leer y guardar con huella → revisar antes de guardar → dejar que se publique solo → probarlo como atacante.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.includes(...)` busca señales de texto dentro del ejemplo. Para el aviso del `sha`, combina una señal presente con otra ausente usando `&&` y `!`.
+> - El resultado es una lista de avisos. Cada comprobación puede agregar el suyo aunque otra también haya encontrado algo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
