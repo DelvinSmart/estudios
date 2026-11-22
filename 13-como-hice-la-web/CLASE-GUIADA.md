@@ -99,6 +99,10 @@ Lo que **no** puede usar son las piezas que **solo existen en el teléfono**: la
 
 > 🌎 **Otro ejemplo:** Como un músico que toca la misma canción en la guitarra acústica y en la eléctrica: sabe la canción, pero la eléctrica tiene pedales que la acústica no.
 
+> 🧩 **Piezas para este ejercicio**
+> - `interface Tanqueo` describe qué propiedades debe tener el objeto. `litros: number` exige un número. Por ejemplo, `40` es número y `'40'` es texto.
+> - En `function calcular(x: number): number`, la primera anotación describe el dato que entra y la segunda el que sale.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -177,6 +181,9 @@ copiloto-driver/
 > 🌎 **En la vida real:** un supermercado: el depósito central (`src/`), la puerta de entrada (`index.html`), el guardia que pide la tarjeta de socio (`App.tsx`), la oficina de diseño (`engines/`), los adaptadores de enchufe (`adapters/`), la reposición (`data/`) y la caja (`actions/`), las góndolas (`ui/`) y los pasillos (`screens/`).
 
 > 🌎 **Otro ejemplo:** Como el plano de un centro comercial: cada local con su rubro, y el pasillo principal que los conecta.
+
+> 🧩 **Piezas para este ejercicio**
+> - Lee una llamada de adentro hacia afuera. En `dibujar(preparar(datos))`, primero se ejecuta `preparar` y su resultado pasa como argumento a `dibujar`. Puedes guardar cada resultado en una variable para ver los pasos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -268,6 +275,10 @@ Cuando la web necesitaba un cálculo que estaba **escondido dentro de una pantal
 
 > 🌎 **Otro ejemplo:** Como un dato que estaba anotado en el celular de un empleado: en vez de copiarlo a otro celular, se pasa al sistema de la empresa y todos lo leen de ahí.
 
+> 🧩 **Piezas para este ejercicio**
+> - `Math.min(ventas, deuda)` devuelve lo menor de las dos cantidades. Si quedan 30 por cubrir y entran 50, solo 30 pueden ir a cubrir la deuda.
+> - Una variable declarada con `let` fuera de `.map(...)` conserva lo que quedó en la vuelta anterior. `.map(...)` devuelve una barra por cada día.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -349,6 +360,10 @@ Así es **imposible** que la web se rompa en silencio por usar algo del teléfon
 > 🌎 **En la vida real:** el control del aeropuerto que no te deja subir con un líquido de más de 100 ml, con un cartel claro, en vez de que el problema explote a mitad de vuelo.
 
 > 🌎 **Otro ejemplo:** Como el detector de metales de un estadio: si alguien intenta entrar con algo prohibido, lo paran en la puerta con un cartel claro.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un `return` temprano acaba la función. Si estás en la app, puedes devolver la importación enseguida y dejar las comprobaciones siguientes para la web.
+> - `REEMPLAZOS[importacion]` busca el nombre exacto. `??` permite elegir el nombre original si no hay reemplazo. `throw new Error(...)` detiene la función con un mensaje.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -443,6 +458,10 @@ La web usa la configuración **pública** de Firebase: **no es un secreto**. Lo 
 
 `data/useCopilot.ts` usa el mismo motor de la app. La pregunta va a la función de la nube `aiCopilot`. **La clave de la IA nunca está en la página**: vive en el servidor.
 
+> 🧩 **Piezas para este ejercicio**
+> - `[4, 6].reduce((suma, valor) => suma + valor, 0)` suma desde cero y da 10. Puedes usar la misma función de suma para ambas listas.
+> - Un margen es una fracción de los ingresos. Antes de dividir, comprueba si los ingresos son cero. `Math.round(...)` redondea el porcentaje a un entero.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -520,6 +539,10 @@ Esa última es sutil: Tailwind, al armar, **solo deja las clases que ve escritas
 
 > 🌎 **Otro ejemplo:** Como la inspección de una franquicia que multa al local que pintó la fachada con un rojo "parecido" en vez del oficial.
 
+> 🧩 **Piezas para este ejercicio**
+> - `clases.split(/\s+/)` separa el texto donde hay uno o más espacios en blanco. `.test(texto)` comprueba si un texto encaja con el patrón.
+> - En una expresión regular, `^` y `$` marcan principio y final. `|` separa alternativas y `\d*` admite cero o más dígitos, como en `xl` y `2xl`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -583,6 +606,10 @@ Todas leen las variables de los motores. Cuando se pidió que los cuadritos oscu
 > 🌎 **En la vida real:** instrucciones cortas para alguien que acomoda muebles: "uno al lado del otro", "a la misma altura", "un pasito entre cada uno", "si la sala es grande, tres columnas".
 
 > 🌎 **Otro ejemplo:** Como abreviaturas en un mensaje: "q" en vez de "que". Tailwind escribe el estilo en abreviaturas cortas pegadas a cada pieza.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.startsWith('laptop:')` comprueba el prefijo. `.slice('laptop:'.length)` devuelve lo que queda después.
+> - Puedes reutilizar la misma búsqueda con el nombre limpio. Si no hay una regla para ese nombre, `?? null` da `null`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -677,6 +704,10 @@ Al cambiar de Semana a Mes, los recuadros **desaparecían y volvían a entrar**.
 
 > 🌎 **Otro ejemplo:** Como cambiarle el nombre a un contacto del teléfono cada vez que lo llamas: el teléfono cree que es una persona nueva y empieza la conversación de cero.
 
+> 🧩 **Piezas para este ejercicio**
+> - En `function Recuadro({ label, value })`, las llaves sacan dos propiedades del objeto que recibe la función.
+> - Los dos métodos pueden compartir una variable declarada con `let` dentro de `crearPantalla`. Uno la cambia y el otro la lee cuando dibuja.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -762,6 +793,10 @@ Se lee: "por mes, la primera barra se llama **S1** (semana 1), y el **total del 
 
 > 🌎 **Otro ejemplo:** Como la inspección final de un departamento antes de entregarlo: paredes, puertas, luz, agua, y que el edificio entero funcione.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.some(...)` sirve para preguntar si algún archivo empieza con una ruta. Un cambio en `src/` cuenta para ambas comprobaciones.
+> - Puedes construir la respuesta con una lista vacía y agregar cada nombre que corresponda usando `.push(...)`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -811,6 +846,9 @@ vf :: `npm run build` corre el candado, TypeScript y las pruebas antes de armar
 > 🌎 **En la vida real:** `npm run dev` es abrir la tienda solo para ti; `--host`, abrir la puerta a los de la casa (no a los de la calle). Si te vas a dormir, nadie atiende el mostrador.
 
 > 🌎 **Otro ejemplo:** Como mostrar tu casa antes de mudarte: abres la puerta a tu familia (mismo Wi-Fi), pero no a la calle.
+
+> 🧩 **Piezas para este ejercicio**
+> - `!servidor.encendido` significa que está apagado. `&&` exige que se cumplan ambas condiciones. Revisa primero si hay servidor, porque las demás condiciones solo importan cuando está encendido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -864,6 +902,10 @@ vf :: `?demo` muestra datos reales de los usuarios
 > 🌎 **Otro ejemplo:** Como dos relojes en la misma pared que marcan horas distintas: no sabes cuál creer; hay que dejar uno solo.
 
 > 💡 **Idea:** fíjate que **dos copias** de una librería ya rompieron algo dos veces en tu historia: React aquí, y `@firebase/app` en la vc89 (Tema 11). Es un error clásico; ahora sabes reconocerlo.
+
+> 🧩 **Piezas para este ejercicio**
+> - `for (const { nombre, version } of arbol)` extrae ambas propiedades de cada elemento.
+> - Un `Set` cuenta valores distintos. Si agregas dos veces la misma versión, `.size` sigue siendo 1. Usa un conjunto por nombre de paquete.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -946,6 +988,10 @@ La forma de juntar los registros se sacó a **un solo archivo** de la app, `src/
 > 🌎 **En la vida real:** dos cajeros con la misma calculadora; uno dice "vendimos 100" y el otro "400". La calculadora estaba bien: uno juntaba los tickets distinto. La prueba de contrato les da **el mismo montón de tickets** y exige el mismo número.
 
 > 🌎 **Otro ejemplo:** Como unificar la forma de contar los votos en todas las mesas de una elección, para que nadie cuente distinto.
+
+> 🧩 **Piezas para este ejercicio**
+> - `Object.keys(totales)` saca los días presentes en un resultado. Puedes unir las claves de ambos resultados en un `Set` para revisar también los días que aparecen en uno solo.
+> - `juntarApp` y `juntarWeb` llegan como funciones. Llama a ambas con los mismos registros antes de comparar los valores por día.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

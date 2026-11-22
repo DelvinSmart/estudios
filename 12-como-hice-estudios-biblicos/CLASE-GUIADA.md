@@ -42,6 +42,11 @@ Tema (el estudio)  →  Puntos (1, 2, 3…)  →  Subpuntos (1.1, 1.2…)  →  
 
 > 💡 **Idea:** este mapa de estudios hace exactamente lo mismo con tus `LECCION.md` (Tema 18): "una sola fuente de verdad".
 
+> 🧩 **Piezas para este ejercicio**
+> - `estudio.puntos` es una lista. `.length` cuenta cuántos elementos hay. Cada punto tiene su propia lista `subpuntos`.
+> - `flatMap` toma una lista de cada elemento y las reúne en una sola. Por ejemplo, `[[1, 2], [3]].flatMap((grupo) => grupo)` da `[1, 2, 3]`.
+> - `reduce` puede llevar un total. Empieza en 0 y en cada vuelta suma el tamaño de la lista de bloques del subpunto actual.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -97,6 +102,10 @@ elige :: Un bloque puede ser… :: Solo texto :: Texto, pasaje, subtítulo, imag
 > 🌎 **Otro ejemplo:** Como armar un puesto en la feria con una mesa y un toldo, en vez de construir un local: para lo que vendes, alcanza y sobra.
 
 > 💡 **Idea:** la web de Copiloto (Tema 13) sí usa React. ¿Contradicción? No: esa web es grande y comparte código con la app. **Se elige la herramienta según el tamaño del trabajo** (Tema 10, parte 9).
+
+> 🧩 **Piezas para este ejercicio**
+> - `'cambiar el color'.includes('color')` da `true`. Busca un fragmento dentro del texto.
+> - Con `.some(...)` puedes probar una lista de palabras y saber si al menos una aparece en la descripción.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -174,6 +183,10 @@ que-dice-la-biblia/
 > 🌎 **Otro ejemplo:** Como una caja de herramientas con compartimentos: los destornilladores en uno, las llaves en otro; sabes dónde está cada cosa sin revolver.
 
 > 📌 **Nota:** después del 13/11 se agregaron más archivos (por ejemplo `biblia.js`, `tema.js`, `panel-ia.js`, `panel-medidor.js`); los ves en el Tema 14. La idea es la misma: uno por tarea.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un texto entre acentos graves permite meter un valor con `${...}`. Si `nombre` vale `'enero'`, `` `informes/${nombre}.json` `` da `'informes/enero.json'`.
+> - En `archivos[tarea]`, la variable `tarea` trae el nombre de la propiedad que quieres consultar.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -260,6 +273,11 @@ Leámoslo:
 
 > 🌎 **Otro ejemplo:** Como un formulario impreso con casilleros: "Nombre:", "Idioma:", y una lista de "Puntos" con sus renglones.
 
+> 🧩 **Piezas para este ejercicio**
+> - `lista.forEach((elemento, i) => { ... })` entrega el elemento y su posición. JavaScript empieza en 0, así que para mostrar «punto 1» sumas 1.
+> - Hay tres niveles de listas. Conserva la posición del punto, del subpunto y del bloque mientras entras en cada nivel.
+> - `bloque[campo]` lee el campo cuyo nombre tienes en una variable. Si falta esa propiedad, obtienes `undefined`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -327,6 +345,10 @@ estudio.html
 > 💡 **Idea:** este mapa de estudios usa **módulos** (`import`/`export`, Tema 17 parte 9), que resuelven el orden solos. La página de estudios usa el orden de los `<script>`: es la forma más simple, y funciona bien en una página chica.
 
 **Ejercicio:** abre `estudio.html`, busca las etiquetas `<script>` al final, anota el orden y explica por qué es ese.
+
+> 🧩 **Piezas para este ejercicio**
+> - `new Set()` crea un conjunto vacío. `.add(nombre)` registra un nombre y `.has(nombre)` comprueba si ya está registrado.
+> - Al recorrer un archivo, distingue las funciones que necesita de las que aporta. Un `return` dentro del bucle termina toda la función.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -410,6 +432,11 @@ Por eso, lo que ves en la vista previa del panel es **exactamente** lo que sale 
 
 > 🌎 **Otro ejemplo:** Como poner entre comillas lo que alguien dijo en un acta: queda claro que es una cita, no una orden del que escribe el acta.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.replaceAll(viejo, nuevo)` sustituye todas las apariciones de un fragmento. Por ejemplo, `'a-a'.replaceAll('-', '/')` da `'a/a'`.
+> - Cambia primero los `&` que ya trae el texto. Las entidades que agregues después, como `&lt;`, también empiezan con `&`.
+> - Llama a la función de escape al insertar el contenido de texto dentro del párrafo. Las etiquetas del párrafo salen de la plantilla.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -490,6 +517,10 @@ Así, **un solo dato** ("morado") pinta todo ese punto, y funciona en modo claro
 
 > 🌎 **Otro ejemplo:** Como pedir "el color del equipo" en una tienda de camisetas: el vendedor lo busca en el catálogo y lo usa en el número, el nombre y el escudo.
 
+> 🧩 **Piezas para este ejercicio**
+> - `TOKENS.includes(color)` comprueba si ese nombre está permitido. `condición ? valorSiSí : valorSiNo` elige uno de dos valores.
+> - `var(--morado)` lee una variable de CSS. `--c` es la otra variable que recibe ese color para este punto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -545,6 +576,9 @@ En `js/efectos.js` y al final de `css/styles.css` (es el mismo efecto de la land
 
 > 🌎 **Otro ejemplo:** Como las luces de un escenario: el técnico decide cuándo se prenden; el reflector decide cómo se ve la luz.
 
+> 🧩 **Piezas para este ejercicio**
+> - `if (elemento.reducir)` entra cuando esa propiedad vale `true`. Si haces `return` allí, la función termina antes de mirar `enPantalla`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -598,6 +632,10 @@ Es un **CI** como el del Tema 04, pero en vez de solo revisar, **publica**: eso 
 > 🌎 **En la vida real:** una imprenta automática: entregas el manuscrito, la imprenta arma el índice, imprime un PDF de cada capítulo y lo pone en la vidriera. Y una página estática es un cartel pegado en la pared: no puede ir a la bodega a ver qué cajas hay; alguien tiene que escribir la lista.
 
 > 🌎 **Otro ejemplo:** Como una revista que se imprime y se reparte sola cada vez que el editor entrega el material: el editor no tiene que llevarla a los kioscos.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.startsWith(...)` comprueba el principio del nombre y `.endsWith(...)`, el final. `.slice(inicio, fin)` extrae un tramo. Un límite final negativo cuenta desde el final.
+> - `a.localeCompare(b, 'es')` compara títulos según el orden del español. Da un número negativo si `a` debe ir antes de `b`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -689,6 +727,10 @@ Es la página real del estudio (`estudio.html?vista=1`) dentro de un cuadro (un 
 
 > 🌎 **Otro ejemplo:** Como una vidriera con un empleado detrás: cada vez que cambias el precio en la libreta, él actualiza el cartel de la vidriera.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.split('.')` convierte una ruta en una lista de pasos. Al hacer `objeto[paso]`, el mismo acceso sirve para una propiedad o una posición de una lista.
+> - Distingue el último paso de los anteriores. Los anteriores llevan al objeto que contiene el dato. El último indica dónde escribir.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -777,6 +819,10 @@ Antes de subir, la foto se achica con un **`<canvas>`** (un lienzo para dibujar 
 
 > 🌎 **Otro ejemplo:** Como comprimir un archivo antes de mandarlo por correo: llega rápido y no llena la casilla.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.map(Number)` convierte los textos a números. `Set` elimina los repetidos y `.sort((a, b) => a - b)` los ordena por su valor.
+> - Para saber si dos versículos son seguidos, compara el siguiente con el actual más uno. `.join(', ')` une los tramos con comas.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -828,6 +874,10 @@ elige :: ¿Qué es OCR? :: Un formato de imagen :: Reconocer texto en una imagen
 | `panel.js` llegó a **casi 500 líneas** | Se **dividió en archivos** por tarea | El cajón de cubiertos que creció demasiado |
 | Los numeritos de versículo en las fotos **salen mal leídos** | El panel muestra la lista **para revisar y corregir** | Un dictado con ruido: se relee |
 | La LBLA tiene **derechos de autor** | No se copia de internet: se pega desde la app o se lee de una foto | No fotocopiar un libro entero |
+
+> 🧩 **Piezas para este ejercicio**
+> - `.find(...)` devuelve la primera regla que cumple la condición, o `undefined`. Una regla puede tener varios prefijos y `.some(...)` comprueba si alguno coincide.
+> - Al agrupar por archivo, crea su lista la primera vez que aparezca y agrega las siguientes funciones a esa misma lista.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
