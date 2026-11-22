@@ -63,6 +63,9 @@ El ejercicio convierte la regla de arriba en código. Antes de escribir, mira qu
 
 > 💡 **Idea:** si `permiso` no viene, preguntar por `permiso.porEscrito` da error. Por eso primero se pregunta si **existe** el permiso (`p && …`) y después por sus datos.
 
+> 🧩 **Piezas para este ejercicio**
+> - El permiso escrito tiene dos datos distintos: si existe y hasta cuándo vale. Compruébalos juntos. Una fecha `AAAA-MM-DD` se puede comparar en orden cuando ambos textos tienen ese formato.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide. Si te trabas, usa **ver solución** y compárala con las tres preguntas de arriba.
 
 ```ejercicio
@@ -124,6 +127,9 @@ En este sitio: **qué** = que el certificado sea real; **quién** = alguien que 
 > 🌎 **En la vida real:** un joyero y una panadería no ponen la misma seguridad: depende de qué cuidan y de quién podría robar.
 
 > 🌎 **Otro ejemplo:** Es como planear un viaje: piensas qué podría salir mal (lluvia, robo, retraso) y llevas lo que necesitas para cada cosa.
+
+> 🧩 **Piezas para este ejercicio**
+> - El modelo de amenazas conecta una situación con la defensa que corresponde. Decide primero qué elemento reconoce el texto y después qué comprobación puede hacer el servidor.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -199,6 +205,9 @@ huella = hashlib.scrypt(b"mi-clave-larga", salt=sal, n=2**14, r=8, p=1)
 > 🌎 **En la vida real:** el 2FA es como un edificio con portero **y** llave: aunque copien tu llave, el portero no conoce al ladrón.
 
 > 🌎 **Otro ejemplo:** Es como el cajero automático: necesitas la tarjeta **y** el PIN; con uno solo no alcanza.
+
+> 🧩 **Piezas para este ejercicio**
+> - Si cada posición admite la misma cantidad de símbolos, el total se obtiene multiplicando esa cantidad una vez por posición. La clasificación de la práctica es una regla simplificada para el ejercicio.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -282,6 +291,9 @@ Si subiste un secreto a GitHub, **borrar el archivo no alcanza**: queda en el hi
 
 > 🌎 **Otro ejemplo:** Es como una tarjeta robada: no esperas a ver si la usan; la bloqueas y pides otra.
 
+> 🧩 **Piezas para este ejercicio**
+> - El detector trabaja por líneas. Usa el índice más uno para mostrar el número tal como aparece en un editor. Registra la ubicación sin copiar el valor que podría ser secreto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -343,6 +355,9 @@ El dominio es lo que va justo antes de la primera `/`. `accounts.google.com` es 
 > 🌎 **En la vida real:** es como leer el remitente de una carta: "Banco do Brasil" escrito a mano en un sobre sin sello no es el banco.
 
 > 🌎 **Otro ejemplo:** Es como una camiseta "Adibas": de lejos parece la marca, de cerca no.
+
+> 🧩 **Piezas para este ejercicio**
+> - `hostname` es el nombre del servidor que interpreta el navegador. En este ejercicio, la lista de terminaciones sirve para los casos dados. En una aplicación con dominios de muchos países se necesita una lista completa de sufijos públicos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -416,6 +431,9 @@ Validar en la pantalla (campos obligatorios, botones bloqueados) es para **ayuda
 
 > 🌎 **Otro ejemplo:** Es como el "solo para mayores de 18" de un sitio: un clic en "sí, tengo 18" no comprueba nada.
 
+> 🧩 **Piezas para este ejercicio**
+> - El catálogo es el dato que controla el servidor. Usa el identificador del producto para consultarlo. Valida que la cantidad sea un entero antes de calcular el importe.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -475,6 +493,9 @@ En un Wi-Fi abierto (aeropuerto, café), alguien en la misma red puede ver qué 
 > 🌎 **En la vida real:** hablar de tu clave del banco en voz alta en un bus lleno: aunque nadie parezca escuchar, alguien puede.
 
 > 🌎 **Otro ejemplo:** Es como un cajero automático en una calle oscura: funciona igual, pero es más fácil que alguien mire.
+
+> 🧩 **Piezas para este ejercicio**
+> - `new URL(...)` separa la dirección en partes. `.protocol` incluye los dos puntos. Si la página es HTTPS, revisa también el protocolo de cada recurso.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

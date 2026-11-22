@@ -30,6 +30,9 @@ return {
 
 **La lección general:** un secreto no se protege solo escondiéndolo; también hay que mirar **qué dejan saber las respuestas**. Es la misma idea que la **enumeración de cuentas** de la clase 23 ("ese correo no existe" contra "contraseña incorrecta").
 
+> 🧩 **Piezas para este ejercicio**
+> - El servidor conoce los resultados de todas las preguntas. Decide qué detalle puede devolver después de determinar si la práctica está aprobada.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -91,6 +94,9 @@ export function gmailCanonico(correo) {
 
 > 📌 **Nota:** se hace **solo para Gmail** porque es el que se sabe que ignora los puntos. Otros servicios pueden tratar `ana.perez` y `anaperez` como dos personas distintas: unirlas ahí sería un error.
 
+> 🧩 **Piezas para este ejercicio**
+> - Normalizar sirve para comparar dos representaciones de la misma dirección. Aplica las reglas de puntos y etiquetas únicamente a los dominios que el ejercicio indica.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -147,6 +153,9 @@ function moverLlaveVieja() {
 ```
 
 > 💡 **Idea:** un secreto que puede publicar código es lo más valioso que hay en el navegador. La regla: guardarlo **lo menos posible** (sessionStorage, no localStorage), y con **los menos permisos posibles** (una llave que solo puede tocar **este** repositorio). Es el mínimo privilegio de la clase 24.
+
+> 🧩 **Piezas para este ejercicio**
+> - El origen se compone de protocolo, nombre del servidor y puerto. El camino de la página no participa en esa comparación.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -211,6 +220,9 @@ export function respuestasValidas(respuestas) {
 ```
 
 **4. Las acciones de GitHub, por su huella.** Lo mismo, en el CI: `uses: actions/checkout@v4` confía en que la etiqueta `v4` no cambie. Una etiqueta **se puede mover**. Ahora cada acción se pide por su **SHA** (la huella exacta del código): la cadena de suministro de la clase 23, parte 7.
+
+> 🧩 **Piezas para este ejercicio**
+> - En JavaScript, una lista también es un objeto para `typeof`. Usa `Array.isArray` para distinguirla antes de contar claves y trata `null` por separado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -278,6 +290,9 @@ export const escapar = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ENTIDAD
 ```
 
 **La lección:** el código repetido no es solo feo; es **peligroso**. Cuando hay que arreglar algo, se arregla en un lugar y se olvidan los otros. Una regla de seguridad tiene que vivir en **un solo lugar**, con su prueba.
+
+> 🧩 **Piezas para este ejercicio**
+> - `??` permite partir de texto vacío si el valor falta. Escapa primero `&` y después los demás caracteres.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

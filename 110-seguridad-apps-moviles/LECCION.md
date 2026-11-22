@@ -30,6 +30,9 @@ Un **APK** (Android) o un **IPA** (iPhone) es, por dentro, un **archivo ZIP**: s
 
 Lo secreto va en **tu servidor**: la app le pide al servidor, y el servidor usa la llave.
 
+> 🧩 **Piezas para este ejercicio**
+> - El paquete final puede contener texto que venía de la configuración. Reporta la categoría del secreto detectado y evita incluir su contenido en el reporte.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -87,6 +90,9 @@ const token = await SecureStore.getItemAsync('token');
 
 **La regla:** las preferencias y los datos comunes (la lista de gastos, el modo oscuro), en el almacenamiento común. Los **secretos**, en la caja fuerte. Y lo mejor: **guardar lo menos posible**. Un dato que no guardas no se puede robar.
 
+> 🧩 **Piezas para este ejercicio**
+> - Decide primero si el dato debe existir en el dispositivo. Si se necesita guardar un secreto, usa el almacenamiento protegido del dispositivo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -134,6 +140,9 @@ Un **deep link** abre tu app en una pantalla con datos: `miapp://pagar?a=juan&mo
 1. Un deep link **nunca hace algo importante solo**: abre la pantalla con los datos **para que la persona confirme**.
 2. **Revisar cada dato** que llega: solo las pantallas que existen, montos con límites, ids que pertenecen a la persona (el IDOR de la clase 23 también entra por aquí).
 3. Preferir los **Universal Links** (iPhone) y **App Links** (Android): enlaces `https://tu-dominio.com/…` que el sistema solo entrega a **tu** app, porque tu dominio lo certifica. Un esquema propio (`miapp://`) lo puede reclamar **otra** app instalada.
+
+> 🧩 **Piezas para este ejercicio**
+> - Lee los campos del enlace, comprueba el destino admitido y valida el monto antes de preparar la pantalla. La acción se presenta para confirmación.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -195,6 +204,9 @@ escribe :: ¿Qué ataque de la clase 23 también puede entrar por un deep link, 
 **Lo que enseña Frida:** cualquier control que esté **solo en la app** se puede apagar. "Es premium", "tiene saldo", "puede ver esto": eso lo decide **el servidor**, en cada pedido. Es lo mismo que "validar en el cliente no es seguridad" de la clase 22, pero en el teléfono.
 
 **Los permisos.** Cada permiso (cámara, ubicación, contactos, micrófono) es una puerta más. Pide **solo** los que la app usa, **cuando** los usa (la cámara, al tocar "sacar foto", no al abrir la app), y explica para qué. MobSF te muestra los que pide tu app: si hay alguno que no reconoces, suele venir de una librería que agregaste.
+
+> 🧩 **Piezas para este ejercicio**
+> - Compara la lista de permisos pedidos con los que la app usa. Solo después revisa si alguno de los sobrantes merece atención prioritaria.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

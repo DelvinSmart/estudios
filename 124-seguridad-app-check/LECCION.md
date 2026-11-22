@@ -67,6 +67,9 @@ escribe :: Explica con tus palabras por qué no sirve esconder la apiKey. :: Por
 
 > 🌎 **Otro ejemplo:** en un concierto, la **pulsera** (el sello) prueba que entraste por la boletería. Pero tener pulsera no te deja subir al escenario: para eso hace falta otro permiso (la cerradura).
 
+> 🧩 **Piezas para este ejercicio**
+> - El sello de la app y los permisos sobre los datos son dos comprobaciones diferentes. El modo de observación mide el paso del sello. La comprobación de permisos se aplica en ambos modos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
 ```ejercicio
@@ -139,6 +142,9 @@ try {
 > 💡 **Idea:** para que el portero sepa cuál es **tu** tienda, la clave se registra con tus **dominios** (`delvinsmart.github.io` y `localhost`). Si alguien copia tu clave del sitio y la usa en su página, reCAPTCHA se niega a darle el puntaje, porque el dominio no es el tuyo.
 
 > 📌 **Nota:** el reCAPTCHA "clásico" (v3) quedó descontinuado para proyectos nuevos. Por eso este sitio usa **Enterprise** (*Fraud Defense* en la consola). Pasó de verdad: se conectó primero con v3 y hubo que cambiarlo.
+
+> 🧩 **Piezas para este ejercicio**
+> - Antes de leer propiedades, comprueba si hay un sello. La comparación de tiempo usa la misma unidad para ambos números. Justo al vencer, ya no es válido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
@@ -234,6 +240,9 @@ const ID_PRACTICA = /^\d{2}:[\w.-]+\.md:\d{1,3}:practica\d{1,2}$/;
 
 > 📌 **Nota:** "las pruebas pasan" quiere decir "lo que probamos funciona", no "todo funciona". Cuando agregas algo nuevo (aquí, clases con un número más largo), **pruébalo en el sitio de verdad**, como lo usaría un alumno.
 
+> 🧩 **Piezas para este ejercicio**
+> - Los separadores del identificador son literales. Los intervalos de cantidad limitan cada grupo de números. Las anclas verifican el texto completo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
 ```ejercicio
@@ -255,6 +264,9 @@ function idValido(id) {
   return /^\d{2,3}:[\w.-]+\.md:\d{1,3}:practica\d{1,2}$/.test(id);
 }
 ```
+
+> 🧩 **Piezas para este ejercicio**
+> - Suma los dos contadores para obtener el total. Si el total es cero, no hay proporción que medir. En otro caso, comprueba por separado la cantidad de días y la proporción.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 

@@ -55,6 +55,9 @@ En la clase 22 hiciste el modelo corto (qué, quién, cómo). Cuando la app crec
 
 > 📌 **Nota:** en un trabajo, esto se hace **antes de programar** algo nuevo y se repasa cuando cambia el diseño. Es una de las preguntas favoritas en entrevistas de seguridad.
 
+> 🧩 **Piezas para este ejercicio**
+> - STRIDE agrupa amenazas según el efecto que producen. Las palabras del ejercicio son señales de una simulación. En un sistema real, clasifica por el comportamiento observado.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
 ```ejercicio
@@ -126,6 +129,9 @@ console.log(JSON.stringify({ hora: new Date().toISOString(), tipo: 'login_fallid
 
 > ⚠️ **Cuidado:** un registro también se puede **atacar**. Si alguien escribe como usuario `ana\n{"tipo":"login_bueno"}`, y tu registro es de frases, puede **inventar una línea falsa**. Con JSON, el salto de línea queda escapado dentro del texto (`\n`) y no se puede colar. Es la misma idea que escapar el HTML (clase 108): lo que viene de afuera es dato, no formato.
 
+> 🧩 **Piezas para este ejercicio**
+> - Construye la línea de registro copiando solo los campos permitidos. Después convierte ese objeto a JSON. Así no se guardan campos nuevos por accidente.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
 ```ejercicio
@@ -175,6 +181,9 @@ Un registro sirve de verdad cuando **algo lo lee solo** y avisa. Las reglas de a
 > 💡 **Idea:** pocas alertas, y buenas. Si suena todo el día por cosas que no importan, la gente la apaga o deja de mirarla. A eso se le llama **fatiga de alertas**.
 
 > 📌 **Nota:** las empresas grandes juntan los registros de todos sus servidores en un solo lugar para buscar y poner alertas (a ese tipo de sistema se le dice **SIEM**). En Firebase y Google Cloud, sin pagar nada extra, tienes **Cloud Logging** y sus alertas, que es lo mismo en chico.
+
+> 🧩 **Piezas para este ejercicio**
+> - Cuenta solo los eventos del tipo indicado. Compara cada total con el límite y ordena las IP que requieran revisión.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
@@ -231,6 +240,9 @@ Cuando hay un incidente, el orden importa más que la velocidad. Es casi siempre
 > 💡 **Idea:** prepara el plan **antes** de necesitarlo, en una hoja: a quién llamar, dónde se rotan las claves, cómo se apaga una función. En medio del susto nadie piensa bien. Es como el plan de evacuación pegado en la puerta del hotel.
 
 > 🎙️ **El profesor dice:** esto ya lo viviste. En la auditoría de este sitio (clase 108) se encontró el oráculo de las prácticas: se **contuvo** (la función dejó de decir qué estaba mal), se **investigó** (cómo funcionaba), se **recuperó** (se publicó el arreglo) y se **aprendió** (se volvió una lección, con su prueba). Eso es una respuesta a incidente en chico.
+
+> 🧩 **Piezas para este ejercicio**
+> - El orden del plan marca la prioridad de cada paso. Usa una lista nueva y conserva los pasos que estén entre los que se recibieron.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 

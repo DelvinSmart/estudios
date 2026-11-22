@@ -89,6 +89,9 @@ match /privado/{documento} {
 
 > ⚠️ **Cuidado:** si tu proyecto es **público** en GitHub (como este curso), el archivo `firestore.rules` también se ve allí. En ese caso, no dejes el correo en el repositorio: guárdalo en otro archivo que no se suba (en `.gitignore`) o usa el **uid** de la cuenta en vez del correo. El uid es un código largo que no dice nada de la persona.
 
+> 🧩 **Piezas para este ejercicio**
+> - Primero comprueba que la sesión exista. Después verifica el correo y compara la dirección completa. Las tres comprobaciones deben aprobarse.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
 ```ejercicio
@@ -240,6 +243,9 @@ async function traerPrivados() {
 
 > ⚠️ **Cuidado:** la copia en el teléfono es para **usar sin internet**, no un secreto. Quien tenga el teléfono del papá en la mano podría leerla. Eso está bien aquí: el objetivo era no **publicar** los dibujos en la app que baja todo el mundo, no esconderlos del propio papá.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un documento ausente, una negativa de acceso y un fallo de conexión son resultados distintos. Trata cada uno según lo que indica el código recibido antes de leer el JSON.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 
 ```ejercicio
@@ -267,6 +273,9 @@ function interpretar(r) {
   return JSON.parse(r.json);
 }
 ```
+
+> 🧩 **Piezas para este ejercicio**
+> - La copia local pertenece a la cuenta cuyo identificador quedó guardado. Compara ese identificador con el de la sesión actual antes de entregar el contenido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 

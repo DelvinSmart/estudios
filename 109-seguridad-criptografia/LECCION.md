@@ -21,6 +21,9 @@ El error más común en la vida real: "lo guardé en **base64**, así que está 
 
 Y el segundo: guardar contraseñas **cifradas** (con una llave) en vez de con un **hash**. Si roban la base de datos **y** la llave (que suele estar en el mismo servidor), tienen todas las contraseñas. Con un hash lento con sal, no hay llave que robar.
 
+> 🧩 **Piezas para este ejercicio**
+> - Base64 permite representar datos como texto. Cualquiera que conozca el formato puede leerlo. El cifrado, la firma y las funciones de hash cumplen tareas distintas.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -84,6 +87,9 @@ eyJhbGciOiJIUzI1NiJ9 . eyJzdWIiOiJhbmEiLCJleHAiOjE4MDAwMDAwMDB9 . 4pZ…firma…
 
 > 📌 **Nota:** base64**url** es base64 con dos cambios para que viaje en una URL: `-` en vez de `+`, `_` en vez de `/`, y sin los `=` del final.
 
+> 🧩 **Piezas para este ejercicio**
+> - Leer los datos de un token solo sirve para inspeccionarlos. La verificación del token requiere además comprobar su firma y las reglas del servidor. Compara el vencimiento usando segundos en ambos lados.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -144,6 +150,9 @@ Hay un primo de este ataque: la **confusión de algoritmos** (cambiar `RS256`, c
 // Con la librería jose (Node):
 const { payload } = await jwtVerify(token, llave, { algorithms: ['HS256'] });   // solo este, siempre
 ```
+
+> 🧩 **Piezas para este ejercicio**
+> - El servidor fija el algoritmo aceptado. Comprueba primero que la cabecera coincida y trata la validez de la firma como otra condición necesaria.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -208,6 +217,9 @@ Set-Cookie: sesion=abc123; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=3600
 
 > 📌 **Nota:** apps como esta usan Firebase Auth, que maneja sus propios tokens: no los escribes tú. Pero cuando hagas tu propio servidor (clase 87), esta es la forma.
 
+> 🧩 **Piezas para este ejercicio**
+> - Cada atributo de la cookie cumple una función. Para revisar cuáles faltan, separa los atributos y compara sus nombres, conservando el orden pedido.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -267,6 +279,9 @@ timingSafeEqual(Buffer.from(recibido), Buffer.from(esperado));   // tarda lo mis
 ```
 
 > 💡 **Idea:** para las contraseñas no hace falta: no se comparan las contraseñas, se comparan sus hashes, y las librerías (bcrypt, argon2) ya lo hacen bien. Esto es para cuando comparas a mano un token o una firma.
+
+> 🧩 **Piezas para este ejercicio**
+> - Cada byte necesita dos cifras hexadecimales para conservar su ancho. La comparación de la práctica recorre de principio a fin. En producción usa una función criptográfica de comparación provista por la plataforma.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

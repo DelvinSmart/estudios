@@ -31,6 +31,9 @@
 
 > 🌎 **Otro ejemplo:** Es como la revisión técnica del carro: frenos, luces, llantas… siempre lo mismo, porque ahí están los accidentes.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una categoría describe el tipo de problema. Convierte el texto a minúsculas y aplica las reglas en orden, porque una descripción puede tener más de una palabra clave.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -117,6 +120,9 @@ Otro caso real de Copiloto: un índice que asocia teléfono con cuenta dejaba qu
 
 > 🌎 **Otro ejemplo:** Es como reservar una mesa en un restaurante a nombre de otra persona para que ella no pueda reservar.
 
+> 🧩 **Piezas para este ejercicio**
+> - La sesión identifica a la persona y la factura tiene un campo de dueño. Aplica esa comprobación tanto al devolver un solo documento como al formar una lista.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -199,6 +205,9 @@ await pool.query('SELECT * FROM usuarios WHERE correo = $1', [correo]);
 > 🌎 **En la vida real:** es como un formulario en papel con casillas: lo que escribas en "nombre" se queda en la casilla de nombre.
 
 > 🌎 **Otro ejemplo:** Es como un cajero que lee el monto en la casilla del monto, no el texto que escribas en el reverso del cheque.
+
+> 🧩 **Piezas para este ejercicio**
+> - La consulta y sus valores viajan por separado. El parámetro ocupa el lugar de un dato. Para elegir nombres de columnas, usa únicamente las opciones de la lista permitida.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -287,6 +296,9 @@ La **Content Security Policy** es una cabecera que le dice al navegador de dónd
 
 > 🌎 **Otro ejemplo:** Es como el cinturón de seguridad: no evita el choque, pero reduce el daño.
 
+> 🧩 **Piezas para este ejercicio**
+> - Escapar convierte caracteres especiales en texto que el navegador muestra. Procesa `&` primero porque las entidades que se agregan después también lo contienen.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -360,6 +372,9 @@ Al entrar, el servidor da un **token** (un pase firmado). Si un token dura para 
 
 > 🌎 **Otro ejemplo:** Es como el boleto del metro: sirve para un viaje, no para toda la vida.
 
+> 🧩 **Piezas para este ejercicio**
+> - La misma respuesta pública evita que el mensaje confirme quién tiene cuenta. Para el límite, conserva por separado el inicio de la ventana y el número de intentos de cada persona.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -432,6 +447,9 @@ escribe :: Diseña un límite para un botón "enviarme un código por correo". :
 
 > 🌎 **Otro ejemplo:** Es como un club que dice qué otros clubes tienen convenio para entrar.
 
+> 🧩 **Piezas para este ejercicio**
+> - CORS indica al navegador qué origen puede leer la respuesta. `Vary: Origin` señala que la respuesta depende del origen. `SameSite=Lax` limita el envío de la cookie en solicitudes entre sitios y permite ciertas navegaciones principales.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -498,6 +516,9 @@ Un ataque de **cadena de suministro** mete código malo en una librería popular
 > 🌎 **En la vida real:** es como envenenar el agua del depósito en vez de cada casa: un solo ataque llega a todos.
 
 > 🌎 **Otro ejemplo:** Es como comprar un remedio falsificado con un nombre casi igual al original.
+
+> 🧩 **Piezas para este ejercicio**
+> - Divide las versiones por puntos y compara los componentes como números. Para los nombres sospechosos, compara con la lista de referencia antes de señalar una similitud.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -582,6 +603,9 @@ En Copiloto, el asistente de IA se protegió con varias capas: **aislamiento por
 > 🌎 **En la vida real:** es como un banco donde el cajero puede ser amable y equivocarse, pero la bóveda solo abre con dos llaves.
 
 > 🌎 **Otro ejemplo:** Es como un perro guardián: ayuda, pero la puerta igual tiene cerradura.
+
+> 🧩 **Piezas para este ejercicio**
+> - La sesión autenticada determina de quién son los datos. La herramienta debe comprobar si la acción está permitida y usar el identificador de esa sesión al consultar.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

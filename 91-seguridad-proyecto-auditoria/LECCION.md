@@ -41,6 +41,9 @@ npm run trampas:arreglada    # contra la arreglada: 10 en verde
 
 > 🌎 **Otro ejemplo:** `127.0.0.1` es como ensayar con la banda en tu garaje con la puerta cerrada: suena igual que en el escenario, pero nadie de la calle escucha.
 
+> 🧩 **Piezas para este ejercicio**
+> - La dirección de escucha determina qué interfaces pueden recibir conexiones. Una dirección de bucle local queda en la máquina. Escuchar en todas las interfaces puede exponer el servicio a la red.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -116,6 +119,9 @@ Si Ana manda `"dueno": "beto"`, el gasto aparece en la lista de Beto. El arreglo
 > 🌎 **En la vida real:** el IDOR es como un guardarropa que te devuelve cualquier abrigo si dices el número, sin mirar tu ficha. La asignación masiva es como un formulario donde, además de tu nombre, puedes escribir "a cobrar a: el vecino".
 
 > 🌎 **Otro ejemplo:** el orden del `...` importa como el orden de las capas de pintura: la última es la que se ve. Si `...pedido.body` va al final, lo que mandó la persona tapa lo del servidor.
+
+> 🧩 **Piezas para este ejercicio**
+> - Al leer, comprueba quién es el dueño del gasto. Al crear, copia solo los campos editables y toma la identidad de la sesión.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -194,6 +200,9 @@ Se probó en el navegador: con la nota `<b>negrita</b><img src=x onerror="docume
 
 > 🌎 **Otro ejemplo:** escapar es como poner un cartel entre comillas en una vitrina: "PELIGRO" escrito en un papel no es un peligro, es una palabra.
 
+> 🧩 **Piezas para este ejercicio**
+> - Pasa los valores de la búsqueda como parámetros. Para presentar datos en HTML, convierte en texto seguro los campos escritos por la persona antes de insertarlos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -253,6 +262,9 @@ export function huellaDe(clave, sal = randomBytes(16)) {
 
 > 🌎 **Otro ejemplo:** el límite de intentos es como el cajero automático que se traga la tarjeta al tercer PIN malo: el ladrón no puede probar los 10.000.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una respuesta pública uniforme cubre los dos casos inválidos. El contador limita intentos y se puede limpiar al validar un acceso correcto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -310,6 +322,9 @@ escribe :: Explica por qué guardar la clave en texto plano es grave aunque "nad
 > 🌎 **En la vida real:** mostrar el stack es como un cajero que, cuando algo falla, te muestra la pantalla de mantenimiento con el modelo, la versión y dónde está la caja fuerte. Al cliente le basta "No se pudo, intente más tarde".
 
 > 🌎 **Otro ejemplo:** rotar una clave filtrada es como cambiar la cerradura cuando perdiste una llave: tirar la copia que te quedaba no sirve, la que se perdió sigue abriendo.
+
+> 🧩 **Piezas para este ejercicio**
+> - Distingue el detalle que sirve para investigar del mensaje público. Aplica la lista de orígenes a cada respuesta. Para reportar un secreto escrito en el código basta con señalar su presencia.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -388,6 +403,9 @@ Y antes de dar las trampas por buenas, se comprobó **por qué** fallaba cada un
 > 🌎 **En la vida real:** las trampas son como el simulacro de incendio que se repite cada año: no basta con que la alarma sonara una vez. Si alguien desconecta un detector, el próximo simulacro lo muestra.
 
 > 🌎 **Otro ejemplo:** comprobar **por qué** falla una trampa es como el médico que, ante una fiebre, no se conforma con "está enfermo": busca qué la causa, para no tratar otra cosa.
+
+> 🧩 **Piezas para este ejercicio**
+> - Usa el orden fijo de severidades para preparar los pendientes. Cuenta todos los hallazgos por categoría y conserva el orden de llegada dentro de cada categoría.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

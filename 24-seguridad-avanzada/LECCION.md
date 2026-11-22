@@ -49,6 +49,9 @@ Cada hallazgo lleva una **severidad**: **crítica, alta, media, baja o informati
 
 > 🌎 **Otro ejemplo:** Es como la lista de arreglos de una casa: el techo que se cae va antes que la pintura.
 
+> 🧩 **Piezas para este ejercicio**
+> - Severidad combina cuánto daño causa un problema y, cuando la consigna lo pide, qué tan fácil resulta que ocurra. Aplica la tabla del ejercicio a cada caso.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -121,6 +124,9 @@ allow update: if request.auth.uid == uid
 
 > 🌎 **Otro ejemplo:** Es como un carnet de socio donde el socio puede escribir "VIP" con su propio lápiz.
 
+> 🧩 **Piezas para este ejercicio**
+> - Compara la unión de campos de ambos objetos, porque una eliminación también cuenta como cambio. Verifica que todos los cambios correspondan a campos editables por la persona.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -185,6 +191,9 @@ Defensas, en capas:
 > 🌎 **En la vida real:** es como un club que, además de tu carnet, mira que llegues en el bus oficial del club.
 
 > 🌎 **Otro ejemplo:** Es como un cajero que solo acepta tarjetas del propio banco.
+
+> 🧩 **Piezas para este ejercicio**
+> - Cada envío consume un cupo por destino y otro global. Revisa ambos antes de sumar. Un envío rechazado deja intactos los dos contadores.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -251,6 +260,9 @@ Las pruebas de reglas se pueden correr en el **CI** (Tema 04) en cada push: si u
 > 🌎 **En la vida real:** es como el detector de metales del aeropuerto: revisa a todos, todo el tiempo, sin cansarse.
 
 > 🌎 **Otro ejemplo:** Es como el corrector ortográfico: revisa cada palabra que escribes sin que se lo pidas.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una prueba defensiva establece quién debe tener acceso y quién debe recibir una negativa. Usa datos de ejemplo y compara el resultado de la regla con el esperado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -325,6 +337,9 @@ escribe :: Convierte esta falla en una prueba: "un usuario puede cambiarse el ro
 > 🌎 **En la vida real:** es como un campo de tiro: disparas cuanto quieras, sin poner a nadie en peligro.
 
 > 🌎 **Otro ejemplo:** Es como un simulador de manejo con lluvia y nieve: practicas lo difícil en un lugar seguro.
+
+> 🧩 **Piezas para este ejercicio**
+> - La salida de diagnóstico ya está dada. Lee el número, el estado y el servicio como columnas. Compara lo observado con el inventario esperado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -402,6 +417,9 @@ Si encuentras una falla en un sistema ajeno **dentro de un programa permitido**,
 
 > 🌎 **Otro ejemplo:** Es como el periodista que avisa a la autoridad antes de publicar una noticia que pondría gente en peligro.
 
+> 🧩 **Piezas para este ejercicio**
+> - Separa la comprobación de campos completos del orden por severidad. Asigna a cada severidad una posición para poder ordenarlas y conserva el orden original en los empates.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -477,6 +495,9 @@ La **LGPD** (Brasil) y leyes parecidas piden recoger **solo los datos necesarios
 
 > 🌎 **Otro ejemplo:** Es como vaciar los bolsillos de la ropa antes de donarla: no regalas lo que no querías dar.
 
+> 🧩 **Piezas para este ejercicio**
+> - Copia el objeto antes de editar los campos de salida. El registro necesita pistas para investigar, mientras el secreto completo debe quedar fuera.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -548,6 +569,9 @@ escribe :: Enumera las capas de seguridad del certificado de este mapa. :: Cuent
 > 🌎 **En la vida real:** es como un músico: el diploma ayuda, pero lo que convence es escucharlo tocar.
 
 > 🌎 **Otro ejemplo:** Es como un chef: el curso cuenta, pero el plato que sirves es la prueba.
+
+> 🧩 **Piezas para este ejercicio**
+> - La lista de pasos tiene un orden fijo. Busca el primer paso que falte. Para el portafolio, inicia los tres contadores en cero.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

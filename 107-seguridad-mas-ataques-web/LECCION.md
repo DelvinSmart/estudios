@@ -40,6 +40,9 @@ res.sendFile(final);
 
 Y mejor todavía: **no aceptar nombres de archivo** del usuario. Guardar los archivos con un id propio (`a7f3…`) y buscar el id en la base de datos.
 
+> 🧩 **Piezas para este ejercicio**
+> - El ejercicio representa la ruta como una lista de carpetas. Al retroceder, la lista pierde su último tramo. Si está vacía, un retroceso saldría de la carpeta permitida. En una aplicación real también importa dónde resuelve el sistema el archivo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -112,6 +115,9 @@ Eso es **SSRF** (*Server-Side Request Forgery*). Fue la puerta de varias filtrac
 3. **Sin redirecciones automáticas** (un sitio permitido puede redirigir a uno interno).
 4. Que el servidor que busca URLs **no tenga permisos** que no necesita.
 
+> 🧩 **Piezas para este ejercicio**
+> - Interpreta la dirección con `new URL` antes de decidir. Compara el nombre del servidor completo con la lista permitida y revisa el protocolo y las credenciales por separado.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -179,6 +185,9 @@ La persona ve **tu dominio** en el enlace, entra con su contraseña de verdad…
 | `//evil.com` | **también** otro sitio: el navegador lo lee como "mismo protocolo, otro dominio" |
 | `/\evil.com` | algunos navegadores tratan `\` como `/`: queda `//evil.com` |
 
+> 🧩 **Piezas para este ejercicio**
+> - Una redirección hace que el navegador abra otra dirección. Usa la portada como respaldo y acepta solo rutas que cumplan las condiciones del ejercicio.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -236,6 +245,9 @@ escribe :: Explica con un ejemplo cómo se usaría una redirección abierta en u
 3. **Tamaño máximo**, revisado en el servidor.
 4. **Nombre propio:** se guarda con un id (`a7f3….png`), nunca con el nombre del usuario.
 5. **Servir desde otro dominio** (por ejemplo, el de Firebase Storage) y con el tipo correcto: aunque algo pasara, no corre con la sesión de tu sitio.
+
+> 🧩 **Piezas para este ejercicio**
+> - Los bytes iniciales señalan un posible formato. Comprueba primero el límite de tamaño y después la firma. La firma por sí sola no valida el archivo completo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

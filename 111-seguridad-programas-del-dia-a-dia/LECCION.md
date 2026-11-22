@@ -30,6 +30,9 @@
 | **Para atacar** | **Phishing en tiempo real**: la página falsa te pide el código y lo usa **al instante**, antes de que venza. También: robar el SMS (por eso el SMS es el segundo factor más débil) |
 | **Defensa** | Preferir la app al SMS, y donde se pueda, **llaves de acceso** (*passkeys*) o llaves físicas: están atadas al dominio verdadero y una página falsa no las puede pedir |
 
+> 🧩 **Piezas para este ejercicio**
+> - Una ventana representa un bloque de 30 segundos. Usa la misma unidad en todas las comparaciones. Una tolerancia pequeña cubre diferencias de reloj en la simulación.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -89,6 +92,9 @@ escribe :: ¿Cómo funciona un phishing que roba el código de segundo factor, y
 | **Para atacar** | Los atacantes usan **esas mismas listas** filtradas: prueban el correo y la contraseña de una filtración en **otros** sitios (*credential stuffing*), porque mucha gente repite la contraseña |
 | **Defensa** | Contraseña distinta por sitio (el gestor de la parte 1), segundo factor, y del lado del sitio: limitar intentos (clase 23) y rechazar contraseñas filtradas |
 
+> 🧩 **Piezas para este ejercicio**
+> - La consulta comparte una parte corta del hash. La comparación final se hace localmente con el resto del hash y la respuesta del servicio.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -145,6 +151,9 @@ escribe :: ¿Cómo usaría un sitio a Have I Been Pwned para proteger a sus usua
 | **Para atacar** | Los atacantes revisan que **su** programa malicioso no lo detecte nadie antes de mandarlo. Y miran lo que **otros** subieron |
 | **Defensa** | Una detección en cero **no prueba** que sea seguro. Y lo más importante: **lo que subes queda visible para otros** (empresas de seguridad lo pueden bajar). **Nunca subas un documento privado**: busca **por su hash**, que no revela el contenido |
 
+> 🧩 **Piezas para este ejercicio**
+> - La práctica usa umbrales de ejemplo. Un resultado aislado es una señal para investigar. Un archivo privado requiere especial cuidado porque subirlo comparte su contenido.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -197,6 +206,9 @@ escribe :: Te llega por correo un PDF "factura pendiente" de alguien que no cono
 | **Para el defensor** | HTTPS gratis en todos lados. Y vigilar los registros: si aparece un certificado de **tu** dominio que no pediste, alguien lo está suplantando |
 | **Para atacar** | Los registros listan **todos los subdominios** que tuvieron certificado: `staging.tuapp.com`, `admin.tuapp.com`, `viejo.tuapp.com`. Es el primer paso del reconocimiento (clase 24, parte 5) |
 | **Defensa** | Ningún subdominio es "secreto": protégelos todos (con contraseña, o que no existan). Y que la renovación sea **automática**: un certificado vencido rompe la app |
+
+> 🧩 **Piezas para este ejercicio**
+> - Normaliza los nombres antes de quitar repetidos. Compara el dominio como un nombre completo o un sufijo que empiece después de un punto para respetar sus límites.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -265,6 +277,9 @@ escribe :: ¿Para qué le sirve a un defensor mirar los registros de certificado
 | **Defensa** | Correrlo tú primero, y escribir reglas propias para los errores que ya te pasaron |
 
 **ZAP** (gratis, de código abierto; antes se llamaba *OWASP ZAP*, hoy lo mantiene Checkmarx): el proxy de la clase 24, que además tiene un **escaneo automático**. En el CI, el *baseline scan* recorre tu sitio de prueba y avisa lo que falta (cabeceras de seguridad, cookies sin `HttpOnly`, la cookie de la clase 109).
+
+> 🧩 **Piezas para este ejercicio**
+> - Un secreto que se borró puede seguir en una revisión anterior. Revisa las líneas de todo el historial que recibe la práctica y registra su ubicación sin repetir su valor.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

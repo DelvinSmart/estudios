@@ -34,6 +34,9 @@ brew install --cask zap wireshark-app
 
 > 🌎 **Otro ejemplo:** Es como una cocina de práctica en la escuela: cocinas platos de verdad, pero no sale ninguno a un cliente.
 
+> 🧩 **Piezas para este ejercicio**
+> - Antes de cualquier práctica, el alcance debe identificar el sistema autorizado. Una palabra dentro de una dirección no comprueba el destino real. La función de esta parte es una simulación con las entradas de la consigna.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -100,6 +103,9 @@ Access-Control-Allow-Origin: *             ← V9: cualquier sitio puede leer su
 
 > 🌎 **Otro ejemplo:** Es como una tienda que deja la puerta de atrás abierta "por si acaso": tarde o temprano entra quien no debe.
 
+> 🧩 **Piezas para este ejercicio**
+> - La práctica te da las cabeceras de la respuesta. Cada comprobación agrega su propio hallazgo. Mantén el mismo orden para poder comparar dos reportes.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -165,6 +171,9 @@ La defensa (clase 23) es doble: **un solo mensaje** para los dos casos (`"Usuari
 > 🌎 **En la vida real:** es como un portero que a todos los que fallan les dice lo mismo, y tras unos intentos no te deja ni tocar el timbre por un rato.
 
 > 🌎 **Otro ejemplo:** Es como el teléfono que, tras varios códigos malos, se bloquea un minuto, y después cinco: probar deja de valer la pena.
+
+> 🧩 **Piezas para este ejercicio**
+> - El ejercicio compara respuestas ficticias y una secuencia de estados. Busca si el mensaje cambia y si la secuencia incluye la señal de límite.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -248,6 +257,9 @@ Y de paso, **V8:** si mandas una comilla sola, el error vuelve con el **stack** 
 
 > 🌎 **Otro ejemplo:** Es como dictar una carta y que el que escribe obedezca una orden que metiste en medio de la frase.
 
+> 🧩 **Piezas para este ejercicio**
+> - La comprobación defensiva debe hacerse antes de entregar el objeto. Una prueba usa un documento permitido y otro que debería quedar fuera para confirmar la regla.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -277,6 +289,9 @@ function esFuga(respuesta) {
   return respuesta.dueno !== undefined;
 }
 ```
+
+> 🧩 **Piezas para este ejercicio**
+> - En la versión protegida, la consulta permanece fija y el valor viaja aparte como parámetro.
 
 ```ejercicio
 titulo: La inyección, y por qué los parámetros la frenan
@@ -352,6 +367,9 @@ La defensa (clase 22): los secretos en variables de entorno (`.env`, fuera de Gi
 
 > 🌎 **Otro ejemplo:** Es como el control de un aeropuerto: no importa lo que digas, solo pasa lo que está en la lista.
 
+> 🧩 **Piezas para este ejercicio**
+> - La lista permitida identifica los campos editables. Toma el dueño de la sesión autenticada al formar el objeto que va a guardar el servidor.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -404,6 +422,9 @@ Y repites cada ataque. Ahora:
 | CORS (V9) | `Allow-Origin: *` | sin esa cabecera |
 
 Eso es una auditoría completa: alcance, reconocimiento, cada falla con su herramienta, el informe, y la prueba de que el arreglo funcionó.
+
+> 🧩 **Piezas para este ejercicio**
+> - Compara el resultado del arreglo con el comportamiento esperado. En la simulación, la diferencia detecta un cambio. En una prueba de regresión, confirma además que el caso permitido sigue funcionando.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
