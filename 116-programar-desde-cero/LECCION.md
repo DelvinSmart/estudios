@@ -28,7 +28,9 @@ Imagina que vas a echar **10 litros** de combustible y cada litro cuesta **5**. 
 
 > 📖 **Palabra nueva: variable.** Es esa cajita con nombre que guarda un dato. Aquí la variable se llama `precioPorLitro` y va a guardar el número `5`.
 
-Ahora veamos la instrucción que crea esa variable y le da su primer valor. Así se escribe en un lenguaje llamado JavaScript:
+> 📖 **Palabra nueva: constante.** En este ejemplo, es una variable a la que el programa le da un valor al crearla y que ya no puede recibir otro mientras corre. Si `precioPorLitro` empieza con el número `5`, el programa usará ese mismo precio cada vez que lea ese nombre.
+
+En JavaScript, la palabra `const` viene de «constante». Así se usa para crear `precioPorLitro` con el valor `5`:
 
 ```js
 const precioPorLitro = 5;
@@ -38,7 +40,7 @@ Se ve raro, pero son solo cinco piezas:
 
 | Pieza | Qué significa |
 |---|---|
-| `const` | Crea la variable. Mientras el programa corre, ese nombre sigue teniendo el valor que le diste al principio. |
+| `const` | Indica que estamos declarando una **constante**. El programa podrá leer su valor, y ese nombre conservará el valor inicial. |
 | `precioPorLitro` | La **etiqueta** de la cajita. La eliges tú. Va sin espacios para que la máquina la lea como un solo nombre. |
 | `=` | **Guarda esto adentro.** Aquí no es el «igual» de matemáticas. |
 | `5` | El **dato** que se guarda. |
