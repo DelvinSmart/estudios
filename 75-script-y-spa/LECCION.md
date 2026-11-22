@@ -81,7 +81,7 @@ Un **script** es un archivo con instrucciones que un programa ejecuta **sin comp
 <script type="module" src="web/app.js"></script>
 ```
 
-`type="module"` dice que es un **módulo**: puede importar otros scripts (`web/vistas/mapas.js`, `web/menu.js`…), cada uno con su trabajo (lo viste en el Tema 50).
+`type="module"` dice que es un **módulo**: puede importar otros scripts (`web/vistas/mapas.js`, `web/menu.js`…), cada uno con su trabajo (lo viste en la clase de JavaScript y lo verás a fondo en el Tema 50).
 
 > 🌎 **En la vida real:** es como el instructivo pegado en la caja de un mueble: alguien lo sigue paso a paso.
 
@@ -98,6 +98,10 @@ Un script puede ser corto (tres líneas) o grande (miles): lo que lo hace "scrip
 > 🌎 **En la vida real:** son como los automatismos de una casa inteligente: "a las 7, abre las cortinas; si llueve, cierra las ventanas".
 
 > 🌎 **Otro ejemplo:** Es como las alarmas programadas del celular: cada una hace algo a su hora.
+
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`for (const [orden, n] of guion)`** recorre la lista y, en cada vuelta, separa la instrucción en dos cajitas. Con `['sumar', 5]`, `orden` vale `'sumar'` y `n` vale `5`.
+> - **`valor += n`** es una forma corta de escribir `valor = valor + n`. También existen `-=` para restar y `*=` para multiplicar.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -172,6 +176,13 @@ La barra de arriba, el menú y los estilos **nunca se vuelven a cargar**: por es
 > 🌎 **En la vida real:** la tradicional es mudarte de casa para cambiar de cuarto; la SPA es caminar de un cuarto a otro.
 
 > 🌎 **Otro ejemplo:** Es como pedir un libro nuevo para cada capítulo frente a pasar la página.
+
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`location.hash`** es lo que va después del `#` en la dirección, incluido el `#`. Por ejemplo, `'#/clase/06'`.
+> - **`location.hash.replace(/^#\/?/, '')`** quita el `#` y la primera barra. Queda `'clase/06'`.
+> - **`.split('/')`** corta ese texto en una lista: `['clase', '06']`.
+> - **`else if`** significa «si no, pregunta esto otro».
+> - **`window.addEventListener('hashchange', pintar)`** llama a `pintar` cada vez que cambia lo que va después del `#`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

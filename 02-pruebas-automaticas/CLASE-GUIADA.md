@@ -75,6 +75,21 @@ Si la respuesta es sí, la prueba **pasa** ✓. Si es no, la prueba **falla** �
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`it('nombre', () => { ... })`** crea una prueba. El texto dice qué revisa y lo que va entre llaves es la revisión.
+> - **`expect(valor)`** significa «espero que este valor…».
+> - **`.toBe(10)`** termina la frase: «…sea exactamente 10».
+> - **`.toBeNull()`** significa «…sea `null`».
+> - El código de arriba de **«Tus pruebas aquí»** ya viene hecho. Es una versión pequeña de la herramienta de pruebas y no necesitas modificarla.
+>
+> Una prueba se ve así:
+>
+> ```js
+> it('el triple de 2 es 6', () => {
+>   expect(triple(2)).toBe(6);
+> });
+> ```
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -462,6 +477,8 @@ Línea por línea: abre la app, toca "Registrar ingreso", escribe 100, toca "Gua
 
 </details>
 
+> 🧩 **Cómo usar la caja de este ejercicio:** `const caja = crearCaja();` crea una caja vacía. `caja.agregar(10)` guarda un gasto y `caja.gastos` es la lista de gastos guardados. Para probar las dos piezas juntas, agrega gastos y después revisa `total(caja.gastos)`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -816,6 +833,13 @@ Si alguien cambia esa función sin querer y Mi empresa empieza a acumular, **est
 > 🌎 **En la vida real:** el `for` es el inspector que revisa los **tres** extintores del piso con la misma pregunta, en vez de escribir tres hojas iguales.
 
 > 🌎 **Otro ejemplo:** Como el profesor que pasa lista con la misma pregunta para tres alumnos: "¿trajo la tarea?", en vez de escribir tres preguntas iguales.
+
+> 🧩 **Para leer `leerCapacidad`:**
+> - `.replace(',', '.')` cambia la coma por un punto.
+> - `/^\d+(\.\d+)?$/` es un patrón que acepta solo números, con decimales opcionales. `.test(...)` responde sí o no.
+> - `Number(normal)` convierte el texto en número.
+> - `Math.round(valor * 10) / 10` redondea a **un decimal**.
+> - No tienes que cambiar esta función. Solo escribe pruebas con `expect(...).toBe(...)` y, cuando esperes `null`, con `.toBeNull()`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

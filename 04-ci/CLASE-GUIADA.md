@@ -231,6 +231,11 @@ Se lee: hay un `carro`; **dentro** del carro (porque está corrido hacia adentro
 
 > ⚠️ **Cuidado:** en YAML un espacio de más o de menos **cambia el significado** (o rompe el archivo). Por eso se usan siempre 2 espacios por nivel.
 
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`ruta.startsWith('.github/')`** pregunta si el texto **empieza** así.
+> - **`/\.ya?ml$/.test(ruta)`** pregunta si termina en `.yml` o `.yaml`. La `?` significa que la `a` es opcional y `$` significa «al final».
+> - **`&&`** significa **«y»**: deben cumplirse las dos condiciones.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -649,6 +654,8 @@ Se llama CI; corre en cada push; tiene un trabajo llamado `pruebas` que corre en
 
 </details>
 
+> 🧩 **Para este ejercicio:** la función `ordenar` **ya viene hecha**. `.toSorted(...)` crea una lista ordenada e `.indexOf(x)` dice en qué posición de `ORDEN` está cada paso. Tú solo escribes los cinco nombres en `ORDEN`, en el orden correcto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -702,6 +709,8 @@ for (const [file, lines] of big) console.error(`✖ ${file}: ${lines} linhas (m�
 // … y si hay archivos grandes, termina con error.
 console.log(`✔ Tamanho: nenhum arquivo passa de ${MAX_LINES} linhas.`);
 ```
+
+`console.error` muestra un mensaje de **error**, y `console.log` muestra un mensaje normal.
 
 Si todo está bien, escribe "✔ Tamaño: ningún archivo pasa de 1000 líneas" y termina con 0.
 

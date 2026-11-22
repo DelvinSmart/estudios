@@ -52,6 +52,12 @@ Git funciona **sin internet**: guarda la historia en tu Mac. GitHub es un lugar 
 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`.push()`**: agrega algo al **final** de una lista: si `viajes` es `[1, 2]`, después de `viajes.push(3)` es `[1, 2, 3]`. Ojo: cambia la lista misma, no crea otra.
+> - **`{ ...archivos }`** crea una **copia** del objeto, como sacar una fotocopia. Si después cambia el original, la copia no cambia.
+> - **`return fotos.length`** devuelve cuántas fotos hay. Sirve como número del commit.
+> - **`.map((f) => f.mensaje)`** crea una lista nueva solo con los mensajes.
+> - **`.reverse()`** invierte el orden de la lista.
+> - **`fotos[n - 1]`** busca la foto número `n`, porque las posiciones empiezan en 0.
+> - **`?.`** significa «si existe, sigue; si no, da `undefined`». Evita un error cuando esa foto no existe.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -693,6 +699,11 @@ escribe :: Cuenta lo que pasó en la Parte E con tus palabras. :: Creé la rama 
 
 > 🌎 **Otro ejemplo:** Como el piloto automático de un avión: hace las mismas maniobras que haría el piloto, en el mismo orden.
 
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`a.endsWith('.key')`** pregunta si el texto **termina** en `.key`.
+> - **`.filter(...)`** deja solo los archivos que cumplen la condición. Si la lista resultante tiene elementos, encontraste secretos.
+> - **`||`** significa **«o»**: basta con que se cumpla una condición.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -765,6 +776,14 @@ Nunca, por ninguna razón, se suben **claves secretas**, la **llave del keystore
 **No.** El commit anterior sigue en la historia, con la clave adentro. Hay que **cambiar la clave** (crear una nueva y anular la vieja).
 
 </details>
+
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`archivo.split('/')`** separa la ruta en carpetas y nombre.
+> - **`partes.at(-1)`** toma el **último** elemento de la lista, que aquí es el nombre del archivo.
+> - **`.slice(0, -1)`** copia todo **menos el último** elemento o letra. **`.slice(1)`** copia todo **menos el primero**.
+> - **`.startsWith()`** y **`.endsWith()`** preguntan cómo empieza y cómo termina un texto.
+> - **`.includes(x)`** pregunta si la lista contiene `x`.
+> - **`reglas.some(...)`** responde `true` si **al menos una** regla se cumple.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
