@@ -59,6 +59,10 @@ while (Date.now() < fin) {}
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - `for (const duracion of tareas)` toma una duración por vuelta, en el orden de la lista. `ahora += duracion` adelanta el reloj hasta el fin de esa tarea.
+> - `break` sale del bucle. `Math.max(30, 50)` devuelve el mayor de los dos tiempos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -127,6 +131,10 @@ Lo que funcionó fue **medir**, con cuatro herramientas, en este orden:
 La **marca de tiempo** dice **cuándo** ocurre algo ("el Início apareció a los 17 s"). El **perfilador** dice **qué función** consume el tiempo ("`localeCompare` gastó 4,8 s").
 
 </details>
+
+> 🧩 **Piezas para este ejercicio**
+> - `marcas[i]` es la marca actual y `marcas[i + 1]` es la siguiente. Si las marcas están en 10 y 25 ms, el tramo dura 15 ms. La última marca solo cierra un tramo.
+> - Puedes empezar sin un tramo ganador, con `null`, y conservar el tramo más largo conforme avanzas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -202,6 +210,10 @@ Si son las 14:31:45, faltan 15 segundos: espera 15.000 ms, y actualiza justo a l
 
 > 🌎 **Otro ejemplo:** Como un reloj de pared que alguien vuelve a pintar entero cada segundo, cuando solo la aguja de los minutos cambia una vez por minuto.
 
+> 🧩 **Piezas para este ejercicio**
+> - `135 % 60` da `15`, lo que sobra después de contar dos grupos completos de 60. Con milisegundos puedes usar el resto para saber cuánto pasó desde el inicio del minuto.
+> - Un minuto son 60 000 ms y una hora son 3 600 000 ms. Para contar cuántos intervalos caben en una hora, divide usando la misma unidad.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -274,6 +286,11 @@ useMemo(calcular, [goals.daily, goals.weekly]); // recalcula si cambia el valor
 **`true`**: `b` no es un objeto nuevo, es **el mismo** objeto con otro nombre (la misma persona con dos apodos).
 
 </details>
+
+> 🧩 **Piezas para este ejercicio**
+> - `memo` es una función. Puede leer y cambiar las variables que se crearon fuera de ella, incluso después de que `crearMemo` haya terminado. Por eso puede recordar la llamada anterior.
+> - En `lista.some((valor, i) => ...)`, `i` es la posición. `.some()` devuelve `true` si al menos una posición cumple la condición. Compara también el largo de las listas.
+> - Dos objetos creados por separado dan `false` al compararlos con `===`, aunque sus datos coincidan. `memo.veces++` añade 1 al contador que trae la función.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -393,6 +410,10 @@ function agruparPorCategoria(gastos) {
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - `indice.get(fecha)` recupera el total acumulado. Si esa fecha todavía no está en el mapa, devuelve `undefined`. `?? 0` usa 0 en ese caso.
+> - `indice.set(fecha, total)` guarda el total nuevo. Si la fecha ya existía, reemplaza el total anterior.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -470,6 +491,10 @@ Y lo mejor: las pruebas encontraron **dos errores reales** que nadie había vist
 > 🌎 **En la vida real:** el banco manda clientes falsos con billetes falsos para ver si los cajeros los detectan.
 
 > 🌎 **Otro ejemplo:** Como un simulacro de evacuación con humo falso: si todos salen bien, el plan sirve para ese tipo de emergencia, no para todas.
+
+> 🧩 **Piezas para este ejercicio**
+> - `it(nombre, () => { ... })` registra una prueba con un nombre. Dentro va la comparación. Por ejemplo, `expect(2 + 2).toBe(4)` pasa, y `expect(2 + 2).toBe(5)` falla.
+> - Aquí el verificador ejecuta tus mismas pruebas primero con la función correcta y luego con cada variante equivocada. Si ninguna falla con una variante, tus pruebas no detectaron ese error.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -553,6 +578,10 @@ El `Set` veía **3** plataformas, y cada una sumaba los 30 de `uber`: **90**, en
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - `'  AbC  '.trim().toLowerCase()` devuelve `'abc'`. `.trim()` quita espacios de las puntas y `.toLowerCase()` convierte a minúsculas.
+> - `totales[clave]` usa el texto de la variable como nombre de propiedad. Si todavía no existe, puedes usar `?? 0` antes de sumar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -603,6 +632,11 @@ El **día del negocio** no siempre coincide con el del calendario. Para **Uber**
 
 > 💡 **Idea:** ¿te acuerdas de la prueba que el Tema 02 dice que se configura con `TZ=America/Sao_Paulo`? Es por esto: las fechas dependen de la zona horaria.
 
+> 🧩 **Piezas para este ejercicio**
+> - `split('T')` separa fecha y hora. Puedes separar cada parte de nuevo y usar `.map(Number)` para convertir sus fragmentos a números.
+> - `Date.UTC(año, mes, día, hora, minuto)` devuelve milisegundos. Los meses empiezan en 0: enero es 0 y diciembre es 11. Aquí UTC sirve de referencia fija para hacer la cuenta.
+> - Al restar horas en milisegundos, la fecha puede retroceder de mes o de año automáticamente. `new Date(ms).toISOString()` devuelve un texto en UTC. Sus primeros 10 caracteres son la fecha.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -649,6 +683,10 @@ Cada subida a GitHub empezó a revisar sola tipos, diseño, secretos y pruebas. 
 > 🌎 **Otro ejemplo:** Como el examen de manejo: lo haces en el auto de la autoescuela, no en el tuyo con tus mañas; si apruebas ahí, manejas bien en cualquiera.
 
 **Lo que el CI no puede detectar:** lo que no revisa. Por ejemplo, cómo se ve una pantalla o si la app abre en un teléfono real (parte 13 lo demuestra).
+
+> 🧩 **Piezas para este ejercicio**
+> - `.includes(ruta)` en una lista compara el texto exacto. `.some(...)` permite comprobar si al menos un archivo coincide después de pasar ambos nombres a minúsculas.
+> - El ejercicio simula un volumen de Mac que ignora mayúsculas. La diferencia que buscas es un nombre que solo coincide cuando haces esa conversión.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -701,6 +739,10 @@ color: dash.formHint
 
 > 🌎 **Otro ejemplo:** Como el uniforme de una empresa: el color oficial tiene nombre (token), la empresa los reparte desde un solo lugar (motor) y un supervisor revisa que nadie lleve uno hecho a mano (candado).
 
+> 🧩 **Piezas para este ejercicio**
+> - `[0-9a-fA-F]` busca un carácter hexadecimal. `{3}` repite el carácter tres veces y `|` ofrece otra opción. Si un patrón admite una variante corta y una larga, prueba primero la larga para evitar tomar solo el principio.
+> - `\b` marca un límite de palabra y `g` busca todas las coincidencias. `'a1 b2'.match(/\d/g)` devuelve `['1', '2']`. Si no hay coincidencias, `.match()` devuelve `null`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -749,6 +791,11 @@ Después: los dos importan vehicleOdometer
 > 🌎 **En la vida real:** "para conseguir trabajo necesito experiencia, y para tener experiencia necesito trabajo". La solución es un tercero: si dos vecinos se pelean por una escalera, la compra el edificio y la usan los dos. Y `import type` es pedir **solo la foto** del vecino, no que venga en persona.
 
 > 🌎 **Otro ejemplo:** Como dos compañeros que no pueden empezar su tarea porque cada uno espera que el otro termine primero: se resuelve dándoles a los dos una herramienta común.
+
+> 🧩 **Piezas para este ejercicio**
+> - `grafo[archivo]` da la lista que importa ese archivo. `Object.keys(grafo)` da todos los archivos desde los que puedes empezar.
+> - Una función recursiva se llama a sí misma para seguir cada importación. Marca cada archivo al entrar y al terminar de revisar sus importaciones.
+> - Si vuelves a un archivo que sigues revisando en ese recorrido, encontraste un ciclo. Si el archivo ya se terminó de revisar, puede ser simplemente una dependencia compartida.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -807,6 +854,10 @@ Una herramienta que se usó: el **hook propio**, una función `useAlgo` que agru
 > 🌎 **Otro ejemplo:** Como reorganizar los cajones de la cocina: los mismos cubiertos, solo mejor ubicados; la comida sale igual.
 
 **¿Dividir un archivo garantiza que sea mejor?** **No.** Un archivo grande puede dividirse mal. Importa que **cada parte tenga una responsabilidad clara** (Tema 10). Repartir la ropa en cinco cajones al azar no ordena nada.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.map(...)` puede sacar los valores de una lista de objetos, y `.filter(...)` quedarse solo con los que pasan una condición.
+> - `Math.max(...[4, 7, 2])` equivale a `Math.max(4, 7, 2)` y devuelve 7. Mira qué devuelve la versión vieja para el máximo cuando no hay gastos válidos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -874,6 +925,11 @@ Las librerías también tienen errores. Para el problema de Firestore (parte 3) 
 
 > 🌎 **Otro ejemplo:** Como un repuesto adaptado a mano para un modelo de carro: si cambias de modelo, el repuesto ya no calza, y te quedas con dos piezas que chocan.
 
+> 🧩 **Piezas para este ejercicio**
+> - `'expo+1.2.3.patch'.replace(/\.patch$/, '')` quita el sufijo. El punto con barra es un punto literal, y `$` exige que esté al final.
+> - `.split('+')` separa las piezas y `.pop()` quita y devuelve la última. Si queda más de una pieza para el nombre, `.join('/')` reconstruye un nombre como `@firebase/app`.
+> - `instaladas[nombre]` busca la versión por nombre. Da `undefined` si falta la librería.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -926,6 +982,10 @@ escribe :: ¿Cuál es la lección de la vc89? :: Compilar no es funcionar: aunqu
 > 🌎 **Otro ejemplo:** Como un pasante muy rápido y entusiasta: le pides el trabajo, pero revisas los números, pruebas que funcione y no firmas nada que no entiendas.
 
 > 💡 **Idea:** estas cinco reglas son las mismas de la clase 19 (agentes): verificar, medir, y una persona en el ciclo.
+
+> 🧩 **Piezas para este ejercicio**
+> - `antes - despues` da el tiempo ahorrado. Dividir el ahorro por el tiempo inicial da la fracción de mejora. Multiplica por 100 para pasarla a porcentaje y usa `Math.round` para redondear.
+> - `typeof 3` da `'number'` y `typeof '3'` da `'string'`. `&&` significa «y». Todas las comprobaciones deben cumplirse.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

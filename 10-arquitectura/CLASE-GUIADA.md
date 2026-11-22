@@ -26,6 +26,10 @@ Una buena arquitectura logra cuatro cosas:
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`.sort()`**: ordena una lista. Para números: `lista.sort((a, b) => a - b)` (de menor a mayor). La función compara dos y devuelve un número negativo si `a` va primero. **Ojo:** `sort` cambia la lista original; por eso se suele copiar antes: `[...lista].sort(…)`.
 
+> 🧩 **Piezas para este ejercicio**
+> - `Object.keys({ inicio: [], caja: [] })` devuelve los nombres de las propiedades: `['inicio', 'caja']`. Con `objeto[nombre]` abres la propiedad cuyo nombre está en la variable `nombre`.
+> - `.includes(valor)` comprueba si una lista contiene ese valor. `.sort()` ordena textos como nombres de archivos. Para este ejercicio, mira solo las listas de importaciones de cada archivo, sin seguir la cadena.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -96,6 +100,10 @@ Ya lo viviste: `isImmutableEarningPlatform` (Tema 01) no sabe nada de Firestore 
 **No.** Es una regla de negocio: recibe los datos y calcula. De dónde salen los datos es problema de otra capa. Si importara Firestore, no se podría probar sin internet.
 
 </details>
+
+> 🧩 **Piezas para este ejercicio**
+> - `'src/caja/servicio/ServicioCaja.ts'.includes('/servicio/')` busca el tramo completo de carpeta. Las barras marcan dónde empieza y termina el nombre.
+> - `||` significa «o». Basta con que se cumpla una de las dos comprobaciones.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -200,6 +208,10 @@ Con una **interfaz**: un **contrato** que dice **qué** se puede hacer, sin deci
 Lo más limpio es que **reciba** la fecha (o un "reloj" por contrato) desde afuera. Así, en una prueba, le pasas la fecha que quieras (como el caso del San del 1 de enero en el Tema 02). Es inversión de dependencias aplicada al tiempo.
 
 </details>
+
+> 🧩 **Piezas para este ejercicio**
+> - `['centro', 'borde'].indexOf('borde')` da `1`, su posición en la lista. Como la lista va de adentro hacia afuera, una posición mayor significa una capa más externa.
+> - `.filter(...)` conserva elementos que cumplen una condición. `.map(...)` transforma cada elemento conservado, por ejemplo de un objeto a un texto.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -333,6 +345,12 @@ Porque las pruebas corren **sin internet ni Firebase**, en **milisegundos**, y c
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - `#cajas` es un campo privado. Dentro del repositorio, `this.#cajas` accede al mapa de ese objeto.
+> - Un `Map` guarda pares de clave y valor. `.set(clave, valor)` guarda, `.get(clave)` devuelve el valor o `undefined`, y `[...mapa.values()]` reúne los valores en una lista.
+> - `structuredClone(objeto)` hace una copia que incluye las listas de dentro. Piensa en copias tanto al guardar como al devolver datos.
+> - Una función `async` entrega una promesa. `await` espera su resultado, aunque aquí los datos estén en memoria.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -443,6 +461,10 @@ El centro es un **hexágono** con las reglas, y alrededor se **enchufan** las co
 
 **¿Clean o hexagonal?** En la práctica, casi la misma cosa: las dos separan las reglas de las herramientas y usan contratos. **Clean** divide el centro en más capas (entidades y casos de uso); **hexagonal** pone el foco en los puertos y adaptadores (los enchufes).
 
+> 🧩 **Piezas para este ejercicio**
+> - `const timbre = { sonar: () => 'ding' }` guarda una función en un objeto. Quien recibe el objeto puede llamar a `timbre.sonar()` sin saber cómo está hecha.
+> - Una función puede usar una lista creada fuera de ella o llamar a un método de un objeto que recibió. `'Hola'.toUpperCase()` devuelve `'HOLA'`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -503,6 +525,10 @@ escribe :: ¿En qué se parecen y en qué se diferencian Clean y hexagonal? :: L
 **El camino:** tocas "Ya pagué" (**vista**) → el **controlador** recibe el toque → le pide al servicio que registre el pago (**modelo**) → la **vista** se actualiza.
 
 > 🌎 **En la vida real:** le haces una seña al mozo (tocas "Ya pagué"); el mozo va a la cocina ("registren el pago de Juan"); la cocina lo anota; el mozo vuelve y te muestra la cuenta actualizada.
+
+> 🧩 **Piezas para este ejercicio**
+> - `try { ... } catch (error) { ... }` intenta ejecutar el primer bloque. Si una llamada de ese bloque lanza un error, salta al segundo.
+> - `error.message` contiene el mensaje del error. En el modelo ya escrito, `new Set()` crea una colección sin repetidos y `.add(nombre)` agrega un nombre.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -586,6 +612,11 @@ Un **hook** (en React) es una función que empieza con `use…` y deja que un co
 
 **¿MVC o MVVM?** La diferencia: en MVVM la vista **se actualiza sola** cuando cambia el modelo de vista (está "conectada"); en MVC el controlador le **dice** a la vista qué mostrar.
 
+> 🧩 **Piezas para este ejercicio**
+> - `litros / capacidad` da una fracción. Para convertirla en porcentaje, multiplícala por 100. `Math.round(18.6)` redondea a `19`.
+> - `Math.min(100, 120)` devuelve `100` y `Math.max(0, -8)` devuelve `0`. Sirven para fijar el techo y el piso de una cantidad.
+> - `null` representa una capacidad sin informar. Comprueba ese caso antes de hacer la división.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -651,6 +682,11 @@ escribe :: ¿Qué diferencia hay entre MVC y MVVM? :: En MVC el controlador le d
 
 > 💡 **Idea:** decir **qué mejorarías** de tu propia app en una entrevista no te hace ver mal: te hace ver con criterio.
 
+> 🧩 **Piezas para este ejercicio**
+> - `[20, 35].at(-1)` lee el último elemento. Si la lista está vacía devuelve `undefined`.
+> - `[2, 3].reduce((suma, valor) => suma + valor, 0)` empieza con 0 y suma cada valor hasta llegar a 5.
+> - Dentro de `contexto.total()`, `this` es `contexto`. Así puede pasarle sus registros a la función pura, que hace la cuenta con los datos recibidos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -711,6 +747,9 @@ Por ejemplo, tu página **¿Qué dice la Biblia?** y este mapa no usan Clean Arc
 > 🌎 **En la vida real:** para hacer un huevo frito no necesitas una cocina industrial con cinco ayudantes. Para un restaurante de 200 cubiertos, sí.
 
 > 🌎 **Otro ejemplo:** Como usar camión de mudanza para llevar una carta: funciona, pero es exagerado. Se elige el transporte según la carga.
+
+> 🧩 **Piezas para este ejercicio**
+> - `parte.reglasComplejas` lee una propiedad que vale `true` o `false`. `||` significa «o». También puedes expresar la decisión con `if` y un `return` para cada resultado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
