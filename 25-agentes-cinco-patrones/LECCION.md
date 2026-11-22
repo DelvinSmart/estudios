@@ -131,6 +131,9 @@ Es un **ciclo infinito**. Se arregla con un **máximo de pasos**, **detectando l
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - La llamada trae un nombre y sus argumentos. Busca la herramienta, valida los datos y ejecuta dentro de `try` para poder devolver un resultado claro si falla.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -275,6 +278,9 @@ for paso in plan.pasos:
 
 **Ejercicio para construir:** un agente investigador que recibe una pregunta, arma un plan de 3 a 6 búsquedas, las ejecuta y escribe un resumen con fuentes. Guarda el plan como JSON e imprime el estado de cada paso mientras corre. Después **mete una búsqueda que falle a propósito** y confirma que el replanificador se recupera.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un plan es una lista de diccionarios. `paso["id"]` identifica un paso y `paso["depende_de"]` contiene los ids que deben estar listos. `all(...)` comprueba todas las dependencias. Si la lista está vacía, el paso no tiene requisitos. `None` indica que todavía no hay un paso disponible.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -412,6 +418,9 @@ return marcar_para_revision(mejor[1], correcciones)
 
 **Ejercicio para construir:** envuelve una generación de código en un ciclo de reflexión donde el crítico son **las pruebas**: **pytest** en Python (lo que usa la guía), o Jest / `node:test` en JavaScript. Genera una función a partir de una descripción, corre las pruebas, devuelve las fallas, tope de tres intentos. Mide cuántas pasan con y sin el ciclo, en 20 descripciones.
 
+> 🧩 **Piezas para este ejercicio**
+> - Guarda el borrador de mayor puntaje mientras recibes correcciones. Si el crítico aprueba, puedes responder de inmediato. Al agotar los intentos, usa lo mejor que ya hayas obtenido.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -534,6 +543,9 @@ return ESPECIALISTAS[ruta.categoria](pedido, ruta.datos, estado)
 > 📌 **Nota de producción:** el enrutamiento controla **el costo** tanto como la calidad. Es común que los equipos recorten una buena parte del gasto mandando lo simple a un modelo pequeño y dejando el modelo más potente solo para lo que lo necesita.
 
 **Ejercicio para construir:** un enrutador de tres caminos (código, investigación, soporte) con salida ordenada y un umbral de confianza. Escribe 30 pedidos de prueba, incluyendo 5 ambiguos. Mide qué tan seguido acierta. Después reemplaza el enrutador con modelo por un clasificador por parecido (*embeddings*) y compara costo, demora y aciertos.
+
+> 🧩 **Piezas para este ejercicio**
+> - `ESPECIALISTAS` es un diccionario cuyos valores son funciones. Leer `ESPECIALISTAS[categoria]` trae la función y agregar `(categoria)` la llama. Comprueba primero que la categoría exista y que la confianza llegue al umbral.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -661,6 +673,9 @@ async def correr_supervisor(tarea):
 > 📌 **Nota de producción:** los sistemas multiagente **queman *tokens***. Según el equipo de ingeniería de Anthropic, un agente usa más o menos **cuatro veces** los *tokens* de una conversación normal, y un sistema multiagente, unas **quince veces**. Asegúrate de que la tarea lo vale antes de usar este patrón.
 
 **Ejercicio para construir:** un supervisor con tres trabajadores: investigador (búsqueda web), analista (corre código para los números) y redactor. Pide un informe de una página sobre un tema con tres conjuntos de números. Corre los trabajadores en paralelo (`Promise.all`). Rastrea toda la ejecución y encuentra **el tramo más caro**.
+
+> 🧩 **Piezas para este ejercicio**
+> - `map` puede construir una promesa por cada delegación. `Promise.all` espera el conjunto y devuelve el resultado en el orden original, aunque algunos terminen antes.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

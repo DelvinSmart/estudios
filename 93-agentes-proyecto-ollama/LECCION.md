@@ -44,6 +44,9 @@ Antes de una línea de código, `PLAN.md`. Y lo primero del plan son **las tres 
 
 > 💡 **Idea:** que todas las herramientas sean de **solo lectura** no es un detalle: es lo que hace que la tercera pregunta dé "sí". Si mañana quieres una herramienta que **anote** un gasto, primero cambias el plan, y esa herramienta va con confirmación de una persona (clase 26, patrón 14).
 
+> 🧩 **Piezas para este ejercicio**
+> - Un archivo Markdown se lee como texto. `splitlines()` entrega una lista de líneas y `.startswith("## ")` detecta títulos de segundo nivel. En `titulo in linea`, `in` busca un fragmento y permite que el encabezado tenga un número delante.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -101,6 +104,9 @@ Tres decisiones más, cada una con su prueba en `test/test_herramientas.py`:
 - **Nunca lanzan un error hacia el ciclo.** `ejecutar` envuelve todo en `try`/`except` y devuelve `{"ok": False, "error": …}`. Una herramienta que revienta mata el ciclo; una que devuelve un error ordenado le da al modelo la oportunidad de corregirse (clase 25, parte 2.1).
 - **Resultados flacos.** `listar_gastos` trae como mucho 10. Cada resultado entra en **todos** los pasos siguientes: si es enorme, paga en cada vuelta (clase 28, parte 6.5).
 - **Lo que mandan los modelos chicos.** A veces mandan `"limite": "3"` (un texto) en vez de `3`. La herramienta lo acepta. Es *poka-yoke*: hacer más fácil la llamada correcta.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un argumento opcional puede faltar. `args.get("desde")` permite consultarlo sin lanzar un error por clave ausente. Primero revisa la forma de las fechas. Después, las fechas `AAAA-MM-DD` se pueden comparar como texto. El patrón de la práctica comprueba el formato y una validación de calendario requiere comprobar que el día exista.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -184,6 +190,9 @@ self.assertEqual(r["herramientas"], ["fecha_de_hoy", "sumar_gastos"])
 
 Por eso las 46 pruebas corren en **milisegundos** y siempre dan lo mismo: prueban **tu código** (el ciclo, los frenos, las herramientas), no al modelo. Al modelo se lo mide aparte, con la evaluación (parte 6).
 
+> 🧩 **Piezas para este ejercicio**
+> - `isinstance(respuesta, str)` decide si el modelo terminó con texto. Si trae una tupla, `nombre, args = respuesta` separa las dos piezas. Una lista puede contar llamadas iguales incluso cuando los argumentos son diccionarios. El ciclo de esta práctica usa herramientas simuladas.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -257,6 +266,9 @@ Dos controles baratos, sin modelo (clase 26, patrón 15):
 Si hay un monto suelto, el ciclo le da **una** vuelta más al modelo ("estos números no salieron de ninguna herramienta…"). Si insiste, la respuesta se entrega **marcada** con un ⚠️, para que la persona no confíe a ciegas. Es la "evaluación de apoyo" de la clase 29 (parte 7.3), hecha con reglas.
 
 Leer montos tiene su trampa: en Brasil `1.245,50` es mil doscientos; en Estados Unidos `651.10` es seiscientos. `_a_numero` decide por **cuál va último** (ese es el decimal), y las fechas (`2026-11-18`, `18/11`) se sacan antes, porque no son montos. Los enteros chicos (hasta 31) no se revisan: son días y cantidades ("4 gastos", "el día 18").
+
+> 🧩 **Piezas para este ejercicio**
+> - Para convertir un monto brasileño, retira primero el separador de miles y luego cambia la coma decimal por punto. `findall` recoge los textos encontrados. `abs(a - b)` mide su diferencia sin importar cuál es mayor. La comprobación es una señal sobre los montos, no una prueba de que toda la respuesta esté respaldada.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -334,6 +346,9 @@ Léelo como en la clase 28 (parte 5.6): el modelo pidió **la fecha** primero (c
 Cada ejecución deja su rastro completo en `rastros/<id>.jsonl` (una línea JSON por evento). La carpeta está en `.gitignore`.
 
 > 💡 **Idea:** `--hoy 2026-11-18` existe para que **la misma pregunta dé la misma respuesta** mientras pruebas. Sin eso, "este mes" cambia de respuesta cada mes.
+
+> 🧩 **Piezas para este ejercicio**
+> - Trabaja con una respuesta de ejemplo. `datos["message"]` trae un diccionario y `.get("tool_calls", [])` da una lista aunque falte esa clave. Solo llama a `json.loads` cuando los argumentos sean texto. Los contadores de entrada y salida se suman.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -418,12 +433,15 @@ Demora p50: 6.3 s · p95: 9.5 s · costo: R$ 0
 
 > 📌 **Nota:** fíjate en lo que **no** se hizo: no se borró el caso de peajes para que el número subiera. Un caso que falla es información. Es la regla de `AGENTS.md`: "Nunca borres una prueba ni un caso de evaluación para que pase".
 
+> 🧩 **Piezas para este ejercicio**
+> - Primero revisa las herramientas que el caso esperaba y luego su texto. Para contar los casos que aprobaron todos sus intentos, exige que haya algún resultado. `all([])` da `True` en Python, así que sirve comprobar por separado que el caso sí se ejecutó.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
 titulo: Calificar con reglas y sacar el pass^k
 lenguaje: python
-pide: Completa `calificar(caso, r)`: devuelve la lista de problemas de una ejecución, en este orden: `"no usó X"` por cada herramienta de `caso["debe_usar"]` que no esté en `r["herramientas"]`, y `"no dijo el monto"` si `caso["monto"]` (un texto como `"651,10"`) no está **dentro** de `r["texto"]`. Y `pass_k(resultados)`: recibe un diccionario `{caso: [True, False, …]}` y devuelve cuántos casos salieron bien **todas** las veces.
+pide: Completa `calificar(caso, r)`: devuelve la lista de problemas de una ejecución, en este orden: `"no usó X"` por cada herramienta de `caso["debe_usar"]` que no esté en `r["herramientas"]`, y `"no dijo el monto"` si `caso["monto"]` (un texto como `"651,10"`) no está **dentro** de `r["texto"]`. Y `pass_k(resultados)`: recibe un diccionario `{caso: [True, False, …]}` y devuelve cuántos casos se ejecutaron al menos una vez y salieron bien **todas** las veces.
 --- código
 def calificar(caso, r):
     pass  # tu código aquí
@@ -437,6 +455,7 @@ prueba("aprobó", lambda: igual(calificar(CASO, {"herramientas": ["fecha_de_hoy"
 prueba("sin la fecha", lambda: igual(calificar(CASO, {"herramientas": ["sumar_gastos"], "texto": "R$ 651,10"}), ["no usó fecha_de_hoy"]))
 prueba("con otro monto", lambda: igual(calificar(CASO, {"herramientas": ["fecha_de_hoy", "sumar_gastos"], "texto": "R$ 600,00"}), ["no dijo el monto"]))
 prueba("pass^3", lambda: igual(pass_k({"mes": [True, True, True], "hoy": [True, False, True], "peajes": [True, True, True]}), 2))
+prueba("un caso sin ejecutar no se cuenta", lambda: igual(pass_k({"sin ejecutar": [], "mes": [True]}), 1))
 --- solución
 def calificar(caso, r):
     problemas = [f"no usó {h}" for h in caso["debe_usar"] if h not in r["herramientas"]]
@@ -446,7 +465,7 @@ def calificar(caso, r):
 
 
 def pass_k(resultados):
-    return len([c for c, veces in resultados.items() if all(veces)])
+    return sum(1 for veces in resultados.values() if veces and all(veces))
 ```
 
 ```practica

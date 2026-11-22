@@ -6,7 +6,7 @@ Esta clase está basada en la guía **"Agentic design patterns"** de **Bashiri S
 
 **La idea central de la guía:** la mayoría aprende agentes al revés (elige una herramienta, copia un ejemplo y termina con algo que no puede explicar). Aquí va al derecho: **primero los patrones**, después las decisiones de ingeniería de cada uno, y al final lo que mantiene vivo a un agente cuando lo usan personas reales.
 
-**Antes de empezar:** haz primero los fundamentos (Temas 01 a 10). Esta clase es la última a propósito.
+**Antes de empezar:** si todavía estás aprendiendo qué es una variable, empieza por el Tema 116. Si Python es nuevo para ti, haz primero los Temas 36 a 39: nombres y tipos, decisiones y ciclos, listas y diccionarios, y funciones. Si ya sabes programar en JavaScript, usa la comparación de abajo para repasar la forma de escribir esas mismas ideas en Python.
 
 **Tres formas de estudiarla** (las mismas que propone la guía):
 
@@ -22,7 +22,18 @@ Esta clase está basada en la guía **"Agentic design patterns"** de **Bashiri S
 
 ## Python: Lo mismo, en los dos lenguajes
 
-> 🌎 **En la vida real:** ya hablas español; aprender a **leer** portugués te lleva días, no años, porque casi todo se parece. Tú ya lees JavaScript y TypeScript; leer Python es igual: cambian algunas palabras y la forma de escribir, pero las ideas son las mismas.
+> 🌎 **En la vida real:** imagina un cuaderno con dos casillas: «combustible» y «lavado». Anotas 50 en la primera y 20 en la segunda. Quien lee esas casillas puede sumar 70 siguiendo el mismo procedimiento cada vez.
+
+En Python puedes darle un nombre a cada cantidad y devolver el resultado desde una función:
+
+```python
+def total_del_dia(combustible, lavado):
+    return combustible + lavado
+
+total = total_del_dia(50, 20)
+```
+
+`def` presenta la función. `combustible` y `lavado` son los nombres que reciben los dos datos. La línea que empieza con cuatro espacios pertenece a la función. Al llamarla con `50` y `20`, `return` entrega `70`, que queda guardado en `total`. Esa secuencia de entrada, trabajo y salida se repite en las herramientas de un agente. La tabla que sigue te permite reconocer cómo se escribe en cada lenguaje.
 
 > 🌎 **Otro ejemplo:** Es como manejar en otro país con el volante del otro lado: al principio te cuesta, pero los pedales, el freno y las reglas son las mismas.
 
@@ -54,6 +65,9 @@ Esta clase está basada en la guía **"Agentic design patterns"** de **Bashiri S
 | Traer de otro archivo | `import { x } from './y.js';` | `from y import x` |
 | Tipos | `nombre: string` | `nombre: str` |
 | "Texto o nada" | `string \| null` | `str \| None` |
+
+> 🧩 **Piezas para este ejercicio**
+> - `def` crea una función y `return` entrega su resultado. `lista.append(app)` cambia la lista agregando al final. Luego `len(lista)` cuenta los elementos, incluido el nuevo. En `f"Hola {nombre}"`, las llaves insertan el valor de `nombre`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -109,6 +123,9 @@ Es tu función `isImmutableEarningPlatform` del Tema 01, escrita en Python. Fíj
 > 🌎 **En la vida real:** la sangría es como un índice de un libro con subtítulos corridos hacia la derecha: con solo mirar cuánto está corrido un renglón, sabes de qué capítulo es. En Python, si corres mal un renglón, cambia de capítulo, y el programa hace otra cosa (o da error).
 
 > 🌎 **Otro ejemplo:** Como las sangrías de una lista de compras por sección: "Lácteos" y, corridos hacia adentro, "leche, queso". Lo corrido pertenece a la sección.
+
+> 🧩 **Piezas para este ejercicio**
+> - `x in lista` devuelve un booleano, `True` o `False`. Las líneas dentro de cada rama llevan cuatro espacios. Python prueba las ramas de arriba hacia abajo, así que prueba el umbral mayor primero.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -174,6 +191,9 @@ grandes = [v for v in valores if v > 15]    # [18, 25]
 
 **3. `async` / `await` y `asyncio.gather`** (el `Promise.all` de Python), para hacer varias cosas a la vez.
 
+> 🧩 **Piezas para este ejercicio**
+> - Lee `[v * 2 for v in valores]` como «por cada valor, guarda su doble». La parte `if` al final es opcional y decide qué valores entran. Para sacar un nombre de un diccionario, usa `herramienta["nombre"]`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -228,6 +248,9 @@ python3 -m pip install pydantic
 ```
 
 > 📌 **Nota:** `pip` es el `npm` de Python: instala librerías. Y **pytest** es el Jest de Python: corre las pruebas automáticas.
+
+> 🧩 **Piezas para este ejercicio**
+> - Aquí la función devuelve texto. `.endswith(".py")` comprueba el final del nombre y `None` representa que no hay comando disponible. El comando se ejecutaría aparte en la terminal.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -324,6 +347,9 @@ Es una **llamada al modelo**. Sería un **agente** si el modelo pudiera decidir 
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - Usa las dos preguntas en orden. Primero mira si hay repetición. Si la hay, distingue quién elige lo que pasa en la próxima vuelta.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -373,6 +399,9 @@ Todo agente, con la herramienta que sea, tiene estas siete piezas. Si puedes dib
 | **Ciclo de orquestación** | El código que llama al modelo, ejecuta las herramientas, agrega los resultados, revisa si hay que parar y repite. **Aquí viven los patrones.** |
 | **Controles** (*guardrails*) | Revisiones de entradas, salidas y acciones: reglas, formato, permisos, límites de gasto. |
 | **Entorno de ejecución** (*runtime*) | Lo que lo mantiene vivo en producción: registros, puntos de guardado, reintentos, colas, cajas aisladas y la posibilidad de **detenerlo**. |
+
+> 🧩 **Piezas para este ejercicio**
+> - Cada nombre de la lista representa una pieza del objeto. Busca el valor con ese nombre. Una propiedad ausente da `undefined` y la consigna también considera ausente a `null`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -461,6 +490,9 @@ def correr_agente(tarea, herramientas, max_pasos=10):
 
 **Esa es toda la idea.** El resto de la guía son variaciones de este ciclo: qué pones en los mensajes, cómo eliges y construyes las herramientas, cómo decides que terminó, y cómo lo mantienes seguro, barato y observable.
 
+> 🧩 **Piezas para este ejercicio**
+> - El modelo simulado lee el historial. Cada resultado de herramienta se agrega a ese historial para que la siguiente llamada lo tenga disponible. El límite controla cuántas veces se vuelve a preguntar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -529,6 +561,9 @@ Si alguna respuesta es "no", **construye primero un flujo de trabajo**.
 
 > 📌 **Nota de producción:** los mejores equipos empiezan con **una sola llamada** al modelo, la miden, y solo agregan complejidad cuando la medición dice que lo simple falla. La complejidad es un costo que pagas para siempre. La capacidad que agregas porque una demo se veía impresionante es la más cara de todas.
 
+> 🧩 **Piezas para este ejercicio**
+> - Las primeras preguntas determinan si conviene darle libertad al modelo. Si pasan, usa la estructura de los pasos para elegir la modalidad. La aprobación puede añadirse a cualquiera de las modalidades.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -576,6 +611,9 @@ function queConstruir(caso) {
 | **Orquestador** | La pieza (código o modelo) que decide qué paso, herramienta o agente corre después. |
 
 > 📌 **Nota:** un *token* es un pedacito de texto (más o menos tres cuartos de una palabra). Los modelos cobran y se limitan por *tokens*.
+
+> 🧩 **Piezas para este ejercicio**
+> - Esta es una estimación. Limpia y separa el texto para contar palabras reales. En la lista de mensajes, estima cada contenido y compara la suma con el espacio disponible.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -673,6 +711,9 @@ No es porque Python sea más rápido ni más seguro. Es por **lo que hay alreded
 | Es para **aprender y conseguir trabajo** en IA | **Python** | Por los ejemplos, la ayuda y las ofertas. |
 
 > 🎙️ **El profesor dice:** si ya sabes JavaScript, **no estás atrasado**: el ciclo, las herramientas, los frenos y las evaluaciones son iguales. Aprende a **leer** Python (esta clase te enseña lo justo) y construye en el lenguaje donde vive tu proyecto.
+
+> 🧩 **Piezas para este ejercicio**
+> - Recorre los requisitos en el orden de la consigna. El primer caso que encaje da el resultado del ejercicio. Un requisito de dispositivo tiene prioridad sobre el lenguaje del resto del proyecto.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 

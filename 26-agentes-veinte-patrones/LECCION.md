@@ -39,6 +39,9 @@ Llamada 1 (índice) ─► compuerta ─✓─► Llamada 2 (borrador) ─► co
 
 **4. Evaluador-optimizador.** Un modelo genera, otro evalúa con criterios, y se repite hasta que pasa. Es la reflexión (2.3) con un evaluador dedicado, y **es el nombre que vas a oír** en las discusiones de arquitectura. Funciona mejor cuando hay criterios claros y cada vuelta mejora de forma medible: traducciones, mejorar consultas de búsqueda, código que tiene que pasar pruebas, documentos con requisitos duros.
 
+> 🧩 **Piezas para este ejercicio**
+> - Cada paso recibe una entrada y produce otra. Después de producirla, la compuerta decide si se puede continuar. Para votar, cuenta por respuesta y conserva el orden de la primera aparición al comparar empates.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -115,12 +118,15 @@ Tarea (analizar 40 mil filas) ─► Agente (escribe un programa que usa herrami
 
 > 🌎 **En la vida real:** en vez de dictarle a tu asistente "suma la fila 1… ahora la 2… ahora la 3", le das una planilla con la fórmula ya escrita. Una orden reemplaza cien.
 
+> 🧩 **Piezas para este ejercicio**
+> - `memoria + [leccion]` crea una lista nueva. Las rebanadas como `lista[-2:]` toman elementos desde el final. Trata el límite cero antes de usar un índice negativo, porque `-0` sigue siendo `0`. `"\n".join(lineas)` separa cada línea con un salto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
 titulo: Reflexion: aprender del intento anterior
 lenguaje: python
-pide: En el patrón Reflexion, después de cada intento fallido el agente guarda una lección corta. Completa `recordar(memoria, leccion, maximo=3)`: devuelve una lista **nueva** con la lección al final, sin repetir una que ya estaba, y con solo las últimas `maximo`. Y `prompt_con_memoria(tarea, memoria)`: devuelve la tarea sola si no hay lecciones; si hay, la tarea, una línea `"Lo que aprendiste antes:"` y cada lección en su línea con `"- "` adelante (separadas con `"\n"`).
+pide: En el patrón Reflexion, después de cada intento fallido el agente guarda una lección corta. Completa `recordar(memoria, leccion, maximo=3)`: devuelve una lista **nueva** con la lección al final, sin repetir una que ya estaba, y con solo las últimas `maximo` (si es `0`, una lista vacía). Y `prompt_con_memoria(tarea, memoria)`: devuelve la tarea sola si no hay lecciones; si hay, la tarea, una línea `"Lo que aprendiste antes:"` y cada lección en su línea con `"- "` adelante (separadas con `"\n"`).
 --- código
 def recordar(memoria, leccion, maximo=3):
     pass  # tu código aquí
@@ -139,11 +145,16 @@ def _no_cambia_la_original():
 prueba("no cambia la lista original", _no_cambia_la_original)
 prueba("sin memoria", lambda: igual(prompt_con_memoria("Arregla el error", []), "Arregla el error"))
 prueba("con memoria", lambda: igual(prompt_con_memoria("Arregla el error", ["revisa null"]), "Arregla el error\nLo que aprendiste antes:\n- revisa null"))
+prueba("con límite cero no guarda lecciones", lambda: igual(recordar(["vieja"], "nueva", 0), []))
+prueba("con repetida respeta el límite", lambda: igual(recordar(["vieja", "nueva"], "nueva", 1), ["nueva"]))
 --- solución
 def recordar(memoria, leccion, maximo=3):
-    if leccion in memoria:
-        return list(memoria)
-    return (memoria + [leccion])[-maximo:]
+    if maximo <= 0:
+        return []
+    lecciones = list(memoria)
+    if leccion not in lecciones:
+        lecciones.append(leccion)
+    return lecciones[-maximo:]
 
 
 def prompt_con_memoria(tarea, memoria):
@@ -172,6 +183,9 @@ def prompt_con_memoria(tarea, memoria):
 **13. Debate y consenso.** Dos o más agentes **defienden posiciones contrarias**, o resuelven el problema por separado y después concilian. Un juez elige al ganador o sintetiza. El debate mejora la exactitud en preguntas discutidas y atrapa errores que un solo agente no vería, **a dos a cuatro veces el costo**. Úsalo para análisis importantes, no para tareas de todos los días.
 
 > 🌎 **En la vida real:** pedir una segunda opinión médica, o un juicio con fiscal y defensor frente a un juez.
+
+> 🧩 **Piezas para este ejercicio**
+> - La clave identifica un espacio en la pizarra. Revisa su autor antes de escribir. Para obtener autores únicos, recorre las entradas en su orden y registra cuáles ya viste.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -242,6 +256,9 @@ Entrada ─► Control de entrada (inyección, datos personales, fuera de tema) 
 
 > 🌎 **En la vida real:** el taxímetro con tope: "llévame, pero si pasa de R$ 50, avísame y paramos".
 
+> 🧩 **Piezas para este ejercicio**
+> - Las condiciones se aplican por orden. Comprueba que existan al menos tres llamadas antes de comparar las últimas. La representación en texto de esta práctica sirve para los objetos que entregan las pruebas.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -309,12 +326,15 @@ Consulta ─► Reescribir (¿buscar? ¿dónde?) ─► Buscar (vectores, palabr
 
 > 💡 **Idea:** esta misma conversación conmigo se compactó varias veces: arriba quedó un resumen con los archivos, las decisiones y lo pendiente. Es este patrón en acción.
 
+> 🧩 **Piezas para este ejercicio**
+> - Separa la primera instrucción, los mensajes viejos y los que quieres dejar sin cambios. Una rebanada `mensajes[1:fin]` empieza después de la primera instrucción y termina antes de `fin`. Si `dejar` es cero, todos los mensajes posteriores a la instrucción son viejos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
 titulo: Compactar el contexto
 lenguaje: python
-pide: Completa `compactar(mensajes, dejar, resumir)`. Si hay `dejar + 1` mensajes o menos, devuelve la lista igual. Si no, deja el **primero** (las instrucciones), después un mensaje `{"rol": "resumen", "contenido": resumir(viejos)}` con los del medio, y al final los últimos `dejar` mensajes, sin tocarlos. `resumir` recibe la lista de los mensajes viejos.
+pide: Completa `compactar(mensajes, dejar, resumir)`. Si hay `dejar + 1` mensajes o menos, devuelve la lista igual. Si no, deja el **primero** (las instrucciones), después un mensaje `{"rol": "resumen", "contenido": resumir(viejos)}` con los del medio, y al final los últimos `dejar` mensajes, sin tocarlos. Si `dejar` es `0`, resume todo lo que sigue a la primera instrucción. `resumir` recibe la lista de los mensajes viejos.
 --- código
 def compactar(mensajes, dejar, resumir):
     pass  # tu código aquí
@@ -326,13 +346,15 @@ prueba("el largo final", lambda: igual(len(compactar(M, 2, contar)), 4))
 prueba("las instrucciones quedan primero", lambda: igual(compactar(M, 2, contar)[0], M[0]))
 prueba("el resumen de los del medio", lambda: igual(compactar(M, 2, contar)[1], {"rol": "resumen", "contenido": "3 mensajes viejos"}))
 prueba("los últimos, tal cual", lambda: igual(compactar(M, 2, contar)[2:], M[-2:]))
+prueba("con cero no conserva mensajes recientes", lambda: igual(compactar(M, 0, contar), [M[0], {"rol": "resumen", "contenido": f"{len(M) - 1} mensajes viejos"}]))
 --- solución
 def compactar(mensajes, dejar, resumir):
     if len(mensajes) <= dejar + 1:
         return mensajes
     primero = mensajes[0]
-    viejos = mensajes[1:-dejar]
-    ultimos = mensajes[-dejar:]
+    inicio_recientes = len(mensajes) - dejar
+    viejos = mensajes[1:inicio_recientes]
+    ultimos = mensajes[inicio_recientes:]
     return [primero, {"rol": "resumen", "contenido": resumir(viejos)}] + ultimos
 ```
 
@@ -371,6 +393,9 @@ Los veinticinco patrones en una tabla:
 | Memoria | El agente debe servir entre sesiones | Medio |
 | RAG agéntico | Las respuestas deben apoyarse en tus datos | Medio |
 | Compactar el contexto | Las ejecuciones son largas y la ventana se llena | Bajo |
+
+> 🧩 **Piezas para este ejercicio**
+> - La tabla sirve de guía para el ejercicio. Evalúa de arriba hacia abajo y devuelve el primer caso que encaje. El último caso funciona como respaldo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

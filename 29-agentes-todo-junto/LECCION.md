@@ -37,6 +37,9 @@ Memoria: perfil del usuario y tickets pasados · Rastros + evaluaciones: 10% cal
 5. Un **crítico** revisa el tono y las reglas antes de responder. El **control de salida** bloquea todo lo que no esté apoyado en datos o no cumpla las reglas.
 6. **Cada ejecución se rastrea.** Un 10% lo califica un modelo-juez. **Cada falla se vuelve un caso de evaluación.** El set de evaluación decide si se publica.
 
+> 🧩 **Piezas para este ejercicio**
+> - La función devuelve pronto si un control decide parar o pedir aclaración. `mensaje.lower()` permite comparar el texto sin importar mayúsculas. El filtro de palabras es una simulación, y las autorizaciones del sistema siguen vigentes aunque el mensaje pase.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -79,6 +82,9 @@ def atender(mensaje, ruta, monto=0):
 | **Entorno** | Las ejecuciones son trabajos en cola con id. Avance transmitido. Retomar desde punto de guardado. Efectos idempotentes. Código en caja aislada. |
 | **Seguridad** | Mínimo privilegio por herramienta. Secretos fuera del contexto. Resultados de herramientas tratados como datos. Filtro de salida. Registro de auditoría. **Una pata de la trifecta quitada.** |
 | **Operación** | Resultados del modo sombra revisados. Interruptor de apagado probado. Prompts, herramientas y modelos versionados como paquete. Revisión semanal de rastros en el calendario. |
+
+> 🧩 **Piezas para este ejercicio**
+> - Cada control corresponde a una propiedad. La ausencia de un valor y el incumplimiento de un mínimo son casos que debes comprobar. Conserva el orden de la lista.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -125,6 +131,9 @@ function faltaParaPublicar(agente) {
 | Demora demasiado | Herramientas en fila, demasiadas vueltas de reflexión | Llamadas en paralelo, tope de vueltas, modelos chicos para lo simple |
 | Ignora instrucciones al final de ejecuciones largas | Contexto hinchado, instrucciones enterradas | Compactar, repetir las reglas clave, resultados flacos |
 | Lo "inyectó" una página web que leyó | Trató los resultados de herramientas como instrucciones | Separar datos de instrucciones, filtrar la salida, quitar una pata de la trifecta |
+
+> 🧩 **Piezas para este ejercicio**
+> - Limpia los espacios de los extremos y pasa a minúsculas antes de buscar. Una tabla de diagnóstico puede devolver un paso de investigación si no hay coincidencia.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -181,6 +190,9 @@ Cada pregunta con **lo que debe tener una respuesta fuerte**:
 11. **¿Qué es MCP y por qué importa?** Un estándar abierto para ofrecer herramientas, recursos y prompts. Construyes el servidor una vez y lo usa cualquier cliente.
 12. **Cuéntame de un agente que construiste y qué se rompió.** **La pregunta de verdad.** Ten un proyecto con rastros, evaluaciones, una historia de falla y su arreglo.
 
+> 🧩 **Piezas para este ejercicio**
+> - Normalizar ambos lados de la comparación evita que una tilde o una mayúscula cambie el resultado. Devuelve las ideas con su texto original.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -221,6 +233,9 @@ function ideasQueFaltan(respuesta, ideas) {
 Cada proyecto va con un **README** que diga: el patrón, el diagrama de arquitectura, los resultados de evaluación, el costo por ejecución y **qué harías distinto**. **Ese README es la entrevista.**
 
 > 💡 **Idea:** este curso ya tiene algo parecido: las clases 12 a 14 cuentan cómo se hicieron sus proyectos, qué salió mal y qué se decidió. Es el mismo músculo.
+
+> 🧩 **Piezas para este ejercicio**
+> - Primero identifica los títulos con `## `. Después comprueba qué nombres esperados aparecen al comienzo de esos títulos. Recorre los nombres requeridos en el orden indicado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -267,6 +282,9 @@ Las fuentes en las que se apoya la guía (los títulos van en inglés, como se p
 **El cierre de la guía, en una idea:** ya sabes más de diseño de agentes que la mayoría de quienes te van a entrevistar. **La distancia entre saber y ser contratado es el trabajo publicado.** Construye los cinco patrones principales, haz los ejercicios, publica un sistema de punta a punta con rastros y evaluaciones, y escribe el README.
 
 > 📌 **Nota:** la guía también invita a la comunidad de su autor en Skool (`skool.com/baswe-ai`), donde ingenieros que se pasan a IA comparten lo que construyen y reciben opiniones. Es opcional; lo menciono porque está en el documento.
+
+> 🧩 **Piezas para este ejercicio**
+> - La clave de `sorted` puede devolver una tupla: primero se compara el año y, en empate, el título. El filtro por año usa `>=` para incluir también el año indicado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

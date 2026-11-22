@@ -31,6 +31,9 @@ Los patrones son **la forma**. Esta parte es **el contenido**: las decisiones qu
 
 > 💡 **Idea:** tu `AGENTS.md` de este curso es exactamente un *system prompt* por secciones: quién es el alumno, el papel de la IA, el idioma, qué leer antes, cómo dar la clase, qué está prohibido.
 
+> 🧩 **Piezas para este ejercicio**
+> - Usa una lista ordenada de nombres para decidir qué secciones van primero. Crea un bloque por sección y únelos con dos saltos de línea para dejar una línea en blanco.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -129,6 +132,9 @@ buscar_pedido = {
 
 Fíjate: dice **cuándo usarla**, **cuándo no** y **qué devuelve**; el `pattern` hace imposible pasar un número mal formado, y avisa que es **solo lectura**.
 
+> 🧩 **Piezas para este ejercicio**
+> - Comprueba el id antes de buscarlo. Los movimientos se pueden acotar con una rebanada que tome los últimos elementos de la lista.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -224,6 +230,9 @@ def guardar_punto(estado: EstadoAgente) -> None:
 
 > 💡 **Idea:** es TypeScript, como Copiloto (Tema 01). Los tipos aquí hacen el mismo trabajo: si alguien escribe mal un campo, se entera antes de correrlo.
 
+> 🧩 **Piezas para este ejercicio**
+> - `dict(estado)` copia las entradas del diccionario a otro. Cambiar una clave de esa copia deja intacto el original. La copia es superficial: una lista dentro del estado sigue siendo compartida si no la copias aparte. `get("version", 1)` usa `1` si falta el campo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -277,6 +286,9 @@ def cargar(punto):
 - Esquemas **planos y chicos**. Los esquemas muy anidados y con muchos campos opcionales producen más errores.
 - Para las categorías usa **tipos literales** (una lista cerrada de opciones), no texto libre.
 - Pon una descripción corta en **cada campo**: **la descripción es el prompt de ese campo**.
+
+> 🧩 **Piezas para este ejercicio**
+> - Distingue un JSON ilegible de un JSON que se pudo leer pero trae campos inválidos. En el ciclo, guarda el mensaje de validación para usarlo como entrada del siguiente intento.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -350,6 +362,9 @@ Usa **el modelo más fuerte** para los pasos que necesitan criterio (planificar,
 | Salida estructurada | Que el modelo respete el esquema de fábrica reduce reintentos y código de lectura. |
 | Pensamiento extendido | Útil para planificar y para críticas difíciles. Caro en lo demás. |
 
+> 🧩 **Piezas para este ejercicio**
+> - Las tarifas se expresan por un millón, así que divide cada subtotal entre un millón antes de sumarlos. El costo del día repite el costo de la ejecución el número de veces indicado.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -405,6 +420,9 @@ El anfitrión corre el agente. Los clientes hablan MCP. Los servidores ofrecen l
 > 💡 **Idea:** yo mismo, Claude Code, uso MCP: el navegador con el que probé esta página, el panel de tareas que ves al trabajar conmigo, todos son servidores MCP.
 
 **A2A** (*Agent-to-Agent*), liderado bajo la **Linux Foundation**, estandariza cómo **agentes hechos con distintos *frameworks*** se descubren y se pasan tareas. Importa en empresas donde agentes de distintos equipos o proveedores tienen que cooperar. **Para un solo producto, un supervisor con llamadas directas a funciones es más simple y más fácil de depurar.**
+
+> 🧩 **Piezas para este ejercicio**
+> - Estos ejercicios construyen mensajes como objetos. El método indica la operación y `params` contiene sus datos. El identificador permite relacionar la respuesta con la solicitud. Aquí solo se trabaja con los objetos de ejemplo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -477,6 +495,9 @@ El panorama cuando se escribió la guía:
 > 💡 **Idea:** como tú trabajas en TypeScript, **Vercel AI SDK** o **Mastra** serían tu puerta de entrada natural; y el **Claude Agent SDK** si quieres un agente que trabaje con archivos y código.
 
 > 🎤 **Entrevista:** **nadie te contrata por conocer un *framework*.** Te contratan por saber **por qué** el *framework* toma las decisiones que toma. Tienes que poder explicar puntos de guardado, flechas condicionales e interrupciones **sin nombrar ninguna librería**.
+
+> 🧩 **Piezas para este ejercicio**
+> - Aplica la tabla en orden porque un proyecto puede cumplir varios criterios. El primer criterio aplicable decide la sugerencia del ejercicio.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -23,6 +23,9 @@ No puedes mejorar lo que no puedes medir, y los agentes son más difíciles de m
 - Tu evaluación tiene que juzgar **el resultado final**, **el camino** y **cuánto costó** llegar.
 - Tiene que tolerar la **variación**: una sola ejecución no dice casi nada. **Corre cada caso varias veces** y mira la distribución.
 
+> 🧩 **Piezas para este ejercicio**
+> - La tasa es éxitos divididos por total. Cuando no hay resultados, la práctica define un respaldo. Un conjunto con éxitos y fallos señala que el comportamiento varía entre ejecuciones.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -72,6 +75,9 @@ function esInestable(resultados) {
 | **En línea** | El comportamiento en producción a lo largo del tiempo | Ejecuciones de muestra calificadas todo el tiempo, más señales de usuarios: pulgares, ediciones, reintentos, escalamientos. |
 
 > 💡 **Idea:** el nivel de unidad es lo que ya conoces del Tema 02 y 04: pruebas que corren en el CI en cada subida.
+
+> 🧩 **Piezas para este ejercicio**
+> - El orden importa para distinguir qué pasó antes de responder. Para una confirmación inmediata, consulta el paso justo anterior. Cuenta las búsquedas en todo el recorrido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -140,6 +146,9 @@ Devuelve JSON: {"puntajes": {...}, "pruebas": {...}, "veredicto": "aprueba" | "r
 
 - Las **tres comillas** `"""…"""` crean un texto de varias líneas, como las comillas invertidas de JavaScript.
 
+> 🧩 **Piezas para este ejercicio**
+> - `juez(a, b)` recibe las respuestas en el orden que le das. Su salida indica una posición. En la segunda llamada intercambiaste las respuestas, así que traduce primero esa posición a `a` o `b` antes de comparar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -185,12 +194,15 @@ def juez_justo(juez, a, b):
 
 > 💡 **Idea:** ¿por qué pass^k baja tan rápido? Si un agente acierta el 90% de las veces, que acierte **3 veces seguidas** es 0,9 × 0,9 × 0,9 = 73%. Y **10 veces seguidas**, apenas 35%.
 
+> 🧩 **Piezas para este ejercicio**
+> - `p` representa una probabilidad entre 0 y 1. En el modelo del ejercicio, los intentos son independientes y comparten `p`. Para «al menos uno», calcula primero la probabilidad de que fallen todos y réstala de 1. El costo por éxito requiere que haya al menos un éxito.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
 titulo: pass@k, pass^k y el costo por éxito
 lenguaje: python
-pide: Si un agente acierta con probabilidad `p`, `pass_arroba_k(p, k)` (al menos uno de k sale bien) es `1 - (1 - p) ** k` y `pass_todos_k(p, k)` (los k salen bien) es `p ** k`. Redondea los dos a 3 decimales con `round`. Y `costo_por_exito(costo_total, exitos)`: el costo dividido entre los **éxitos** (no entre las ejecuciones), a 2 decimales, o `None` si no hubo ninguno.
+pide: Si los intentos son independientes y cada uno tiene la misma probabilidad de acierto `p`, `pass_arroba_k(p, k)` (al menos uno de k sale bien) es `1 - (1 - p) ** k` y `pass_todos_k(p, k)` (los k salen bien) es `p ** k`. Redondea los dos a 3 decimales con `round`. Y `costo_por_exito(costo_total, exitos)`: el costo dividido entre los **éxitos** (no entre las ejecuciones), a 2 decimales, o `None` si no hubo ninguno.
 --- código
 def pass_arroba_k(p, k):
     pass  # tu código aquí
@@ -235,6 +247,9 @@ def costo_por_exito(costo_total, exitos):
 - Guarda un **set aparte que quien escribe el prompt nunca ve** (para no "estudiar para el examen").
 - **Córrelo en el CI y bloquea la publicación** si bajan la tasa de éxito o sube la de violaciones de seguridad.
 - **Ponle versión al set junto con el código.**
+
+> 🧩 **Piezas para este ejercicio**
+> - Compara primero los resultados de seguridad. La diferencia entre tasas se calcula restando la nueva de la anterior. Una diferencia de `0.02` representa dos puntos porcentuales.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -288,6 +303,9 @@ En ese rastro se ve de un vistazo **el tramo más caro** (el investigador) y **l
 - **Qué capturar:** el prompt exacto y las definiciones de herramientas enviadas (con versión), el modelo y sus parámetros, *tokens* y costo, entradas y salidas de herramientas, demora por tramo, la salida final, los puntajes del evaluador y cualquier opinión del usuario ligada al rastro.
 - **Con qué:** **OpenTelemetry** con sus convenciones para IA generativa como base neutral, más una capa especializada como **Langfuse**, **LangSmith**, **Arize Phoenix**, **Braintrust** o **Weights and Biases Weave** para ver rastros, correr evaluaciones y administrar prompts.
 - **El hábito:** revisa rastros **cada semana**. Toma cinco éxitos y cinco fallas. **Cada revisión debe producir al menos un caso de evaluación nuevo o una mejora de herramienta.**
+
+> 🧩 **Piezas para este ejercicio**
+> - Un tramo puede tener hijos, que también son tramos. La suma de un nodo incluye su valor y la suma de cada hijo. Un nodo sin hijos aporta solo su propio valor.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -382,6 +400,9 @@ Cliente (web, app, Slack, API) ─► Capa de API (autentica, valida, encola, tr
 - **Almacén de estado.** Puntos de guardado en una base de datos, archivos en almacenamiento de objetos, y una base de vectores para la memoria semántica.
 - **Observabilidad.** Cada ejecución emite rastros, métricas y registros **a un solo sistema**.
 
+> 🧩 **Piezas para este ejercicio**
+> - La cola separa recibir el pedido de hacer el trabajo. Agregar al final y retirar del principio conserva el orden de llegada.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -439,6 +460,9 @@ Las ejecuciones duran de **segundos a horas**. Diseña para eso:
 
 > 💡 **Idea:** "idempotente" quiere decir que hacerlo una vez o diez veces da el mismo resultado. Como el botón del ascensor: apretarlo cinco veces no trae cinco ascensores. Un pago **sin** clave de idempotencia, reintentado, puede cobrar dos veces.
 
+> 🧩 **Piezas para este ejercicio**
+> - En el simulador, el mapa conserva la respuesta que corresponde a cada clave. Consulta el mapa antes de volver a llamar a la función que simula el pago.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -494,12 +518,15 @@ function crearReembolsos() {
 
 > 💡 **Idea:** "espera exponencial" es esperar 1 segundo, después 2, después 4, después 8… El "azar" es sumarle unos milisegundos al azar para que mil clientes no reintenten **todos en el mismo instante**.
 
+> 🧩 **Piezas para este ejercicio**
+> - `range(intentos)` empieza en cero y `2 ** i` multiplica la espera base por una potencia de dos. Aplica el tope a la espera base y luego suma la variación que devuelve `azar()`. En las pruebas, una función fija permite comprobar los segundos esperados.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
 titulo: Reintentos con espera exponencial
 lenguaje: python
-pide: Completa `se_reintenta(codigo)`: `True` para los errores pasajeros (`429`, el límite de uso, y del `500` al `599`); `False` para los demás, como `400`, que van a fallar igual. Y `esperas(intentos, base, tope, azar)`: la lista de segundos a esperar antes de cada reintento: `base`, `base*2`, `base*4`…, sin pasar del `tope` (`min`), y a cada una se le suma `azar()`, redondeado a 2 decimales.
+pide: Completa `se_reintenta(codigo)`: `True` para los errores pasajeros (`429`, el límite de uso, y del `500` al `599`); `False` para los demás, como `400`, que van a fallar igual. Y `esperas(intentos, base, tope, azar)`: la lista de segundos a esperar antes de cada reintento: `base`, `base*2`, `base*4`…, con la parte base limitada por `tope` (`min`). Después de aplicar ese límite, suma `azar()` a cada espera y redondea a 2 decimales.
 --- código
 def se_reintenta(codigo):
     pass  # tu código aquí
@@ -549,6 +576,9 @@ puede ser convertido en una herramienta para **robar datos** por cualquiera que 
 
 > 💡 **Idea:** cuando trabajo contigo, las reglas que sigo son estas mismas: si una página web o un archivo me "ordena" algo, lo trato como dato y te pregunto; no escribo tus contraseñas; y te pido confirmar antes de publicar o borrar.
 
+> 🧩 **Piezas para este ejercicio**
+> - Las tres condiciones deben estar presentes al mismo tiempo en el ejemplo. El filtro cubre el formato de llave dado. La protección de datos requiere también controlar qué información puede leer y enviar el agente.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -594,6 +624,9 @@ function filtrarSalida(texto) {
 - **Caché de resultados de herramientas.** Misma consulta, mismo resultado, durante un tiempo de vida (*TTL*).
 - **Procesamiento por lotes.** Para trabajos que no son en vivo, las APIs por lotes cuestan menos y quitan la presión de la demora.
 - **Mide el costo por tarea exitosa, no por llamada.**
+
+> 🧩 **Piezas para este ejercicio**
+> - Guarda con cada resultado su hora. Resta esa hora de la hora actual para obtener la antigüedad. En el límite exacto, la entrada ya venció.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -669,6 +702,9 @@ function crearCache(ttlMs, ahora) {
 - **Vigila la deriva** (*drift*). Las actualizaciones del modelo, los cambios de datos y los pedidos nuevos **cambian el comportamiento en silencio**.
 
 > 💡 **Idea:** "canario" viene de los mineros, que bajaban un canario a la mina: si el pájaro se desmayaba, había gas, y salían antes de que les pasara a ellos.
+
+> 🧩 **Piezas para este ejercicio**
+> - Revisa primero el interruptor. Para el grupo de prueba, el resto de dividir entre 100 produce un número de 0 a 99. Compararlo con el porcentaje hace que el mismo id obtenga siempre la misma decisión.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
