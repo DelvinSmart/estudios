@@ -31,6 +31,9 @@ Esta es la **clase completa**, explicada paso a paso, para estudiarla a tu ritmo
 
 > 📌 **Nota:** después del 15/11 siguieron los cambios (por ejemplo, una tarjeta "Reglas para la IA" en el panel y la portada a todo el ancho). La idea de fondo es la misma.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.map(...)` transforma cada estudio en un resultado. La plantilla recibe un pasaje y el recorrido le pasa el pasaje del estudio actual.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -111,6 +114,10 @@ GitHub Pages le dice al navegador que guarde cada página **10 minutos** (`cache
 
 > 💡 **Idea:** este mismo mapa tuvo el problema de la caché cuando lo probamos (el CSS viejo seguía cargado). Es un problema de todos los días en la web.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una expresión regular puede capturar partes con paréntesis. En `.replace(patrón, (coincidencia, grupo) => ...)`, el primer argumento es el texto completo encontrado y los siguientes son los grupos.
+> - En un patrón, `\?` busca un signo `?` literal y `?` después de un grupo lo hace opcional. La bandera `g` permite cambiar todos los archivos encontrados.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -169,6 +176,9 @@ Leída: "`esLBLA` recibe una referencia y devuelve **sí** si contiene la palabr
 > 🌎 **En la vida real:** las reglas para usar fotos de un fotógrafo: "hasta 500, no todo el álbum, no más de un cuarto de tu revista, y siempre con mi nombre". Y una impresora que **siempre** imprime el pie de página.
 
 > 🌎 **Otro ejemplo:** Como una imprenta que siempre pone el pie de página con el copyright: el autor no tiene que acordarse.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.trim().endsWith('LBLA')` ignora los espacios de las puntas y comprueba el final. Si el campo falta, usa un texto vacío antes de llamar a esos métodos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -234,6 +244,9 @@ Dos palabras importantes:
 
 > 💡 **Idea:** esta es la misma regla que sigo yo contigo: no copio texto con derechos de páginas web, y no "invento" lo que tiene que ser exacto (Tema 11, parte 14; Tema 19).
 
+> 🧩 **Piezas para este ejercicio**
+> - `CODIGOS[libro]` consulta el código con el nombre recibido. Separa la decisión sobre el versículo o rango de la construcción de la dirección.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -295,6 +308,10 @@ vf :: Con una foto tuya, eres tú quien trae el texto, igual que al pegarlo
 **900**: tres veces lo bíblico. Así el total es 1.200 y la Biblia es 300 de 1.200 = **25 %**.
 
 </details>
+
+> 🧩 **Piezas para este ejercicio**
+> - `'Capítulo 5:22-25'.split(':')[1]` da `'22-25'`. Si separas por `'-'` y conviertes a números, puedes distinguir un versículo de un rango.
+> - El rango incluye sus dos extremos. Para evaluar un límite porcentual, distingue la proporción real del entero que muestras en pantalla.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -364,6 +381,10 @@ Se pusieron **34 fuentes** en Lenguas extrañas, y **cada link se abrió** para 
 
 Es el Tema 07 otra vez: **verificar antes de afirmar**.
 
+> 🧩 **Piezas para este ejercicio**
+> - Usa un `Set` para recordar las direcciones que ya viste. `.has(url)` comprueba si la conoces y `.add(url)` la registra.
+> - `subpunto.fuentes ?? []` da una lista vacía cuando el campo falta. Conserva el orden agregando cada fuente al verla por primera vez.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -420,6 +441,10 @@ vf :: Se abrió cada link de las fuentes antes de publicarlas
 > 🌎 **En la vida real:** una canción con derechos (NA28) contra una música libre de derechos (SBLGNT). Y tenerlo dentro de la página es tener la enciclopedia en tu estante.
 
 > 🌎 **Otro ejemplo:** Como usar música libre de derechos en un video: la usas tranquilo, solo pones el crédito del músico.
+
+> 🧩 **Piezas para este ejercicio**
+> - `[desde, hasta = desde]` usa el inicio como final cuando solo se dio un versículo.
+> - `datos[libro]?.[capitulo]` permite consultar el capítulo si existe el libro. Si falta algún nivel, devuelve `undefined` y puedes detener la búsqueda.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -490,6 +515,9 @@ Leída: "si hay recuadros abiertos, espera lo que dura el cierre y después mues
 > 🌎 **Otro ejemplo:** Como la fila de un baño de un solo lugar: entra el siguiente cuando sale el anterior.
 
 **En el PDF** los pasajes salen **completos**, porque en papel no se puede tocar nada.
+
+> 🧩 **Piezas para este ejercicio**
+> - Los dos métodos pueden compartir una variable declarada afuera. `null` representa que no hay recuadro abierto. Si el id recibido coincide con el actual, vacía esa variable.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -564,6 +592,10 @@ Logos responde con **JSONP**: en vez de `fetch`, se agrega un **`<script>`** cuy
 > 🌎 **Otro ejemplo:** Como dejar tu número de teléfono en un mostrador: cuando llega tu pedido, te llaman a ti con los datos.
 
 **El riesgo:** ese servicio **no está documentado** para usarse así. Si Logos lo cambia, el botón dejaría de cargar. Es bueno decirlo en voz alta: es una **deuda técnica conocida**.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un `Map` permite usar la referencia como clave. `.has(ref)` comprueba si ya la guardaste, aunque su valor sea vacío, y `.get(ref)` lee el valor.
+> - El contador mide llamadas a `traer`. Devolver una respuesta ya guardada no suma un pedido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -663,6 +695,10 @@ Porque **no se puede leer** el texto de Lockman (CORS), pero **sí** tenemos el 
 
 </details>
 
+> 🧩 **Piezas para este ejercicio**
+> - `Math.floor(3.8)` baja a 3. Sirve para contar cuántas letras completas caben en una línea.
+> - `Math.ceil(3.2)` sube a 4. Sirve porque una línea ocupada a medias también cuenta como línea.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -734,6 +770,10 @@ Se comparó la página nueva con la publicada, **elemento por elemento**: más d
 
 > 🌎 **Otro ejemplo:** Como comparar dos fotos de una sala antes y después de reorganizar el mueble: si no se movió nada, la foto es idéntica.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.split('\n')` separa el texto por líneas y `.trim()` quita espacios de las puntas. Después puedes descartar las líneas cuyo comienzo está permitido.
+> - `\d+` reconoce uno o más dígitos. En una expresión regular, `|` permite probar un patrón u otro.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -790,6 +830,10 @@ vf :: Los `@media` pueden usar variables CSS
 
 > 🌎 **Otro ejemplo:** Como un auto con detalles de cortesía: la luz interior que se prende sola, el asiento que recuerda tu posición y el aviso de puerta abierta.
 
+> 🧩 **Piezas para este ejercicio**
+> - `Date.parse('2026-11-05')` devuelve un tiempo en milisegundos. La diferencia de dos fechas dividida por `86_400_000` da días.
+> - Puedes comprobar primero si la persona ya abrió el estudio con `.includes(estudio.id)`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -843,6 +887,10 @@ vf :: Se generan dos PDF por estudio: claro y oscuro
 > 🌎 **En la vida real:** poder usar una canción no quiere decir que alguien te mande el archivo; antes de mandar a alguien a una tienda, asegúrate de que está abierta; una camisa puede quedar bien de frente y mal de costado; no se ajusta la balanza con una sola manzana.
 
 > 🌎 **Otro ejemplo:** Como el cuaderno de errores de una obra: cada problema con lo que se aprendió, para no repetirlo.
+
+> 🧩 **Piezas para este ejercicio**
+> - Suma los anchos y las letras por separado. Si mediste 2 letras en una muestra y 10 en otra, la segunda aporta más letras al promedio.
+> - `Math.round(valor * 10) / 10` redondea a un decimal.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
