@@ -39,6 +39,9 @@ Es el mismo `??` de TypeScript, y el `?:` de Kotlin. Y el `String?` de Swift es 
 
 > 💡 **Idea:** `nil` no es `0`, ni `""`. "No sé cuántos viajes hiciste" es distinto de "hiciste 0 viajes". Por eso existe: para no confundir **nada** con **cero**.
 
+> 🧩 **Piezas para este ejercicio**
+> - `Int(texto)` puede producir un número o `nil`. `??` usa el respaldo cuando falta. `if let` te permite nombrar un valor que ya comprobaste que existe.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -109,6 +112,9 @@ let n = Int("doce")!    // 💥 Fatal error: Unexpectedly found nil while unwrap
 
 > 📌 **Nota:** en esta página, si tu código usa `!` sobre un `nil`, el programa se cae, y la prueba te dice en español "usaste ! en algo que era nil". Es el mismo error que verías en Xcode.
 
+> 🧩 **Piezas para este ejercicio**
+> - `guard let` comprueba que se pudo convertir el texto y deja el número disponible después. El bloque `else` termina temprano si falla la comprobación. Revisa el límite de litros antes de calcular.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -173,6 +179,9 @@ for app in ["Uber", "99", "inDrive"] { print(app) }
 ```
 
 Y como en Kotlin, también hay `while` para cuando no sabes cuántas vueltas vas a dar.
+
+> 🧩 **Piezas para este ejercicio**
+> - `25...` incluye 25 y todos los valores mayores. `15..<25` incluye 15 y termina antes de 25. Usa el resultado de `nivel` para decidir cuáles contar.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

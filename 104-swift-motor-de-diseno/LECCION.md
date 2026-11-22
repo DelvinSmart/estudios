@@ -43,6 +43,9 @@ Cada uno de esos valores con nombre (`Motor.Espacio.grande`, `Motor.Forma.radio`
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **la tupla**: junta varios valores en uno, sin crear un `struct`: `let hallazgo = (linea: 12, valor: 10)` y se lee `hallazgo.linea` o `hallazgo.valor`. Sirve para devolver dos cosas a la vez.
 
+> 🧩 **Piezas para este ejercicio**
+> - Divide el código en líneas antes de revisar el patrón. Una búsqueda con `.regularExpression` devuelve un rango si encuentra coincidencia. Conserva el texto de las líneas que coincidan.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -125,6 +128,9 @@ static func deApp(_ app: String) -> Color {
 
 **Probado en el simulador**, en modo claro y después en oscuro (`xcrun simctl ui <simulador> appearance dark`, o en Xcode, el botón de apariencia de la vista previa): el fondo, las tarjetas, el verde y el punto de Uber cambiaron solos, sin tocar la pantalla.
 
+> 🧩 **Piezas para este ejercicio**
+> - `>>` mueve los bits hacia la derecha. `& 0xFF` conserva los últimos ocho bits, que bastan para un canal de color. Cada canal se extrae después del desplazamiento que le corresponde.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -206,6 +212,9 @@ Es el `estilos.tarjeta` de React Native y el `Modifier` de Compose: **la forma d
 **Lo que se encontró mirando la tarjeta.** La primera versión decía, grande, **R$ 85,00**, y debajo, chico, **"4 viajes · R$ 85,00"**: el total dos veces. Ninguna prueba lo ve (los dos números estaban bien). Se arregló en la lógica, no en la pantalla: el `resumen` del diario pasó a mostrar el **promedio** ("4 viajes · promedio R$ 21,25"). La línea chica ahora dice algo nuevo.
 
 > 💡 **Idea:** en la clase 102 se encontró "1 viajes"; en la 103, "Sin viajes todavía" dos veces; hoy, el total dos veces y un número escapado del motor. **Cada pantalla nueva, mirada en el simulador, encontró algo que las pruebas no ven.** No es mala suerte: es el método.
+
+> 🧩 **Piezas para este ejercicio**
+> - La cantidad decide el texto singular o plural. Si la lista tiene algún viaje, divide la suma por la cantidad para calcular el dato de la segunda parte de la línea.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

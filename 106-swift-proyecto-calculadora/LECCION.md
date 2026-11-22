@@ -68,6 +68,9 @@ func tocar(_ teclas: String...) -> String {
 
 **Resultado:** las 43 pruebas que vinieron de las otras dos versiones pasaron **a la primera**. Incluida la del porcentaje que en Kotlin se había roto: una prueba que nace en una versión protege a las tres.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un caso de `enum` puede traer un dígito u operador como dato asociado. Usa el valor asociado al preparar el símbolo y `rawValue` para leer el texto que ya declara el operador.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -160,6 +163,9 @@ func desdeElTexto() { #expect(tocar("1", "9", ",", "9", "9", "×", "3", "=") == 
 
 > 💡 **Idea:** fíjate en cómo se trató la idea que **no** resultó cierta: se probó, no se confirmó, y no se escribió. Lo que va a una clase se prueba antes.
 
+> 🧩 **Piezas para este ejercicio**
+> - `Decimal(string:)` interpreta el precio decimal directamente a partir de sus dígitos. Si el texto no se puede leer, la inicialización devuelve `nil` y puedes elegir el respaldo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -239,6 +245,9 @@ Text(texto)
 **Lo que no cambió en ninguna:** el plan con la tabla de decisiones, la lógica separada de la pantalla, el teclado como datos, el motor de diseño, la accesibilidad y las pruebas primero. Eso es lo que sabes de verdad; el lenguaje es la herramienta.
 
 > 📌 **Nota:** ¿por qué esta calculadora no se instala en Android, y por qué existen apps solo para iPhone? Está explicado en la clase 44, en **"Para ir más lejos: ¿por qué la app de un teléfono no sirve en el otro?"**.
+
+> 🧩 **Piezas para este ejercicio**
+> - Comprueba por separado si estás esperando el segundo número y si hay un error. La salida es opcional para representar que ninguna tecla queda encendida.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -327,6 +336,9 @@ public class MiModulo: Module {
 **Por qué importa para ti:** con los tres cursos (React Native, Kotlin y Swift) puedes leer las **tres** partes de una app como Copiloto. La mayoría es TypeScript; cuando algo solo lo puede hacer el teléfono, hay un módulo nativo con su gemelo en cada sistema. Es lo que más se valora en un equipo chico: alguien que no se frena en el borde entre React Native y lo nativo.
 
 > 📌 **Nota:** el código de Copiloto es privado (clase 85): aquí se cuenta **qué hace** cada pieza y **cómo se conectan**, no sus detalles. El ejemplo de arriba es la forma general de cualquier módulo de Expo.
+
+> 🧩 **Piezas para este ejercicio**
+> - El diccionario guarda funciones por nombre. Si encuentras la función, puedes llamarla con el dato que recibió el puente. El caso en que falte la clave tiene su propia respuesta.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

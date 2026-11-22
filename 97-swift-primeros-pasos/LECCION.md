@@ -55,6 +55,9 @@ print(saludo("Delvin"))   // muestra Hola, Delvin
 | `return` | **Entrega** el resultado. |
 | `\(nombre)` | Mete el valor de `nombre` dentro del texto. |
 
+> 🧩 **Piezas para este ejercicio**
+> - El nombre que se declara antes de `:` es el parámetro. `_` deja pasar el argumento sin etiqueta al llamar. `\(nombre)` inserta el dato en el texto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -119,6 +122,9 @@ placa = "XYZ9K87"   // ✗ error: cannot assign to value: 'placa' is a 'let' con
 ```
 
 > 💡 **Idea:** en este curso, cuando Swift te diga un error en inglés, la página te lo explica en español debajo, y te deja el original (es el que vas a buscar en internet).
+
+> 🧩 **Piezas para este ejercicio**
+> - El `for` toma un viaje por vuelta. Usa `var` para el acumulador. Comprueba si la lista está vacía antes de dividir por `count`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -201,6 +207,9 @@ let resumen = "\(viajes) viajes, R$ \(total)"   // "12 viajes, R$ 117.0"
 | `"\(viajes) viajes"` | Swift |
 
 **Y un texto a número**, que puede salir mal: `Int("12")` da `12`, pero `Int("doce")` no puede. Por eso `Int("…")` no devuelve un `Int`, sino un **`Int?`**: un número **o nada** (`nil`). Es la puerta a la clase 98, y la idea más importante de Swift.
+
+> 🧩 **Piezas para este ejercicio**
+> - Convierte la cantidad a `Double` antes de multiplicar. La plantilla puede insertar un `Int` y un `Double` en el mismo texto.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

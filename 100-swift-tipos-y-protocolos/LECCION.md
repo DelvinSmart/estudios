@@ -51,6 +51,9 @@ var hoy = Contador()
 hoy.sumar()        // bien: hoy es var
 ```
 
+> 🧩 **Piezas para este ejercicio**
+> - `mutating` permite a un método de `struct` cambiar una propiedad de ese valor. Comprueba primero si alcanza. Una variable que recibe ese `struct` tiene su propio valor, mientras dos referencias a una clase pueden apuntar a la misma instancia.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -132,6 +135,9 @@ func texto(_ e: EstadoViaje) -> String {
 Esto es lo que en Kotlin hacías con una familia `sealed` (clases 64 y 96), y en TypeScript con uniones. En Swift es un `enum` y listo.
 
 > 💡 **Idea:** un `enum` así hace **imposibles** los estados raros. Con variables sueltas (`var chofer: String?`, `var cancelado: Bool`) podrías tener "cancelado y con chofer en camino" a la vez. Con el `enum`, el viaje está en **un** caso, con **sus** datos.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un caso de `enum` puede guardar datos asociados. Escribe `case let` para extraerlos en esa rama. Enumera todos los casos para que el compilador compruebe que el `switch` está completo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -218,6 +224,9 @@ extension Double {
 ```
 
 > 💡 **Idea:** con `extension` también se hace cumplir un protocolo a un tipo después: `extension Viaje: Comparable { … }`. Así el tipo queda limpio y cada habilidad va en su propio bloque.
+
+> 🧩 **Piezas para este ejercicio**
+> - El protocolo garantiza que cada elemento tenga `total`. Por eso el recorrido puede leer esa propiedad sin conocer el tipo concreto. En una extensión de `Double`, `self` es el número sobre el que llamaste la propiedad.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -42,6 +42,9 @@ saludo("Ana")
 
 > 💡 **Idea:** si una función tiene **una sola línea** que devuelve algo, el `return` se puede omitir (como en `saludo` de arriba). Es el `= expresión` de Kotlin.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una declaración puede dar al parámetro una etiqueta externa y un nombre interno. En `de origen: String`, quien llama escribe `de:` y dentro de la función lees `origen`. El porcentaje es una parte sobre 100.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -106,6 +109,9 @@ Button("Guardar") {        // la closure es lo que pasa al tocar el botón
 ```
 
 Es la misma idea que el `prueba("nombre") { … }` de los ejercicios de este curso: el `{ … }` es una closure que se corre después.
+
+> 🧩 **Piezas para este ejercicio**
+> - `(Double) -> Double` describe una función que recibe un número y devuelve otro. Dentro del recorrido `cambio(valor)` ejecuta esa función. `$0` es el primer argumento en una closure corta.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -177,6 +183,9 @@ let porApp = ["Uber": 120.5, "99": 80]
 porApp["inDrive"] ?? 0                 // 0: no estaba
 porApp["Uber", default: 0]             // 120.5: lo mismo, con su forma propia
 ```
+
+> 🧩 **Piezas para este ejercicio**
+> - Un diccionario usa una clave para cada app. El subíndice con `default: 0` permite sumar aunque sea el primer viaje de esa app. `Set` conserva una sola copia de cada nombre.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

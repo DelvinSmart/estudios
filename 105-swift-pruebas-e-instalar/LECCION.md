@@ -59,6 +59,9 @@ func promedioNoTotal() {
 
 **Resultado:** `Test run with 10 tests in 3 suites passed`, en el simulador del iPhone, en unos 30 segundos (casi todo es armar la app; las pruebas tardan 0,02 s).
 
+> 🧩 **Piezas para este ejercicio**
+> - Lee los resultados esperados como ejemplos de las ramas. El caso vacío evita dividir por cero. El promedio utiliza tanto la suma como la cantidad de valores.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -122,6 +125,9 @@ func valoresMalos(valor: Double) {
 Es el `test.each` de Jest y el `@pytest.mark.parametrize` de pytest. Sirve para los **bordes**: el 0, un negativo, uno apenas negativo (`-0.01`). Los errores viven en los bordes.
 
 > 💡 **Idea:** romper a propósito no se hace en cada prueba, todos los días. Se hace **cuando escribes una prueba nueva** y no la viste fallar nunca: si escribiste la prueba después del código y pasó a la primera, rómpelo una vez para ver que avisa.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una prueba de tabla repite la misma comprobación con entradas distintas. Compara qué entradas deben cambiar la lista y cuáles deben dejarla como estaba.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -187,6 +193,9 @@ Con una **cuenta gratuita** de Apple (la misma del iPhone) puedes instalar tu ap
 Para aprender y para tu propio uso, la gratuita alcanza: cada 7 días, la conectas y tocas ▶ otra vez. Pagar hace falta recién para publicar (como la cuenta de Google Play de la clase 20, que es un pago único de US$ 25).
 
 > 📌 **Nota:** en esta clase, la app se probó en el **simulador**. El iPhone de verdad no estaba conectado a la Mac en ese momento, así que la lista de arriba es la de Apple, sin un caso real contado. Cuando la instales en el tuyo, anota qué pasó: eso es material para el `PROGRESO.md`.
+
+> 🧩 **Piezas para este ejercicio**
+> - `dateComponents` devuelve componentes opcionales. `?? 0` cubre la ausencia de días. `max(0, restante)` mantiene un mínimo de cero antes de escoger el mensaje.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

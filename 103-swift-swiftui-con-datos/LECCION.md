@@ -55,6 +55,9 @@ NavigationStack {
 
 **Lo que dijo el compilador.** La primera vez no compiló: `initializer 'init(value:label:)' requires that 'Viaje' conform to 'Hashable'`. Para usar un viaje como destino, SwiftUI necesita poder compararlo y guardarlo en un conjunto: el protocolo **`Hashable`** de la clase 100. Se agregó, y listo. Leer el error en inglés te dice exactamente qué protocolo falta.
 
+> 🧩 **Piezas para este ejercicio**
+> - `IndexSet` guarda posiciones. Al borrar una posición, se corren las de la derecha. Empezar por las mayores mantiene correctos los índices que faltan por borrar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -140,6 +143,9 @@ struct FormularioViaje: View {
 Es el `Context` de React (clase 59): en vez de pasar el diario de pantalla en pantalla, se pone **en el entorno** y cada una lo toma.
 
 **El formulario sube desde abajo** con `.sheet(isPresented: $anotando)`: cuando `anotando` pasa a `true`, aparece; con `cerrar()`, se va.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una instancia de `Diario` puede compartirse entre pantallas. Después de validar y agregar, envía la lista actual al guardado. El total se calcula leyendo los valores de esa misma lista.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -251,6 +257,9 @@ Tres decisiones, cada una por una razón:
 - **Probar sin teléfono:** en las pruebas y en la vista previa se usa `GuardadoEnMemoria`. Mismo diario, otro guardado.
 
 **Lo que se encontró mirándola.** Con la app vacía, decía **"Sin viajes todavía" dos veces**: arriba, como título de la lista, y en el centro, como aviso grande. Ninguna prueba lo ve: las dos cosas eran correctas por separado. Se arregló en la pantalla: sin viajes, el título no se muestra. Y la prueba que más importa se hizo a mano en el simulador: **cerrar la app del todo y volver a abrirla**. El viaje seguía ahí.
+
+> 🧩 **Piezas para este ejercicio**
+> - `JSONEncoder` produce `Data` y `JSONDecoder` necesita el tipo de lo que va a recuperar. `try?` da `nil` si falla, y `??` permite elegir el respaldo adecuado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

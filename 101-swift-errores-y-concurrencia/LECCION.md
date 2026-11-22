@@ -42,6 +42,9 @@ Es el `try`/`catch` de TypeScript y de Kotlin, con dos diferencias que ayudan:
 - La palabra `try` aparece **en la línea exacta** que puede fallar: leyendo el código, sabes dónde mirar.
 - `throws` está **en la firma** de la función: no te enteras recién cuando la app ya se cayó.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una función `throws` puede salir con `throw`. Quien la llama usa `try` para reconocer esa posibilidad. En `catch`, distingue los casos del error para elegir el mensaje.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -121,6 +124,9 @@ let seguro = (try? validar(km: 0, valor: 30)) ?? 0 // 0 si falló: el ?? de la c
 **`try!` es el `!` de los errores** (clase 98): si falla, la app se cierra. Misma regla: no lo uses salvo que puedas explicar por qué **nunca** va a fallar.
 
 > 💡 **Idea:** usa `do-catch` cuando la persona **necesita saber** qué pasó ("escribe los km"). Usa `try?` cuando el error **no cambia nada** para ella (por ejemplo, una foto de perfil que no se pudo bajar: se muestra la de siempre).
+
+> 🧩 **Piezas para este ejercicio**
+> - `try?` convierte un resultado fallido en `nil`. `compactMap` transforma cada elemento y deja fuera los resultados que sean `nil`. Después puedes sumar los números restantes.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -209,6 +215,9 @@ Button("Actualizar") {
 ```
 
 > 📌 **Nota:** Swift también tiene los **`actor`**: tipos que no dejan que dos tareas cambien sus datos a la vez (el problema clásico de dos cajeros sacando del mismo saldo al mismo tiempo). Lo importante para empezar: SwiftUI dibuja la pantalla desde un lugar que se llama **`@MainActor`**, y Swift te avisa si intentas cambiar la pantalla desde otro lado.
+
+> 🧩 **Piezas para este ejercicio**
+> - Declara las dos variables con `async let` antes de esperar. Cada declaración inicia una tarea hija. Usa `await` al recoger los resultados necesarios para la suma.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

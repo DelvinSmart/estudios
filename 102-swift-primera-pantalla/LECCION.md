@@ -50,6 +50,9 @@ Fíjate: la **app** es un `struct`, la **pantalla** es un `struct` (clase 100). 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`.count` y `.isEmpty`**: `viajes.count` dice cuántos elementos tiene la lista; `viajes.isEmpty` es `true` si no tiene ninguno. Se prefiere `isEmpty` a preguntar `count == 0`: se lee mejor.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una propiedad calculada puede obtener el resultado a partir de la lista cada vez que se lee. `reduce(0, +)` empieza en cero y suma cada viaje. `popLast()` permite quitar el último sin fallar cuando no hay viajes.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -141,6 +144,9 @@ struct PantallaJornada: View {
 
 **`Button("Deshacer") { jornada.deshacer() }`** es la closure al final de la clase 99: lo que pasa al tocarlo. Y `.disabled(jornada.viajes.isEmpty)` lo apaga cuando no hay nada que deshacer: el botón **dice la verdad** sobre lo que se puede hacer.
 
+> 🧩 **Piezas para este ejercicio**
+> - `isEmpty` comprueba si una lista está vacía. Separa esa decisión del formato del dinero. `%.2f` pide dos cifras decimales en el texto de salida.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -211,6 +217,9 @@ struct PantallaJornada: View {
 **"1 viajes"**. Ninguna cuenta estaba mal: el error era de **texto**. La pantalla tenía `Text("\(jornada.viajes.count) viajes · …")`. El arreglo **no** fue en la pantalla, sino en la lógica: un `resumen` en `Jornada` que dice "1 viaje" o "2 viajes", y la pantalla solo lo muestra con `Text(jornada.resumen)`. Así, ese texto **se puede probar sin abrir el simulador** (es el ejercicio de esta parte, y en la clase 105 va a tener su prueba en Xcode).
 
 > 💡 **Idea:** cada vez que algo de la pantalla tiene una regla (el plural, el formato de la plata, cuándo se apaga un botón), sácalo a la lógica. La pantalla que solo muestra es fácil de leer; la lógica sin pantalla es fácil de probar. Es lo mismo que en la calculadora (clases 94 a 96).
+
+> 🧩 **Piezas para este ejercicio**
+> - Comprueba primero si la cantidad es cero o uno. Para más viajes, inserta la cantidad en el plural. El resumen decide además si corresponde mostrar el promedio.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
