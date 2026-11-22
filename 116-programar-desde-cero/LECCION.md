@@ -6,9 +6,72 @@
 
 ## Parte 1. ¿Qué es programar, de verdad?
 
-Vas a calcular cuánto cuesta echar 10 litros de combustible. El precio por litro está en una caja con nombre: `precioPorLitro`. El asterisco `*` multiplica y `console.log` muestra el resultado debajo del editor.
+> 🌎 **En la vida real:** imagina que le explicas a alguien, por teléfono, cómo hacer un sándwich, pero esa persona **nunca vio comida** y hace todo al pie de la letra. Si dices "pon el jamón", lo pone sobre la mesa, no sobre el pan, porque no lo dijiste. Esa persona es la computadora.
 
-Antes de tocar **▶ probar**, predice cuánto pagarías si cada litro cuesta 6. Cambia el precio de 5 a 6, ejecuta el código y compara tu predicción con la salida. Después prueba otro precio y explica por qué cambió el total. La prueba seguirá esperando 60, pero la consola mostrará el resultado de tu experimento. Puedes hacer todos los ejercicios de este proyecto sin cuenta.
+> 🌎 **Otro ejemplo:** es como las instrucciones de un mueble para armar: paso 1, paso 2, paso 3. Si cambias el orden, el mueble queda mal.
+
+**Programar es escribir instrucciones para que una máquina las siga.** Nada más, y nada menos. La máquina es rapidísima y nunca se cansa, pero es **tonta**: hace lo que dice la instrucción, aunque sea un error. Por eso programar no es ser un genio de las matemáticas: es aprender a **pensar en pasos** y a ser **ordenado y claro**.
+
+Tres ideas para toda la vida:
+
+- La máquina hace **exactamente** lo que le dices, no lo que **querías** decir.
+- El **orden** importa: primero esto, después aquello.
+- Equivocarse es **parte normal** del trabajo, no una señal de que no sirves. Hasta el mejor programador se equivoca todos los días; lo que cambia es que aprende a encontrar y arreglar el error.
+
+> 💡 **Idea:** si alguna vez seguiste una receta, armaste un mueble o explicaste cómo llegar a tu casa, ya pensaste "como programador". Ahora vas a aprender a escribirlo en un idioma que la máquina entiende.
+
+### Una instrucción de verdad, palabra por palabra
+
+Imagina que vas a echar **10 litros** de combustible y cada litro cuesta **5**. A mano harías: 10 × 5 = 50. Ahora le vas a enseñar esa misma cuenta a la máquina. Como ella no recuerda nada por su cuenta, lo primero es **guardar el precio** en un lugar con nombre.
+
+> 🌎 **En la vida real:** es como anotar el precio en una cajita y pegarle una etiqueta que diga «precio por litro». Cuando lo necesitas, no lo vuelves a preguntar: miras la cajita con ese nombre.
+
+Así se escribe en un lenguaje llamado JavaScript:
+
+```js
+const precioPorLitro = 5;
+```
+
+Se ve raro, pero son solo cinco piezas:
+
+| Pieza | Qué significa |
+|---|---|
+| `const` | Viene de **constante**. Le dice a la máquina: «crea una cajita para guardar un dato». |
+| `precioPorLitro` | La **etiqueta** de la cajita. La eliges tú. Va sin espacios para que la máquina la lea como un solo nombre. |
+| `=` | **Guarda esto adentro.** Aquí no es el «igual» de matemáticas. |
+| `5` | El **dato** que se guarda. |
+| `;` | El **punto final** de la instrucción. |
+
+Léelo en español: **«Crea una cajita llamada precioPorLitro y guarda un 5.»**
+
+> 📖 **Palabra nueva: "variable".** Así se le dice a una cajita con nombre que guarda un dato.
+
+> ⚠️ **¿Si es «constante», por qué la voy a cambiar?** Buena pregunta. Tú eres quien escribe la receta: antes de ejecutarla puedes borrar el 5 y escribir un 6. Lo que `const` impide es que el **programa**, mientras está corriendo, le cambie el valor a esa cajita.
+
+### Las cuatro instrucciones juntas
+
+Ahora mira el programa completo. La máquina lo lee **de arriba hacia abajo**, una línea a la vez. Lo que va después de `//` es una nota para las personas, y la máquina la ignora.
+
+```js
+const litros = 10;                       // guarda 10 en la cajita litros
+const precioPorLitro = 5;                // guarda 5 en la cajita precioPorLitro
+const total = litros * precioPorLitro;   // multiplica y guarda el resultado en total
+console.log(total);                      // muestra lo que hay en total
+```
+
+- **Línea 1:** guarda cuántos litros vas a echar.
+- **Línea 2:** guarda cuánto cuesta cada litro.
+- **Línea 3:** el asterisco `*` significa **multiplicar**, porque el teclado no tiene ×. La máquina busca lo que hay en las dos cajitas, hace 10 × 5 y guarda 50 en una cajita nueva llamada `total`.
+- **Línea 4:** `console.log` significa **«muestra esto en la pantalla»**. Lo que va dentro de los paréntesis es lo que se muestra. Sin esta línea, la máquina haría la cuenta, pero tú no verías el resultado.
+
+### Ahora tú: predice, cambia y prueba
+
+1. **Predice:** si cada litro cuesta 6, ¿cuánto pagarías por 10 litros? Piénsalo antes de tocar nada.
+2. **Cambia:** en la línea 2 del recuadro de abajo, borra el `5` y escribe `6`.
+3. **Prueba:** toca **▶ probar** y compara el resultado con lo que predijiste.
+4. **Juega:** pon otro precio y explica por qué cambió el total. La revisión automática seguirá esperando 60 y marcará error, pero debajo verás el resultado de tu experimento.
+
+No necesitas una cuenta para hacer los ejercicios.
 
 ```ejercicio
 titulo: Calcula tu primer gasto de combustible
@@ -29,19 +92,7 @@ const total = litros * precioPorLitro;
 console.log(total);
 ```
 
-> 🌎 **En la vida real:** imagina que le explicas a alguien, por teléfono, cómo hacer un sándwich, pero esa persona **nunca vio comida** y hace todo al pie de la letra. Si dices "pon el jamón", lo pone sobre la mesa, no sobre el pan, porque no lo dijiste. Esa persona es la computadora.
-
-> 🌎 **Otro ejemplo:** es como las instrucciones de un mueble para armar: paso 1, paso 2, paso 3. Si cambias el orden, el mueble queda mal.
-
-**Programar es escribir instrucciones para que una máquina las siga.** Nada más, y nada menos. La máquina es rapidísima y nunca se cansa, pero es **tonta**: hace lo que dice la instrucción, aunque sea un error. Por eso programar no es ser un genio de las matemáticas: es aprender a **pensar en pasos** y a ser **ordenado y claro**.
-
-Tres ideas para toda la vida:
-
-- La máquina hace **exactamente** lo que le dices, no lo que **querías** decir.
-- El **orden** importa: primero esto, después aquello.
-- Equivocarse es **parte normal** del trabajo, no una señal de que no sirves. Hasta el mejor programador se equivoca todos los días; lo que cambia es que aprende a encontrar y arreglar el error.
-
-> 💡 **Idea:** si alguna vez seguiste una receta, armaste un mueble o explicaste cómo llegar a tu casa, ya pensaste "como programador". Ahora vas a aprender a escribirlo en un idioma que la máquina entiende.
+> 🎙️ **El profesor dice:** {{alumno}}, acabas de cambiar un dato y la máquina rehízo toda la cuenta sin que se lo repitieras. Eso es programar: dejar las instrucciones bien escritas para que la máquina haga el trabajo.
 
 ## Parte 2. Las primeras palabras (sin miedo)
 
@@ -85,7 +136,56 @@ Eso quiere decir: "corre las pruebas de este proyecto". La máquina las corre y 
 
 > 🌎 **En la vida real:** nadie aprende a manejar leyendo sobre carros. Te subes y arrancas, despacio. Aquí igual: vas a escribir código ya, en esta misma página, sin instalar nada.
 
-Abajo hay una cajita. Vas a completar una **función** (una instrucción con nombre) que salude a una persona. No te preocupes si no entiendes cada símbolo: fíjate en la forma y prueba. Cuando toques **▶ probar**, la máquina revisa tu código y te dice si pasó.
+Ya leíste código y cambiaste un número. Ahora vas a escribirlo tú, en esta misma página y sin instalar nada. Primero repasamos las cajitas, después aprendes a crear una **función** y al final la escribes.
+
+### Las cajitas con nombre: variables
+
+> 🌎 **En la vida real:** en la cocina guardas el azúcar en un frasco con la etiqueta "azúcar". Cuando la receta dice "dos cucharadas de azúcar", no buscas por toda la cocina: vas al frasco con ese nombre.
+
+Una **variable** es eso: una cajita con un nombre, donde guardas un dato para usarlo después.
+
+```js
+const litros = 40;
+const precioPorLitro = 5;
+const total = litros * precioPorLitro;   // 200
+```
+
+- `const` crea una cajita. Mientras el programa corre, su valor **no cambia**. Tú sí puedes editar el código antes de ejecutarlo.
+- `litros` es el **nombre**. Lo eliges tú, y conviene que diga qué guarda.
+- `=` aquí **no** es "igual" como en matemáticas: quiere decir **guardar**. "En la cajita `litros`, guarda 40".
+- `*` es multiplicar (el teclado no tiene ×). `+` suma, `-` resta y `/` divide.
+- Lo que va después de `//` es un **comentario**: una nota para las personas. La máquina lo ignora.
+
+> 💡 **Idea:** si mañana el litro cuesta 6, cambias **un solo número** (`precioPorLitro`) y el total se recalcula solo. Para eso sirven los nombres.
+
+### Las funciones: una máquina con nombre
+
+> 🌎 **En la vida real:** una función es como una licuadora. **Le metes** fruta, **hace** su trabajo y **te devuelve** el jugo. No tienes que explicarle cómo licuar cada vez: solo la usas.
+
+Esta función recibe un número y devuelve el doble:
+
+```js
+function doble(numero) {
+  return numero * 2;
+}
+
+console.log(doble(4));   // muestra 8
+```
+
+| Pieza | Qué significa |
+|---|---|
+| `function` | «Voy a crear una función». |
+| `doble` | El **nombre** de la función. Lo eliges tú. |
+| `(numero)` | Lo que la función **recibe**, como la fruta de la licuadora. A esta cajita de entrada se le llama **parámetro**. |
+| `{ }` | Entre las llaves va el **trabajo** que hace. |
+| `return` | **Devuelve** este resultado a quien usó la función. Es el jugo que sale. |
+| `doble(4)` | **Usa** la función y le entrega un 4. Dentro, `numero` vale 4. |
+
+Crear la función es como comprar la licuadora: todavía no hizo nada. Trabaja cuando la **usas**, escribiendo su nombre con paréntesis.
+
+En el próximo ejercicio vas a trabajar con **texto**. El texto va entre comillas, como `'Hola, '`, para que la máquina no lo confunda con el nombre de una cajita. El signo `+` sirve para **pegar** textos: `'Hola, ' + 'Ana'` da `'Hola, Ana'`.
+
+Cuando toques **▶ probar**, la máquina revisa tu código y te dice si pasó.
 
 ✍️ **Ahora escribes tú:**
 
@@ -108,26 +208,6 @@ function saludar(nombre) {
 ```
 
 > 🎙️ **El profesor dice:** si te salió en verde, acabas de programar. Si te salió en rojo, lee el mensaje, arregla y vuelve a probar: **eso también es programar**, y es lo que hacemos todo el día.
-
-### Las cajitas con nombre: variables
-
-> 🌎 **En la vida real:** en la cocina guardas el azúcar en un frasco con la etiqueta "azúcar". Cuando la receta dice "dos cucharadas de azúcar", no buscas por toda la cocina: vas al frasco con ese nombre.
-
-Una **variable** es eso: una cajita con un nombre, donde guardas un dato para usarlo después.
-
-```js
-const litros = 40;
-const precioPorLitro = 5;
-const total = litros * precioPorLitro;   // 200
-```
-
-- `const` quiere decir "crea una cajita que no va a cambiar".
-- `litros` es el **nombre**. Lo eliges tú, y conviene que diga qué guarda.
-- `=` aquí **no** es "igual" como en matemáticas: quiere decir **guardar**. "En la cajita `litros`, guarda 40".
-- `*` es multiplicar (el teclado no tiene ×). `+` suma, `-` resta y `/` divide.
-- Lo que va después de `//` es un **comentario**: una nota para las personas. La máquina lo ignora.
-
-> 💡 **Idea:** si mañana el litro cuesta 6, cambias **un solo número** (`precioPorLitro`) y el total se recalcula solo. Para eso sirven los nombres.
 
 ✍️ **Ahora escribes tú:**
 
@@ -197,6 +277,27 @@ Dos ideas que te van a ahorrar muchos errores:
 2. **Piensa siempre los dos caminos.** ¿Qué pasa si **sí**? ¿Y si **no**? Muchos errores de principiante son por olvidar el "si no": el programa funciona cuando todo va bien, pero no sabe qué hacer cuando algo falta.
 
 > 💡 **Idea:** cuando una decisión tiene **varios** casos (rojo, amarillo, verde), se encadenan: `si… si no, si… si no…`. Lo verás a fondo, con código de verdad, en [Decisiones y ciclos](../46-js-decisiones-y-ciclos/LECCION.md) (la clase 02 del curso de JavaScript).
+
+### Cómo se escribe una decisión
+
+```js
+function semaforo(enRojo) {
+  if (enRojo) {
+    return 'detente';
+  } else {
+    return 'avanza';
+  }
+}
+
+console.log(semaforo(true));    // muestra detente
+console.log(semaforo(false));   // muestra avanza
+```
+
+- `if (enRojo)` pregunta: **«¿está en rojo?»**. La pregunta va entre paréntesis.
+- `true` significa **sí** y `false` significa **no**. Así responde la máquina a una pregunta.
+- Las primeras llaves `{ }` son lo que se hace si la respuesta es **sí**.
+- `else` significa **«si no»**, y sus llaves son lo que se hace si la respuesta es **no**.
+- La máquina toma **un solo camino**, nunca los dos.
 
 ✍️ **Ahora escribes tú:**
 
