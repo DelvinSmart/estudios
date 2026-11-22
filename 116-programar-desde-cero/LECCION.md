@@ -26,7 +26,9 @@ Imagina que vas a echar **10 litros** de combustible y cada litro cuesta **5**. 
 
 > 🌎 **En la vida real:** es como anotar el precio en una cajita y pegarle una etiqueta que diga «precio por litro». Cuando lo necesitas, no lo vuelves a preguntar: miras la cajita con ese nombre.
 
-Así se escribe en un lenguaje llamado JavaScript:
+> 📖 **Palabra nueva: variable.** Es esa cajita con nombre que guarda un dato. Aquí la variable se llama `precioPorLitro` y va a guardar el número `5`.
+
+Ahora veamos la instrucción que crea esa variable y le da su primer valor. Así se escribe en un lenguaje llamado JavaScript:
 
 ```js
 const precioPorLitro = 5;
@@ -36,17 +38,13 @@ Se ve raro, pero son solo cinco piezas:
 
 | Pieza | Qué significa |
 |---|---|
-| `const` | Viene de **constante**. Le dice a la máquina: «crea una cajita para guardar un dato». |
+| `const` | Crea la variable. Mientras el programa corre, ese nombre sigue teniendo el valor que le diste al principio. |
 | `precioPorLitro` | La **etiqueta** de la cajita. La eliges tú. Va sin espacios para que la máquina la lea como un solo nombre. |
 | `=` | **Guarda esto adentro.** Aquí no es el «igual» de matemáticas. |
 | `5` | El **dato** que se guarda. |
 | `;` | El **punto final** de la instrucción. |
 
-Léelo en español: **«Crea una cajita llamada precioPorLitro y guarda un 5.»**
-
-> 📖 **Palabra nueva: "variable".** Así se le dice a una cajita con nombre que guarda un dato.
-
-> ⚠️ **¿Si es «constante», por qué la voy a cambiar?** Buena pregunta. Tú eres quien escribe la receta: antes de ejecutarla puedes borrar el 5 y escribir un 6. Lo que `const` impide es que el **programa**, mientras está corriendo, le cambie el valor a esa cajita.
+Léelo en español: **«Crea la variable precioPorLitro con el valor 5 para esta ejecución.»**
 
 ### Las cuatro instrucciones juntas
 
@@ -68,6 +66,7 @@ console.log(total);                      // muestra lo que hay en total
 
 1. **Predice:** si cada litro cuesta 6, ¿cuánto pagarías por 10 litros? Piénsalo antes de tocar nada.
 2. **Cambia:** en la línea 2 del recuadro de abajo, borra el `5` y escribe `6`.
+   Puedes editar ese número porque estás preparando otra ejecución. Cuando toques **▶ probar**, el programa volverá a empezar y creará `precioPorLitro` con el valor que escribiste. Durante esa ejecución, `const` impide que el programa le asigne otro valor.
 3. **Prueba:** toca **▶ probar** y compara el resultado con lo que predijiste.
 4. **Juega:** pon otro precio y explica por qué cambió el total. La revisión automática seguirá esperando 60 y marcará error, pero debajo verás el resultado de tu experimento.
 

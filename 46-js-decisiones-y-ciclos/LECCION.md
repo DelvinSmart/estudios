@@ -23,7 +23,9 @@ if (ganancia >= 250) {
 }
 ```
 
-Las llaves `{ }` marcan el bloque (en Python era la sangría).
+Las llaves `{ }` marcan qué instrucciones pertenecen a cada caso. `>=` significa «mayor o igual que». JavaScript revisa las condiciones de arriba hacia abajo y ejecuta el primer caso que se cumple. Una ganancia de 300 cumple ambas comparaciones del ejemplo, así que importa cuál va primero.
+
+Aquí usamos `console.log` para mostrar el mensaje. En el ejercicio, usa `return` para entregarlo a quien llamó a la función.
 
 > 🌎 **En la vida real:** es como clasificar la ropa sucia: cada prenda va a una sola pila.
 
@@ -95,7 +97,7 @@ const propina = viaje.propina ?? 0;             // solo si es null o undefined u
 esPremium && mostrarInsignia();                  // ejecuta solo si esPremium es verdadero
 ```
 
-`??` es mejor que `||` cuando `0` o `''` son valores válidos.
+Elige según lo que quieras conservar. `0 || 10` da `10`, porque `||` toma el valor de la derecha cuando el de la izquierda cuenta como falso. `0 ?? 10` da `0`, porque `??` solo toma el valor de la derecha cuando el de la izquierda es `null` o `undefined`.
 
 > 🌎 **En la vida real:** `??` es "si no me dijiste nada, pongo esto"; `||` es "si me dijiste algo vacío, también pongo esto".
 
@@ -104,7 +106,7 @@ esPremium && mostrarInsignia();                  // ejecuta solo si esPremium es
 ### ?. : preguntar sin romper
 
 ```js
-const ciudad = usuario?.direccion?.ciudad;   // si algo en el camino no existe, da undefined en vez de error
+const ciudad = usuario?.direccion?.ciudad;   // si usuario o direccion es null o undefined, el resultado es undefined
 ```
 
 > 🌎 **En la vida real:** es como preguntar "¿hay alguien en casa? ¿y está en la cocina?" sin tumbar la puerta.
@@ -184,6 +186,8 @@ while (ahorro < 1000) {
 }
 ```
 
+El `while` comprueba su condición **antes** de cada vuelta. Si la meta ya está alcanzada al empezar, el cuerpo se ejecuta cero veces. `ahorro += 150` suma 150 a lo que llevas y `meses++` aumenta en uno el contador de meses.
+
 `break` sale del ciclo; `continue` pasa a la siguiente vuelta. Cuidado con los ciclos que nunca terminan (el laboratorio los corta a los 3 segundos).
 
 > 🌎 **En la vida real:** el `for` clásico es "da 7 vueltas a la pista"; el `while` es "corre hasta que te canses".
@@ -259,7 +263,7 @@ function tarifaPorApp(app) {
 }
 ```
 
-Si no usas `return`, cada `case` necesita `break`, o sigue de largo al siguiente. Muchas veces un **objeto** es más claro: `const tarifas = { Uber: 1.9, '99': 1.8 }; tarifas[app] ?? 2.0`.
+Cada `case` marca un valor que puede coincidir con `app`. `default` cubre los demás valores. En el ejemplo, `return` devuelve la tarifa y da por terminada la función. Si un caso sigue ejecutándose sin `return` ni `break`, entra también en el siguiente. Muchas veces un **objeto** es más claro: `const tarifas = { Uber: 1.9, '99': 1.8 }; tarifas[app] ?? 2.0`.
 
 > 🌎 **En la vida real:** olvidar el `break` es como una tobogán sin freno: sigues bajando al siguiente caso.
 
