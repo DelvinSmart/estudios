@@ -169,6 +169,13 @@ const conocidas = propinas.filter((p) => p !== null);   // [10, 0]
 const promedio = (10 + 0) / conocidas.length;           // 5   → el promedio real de los viajes terminados
 ```
 
+Hay varias piezas nuevas. Léelas así:
+
+- `(number | null)[]`: los corchetes `[]` significan **lista**. Es una lista donde cada dato es un número **o** `null`.
+- `propinas.filter(...)`: **filtra** la lista y deja solo los datos que cumplen una condición, como separar las monedas buenas de las rotas.
+- `(p) => p !== null`: es la condición. Se lee: «toma cada dato, llámalo `p`, y déjalo solo si **no es** `null`». La flecha `=>` crea una función corta, y `!==` significa **«es distinto de»**.
+- `conocidas.length`: dice **cuántos datos** tiene la lista. Aquí, 2.
+
 Si confundes `null` con `0`, **la cuenta sale mal** y tomas decisiones con un número falso. Por eso existe `null`: para decir "esto no se sabe todavía" sin inventar un número.
 
 **TypeScript te obliga a pensarlo.** Si una caja es `number | null` ("número, o nada"), TypeScript **no te deja** usarla como número sin revisar antes:
@@ -183,6 +190,10 @@ if (propina !== null) {
 }
 const texto = propina ?? 'todavía no se sabe';   // ✅ si es null, muestra otra cosa
 ```
+
+- `propina.toFixed(2)` muestra el número con **dos decimales**: `10` se ve como `'10.00'`. Si `propina` es `null`, no hay número que mostrar, y por eso TypeScript avisa.
+- `if (propina !== null) { ... }` significa: «**si** la propina no es `null`, haz lo que está entre llaves».
+- `??` significa **«y si no hay, usa esto»**. `propina ?? 'todavía no se sabe'` da la propina; si es `null`, da ese texto.
 
 Ese aviso es lo que evita que la app de Copiloto se rompa al mostrar una propina que no existe.
 
@@ -238,6 +249,12 @@ Cuando alguien **no escribe nada** en una casilla opcional, el programa puede gu
 const nota = textoEscrito.trim() === '' ? null : textoEscrito.trim();
 ```
 
+Esa línea parece difícil, pero es una pregunta con dos respuestas:
+
+- `textoEscrito.trim()` quita los espacios del principio y del final.
+- `=== ''` pregunta: **«¿quedó exactamente vacío?»**. Tres signos `=` **comparan**; uno solo **guarda**.
+- `pregunta ? siSí : siNo` elige entre dos valores. Si quedó vacío, guarda `null`; si no, guarda el texto limpio.
+
 Y en TypeScript lo vas a ver de dos formas:
 
 ```ts
@@ -248,6 +265,9 @@ interface Gasto {
 }
 ```
 
+- `interface Gasto { ... }` es como el **molde de un formulario**: dice qué datos tiene un gasto y de qué tipo es cada uno. No guarda ningún gasto todavía.
+- `foto?: string`: el signo `?` después del nombre significa que ese dato es **opcional**, así que puede no venir.
+
 **En Copiloto:** al registrar un gasto, la **nota** es opcional. Si no escribes nada, se guarda `null` ("no dejó nota"); si escribes "lavado completo", se guarda ese texto. Cuando la app muestra el gasto, revisa primero: si la nota es `null`, no dibuja la línea de la nota.
 
 **La regla para recordarlo:** `null` = **"pregunté y no hay respuesta"**. Una casilla opcional en blanco es `null`. Pero un **0 que la persona escribió** (por ejemplo, "propina: 0") **sí es una respuesta**: es un número.
@@ -257,6 +277,19 @@ interface Gasto {
 > 🌎 **Otro ejemplo:** al registrarte en una app de transporte, "segundo teléfono (opcional)". Si no lo pones, la app guarda `null` y nunca intenta llamarlo. Si guardara `''`, podría intentar marcar un número vacío y fallar.
 
 **Ahora sí, a practicar.** Ya viste todo lo de esta parte (los tipos y `null` a fondo). Responde las tres prácticas:
+
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **Poner el tipo:** va después del nombre, con dos puntos: `const ciudad: string = 'Blumenau';`.
+> - **Lista de textos:** se escribe `string[]`. Por ejemplo, `const colores: string[] = ['rojo', 'plata'];`.
+> - **Una función es una máquina:** recibe datos, hace un trabajo y devuelve un resultado. En la parte 4 la verás pieza por pieza. Este modelo recibe dos números y devuelve su suma:
+>
+> ```ts
+> function sumar(a: number, b: number): number {
+>   return a + b;
+> }
+> ```
+>
+> Los tipos de `a` y `b` dicen qué recibe. El `: number` después del paréntesis dice qué devuelve. `return` entrega el resultado. Para dividir se usa `/`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -433,6 +466,8 @@ Un **objeto** guarda **varios datos de una misma cosa**, cada uno con su nombre.
 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`.split()` y `.join()`**: `texto.split(' ')` corta un texto donde hay un espacio y te da una lista: `'hola mundo'.split(' ')` → `['hola', 'mundo']`. `.join(' ')` hace lo contrario: une la lista en un solo texto.
+> - **`.length`**: dice cuántos elementos tiene una lista. `['Taxi', 'Bom'].length` da `2`.
+> - **Devolver un objeto:** `return { cabe: true, palabras: 2 };` entrega dos datos juntos, cada uno con su nombre.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -860,6 +895,7 @@ Y, como es una regla de dinero, agregarías una prueba para `'deliveries'`.
 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`.reduce()`**: recorre una lista y va juntando un resultado. `[10, 20, 5].reduce((suma, x) => suma + x, 0)` empieza en `0` y en cada vuelta suma el siguiente: da `35`. El `0` del final es el valor con que empieza.
+> - **El último de una lista:** como las posiciones empiezan en 0, el último está en `lista[lista.length - 1]`. En una lista de 3, es la posición 2.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -957,6 +993,14 @@ Apliquemos los cuatro pasos:
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`.split(/\s+/)`** corta el texto en cada grupo de espacios.
+> - **`.filter(Boolean)`** quita de la lista los pedazos vacíos.
+> - **`.slice(0, 2)`** toma los **dos primeros** caracteres de un texto: `'Uber'.slice(0, 2)` da `'Ub'`.
+> - **`.toUpperCase()`** pasa el texto a **mayúsculas**.
+> - **`palabras[0][0]`** es la primera letra de la primera palabra. El primer `[0]` elige la palabra y el segundo elige la letra.
+> - **`` `${a}${b}` ``** arma un texto con los valores de `a` y `b`, uno pegado al otro.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -1028,7 +1072,7 @@ vf :: Hay que entender cada símbolo antes de seguir leyendo
 7. ¿Por qué es mejor usar `MY_COMPANY_NAME_MAX_WORDS` que escribir `2` en el `if`?
 
 **C. Para practicar leer**
-8. Explica con tus palabras, en una frase, qué hace `vehicleHasFuelTank` (parte 7).
+8. Explica con tus palabras, en una frase, qué hace `vehicleHasFuelTank` (parte 8).
 
 **D. Un poco más difícil**
 9. ¿Qué devuelve `normalizeMyCompanyName('     ')` (solo espacios)? ¿Por qué no devuelve `null`?

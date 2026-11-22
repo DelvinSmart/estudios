@@ -49,6 +49,13 @@ app.listen(3000);
 // cada vez que alguien pide /gastos.
 ```
 
+No necesitas memorizar este código. Lo importante es esto:
+
+- `app.get('/gastos', ...)` le dice a Express: «cuando alguien pida `/gastos`, usa esta función».
+- `(pedido, respuesta) => { ... }` es una **función corta**. Recibe el pedido y la respuesta que se va a enviar.
+- `respuesta.json(gastos)` envía los gastos a quien los pidió.
+- `app.listen(3000)` deja el servidor **esperando pedidos**. El `3000` es el número de su puerta.
+
 Fíjate: en ninguna parte escribiste "ejecuta la función de `/gastos`". Eso lo hace Express, cada vez que llega un pedido. Esa idea tiene nombre: **inversión de control**. El control del programa pasa de ti al framework. También se le dice el **principio de Hollywood**: *"no nos llames, nosotros te llamamos"*.
 
 | | Librería | Framework |
@@ -256,6 +263,7 @@ Por eso todo cabe en una sola frase: **"Escribí las órdenes en TypeScript, con
 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`??`**: pone un valor de repuesto cuando el dato **no existe** (`undefined` o `null`): `config.color ?? 'azul'` da el color de la configuración y, si no hay, `'azul'`.
+> - **Buscar en un objeto con una variable:** si `const EQUIVALE = { div: 'View' }` y `etiqueta` vale `'div'`, entonces `EQUIVALE[etiqueta]` da `'View'`. Es como buscar una palabra en un diccionario.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -384,6 +392,11 @@ Si mañana quisieras agregar a Copiloto una pantalla nueva de **"Historial de vi
 En **TypeScript**, con las piezas de React Native, dentro de Expo. Es una pantalla normal: una lista de viajes, textos y botones. No necesita meterse con los permisos profundos del teléfono, así que no hace falta tocar al "mecánico" (Kotlin o Swift). Solo usarías Kotlin o Swift para algo que el teléfono no deja hacer desde TypeScript, como leer la pantalla de otra app o dibujar encima de ella.
 
 </details>
+
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`pedido`** es un objeto con datos de sí o no. `pedido.iphone` da `true` si la app necesita iPhone.
+> - **`&&`** significa **«y»**: `pedido.iphone && pedido.android` da `true` solo si se necesitan **los dos**.
+> - **Empieza por el caso más exacto.** Si primero preguntas «¿necesita Android?», también entraría la app que necesita los dos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
