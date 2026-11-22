@@ -324,6 +324,18 @@ elige :: ¿Qué hace Semgrep? :: Busca contraseñas filtradas :: Revisa el códi
 escribe :: ¿Cómo usarías gitleaks, Semgrep y ZAP juntos en un proyecto? :: gitleaks antes de cada push y en el CI, para que no se suba ningún secreto; Semgrep en el CI, para frenar patrones peligrosos en el código; y el baseline scan de ZAP contra el sitio de prueba, para ver cabeceras y cookies que faltan.
 ```
 
+
+**Comprobación antes de seguir**
+
+Antes de usar un servicio externo para revisar un archivo o enlace, explica qué información enviaría.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Usa ejemplos públicos y evita cargar archivos privados o de clientes.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué herramientas de seguridad usas?":** "En lo personal, un gestor de contraseñas como Bitwarden, con una contraseña distinta por sitio, y segundo factor con app o llaves de acceso, no SMS. Como programador: gitleaks antes de subir y en el CI, porque una llave subida se usa en minutos y borrarla no la saca del historial; Semgrep para patrones peligrosos en el código; el baseline scan de ZAP contra el sitio de prueba; y npm audit con Dependabot para las dependencias. Al crear cuentas, reviso las contraseñas contra Have I Been Pwned con k-anonimato. Uso VirusTotal con cuidado, porque lo que se sube lo ven otros, y Let's Encrypt con renovación automática, sabiendo que los registros de certificados muestran todos mis subdominios."

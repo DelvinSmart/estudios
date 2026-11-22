@@ -201,6 +201,18 @@ elige :: ¿Qué tipo usarías para el precio de un litro de combustible? :: Int 
 escribe :: Escribe un println que muestre el rendimiento km/litros con un decimal. :: println("Rendimiento: ${"%.1f".format(km / litros)} km/l")
 ```
 
+
+**Comprobación antes de seguir**
+
+Distingue entre un mensaje del compilador y una prueba que recibió otro resultado.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Si llega un resultado, el programa ya compiló. Compara el valor esperado con el recibido.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué diferencias ves entre Kotlin y TypeScript?":** "Se parecen mucho: val y var son como const y let, el tipo va después del nombre con dos puntos, y hay inferencia. Kotlin separa Int y Double, los String van con comillas dobles y las plantillas usan $. Y en Kotlin los tipos se revisan siempre al compilar, sin forma de apagarlos. Practico en el Kotlin Playground y para Android uso Android Studio."

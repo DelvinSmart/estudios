@@ -636,6 +636,18 @@ elige :: ¿Qué se revisa al girar el teléfono? :: Que la app se cierre :: Que 
 escribe :: Escribe tu lista de comprobación antes de darle la app a alguien. :: Las pruebas en verde; anotar dos gastos y ver el total; cerrarla del todo y abrirla, y que sigan ahí; borrar uno y que siga borrado al abrirla; girar el teléfono con algo escrito; y mirar que las barras de arriba y de abajo se lean.
 ```
 
+
+**Comprobación antes de seguir**
+
+Carga dos gastos válidos junto con una línea dañada y vuelve a abrir la app.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Comprueba si se preservan los gastos válidos y si el total coincide con ellos.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué hiciste en Android nativo?":** "La misma app de gastos que tengo en React Native, hecha nativa con Kotlin y Jetpack Compose, para comparar. La lógica es Kotlin puro con pruebas de JUnit: usé LocalDate, que ya rechaza el 31 de febrero, y los null de Kotlin en vez de NaN. Los datos van detrás de una interfaz: DataStore en el teléfono y uno en memoria para probar el ViewModel. El ViewModel expone un StateFlow de solo lectura con una data class de estado, y no deja guardar mientras está cargando, para no pisar lo guardado; lo probé con un repositorio lento. La pantalla usa Scaffold, LazyColumn con key, FlowRow, imePadding y rememberSaveable para que nada se pierda al girar. Son 23 pruebas, y además la usé en el emulador: ahí encontré que las barras del sistema salían ilegibles y que un chip no usaba el color del motor, y lo arreglé."

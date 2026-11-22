@@ -313,6 +313,18 @@ elige :: ¿Qué hace una comparación de tiempo constante? :: Compara más rápi
 escribe :: ¿Por qué no hace falta comparar en tiempo constante las contraseñas a mano? :: Porque no se comparan las contraseñas, sino sus hashes, y las librerías de hash para contraseñas (bcrypt, argon2) ya hacen la comparación bien.
 ```
 
+
+**Comprobación antes de seguir**
+
+Decide cuándo usar hash, cifrado o firma en tres casos de una app.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Pregúntate si necesitas recuperar el dato, comprobar integridad o comprobar quién lo firmó.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué sabes de criptografía?":** "Lo que necesita un programador: no inventarla, y usar cada herramienta para lo suyo. Hash lento con sal para contraseñas, cifrado para lo que hay que volver a leer, firma para probar quién hizo algo; y que base64 no protege nada. Un JWT se lee sin llave, así que no lleva secretos, y la firma se revisa en el servidor con el algoritmo fijo, para que no pase el ataque de alg: none. El token de sesión va en una cookie HttpOnly, Secure, SameSite y con vencimiento. Y dos trampas: Math.random() no sirve para secretos, y los tokens se comparan en tiempo constante."

@@ -252,6 +252,18 @@ elige :: ¿Por qué Number(m.valor) en la suma? :: Por estilo :: Porque lo que s
 escribe :: ¿Qué tiene en común este script con el proyecto de Python 8? :: Hacen lo mismo: leen los movimientos de un CSV, suman lo ganado y lo gastado y calculan el neto; solo cambia el lenguaje.
 ```
 
+
+**Comprobación antes de seguir**
+
+Explica cómo distinguirías una ruta equivocada, un archivo inexistente y un JSON inválido.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Primero comprueba desde qué carpeta se resuelve la ruta. Después separa el paso de leer del paso de interpretar.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo trabajas con archivos en Node?":** "Con node:fs/promises y async/await, siempre en utf8. Manejo los errores por su código, como ENOENT, sin esconder los demás. Armo rutas con node:path desde la carpeta del propio archivo, y nunca uso directo un nombre de archivo que manda un usuario, para evitar path traversal. Para datos uso JSON con JSON.parse y JSON.stringify, y para CSV complicados un paquete probado."

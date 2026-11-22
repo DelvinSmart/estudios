@@ -273,6 +273,18 @@ elige :: ¿Qué responde el manejador ante un error inesperado? :: 200 con el st
 escribe :: ¿Por qué conviene manejar los errores en un solo lugar? :: Para que todos los errores respondan igual y sin mostrar detalles internos, y para registrar el detalle en un solo sitio en vez de repetir try/catch en cada ruta.
 ```
 
+
+**Comprobación antes de seguir**
+
+Dibuja el orden en que Express pasa por las funciones intermedias.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Marca qué función envía la respuesta y cuáles delegan con `next()`.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo armas un servidor con Express?":** "Con rutas por verbo y ruta, leyendo params, query y body con express.json y un límite de tamaño. Uso middleware para lo que se repite: registro de pedidos, autenticación, validación; sé que el orden importa. Al final pongo un 404 para rutas que no existen y un manejador de errores que registra el detalle y responde un 500 general, sin mostrar nada interno."

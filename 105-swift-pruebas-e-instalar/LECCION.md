@@ -233,6 +233,18 @@ elige :: La primera vez que abres tu app en el iPhone dice que no confía en el 
 escribe :: ¿Por qué esta clase dice que la instalación en el iPhone no se probó, en vez de contarla como hecha? :: Porque el iPhone no estaba conectado a la Mac en ese momento: contarla como hecha sería mentir. Se explica la lista de Apple, y se anota que la prueba real queda para cuando se instale en el teléfono.
 ```
 
+
+**Comprobación antes de seguir**
+
+Completa la entrega ejecutando la prueba en el simulador. Usa un iPhone físico si tienes uno disponible.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Haz que falle un caso, corrige y vuelve a correr la prueba.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo pruebas una app de iOS?":** "La lógica va separada de la pantalla y detrás de protocolos, así la pruebo con Swift Testing sin el teléfono: `@Test`, `#expect` y tablas de casos con `arguments:` para los bordes. Cada error que encuentro mirando la app en el simulador se vuelve una prueba, para que no vuelva. Y cuando una prueba nueva pasa a la primera, rompo el código a propósito una vez para ver que avisa. Para instalar en mi iPhone uso la cuenta gratuita de Apple, que dura 7 días; para publicar o usar TestFlight hace falta el Developer Program, que cuesta US$ 99 por año."

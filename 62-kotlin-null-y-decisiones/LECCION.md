@@ -225,6 +225,18 @@ elige :: ¿Cómo tienes el número y el elemento juntos en un for? :: forEach ::
 escribe :: Escribe un for que muestre los días del 1 al 5. :: for (dia in 1..5) println("Día $dia")
 ```
 
+
+**Comprobación antes de seguir**
+
+Predice el resultado con un valor presente y con `null`.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Sigue el momento exacto en que se elige el valor alternativo.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué es la null safety de Kotlin?":** "En Kotlin un tipo como String nunca puede ser null; si puede serlo, se escribe String?, y el compilador me obliga a revisarlo: con ?. para acceder seguro, con ?: para dar un valor por defecto, o con un if. Evito !! porque si es null la app se cae. Además if y when devuelven valores, y when reemplaza al switch sin break."

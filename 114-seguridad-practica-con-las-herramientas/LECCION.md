@@ -443,6 +443,18 @@ elige :: ¿Qué es lo último de una auditoría? :: Borrar la app :: El informe,
 escribe :: Resume cómo harías la auditoría de la app de la clase 91, de principio a fin. :: Escribo el alcance (solo 127.0.0.1). Hago reconocimiento con nmap y miro las cabeceras. Pruebo el login (enumeración y Hydra), saco datos con el IDOR y con sqlmap, uso un proxy para la asignación masiva y gitleaks para el secreto. Anoto cada falla en un informe con su arreglo, y al final corro todo contra la versión arreglada para probar que ya no cae.
 ```
 
+
+**Comprobación antes de seguir**
+
+Evalúa la corrección de un control y comprueba el funcionamiento normal con datos ficticios.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Anota el resultado permitido, el resultado rechazado y la evidencia de ambos.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿has hecho una prueba de seguridad de verdad?":** "Sí, sobre una API de práctica con diez fallas a propósito, en mi computadora. Escribí el alcance, hice reconocimiento con nmap y revisé las cabeceras, que soltaban la tecnología y un CORS abierto. En el login encontré enumeración de usuarios y falta de límite de intentos, que probé con Hydra. Saqué datos con un IDOR a mano y con sqlmap por una inyección SQL, usé un proxy para una asignación masiva, y gitleaks encontró un secreto en el código. Lo anoté todo en un informe con el arreglo de cada una —control de acceso con el dueño, consultas con parámetros, lista blanca, límite de intentos, un solo mensaje en el login— y al final corrí las herramientas contra la versión arreglada para demostrar que ya no caían."

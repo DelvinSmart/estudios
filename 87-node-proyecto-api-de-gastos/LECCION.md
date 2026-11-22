@@ -544,14 +544,16 @@ Dos cosas que hay que saber, para no engañarte:
 - **`maxInstances: 1`** deja una sola copia del servidor. Así la fila de la Parte 3 alcanza, porque todos los pedidos pasan por la misma fila. Con varias copias, cada una tendría su propia fila, y haría falta una **transacción** de Firestore, que ordena los cambios en la base de datos misma.
 - **Todo en un documento** sirve para una persona y unos cientos de gastos (un documento de Firestore aguanta hasta 1 MB). Para muchos usuarios, cada gasto iría en su propio documento, dentro de `usuarios/{uid}/gastos`, con las reglas de la clase 08.
 
-### La lista antes de publicar
+### Entrega local y publicación opcional
+
+Completa los pasos 1 a 3 para entregar el proyecto sin contratar alojamiento. Los pasos 4 a 6 son para el despliegue opcional. Cloud Functions requiere facturación en Blaze y pueden generarse cargos.
 
 1. `npm test`: 32 en verde.
 2. Con `npm start` y `curl`: crear, listar, cambiar, borrar y el resumen.
 3. Los casos raros: id `abc`, fecha `2026-02-31`, JSON roto y dos gastos a la vez.
 4. `origenes` tiene **solo** tus páginas.
 5. Ningún secreto en el código (clase 73).
-6. `maxInstances` bajo y el límite por minuto puesto, para quedarte en la cuota gratis.
+6. `maxInstances` bajo y el límite por minuto puesto, para ayudar a controlar el consumo.
 
 > 🌎 **En la vida real:** te mudas de casa y te llevas los mismos muebles. Cambia el lugar donde guardas las cosas, pero el sofá, la mesa y la cama son los mismos. Si los hubieras pegado a las paredes de la casa vieja, no podrías mudarte.
 
@@ -614,6 +616,18 @@ elige :: ¿Por qué el almacén de Firestore recibe el documento en vez de impor
 elige :: Con maxInstances: 1, ¿por qué alcanza la fila de la Parte 3? :: Porque Firestore no acepta dos pedidos :: Porque hay una sola copia del servidor y todos los pedidos pasan por la misma fila :: No alcanza nunca
 escribe :: Explica con tus palabras qué es "el contrato del almacén" y para qué sirvió en este proyecto. :: Es la promesa de que todo almacén tiene leer() y guardar(lista). Gracias a eso, el mismo servicio funciona con memoria en las pruebas, con un archivo en mi computadora y con Firestore en la nube, sin cambiar la lógica ni las rutas.
 ```
+
+
+**Comprobación antes de seguir**
+
+Entrega la API local con un resumen correcto, una fecha inválida rechazada y dos gastos simultáneos conservados.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Comprueba el estado final del almacén, además de las respuestas de cada solicitud.
+
+</details>
 
 ## Para la entrevista
 

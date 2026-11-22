@@ -287,6 +287,18 @@ vf :: Para aplicar App Check en una Cloud Function se agrega enforceAppCheck: tr
 escribe :: Cuenta cómo buscarías la causa de un 403 de App Check sin adivinar. :: Separo las piezas. Primero pruebo si la clave del sitio da un token de reCAPTCHA en mi dominio. Si da, el dominio y la clave de reCAPTCHA están bien. Después pruebo canjear ese token en App Check. Si falla ahí, el problema está en la configuración de App Check: que la clave registrada sea la misma, o que todavía no se activó.
 ```
 
+
+**Comprobación antes de seguir**
+
+Explica por qué verificar la procedencia de la aplicación y verificar al usuario son tareas distintas.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Piensa en qué dato aporta cada comprobación antes de decidir un permiso.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿la apiKey de Firebase en el frontend no es un riesgo?":** "No es secreta: el navegador la necesita para encontrar el proyecto. Lo que protege los datos son las reglas de Firestore, que dicen quién puede leer y escribir qué. El riesgo real es otro: que alguien copie la configuración y llame a mis funciones desde un programa propio para hacerme gastar. Para eso puse App Check."

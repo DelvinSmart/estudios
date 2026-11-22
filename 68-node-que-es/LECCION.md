@@ -217,6 +217,18 @@ elige :: ¿Qué hace node --watch servidor.mjs? :: Lo borra :: Lo reinicia solo 
 escribe :: Escribe cómo terminar un script con error si no te pasaron el nombre de un archivo. :: if (!process.argv[2]) { console.error('Falta el archivo'); process.exit(1); }
 ```
 
+
+**Comprobación antes de seguir**
+
+Predice el orden de los mensajes del ejemplo y compruébalo ejecutándolo.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Separa lo que se ejecuta de inmediato de lo que queda programado para después.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué es Node.js y cómo funciona?":** "Es un entorno que ejecuta JavaScript fuera del navegador con el motor V8. Trabaja con un solo hilo y un event loop: lo que tarda, como archivos, red o base de datos, se pide y sigue atendiendo otras cosas, por eso un servidor atiende muchos pedidos a la vez; lo que lo traba son los cálculos largos. Uso process.argv y process.env para entrada y configuración, y los módulos node: como fs, path, http y test."

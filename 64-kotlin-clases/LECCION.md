@@ -295,6 +295,18 @@ elige :: ¿Cómo llamas a conImpuesto del object Configuracion? :: Configuracion
 escribe :: ¿Por qué conviene que la pantalla dependa de una interfaz RepositorioGastos? :: Porque así puedo cambiar Firebase por otra fuente, o usar uno en memoria en las pruebas, sin tocar la pantalla.
 ```
 
+
+**Comprobación antes de seguir**
+
+Explica qué operación promete la interfaz y qué decisión queda a cargo de cada repositorio.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Si ambas implementaciones cumplen la promesa, su código interno puede ser distinto.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué tipos de clases usas en Kotlin?":** "data class para datos, inmutables con val y copy para cambiarlos; enum para opciones fijas; sealed para estados como cargando, lista o error, con when que cubre todos los casos sin else; object para lo que hay uno solo; e interfaces para que la pantalla dependa de un contrato y no de Firebase, como en la arquitectura hexagonal, lo que me deja probar con un repositorio en memoria."

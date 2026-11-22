@@ -220,6 +220,18 @@ elige :: ¿Qué números incluye 1..<5? :: Del 1 al 5 :: Del 1 al 4 :: Del 0 al 
 escribe :: ¿Qué ventaja tiene que el switch obligue a cubrir todos los casos? :: Que no te puedes olvidar de uno: si agregas un caso nuevo (por ejemplo, un nivel más), Swift te avisa en cada switch que no lo trata, en vez de fallar callado cuando la app ya está en uso.
 ```
 
+
+**Comprobación antes de seguir**
+
+Prueba la misma función con un valor válido y con una entrada vacía.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Lee qué sale de la función cuando la condición de `guard` falla.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué es un opcional en Swift?":** "Es un valor que puede estar o no estar: `String?` es un texto o `nil`. El compilador no te deja usarlo hasta que lo abras con `if let`, `guard let` o un valor por defecto con `??`. Así el caso de 'no hay' se piensa cuando escribes el código, y no aparece como un cierre de la app cuando ya la está usando alguien. Evito el `!` porque, si el valor era `nil`, la app se cierra. Es la misma idea que el `String?` de Kotlin o el `string | null` de TypeScript."

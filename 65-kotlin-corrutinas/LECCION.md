@@ -251,6 +251,18 @@ elige :: ¿A qué se parece un Flow de Firebase en React Native? :: useState :: 
 escribe :: ¿Por qué no hay que leer un archivo grande en el hilo de la pantalla? :: Porque el hilo de la pantalla se trabaría y la app dejaría de responder; se hace en Dispatchers.IO con withContext.
 ```
 
+
+**Comprobación antes de seguir**
+
+Dibuja cuándo arrancan y cuándo terminan dos operaciones en paralelo.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Marca dónde empieza cada operación y dónde se espera su resultado.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo manejas la asincronía en Kotlin?":** "Con corrutinas: funciones suspend para lo que tarda, launch para disparar trabajo y async con await para resultados, en paralelo dentro de un coroutineScope como un Promise.all. Todo vive en un scope como viewModelScope, que cancela al cerrar la pantalla. Uso withContext(Dispatchers.IO) para red y archivos, y Flow o StateFlow para datos que siguen llegando, como hacía con onSnapshot en React Native."

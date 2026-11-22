@@ -376,6 +376,18 @@ elige :: ¿Qué usa el módulo de Copiloto en el iPhone para leer el texto de la
 escribe :: ¿Por qué saber React Native, Kotlin y Swift juntos es valioso en un equipo chico? :: Porque puedes leer y arreglar las tres partes de una app como Copiloto: la mayoría en TypeScript, y los módulos nativos en Swift y Kotlin para lo que solo el teléfono puede hacer, sin frenarte en el borde.
 ```
 
+
+**Comprobación antes de seguir**
+
+Usa la misma secuencia decimal en Swift, Kotlin y React Native y compara el visor.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Si los resultados difieren, apunta después de qué tecla aparece la diferencia.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué sabes de iOS?":** "Hice el curso de Swift completo: el lenguaje, con opcionales, structs y enums con valores asociados, errores y async/await; SwiftUI con listas, navegación, datos compartidos con @Observable y guardado en el teléfono, un motor de diseño con modo claro y oscuro, y pruebas con Swift Testing, rompiendo el código a propósito para ver que avisan. El proyecto final fue la misma calculadora que hice en React Native y en Kotlin, con las mismas 44 decisiones probadas. En Swift encontré su trampa: un Decimal creado desde un Double hereda el error; por eso se crea desde el texto. Y entiendo cómo encaja con React Native: un módulo nativo de Expo en Swift para lo que solo el iPhone puede hacer, como en Copiloto."

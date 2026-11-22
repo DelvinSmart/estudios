@@ -130,59 +130,19 @@ escribe :: ¿Por qué la regla protege y el if del cliente no? :: Porque la regl
 
 Si la regla dice `allow write: if false`, ¿cómo llegan los dibujos a Firestore? Por la **puerta de atrás**: como **administrador** del proyecto, sin pasar por la app.
 
-**Primero, ¿qué es un token?** Cuando entras con `firebase login`, Google no guarda tu contraseña en tu computadora. Te da un **token de acceso**: un texto largo que dice "esta es la cuenta dueña del proyecto". Dura **una hora** y después hay que pedir otro. Lo mandas en cada pedido, en un encabezado llamado `Authorization`.
+Un **token de acceso** es una credencial temporal que un programa presenta para identificarse. Tiene vencimiento. El token que gestiona una herramienta de línea de comandos sigue siendo sensible durante su vigencia.
 
-**¿Por qué el administrador se salta las reglas?** Las reglas de Firestore son para los **clientes**: la página o la app, que entran con una cuenta de usuario de Firebase. Cuando llamas con el token de **la cuenta dueña del proyecto** (la de Google Cloud), Firebase revisa otro tipo de permiso: el del **dueño**. El dueño puede todo. Por eso ese token es tan delicado como una contraseña.
+Firestore distingue dos caminos. La app usa una cuenta de Firebase Authentication y sus lecturas pasan por las reglas de seguridad. Las operaciones administrativas de una cuenta de Google se autorizan mediante **IAM**, el sistema de permisos del proyecto. La cuenta administrativa necesita un permiso que le permita escribir en la base de datos. Una petición REST de actualización puede usar el método **PATCH** y una credencial de Google, con la misma comprobación de permisos administrativos.
 
-Los pasos:
+Para este ejercicio abre la [consola de Firebase](https://console.firebase.google.com/) con tu cuenta autorizada y elige tu **proyecto de prueba**:
 
-```bash
-# 1. Entrar con la cuenta dueña del proyecto (abre el navegador una sola vez)
-npx firebase-tools login
+1. Abre **Firestore Database → Datos**.
+2. Crea la colección `privado` y el documento `dibujos-personajes`. Si ya existen, abre el documento.
+3. Añade el campo `json`, de tipo **string** (texto). Guarda un ejemplo ficticio como `[{"nombre":"dibujo de prueba"}]`.
+4. Confirma que puedes ver el documento en la consola con la cuenta administrativa. Verifica luego los permisos desde la app con las cuentas de prueba.
 
-# 2. Cualquier comando renueva el token guardado, si ya venció
-npx firebase-tools projects:list
-```
+La consola gestiona la sesión. Guarda los dibujos originales fuera de la carpeta que se publica o se empaqueta. Consulta la [guía para añadir datos](https://firebase.google.com/docs/firestore/manage-data/add-data) y los [permisos IAM de Firestore](https://firebase.google.com/docs/firestore/security/iam).
 
-`firebase-tools` guarda la sesión en un archivo de tu computadora. De ahí se lee el token, sin escribirlo nunca en la pantalla ni en el código:
-
-```bash
-TOKEN=$(node -p "require(process.env.HOME + '/.config/configstore/firebase-tools.json').tokens.access_token")
-```
-
-Después se arma el cuerpo del pedido con el contenido. Firestore guarda cada campo con su tipo; aquí el campo se llama `json` y es un texto (`stringValue`) con la lista de dibujos:
-
-```bash
-node -e "
-  const lista = require('./herramientas/privado/dibujos-personajes.json');
-  const cuerpo = { fields: { json: { stringValue: JSON.stringify(lista) } } };
-  require('fs').writeFileSync('/tmp/cuerpo.json', JSON.stringify(cuerpo));
-"
-```
-
-Y se manda con un **PATCH** (crear o reemplazar) a la API REST de Firestore:
-
-```bash
-curl -s -X PATCH \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  --data @/tmp/cuerpo.json \
-  "https://firestore.googleapis.com/v1/projects/MI-PROYECTO/databases/(default)/documents/privado/dibujos-personajes"
-```
-
-**Cómo leer el `curl`:**
-
-| Pieza | Qué hace |
-|---|---|
-| `-X PATCH` | "Pon este documento así". Si no existe, lo crea; si existe, lo reemplaza. |
-| `Authorization: Bearer $TOKEN` | Mi pase de administrador. *Bearer* quiere decir "el que lo trae". |
-| `--data @/tmp/cuerpo.json` | El contenido, leído del archivo (la `@` quiere decir "de este archivo"). |
-| `MI-PROYECTO` | El id de tu proyecto de Firebase (lo ves en la consola). |
-| `(default)` | El nombre de la base de datos. Casi todos los proyectos tienen una sola, que se llama así. |
-
-> ⚠️ **Cuidado:** el archivo con los dibujos (`herramientas/privado/…`) **no** puede estar en la carpeta que se empaqueta en la app (`www/`), y si el proyecto usa git, va en `.gitignore`. Si se cuela en el paquete, todo lo de esta clase no sirvió de nada (la Parte 6 lo comprueba).
-
-> 📌 **Nota:** todo esto es **gratis**: `firebase-tools`, la API REST y Firestore en el plan Spark (el gratuito) alcanzan de sobra para un documento.
 
 ```practica
 vf :: El token de acceso es tan delicado como una contraseña y no se pega en el código ni en un chat
@@ -337,6 +297,21 @@ vf :: Se guarda el uid junto con la lista para que, si entra otra cuenta en el m
 escribe :: ¿Por qué no es lo mismo "no tienes permiso" que "no hay internet", y qué hace la app en cada caso? :: Sin permiso, la respuesta es definitiva: a esa cuenta no le toca nada y se devuelve una lista vacía. Sin internet, no se sabe nada nuevo: si se devolviera vacía se borraría la copia buena, así que se lanza el error y la app sigue usando lo que tenía guardado.
 ```
 
+### Comprobar qué pasa con la copia sin conexión
+
+La regla de Firestore controla las lecturas del servidor. Una copia descargada para trabajar sin conexión puede seguir disponible hasta que el cliente vuelva a conectarse y reciba la denegación. Si necesitas revocación inmediata, exige una autorización reciente para mostrar el contenido y decide cuándo caduca. Eso limita el uso sin internet.
+
+Con datos ficticios, comprueba y anota estos casos:
+
+| Caso | Comprobación |
+|---|---|
+| Cierre de sesión o cambio de cuenta | Oculta el contenido, elimina la copia de la cuenta anterior e ignora cualquier lectura anterior que termine tarde. |
+| Permiso revocado con conexión | Al recibir una denegación, borra la copia y verifica que tampoco aparece al reabrir la app sin conexión. |
+| Interrupción de red con la misma cuenta | Conserva la copia solo durante el plazo permitido por tu política de uso sin conexión. |
+| Permiso revocado mientras el equipo está desconectado | Comprueba la caducidad local. Al reconectar, verifica que la denegación elimina la copia. |
+
+El código de arriba ilustra la asociación con el UID. Los resultados de esta tabla se comprueban en la app que implementa la política.
+
 ## Parte 6. La prueba final: buscar en el paquete
 
 > 🌎 **En la vida real:** antes de despachar la caja de cereal, alguien la abre y revisa que el regalo **no** se haya quedado adentro por error.
@@ -382,7 +357,7 @@ vf :: Un APK es un archivo zip y se puede abrir con unzip
 > 🎙️ **El profesor dice:** {{alumno}}, ahora lo haces tú, en un proyecto de Firebase de prueba (gratis, en el plan Spark). **No** uses el proyecto de una app que tiene usuarios reales.
 
 1. En tu proyecto de prueba, agrega la regla de la Parte 2 con **tu** correo (y en el archivo de reglas, no en el código de la página). Súbela con `npx firebase-tools deploy --only firestore:rules`.
-2. Inventa un contenido privado pequeño, por ejemplo `{ "mensaje": "solo para mí" }`, y súbelo con el `curl` de la Parte 3 al documento `privado/prueba`.
+2. Inventa un contenido privado pequeño, por ejemplo `{ "mensaje": "solo para mí" }`, y súbelo desde la consola siguiendo la Parte 3 al documento `privado/prueba`.
 3. Haz las cuatro pruebas de la tabla de la Parte 4. Anota qué respondió cada una.
 4. En una página sencilla, escribe la función que lee `privado/prueba` y lo guarda en `localStorage` con el uid. Desconecta el internet y recarga: ¿se sigue viendo?
 5. Busca con `grep -rl` tu correo y el texto `solo para mí` en la carpeta que publicas. No tiene que salir nada.

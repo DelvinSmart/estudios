@@ -450,6 +450,18 @@ elige :: ¿Cómo sabe el servicio de Android qué mínimos usar con la app cerra
 escribe :: ¿Cuáles son los dos canales que usa Copiloto entre TypeScript y lo nativo? :: El puente (funciones, funciones asíncronas y eventos) mientras la app está abierta, y un almacén compartido (SharedPreferences en Android, App Group en iPhone) para lo que corre con la app cerrada.
 ```
 
+
+**Comprobación antes de seguir**
+
+Anota el dato que cruza el puente y el tipo de respuesta esperado en TypeScript, Kotlin y Swift.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Compara nombres, tipos y qué ocurre cuando falta un valor.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo conectas React Native con código nativo?":** "Con Expo Modules, que por debajo usa JSI. El módulo tiene un lado en Kotlin y otro en Swift con el mismo nombre; comparten la mayoría de las funciones, y cada uno tiene las suyas según lo que cada teléfono permite, que en el `index.ts` se marcan con `?` y se llaman con `?.()`. Hay tres maneras de hablar: `Function` para lo rápido, `AsyncFunction` con promesa para lo que espera a la persona, y eventos con `sendEvent` y `addListener` cuando el nativo avisa primero. Los datos se convierten al cruzar: `number` a `Double`, objetos a `Map` o diccionario. En mi app cargo el módulo con `requireOptionalNativeModule` la primera vez que se usa, con un respaldo en cada llamada, para que en Expo Go o con un error en el arranque la app no se caiga. Y lo que tiene que funcionar con la app cerrada, como un servicio de accesibilidad o una extensión de iPhone, no usa el puente: lee un almacén compartido."

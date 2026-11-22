@@ -315,6 +315,18 @@ elige :: ¿Qué significa alTocar?: () => void en la interfaz? :: Es obligatoria
 escribe :: Explica el flujo de datos de React en una frase. :: Los datos bajan del padre al hijo por props y los avisos suben cuando el hijo llama una función que el padre le pasó.
 ```
 
+
+**Comprobación antes de seguir**
+
+Crea otra tarjeta a partir del ejemplo y enumera los datos que recibe.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Primero cambia los valores que pasan desde el componente padre.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué es un componente y qué son las props?":** "Un componente es una función que devuelve lo que se dibuja, con nombre en mayúscula, escrita en JSX. Las props son los datos que recibe del padre, tipados con una interfaz en TypeScript y de solo lectura. Los datos bajan por props y los avisos suben llamando funciones que el padre pasa. Al listar uso map con un key único, como el id."

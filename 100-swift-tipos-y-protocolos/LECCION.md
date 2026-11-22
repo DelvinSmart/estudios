@@ -283,6 +283,18 @@ elige :: ¿Por qué el igual() de los ejercicios funciona con números, textos y
 escribe :: ¿Qué protocolo cumple cada pantalla de SwiftUI, y qué crees que pide? :: El protocolo View. Pide una propiedad body que diga qué se dibuja (lo vas a ver en la clase 102).
 ```
 
+
+**Comprobación antes de seguir**
+
+Predice si el original cambia al modificar una copia del valor y luego una referencia.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Haz una tabla con lo que guardaba cada variable antes y después de modificarla.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿struct o class?":** "struct es un tipo de valor: al copiarlo o pasarlo se copia, y nadie me lo cambia por detrás; class es un tipo de referencia: se comparte el mismo objeto. En Swift uso struct por defecto, como hace SwiftUI, y class solo cuando necesito compartir un objeto, como el modelo de datos de la app. Para estados uso enum con valores asociados, que hace imposibles los estados raros, y para decir 'esto sabe hacer tal cosa', protocolos, como Equatable o el View de SwiftUI."

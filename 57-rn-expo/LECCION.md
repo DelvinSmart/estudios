@@ -251,6 +251,18 @@ elige :: ¿Cómo ves un Snack en tu iPhone? :: No se puede :: Escaneando su QR c
 escribe :: Escribe el botón reiniciar para el contador de viajes. :: <Pressable onPress={() => setViajes(0)}><Text>Reiniciar</Text></Pressable>
 ```
 
+
+**Comprobación antes de seguir**
+
+Elige cómo ejecutarías un contador sencillo y luego un ejemplo que requiera un módulo nativo propio.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Snack permite probar ejemplos. Expo Go trae una selección fija de módulos. Un módulo nativo propio requiere una compilación que lo incluya.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo empiezas una app de React Native?":** "Con Expo: create-expo-app, npx expo start y la abro en mi iPhone con Expo Go, con Fast Refresh. Configuro nombre, ícono y permisos en app.json. Cuando la app necesita piezas nativas que Expo Go no trae, uso un development build, como en mi app Copiloto. Para probar ideas rápidas uso Expo Snack."

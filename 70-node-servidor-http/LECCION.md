@@ -241,6 +241,18 @@ elige :: ¿Qué código respondes al crear el gasto bien? :: 200 :: 201 :: 204
 escribe :: Nombra tres cosas que hiciste a mano en este servidor y que Express hace por ti. :: Leer el cuerpo en pedazos, convertir el JSON con límite de tamaño, y separar las rutas por verbo y dirección.
 ```
 
+
+**Comprobación antes de seguir**
+
+Sigue una solicitud desde que llega hasta que se envía la respuesta.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Anota método y ruta antes de decidir el código de estado.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿sabes cómo funciona un servidor por dentro?":** "Sí: con node:http, cada pedido llega con un verbo, una ruta, cabeceras y a veces un cuerpo que llega en pedazos. Respondo con un código de estado y un cuerpo, normalmente JSON con su Content-Type. Separo las rutas por verbo y dirección, valido lo que llega, limito el tamaño del cuerpo y uso los códigos correctos: 200, 201, 400, 404. Express hace eso más cómodo, pero sé lo que hay debajo."

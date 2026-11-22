@@ -214,6 +214,18 @@ elige :: ¿Qué devuelve Int("doce")? :: 0 :: nil, porque Int("…") devuelve un
 escribe :: ¿Cuándo hace falta escribir el tipo, como en var gastos: [Double] = []? :: Cuando Swift no lo puede adivinar solo, como en una lista vacía: no sabe de qué va a ser la lista.
 ```
 
+
+**Comprobación antes de seguir**
+
+Antes de ejecutar, usa código de práctica y comprueba qué ocurre con un error de sintaxis.
+
+<details>
+<summary>Necesito una pista</summary>
+
+El botón Probar envía el código del ejercicio a Compiler Explorer. Si el servicio falla, vuelve a intentar o prueba el ejemplo en Swift local.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué sabes de Swift?":** "Es el lenguaje de Apple para iPhone, iPad, Mac y el reloj. Se parece mucho a Kotlin: `let` para lo que no cambia y `var` para lo que cambia, tipos que el compilador adivina, y no mezcla `Int` con `Double` sin que lo pidas. Lo más importante es que los valores que pueden faltar se marcan con `?`, y el compilador te obliga a revisarlos. Lo practiqué en Compiler Explorer y en Xcode, y entiendo cómo una app de React Native usa un módulo nativo en Swift para lo que solo el iPhone puede hacer."

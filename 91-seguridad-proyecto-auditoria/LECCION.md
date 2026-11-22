@@ -435,6 +435,18 @@ elige :: ¿Qué partes tiene cada hallazgo del informe? :: Solo el título :: T�
 escribe :: Cuenta cómo se usa este proyecto para practicar una auditoría, de principio a fin. :: Leo el alcance y corro la versión con errores solo en mi computadora. Leo el código por categorías y, por cada error, escribo una trampa que intenta el ataque y espera que falle; la veo en rojo y compruebo que falla porque el ataque funciona. Lo arreglo, veo la trampa en verde y que el uso normal sigue pasando. Al final escribo cada hallazgo en el informe con su severidad y su corrección.
 ```
 
+
+**Comprobación antes de seguir**
+
+Entrega un informe con correcciones priorizadas y verificaciones de los controles.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Por cada corrección, explica cómo comprobarías que el permiso esperado se conserva.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿hiciste alguna auditoría de seguridad?":** "Sí, dos: la de mi app Copiloto y una de práctica sobre una API de gastos con usuarios y una base SQLite, con diez errores puestos a propósito. Escribí el alcance, la corrí solo en mi computadora, y por cada falla escribí una trampa: una prueba que intenta el ataque y espera que falle. Encontré un IDOR, asignación masiva del dueño, inyección SQL que traía los datos de todos, XSS en la página, claves en texto plano, enumeración de usuarios, login sin límite, errores que mostraban el stack con las rutas del servidor, CORS abierto y una clave en el código. Las arreglé con el dueño en la consulta, campos permitidos, consultas con parámetros, escapar, scrypt con sal, una sola respuesta de login, un freno de cinco intentos, errores sin detalles, CORS con lista y la clave del entorno, rotándola. Las diez trampas pasan en la versión arreglada, y las pruebas de uso normal pasan en las dos, así que arreglar no rompió nada."

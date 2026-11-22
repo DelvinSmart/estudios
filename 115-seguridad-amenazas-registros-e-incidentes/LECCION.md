@@ -263,6 +263,18 @@ vf :: Un buen post-mortem dice qué persona se equivocó, para que no vuelva a p
 escribe :: Cuenta cómo respondiste a un hallazgo de seguridad real (el oráculo de las prácticas de este sitio) con los pasos de la respuesta a incidentes. :: Lo detectó una auditoría en otra sesión. Lo contuve cambiando la función para que, si no apruebas, no diga cuáles preguntas están mal. Investigué cómo se podía usar para sacar las respuestas una por una. Lo recuperé publicando el arreglo con su prueba, y lo aprendí convirtiéndolo en una lección del curso.
 ```
 
+
+**Comprobación antes de seguir**
+
+Ante una alerta ficticia, decide qué registrarías, a quién avisarías y qué dato excluirías.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Incluye hora, tipo de evento y contexto operativo sin registrar contraseñas ni credenciales.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo piensas la seguridad de una app nueva?":** "Antes de programar hago un modelo de amenazas: dibujo la app, marco las fronteras de confianza, donde entra algo que no controlo, y en cada una paso la lista STRIDE: hacerse pasar por otro, cambiar datos, negar lo hecho, filtrar información, tumbar el servicio y subir de permisos. Cada amenaza termina en una defensa y en una prueba que la demuestra. Mientras corre, dejo registros estructurados de los eventos de seguridad, sin claves ni tokens, con un par de alertas buenas, como muchas entradas malas desde una misma IP. Y tengo escrito qué hacer si pasa algo: contener primero, por ejemplo rotar una clave filtrada, después investigar con los registros, recuperar, avisar y escribir un post-mortem sin culpables."

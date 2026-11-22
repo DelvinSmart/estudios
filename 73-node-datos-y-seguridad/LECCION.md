@@ -306,6 +306,18 @@ elige :: ¿Cuándo conviene que falle una configuración mal puesta? :: Cuando a
 escribe :: ¿Qué tiene que ver la configuración en un solo lugar con un motor de diseño? :: Es la misma idea: los valores que deciden cómo se ve o cómo se comporta algo viven en un solo lugar, y el resto los llama. Cambiar un valor es cambiar una línea, no buscarlo por todo el código.
 ```
 
+
+**Comprobación antes de seguir**
+
+Para cada operación sobre un gasto, anota quién la pide, a quién pertenece el dato y si debe concederse.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Comprueba identidad y permiso sobre ese gasto por separado.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo aseguras una API en Node?":** "Guardo en una base de datos con consultas parametrizadas para evitar inyección, con restricciones en la propia tabla. Los secretos van en .env o en el gestor de secretos, nunca en el código. Verifico el token de Firebase Auth en el servidor y solo dejo tocar lo que es del uid. Pongo límites de uso, helmet, CORS para mis dominios y errores sin detalles. Y si uso firebase-admin, sé que se salta las reglas, así que valido todo en el código, como en las funciones de mi mapa de estudios."

@@ -132,7 +132,9 @@ elige :: ¿Qué hace beforeEach(() => reiniciar())? :: Borra las pruebas :: Deja
 escribe :: Escribe una prueba que confirme que GET /gastos/99 responde 404. :: test('un gasto que no existe da 404', async () => { const r = await request(app).get('/gastos/99'); assert.equal(r.status, 404); });
 ```
 
-## Parte 2. Publicar gratis
+## Parte 2. Despliegue opcional en Firebase
+
+> 📌 **Despliegue opcional.** La cuota sin costo requiere una cuenta de facturación y puede haber cargos.
 
 > 🌎 **En la vida real:** abrir la tienda: necesitas un local con dirección, luz y una puerta que esté siempre abierta.
 
@@ -152,7 +154,7 @@ export const api = onRequest({ region: 'us-central1', maxInstances: 2 }, app);
 firebase deploy --only functions:api
 ```
 
-Las funciones tienen una **cuota gratis** mensual, y el de este mapa tiene una **alerta de presupuesto** de 10 reales. Pon `maxInstances` bajo y límites de uso (clase 73) para no salirte de lo gratis.
+Completa la clase con las pruebas en local. Desplegar es opcional. Cloud Functions requiere el plan Blaze, con una cuenta de facturación. Hay una cuota sin costo y puede haber cargos. Los límites de uso ayudan a controlar el consumo y las alertas de presupuesto avisan. Consulta los [planes de Firebase](https://firebase.google.com/docs/projects/billing/firebase-pricing-plans).
 
 > 🌎 **En la vida real:** es como tener tu puesto dentro de un mercado que ya pagó la luz y la seguridad, mientras no pases cierto consumo.
 
@@ -221,7 +223,7 @@ escribe :: Escribe la lista de lo que revisas antes de publicar tu API. :: Que l
 | 4 | Express: rutas, middleware y errores |
 | 5 | Una API REST con validación y CORS |
 | 6 | Base de datos, autenticación, permisos y límites |
-| 7 | Pruebas con supertest y publicar gratis |
+| 7 | Pruebas con supertest y publicación opcional |
 
 Con esto puedes construir el **backend** de una app: una API para Copiloto, para una web o para un proyecto nuevo, y entender las funciones que ya corren en este mapa.
 
@@ -270,6 +272,18 @@ elige :: ¿En qué clase aprendiste los middleware? :: 1 :: 4 :: 7
 elige :: ¿Qué clase cubre la autenticación y los permisos? :: 2 :: 6 :: 3
 escribe :: Propón un backend en Node para una app (por ejemplo, Copiloto) y di qué partes del curso usarías. :: Por ejemplo, una API de gastos para Copiloto con Express, validación y CORS, guardando en Firestore con firebase-admin, verificando el token del usuario, con límites de uso, pruebas con supertest y publicada como Cloud Function.
 ```
+
+
+**Comprobación antes de seguir**
+
+Termina las pruebas en local y explica qué verificó cada una.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Una salida verde es más útil si sabes qué comportamiento dejaría de funcionar al cambiar la lógica.
+
+</details>
 
 ## Para la entrevista
 

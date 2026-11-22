@@ -1103,3 +1103,8 @@ body.con-reproductor { padding-bottom: 70px; }
 
 .ejercicio-pista { margin-block: 12px; padding: 8px 12px; border-left: 3px solid var(--acento-2); background: var(--fondo-2); }
 .ejercicio-pista summary { cursor: pointer; }
+
+.ejercicio-pregunta { width: 100%; min-height: 9em; }
+.ejercicio-aviso-copia:empty { display: none; }
+.pagina-legal { max-width: 72ch; margin: 0 auto; padding: 24px 16px; }
+.pagina-legal section { scroll-margin-top: 16px; }

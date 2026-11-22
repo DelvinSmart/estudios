@@ -373,6 +373,18 @@ elige :: Una empresa necesita su app en Android y en iPhone, con un equipo chico
 escribe :: Entre las dos calculadoras, ¿qué fue igual y qué cambió? :: Igual: el plan y la tabla de decisiones, la lógica separada de la pantalla, el teclado como datos, el motor de diseño, la accesibilidad y las pruebas primero. Cambió el lenguaje y sus herramientas: TypeScript con number y redondeo contra Kotlin con BigDecimal exacto y familias sealed; useState contra ViewModel; Expo contra Gradle.
 ```
 
+
+**Comprobación antes de seguir**
+
+Compara resultados decimales y gira el dispositivo con una cuenta empezada.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Revisa por separado cómo se compara el número y qué estado se conserva en pantalla.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿React Native o nativo?":** "Hice la misma calculadora de las dos formas, con las mismas decisiones y las mismas pruebas. En React Native salió para Android y iPhone con un solo código. En Kotlin, con BigDecimal los decimales son exactos y las familias sealed hacen que el compilador me avise si me olvido un caso. Comparar me enseñó dos cosas: que una prueba que nace en una versión sirve para la otra (el porcentaje con decimales, que en Kotlin daba 0 por cómo divide BigDecimal), y que el applicationId es la identidad de la app: con el mismo, Android no deja instalar las dos. Elijo según para quién es la app: las dos plataformas con un equipo chico, React Native; solo Android o lo último del sistema, nativo."

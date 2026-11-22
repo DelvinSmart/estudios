@@ -238,6 +238,18 @@ elige :: ¿Dónde se arregló que el total apareciera dos veces? :: En la pantal
 escribe :: En las clases 102, 103 y 104, ¿qué tienen en común las cosas que se encontraron mirando la app? :: Que ninguna era un error de cuenta: "1 viajes", un aviso repetido, el total dos veces y un número escapado del motor. Las pruebas no las ven porque todo estaba "bien"; aparecen mirando la app en el simulador, y cada pantalla nueva encontró algo.
 ```
 
+
+**Comprobación antes de seguir**
+
+Mira el mismo recuadro en modo claro y oscuro con el texto ampliado.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Busca colores o medidas escritos directamente en la pantalla.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo haces el diseño en SwiftUI?":** "Con un motor de diseño en un solo archivo: un `enum Motor` sin casos con las separaciones, formas y letras, y una `extension Color` con los colores con nombre, cada uno con su versión clara y oscura, usando un `UIColor` dinámico (o el catálogo de colores de Xcode). Las pantallas no escriben ningún número ni color a mano, y lo repetido, como una tarjeta, es un `ViewModifier` propio que se llama con `.tarjeta()`. Lo pruebo en el simulador en los dos modos, y releo cada pantalla buscando números escapados del motor."

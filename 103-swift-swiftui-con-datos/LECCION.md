@@ -299,6 +299,18 @@ elige :: ¿Para qué el diario usa un protocolo Guardado en vez de UserDefaults 
 escribe :: ¿Cuál fue la prueba más importante que se hizo a mano en el simulador, y por qué no alcanza con las del código? :: Cerrar la app del todo y volver a abrirla, para ver que los viajes seguían ahí. Las pruebas del código usan un guardado en memoria: no prueban que el teléfono de verdad guarde y lea.
 ```
 
+
+**Comprobación antes de seguir**
+
+Borra un elemento, cierra la app y comprueba la lista al abrirla otra vez.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Si vuelve el elemento, verifica si se guardó el cambio o si se cargó un estado anterior.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo manejas datos en SwiftUI?":** "Los modelos son structs `Identifiable` y `Codable`. Los datos que comparten varias pantallas van en una class `@Observable`, que pongo en el entorno con `.environment` y pido con `@Environment`; uso `private(set)` para que solo se cambien por sus funciones. La navegación es un `NavigationStack` con `NavigationLink(value:)` y `navigationDestination`, por eso el modelo es `Hashable`. Guardo detrás de un protocolo, como un repositorio: en el teléfono, JSON en `UserDefaults` con una clave con versión y `try?` para no caerme con datos rotos; en las pruebas, en memoria. Y lo pruebo a mano: cerrar la app y volver a abrirla."

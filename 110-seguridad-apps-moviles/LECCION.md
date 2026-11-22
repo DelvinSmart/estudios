@@ -240,6 +240,18 @@ elige :: ¿Para qué usa MobSF un defensor? :: Para hackear apps ajenas :: Para 
 escribe :: MobSF muestra que tu app pide READ_CONTACTS y tú nunca usaste los contactos. ¿Qué haces? :: Busco de dónde viene (suele ser una librería que agregué), lo saco si no hace falta, y si una librería lo necesita, evalúo si vale la pena. Un permiso peligroso que no se usa es una puerta abierta sin motivo.
 ```
 
+
+**Comprobación antes de seguir**
+
+Haz un inventario del almacenamiento de tu app con datos ficticios.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Para cada dato, indica qué función necesita conservarlo y qué protección le corresponde.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué miras en la seguridad de una app móvil?":** "Parto de que la app está en manos del atacante: el APK o el IPA se abren como un ZIP, y con jadx se lee el código, así que nada secreto va en la app; lo secreto va en el servidor. Lo sensible que guarda el teléfono va en la Keychain o el Keystore, con expo-secure-store, y lo demás, lo menos posible. Los deep links los puede abrir cualquiera: reviso cada dato, nada importante pasa sin confirmar, y prefiero Universal Links y App Links. Con Frida se apaga cualquier control que esté solo en la app, así que lo importante lo decide el servidor. Y antes de publicar, paso la app por MobSF para ver permisos de más y claves que se escaparon. La referencia es OWASP MASVS."

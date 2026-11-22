@@ -255,6 +255,18 @@ elige :: ¿Qué quiere decir el $ en Stepper(…, value: $valor)? :: Que valor e
 escribe :: ¿Por qué conviene que una regla como el plural de "viaje" esté en la lógica y no en la pantalla? :: Porque en la lógica se puede probar sin abrir la app, se usa igual desde cualquier pantalla, y la pantalla queda corta y fácil de leer: solo muestra lo que le dan.
 ```
 
+
+**Comprobación antes de seguir**
+
+Confirma en una Mac con Xcode que el simulador abre la pantalla inicial antes de editar el estado.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Cambia un texto visible y comprueba que el simulador refleja el cambio.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo funciona SwiftUI?":** "Una pantalla es un struct que cumple `View` y describe en `body` qué se dibuja, con pilas como `VStack` y `HStack` y modificadores encadenados, donde el orden importa. El estado va en `@State`: cuando cambia, SwiftUI vuelve a dibujar; con `$` le paso a un control la conexión al dato. Mantengo la pantalla sin reglas: en mi primera app, 'Mi jornada', el texto '1 viajes' lo encontré mirándola en el simulador, y lo arreglé moviendo el resumen a la lógica, donde se puede probar."

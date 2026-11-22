@@ -592,6 +592,18 @@ elige :: ¿Qué puede mostrar tu portafolio de seguridad? :: Fotos de tu computa
 escribe :: Arma tu plan de 3 meses para seguir aprendiendo seguridad. :: Por ejemplo: mes 1, redes básicas y Linux con TryHackMe; mes 2, PortSwigger Academy (control de acceso, inyección, XSS); mes 3, auditar uno de mis proyectos y escribir el informe, más algunos CTF de principiantes.
 ```
 
+
+**Comprobación antes de seguir**
+
+Documenta un control con su impacto, su corrección y una prueba que verifique la corrección.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Escribe qué conducta normal debe seguir funcionando.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿has hecho una auditoría de seguridad?":** "Sí, de mi app Copiloto Driver antes de publicarla. Definí el alcance, revisé cinco categorías (aislamiento por dueño, permisos en el cliente, IDOR, secretos y XSS), le di una severidad a cada hallazgo con su archivo, cómo se explotaba y cómo corregirlo, y después los cerré con commits y pruebas de reglas en el emulador. Por ejemplo, separé `get` de `list` en colecciones que se podían listar enteras, y corregí una regla que dejaba reservar un dato ajeno."

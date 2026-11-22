@@ -231,6 +231,18 @@ elige :: Tu web en github.io no puede leer tu API. ¿Qué revisas primero? :: El
 escribe :: Escribe la configuración de CORS para permitir tu web de GitHub Pages y tu entorno local en el puerto 5173. :: app.use(cors({ origin: ['https://delvinsmart.github.io', 'http://localhost:5173'] }));
 ```
 
+
+**Comprobación antes de seguir**
+
+Describe qué ocurre con datos inválidos y con un origen web diferente.
+
+<details>
+<summary>Necesito una pista</summary>
+
+La validación revisa los datos. CORS controla si el navegador permite que una página lea la respuesta.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo diseñas una API REST?":** "Rutas con sustantivos en plural y el verbo HTTP para la acción: GET, POST, PATCH y DELETE, con los códigos correctos (200, 201, 204, 400, 404). La lógica va separada de las rutas para probarla sola. Valido todo lo que llega, acepto solo los campos que conozco y respondo los errores siempre con la misma forma. Habilito CORS solo para mis dominios, y la autenticación va aparte."

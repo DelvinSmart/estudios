@@ -239,6 +239,18 @@ elige :: ¿Qué comando de Gradle arma el AAB de producción? :: ./gradlew test 
 escribe :: Un reclutador te pregunta por qué elegiste React Native para Copiloto y no Kotlin. ¿Qué respondes? :: Porque necesitaba la app en iPhone y Android con un solo código y un equipo chico; con Kotlin tendría que escribir además la versión de iPhone en Swift. Si necesito algo muy nativo, puedo escribir ese módulo en Kotlin.
 ```
 
+
+**Comprobación antes de seguir**
+
+Completa primero la práctica de almacenamiento de Room. Repite la idea con Firebase si ya tienes un entorno preparado.
+
+<details>
+<summary>Necesito una pista</summary>
+
+El DAO del ejercicio describe operaciones de datos. Para esa parte, puedes practicar en local.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué sabes de Android nativo?":** "Kotlin con Jetpack Compose, ViewModel con StateFlow y corrutinas, un repositorio detrás de una interfaz para probar con JUnit, DataStore para preferencias y Room para datos locales, Firebase con google-services.json y las reglas del servidor, y el AAB firmado con Gradle para Google Play. Mi app en producción es React Native, y sé cuándo conviene cada uno."

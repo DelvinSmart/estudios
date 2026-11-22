@@ -227,6 +227,18 @@ elige :: ¿Qué hace viajes.reduce(0, +)? :: Cuenta los viajes :: Suma todos los
 escribe :: ¿Cuándo usarías un Dictionary en vez de un Array? :: Cuando quiero buscar un valor por una clave (el total de cada app por su nombre) en vez de por la posición en la lista.
 ```
 
+
+**Comprobación antes de seguir**
+
+Llama a una función con etiquetas y acumula tres gastos por categoría en un diccionario.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Escribe el valor de cada clave después de cada gasto.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué tienen de especial las funciones de Swift?":** "Las etiquetas: cada dato se escribe con su nombre al llamar la función, como `mover(de: \"Centro\", a: \"Aeropuerto\")`, así la llamada se explica sola; con `_` se quita cuando no agrega nada. Las closures son funciones sin nombre, con `$0` para el primer dato y la closure al final afuera de los paréntesis, que es lo que se ve en todo SwiftUI. Y las colecciones tienen el `map`, `filter` y `reduce` de siempre; un diccionario devuelve un opcional, porque la clave puede no estar."

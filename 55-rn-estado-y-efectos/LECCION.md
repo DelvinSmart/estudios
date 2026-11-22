@@ -316,6 +316,18 @@ elige :: Quieres recargar los gastos cada vez que cambia el mes. ¿Qué dependen
 escribe :: ¿Qué es un hook? :: Una función especial de React, como useState o useEffect, que le da a un componente memoria o efectos; se llama siempre arriba del componente y puedo crear los míos.
 ```
 
+
+**Comprobación antes de seguir**
+
+Predice cuándo se ejecuta el efecto al cambiar dos controles distintos del formulario.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Mira qué dato cambió y si aparece entre las dependencias.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo manejas el estado en React?":** "Con useState para la memoria de cada componente, sin cambiarla directamente: creo arrays u objetos nuevos y uso la forma con el valor anterior. Los formularios son controlados y validan en pantalla, pero la seguridad va en el servidor. useEffect lo uso para pedir datos o suscribirme, con sus dependencias bien puestas y su limpieza. Y sigo las reglas de los hooks, que llamo siempre arriba."

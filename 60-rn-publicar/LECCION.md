@@ -216,6 +216,18 @@ elige :: Cambiaste un texto de una pantalla. ¿Cómo puede llegar a los usuarios
 escribe :: Escribe los pasos generales para publicar una versión nueva de tu app en Google Play. :: Probarla, subir el versionCode, compilar el AAB firmado con EAS (o local), subirlo a una prueba interna en Google Play, revisar y después pasarlo a producción.
 ```
 
+
+**Comprobación antes de seguir**
+
+Ejecuta las pruebas y comprueba la compilación de desarrollo disponible en tu equipo. Deja los pasos de las tiendas como ampliación.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Anota qué dispositivo o simulador usaste y qué acción funcionó.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo publicas una app de React Native?":** "La pruebo con Jest y Testing Library, compilo con EAS Build (en la nube o local), firmo con una llave que cuido como lo más valioso, subo el AAB a Google Play pasando por prueba interna, y uso TestFlight en iPhone. Los cambios de JavaScript pueden ir por EAS Update; los nativos necesitan build nuevo y subir el versionCode. Así lo hago con Copiloto Driver."

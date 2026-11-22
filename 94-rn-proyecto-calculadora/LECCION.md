@@ -382,6 +382,18 @@ elige :: ¿Para qué sirve el ayudante tocar(...teclas) en las pruebas? :: Para 
 escribe :: ¿Por qué conviene separar cómo se guarda el número (-1234.5) de cómo se ve (-1.234,5)? :: Porque así las cuentas no dependen del formato: se puede cambiar cómo se muestra (otro país, otro separador) sin tocar la lógica, y las pruebas de las cuentas siguen igual.
 ```
 
+
+**Comprobación antes de seguir**
+
+Comprueba las cuentas y el estado antes de montar los botones.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Usa la secuencia 0,1 + 0,2 y compara el valor que devuelve la lógica.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo harías una calculadora?":** "Empezaría por el plan, con una tabla de decisiones: de izquierda a derecha o con precedencia, qué pasa al dividir entre cero, con dos operadores seguidos, con el porcentaje. Cada fila se vuelve una prueba. La lógica es un reducer puro, `apretar(estado, tecla)`, que devuelve un estado nuevo y se prueba sin pantalla. Nunca `eval`: es inseguro y no te deja decidir los casos. Y redondeo a 12 cifras significativas, porque `0,1 + 0,2` en cualquier computadora da `0,30000000000000004`."

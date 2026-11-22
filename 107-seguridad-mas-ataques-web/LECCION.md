@@ -278,6 +278,18 @@ elige :: ¿Con qué nombre conviene guardar un archivo subido? :: Con el nombre 
 escribe :: ¿Por qué conviene servir los archivos subidos desde otro dominio que el de tu app? :: Porque si algo dañino se escapara (un HTML con script), correría en ese otro dominio y no con la sesión ni los datos de tu app.
 ```
 
+
+**Comprobación antes de seguir**
+
+Revisa qué entradas requieren validación al aceptar archivos, redirecciones y solicitudes del servidor.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Anota las acciones permitidas y en qué punto se valida cada una.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué revisarías en una API además de lo del OWASP Top 10 de memoria?":** "Las puertas que no se ven en la pantalla: path traversal, donde calculo la ruta final y compruebo que no salió de la carpeta, o mejor, guardo los archivos con un id; SSRF, si el servidor busca URLs que manda el usuario, con lista de permitidos, solo https y sin direcciones internas; redirecciones abiertas, donde el destino solo puede ser una ruta de mi sitio, cuidando // y \; y las subidas, que reviso por los primeros bytes y no por el nombre, con tamaño máximo, sin HTML ni SVG, y servidas desde otro dominio. En todas, lo mismo: lista de permitidos, no de prohibidos, y nunca confiar en lo que viene del usuario."

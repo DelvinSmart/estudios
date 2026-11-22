@@ -310,6 +310,18 @@ elige :: ¿Qué hace escapar con "<b>hola</b>"? :: Lo borra :: Lo convierte en &
 escribe :: ¿Qué aprendiste de la auditoría sobre el código repetido? :: Que no es solo desprolijo: una regla de seguridad repetida en varios lugares se termina arreglando en unos y no en otros. Tiene que vivir en un solo lugar, con su prueba, y los demás la importan.
 ```
 
+
+**Comprobación antes de seguir**
+
+Ubica cada hallazgo en una versión del sitio y anota qué control debería existir hoy.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Una nota histórica debe incluir su fecha o commit y una comprobación defensiva actual.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿hiciste alguna auditoría de seguridad?":** "Sí, la de mi propio sitio de estudios, hecha por una sesión aparte que no lo había construido, y verificando cada hallazgo antes de arreglarlo. Encontramos, entre otras cosas: que la corrección de las prácticas funcionaba como un oráculo, porque decía qué pregunta fallaba, y ahora solo dice cuántas; que con variantes de Gmail se podía inundar a una persona de correos y gastar el tope del sitio, y ahora se cuenta la bandeja canónica y hay un tope por conexión; que la llave del panel estaba en un localStorage compartido con todos los proyectos de mi cuenta de github.io, y pasó a sessionStorage; que había cinco copias de la función de escapar y ninguna escapaba la comilla simple. También agregamos SRI a los scripts del CDN, fijamos las acciones de GitHub por SHA y pusimos límites a lo que entra."

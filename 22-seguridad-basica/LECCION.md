@@ -514,6 +514,18 @@ elige :: Para entrar al banco en un aeropuerto, ¿qué es más seguro? :: El Wi-
 escribe :: ¿Por qué un sitio con candado puede ser igual un engaño? :: Porque el candado solo dice que la conexión está cifrada con ese dominio; un estafador puede tener su propio dominio con certificado, así que hay que revisar el nombre del dominio.
 ```
 
+
+**Comprobación antes de seguir**
+
+Identifica tres datos sensibles de una app de gastos y quién necesita ver cada uno.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Empieza por distinguir los datos de una persona de los datos visibles al público.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué es lo primero que miras para asegurar una app?":** "Hago un modelo de amenazas: qué protejo, quién lo atacaría y cómo. Después reviso que nada importante dependa del cliente: permisos y límites en el servidor, secretos fuera del repositorio y en un gestor de secretos, contraseñas manejadas por un servicio que guarde hashes con sal, y HTTPS en todo."

@@ -324,6 +324,18 @@ elige :: ¿Dónde guardarías un token de sesión? :: AsyncStorage :: expo-secur
 escribe :: Escribe cómo guardar y leer un número de meta diaria con AsyncStorage. :: await AsyncStorage.setItem('meta', JSON.stringify(250)); const meta = JSON.parse((await AsyncStorage.getItem('meta')) ?? '0');
 ```
 
+
+**Comprobación antes de seguir**
+
+Abre el detalle con un dato, cierra la app y comprueba qué valor se conserva al abrirla.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Distingue el parámetro que viajó con la navegación del valor que se escribió en el almacenamiento.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo manejas la navegación en React Native?":** "Con React Navigation: pestañas abajo para las secciones principales y native-stack para ir y volver con transiciones nativas. Las rutas están tipadas en TypeScript y paso solo ids en los params. Uso deep links para abrir pantallas exactas. Para guardar en el teléfono uso AsyncStorage con JSON para preferencias y datos sin internet, y SecureStore para cualquier secreto."

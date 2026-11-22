@@ -386,6 +386,18 @@ elige :: ¿Cómo sabe la app de Compose si el teléfono está en modo oscuro? ::
 escribe :: ¿Por qué copy sirve para armar el tema claro a partir del oscuro? :: Porque copy crea un tema nuevo cambiando solo lo que le dices (el fondo y el texto) y dejando igual lo demás (espacios, radio, acento). Así los dos temas comparten las mismas medidas sin copiarlas a mano.
 ```
 
+
+**Comprobación antes de seguir**
+
+Abre primero la pantalla inicial en Android Studio. Después cambia un dato de estado y comprueba el resultado.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Si la pantalla inicial no abre, comprueba la sincronización del proyecto y el dispositivo seleccionado.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo haces una pantalla en Android moderno?":** "Con Jetpack Compose: funciones @Composable, Column, Row y LazyColumn, y Modifier para el estilo. El estado local va con remember y mutableStateOf; el estado de la pantalla en un ViewModel que expone un StateFlow con una sealed de Cargando, Lista o Error, pidiendo los datos en viewModelScope con un repositorio. Es la misma idea que React Native, que ya uso en Copiloto, pero nativa."

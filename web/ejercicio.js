@@ -224,11 +224,41 @@ export function crearEjercicio(texto, id) {
       <button class="boton ejercicio-reiniciar" type="button">reiniciar</button>
       ${ej.solucion ? '<button class="boton ejercicio-ver" type="button" disabled>ver solución</button>' : ''}
     </div>
+    <details class="ejercicio-pista">
+      <summary>Necesito una pista</summary>
+      <p>Elige un caso de prueba. Escribe qué dato entra y qué resultado esperas antes de tocar el código.</p>
+      <details>
+        <summary>Ver el siguiente paso</summary>
+        <p>${ej.pista ? enLinea(ej.pista) : 'Compara el resultado esperado con el que recibiste. Sigue el valor a través de una sola parte de tu código y revisa dónde cambia.'}</p>
+        <p>Si el compilador externo no responde, vuelve a intentar o usa un entorno local del mismo lenguaje.</p>
+      </details>
+      <button class="boton ejercicio-copiar-pregunta" type="button">Copiar pregunta para un tutor</button>
+      <p class="ejercicio-aviso-copia" aria-live="polite"></p>
+      <textarea class="ejercicio-pregunta" aria-label="Pregunta para copiar" readonly hidden></textarea>
+    </details>
     <div class="ejercicio-resultado" aria-live="polite"></div>
     <pre class="ejercicio-solucion" hidden></pre>`;
 
   const editor = caja.querySelector('.ejercicio-codigo');
   const resultado = caja.querySelector('.ejercicio-resultado');
+  const pregunta = caja.querySelector('.ejercicio-pregunta');
+  const avisoCopia = caja.querySelector('.ejercicio-aviso-copia');
+  pregunta.value = [
+    'Estoy aprendiendo programación. Dame una sola pista en español y espera mi intento. Evita darme la solución completa.',
+    'Concepto que estoy practicando: [describe el concepto].',
+    'Esperaba: [resultado]. Obtuve: [resultado o mensaje sin datos privados].',
+  ].join('\n');
+  caja.querySelector('.ejercicio-copiar-pregunta').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(pregunta.value);
+      avisoCopia.textContent = 'Pregunta copiada. Completa los campos antes de compartirla.';
+    } catch {
+      pregunta.hidden = false;
+      pregunta.focus();
+      pregunta.select();
+      avisoCopia.textContent = 'Puedes seleccionar y copiar la pregunta manualmente.';
+    }
+  });
   const botonVer = caja.querySelector('.ejercicio-ver');
   editor.value = leer(CLAVE + id) ?? ej.codigo;
   // Cuántas veces probó con código propio. Si ya lo resolvió, la solución queda libre.
@@ -275,7 +305,6 @@ export function crearEjercicio(texto, id) {
       ${r.error ? `<p class="ejercicio-error">✗ ${esc(r.error)}</p>` : ''}
       ${total ? `<p class="ejercicio-cuenta mono ${todo ? 'bien' : ''}">${todo ? '✓ ¡Todas las pruebas pasan!' : `${bien} de ${total} pruebas pasan`}</p>` : ''}
       <ul class="ejercicio-pruebas">${r.resultados.map((x) => `<li class="${x.paso ? 'bien' : 'mal'}"><span>${x.paso ? '✓' : '✗'}</span> ${esc(x.nombre)}${x.paso || !x.mensaje ? '' : `<small>${esc(x.mensaje)}</small>`}</li>`).join('')}</ul>
-      ${ej.pista && (r.error || total > bien) ? `<details class="ejercicio-pista"><summary>¿Necesitas una pista?</summary><p>${enLinea(ej.pista)}</p></details>` : ''}
       ${r.logs?.length ? `<pre class="ejercicio-consola">${esc(r.logs.join('\n'))}</pre>` : ''}`;
     if (vista) resultado.after(vista);
   };

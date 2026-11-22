@@ -251,6 +251,18 @@ elige :: Un botón de SwiftUI tiene que llamar a algo async. ¿Cómo? :: Escribi
 escribe :: Tienes que traer las ganancias de Uber, de 99 y de inDrive, y cada pedido tarda 1 segundo. ¿Cómo lo harías y cuánto tardaría? :: Con tres async let, uno por app, y un solo await al sumar. Los tres empiezan juntos, así que tardaría alrededor de 1 segundo en vez de 3.
 ```
 
+
+**Comprobación antes de seguir**
+
+Prueba primero un error con `throws`. Después observa qué pasa cuando dos operaciones esperan.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Separa el lugar donde se comunica el fallo del lugar donde se recibe o se espera el resultado.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo manejas errores y tareas que tardan en Swift?":** "Las funciones que pueden fallar llevan `throws` en la firma, los errores son un `enum` que cumple `Error`, y quien llama usa `try` dentro de un `do-catch` cuando la persona necesita saber qué pasó, o `try?` cuando alcanza con saber si salió. Evito `try!`. Para lo que tarda uso `async`/`await`, y `async let` para hacer varios pedidos al mismo tiempo, como un `Promise.all`. Desde la pantalla, que no es async, lo empiezo con un `Task`, y la pantalla se cambia en el `@MainActor`."

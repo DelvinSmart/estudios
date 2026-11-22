@@ -199,6 +199,18 @@ elige :: ¿Qué devuelve firstOrNull si nada cumple la condición? :: Un error :
 escribe :: Escribe cómo obtener los viajes de 99 con valor mayor que 20. :: viajes.filter { it.app == "99" && it.valor > 20 }
 ```
 
+
+**Comprobación antes de seguir**
+
+Agrupa tres gastos de ejemplo y suma cada grupo a mano antes de correr el código.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Mira la colección intermedia que devuelve `groupBy`.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo trabajas con colecciones en Kotlin?":** "Prefiero las colecciones de solo lectura (listOf, mapOf) y uso mutable solo cuando hace falta cambiar algo. Uso map, filter, sumOf, groupBy y firstOrNull con lambdas, que van fuera de los paréntesis y usan it. Escribo funciones con valores por defecto y argumentos con nombre, y funciones de extensión cuando agregan claridad, como formatear reales."

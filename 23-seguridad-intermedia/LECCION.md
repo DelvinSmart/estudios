@@ -621,6 +621,18 @@ elige :: ¿Dónde deben ir las barreras de seguridad en una app con IA? :: En la
 escribe :: Una IA puede "borrar gastos". ¿Qué controles pondrías en el código? :: Que solo pueda borrar gastos del uid de la sesión, validar que el gasto exista y sea de esa persona, pedir confirmación a la persona y limitar cuántas acciones hace por minuto.
 ```
 
+
+**Comprobación antes de seguir**
+
+Arma una matriz de usuario, recurso y acción para revisar permisos.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Incluye una acción permitida y otra que el servidor debe rechazar.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué vulnerabilidad corregiste?":** "En una app con Firebase, unas colecciones tenían `allow read`, que incluye listar. Cualquiera con el SDK podía descargar todos los documentos. Separé `get` de `list` y cerré `list`. También corregí una regla que dejaba a un usuario reservar un dato que no era suyo: ahora exige que coincida con su propio perfil. Y siempre escapo el texto que viene del usuario antes de meterlo en HTML."

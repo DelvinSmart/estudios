@@ -4,6 +4,9 @@ Este es mi curso de programación, hecho con mi propia app, Copiloto Driver.
 Cada clase usa código real de la app, el mismo que voy a tener que explicar
 en una entrevista.
 
+Mapa de estudios es gratuito. © 2026 Delvin José Rodríguez. Consulta los
+[términos de uso y el aviso de privacidad](https://delvinsmart.github.io/estudios/web/legal.html).
+
 ## Los archivos importantes
 
 | Archivo | Para qué sirve |

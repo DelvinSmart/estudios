@@ -314,6 +314,18 @@ elige :: Eres el único programador de Copiloto. ¿Qué arquitectura conviene? :
 escribe :: Con tus palabras: ¿qué tiene en común el AIEventBus de Copiloto con los microservicios que se hablan por eventos? :: Las dos usan eventos: una parte avisa "pasó algo" y las que les interesa escuchan, sin conocerse entre ellas. En Copiloto pasa dentro de la app; en microservicios, por la red.
 ```
 
+
+**Comprobación antes de seguir**
+
+Decide si separarías el sistema de gastos en varios servicios y justifica la decisión.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Escribe un problema concreto que mejoraría con la separación y un costo nuevo que traería.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué es un BFF?":** "Backend for Frontend: un servidor hecho a la medida de cada frontend. Por ejemplo, en Copiloto tendría uno para la app del celular y otro para la versión web. La app hace una sola llamada para la pantalla Início y recibe solo lo que muestra; por dentro, el BFF junta los datos de varios servicios con `Promise.allSettled` y un tiempo máximo, para que si uno falla la pantalla igual cargue. Con un solo frontend no lo usaría: sería un servidor más sin ganar nada."

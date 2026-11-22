@@ -397,6 +397,18 @@ elige :: ¿Qué diferencia hay entre armar la app en Debug y en Release? :: Rele
 escribe :: ¿Por qué la calculadora sale para Android y para iPhone con un solo código? :: Porque está hecha con React Native: el mismo TypeScript se convierte en botones y textos nativos de cada sistema. Solo cambia cómo se arma e instala en cada uno.
 ```
 
+
+**Comprobación antes de seguir**
+
+Pulsa dos teclas rápido y prueba un resultado largo en el visor.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Si falla la secuencia, revisa las transiciones de estado. Si solo se corta el texto, revisa el visor.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "cuéntame de un proyecto tuyo de principio a fin":** "Hice una calculadora en React Native con TypeScript y Expo, que sale para Android y iPhone con un solo código. Empecé por el plan con una tabla de decisiones, que se volvió las pruebas. La lógica es un reducer puro, sin eval, con 0,1 + 0,2 resuelto redondeando a 12 cifras. El diseño sale de un motor con tema claro y oscuro, el teclado es una tabla de datos, y cada tecla tiene su etiqueta para el lector de pantalla. Tiene 56 pruebas, pero lo más interesante lo encontré mirando la app en un iPhone SE: el número largo se cortaba, porque adjustsFontSizeToFit solo funciona en iOS. Lo arreglé con una prueba primero, calculando la letra con el ancho. Y la armé en Release: la instalé en el simulador del iPhone y como APK en un Android, con el mismo código."

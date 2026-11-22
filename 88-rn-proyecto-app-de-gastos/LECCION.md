@@ -542,6 +542,18 @@ elige :: ¿Por qué hay que cambiar com.tuusuario.gastosdelcarro antes de public
 escribe :: Escribe los comandos para bajar la app, probarla y abrirla en tu iPhone. :: git clone --depth 1 https://github.com/DelvinSmart/estudios.git, cd estudios/88-rn-proyecto-app-de-gastos/proyecto, npm install, npm test (27 en verde), npm run tipos, y npx expo start para escanear el QR con el iPhone y abrirla en Expo Go.
 ```
 
+
+**Comprobación antes de seguir**
+
+Registra un gasto, cierra la app, vuelve a abrirla y comprueba la lista y el total.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Si desaparece, revisa por separado la escritura y la lectura al arrancar.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué hiciste con React Native?":** "Una app de gastos del carro con Expo y TypeScript, como mi app Copiloto pero en chico. La separé en piezas con una sola tarea: un motor de diseño con todos los colores y medidas, la lógica pura con sus pruebas (las reglas, el total de la semana de lunes a hoy, el dinero como en Brasil), un repositorio con un contrato de dos funciones que guarda en AsyncStorage, un hook que lee antes de guardar para no pisar los datos, y la pantalla con FlatList, SafeArea, el teclado, memo y useCallback. Tiene 27 pruebas con Jest y Testing Library, que usan la pantalla como una persona. Probándola de verdad encontré que el gasto más nuevo quedaba abajo si era del mismo día; escribí la prueba en rojo y lo arreglé poniéndolo primero, porque sort es estable. La abro en mi iPhone con Expo Go."

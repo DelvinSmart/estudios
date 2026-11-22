@@ -334,6 +334,18 @@ elige :: ¿Qué hace freezeOnBlur en Copiloto? :: Borra las pestañas :: Congela
 escribe :: Antes de optimizar una pantalla lenta, ¿qué haces primero y por qué? :: Medirla con el perfilador para encontrar qué tarda de verdad, porque optimizar a ciegas gasta tiempo y puede no arreglar el problema.
 ```
 
+
+**Comprobación antes de seguir**
+
+Identifica si la demora aparece antes de recibir los datos o al dibujarlos.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Observa por separado cuándo llega la respuesta y cuándo se vuelve a dibujar la lista.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿cómo conectas datos y cuidas el rendimiento en React Native?":** "Uso el SDK de Firebase con onSnapshot dentro de un useEffect que limpia la suscripción, y las reglas del servidor deciden quién lee qué. Comparto la sesión con Context y un hook propio. Para el rendimiento: el estado donde se usa, FlatList para listas, React.memo, useMemo y useCallback cuando hace falta, y congelo pantallas que no se ven. Siempre mido con el perfilador antes, como hice en Copiloto con Hermes."

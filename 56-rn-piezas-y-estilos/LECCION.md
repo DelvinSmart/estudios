@@ -379,6 +379,18 @@ elige :: ¿Cómo tiene modo claro una app de React Native con motor de diseño? 
 escribe :: Encuentras padding: 13 escrito a mano en un componente. ¿Qué haces y por qué? :: Lo cambio por un valor del motor (espacio.medio, por ejemplo), o agrego ese valor al motor si de verdad hace falta. Si no, ese componente no cambia cuando cambia el motor y la app queda despareja.
 ```
 
+
+**Comprobación antes de seguir**
+
+Prueba una tarjeta en una pantalla estrecha y con letras ampliadas.
+
+<details>
+<summary>Necesito una pista</summary>
+
+Busca alturas fijas o texto que ya no quepa.
+
+</details>
+
 ## Para la entrevista
 
 > 🎤 **Si te preguntan "¿qué diferencias hay entre React y React Native?":** "La lógica es la misma: componentes, props, estado y hooks. Cambian las piezas: View, Text, Pressable y TextInput en vez de etiquetas HTML, que se convierten en vistas nativas. Los estilos son objetos con StyleSheet y Flexbox en columna por defecto. Para listas largas uso FlatList, y cuido SafeArea, el teclado y los tamaños, probando en iPhone y Android."
