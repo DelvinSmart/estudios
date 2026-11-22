@@ -200,7 +200,31 @@ console.log(doble(4));   // muestra 8
 | `(numero)` | Lo que la función **recibe**, como la fruta de la licuadora. A esta cajita de entrada se le llama **parámetro**. |
 | `{ }` | Entre las llaves va el **trabajo** que hace. |
 | `return` | **Devuelve** este resultado a quien usó la función. Es el jugo que sale. |
+| `numero * 2` | La **cuenta**: toma lo que hay en `numero` y lo multiplica por 2. |
 | `doble(4)` | **Usa** la función y le entrega un 4. Dentro, `numero` vale 4. |
+
+#### ¿De dónde sale ese 2?
+
+**El doble** de algo es ese algo **multiplicado por 2**. El doble de 4 es 4 × 2 = 8. Por eso la función tiene un `2` escrito adentro: es la parte de la cuenta que **siempre es igual**. Lo que cambia es `numero`, porque es lo que tú le entregas cada vez.
+
+> 🌎 **En la vida real:** imagina que un viaje paga el doble en un día festivo. La regla siempre es «multiplica por 2». Lo que cambia es cuánto valía el viaje: si valía 4 te pagan 8, si valía 10 te pagan 20.
+
+Mira lo que hace la máquina con `console.log(doble(4));`, paso a paso:
+
+1. Lee `doble(4)` y entra a la función con ese 4.
+2. Guarda el 4 en la cajita `numero`.
+3. Cambia `numero * 2` por `4 * 2`.
+4. Hace la cuenta: da **8**.
+5. `return` saca el 8 de la función, y ese 8 queda en el lugar donde estaba `doble(4)`.
+6. `console.log` muestra **8** en la pantalla.
+
+| Si escribes | `numero` vale | La cuenta | Resultado |
+|---|---|---|---|
+| `doble(4)` | 4 | `4 * 2` | **8** |
+| `doble(10)` | 10 | `10 * 2` | **20** |
+| `doble(25)` | 25 | `25 * 2` | **50** |
+
+No confundas los dos números: el **4** lo entregas tú al usar la función, y el **2** ya viene escrito dentro. Si cambiaras ese `2` por un `3`, la función daría el triple.
 
 Crear la función es como comprar la licuadora: todavía no hizo nada. Trabaja cuando la **usas**, escribiendo su nombre con paréntesis.
 
