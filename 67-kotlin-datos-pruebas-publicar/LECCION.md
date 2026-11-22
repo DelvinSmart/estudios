@@ -40,6 +40,9 @@ Las consultas con parámetros evitan la inyección SQL (Tema 23). Para los secre
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`sortedBy { }`**: da una lista **nueva** ordenada por el dato que dices: `gastos.sortedBy { it.valor }` (de menor a mayor). `sortedByDescending` ordena al revés. La lista original no cambia.
 
+> 🧩 **Piezas para este ejercicio**
+> - El DAO reúne las operaciones de almacenamiento. Usa el id `0` como señal para crear un id y conserva el id asignado en el objeto que guardas. Para consultar, ordena por id y filtra por tipo cuando corresponda.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -135,6 +138,9 @@ Corren con Gradle (`./gradlew test`) o con el ▶ verde al lado de la prueba en 
 
 > 🌎 **Otro ejemplo:** Es como probar la balanza con un peso conocido.
 
+> 🧩 **Piezas para este ejercicio**
+> - El valor absoluto mide qué tan separados están los números sin importar cuál es mayor. Compáralo con el margen, incluyendo el caso en que son iguales.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -202,6 +208,9 @@ Saber los dos te deja escribir un módulo nativo en Kotlin para tu app de React 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`joinToString()`**: une una lista en un solo texto, con lo que pongas entre medio: `listOf("uber", "99").joinToString(", ")` → `"uber, 99"`.
 > - **`toInt()`, `toDouble()` y `toString()`**: convierten entre texto y número: `"12".toInt()` → `12`, `"12.5".toDouble()` → `12.5`, `12.toString()` → `"12"`. Si el texto no es un número, `toInt()` rompe el programa; `toIntOrNull()` da `null` en vez de romperse.
+
+> 🧩 **Piezas para este ejercicio**
+> - Separa la versión por puntos, convierte la última parte a número y vuelve a unir. El número de compilación se incrementa aparte de la versión que verá la persona.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -63,6 +63,9 @@ Como la familia es **cerrada**, Kotlin sabe cuáles son **todas** las teclas. Si
 
 > 💡 **Idea:** el teclado sigue siendo **datos** (`FILAS`, una lista de listas de teclas), como en la clase 95. Y las pruebas buscan las teclas por su símbolo con `teclaDe("+")`, así se escriben **igual** que las de React Native: `tocar("2", "+", "3", "=")`.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un `when` sobre un tipo `sealed` puede comprobar tanto casos únicos como tipos de caso. Incluye los casos de dígito y coma aunque compartan la misma respuesta.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -143,6 +146,9 @@ En Kotlin, `/` entre dos `BigDecimal` **conserva los decimales del primero**. `1
 
 En rojo, después `.divide(CIEN, DOCE_CIFRAS)`, y en verde. Y la **misma prueba** se agregó a la calculadora de React Native, donde pasó sin cambiar nada (JavaScript divide con decimales siempre). **Una prueba que nace en una versión sirve para las dos.**
 
+> 🧩 **Piezas para este ejercicio**
+> - Crea `BigDecimal` a partir de los textos. `divide` con un contexto indica cuántas cifras usar y `stripTrailingZeros` quita ceros al final del resultado.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -222,6 +228,9 @@ sealed interface Resultado {
 
 En TypeScript era `number | string`, y había que mirar con `typeof`. En Kotlin, un `when (r)` con `is Resultado.Aviso` e `is Resultado.Numero`, y otra vez: si falta un caso, no compila.
 
+> 🧩 **Piezas para este ejercicio**
+> - Decide según la tecla y el estado actual. `copy(...)` permite devolver otra pantalla y conservar los campos que todavía sirven.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -277,6 +286,9 @@ Fíjate en la primera fila. `update { }` recibe **siempre el estado más nuevo**
 **El ViewModel, probado en el emulador.** Con `-0,333333333333` en el visor, se cambió el emulador de modo oscuro a claro. Android **recrea la pantalla** cuando cambia el tema (y cuando giras el teléfono)… y **el número siguió ahí**. Eso es el ViewModel (clase 66): el estado vive afuera de la pantalla y sobrevive cuando ella se vuelve a crear. Con un `remember` común, se habría borrado.
 
 > 💡 **Idea:** `Calculadora(estado, colores, anchoPantalla, alTocar)` está separada de `PantallaCalculadora(vm, colores)`: la primera **no conoce** al ViewModel, recibe todo lo que dibuja. Así se la puede ver en la vista previa de Android Studio con cualquier estado, sin tocar teclas.
+
+> 🧩 **Piezas para este ejercicio**
+> - Primero resuelve el estado encendido. Para el resto, el `when` del enum puede agrupar dos casos con una coma.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -348,6 +360,9 @@ Después, en el emulador, en modo oscuro y claro: `0,1 + 0,2 =` dio **0,3**; `15
 **¿Cuál conviene?** Depende de para quién es la app. Si tiene que estar en **Android y en iPhone** y la hace un equipo chico, React Native ahorra hacer todo dos veces (Copiloto lo hace así). Si es **solo para Android** o necesita lo último de Android (widgets, el reloj, el auto), Kotlin nativo es el camino directo. Lo que **no** cambia, y es lo más importante: el plan, la tabla de decisiones, la lógica separada de la pantalla, el motor de diseño y las pruebas primero. **Eso es saber programar; el lenguaje es la herramienta.**
 
 > 📌 **Nota:** ¿por qué esta app no se puede subir a la App Store del iPhone, y por qué existen apps solo para Android? Está explicado en la clase 44, en **"Para ir más lejos: ¿por qué la app de un teléfono no sirve en el otro?"**.
+
+> 🧩 **Piezas para este ejercicio**
+> - Los pares traen un nombre y un identificador. Agrupa usando el identificador, cuenta las apps de cada grupo y convierte los grupos repetidos en una lista ordenada.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

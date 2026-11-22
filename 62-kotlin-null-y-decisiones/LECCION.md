@@ -38,6 +38,9 @@ val seguro = apodo!!.length          // "confía en mí": si es null, la app se 
 
 > 🌎 **Otro ejemplo:** `!!` es como saltar en paracaídas sin revisar si está bien doblado.
 
+> 🧩 **Piezas para este ejercicio**
+> - `?.` solo lee o llama lo que sigue si el dato está presente. `?:` elige un respaldo si el resultado es `null`. `firstOrNull()` también puede devolver `null` para un texto vacío.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -113,6 +116,9 @@ val nivel = when {
 
 > 🌎 **Otro ejemplo:** Es como la tabla de precios de un estacionamiento por horas.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un `when` puede devolver el valor de la primera rama que coincide. Prueba los umbrales de mayor a menor. Para un `when` con argumento, una coma permite que dos valores compartan una rama.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -185,6 +191,9 @@ while (ahorro < 1000) {
 > 🌎 **En la vida real:** es como llenar un balde con un vaso: repites mientras no esté lleno.
 
 > 🌎 **Otro ejemplo:** Es como esperar el bus: mientras no llegue, sigues esperando.
+
+> 🧩 **Piezas para este ejercicio**
+> - `0..hasta` incluye ambos extremos y `step` cambia el salto. `while` revisa la condición antes de cada vuelta, así que una meta ya alcanzada requiere cero vueltas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

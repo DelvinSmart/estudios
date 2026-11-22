@@ -43,6 +43,9 @@ fun main() = runBlocking {
 
 > 🌎 **Otro ejemplo:** Es como un simulador que pausa el tiempo.
 
+> 🧩 **Piezas para este ejercicio**
+> - `suspend` indica que una función puede suspenderse. `delay` pausa esa corrutina y permite que otras tareas avancen. Al llamar otra función `suspend`, el código continúa cuando llega su resultado.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -121,6 +124,9 @@ Toda corrutina vive dentro de un **scope**. En Android, `viewModelScope` cancela
 > 🌎 **En la vida real:** al cerrar la tienda, el encargado apaga todas las máquinas.
 
 > 🌎 **Otro ejemplo:** Es como al terminar el turno: se cierran todos los pedidos abiertos.
+
+> 🧩 **Piezas para este ejercicio**
+> - Dentro de `coroutineScope`, crea las dos tareas con `async` antes de llamar a `await`. Así ambas pueden avanzar durante la espera.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -202,6 +208,9 @@ En Android se usa `StateFlow` para el estado de una pantalla (próxima clase).
 > 🌎 **En la vida real:** es como estar suscrito a un canal: cada noticia nueva llega sola.
 
 > 🌎 **Otro ejemplo:** Es como el marcador en vivo de un partido.
+
+> 🧩 **Piezas para este ejercicio**
+> - `emit` entrega un valor a quien recoge el flujo. Dentro de `collect`, suma lo que acaba de llegar y guarda el total de esa vuelta en la lista de resultados.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

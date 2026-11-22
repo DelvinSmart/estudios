@@ -31,6 +31,9 @@ Una función que no devuelve nada devuelve `Unit` (como `void`).
 
 > 🌎 **Otro ejemplo:** Es como el control del aire: arranca en 23 grados y cambias lo que quieres.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un parámetro con `= valor` en la declaración puede omitirse en la llamada. Con argumentos con nombre puedes indicar qué valor estás pasando. `maxOf` elige el mayor de dos números.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -90,6 +93,9 @@ fun Double.enReales(): String = "R$ %.2f".format(this)
 > 🌎 **En la vida real:** es como ponerle un accesorio a una herramienta que ya tenías.
 
 > 🌎 **Otro ejemplo:** Es como agregar un botón de atajo a tu celular.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una lambda es una función escrita entre llaves. En una extensión, `this` es el valor sobre el que llamaste el método. Dentro de `filter`, `it` es el elemento que se está comprobando.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -163,6 +169,9 @@ val caro = viajes.firstOrNull { it.valor > 40 }
 > 🌎 **En la vida real:** son las mismas herramientas de la cocina que ya usabas (clase 48), con otro mango.
 
 > 🌎 **Otro ejemplo:** Es como el cierre de caja: filtrar, sumar y agrupar.
+
+> 🧩 **Piezas para este ejercicio**
+> - `groupBy` forma un mapa de clave a lista. `mapValues` deja las claves y transforma sus listas en totales. `firstOrNull { ... }` se queda con el primer viaje que cumple o devuelve `null`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

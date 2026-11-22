@@ -46,6 +46,9 @@ val (id, tipo, valor) = g          // desestructurar
 
 > 🌎 **Otro ejemplo:** Es como una plantilla de contrato donde cambias solo el nombre.
 
+> 🧩 **Piezas para este ejercicio**
+> - `km % cada` da el resto después de los intervalos completos. `copy(valor = nuevo)` crea un gasto con ese campo cambiado y toma los demás del original.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -131,6 +134,9 @@ Si mañana agregas un estado nuevo, Kotlin te avisa en cada `when` que te falta 
 > 🌎 **En la vida real:** es como una lista de chequeo que te avisa si te olvidaste un ítem.
 
 > 🌎 **Otro ejemplo:** Es como el tablero de un avión que no te deja despegar si falta un control.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una familia `sealed` le permite al compilador conocer todos sus casos. Un `when` sin `else` puede devolver un resultado si menciona todos. En la rama de un tipo con datos puedes leer sus propiedades.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -223,6 +229,9 @@ La pantalla depende de la **interfaz**, no de Firebase: en las pruebas usas el d
 > 🌎 **En la vida real:** es como un enchufe estándar: puedes conectar cualquier aparato que cumpla la forma.
 
 > 🌎 **Otro ejemplo:** Es como un puesto de trabajo: lo puede ocupar cualquiera que cumpla el perfil.
+
+> 🧩 **Piezas para este ejercicio**
+> - La interfaz establece qué métodos puede llamar el servicio. El repositorio de memoria implementa esos métodos con una lista propia. `sumOf` toma el número de cada gasto y suma esos números.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

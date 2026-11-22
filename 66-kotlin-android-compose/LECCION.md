@@ -40,6 +40,9 @@ La **Activity** es la ventana de la app; `setContent` pone adentro tu pantalla d
 
 > 🌎 **Otro ejemplo:** Es como el escenario y la obra.
 
+> 🧩 **Piezas para este ejercicio**
+> - `lines()` separa las líneas y `trim()` limpia los extremos. Después de reconocer `implementation(`, toma el texto entre comillas y separa la versión del grupo y el nombre.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -146,6 +149,9 @@ Como `FlatList`: solo dibuja lo que se ve, y la `key` es el id.
 
 > 🌎 **Otro ejemplo:** Es como una vitrina que muestra pocos productos a la vez.
 
+> 🧩 **Piezas para este ejercicio**
+> - Dentro de un setter, `value` es el dato nuevo y `field` es el valor que estaba guardado. Usa `field` para escribir sin volver a llamar al setter.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -231,6 +237,9 @@ Junta todo el curso: la **sealed** (clase 64), las **corrutinas** y el scope (65
 > 🌎 **En la vida real:** el ViewModel es la cocina; la pantalla es el mozo que lleva lo que sale.
 
 > 🌎 **Otro ejemplo:** Es como el cerebro y la cara: uno piensa, la otra muestra.
+
+> 🧩 **Piezas para este ejercicio**
+> - `StateFlow` mantiene un estado actual. En el ejemplo, el valor nuevo puede salir de `try` si la lectura funciona o de `catch` si falla.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -344,6 +353,9 @@ Card(shape = RoundedCornerShape(Motor.Forma.radio)) {
 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`if` que devuelve un valor**: en Kotlin, `if` **da un resultado**, así que se puede guardar: `val nivel = if (ganancia >= 250) "buena" else "normal"`. `when` funciona igual. Por eso Kotlin no necesita el `? :` de JavaScript.
+
+> 🧩 **Piezas para este ejercicio**
+> - Si el color está dentro de otro objeto, copia primero ese objeto con sus colores nuevos y úsalo al copiar el tema. Los demás campos pueden venir del tema original.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

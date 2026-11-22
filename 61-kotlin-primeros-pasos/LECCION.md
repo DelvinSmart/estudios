@@ -34,6 +34,9 @@ Para apps de Android (clases 66 y 67) se usa **Android Studio**, gratis, para Ma
 
 > 🌎 **Otro ejemplo:** Es como pasar del simulador a la pista de entrenamiento.
 
+> 🧩 **Piezas para este ejercicio**
+> - `fun` declara una función. El valor que sigue a `return` es lo que recibe quien la llama. En una cadena, `$nombre` inserta el valor del parámetro.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -100,6 +103,9 @@ Kotlin es **estáticamente tipado** como TypeScript, pero aquí los tipos se rev
 > 🌎 **En la vida real:** es como las etiquetas de los frascos, pero pegadas con pegamento: no se pueden despegar.
 
 > 🌎 **Otro ejemplo:** Es como el control de seguridad de un aeropuerto: no hay forma de saltarlo.
+
+> 🧩 **Piezas para este ejercicio**
+> - `val` conserva el valor inicial y `var` permite asignar otro. El total necesita cambiar después de cada recorrido. En `for (r in recorridos)`, `r` recibe una distancia por vuelta.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -168,6 +174,9 @@ println("El nombre tiene ${nombre.length} letras")
 > 🌎 **En la vida real:** es como la carta modelo con huecos.
 
 > 🌎 **Otro ejemplo:** Es como el cartel del bus que cambia el destino.
+
+> 🧩 **Piezas para este ejercicio**
+> - Convierte uno de los números antes de dividir para conservar la parte decimal. `$nombre` inserta una variable en una plantilla y `${expresion}` inserta el resultado de una expresión.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -74,6 +74,9 @@ dependencies {
 
 > 🌎 **Otro ejemplo:** el BOM de Compose es como comprar un juego de llaves de la misma marca: todas encajan entre sí, en vez de juntar llaves sueltas de tamaños parecidos.
 
+> 🧩 **Piezas para este ejercicio**
+> - Recorre las secciones en orden y guarda si estás dentro de `[versions]`. Las líneas con `=` solo se interpretan como versiones mientras esa sección esté activa.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -173,6 +176,9 @@ Mira la segunda rama del primer `when`: `valor > 100_000`. Kotlin sabe que ahí 
 > 🌎 **En la vida real:** el `Borrador` es como el formulario en papel que llena el cliente en el taller: todavía no es una orden de trabajo. El recepcionista lo revisa, y solo si está completo se convierte en una orden con su número.
 
 > 🌎 **Otro ejemplo:** `LocalDate.parse` es como un cajero que conoce el calendario: si le das un cheque del 31 de febrero, lo devuelve. No tienes que revisarlo tú.
+
+> 🧩 **Piezas para este ejercicio**
+> - Las funciones de lectura pueden devolver `null`. Comprueba si la fecha se pudo leer antes de compararla con hoy. Conserva cada aviso en la lista para que se puedan mostrar juntos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -286,6 +292,9 @@ private fun leerLinea(linea: String): Gasto? {
 
 > 🌎 **Otro ejemplo:** la interfaz es como el enchufe de la pared: cualquier aparato con el enchufe correcto funciona. El ViewModel no sabe si del otro lado hay DataStore o una lista en memoria.
 
+> 🧩 **Piezas para este ejercicio**
+> - Cada línea es un registro independiente. `mapNotNull` permite devolver `null` para una fila dañada y conservar las válidas. Comprueba cuántos campos hay antes de leer sus posiciones.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -386,6 +395,9 @@ class GastosViewModel(
 > 🌎 **En la vida real:** el ViewModel es como el pizarrón de la cocina de un restaurante: los cocineros lo actualizan y los meseros lo miran. Los meseros no escriben en él, y cuando cambia el turno (girar el teléfono), el pizarrón sigue en la pared.
 
 > 🌎 **Otro ejemplo:** `copy` es como sacar fotocopia de una ficha y corregir la copia: la original sigue intacta y siempre sabes cuál es la versión nueva.
+
+> 🧩 **Piezas para este ejercicio**
+> - `update` recibe el estado actual. Dentro de su bloque, `copy` crea el siguiente estado con los campos que cambies. La rama de carga termina antes de escribir.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -512,6 +524,9 @@ Las pruebas pasaban, pero al abrir la app en el emulador se vieron dos cosas:
 
 > 🌎 **Otro ejemplo:** separar `PantallaGastos` de `ContenidoGastos` es como separar al mesero de la carta: la carta (el contenido) la puedes mostrar sola, sin mesero, para ver cómo quedó.
 
+> 🧩 **Piezas para este ejercicio**
+> - Trabaja con el valor absoluto en centavos y guarda el signo aparte. La división entera obtiene los reales y el resto obtiene los centavos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -596,6 +611,9 @@ Para instalarla en tu propio Android sin cables, `./gradlew assembleDebug` arma 
 > 🌎 **En la vida real:** las pruebas son la revisión técnica del carro en el taller; la lista de comprobación es salir a manejarlo por la ciudad. Las dos son necesarias antes de entregárselo a alguien.
 
 > 🌎 **Otro ejemplo:** cambiar el hilo de la pantalla por un despachador de pruebas es como ensayar una obra sin público: todo pasa igual, pero nadie espera en la butaca.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un ordenamiento estable conserva el orden relativo de gastos que tienen la misma fecha. `maxOfOrNull` devuelve el mayor id o `null` cuando la lista está vacía.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
