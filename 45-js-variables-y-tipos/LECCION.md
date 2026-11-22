@@ -39,6 +39,10 @@ Y también tienes el **laboratorio de CRUD** de este sitio (`#/laboratorio`), qu
 
 > 🌎 **Otro ejemplo:** Es como hablar por teléfono (consola) o mandar una carta (archivo).
 
+> 🧩 **Piezas para este ejercicio**
+> - En `function largo(texto)`, `texto` es el nombre del dato que recibe la función. Al llamar `largo('hola')`, ese dato vale `'hola'`.
+> - `return` entrega el resultado a quien llamó la función. `console.log` lo muestra en la consola.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -99,6 +103,10 @@ En JavaScript los nombres van en **camelCase**: `gananciaTotal`, `numeroDeViajes
 > 🌎 **En la vida real:** es como la ortografía de cada idioma: en Python `ganancia_total`, en JavaScript `gananciaTotal`.
 
 > 🌎 **Otro ejemplo:** Es como las costumbres de cada país para escribir la fecha.
+
+> 🧩 **Piezas para este ejercicio**
+> - Lee `for (let i = 0; i < veces; i++)` en tres pasos. Empieza con `i` en 0, repite mientras `i` sea menor que `veces` y suma 1 a `i` después de cada vuelta.
+> - Dentro del bucle, `viajes += 1` intenta asignar un nuevo valor a `viajes`. Busca qué declaración permite esa asignación.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -246,6 +254,10 @@ Number.isNaN(Number('abc'))   // true → así revisas si salió mal
 > 🌎 **En la vida real:** es como cambiar dólares por reales en la casa de cambio, a propósito y sabiendo cuánto da.
 
 > 🌎 **Otro ejemplo:** Es como pasar una receta de tazas a gramos antes de pesar.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.trim()` quita los espacios de las puntas. Un texto como `'   '` se convierte en `''`.
+> - `Number('')` devuelve 0. Comprueba si el campo está vacío antes de convertir, porque el ejercicio distingue el campo vacío de un cero escrito por la persona.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
