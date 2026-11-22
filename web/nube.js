@@ -35,6 +35,8 @@ const ES_GMAIL = /^[^@\s]+@gmail\.com$/i;
 let cargando = null;
 const progresoCache = {}; // { curso: datos } — el último progreso leído de la nube
 const oyentes = new Set();
+const ESPERA_RECUPERAR_MS = 30000;
+let ultimaRecuperacion = { uid: null, hora: 0 };
 
 export const pendientesNube = typeof window === 'undefined' ? null : crearColaNube({
   almacenamiento: {
@@ -82,7 +84,13 @@ function cargar() {
           await comprobacion.initialize({ debug: false });
         }
         AC.initializeAppCheck(app, {
-          provider: new AC.CustomProvider({ getToken: () => comprobacion.getToken() }),
+          // Si la verificación se queda colgada, se corta: el botón "entrar" nunca debe quedarse sin respuesta.
+          provider: new AC.CustomProvider({
+            getToken: () => Promise.race([
+              comprobacion.getToken(),
+              new Promise((_, rechazar) => setTimeout(() => rechazar(new Error('App Check tardó demasiado')), 15000)),
+            ]),
+          }),
           isTokenAutoRefreshEnabled: true,
         });
       } else {
@@ -106,9 +114,17 @@ function cargar() {
       const corregir = Fn.httpsCallable(funciones, 'corregirPractica');
       // Esperar a saber si ya había una sesión abierta; después, avisar de cada cambio.
       await auth.authStateReady();
+      let uidVisto = auth.currentUser?.uid ?? null;
       A.onAuthStateChanged(auth, (u) => {
-        for (const k in progresoCache) delete progresoCache[k];
-        reflejarPartesEnNube([]);
+        // Solo se borra el progreso si cambió la persona: un aviso repetido de la misma cuenta
+        // no debe apagar los bombillos que ya llegaron de la nube.
+        const uid = u?.uid ?? null;
+        if (uid !== uidVisto) {
+          uidVisto = uid;
+          ultimaRecuperacion = { uid: null, hora: 0 };
+          for (const k in progresoCache) delete progresoCache[k];
+          reflejarPartesEnNube([]);
+        }
         actualizarCola(u);
         oyentes.forEach((f) => f(u));
       });
@@ -270,9 +286,16 @@ export async function recuperarProgresoDeCuenta() {
     reflejarPartesEnNube([]);
     return;
   }
+  // Cada pantalla lo pide, pero a la nube se le pregunta como máximo cada 30 segundos por cuenta.
+  const ahora = Date.now();
+  if (ultimaRecuperacion.uid === usuario.uid && ahora - ultimaRecuperacion.hora < ESPERA_RECUPERAR_MS) return;
+  ultimaRecuperacion = { uid: usuario.uid, hora: ahora };
   const resultados = await Promise.allSettled(Object.keys(CURSOS).map(leerProgresoNube));
   if (auth.currentUser?.uid !== usuario.uid) return;
-  if (resultados.every((r) => r.status === 'rejected')) throw resultados[0].reason;
+  if (resultados.every((r) => r.status === 'rejected')) {
+    ultimaRecuperacion = { uid: null, hora: 0 }; // falló: la próxima pantalla vuelve a intentar
+    throw resultados[0].reason;
+  }
   reflejarPartesEnNube(Object.values(progresoCache).flatMap((curso) => Object.keys(curso?.partes || {})));
 }
 

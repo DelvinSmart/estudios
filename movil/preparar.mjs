@@ -48,9 +48,12 @@ for (const [remoto, paquete, archivo] of recursosLocales) {
   index = index.replace(remoto, 'web/' + archivo);
 }
 await writeFile(new URL('index.html', destino), index
-  .replace('initial-scale=1', 'initial-scale=1, viewport-fit=cover')
+  // En la app la pantalla no se estira: ni con doble toque ni con dos dedos. La web pública sí deja hacer zoom.
+  .replace('initial-scale=1', 'initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover')
   .replace(/^ *<link [^\n]*https:\/\/fonts\.(?:googleapis|gstatic)\.com[^\n]*>\n/gm, '')
+  .replace(/^ *<link rel="manifest"[^\n]*>\n/m, '') // la app de la tienda no se instala desde la página
   .replace('</head>', `  <style>
+    html { touch-action: manipulation; }
     .barra { border-top: env(safe-area-inset-top) solid var(--fondo); }
     body { padding-inline: env(safe-area-inset-left) env(safe-area-inset-right); padding-bottom: env(safe-area-inset-bottom); }
     #cursos-mapa, .mapa-islas { scroll-margin-top: calc(76px + env(safe-area-inset-top)); }

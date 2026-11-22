@@ -15,7 +15,7 @@
 import { CURSOS } from './cursos.js';
 import { normalizarRuta, hashDeClase } from './rutas.js';
 import { textoPlano } from './lector.js';
-import { leerTema, guardarTema } from './guardado.js';
+import { leerTema, guardarTema, versionProgreso } from './guardado.js';
 import { prepararBuscador } from './buscar.js';
 import { prepararMenu } from './menu.js';
 import * as nube from './nube.js';
@@ -29,11 +29,12 @@ import { vistaProgreso } from './vistas/progreso.js';
 import { vistaEntrar, vistaAccion, vistaCuenta } from './vistas/cuenta.js';
 import { vistaCertificado, vistaVerificar } from './vistas/certificado.js';
 import { vistaLaboratorio } from './vistas/laboratorio.js';
+import { vistaInstalar, estaInstalada } from './vistas/instalar.js';
 
 // ---------- el que decide qué pantalla mostrar ----------
 
 // Las pantallas que no son del recorrido de estudio: desde ellas se puede volver a donde estabas.
-const PANTALLAS_SUELTAS = ['progreso', 'certificado', 'entrar', 'cuenta', 'verificar', 'laboratorio'];
+const PANTALLAS_SUELTAS = ['progreso', 'certificado', 'entrar', 'cuenta', 'verificar', 'laboratorio', 'instalar'];
 
 function ponerBotonVolver(mostrar) {
   const boton = document.getElementById('boton-volver');
@@ -43,6 +44,22 @@ function ponerBotonVolver(mostrar) {
   boton.hidden = !mostrar;
   boton.href = vale ? antes : '#/';
   boton.querySelector('.boton-volver-texto').textContent = vale && antes !== '#/' ? ' volver a donde estaba' : ' volver al mapa';
+}
+
+// Trae los bombillos de la cuenta en cualquier pantalla. Si llegaron cambios, vuelve a dibujar
+// sin mover el scroll. No redibuja una lección abierta ni los formularios de la cuenta.
+function traerProgresoDeCuenta(partesRuta) {
+  if (!hayDatosDeSesion()) return;
+  const rutaActual = location.hash;
+  const versionAntes = versionProgreso();
+  const esLectura = partesRuta[0] === 'clase' && partesRuta[3];
+  const esFormulario = ['entrar', 'cuenta'].includes(partesRuta[0]);
+  nube.recuperarProgresoDeCuenta().then(async () => {
+    if (versionProgreso() === versionAntes || location.hash !== rutaActual || esLectura || esFormulario) return;
+    const y = window.scrollY;
+    await dibujar();
+    window.scrollTo({ top: y });
+  }).catch((e) => console.warn('No se pudo traer el progreso de la cuenta:', e?.code || e?.message));
 }
 
 async function dibujar() {
@@ -66,22 +83,16 @@ async function dibujar() {
     else if (partesRuta[0] === 'cuenta') await vistaCuenta();
     else if (partesRuta[0] === 'verificar') await vistaVerificar(partesRuta[1]);
     else if (partesRuta[0] === 'laboratorio') vistaLaboratorio();
+    else if (partesRuta[0] === 'instalar') vistaInstalar();
     else if (partesRuta[0] === 'curso') vistaInicio(partesRuta[1]);
     else if (partesRuta[0] === 'etapa') await vistaEtapa(partesRuta[1]);
     else if (partesRuta[0] === 'clase' && partesRuta[3]) await vistaParte(partesRuta[1], +partesRuta[2] || 0, partesRuta[3]);
     else if (partesRuta[0] === 'clase') await vistaClase(partesRuta[1], +partesRuta[2] || 0);
-    else {
-      vistaInicio();
-      if (hayDatosDeSesion()) {
-        const rutaActual = location.hash;
-        nube.recuperarProgresoDeCuenta().then(() => {
-          if (location.hash === rutaActual) vistaInicio();
-        }).catch(() => {});
-      }
-    }
+    else vistaInicio();
   } catch (err) {
     mostrarError(err);
   }
+  traerProgresoDeCuenta(partesRuta);
   // La barra de direcciones muestra siempre la forma bonita (#/curso/número), igual que la pantalla.
   // El progreso se guarda con el id fijo de atrás; esto solo cambia lo que se VE en la URL.
   if (partesRuta[0] === 'clase') {
@@ -118,6 +129,8 @@ botonPresentacion.addEventListener('click', () => {
 // ---------- arranque ----------
 
 async function empezar() {
+  // El enlace de instalar no tiene sentido si ya está instalada o dentro de la app de la tienda.
+  document.getElementById('enlace-instalar').hidden = estaInstalada() || globalThis.Capacitor?.isNativePlatform?.() === true;
   await contarPartes();
   alRedibujar(dibujar);
   prepararBuscador();

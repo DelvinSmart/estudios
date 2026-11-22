@@ -6,6 +6,13 @@
   <title>Mapa de estudios</title>
   <meta name="description" content="Mi carrera de programación, clase por clase, como un mapa.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="web/iconos/icono-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Aprender">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="theme-color" content="#0d1117">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -14,6 +21,11 @@
   <script>
     // El tema se aplica antes de dibujar, para que no parpadee.
     try { const t = localStorage.getItem('mapa-tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    // Abierta desde su ícono se comporta como una app: la pantalla no se estira. En el navegador, el zoom sigue libre.
+    if (navigator.standalone === true || matchMedia('(display-mode: standalone)').matches) {
+      document.querySelector('meta[name=viewport]').content += ', maximum-scale=1, user-scalable=no';
+      document.documentElement.style.touchAction = 'manipulation';
+    }
   </script>
 </head>
 <body>
@@ -49,6 +61,7 @@
 
   <footer class="pie mono">
     <span>© 2026 Delvin José Rodríguez · Mapa de estudios</span>
+    <a href="#/instalar" id="enlace-instalar">📲 Instalar en mi equipo</a>
     <a href="web/legal.html#terminos">Términos de uso</a>
     <a href="web/legal.html#privacidad">Privacidad</a>
   </footer>

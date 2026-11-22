@@ -56,7 +56,7 @@ const campo = (id, etiqueta, tipo = 'text', extra = '') => `
     <input id="${id}" type="${tipo}" ${extra}></label>`;
 const campoClave = (id, etiqueta, extra = '') => `
   <label class="cuenta-campo"><span class="mono">${etiqueta}</span>
-    <span class="clave"><input id="${id}" type="password" ${extra}>
+    <span class="clave"><input id="${id}" type="password" autocapitalize="none" autocorrect="off" spellcheck="false" ${extra}>
       <button class="ver-clave mono" type="button" data-para="${id}" aria-label="Mostrar contraseña">ver</button></span></label>`;
 const botonGoogle = '<button class="boton boton-google" id="cuenta-google" type="button"><span class="g">G</span> Continuar con Google</button>';
 
@@ -113,7 +113,7 @@ export async function vistaEntrar(paso) {
       ${campo('c-nombre', 'nombre completo', 'text', 'autocomplete="name" maxlength="80"')}
       <p class="cuenta-nota">⚠️ Escríbelo <b>tal como aparece en tu documento</b>, con tildes y apellidos.
         Es el nombre que saldrá impreso en tu certificado.</p>
-      ${campo('c-correo', 'correo de Gmail', 'email', 'autocomplete="email" placeholder="tu.nombre@gmail.com"')}
+      ${campo('c-correo', 'correo de Gmail', 'email', 'autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="tu.nombre@gmail.com"')}
       ${campoClave('c-clave', 'contraseña (mínimo 8)', 'autocomplete="new-password"')}
       ${campoClave('c-clave2', 'repite la contraseña', 'autocomplete="new-password"')}
       <button class="boton-principal ancho" id="c-crear" type="button">crear cuenta</button>
@@ -154,7 +154,7 @@ export async function vistaEntrar(paso) {
   if (paso === 'contrasena') {
     tarjetaCuenta('./recuperar-contrasena', 'Contraseña nueva', `
       <p class="bajada">Escribe el correo de la cuenta. Te mandamos ahí un enlace para crear una contraseña nueva.</p>
-      ${campo('r-correo', 'correo de Gmail', 'email', 'autocomplete="email" placeholder="tu.nombre@gmail.com"')}
+      ${campo('r-correo', 'correo de Gmail', 'email', 'autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="tu.nombre@gmail.com"')}
       <button class="boton-principal ancho" id="r-enviar" type="button">enviar enlace por correo</button>
       <div id="r-listo"></div>
       <p class="cuenta-pie"><a href="#/entrar/ayuda">← volver</a></p>`);
@@ -218,7 +218,7 @@ export async function vistaEntrar(paso) {
   if (yaDentro) { location.hash = '#/cuenta'; return; }
   tarjetaCuenta('./entrar', 'Entrar', `
     <p class="bajada">Entra para que tus bombillos cuenten en la nube y puedas emitir tu certificado verificable.</p>
-    ${campo('e-correo', 'correo de Gmail', 'email', 'autocomplete="email" placeholder="tu.nombre@gmail.com"')}
+    ${campo('e-correo', 'correo de Gmail', 'email', 'autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="tu.nombre@gmail.com"')}
     ${campoClave('e-clave', 'contraseña', 'autocomplete="current-password"')}
     <button class="boton-principal ancho" id="e-entrar" type="button">entrar</button>
     <p class="cuenta-ayuda"><a href="#/entrar/ayuda">¿Problemas para entrar?</a></p>
