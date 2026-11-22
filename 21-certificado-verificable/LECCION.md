@@ -53,6 +53,10 @@ localStorage.setItem('mapa-entendido', JSON.stringify({ '01:CLASE-GUIADA.md:1': 
 
 > 🌎 **Otro ejemplo:** Es como la portería de un edificio: tú dices "vengo al 502", pero el portero llama al 502 antes de abrir.
 
+> 🧩 **Piezas para este ejercicio**
+> - `pedido.uid` identifica la cuenta que se está comprobando en el ejercicio. `servidor.aprobadas(...)` consulta un recuento que guarda el servidor.
+> - Compara el recuento con el total requerido. La resta te dice cuántas partes faltan cuando aún no se alcanza.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -136,6 +140,10 @@ Decidimos aceptar **solo correos de Gmail** y **no pedir teléfono**. Menos dato
 > 🌎 **Otro ejemplo:** Es como viajar con poco equipaje: entre menos lleves, menos se te puede perder.
 
 > ⚠️ **Ojo:** tampoco pedimos **CPF** para confirmar el nombre. Este sitio no tiene cómo confirmarlo con el gobierno, y guardarlo sería un riesgo enorme (es un dato protegido por la LGPD). Por eso el nombre depende de que la persona lo escriba bien, y la pantalla del certificado lo avisa claro.
+
+> 🧩 **Piezas para este ejercicio**
+> - El mensaje de recuperación puede ser el mismo en todos los casos. La validación del formato se hace por separado.
+> - En una expresión regular, `[^\s@]` acepta un carácter distinto de los espacios en blanco y de `@`. `\.` representa un punto literal.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -224,6 +232,10 @@ await F.setDoc(ref, { n: actual.n + 1, ultimo: ahora, ultimaParte: id, partes: {
 > 🌎 **En la vida real:** es como escribir una dirección "Calle 5.2": el cartero puede pensar que es la calle 5, casa 2.
 
 > 🌎 **Otro ejemplo:** Es como un nombre de archivo con barra `/`: la computadora cree que es una carpeta.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.replaceAll(...)` aplica el cambio a todas las apariciones del texto indicado.
+> - En `{ ...base, [clave]: valor }`, `...base` copia las propiedades y `[clave]` crea o actualiza la propiedad cuyo nombre está guardado en la variable.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -333,6 +345,10 @@ Y una vez creado, **nadie lo puede cambiar** (`allow update: if false`), ni su d
 
 > 🌎 **Otro ejemplo:** Es como un apretón de manos: si uno no extiende la mano, no hay apretón.
 
+> 🧩 **Piezas para este ejercicio**
+> - `Object.keys(...)` devuelve los nombres de las partes guardadas. `.every(...)` comprueba que cada parte anterior conserve el mismo valor.
+> - Comprueba por separado quién está haciendo la solicitud, qué cambió y cuánto tiempo pasó desde la última escritura.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -415,6 +431,10 @@ test('el primer bombillo, bien hecho, se acepta', async () => {
 > 🌎 **En la vida real:** un portero que no deja entrar a **nadie** es tan malo como uno que deja entrar a todos.
 
 > 🌎 **Otro ejemplo:** Es como un filtro de agua: tiene que dejar pasar el agua y atrapar la tierra; si no deja pasar nada, no sirve.
+
+> 🧩 **Piezas para este ejercicio**
+> - `it(nombre, funcion)` registra una prueba del control de acceso simulado. `assertSucceeds` espera que se permita la operación y `assertFails` espera que se rechace.
+> - Incluye una comprobación del caso permitido y de los casos en que la regla debe rechazar la lectura. Las pruebas se ejecutan sobre la función local del ejercicio.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -509,6 +529,10 @@ Las reglas dejan **leer un** certificado si sabes su código (`allow get: if tru
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`.padStart()`**: rellena un texto por la izquierda hasta que tenga el largo que pides: `'7'.padStart(2, '0')` → `'07'`. Sirve para fechas y códigos. `.padEnd()` rellena por la derecha.
 
+> 🧩 **Piezas para este ejercicio**
+> - `(15).toString(16)` produce `'f'`. `.padStart(2, '0')` completa a dos caracteres con un cero a la izquierda.
+> - `16 ** 3` cuenta las combinaciones de tres caracteres si cada uno tiene 16 opciones. Cada posición puede elegirse de manera independiente.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -568,6 +592,10 @@ La configuración de Firebase en `web/nube.js` (`apiKey`, `projectId`…) **no e
 > 🌎 **En la vida real:** la dirección de tu casa no es secreta (te llegan cartas); la llave sí.
 
 > 🌎 **Otro ejemplo:** Es como el número de cuenta del banco: lo das para que te paguen; la clave del cajero, jamás.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.split('/').pop()` devuelve el nombre al final de una ruta. `.includes(...)` busca un fragmento del contenido.
+> - Este ejercicio usa un filtro de ejemplo con las señales de la consigna. Un archivo marcado como privado queda fuera de la publicación.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -712,6 +740,10 @@ Ser honesto con los límites también es parte de la seguridad:
 > 🌎 **En la vida real:** es como cuando el profesor arma un examen nuevo: escribe preguntas y respuestas juntas, y después separa la hoja de los alumnos de la plantilla.
 
 > 🌎 **Otro ejemplo:** Es como cargar un producto nuevo en una tienda online: le pones el precio en el sistema (privado) y la foto en la vitrina (pública).
+
+> 🧩 **Piezas para este ejercicio**
+> - `.filter((respuesta, i) => ...)` entrega la respuesta y su posición. La posición permite compararla con lo enviado para esa misma pregunta.
+> - Una respuesta esperada con valor `null` representa una pregunta que se omite. Cuenta las diferencias y usa ese total para formar el resultado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
