@@ -100,6 +100,10 @@ export const GLOSARIO = [
     definicion: 'Los datos con que tu página encuentra a Firebase (apiKey, projectId). Van a la vista y no son secretos: lo que protege los datos son las reglas.' },
   { termino: 'modo mirar', alias: ['monitor', 'enforce', 'aplicar app check'], clase: '124',
     definicion: 'Encender un control nuevo primero solo para observar (cuenta, pero no rechaza a nadie) y, cuando los números están bien, recién "aplicar" para que rechace.' },
+  { termino: 'contenido privado', alias: ['documento privado', 'privado/'], clase: '125',
+    definicion: 'Algo que solo debe ver una cuenta. No va dentro de la app (el APK se puede abrir): se guarda en el servidor y una regla decide a quién se le entrega.' },
+  { termino: '403', alias: ['error 403', 'permiso denegado', 'permission-denied'], clase: '125',
+    definicion: 'La respuesta del servidor que quiere decir "te reconozco, pero no tienes permiso". En Firestore, desde la app, llega como permission-denied.' },
   { termino: 'App Check', alias: ['app check', 'appcheck'], clase: '124',
     definicion: 'Un control de Firebase que deja usar el servidor solo desde tu sitio de verdad, no desde un programa que copió tu configuración.' },
 

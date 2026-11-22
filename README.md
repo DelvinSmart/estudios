@@ -174,7 +174,7 @@ recomendada (lo básico en JavaScript 01 a 04, luego el resto de Programación y
 | 08 | [Pruebas y un proyecto real](43-python-pruebas-y-proyecto/LECCION.md) | pytest, el resumen de la semana de un conductor y las APIs | `43` |
 | 09 | [Proyecto final: el resumen de la semana](90-python-proyecto-resumen-semanal/LECCION.md) | Un programa de terminal: revisar cada fila, juntar los problemas, argparse y 28 pruebas con pytest | `90` |
 
-### 🛡️ Seguridad · 13 clases · certificado `SE-…`
+### 🛡️ Seguridad · 14 clases · certificado `SE-…`
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
@@ -184,13 +184,14 @@ recomendada (lo básico en JavaScript 01 a 04, luego el resto de Programación y
 | 04 | [Más ataques web, del lado del defensor](107-seguridad-mas-ataques-web/LECCION.md) | Path traversal, SSRF, redirecciones abiertas y archivos subidos con sorpresa | `107` |
 | 05 | [La auditoría de este mismo sitio](108-seguridad-auditoria-de-este-sitio/LECCION.md) | Los hallazgos de verdad: el oráculo de las prácticas, los correos de Gmail, la llave del panel, SRI y escapar en un solo lugar | `108` |
 | 06 | [App Check: el portero de la entrada](124-seguridad-app-check/LECCION.md) | La configuración pública, la cerradura (reglas) contra el portero (App Check), el sello de reCAPTCHA y por qué primero se mira y después se aplica | `124` |
-| 07 | [Criptografía para programadores](109-seguridad-criptografia/LECCION.md) | Hash, cifrado y firma, un JWT por dentro, el ataque de alg: none, la cookie bien hecha y dos trampas clásicas | `109` |
-| 08 | [Apps móviles](110-seguridad-apps-moviles/LECCION.md) | El archivo de la app se abre (jadx), la caja fuerte del teléfono, los deep links, y MobSF y Frida | `110` |
-| 09 | [Los programas del día a día](111-seguridad-programas-del-dia-a-dia/LECCION.md) | Gestores de contraseñas, segundo factor, Have I Been Pwned, VirusTotal, Let's Encrypt, gitleaks, Semgrep y ZAP | `111` |
-| 10 | [El maletín del pentester](112-seguridad-maletin-del-pentester/LECCION.md) | Kali, nmap, Shodan, Wireshark, Burp, sqlmap, Nikto, Hydra, hashcat, gobuster, ffuf y Metasploit | `112` |
-| 11 | [La práctica con las herramientas](114-seguridad-practica-con-las-herramientas/LECCION.md) | Atacar la app de la clase 91 con nmap, Hydra, sqlmap, un proxy y gitleaks, y probar que la arreglada ya no cae | `114` |
-| 12 | [Amenazas, registros e incidentes](115-seguridad-amenazas-registros-e-incidentes/LECCION.md) | El modelo de amenazas con STRIDE, qué anotar en los registros, las alertas y qué hacer cuando pasó | `115` |
-| 13 | [Proyecto final: auditar una API con errores](91-seguridad-proyecto-auditoria/LECCION.md) | Una API con 10 errores a propósito: trampas, arreglos sin romper nada y el informe | `91` |
+| 07 | [Contenido privado: solo para una cuenta](125-seguridad-contenido-privado/LECCION.md) | Por qué un if en la app no protege, la caja fuerte en Firestore con una regla del servidor, subir como administrador con un token, el 403, el modo sin internet y buscar en el APK | `125` |
+| 08 | [Criptografía para programadores](109-seguridad-criptografia/LECCION.md) | Hash, cifrado y firma, un JWT por dentro, el ataque de alg: none, la cookie bien hecha y dos trampas clásicas | `109` |
+| 09 | [Apps móviles](110-seguridad-apps-moviles/LECCION.md) | El archivo de la app se abre (jadx), la caja fuerte del teléfono, los deep links, y MobSF y Frida | `110` |
+| 10 | [Los programas del día a día](111-seguridad-programas-del-dia-a-dia/LECCION.md) | Gestores de contraseñas, segundo factor, Have I Been Pwned, VirusTotal, Let's Encrypt, gitleaks, Semgrep y ZAP | `111` |
+| 11 | [El maletín del pentester](112-seguridad-maletin-del-pentester/LECCION.md) | Kali, nmap, Shodan, Wireshark, Burp, sqlmap, Nikto, Hydra, hashcat, gobuster, ffuf y Metasploit | `112` |
+| 12 | [La práctica con las herramientas](114-seguridad-practica-con-las-herramientas/LECCION.md) | Atacar la app de la clase 91 con nmap, Hydra, sqlmap, un proxy y gitleaks, y probar que la arreglada ya no cae | `114` |
+| 13 | [Amenazas, registros e incidentes](115-seguridad-amenazas-registros-e-incidentes/LECCION.md) | El modelo de amenazas con STRIDE, qué anotar en los registros, las alertas y qué hacer cuando pasó | `115` |
+| 14 | [Proyecto final: auditar una API con errores](91-seguridad-proyecto-auditoria/LECCION.md) | Una API con 10 errores a propósito: trampas, arreglos sin romper nada y el informe | `91` |
 
 ### 🧠 IA para programadores · 10 clases · certificado `IA-…`
 

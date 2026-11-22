@@ -43,6 +43,7 @@ export const CLASES = {
   '107': { carpeta: '107-seguridad-mas-ataques-web', titulo: 'Más ataques web, del lado del defensor', meta: 'Path traversal, SSRF, redirecciones abiertas y archivos subidos con sorpresa', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '108': { carpeta: '108-seguridad-auditoria-de-este-sitio', titulo: 'La auditoría de este mismo sitio', meta: 'Los hallazgos de verdad: el oráculo de las prácticas, los correos de Gmail, la llave del panel, SRI y escapar en un solo lugar', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '124': { carpeta: '124-seguridad-app-check', titulo: 'App Check: el portero de la entrada', meta: 'La configuración pública, la cerradura (reglas) contra el portero (App Check), el sello de reCAPTCHA y por qué primero se mira y después se aplica', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
+  '125': { carpeta: '125-seguridad-contenido-privado', titulo: 'Contenido privado: solo para una cuenta', meta: 'Por qué un if en la app no protege, la caja fuerte en Firestore con una regla del servidor, subir como administrador con un token, el 403, el modo sin internet y buscar en el APK', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '109': { carpeta: '109-seguridad-criptografia', titulo: 'Criptografía para programadores', meta: 'Hash, cifrado y firma, un JWT por dentro, el ataque de alg: none, la cookie bien hecha y dos trampas clásicas', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '110': { carpeta: '110-seguridad-apps-moviles', titulo: 'Apps móviles', meta: 'El archivo de la app se abre (jadx), la caja fuerte del teléfono, los deep links, y MobSF y Frida', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
   '111': { carpeta: '111-seguridad-programas-del-dia-a-dia', titulo: 'Los programas del día a día', meta: 'Gestores de contraseñas, segundo factor, Have I Been Pwned, VirusTotal, Let\'s Encrypt, gitleaks, Semgrep y ZAP', docs: [{ archivo: 'LECCION.md', titulo: 'Clase completa' }] },
@@ -152,7 +153,7 @@ const ICONOS = {
   '54': '⚛️', '55': '🔁', '56': '📐', '57': '📲', '58': '🧭', '59': '⚡', '60': '🚀', '88': '🏁', '94': '🧮', '95': '📱',
   '36': '👋', '37': '🔀', '38': '📚', '39': '🧩', '40': '🐞', '41': '📦', '42': '🧱', '43': '🧪', '90': '🏁',
   '61': '👋', '62': '🛟', '63': '🧰', '64': '🏗️', '65': '🧵', '66': '🎨', '67': '📦', '89': '🏁', '96': '⚖️', '97': '👋', '98': '🛟', '99': '🧰', '100': '🏗️', '101': '🚦', '102': '🖼️', '103': '🗂️', '104': '🎨', '105': '🧪', '106': '🏁',
-  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '117': '🗣️', '118': '⏱️', '119': '🗃️', '120': '🐞', '121': '🔀', '122': '📖', '123': '🎯', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '124': '💂', '109': '🔑', '110': '📲', '111': '🧰', '113': '🌉', '112': '💼', '114': '🎯', '115': '🚨', '91': '🏁',
+  '21': '🎓', '77': '🎛️', '85': '🛤️', '86': '🎤', '117': '🗣️', '118': '⏱️', '119': '🗃️', '120': '🐞', '121': '🔀', '122': '📖', '123': '🎯', '22': '🔐', '23': '🕵️', '24': '🛡️', '107': '🚪', '108': '🔍', '124': '💂', '125': '🗝️', '109': '🔑', '110': '📲', '111': '🧰', '113': '🌉', '112': '💼', '114': '🎯', '115': '🚨', '91': '🏁',
 };
 for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono = icono;
 
@@ -163,7 +164,7 @@ const LOGOS_CLASE = {
   '12': ['html', 'css', 'javascript'], '13': ['react', 'typescript', 'vite', 'tailwind', 'firebase'], '14': ['html', 'css', 'javascript'],
   '15': ['html'], '16': ['css'], '17': ['javascript'], '18': ['html', 'css', 'javascript', 'markdown'],
   '19': ['python', 'javascript'], '20': ['github', 'firebase', 'android', 'apple'], '21': ['firebase', 'javascript'], '77': ['github', 'firebase', 'react'], '85': ['firebase', 'javascript', 'github'], '86': ['javascript', 'typescript', 'react'],
-  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '107': ['owasp', 'node'], '108': ['owasp', 'firebase', 'github'], '124': ['firebase', 'owasp'], '109': ['owasp', 'node'], '110': ['owasp', 'android', 'apple'], '113': ['expo', 'kotlin', 'swift'], '111': ['bitwarden', 'letsencrypt', 'github'], '112': ['owasp', 'bash'], '114': ['owasp', 'node'], '115': ['owasp', 'firebase'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'], '93': ['python', 'ollama'],
+  '22': ['bitwarden', 'letsencrypt'], '23': ['owasp'], '24': ['owasp', 'firebase'], '107': ['owasp', 'node'], '108': ['owasp', 'firebase', 'github'], '124': ['firebase', 'owasp'], '125': ['firebase', 'android'], '109': ['owasp', 'node'], '110': ['owasp', 'android', 'apple'], '113': ['expo', 'kotlin', 'swift'], '111': ['bitwarden', 'letsencrypt', 'github'], '112': ['owasp', 'bash'], '114': ['owasp', 'node'], '115': ['owasp', 'firebase'], '91': ['owasp', 'node'], '25': ['python', 'javascript'], '27': ['python'], '93': ['python', 'ollama'],
   '30': ['claude', 'gemini', 'ollama'], '31': ['gemini', 'claude'], '32': ['claude'], '33': ['ollama', 'gemini', 'github'],
   '35': ['claude', 'git'], '79': ['claude'], '78': ['claude', 'git'], '80': ['claude', 'ollama'], '92': ['claude', 'javascript'],
   '44': ['javascript', 'typescript', 'react', 'kotlin'],
@@ -256,7 +257,7 @@ export const ETAPAS = [
   {
     id: 'seguridad', curso: 'seguridad', icono: '🛡️', titulo: 'Seguridad: pensar como hacker', logos: ['owasp'],
     desc: 'Un curso aparte, con su propio certificado: cómo atacan y cómo se defiende un sistema.',
-    clases: ['22', '23', '24', '107', '108', '124', '109', '110', '111', '112', '114', '115', '91'],
+    clases: ['22', '23', '24', '107', '108', '124', '125', '109', '110', '111', '112', '114', '115', '91'],
   },
   {
     id: 'ia-programadores', curso: 'ia', icono: '🧠', titulo: 'IA para programadores', logos: ['claude', 'gemini', 'ollama'],
