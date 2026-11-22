@@ -87,6 +87,12 @@ vf :: Editar un ingreso en Copiloto es una operación de actualizar (U)
 
 El servidor es un mesero: la **petición** es tu pedido ("tráeme la lista de gastos"); la **respuesta** es el plato; y el **código** de respuesta es lo que dice el mesero: "aquí está" (200), "no tenemos eso" (404), "su pedido no se entiende" (400).
 
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`const [verbo, ruta, ...resto] = texto.split(' ')`** guarda el primer pedazo en `verbo`, el segundo en `ruta` y **todos los demás** en la lista `resto`.
+> - **`resto.join(' ')`** vuelve a unir esos pedazos, porque el JSON también puede tener espacios.
+> - **`JSON.parse(json)`** convierte el texto JSON en un objeto.
+> - **`hayDatos ? a : b`** elige `a` si hay datos y `b` si no.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -194,6 +200,12 @@ Debe decir: **`Servidor listo en http://localhost:3000`**. El servidor **queda e
 
 > 🌎 **Otro ejemplo:** Como encender una computadora nueva: la primera vez instalas los programas; después solo la prendes.
 
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`comando.startsWith('npm run ')`** pregunta si empieza así.
+> - **`comando.slice('npm run '.length)`** quita ese comienzo y deja solo el nombre del script.
+> - **`paquete.scripts?.[nombre]`** busca ese nombre dentro de `scripts`. El `?.` evita un error si `scripts` no existe.
+> - **`??`** pone el mensaje de error cuando no encontró el script.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -275,6 +287,11 @@ Respuesta: `{"errores":["El monto debe ser un número mayor que 0."]}`
 `{"error":"Gasto no encontrado."}`, con el código **404**: ese gasto ya no existe.
 
 </details>
+
+> 🧩 **Piezas para este ejercicio:**
+> - **`comando += ' algo'`** pega `' algo'` al final del texto que ya tenías.
+> - **`` `-X ${verbo}` ``** mete el valor de `verbo` dentro del texto.
+> - **`JSON.stringify(datos)`** convierte un objeto en texto JSON.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -413,6 +430,13 @@ app.post('/gastos', (req, res) => {
 El gasto recibe el id **3**, y `siguienteId` queda en **4**. `x++` usa el valor actual y **después** lo sube.
 
 </details>
+
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`gastos.find((g) => g.id === 2)`** busca el **primer** gasto que cumple la condición. Si no hay, da `undefined`.
+> - **`gastos.some(...)`** responde si **al menos uno** cumple la condición.
+> - **`gastos.filter((g) => g.id !== 2)`** crea una lista **sin** ese gasto.
+> - **`Number(id)`** convierte el texto `'2'` en el número `2`.
+> - **`return { status: 404, body: { error: 'Gasto no encontrado.' } }`** es la forma de responder en este ejercicio.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -745,6 +769,10 @@ test('el total suma los montos', async (t) => {
 });
 ```
 
+- `arrancar()` enciende un servidor solo para esta prueba.
+- `t.after(() => servidor.close())` lo **apaga al terminar**.
+- `assert.deepEqual` compara el **contenido completo** de dos objetos.
+
 </details>
 
 ### Ejercicio 3: pruebas para lo nuevo
@@ -790,6 +818,10 @@ function guardar(gastos) {
 }
 ```
 
+- `require('node:fs')` trae `fs`, la herramienta de Node para trabajar con archivos.
+- `fs.readFileSync` **lee** un archivo y `fs.writeFileSync` lo **escribe**.
+- `try { ... } catch (e) { ... }` significa: «intenta esto; si falla, haz esto otro».
+
 Dentro de `crearApp`: `let gastos = cargar();` y `let siguienteId = gastos.reduce((max, g) => Math.max(max, g.id), 0) + 1;` (el id siguiente al más alto). Y después de cada cambio (crear, actualizar, borrar), una línea: `guardar(gastos);`.
 
 `JSON.stringify(gastos, null, 2)` guarda el JSON "lindo", con 2 espacios de sangría, para que lo puedas leer.
@@ -823,6 +855,12 @@ function crearRepositorioArchivo(archivo) {
 Y `crearApp(repositorio)` usa solo esas cuatro funciones. Mañana haces `crearRepositorioSqlite()` con las **mismas cuatro funciones**, y las rutas **no cambian ni una línea**. Eso es lo que el Tema 10 llama **inversión de dependencias**.
 
 </details>
+
+> 🧩 **Piezas para este ejercicio:**
+> - **`rutas.find(...)`** devuelve la **primera** ruta que cumple la condición. Por eso importa el orden.
+> - **`camino.split('/')`** y **`r.patron.split('/')`** separan cada dirección en pedazos.
+> - **`patron.every((p, i) => ...)`** revisa todos los pedazos. `p` es el pedazo e `i` es su posición, así que `partes[i]` es el pedazo correspondiente del camino.
+> - **`p.startsWith(':')`** pregunta si ese pedazo es variable, como `:id`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

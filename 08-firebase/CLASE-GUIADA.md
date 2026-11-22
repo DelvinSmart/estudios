@@ -187,6 +187,12 @@ En `users/{tu uid}/personalExpenses/{id}`: un documento nuevo en la subcolecció
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`ruta.split('/')`** convierte `'usuarios/ana/gastos/g1'` en una lista de cuatro pedazos.
+> - **`i += 2`** hace que el `for` avance **de dos en dos**. Así, `partes[i]` es la colección y `partes[i + 1]` es su documento.
+> - **`pares.push({ coleccion: 'gastos', documento: 'g1' })`** agrega un objeto a la lista.
+> - **`const [primero] = lista`** guarda el primer elemento de la lista en la cajita `primero`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -308,6 +314,10 @@ Porque alguien puede saltarse la app y pedirle los datos **directamente** a Fire
 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`typeof`**: dice de qué tipo es un valor, como texto: `typeof 12` → `'number'`, `typeof 'hola'` → `'string'`, `typeof true` → `'boolean'`, `typeof {}` → `'object'`.
+> - **`pedido.ruta.split('/')`** separa la ruta. En `usuarios/ana/gastos/g1`, la posición 1 es el dueño.
+> - **`pedido.datos ?? {}`** usa un objeto vacío si no vinieron datos.
+> - **`Object.keys(d)`** da la lista con los **nombres de los campos** de un objeto: `{ tipo: 'agua', valor: 5 }` da `['tipo', 'valor']`.
+> - **`.every(...)`** responde `true` solo si **todos** los elementos cumplen la condición.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -412,6 +422,11 @@ npx firebase-tools deploy --only functions --project copiloto-driver-ia
 
 > 🌎 **Otro ejemplo:** Como actualizar el menú de una cadena de restaurantes: imprimirlo en la oficina no alcanza; hay que mandarlo a los locales.
 
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`contexto.auth`** es `null` si no hay sesión. Si hay sesión, es un objeto con el `uid` de quien llama: `contexto.auth.uid`.
+> - **`throw new Error('mensaje')`** detiene la función y avisa del error. Lo que sigue ya no se ejecuta.
+> - **`delete base[uid][id]`** borra ese gasto. Por eso la revisión tiene que ir **antes** de esa línea.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -481,6 +496,13 @@ Firestore **rechaza** la escritura con "Missing or insufficient permissions", y 
 
 </details>
 
+> 🧩 **Piezas nuevas para este ejercicio:**
+> - **`fn`** es una función que te entregan guardada en una cajita. Para avisarle, la llamas con la lista: `fn(lista)`.
+> - **`oyentes.push(fn)`** guarda a quien quiere escuchar.
+> - **`[...datos]`** crea una **copia** de la lista.
+> - **`return () => { ... }`** devuelve una función para usarla después. Aquí será el botón de «dejar de escuchar».
+> - **`oyentes.filter((o) => o !== fn)`** crea una lista sin ese oyente.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -544,6 +566,12 @@ vf :: La pantalla del Inicio se actualiza sola porque escucha los cambios de Fir
 > 🌎 **Otro ejemplo:** Como las reglas de un banco: la clave nunca se dice por teléfono, la llave de la bóveda la guarda el gerente aparte, y ningún movimiento grande se hace sin la firma del titular.
 
 > 💡 **Idea:** ¿y la configuración de Firebase que sí está en la app (el nombre del proyecto, etc.)? Esa es **pública por diseño**: no es un secreto. Lo que protege los datos no es esconder esa configuración, sino **las reglas**. Esto lo vas a ver otra vez en el Tema 13.
+
+> 🧩 **Piezas para este ejercicio:**
+> - **`/sk_\w+/.test(texto)`** pregunta si el texto contiene `sk_` seguido de letras o números.
+> - **`texto.includes('"private_key"')`** pregunta si ese pedazo aparece dentro del texto.
+> - **`texto.trim() === '.env'`** compara el texto, sin espacios en las puntas, con `.env`.
+> - **`||`** significa **«o»**: basta con que se cumpla una.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
