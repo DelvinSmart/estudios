@@ -55,6 +55,9 @@ const Pila = createNativeStackNavigator();
 
 > 🌎 **Otro ejemplo:** Es como las páginas de un libro: avanzas y retrocedes.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una pila conserva el orden. `push` agrega arriba, `pop` quita el último y `.at(-1)` lo consulta. Mira cuántas pantallas quedan antes de permitir volver.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -131,6 +134,9 @@ Manda **solo el id**, no el objeto entero: la pantalla de detalle lo busca. Así
 
 > 🌎 **Otro ejemplo:** Es como el marcador de un libro que te abre en la página justa.
 
+> 🧩 **Piezas para este ejercicio**
+> - Primero identifica el esquema y el destino. Convierte el tramo del id a número y comprueba que sea entero y positivo antes de enviarlo como parámetro.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -199,6 +205,9 @@ Es **asíncrono** (clase 49) y solo guarda **texto** (por eso `JSON.stringify`, 
 
 > 🌎 **Otro ejemplo:** Es como una nota en la nevera frente a una caja fuerte.
 
+> 🧩 **Piezas para este ejercicio**
+> - El almacén recibe texto, así que usa `JSON.stringify` al guardar y `JSON.parse` al leer. `await` espera el resultado del almacén. Comprueba si falta texto antes de intentar convertirlo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -244,6 +253,9 @@ async function leerJSON(almacen, clave, porDefecto) {
 ```
 
 📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+> 🧩 **Piezas para este ejercicio**
+> - Cargar el valor también es una operación asíncrona. Conserva una señal que indique cuándo acabó la lectura inicial. Eso evita que el cero de arranque se guarde antes de recuperar la cuenta anterior.
 
 ```snack
 titulo: Un contador que no se olvida

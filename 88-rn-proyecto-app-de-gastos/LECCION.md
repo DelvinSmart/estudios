@@ -45,6 +45,9 @@ Antes del código, el plano (clase 79):
 
 > 🌎 **Otro ejemplo:** las puertas y ventanas son como el manual de un electrodoméstico: qué pasa si se corta la luz, si lo llenas de más o si lo prendes sin agua. El fabricante lo pensó antes de venderlo.
 
+> 🧩 **Piezas para este ejercicio**
+> - Valida primero si el día existe. Solo en ese caso tiene sentido compararlo con hoy. `valor > 0` también da `false` para `NaN`, así que usa esa comparación como condición de aprobación.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -143,6 +146,9 @@ Las piezas siguen las reglas de las clases 54 y 56:
 
 > 🌎 **Otro ejemplo:** es como el uniforme de una empresa: todos usan las mismas prendas. Si cambia el logo, se cambia en el uniforme, no en cada persona.
 
+> 🧩 **Piezas para este ejercicio**
+> - `Object.entries` da pares con el nombre del estilo y su contenido. Recorre también las propiedades interiores y compara sus valores con los colores que ofrece el motor.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -220,6 +226,9 @@ export function dinero(valor: number): string {
 > 🌎 **En la vida real:** la lógica separada es como la receta escrita en un papel: la puedes probar en cualquier cocina, sin importar si el fogón es de gas o eléctrico. La pantalla es el fogón.
 
 > 🌎 **Otro ejemplo:** pasar `hoy` de afuera es como el reloj de un examen: si el profesor dice "son las 10", todos calculan con la misma hora, aunque el reloj de cada uno esté un poco adelantado.
+
+> 🧩 **Piezas para este ejercicio**
+> - Guarda el signo por separado. Formatea el valor absoluto con dos decimales y coloca los separadores en la parte entera y en la parte decimal por separado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -317,6 +326,9 @@ useEffect(() => {
 > 🌎 **En la vida real:** es como abrir tu cuaderno de gastos antes de anotar: si empiezas a escribir en una hoja en blanco y la pegas encima del cuaderno, pierdes todo lo de antes. Primero lees, después anotas.
 
 > 🌎 **Otro ejemplo:** el `useRef` es como un papelito en el bolsillo: te acuerdas de algo sin tener que avisarle a nadie. El estado, en cambio, es como cambiar el cartel de la tienda: todos lo ven.
+
+> 🧩 **Piezas para este ejercicio**
+> - `JSON.parse` puede fallar y también puede devolver algo distinto de una lista. Después de verificar con `Array.isArray`, filtra los elementos sin la forma necesaria.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -419,6 +431,9 @@ Primero se escribió la prueba "del mismo día, el que acabas de anotar queda ar
 
 > 🌎 **Otro ejemplo:** `useCallback` es como darle a cada tarjeta el **mismo** número de teléfono para avisar. Si cada vez le das un número nuevo, la tarjeta cree que algo cambió y se vuelve a dibujar.
 
+> 🧩 **Piezas para este ejercicio**
+> - Crea una lista nueva antes de ordenar. Para las fechas iguales, un ordenamiento estable conserva el orden previo de esos elementos. Aprovecha dónde colocas el gasto nuevo antes de ordenar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -502,6 +517,9 @@ Para tenerla como una app más, con su ícono, en Android: un **APK** con EAS Bu
 > 🌎 **En la vida real:** es como el ensayo general antes del estreno: los actores pasan la obra entera, con vestuario, y el director mira desde la butaca como un espectador. Las pruebas de la pantalla son ese espectador.
 
 > 🌎 **Otro ejemplo:** la etiqueta de accesibilidad es como el nombre escrito en la puerta de cada oficina: le sirve al cartero (la prueba) y a la visita que no conoce el edificio (el lector de pantalla).
+
+> 🧩 **Piezas para este ejercicio**
+> - Filtra primero por texto o etiqueta. El largo del resultado distingue entre ningún elemento, uno solo y una búsqueda ambigua.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

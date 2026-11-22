@@ -44,6 +44,9 @@ Estas piezas se convierten en piezas **nativas** de iOS y Android: por eso la ap
 
 > 🌎 **Otro ejemplo:** Es como una vitrina que muestra unos pocos productos a la vez, aunque el depósito tenga miles.
 
+> 🧩 **Piezas para este ejercicio**
+> - El árbol tiene elementos y textos. Al bajar hacia un hijo, recuerda si ese camino ya pasó por un `Text`. Esa información permite decidir si el texto está suelto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -118,6 +121,9 @@ Copiloto no escribe colores sueltos: usa un **tema** (`src/theme`) con sus color
 
 > 🌎 **Otro ejemplo:** Es como el uniforme de una empresa: los colores están definidos una vez.
 
+> 🧩 **Piezas para este ejercicio**
+> - Combina los estilos de izquierda a derecha. Cuando dos objetos tienen la misma propiedad, el que se mezcla al final aporta su valor. Omite primero las entradas vacías o falsas.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -151,6 +157,9 @@ function direccion(estilo) {
 ```
 
 📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+> 🧩 **Piezas para este ejercicio**
+> - `flexDirection` va en el contenedor y decide el eje principal. `flex: 1` va en cada tarjeta para repartir por igual el espacio disponible. `gap` va entre los hijos del contenedor.
 
 ```snack
 titulo: Tres tarjetas en una fila, con Flexbox
@@ -256,6 +265,9 @@ El iPhone tiene la **isla** o muesca arriba y la barra de inicio abajo. Con `Saf
 
 > 🌎 **Otro ejemplo:** Es como una camiseta elástica: le queda bien a varios tamaños.
 
+> 🧩 **Piezas para este ejercicio**
+> - Comprueba los límites del ancho en orden creciente. Los bordes seguros son espacios reservados por el teléfono. Resta ambos al alto total para obtener el espacio que puede usar la pantalla.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -331,6 +343,9 @@ const estilos = crearEstilos(tema);                    // una función que arma 
 ```
 
 > 📌 **Nota:** esta es la misma idea que `dash.*` de Copiloto: un solo lugar donde vive el diseño, y pantallas que solo lo llaman.
+
+> 🧩 **Piezas para este ejercicio**
+> - El esquema decide qué tema se elige. Después la función de estilos lee de ese objeto los colores, espacios y tamaños, de modo que el mismo componente pueda usar los dos temas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

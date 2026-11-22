@@ -31,6 +31,9 @@ modules/mi-modulo/
 
 Al compilar la app, Expo lee `expo-module.config.json` y **enchufa** solo las dos clases (*autolinking*). Por eso el módulo **no está en Expo Go** (clase 57): Expo Go ya viene compilado, y un módulo tuyo necesita un *development build*.
 
+> 🧩 **Piezas para este ejercicio**
+> - La lista `SOLO_NATIVO` clasifica cada tarea del ejercicio. `.some` permite decidir si al menos una tarea requiere el módulo que se incluye al construir la app.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -99,6 +102,9 @@ En un módulo de Expo, el lado nativo declara todo en una función `definition()
 | `null` o sin valor | un tipo con `?` | un opcional `?` |
 
 Si TypeScript manda un tipo que no coincide (un texto donde Kotlin espera `Boolean`), el puente **no adivina**: tira un error. Por eso el lado TypeScript escribe el **tipo** de cada función (parte 3).
+
+> 🧩 **Piezas para este ejercicio**
+> - `typeof` distingue los tipos simples. Comprueba las listas con `Array.isArray` antes de tratar los objetos como mapas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -181,6 +187,9 @@ Tres decisiones, cada una por un problema real:
 2. **Cargar tarde:** si el módulo se carga al importar el archivo, un error del lado nativo en el arranque **tira la app entera** antes de la primera pantalla. Cargándolo la primera vez que se usa, el error queda encerrado.
 3. **Un respaldo en cada llamada:** si algo falla del otro lado, la app sigue con un valor seguro (`false`, una lista vacía) en vez de romperse.
 
+> 🧩 **Piezas para este ejercicio**
+> - Guarda una señal que indique si ya intentaste buscar. Así puedes distinguir «todavía no busqué» de «ya busqué y no encontré módulo». Atrapa por separado el fallo al cargar y el fallo al usarlo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -235,6 +244,9 @@ function crearPuente(buscar: () => Modulo | null) {
 ```
 
 Una cosa más del lado TypeScript de Copiloto: la lista de apps de viaje instaladas llega como **lista** en Android, pero en iPhone llega como **texto JSON** (Swift la arma con `JSONSerialization`, porque una lista de diccionarios con valores mezclados es más fácil de mandar como texto). El tipo lo dice: `listarApps(): App[] | string`, y TypeScript acepta las dos.
+
+> 🧩 **Piezas para este ejercicio**
+> - Primero comprueba si ya tienes una lista. Si llega texto, conviértelo dentro de `try` y vuelve a comprobar con `Array.isArray` antes de devolverlo.
 
 ```ejercicio
 titulo: La misma respuesta, de dos formas
@@ -337,6 +349,9 @@ Lo que muestran estos dos archivos, y que pasó de verdad en Copiloto:
 - **El hilo principal.** Las funciones del módulo **no** corren en el hilo de las pantallas. Todo lo que toca una pantalla del sistema se manda al hilo principal (`DispatchQueue.main` en Swift).
 - **Las promesas se resuelven siempre.** Si una `AsyncFunction` nunca llama a `promise.resolve` (ni a `promise.reject`), el `await` de TypeScript **espera para siempre**.
 
+> 🧩 **Piezas para este ejercicio**
+> - En Kotlin, `mapa[clave]` puede dar `null`. `valor ?: respaldo` conserva un valor presente y usa el respaldo cuando falta.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -360,6 +375,9 @@ fun leerMinimos(mapa: Map<String, Double>): Minimos = Minimos(
     nota = mapa["nota"] ?: 4.5,
 )
 ```
+
+> 🧩 **Piezas para este ejercicio**
+> - El sistema entrega la respuesta mediante una función que llama más tarde. Resuelve la promesa desde esa función, en el momento en que llega el booleano.
 
 ```ejercicio
 titulo: La promesa que TypeScript está esperando
@@ -420,6 +438,9 @@ Hay un detalle de Copiloto que no se ve en el puente: la parte que lee la oferta
 - **En iPhone**, la pantalla compartida la recibe una **extensión**: un programa aparte, con su propia memoria. La app y la extensión comparten una carpeta (un **App Group**, con `UserDefaults(suiteName:)`): la extensión escribe ahí lo que leyó, y la app lo lee.
 
 O sea que Copiloto usa **dos canales**: el **puente**, para hablar mientras la app está abierta, y un **almacén compartido**, para dejar instrucciones a lo que corre cuando la app está cerrada.
+
+> 🧩 **Piezas para este ejercicio**
+> - Distingue quién está ejecutando el código antes de mirar si la app está abierta. En el ejercicio, el servicio y la extensión pueden trabajar desde un proceso separado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

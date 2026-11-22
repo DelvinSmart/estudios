@@ -39,6 +39,9 @@ Firestore guarda una copia local: la app sigue mostrando los datos y manda los c
 
 > 🌎 **Otro ejemplo:** Es como un mensaje de WhatsApp con un solo tilde: enviado, pero no llegó todavía.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una foto contiene varios documentos. Usa `map` para obtener un gasto de cada documento y lee sus datos con `data()`. Después cuenta cuántos tienen la marca de pendiente.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -104,6 +107,9 @@ Copiloto tiene sus contextos en `src/context` (por ejemplo, la cuenta del usuari
 
 > 🌎 **Otro ejemplo:** Es como la hora oficial: todos los relojes la toman de la misma fuente.
 
+> 🧩 **Piezas para este ejercicio**
+> - La parte superior de la pila representa al proveedor más cercano. Usa `try` para dibujar y `finally` para quitar el valor de la pila aunque el dibujo lance un error.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -149,6 +155,9 @@ function crearContexto(porDefecto) {
 ```
 
 📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+> 🧩 **Piezas para este ejercicio**
+> - Crea el contexto una vez, fuera del componente. El `Provider` recibe el tema actual como `value`. `useContext` lo lee en los componentes que se renderizan dentro.
 
 ```snack
 titulo: El modo oscuro, compartido con Context
@@ -267,6 +276,9 @@ No adivines: mide con el perfilador (en Copiloto se usó el de **Hermes**, el mo
 > 🌎 **En la vida real:** antes de cambiar piezas, el mecánico conecta el escáner y ve qué falla.
 
 > 🌎 **Otro ejemplo:** Es como un médico que pide análisis antes de recetar.
+
+> 🧩 **Piezas para este ejercicio**
+> - Compara primero las claves y después los valores de cada clave. El componente envuelto puede guardar las últimas props y el resultado para decidir cuándo tiene que calcular de nuevo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

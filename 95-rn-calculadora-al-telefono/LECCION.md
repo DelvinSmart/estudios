@@ -32,6 +32,9 @@ const ETIQUETAS = { '÷': 'dividir', '×': 'multiplicar', '⌫': 'borrar el últ
 
 Esto último no es un detalle: una persona que no ve usa el **lector de pantalla** (VoiceOver en el iPhone, TalkBack en Android), que lee en voz alta lo que tocas. Un `÷` leído en voz alta no dice nada; `"dividir"` sí. Es la **accesibilidad**, y en esta app es una regla de `AGENTS.md`.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una lista de teclas agrupa las que hacen el mismo tipo de trabajo. Usa `.includes` para decidir qué grupo contiene la tecla y consulta la etiqueta con la tecla como clave.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -100,6 +103,9 @@ escribe :: ¿Qué ventaja tiene que el teclado sea datos y no 20 botones escrito
 
 > 💡 **Idea:** fíjate en lo que **no** hay en estos dos archivos: ningún color, ninguna medida, ninguna cuenta. Los colores vienen del motor, las medidas del motor, las cuentas de la lógica. Por eso son cortos y se entienden de una leída.
 
+> 🧩 **Piezas para este ejercicio**
+> - Comprueba primero si el operador está encendido. Ese estado cambia qué color es fondo y cuál es texto. Los demás casos pueden devolver sus pares normales.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -165,6 +171,9 @@ Lee las tres primeras líneas: **el teléfono** dice el modo, **el motor** dice 
 **Un detalle que separa una app que anda de una que anda siempre:** `setEstado((e) => apretar(e, t))` y no `setEstado(apretar(estado, t))`. Si alguien toca `1` y `2` muy rápido, React puede no haber vuelto a dibujar entre los dos toques. Con la segunda forma, el segundo toque usa el estado **viejo** (el de antes del `1`) y **el `1` se pierde**. Con la función, React le pasa **el estado más nuevo**, siempre. El ejercicio de esta parte lo muestra con un `useState` de mentira.
 
 > 📌 **Nota:** `SafeAreaView` (clase 56, parte 3) deja el visor fuera de la isla dinámica del iPhone y de la barra de abajo. Y `useWindowDimensions` se actualiza solo si giras el teléfono o cambias el tamaño de la ventana en la web.
+
+> 🧩 **Piezas para este ejercicio**
+> - En el simulador, `ver()` sigue devolviendo la última pantalla dibujada mientras hay cambios pendientes. Una función de actualización recibe el valor acumulado al aplicar su turno.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -270,6 +279,9 @@ En **rojo**. Después, en el motor, la letra del visor pasó a depender **tambi�
 
 > 💡 **Idea:** es la misma lección de las clases 92 y 93: **las pruebas revisan lo que les preguntaste; mirar la app de verdad encuentra lo que nadie preguntó**. Hacen falta las dos.
 
+> 🧩 **Piezas para este ejercicio**
+> - Calcula por separado el tamaño que sugeriría el largo y el tamaño que cabe según el ancho. `Math.min` elige el que satisface los dos límites.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -357,6 +369,9 @@ Para pasarlo a tu Samsung: copia el APK al teléfono (por cable, por Google Driv
 > 📌 **Nota:** ¿por qué pesa 68 MB una calculadora? Porque ese APK trae la app **para todos los tipos de procesador** de Android a la vez. Google Play usa otro formato, el **AAB** (clase 60), y le manda a cada teléfono solo lo suyo: ahí pesa mucho menos. Y este APK está firmado con una llave **de prueba**: sirve para tu teléfono, pero para Google Play hace falta tu propia llave.
 
 > 💡 **Idea:** fíjate en lo que **no** cambió entre la web, el simulador del iPhone y Android: **ni una línea de la calculadora**. La lógica, el motor, las teclas y la pantalla son los mismos. Solo cambia cómo se **arma** para cada lugar. Eso es React Native.
+
+> 🧩 **Piezas para este ejercicio**
+> - `^` y `$` hacen que el patrón valide el identificador completo. `Number.isInteger` comprueba si el código es entero. La regla también exige que sea positivo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

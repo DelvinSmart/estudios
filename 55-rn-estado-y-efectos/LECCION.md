@@ -48,6 +48,9 @@ setGastos((antes) => [...antes, nuevo]);   // ✅ mejor: usa el valor anterior s
 
 > 🌎 **Otro ejemplo:** Es como corregir un documento compartido sin guardar: nadie ve el cambio.
 
+> 🧩 **Piezas para este ejercicio**
+> - `filter` devuelve una lista con los elementos que conservas. En `map`, devuelve un objeto nuevo solo para el elemento que cambia y devuelve los demás tal como llegaron.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -86,6 +89,9 @@ function cambiarValor(lista, id, valor) {
 ```
 
 📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+> 🧩 **Piezas para este ejercicio**
+> - `useState(0)` entrega la cuenta actual y una función para actualizarla. La actualización `anterior => anterior + 1` usa la cuenta que React tenga al aplicar el cambio. Reiniciar puede pasar `0` directamente.
 
 ```snack
 titulo: Un contador de viajes
@@ -187,6 +193,9 @@ El `TextInput` muestra lo que hay en el estado y cada cambio actualiza el estado
 
 > 🌎 **Otro ejemplo:** Es como el formulario del banco que marca en rojo el campo mal llenado.
 
+> 🧩 **Piezas para este ejercicio**
+> - El dato llega como texto. Cambia la coma antes de convertir a número y usa `.trim()` para distinguir un campo en blanco de un valor escrito que no es válido.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -248,6 +257,9 @@ Los *hooks* (`useState`, `useEffect`…) se llaman **siempre arriba** del compon
 > 🌎 **En la vida real:** es como el orden de los pasos en un avión antes de despegar: siempre el mismo, sin saltarse ninguno.
 
 > 🌎 **Otro ejemplo:** Es como los botones de un ascensor: siempre en el mismo lugar.
+
+> 🧩 **Piezas para este ejercicio**
+> - Guarda las dependencias y la función de limpieza entre llamadas. Si hay que ejecutar de nuevo el efecto, corre primero la limpieza anterior. `Object.is` compara cada dependencia con la que ocupaba la misma posición.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

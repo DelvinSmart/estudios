@@ -51,6 +51,9 @@ Ninguna está "mal": son **decisiones**. El error es no tomarlas, y que la app h
 
 > 💡 **Idea:** la regla más importante de `AGENTS.md` en este proyecto es **"Nunca `eval`"**. `eval("2+3")` da 5, y parece la forma fácil de hacer una calculadora. Pero `eval` corre **cualquier código**: es una puerta abierta (el curso de seguridad lo explica), y además no te deja decidir nada de la tabla de arriba.
 
+> 🧩 **Piezas para este ejercicio**
+> - Empieza con el primer número como resultado parcial. Cada vuelta toma un operador y el número siguiente, aplica esa operación y conserva el resultado para la siguiente vuelta.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -115,6 +118,9 @@ export function ladoDeTecla(anchoPantalla: number): number {
 ```
 
 Fíjate que **usa el motor** (`espacio.grande`, `espacio.medio`): si mañana quieres más aire entre las teclas, cambias `espacio.medio` y el lado se recalcula solo. Y `forma.anchoMaximo` evita que en una tableta las teclas salgan gigantes. **La prueba** lo dice con números: en 320 de ancho, cuatro teclas más sus huecos no se pasan, y cada tecla mide al menos 56 (que se pueda tocar con el dedo).
+
+> 🧩 **Piezas para este ejercicio**
+> - Cuatro teclas tienen tres huecos entre ellas. Descuenta ambos márgenes y esos huecos antes de repartir lo que queda. La mitad del lado es el radio de la tecla.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -199,6 +205,9 @@ export function calcular(a: number, operador: Operador, b: number): number | str
 `number | string` dice "devuelve un número **o** un aviso". Quien la llama **tiene** que mirar cuál vino (`typeof r === 'number'`): TypeScript no lo deja olvidarse.
 
 > 📌 **Nota:** los operadores son `'−'`, `'×'` y `'÷'`: los símbolos de verdad, no `-`, `*` y `/`. Son los que se ven en las teclas, y el tipo `Operador` no deja que se cuele otro.
+
+> 🧩 **Piezas para este ejercicio**
+> - `toPrecision(12)` redondea a cifras significativas y devuelve texto. `Number` recupera el número. `Math.abs` permite aplicar el mismo límite a números positivos y negativos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -287,6 +296,9 @@ Cada caso de la tabla del plan es **un `if`** con su comentario. Si lees `apreta
 
 > 💡 **Idea:** `pantalla` es **texto** y no número a propósito. Mientras escribes `12,` el número todavía es `12`, pero el visor tiene que mostrar la coma. Y `0,50` tiene que mostrar el cero. Como texto, se ve exactamente lo que tocaste.
 
+> 🧩 **Piezas para este ejercicio**
+> - Decide primero qué clase de tecla se tocó. En las ramas que modifican la pantalla, copia el estado con `...` y luego escribe las propiedades que cambian.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -349,6 +361,9 @@ El ayudante `tocar` hace que cada prueba se lea **como lo que haría una persona
 **Lo que pasó:** las 39 pruebas de la lógica salieron en **rojo** (todavía no había código), y en **verde** a la primera cuando se escribió `calculadora.ts`. Pero que pasen a la primera **no** quiere decir que esté todo bien: quiere decir que el código hace **lo que las pruebas preguntan**. Lo que nadie preguntó apareció recién mirando la app en un teléfono chico (clase 95, parte 4).
 
 > 📌 **Nota:** `formatear` es la otra mitad del visor: la lógica guarda `-1234.5` y el visor muestra `-1.234,5`, como en Brasil. Separar "cómo se guarda" de "cómo se ve" es lo que permite cambiar el formato (por ejemplo, para Estados Unidos) sin tocar ninguna cuenta.
+
+> 🧩 **Piezas para este ejercicio**
+> - Guarda aparte si había punto decimal. Un texto terminado en punto todavía necesita mostrar la coma aunque su parte decimal esté vacía.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

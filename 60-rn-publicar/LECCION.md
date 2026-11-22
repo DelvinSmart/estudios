@@ -28,6 +28,9 @@ Se prueba **como lo usa una persona**: buscar el texto, tocar, ver el resultado.
 
 > 🌎 **Otro ejemplo:** Es como el cliente misterioso que prueba la atención de una tienda.
 
+> 🧩 **Piezas para este ejercicio**
+> - Al recorrer los hijos, conserva el botón más cercano que envuelve el nodo actual. Cuando encuentres el texto, esa referencia señala el botón que debe responder al toque.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -107,6 +110,9 @@ eas build --platform ios --profile production
 
 > 🌎 **Otro ejemplo:** Es como la llave de tu casa: si la pierdes, no puedes entrar a cambiar nada.
 
+> 🧩 **Piezas para este ejercicio**
+> - Copia cada nivel que vas a modificar: configuración, `expo` y los objetos de Android e iOS. Convierte temporalmente `buildNumber` a número para sumar y luego vuelve a texto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -181,6 +187,9 @@ escribe :: ¿Qué diferencia hay entre un AAB y un APK? :: El AAB es el paquete 
 > 🌎 **En la vida real:** cambiar el menú del día (JavaScript) es rápido; remodelar la cocina (nativo) necesita permiso de obra.
 
 > 🌎 **Otro ejemplo:** Es como actualizar los precios de una vitrina frente a cambiar la vitrina.
+
+> 🧩 **Piezas para este ejercicio**
+> - Empieza por la lista vacía. Después usa una comprobación que detecte si algún nombre de archivo o prefijo coincide con los casos de cambio nativo de la consigna.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

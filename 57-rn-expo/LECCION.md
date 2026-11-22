@@ -34,6 +34,9 @@ npx expo start
 
 > 🌎 **Otro ejemplo:** Es como el DNI de la app.
 
+> 🧩 **Piezas para este ejercicio**
+> - Revisa las propiedades dentro de `config.expo`. En un patrón, `\d` representa un dígito y `\.` busca un punto literal. Los puntos separan los segmentos tanto de la versión como del identificador.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -102,6 +105,9 @@ Expo Go trae un conjunto fijo de piezas nativas. Si tu app necesita una pieza na
 
 > 🌎 **Otro ejemplo:** Es como una cocina de prueba con utensilios estándar.
 
+> 🧩 **Piezas para este ejercicio**
+> - Compara cada módulo requerido con la lista de los incluidos. Si falta uno, esa condición decide cómo abrir el proyecto antes de considerar el tipo de conexión.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -164,6 +170,9 @@ Copia en Snack el `ContadorDeViajes` (clase 55) y agrégale un botón "reiniciar
 
 > 🌎 **Otro ejemplo:** Es como tocar tu primera canción entera, aunque sea simple.
 
+> 🧩 **Piezas para este ejercicio**
+> - Los tres métodos de un contador pueden compartir una variable. `sumar` la incrementa, `reiniciar` la deja en cero y `texto` lee su valor al preparar el mensaje.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -200,6 +209,9 @@ function crearContador() {
 ```
 
 📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+> 🧩 **Piezas para este ejercicio**
+> - En JSX, escribe el saludo dentro de `<Text>`. Cambia la propiedad `backgroundColor` del estilo del contenedor y coloca el segundo `<Text>` al lado del primero dentro de ese contenedor.
 
 ```snack
 titulo: Tu primer Snack

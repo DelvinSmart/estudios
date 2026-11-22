@@ -56,6 +56,9 @@ La pantalla de inicio de Copiloto está hecha así: muchas piezas chicas, cada u
 
 > 🌎 **Otro ejemplo:** Es como una orquesta: cada músico es un componente y la sinfonía es la pantalla.
 
+> 🧩 **Piezas para este ejercicio**
+> - `tipo` indica cómo interpretar cada elemento. Si es una función, llámala con sus propiedades y vuelve a interpretar lo que devuelve. Para los elementos con hijos, interpreta cada hijo antes de unir los textos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -136,6 +139,9 @@ function ResumenDelDia({ ganancia, viajes }: { ganancia: number; viajes: number 
 
 > 🌎 **Otro ejemplo:** Es como la placa de cada carro en un estacionamiento.
 
+> 🧩 **Piezas para este ejercicio**
+> - Agrega primero las líneas que siempre aparecen. `if` agrega la celebración solo al alcanzar la meta. Para los gastos, separa el caso de lista vacía del recorrido que prepara una línea por gasto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -213,6 +219,9 @@ Este es el flujo de React: **los datos bajan** por props de padre a hijo, y **lo
 
 > 🌎 **Otro ejemplo:** Es como un río con un teléfono: el agua baja, las llamadas suben.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un callback es una función que se llama cuando ocurre algo. Al construir cada tarjeta, puedes darle una función que recuerde el id de ese gasto. Comprueba que el callback exista al tocar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -252,6 +261,9 @@ function crearLista(gastos, alElegir) {
 ```
 
 📱 **Ahora, en la app de verdad:** toca **▶ abrir la app en Snack**, cambia el código y mira la app. Marca cada cosa cuando la veas.
+
+> 🧩 **Piezas para este ejercicio**
+> - Las props son datos que recibe un componente. Léelas en el parámetro de `TarjetaGasto` y pásalas con atributos al usar `<TarjetaGasto />`. Escribe los números entre llaves para enviarlos como números.
 
 ```snack
 titulo: Una tarjeta, tres gastos
