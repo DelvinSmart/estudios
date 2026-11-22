@@ -38,6 +38,10 @@ const mapa = new Map<string, number>();                // llaves texto, valores 
 
 > 🌎 **Otro ejemplo:** Es como los frascos con tapa de color según lo que guardan.
 
+> 🧩 **Piezas para este ejercicio**
+> - `<T>` permite que una función conserve el tipo que llega. Con `lista: T[]`, el tipo de un elemento es `T`; añade `| undefined` al resultado para el caso vacío.
+> - El primer índice es `0`. Para el último puedes usar `.at(-1)`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -114,6 +118,10 @@ Así el CRUD del laboratorio tendría tipos: `actualizar(id: string, cambios: Pa
 > 🌎 **En la vida real:** son como versiones de un mismo formulario: completo, resumido, sin campos internos.
 
 > 🌎 **Otro ejemplo:** Es como recortar una foto: el original, solo las caras, sin el fondo.
+
+> 🧩 **Piezas para este ejercicio**
+> - `typeof null` devuelve `'object'`. Antes de inspeccionar propiedades de un `unknown`, comprueba que sea un objeto y descarta `null`. El operador `in` permite preguntar si existe una propiedad antes de comprobar su tipo.
+> - `Partial<Gasto>` permite pasar algunos campos. En una copia con `...`, las propiedades que aparecen después reemplazan las anteriores con el mismo nombre.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -203,6 +211,9 @@ En Copiloto, el CI corre la revisión de tipos en cada subida (Tema 04).
 
 > 🌎 **Otro ejemplo:** Es como pasar el corrector a todo el documento antes de imprimir.
 
+> 🧩 **Piezas para este ejercicio**
+> - `find` da un elemento o `undefined`. Después de una comprobación que devuelve temprano cuando falta, TypeScript sabe que el resto de la función sí tiene un objeto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -266,6 +277,10 @@ Se leen igual que en el Tema 07: **qué** pasó, **dónde** (archivo y línea) y
 > 🌎 **En la vida real:** es como poner cinta sobre la luz del aceite del tablero: la luz no se ve, el problema sigue.
 
 > 🌎 **Otro ejemplo:** Es como firmar "yo me hago responsable" sin revisar.
+
+> 🧩 **Piezas para este ejercicio**
+> - Empieza por la línea que marca el compilador. Lee el tipo que encontró, compáralo con el que se esperaba y sigue la pista hasta el valor que se pasó o la propiedad que se escribió.
+> - Vuelve a probar después de un cambio para ver qué errores quedan.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -39,6 +39,10 @@ gastos-del-carro/
 
 > 🌎 **Otro ejemplo:** Es como las secciones de un supermercado.
 
+> 🧩 **Piezas para este ejercicio**
+> - En `package.json`, `scripts` guarda nombres de comandos y `devDependencies` guarda nombres de paquetes con sus versiones. Ambos son objetos dentro del objeto principal.
+> - El prefijo `^` pertenece al texto de la versión. El ejercicio comprueba la forma del archivo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -145,6 +149,10 @@ export function porTipo(gastos: Gasto[]): Partial<Record<TipoGasto, number>> {
 > 🌎 **En la vida real:** es como el resumen del extracto: total y por categoría.
 
 > 🌎 **Otro ejemplo:** Es como el cierre de caja por tipo de producto.
+
+> 🧩 **Piezas para este ejercicio**
+> - La lista y el contador se pueden declarar dentro de `crearAlmacen`. Los métodos devueltos conservan acceso a esas variables.
+> - Para actualizar la lista, asigna una copia con el gasto extra o el resultado de `filter`. Poner el contador aparte permite conservar la secuencia aunque borres datos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -269,6 +277,10 @@ it('una lista vacía da 0', () => expect(totalGastos([])).toBe(0));
 
 > 🌎 **Otro ejemplo:** Es como pesar algo conocido para comprobar que la balanza está bien.
 
+> 🧩 **Piezas para este ejercicio**
+> - Lee cada prueba como un ejemplo de entrada y salida. La clave del objeto devuelto es el tipo de gasto y su valor es la suma para ese tipo.
+> - Calcula las sumas como números. Redondea cada total después de sumar sus gastos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -340,6 +352,10 @@ Con su `README`, sus pruebas pasando y, si quieres, el CI corriendo `npm test` e
 > 🌎 **En la vida real:** es como un trabajo con firma y certificado de calidad.
 
 > 🌎 **Otro ejemplo:** Es como un músico que sube su demo bien grabada.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.map(...)` devuelve una fila por gasto. Puedes usar el primer carácter en mayúscula y `.slice(1)` para conservar el resto del nombre.
+> - `toFixed(2)` devuelve el texto con dos decimales que se puede unir al prefijo `R$`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

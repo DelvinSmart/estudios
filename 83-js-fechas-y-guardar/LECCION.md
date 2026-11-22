@@ -29,6 +29,10 @@ const fecha = new Date(a, m - 1, d);              // m - 1: el mes de JavaScript
 
 > 🌎 **Otro ejemplo:** el formato ISO es como escribir las placas siempre igual (ABC1D23): si cada uno las escribe a su manera, buscar y ordenar se vuelve imposible.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.split('-').map(Number)` convierte una fecha en tres números. Con `new Date(año, mes, día)`, enero es `0`, así que ajusta el mes al crear la fecha y al volver a obtenerlo.
+> - `String(3).padStart(2, '0')` da `'03'`. Se aplica al mes y al día después de obtener sus números.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -105,6 +109,10 @@ new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(23
 > 🌎 **En la vida real:** restar fechas es como contar los días en un calendario con el dedo, pero hecho por una máquina que no se equivoca con los meses de 30 y 31 días.
 
 > 🌎 **Otro ejemplo:** `Intl` es como un traductor de formatos: el mismo número se escribe 1.234,50 en Brasil y 1,234.50 en Estados Unidos.
+
+> 🧩 **Piezas para este ejercicio**
+> - Al restar dos objetos `Date`, obtienes milisegundos. Divide por `86_400_000` y redondea si quieres contar días completos del ejemplo.
+> - La selección tiene dos límites inclusivos. Una fecha debe estar en el lunes o después y en `hoy` o antes.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -206,6 +214,10 @@ Lo que tienes que saber de localStorage:
 
 > 🌎 **Otro ejemplo:** es como una libreta de notas: solo admite texto; si quieres guardar una tabla, la escribes como texto ordenado (JSON) y la vuelves a leer.
 
+> 🧩 **Piezas para este ejercicio**
+> - `setItem` recibe una clave y un texto. `JSON.stringify` prepara el texto para guardar y `JSON.parse` recupera el valor.
+> - Coloca la lectura del almacén y la conversión dentro del mismo `try`: cualquiera de las dos puede fallar. La ausencia de texto también tiene su propio caso.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -274,6 +286,10 @@ function crearRepositorio(almacen, llave) {
 > 🌎 **En la vida real:** es como el depósito de un restaurante con un encargado: los cocineros le piden "dame tomates" y no les importa si los tomates están en la nevera grande o en la chica. Si mañana cambian de nevera, los cocineros ni se enteran.
 
 > 🌎 **Otro ejemplo:** es como el cajero del banco: tú pides "deposita esto" sin saber en qué bóveda queda guardado.
+
+> 🧩 **Piezas para este ejercicio**
+> - El repositorio reúne las operaciones sobre los gastos. Todas usan la misma llave para leer y guardar la lista.
+> - Para elegir un id, busca el mayor de los que quedan y súmale uno. Para borrar, conserva los gastos cuyo id sea distinto y guarda esa lista.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

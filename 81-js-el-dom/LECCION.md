@@ -27,6 +27,10 @@ console.log(titulo.textContent);                        // el texto que tiene ad
 
 > 🌎 **En la vida real:** `querySelector` es como pedir en una biblioteca "el primer libro de la estantería azul"; `querySelectorAll`, "todos los libros de la estantería azul".
 
+> 🧩 **Piezas para este ejercicio**
+> - El DOM es la representación de la página que JavaScript puede consultar. En un selector, `h1` busca una etiqueta, `#lectura` busca un id y `.viaje` busca una clase.
+> - `querySelector` devuelve el primer elemento que coincide. `querySelectorAll` devuelve una colección y `.length` cuenta sus elementos. `textContent` sirve tanto para leer texto como para escribirlo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -104,6 +108,10 @@ item.remove();                               // y así se quita
 > ⚠️ **Cuidado con `innerHTML`:** `elemento.innerHTML = texto` también cambia el contenido, pero **interpreta** el texto como HTML. Si ese texto lo escribió un usuario, puede meter código malicioso en tu página (es el ataque XSS del curso de seguridad). Para mostrar texto, usa siempre `textContent`.
 
 > 🌎 **En la vida real:** `textContent` es como pegar una nota escrita a mano; `innerHTML` es como pegar lo que alguien te mandó sin leerlo: puede traer una sorpresa adentro.
+
+> 🧩 **Piezas para este ejercicio**
+> - `document.createElement('li')` crea un elemento que todavía está fuera de la página. Ponle texto y agrégalo a la lista con `.append(...)` o `.appendChild(...)`.
+> - `toFixed(2)` prepara el número para mostrarlo con dos decimales. Para comprobar el total, conserva la suma como número hasta terminar la cuenta.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -192,6 +200,10 @@ La función recibe un **objeto del evento** con detalles: `evento.target` es el 
 
 > 🌎 **Otro ejemplo:** Es como pedirle al portero: "cuando llegue un paquete, avísame". Tú sigues con lo tuyo hasta que llega.
 
+> 🧩 **Piezas para este ejercicio**
+> - Registra una función distinta para cada botón con `addEventListener('click', ...)`. El navegador llama a esa función cuando ocurre el clic.
+> - Declara el contador en un lugar que ambas funciones puedan leer. Después de cada cambio, escribe el valor nuevo en el elemento que lo muestra.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -262,6 +274,10 @@ Tres trampas que casi todos pisan la primera vez:
 > 🌎 **En la vida real:** es como la recepción de un hotel: recibes el formulario, revisas que esté completo antes de aceptarlo, y si falta algo se lo dices a la persona amablemente, sin tirar todo a la basura.
 
 > 🌎 **Otro ejemplo:** `preventDefault` es como decirle al mesero "no retires el plato todavía": el comportamiento normal se frena para que tú decidas qué pasa.
+
+> 🧩 **Piezas para este ejercicio**
+> - Escucha `submit` en el formulario. `evento.preventDefault()` evita la navegación que normalmente sigue al envío.
+> - Un campo numérico puede dar `NaN` cuando está vacío. Comprueba primero si el número es mayor que cero. Deja la escritura en la lista y `form.reset()` para después de esa comprobación.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

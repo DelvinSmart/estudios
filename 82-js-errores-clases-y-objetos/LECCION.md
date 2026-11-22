@@ -37,6 +37,10 @@ try {
 
 > ⚠️ **No escondas los errores:** un `catch` vacío que se traga todo hace que el problema siga ahí sin que nadie lo vea (clase 34). Atrapa un error solo si sabes qué hacer con él.
 
+> 🧩 **Piezas para este ejercicio**
+> - `throw new Error(mensaje)` interrumpe la función. Si otra función la llamó dentro de `try`, el control pasa a `catch` y `error.message` recupera el mensaje.
+> - `toFixed(2)` produce texto para mostrar. Para conservar un total numérico, puedes usar `Math.round(valor * 100) / 100`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -112,6 +116,10 @@ const onix = new Carro('Chevrolet', 40000); // otro carro, con sus propios datos
 > 🌎 **En la vida real:** la clase es el molde de una panadería; cada pan (`new`) sale con la misma forma, pero cada uno es un pan distinto: si muerdes uno, los otros siguen enteros.
 
 > 🌎 **Otro ejemplo:** Es como el formulario de inscripción de un gimnasio: el formulario es igual para todos (la clase), pero cada ficha llena es de una persona (cada objeto), con sus datos.
+
+> 🧩 **Piezas para este ejercicio**
+> - `constructor` se ejecuta al crear cada carro con `new`. `this.km` guarda los kilómetros de ese carro concreto.
+> - Para medir lo recorrido desde el último cambio, resta el kilometraje registrado entonces al actual. Al cambiar el aceite, registra el kilometraje actual para la próxima comparación.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -216,6 +224,10 @@ Con `#saldo`, nadie puede escribir `billetera.#saldo = 1000000` desde afuera: la
 
 > 💡 **Idea:** no abuses de la herencia. Más de dos o tres niveles (`A extends B extends C extends D`) se vuelve difícil de seguir. Muchas veces es mejor **componer**: un objeto que **tiene** otro adentro, en vez de **ser** otro.
 
+> 🧩 **Piezas para este ejercicio**
+> - `#saldo` es un campo que solo puede usar el código de la clase que lo declara. Un getter escrito como `get saldo()` se lee con `billetera.saldo`.
+> - Si la subclase tiene constructor, `super(...)` inicializa la parte heredada antes de usar `this`. La subclase puede leer el saldo mediante el getter.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -315,6 +327,10 @@ Se parecen en la idea de fondo: **cada cosa en un solo lugar, y los demás la pi
 - **Funciones y objetos simples**: para transformar datos (calcular un total, filtrar una lista). Es lo más usado hoy en **JavaScript con React**: los componentes de Copiloto son funciones, no clases.
 
 Ninguna es "la correcta": un buen programador elige la que hace el código más claro.
+
+> 🧩 **Piezas para este ejercicio**
+> - Dos tipos de vehículo pueden tener un método con el mismo nombre y aplicar reglas diferentes. Cuando llamas `vehiculo.necesitaAceite()`, se ejecuta el método del objeto que tienes en esa vuelta.
+> - `filter` puede quedarse con los vehículos cuya respuesta fue `true`. `map` puede convertir esos vehículos en sus nombres.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

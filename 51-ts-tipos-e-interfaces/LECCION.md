@@ -40,6 +40,10 @@ Regla: anota los **parámetros** de las funciones y los datos de afuera (APIs, F
 
 > 🌎 **Otro ejemplo:** Es como reconocer una moneda por su forma sin leer el valor.
 
+> 🧩 **Piezas para este ejercicio**
+> - `number[]` significa «lista de números». El tipo que va después de `)` describe el resultado que entrega la función.
+> - El promedio se obtiene dividiendo la suma por la cantidad. Mira primero qué espera la prueba cuando la lista llega vacía.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -104,6 +108,10 @@ function mostrarId(id: string | number) {
 > 🌎 **En la vida real:** antes de cargar un carro, preguntas si es nafta o diésel.
 
 > 🌎 **Otro ejemplo:** Es como revisar si una llamada es del trabajo o personal antes de contestar.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un tipo literal como `'Uber'` admite ese texto exacto. `|` une varias opciones admitidas.
+> - En la prueba, `@ts-expect-error` comprueba que TypeScript realmente detecte el uso inválido de la línea siguiente.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -180,6 +188,10 @@ interface CarroDeApp extends Vehiculo { apps: string[]; }
 > 🌎 **En la vida real:** es como un formulario base de vehículo con una sección extra para conductores de app.
 
 > 🌎 **Otro ejemplo:** Es como un modelo de carro con un paquete de extras.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una `interface` describe las propiedades que debe tener un objeto. El `?` después del nombre indica que ese campo se puede omitir.
+> - Puedes usar una unión de textos entre comillas para limitar un campo a los tipos de gasto admitidos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -260,6 +272,9 @@ En React, así se tipan las funciones que se pasan como props.
 > 🌎 **En la vida real:** es como decir "necesito un electricista certificado", no "cualquier persona".
 
 > 🌎 **Otro ejemplo:** Es como el tipo de enchufe que acepta un aparato.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una función que devuelve una lista directamente tiene un tipo como `Gasto[]`. Una función `async` entrega una promesa, así que se escribe `Promise<Gasto[]>` cuando esa promesa se cumple con una lista de gastos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -349,6 +364,10 @@ function estiloDeTarjeta(tema: Tema) {
 `estiloDeTarjeta(oscuro)` y `estiloDeTarjeta(claro)` dan tarjetas distintas con **el mismo código**.
 
 > 💡 **Idea:** `as const` (clase 52) sirve cuando hay **un solo** tema: congela los valores. Cuando hay **dos o más** que tienen que ser iguales por dentro, lo que conviene es una **interfaz**, como aquí.
+
+> 🧩 **Piezas para este ejercicio**
+> - `const claro: Tema` pide a TypeScript que compruebe el objeto con la misma forma que `oscuro`. Puedes reutilizar una propiedad leyendo `oscuro.espacio` o `oscuro.radio`.
+> - Dentro de `estiloDeBoton`, lee las propiedades del tema recibido. Así la función puede trabajar con cualquiera de los dos temas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

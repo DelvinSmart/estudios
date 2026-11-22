@@ -45,6 +45,10 @@ Antes de escribir código, el plano (la clase "El plano y la estructura" del cur
 
 > 🌎 **Otro ejemplo:** las puertas y ventanas son como revisar que la casa tenga entrada, luz y desagüe antes de mudarse: lo obvio que nadie dice, pero sin eso no se puede vivir.
 
+> 🧩 **Piezas para este ejercicio**
+> - Cada comprobación puede aportar su propio aviso. Empieza con una lista vacía y agrega los avisos de todos los campos que fallen.
+> - Con el formato fijo `AAAA-MM-DD`, comparar los textos en orden compara año, mes y día en ese orden.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -178,6 +182,10 @@ Fíjate: **ni un color ni un tamaño escrito a mano**. Si mañana quieres el tem
 
 > 🌎 **Otro ejemplo:** `var(--relleno)` es como pedir "el tornillo número 8" en una ferretería: todos saben exactamente cuál es, sin medirlo cada vez.
 
+> 🧩 **Piezas para este ejercicio**
+> - `var(--tarjeta)` lee el valor declarado en `:root`. Usa esa forma para conectar cada propiedad de la tarjeta con su variable.
+> - `gap` define el espacio entre los elementos hijos en un contenedor flexible.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -305,6 +313,10 @@ En `package.json` agrega `"type": "module"` y el script `"test": "vitest run"`; 
 
 > 🌎 **Otro ejemplo:** es como la calculadora del taller: no le importa si el resultado se escribe en una pizarra o en un papel; solo hace bien la cuenta.
 
+> 🧩 **Piezas para este ejercicio**
+> - Para el total de la semana, conserva los gastos dentro de ambos límites y suma sus valores antes de redondear.
+> - Al ordenar, compara primero la fecha. Si es la misma, compara los ids. Crea una lista nueva antes de usar un método que ordena en el lugar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -409,6 +421,10 @@ Fíjate en `alBorrar`: la pantalla **no sabe** borrar. Solo avisa "tocaron borra
 > 🌎 **En la vida real:** la pantalla es como el mesero: muestra el menú y te trae el plato, pero no cocina. Si pides algo, le avisa a la cocina.
 
 > 🌎 **Otro ejemplo:** `replaceChildren()` es como borrar la pizarra antes de escribir el menú del día: si no la borras, se mezcla con el de ayer.
+
+> 🧩 **Piezas para este ejercicio**
+> - Antes de dibujar, limpia el contenido anterior. Si la lista está vacía, agrega el mensaje y termina esa actualización.
+> - En el botón, guarda una función que llame a `alBorrar` con el id del gasto de esa fila. El clic ejecuta esa función.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -551,6 +567,10 @@ El ciclo es siempre el mismo: **la persona hace algo → app.js pide a la lógic
 > 🌎 **En la vida real:** app.js es el jefe de cocina: recibe el pedido del mesero, le pide al depósito los ingredientes, sigue la receta y manda el plato. No pica la cebolla él mismo, pero sabe a quién pedírselo.
 
 > 🌎 **Otro ejemplo:** el ciclo "acción → datos → redibujar" es como un marcador de fútbol: cada gol (acción) se anota (datos) y el tablero se actualiza (pantalla).
+
+> 🧩 **Piezas para este ejercicio**
+> - `refrescar` vuelve a leer los gastos y actualiza las dos vistas. Borrar un gasto cambia el almacén, por eso después se vuelve a dibujar.
+> - En `submit`, revisa los datos antes de llamar al almacén. Si hay problemas, `.join('. ')` los convierte en un texto para mostrar juntos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -735,6 +755,9 @@ Agrega también un `.gitignore` con `node_modules/` para no subir las librerías
 > 🌎 **En la vida real:** publicar es como abrir la tienda: antes revisas que todo funcione (la lista de comprobación), y después le das la dirección a todo el mundo.
 
 > 🌎 **Otro ejemplo:** "agregar a pantalla de inicio" es como dejar un atajo en tu escritorio: no es una app de la tienda, pero se abre con un toque.
+
+> 🧩 **Piezas para este ejercicio**
+> - Convierte el nombre del usuario a minúsculas antes de construir el dominio. Compara el nombre del repositorio con ese dominio para decidir si la dirección lleva un tramo adicional.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
