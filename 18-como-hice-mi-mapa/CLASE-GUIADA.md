@@ -24,6 +24,9 @@ A esto se le llama **una sola fuente de verdad** (*single source of truth*).
 
 > 💡 **Idea:** es la misma idea de tu página de estudios (contenido en JSON, Tema 12) y de la web de Copiloto (usa la app sin copiarla, Tema 13). Ya la viste tres veces: es una de las ideas más importantes de la ingeniería.
 
+> 🧩 **Piezas para este ejercicio**
+> - `md.split('\n')` separa el texto por líneas. `.startsWith('## ')` reconoce un encabezado de segundo nivel y `.slice(3)` devuelve el título sin su marca.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -85,6 +88,9 @@ Es la arquitectura del Tema 10 en pequeño: **los datos** (`cursos.js`) separado
 > 🌎 **En la vida real:** una caja de herramientas con compartimentos: cada uno, una cosa.
 
 > 🌎 **Otro ejemplo:** Como los compartimentos de un botiquín: curitas en uno, remedios en otro, termómetro en otro. Encuentras lo que buscas en segundos.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.includes(...)` busca un fragmento de texto. `||` permite reconocer dos palabras que llevan al mismo archivo. `return` termina la búsqueda en cuanto encuentra una coincidencia.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -165,6 +171,10 @@ A esto se le llama **enrutador** (*router*), y a una página así, **SPA** (*Sin
 > 🌎 **Otro ejemplo:** Como un libro con capítulos, secciones y páginas: abres el libro (etapas), eliges un capítulo (clase) y lees una sección (parte), sin cambiar de libro.
 
 > 💡 **Idea:** como cada pantalla tiene su dirección, puedes **guardar en favoritos** una parte exacta, mandársela a alguien, y el botón "atrás" del navegador funciona.
+
+> 🧩 **Piezas para este ejercicio**
+> - `hash` es el fragmento de la dirección que empieza por `#`. Después de quitar esa marca, dividir `'/clase/18/0'` por `'/'` deja un primer elemento vacío.
+> - En `const [, tipo, a] = lista`, la coma inicial salta el primer elemento. `Number(...)` convierte en número una posición que llegó como texto.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -250,6 +260,10 @@ for (const l of lineas) {
 
 > 📌 **Nota:** es la misma idea del script que agregó los 270 ejemplos "🌎 En la vida real" a las clases: también saltaba los bloques de código.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una variable booleana puede recordar si estás dentro de un bloque. Cuando ves una cerca de tres acentos graves, `enCodigo = !enCodigo` cambia al estado contrario.
+> - `partes.at(-1)` devuelve la última parte agregada. Comprueba que ya exista una parte antes de aumentar su contador.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -326,6 +340,10 @@ El Markdown se convierte en HTML con una librería pequeña, **marked**. Despué
 
 Por eso, en un `.md` puedes escribir `> 💡 **Idea:** ...` y en la página aparece una tarjeta amarilla, **sin tocar código**.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.match(...)` devuelve `null` si la línea no encaja. Si encaja, la posición `0` contiene la línea completa y las siguientes contienen los grupos del patrón.
+> - `TIPOS[marca]` consulta la categoría del emoji. Pasa el título y el cuerpo por `escapar` antes de interpolarlos como texto HTML.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -390,6 +408,10 @@ En internet, el servidor es **GitHub Pages** (parte 9).
 > 🌎 **En la vida real:** un empleado no puede entrar a cualquier cajón de la oficina: necesita que recepción le alcance lo que pide. Con doble clic no hay recepción.
 
 > 🌎 **Otro ejemplo:** Como una farmacia que no te deja entrar al depósito: pides en el mostrador y el farmacéutico te trae el remedio.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.startsWith(...)` comprueba cómo empieza una dirección. Aquí basta distinguir el protocolo `file:` de los protocolos `http:` y `https:`.
+> - En la plantilla del comando, `${puerto}` se sustituye por el número recibido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -463,6 +485,10 @@ vf :: En internet, el servidor del mapa es GitHub Pages
 
 > 🔧 **Lo que cambió después (una lección en sí misma):** con el tiempo, el mapa pasó a ser de **islas** (`web/mapa-islas.js`) y se acomodaba en **serpiente**: la segunda fila iba de derecha a izquierda. Se veía bonito, pero una revisión "como humano" mostró que la gente leía el 04 antes que el 03. Ahora cada fila se lee de izquierda a derecha, como un libro. Lo bonito no sirve si confunde el orden.
 
+
+> 🧩 **Piezas para este ejercicio**
+> - `:root` apunta a la raíz del documento. Una propiedad como `--acento` puede leerse desde otros selectores con `var(--acento)`.
+> - `:nth-child(even)` selecciona los hijos que ocupan posiciones pares entre sus hermanos. La primera posición es 1.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -557,6 +583,10 @@ Así **se escriben**. Pero en GitHub **no quedan así**: el script `firebase/sep
 
 `practica.js` lo hace con lo del Tema 17: lee las líneas con `split(' :: ')`, arma botones con plantillas, escucha clics con `addEventListener`, manda tus respuestas al servidor con `await` (Tema 21, Parte 8), y al aprobar guarda en `localStorage` y avisa con un evento propio (`practica-aprobada`), que `vistas/parte.js` escucha para desbloquear el botón.
 
+> 🧩 **Piezas para este ejercicio**
+> - `.split('::')` corta la línea en campos y `.trim()` limpia los espacios de cada campo.
+> - En `[tipo, pregunta, ...opciones]`, los dos primeros campos tienen nombre y `...opciones` reúne el resto en una lista.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -620,6 +650,10 @@ Es **honesto**: dice que lo emite el propio curso y que **no es un título ofici
 
 > 🌎 **Otro ejemplo:** Como subir una foto a un álbum público: cualquiera con el enlace la puede ver.
 
+> 🧩 **Piezas para este ejercicio**
+> - Si separas una ruta por `/`, `.pop()` devuelve el último fragmento, que es el nombre del archivo. `.endsWith('.key')` comprueba la extensión.
+> - La lista de problemas puede crecer durante el recorrido. `.push(...)` agrega un aviso por cada comprobación que falla.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -674,6 +708,10 @@ vf :: Antes de publicar algo, hay que revisar que no tenga nada privado
 > 🌎 **En la vida real:** agregar una parada a la ruta del autobús: pintas el cartel en la parada (la carpeta y su lección) y la agregas al mapa de la ruta (el catálogo).
 
 > 🌎 **Otro ejemplo:** Como agregar un nuevo plato al menú de un restaurante: escribes la receta (la clase) y lo agregas a la carta (el catálogo).
+
+> 🧩 **Piezas para este ejercicio**
+> - `numero in catalogo.CLASES` comprueba si el objeto tiene una propiedad con esa clave. `.includes(numero)` busca el número en una lista.
+> - Una clase debe estar registrada y aparecer en alguna etapa. Usa `.some(...)` para encontrar si existe una etapa que la incluya.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -743,6 +781,10 @@ export const ETAPAS = [{ id: 'web', titulo: 'La web: HTML, CSS y JavaScript', cl
 > 🌎 **Otro ejemplo:** Como el índice de un libro grande más el marcador: el índice te deja saltar a cualquier capítulo y el marcador te devuelve a donde estabas.
 
 > 💡 **Idea:** el menú en árbol y el mapa de islas usan **los mismos datos** (`cursos.js`). Si agregas un curso, aparece solo en los dos.
+
+> 🧩 **Piezas para este ejercicio**
+> - Cada nivel tiene su propio recorrido. Un curso da sus etapas y cada etapa da sus clases.
+> - Los espacios al principio de cada línea representan su nivel. `.join('\n')` reúne todas las líneas al final.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -943,6 +985,10 @@ La automatización corre en el repositorio del mapa (`estudios`), pero publica e
 > 🌎 **Otro ejemplo más:** Es como la clave del wifi de invitados: la usan las visitas, pero no les da acceso a tu computadora.
 
 > 💡 **Idea:** cada pieza hace **una sola cosa** y se puede cambiar sin tocar las demás: el texto (las clases), la voz (el motor), el interruptor (`motor.json`), el trabajador (GitHub Actions) y el almacén (`estudios-audio`).
+
+> 🧩 **Piezas para este ejercicio**
+> - `letra.codePointAt(0)` da un número que representa el carácter. `%` devuelve el resto de una división y en este ejercicio mantiene pequeña la huella.
+> - Compara la huella recién calculada con la guardada para el mismo id. Después de filtrar las partes diferentes, `.map(...)` puede quedarse con sus ids.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
