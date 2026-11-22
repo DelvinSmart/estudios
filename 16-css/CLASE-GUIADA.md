@@ -35,6 +35,8 @@ Leída: **"a todos los `h1`: color verde, tamaño de letra 32 píxeles"**.
 
 **Prueba ahora:** escribe esa regla en tu `estilos.css`, guarda y recarga. Tu título se pone verde.
 
+> 🧩 **Pieza nueva para este ejercicio:** aquí no hay un archivo `estilos.css`. La etiqueta **`<style>`** permite escribir CSS dentro de la misma página, y tu regla va entre `<style>` y `</style>`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -184,6 +186,11 @@ Las dos reglas de `p` tienen la **misma especificidad** (son etiquetas), así qu
 
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **el `for` que cuenta**: `for (let i = 0; i < lista.length; i++) { … }` repite contando: empieza en `0`, sigue mientras `i` sea menor que el largo de la lista y suma 1 en cada vuelta (`i++`). Sirve cuando necesitas saber la **posición** de cada elemento.
+> - **`texto.match(/patrón/g)`**: busca todas las coincidencias y devuelve una lista. Si no encuentra ninguna, devuelve `null`. Por eso se escribe `texto.match(/#[\w-]+/g) ?? []`: si no hay, usa una lista vacía.
+> - **Los patrones que necesitas:** `/#[\w-]+/g` encuentra ids, `/\.[\w-]+|:[\w-]+/g` encuentra clases y `:hover`, y `/^[a-zA-Z]/` pregunta si un pedazo empieza con una letra.
+> - **`/patrón/.test(texto)`**: responde `true` o `false`, según si el texto cumple el patrón.
+> - **`.split(/\s+/)`** corta el selector en cada espacio. **`.filter(...)`** deja solo los pedazos que cumplen una condición.
+> - **`pregunta ? a : b`**: si la respuesta es sí, da `a`; si es no, da `b`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -493,6 +500,9 @@ Los colores son una sola de las **cuatro familias** de un motor de diseño. Las 
 .lista   { display: grid; gap: var(--hueco); }
 ```
 
+- `box-shadow` pone una **sombra** alrededor de la caja.
+- `display: grid` ordena los hijos en una **cuadrícula**, y `gap` es el espacio entre ellos. Lo verás a fondo en la parte 8.
+
 Fíjate: `.tarjeta` **no escribe ningún número**. Solo **llama** al motor: "dame el relleno de la casa, las esquinas de la casa". Esta misma página está hecha así: busca `--hueco` y `--relleno` en `web/estilos.css`.
 
 **El truco que hace al motor poderoso:** una variable se puede **cambiar en una parte de la página**, y todo lo que está adentro la usa:
@@ -691,6 +701,8 @@ vf :: `gap` agrega espacio entre los hijos
 
 > 💡 **Idea:** cuando lees una parte de una clase en esta página, el índice a la izquierda y el texto a la derecha son `.lectura`.
 
+> 🧩 **Pieza para este ejercicio:** `width` es el **ancho** de una caja y `height` es su **alto**. Ya vienen puestos: tú solo agregas `display`, `grid-template-columns` y `gap`.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -822,6 +834,10 @@ escribe :: ¿Qué es una página responsive? :: Una página que se adapta al tam
 > 🌎 **En la vida real:** una puerta que se abre de golpe asusta; una que se abre suave se siente cuidada. Las transiciones son las bisagras suaves.
 
 > 🌎 **Otro ejemplo:** Como las puertas automáticas del supermercado: se abren suaves, no de golpe, y eso se siente cuidado.
+
+- `translateY(-2px)` mueve la caja en vertical: con números negativos sube y con positivos baja.
+- `opacity` es la **transparencia**: `0` es invisible y `1` se ve completo.
+- En `animation: entrar 0.45s ease both`, `entrar` es el nombre, `0.45s` es la duración, `ease` hace el movimiento suave y `both` conserva el estado inicial y final.
 
 > ⚠️ **Cuidado:** a algunas personas el movimiento les marea. Por eso se respeta su preferencia: `@media (prefers-reduced-motion: reduce) { * { animation: none; } }`.
 

@@ -324,6 +324,9 @@ li.textContent = 'inDrive';
 lista.appendChild(li);
 ```
 
+- `document.createElement('li')` **crea** una caja nueva, pero todavía no aparece en la página.
+- `lista.appendChild(li)` la **coloca** al final de `lista`, y recién ahí se ve.
+
 `.join('')` une la lista de textos en uno solo (sin nada entre medio).
 
 > ⚠️ **Cuidado:** `innerHTML` con texto que **escribió un usuario** es peligroso: si alguien escribe `<script>...`, lo ejecutarías. Para texto del usuario usa **`textContent`**, que lo muestra tal cual. Este mapa tiene una función `escapar(...)` justo para eso.
@@ -540,6 +543,8 @@ Las claves van **siempre entre comillas dobles**.
 Tienes **la promesa** (el recibo), no el archivo: los datos todavía no llegaron. Intentar leer `.titulo` de un recibo no funciona.
 
 </details>
+
+> 🧩 **Antes del ejercicio:** `ARCHIVOS` y `fetchDeMentira` **ya vienen hechos** y no tienes que tocarlos. Imitan un servidor para que puedas practicar sin internet. Úsala como usarías `fetch`: `await fetchDeMentira('estudios/...')`. Tu trabajo está solo dentro de `cargarEstudio`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

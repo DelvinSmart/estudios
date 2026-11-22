@@ -137,6 +137,10 @@ Algunas etiquetas **no tienen nada adentro**, así que no llevan cierre. Se llam
 <input type="text">
 ```
 
+- `<img>` muestra una **imagen**.
+- `<br>` hace un **salto de línea**, como tocar Enter dentro de un texto.
+- `<input>` crea una **casilla** donde la persona puede escribir.
+
 ### Los tres atributos más comunes
 
 > 🌎 **En la vida real:** Es como tu documento de identidad (id, único), tu equipo de fútbol (class, lo comparten muchos) y la dirección de tu casa (href, a dónde lleva).
@@ -564,6 +568,22 @@ Ese árbol se llama **DOM** (*Document Object Model*: "el documento como objetos
 
 > 💡 **Idea:** en el navegador, clic derecho sobre cualquier cosa → **Inspeccionar**. Ves el árbol real de la página. Prueba con esta misma página.
 
+> 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
+> - **`<script>`** es la etiqueta donde va el código JavaScript dentro de la página.
+> - **`document.querySelector('h2')`** busca en la página el primer `h2` y lo guarda para que puedas usarlo. Con `'#total'` busca por `id`.
+> - **`.parentElement`** es la caja que lo contiene: su **padre**.
+> - **`.tagName`** es el nombre de la etiqueta, en mayúsculas. **`.toLowerCase()`** lo pasa a minúsculas.
+> - **`.children`** son sus hijos directos, y **`.children.length`** dice cuántos tiene.
+> - **`.textContent = 'hola'`** escribe ese texto dentro de la caja.
+> - **`` `${a} · ${b}` ``** arma un texto con los valores de `a` y `b`.
+>
+> Por ejemplo, para mostrar el padre de un `h2` dentro de `#salida`:
+>
+> ```js
+> const titulo = document.querySelector('h2');
+> document.querySelector('#salida').textContent = titulo.parentElement.tagName.toLowerCase();
+> ```
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -638,6 +658,17 @@ El disco de la Mac **no distingue** mayúsculas, así que la encuentra. GitHub P
 > - **`for...of`**: repite un bloque **una vez por cada elemento** de una lista, como revisar las cartas de un mazo una por una. `for (const carta of mazo) { … }`.
 > - **`.push()`**: agrega un elemento al **final** de una lista. `pila.push('p')` pone `'p'` arriba de la pila.
 > - **`.pop()`**: saca el **último** elemento de la lista y te lo da, como sacar el plato de arriba de una pila de platos.
+> - **`.includes(x)`**: pregunta si la lista contiene `x`. Responde `true` o `false`.
+> - **`continue`**: salta a la siguiente vuelta del `for`.
+> - **Buscar etiquetas:** puedes copiar esta línea. Recorre cada etiqueta del texto y te da `cierre` (`'/'` si es de cierre, vacío si abre) y `nombre`:
+>
+> ```js
+> for (const [, cierre, nombre] of html.matchAll(/<(\/?)([a-zA-Z0-9]+)[^>]*>/g)) { … }
+> ```
+>
+> Lo que está entre barras es una **expresión regular**, un patrón para buscar texto. No necesitas dominarla todavía.
+>
+> **La idea:** cuando una etiqueta abre, la pones en la pila. Cuando cierra, sacas la última y debe ser la misma. Al terminar, la pila debe quedar vacía.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
