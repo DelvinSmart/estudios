@@ -61,6 +61,9 @@ try {
 
 > 🌎 **Otro ejemplo:** Es como distinguir "no hay stock" de "la tienda está cerrada".
 
+> 🧩 **Piezas para este ejercicio**
+> - `await leer(...)` entrega el contenido y `JSON.parse` lo convierte en un objeto. En `catch`, mira `error.code`. Si no reconoces ese código, `throw error` conserva el error original.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -126,6 +129,9 @@ Si un usuario manda `../../secretos.env` como nombre de archivo, podría leer co
 > 🌎 **En la vida real:** si alguien te pide "tráeme lo del cajón de al lado del de al lado", revisas antes de ir.
 
 > 🌎 **Otro ejemplo:** Es como el portero que no deja subir a otro piso que el que dice tu invitación.
+
+> 🧩 **Piezas para este ejercicio**
+> - Este ejercicio valida nombres de archivo con una lista de caracteres admitidos. Comprueba todo el texto, desde el principio hasta el final, antes de aceptar el nombre. Para leer una extensión, busca el último punto del nombre.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -208,6 +214,9 @@ Es el mismo proyecto que hiciste en Python 8, ahora en Node: los conceptos no ca
 > 🌎 **En la vida real:** es la misma receta cocinada en otra cocina.
 
 > 🌎 **Otro ejemplo:** Es como la misma canción tocada con otro instrumento.
+
+> 🧩 **Piezas para este ejercicio**
+> - Separa el texto por líneas y la fila por comas. La primera línea da los nombres de las columnas. Convierte el valor a número antes de sumarlo. `JSON.stringify(objeto, null, 2)` agrega una sangría de dos espacios.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

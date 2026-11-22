@@ -57,6 +57,9 @@ Antes del código, el plano (como en la clase 79 del curso de IA):
 
 Fíjate en un detalle del orden: `/gastos/resumen` se escribe **antes** que `/gastos/:id`. Express prueba las rutas de arriba hacia abajo, y `:id` encaja con cualquier palabra. Si `:id` fuera primero, "resumen" se tomaría como un id (lo viste en la clase 09).
 
+> 🧩 **Piezas para este ejercicio**
+> - Obtén primero el camino sin la consulta. En la búsqueda, revisa las rutas fijas antes de las rutas que aceptan un tramo variable, porque un mismo texto podría coincidir con ambas.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -158,6 +161,9 @@ function existeElDia(texto) {
 > 🌎 **En la vida real:** es como el portero que, además de mirar que el documento tenga la forma correcta, revisa que la fecha de nacimiento exista. Un documento con "31 de febrero" tiene la forma bien, pero es falso.
 
 > 🌎 **Otro ejemplo:** es como un formulario del banco que te marca **todos** los campos mal llenados a la vez, en vez de avisarte uno, hacerte enviar otra vez y avisarte el siguiente.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una fecha puede tener la forma correcta y aun así no existir. `Date.UTC` puede mover al mes siguiente un día fuera de rango. Compara los componentes UTC obtenidos con los de entrada.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -263,6 +269,9 @@ crear(datos) {
 
 > 🌎 **Otro ejemplo:** dos personas editan la misma lista de compras en papel: cada una copia la lista, agrega lo suyo y pega su copia en la nevera. La última copia que se pega borra lo que agregó la otra.
 
+> 🧩 **Piezas para este ejercicio**
+> - Cada llamada devuelve la promesa de su paso. Guarda otra promesa para que la fila pueda continuar aunque ese paso falle. Así el error llega a quien lo pidió y el siguiente puede comenzar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -359,6 +368,9 @@ Otra idea importante: `crearApp()` **no abre ningún puerto**. Lo abre `servidor
 > 🌎 **En la vida real:** el mesero toma el pedido, lo lleva a la cocina y trae el plato. No cocina. Si el mesero también cocinara, cuando cambies de mesero tendrías que enseñarle a cocinar.
 
 > 🌎 **Otro ejemplo:** el portero del edificio (middleware) revisa quién entra antes de que llegues al apartamento (la ruta). Si no pasas el portero, ni subes.
+
+> 🧩 **Piezas para este ejercicio**
+> - Convierte el id a número antes de comprobar que sea entero y positivo. Para elegir el código, distingue primero el caso de recurso ausente y después el tipo de operación.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -464,6 +476,9 @@ Y recuerda lo que pasó con los dos errores de esta clase: **las pruebas viejas 
 
 > 🌎 **Otro ejemplo:** las tres capas de pruebas son como revisar una casa: la tubería sola, después cada cuarto, y al final abrir todas las canillas a la vez.
 
+> 🧩 **Piezas para este ejercicio**
+> - Acumula el total general y un total por tipo. Redondea al final de cada suma para que los valores intermedios sigan siendo numéricos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -558,6 +573,9 @@ Completa los pasos 1 a 3 para entregar el proyecto sin contratar alojamiento. Lo
 > 🌎 **En la vida real:** te mudas de casa y te llevas los mismos muebles. Cambia el lugar donde guardas las cosas, pero el sofá, la mesa y la cama son los mismos. Si los hubieras pegado a las paredes de la casa vieja, no podrías mudarte.
 
 > 🌎 **Otro ejemplo:** es como cambiar la billetera por una cuenta en el banco: sigues pagando igual (meter y sacar plata), solo cambia dónde está guardada.
+
+> 🧩 **Piezas para este ejercicio**
+> - La consulta al documento puede terminar con una foto vacía. Revisa `exists` antes de llamar a `data()`. Para guardar, el documento espera un objeto que contenga la lista.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

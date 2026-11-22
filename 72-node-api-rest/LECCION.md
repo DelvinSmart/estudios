@@ -26,6 +26,9 @@
 
 > 🌎 **Otro ejemplo:** Es como los íconos de un tablero de carro: el mismo dibujo en todas las marcas.
 
+> 🧩 **Piezas para este ejercicio**
+> - Divide la ruta por `/` para revisar cada tramo. Pasa los tramos a minúsculas antes de compararlos. `.startsWith(...)` comprueba únicamente el principio.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -127,6 +130,9 @@ app.delete('/gastos/:id', (q, r) => (G.borrar(Number(q.params.id)) ? r.status(20
 
 > 🌎 **Otro ejemplo:** Es como un recepcionista que deriva cada llamada al departamento correcto.
 
+> 🧩 **Piezas para este ejercicio**
+> - En una actualización parcial, comprueba si viene cada propiedad antes de validarla. Para formar la salida, copia solo las propiedades reconocidas que estén presentes.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -197,6 +203,9 @@ Nunca `origin: '*'` en una API con datos privados (Tema 23). CORS **no** reempla
 > 🌎 **En la vida real:** la lista de invitados de la fiesta no reemplaza al guardia que revisa el documento.
 
 > 🌎 **Otro ejemplo:** Es como el control de acceso por tarjeta: dice qué puertas, no quién eres.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un origen reúne protocolo, nombre del servidor y puerto. Compara el texto del origen completo con la lista permitida y construye la cabecera solo cuando encaje.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -47,6 +47,9 @@ Cada pareja de verbo y ruta que tu servidor atiende (`GET /gastos`, `POST /gasto
 
 > 🌎 **Otro ejemplo:** Es como un sobre: el remitente, la dirección y la carta adentro.
 
+> 🧩 **Piezas para este ejercicio**
+> - `new URL(url, base)` interpreta rutas relativas. `.pathname` da el camino y `.searchParams` permite recorrer pares de nombre y valor. `Object.fromEntries(...)` convierte esos pares en un objeto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -124,6 +127,9 @@ Son los mismos de la clase 09.
 > 🌎 **En la vida real:** son como las caras del empleado: sonrisa (200), "llenó mal el formulario" (400), "eso no existe" (404).
 
 > 🌎 **Otro ejemplo:** Es como las luces de un semáforo, pero con más colores.
+
+> 🧩 **Piezas para este ejercicio**
+> - Compara el método y el camino para decidir la rama. La lista y el gasto individual tienen caminos distintos. Un gasto ausente tiene su propia respuesta.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -203,6 +209,9 @@ Fíjate en todo lo que tuviste que hacer a mano: leer en pedazos, limitar el tam
 > 🌎 **En la vida real:** es como armar un mueble sin instrucciones: se puede, pero entiendes por qué las instrucciones existen.
 
 > 🌎 **Otro ejemplo:** Es como cocinar el pan desde la harina antes de comprarlo hecho.
+
+> 🧩 **Piezas para este ejercicio**
+> - `for await (const pedazo of pedazos)` espera el siguiente fragmento en cada vuelta. Revisa el tamaño del texto acumulado antes de convertirlo a JSON. El texto vacío representa el caso sin datos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

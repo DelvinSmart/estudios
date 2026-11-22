@@ -54,6 +54,9 @@ Compáralo con la clase 70: `:id` reemplaza la expresión regular, `express.json
 
 > 🌎 **Otro ejemplo:** Es como una carta ya abierta y ordenada en tu escritorio.
 
+> 🧩 **Piezas para este ejercicio**
+> - Separa la ruta en tramos. Un tramo literal tiene que coincidir y uno que empieza con `:` indica el nombre con el que se guarda el valor recibido. Descarta patrones con distinta cantidad de tramos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -153,6 +156,9 @@ Los middleware corren **en el orden en que los escribes**. Si pones la ruta ante
 
 > 🌎 **Otro ejemplo:** Es como vestirse: primero las medias, después los zapatos.
 
+> 🧩 **Piezas para este ejercicio**
+> - Cada función recibe la misma `respuesta`. `siguiente` es la función que inicia el paso próximo. Si un paso escribe una respuesta y termina sin llamar a `siguiente`, los demás quedan sin ejecutar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -235,6 +241,9 @@ Nunca le muestres al usuario el error completo (el *stack*, rutas de archivos, c
 > 🌎 **En la vida real:** al cliente le dices "estamos resolviendo un problema"; el informe técnico va al mecánico.
 
 > 🌎 **Otro ejemplo:** Es como un hospital: al paciente le explican claro, el detalle va a la historia clínica.
+
+> 🧩 **Piezas para este ejercicio**
+> - La función que envuelve la ruta debe esperar su promesa dentro de `try` para poder capturar un rechazo. Guarda el detalle en el registro y construye una respuesta pública breve.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

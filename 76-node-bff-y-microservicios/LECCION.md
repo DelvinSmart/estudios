@@ -45,6 +45,9 @@ Por eso Copiloto guarda primero en el aparato y reintenta con cuidado: un `POST`
 - **Paginación:** nunca devuelvas 10.000 viajes de una vez. `GET /viajes?limite=20&despues=abc123` trae 20 y te dice desde dónde seguir.
 - **Versión en la ruta:** `/v1/gastos`. Si un día cambias la forma de la respuesta, creas `/v2/gastos` y las apps viejas, que la gente no actualizó, siguen funcionando con `/v1`.
 
+> 🧩 **Piezas para este ejercicio**
+> - Guarda el resultado original asociado a la clave. Si esa clave aparece otra vez, reutiliza el resultado antes de incrementar el contador o crear un nuevo id.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -106,6 +109,9 @@ Un **monolito** es una sola aplicación de servidor que hace todo: usuarios, gas
 | Llamar a otra parte es llamar a una función, sin red. | Muchos equipos tocando el mismo código se estorban. |
 
 La recomendación de la industria es: **empieza con un monolito ordenado** (lógica separada por áreas, como `gastos.mjs` aparte de las rutas). Solo cuando duele, lo partes.
+
+> 🧩 **Piezas para este ejercicio**
+> - `&&` combina dos requisitos. La recomendación del ejercicio depende de la cantidad de equipos y de si varias partes se estorban.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -189,6 +195,9 @@ Fíjate en tres cosas:
 
 Cuándo **no** vale la pena: si tienes un solo frontend, o la app y la web piden casi lo mismo. Un BFF es un servidor más que mantener.
 
+> 🧩 **Piezas para este ejercicio**
+> - `Promise.allSettled` entrega un resultado por promesa en el mismo orden de entrada. Revisa `status` antes de leer `value` y usa el valor de respaldo para una lectura fallida.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -258,6 +267,9 @@ Los eventos ya los conoces: el `AIEventBus` de Copiloto es exactamente esa idea,
 | Más cosas que publicar | 10 servicios son 10 cosas que vigilar. |
 
 Por eso la regla es: **microservicios cuando el equipo y el tamaño lo piden**, no por moda. Copiloto, hecho por una persona, está mejor como está.
+
+> 🧩 **Piezas para este ejercicio**
+> - Cada nombre de evento puede tener su propia lista de funciones. Al avisar, recorre esa lista en el orden de registro y pasa los datos a cada función.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

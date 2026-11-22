@@ -57,6 +57,9 @@ Cada ruta con el caso bueno, los **errores** (400, 404) y los **bordes** (lista 
 
 > 🌎 **Otro ejemplo:** Es como revisar un paracaídas: abre, no se enreda, y aguanta el peso.
 
+> 🧩 **Piezas para este ejercicio**
+> - `it` registra un caso. `assertEqual` compara el código que regresó la API simulada con el esperado. Prepara una entrada diferente por cada comportamiento que quieras comprobar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -171,6 +174,9 @@ Completa la clase con las pruebas en local. Desplegar es opcional. Cloud Functio
 
 > 🌎 **Otro ejemplo:** Es como revisar el carro antes de un viaje largo.
 
+> 🧩 **Piezas para este ejercicio**
+> - Cada condición puede agregar su aviso. Recorre las comprobaciones en el orden de la consigna para que la lista también quede en ese orden.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -230,6 +236,9 @@ Con esto puedes construir el **backend** de una app: una API para Copiloto, para
 > 🌎 **En la vida real:** es como un mecánico que ya sabe desarmar, arreglar, probar y entregar.
 
 > 🌎 **Otro ejemplo:** Es como terminar la escuela de cocina: ya puedes abrir tu cocina.
+
+> 🧩 **Piezas para este ejercicio**
+> - Usa el índice del curso para relacionar cada tema con su capítulo. En el ejercicio, busca en la descripción una palabra que indique ese tema.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

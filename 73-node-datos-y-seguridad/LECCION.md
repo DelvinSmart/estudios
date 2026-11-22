@@ -60,6 +60,9 @@ En los proyectos de este curso, el servidor (Cloud Functions) usa **firebase-adm
 
 > 🌎 **Otro ejemplo:** Es como el gerente del banco que puede abrir cualquier caja: su responsabilidad es mayor.
 
+> 🧩 **Piezas para este ejercicio**
+> - En este ejercicio, `?` reserva el lugar del valor. La consulta indica qué campo leer y el primer parámetro indica con qué valor comparar. Mantén esos dos datos separados.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -121,6 +124,9 @@ En el código: `process.env.CLAVE_API_EXTERNA`. En la nube, el gestor de secreto
 > 🌎 **En la vida real:** autenticación es mostrar el documento en la portería; autorización es que te dejen subir solo a tu piso.
 
 > 🌎 **Otro ejemplo:** Es como el hotel: la tarjeta dice quién eres y abre solo tu habitación.
+
+> 🧩 **Piezas para este ejercicio**
+> - La autenticación obtiene la identidad del token. La autorización compara esa identidad con la del recurso solicitado. Haz esas comprobaciones en orden para distinguir los dos códigos de error.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -196,6 +202,9 @@ Secretos en `.env` o en el gestor de secretos · valida todo lo que entra · con
 
 > 🌎 **Otro ejemplo:** Es como el checklist del piloto: corto, siempre el mismo.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un `Map` permite guardar por IP el inicio de la ventana y el contador de pedidos. Compara el tiempo transcurrido antes de decidir si continúa la ventana o comienza otra.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -270,6 +279,9 @@ app.listen(config.puerto);
 - **`env = process.env`** como parámetro: en las pruebas le pasas un objeto común.
 
 > 📌 **Nota:** fíjate en el valor por defecto de `tokenSecreto`: existe **solo** para desarrollo. En producción no hay valor por defecto: si falta, es un error. Un secreto "de mentira" que llega a producción es un agujero de seguridad.
+
+> 🧩 **Piezas para este ejercicio**
+> - Las variables de entorno llegan como texto. Convierte el puerto antes de preguntar con `Number.isInteger`. `Object.freeze` protege las propiedades directas del objeto devuelto.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -33,6 +33,9 @@ Lo que **no** tiene: `document`, `window` ni botones; no hay página. Lo que **s
 
 > 🌎 **Otro ejemplo:** Es como un electricista que hace instalaciones, arreglos y también te arma la lámpara.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una API del entorno es una herramienta que el entorno pone a disposición del código. Primero busca las pistas que solo existen en un entorno. Las compartidas, como `console`, por sí solas no distinguen dónde corre.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -113,6 +116,9 @@ Un cálculo **largo y pesado** (por ejemplo, un ciclo de mil millones de vueltas
 > - **`const pedido = leerArchivoDeMentira();`** hace el pedido y guarda el recibo, **sin esperar**.
 > - **`const texto = await pedido;`** espera el resultado y lo guarda en `texto`.
 > - **`pasos.push('algo')`** agrega `'algo'` al final de la lista `pasos`.
+
+> 🧩 **Piezas para este ejercicio**
+> - Llamar una función que devuelve una promesa inicia el pedido. Puedes guardar esa promesa en una variable y usar `await` después de anotar el segundo paso.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -197,6 +203,9 @@ Los archivos `.mjs` (o con `"type": "module"` en `package.json`) usan `import`; 
 > 🌎 **En la vida real:** son las herramientas que vienen de fábrica con el carro.
 
 > 🌎 **Otro ejemplo:** Es como la vajilla que trae un departamento amueblado.
+
+> 🧩 **Piezas para este ejercicio**
+> - `argv[2]` es el tercer elemento porque los índices empiezan en 0. `env.NODE_ENV` lee una variable de entorno. Usa un valor por defecto si falta y devuelve la ayuda si falta el nombre del archivo.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
