@@ -34,6 +34,9 @@ Como puede tocar archivos y correr comandos, Claude Code **pide permiso** para l
 
 > 🌎 **Otro ejemplo:** Es como un empleado nuevo: al principio revisas todo; con el tiempo le das más confianza, pero los pagos grandes los apruebas tú.
 
+> 🧩 **Piezas para este ejercicio**
+> - La tabla describe un agente simulado. Revisa primero la acción especial y luego el modo. Así puedes distinguir una regla que aplica siempre de una que depende del modo.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -100,6 +103,9 @@ Un archivo `CLAUDE.md` en la raíz del proyecto que Claude Code **lee al empezar
 > 🌎 **En la vida real:** en el manual del empleado va dónde está la caja; la combinación, no.
 
 > 🌎 **Otro ejemplo:** Es como el cartel de la casa de veraneo: "la llave del gas se cierra al salir", no "la llave de la puerta está bajo el tapete".
+
+> 🧩 **Piezas para este ejercicio**
+> - Puedes leer el archivo por líneas. Revisa los encabezados y agrega el número de cada línea sospechosa al aviso. Mantén fuera el contenido del secreto.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -171,6 +177,9 @@ Cuando un cambio está bien, **commit** (Tema 06). Si el siguiente sale mal, vue
 > 🌎 **En la vida real:** es como guardar la partida en un videojuego antes del jefe final.
 
 > 🌎 **Otro ejemplo:** Es como sacar fotos de cada paso al desarmar algo: después sabes cómo volver a armarlo.
+
+> 🧩 **Piezas para este ejercicio**
+> - Cada fila de archivo tiene una barra vertical antes de su recuento. Extrae el nombre de esas filas y después comprueba cuáles quedan fuera de la lista pedida.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -244,6 +253,9 @@ Para buscar mucho o revisar algo grande, Claude Code puede lanzar **subagentes**
 > 🌎 **En la vida real:** es como los enchufes estándar: cualquier aparato se conecta a cualquier pared.
 
 > 🌎 **Otro ejemplo:** Es como el USB: un mismo conector para el mouse, la memoria o la impresora.
+
+> 🧩 **Piezas para este ejercicio**
+> - La corrección de la tarea actual y el inicio de otro tema son decisiones distintas. Para el resumen, cuenta todos los resultados y filtra los que sí requieren atención.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

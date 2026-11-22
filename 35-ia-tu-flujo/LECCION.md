@@ -34,6 +34,9 @@ El tiempo no se pierde escribiendo código (eso lo hace rápido la IA): se pierd
 
 > 🌎 **Otro ejemplo:** Es como cocinar sin leer la receta: terminas yendo tres veces al mercado.
 
+> 🧩 **Piezas para este ejercicio**
+> - La lista fija define el orden de trabajo. Busca el primer paso ausente. Para decidir si se puede publicar, toma los anteriores a publicar y comprueba cuáles faltan.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -103,6 +106,9 @@ La IA escribió el código, las pruebas y las clases. **Tú** decidiste qué se 
 > 🌎 **En la vida real:** el arquitecto no pone ladrillos, pero sin él la casa no tiene sentido.
 
 > 🌎 **Otro ejemplo:** Es como un director de cine: no actúa, pero decide cada toma.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un requisito es un paso que debe estar hecho de antemano. Al recorrer un orden, guarda cuáles ya ocurrieron. Para proponer otro orden, vuelve a buscar el primer paso cuyos requisitos estén resueltos.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -189,6 +195,9 @@ Programación primero (los fundamentos que te faltan), **seguridad** en paralelo
 > 🌎 **En la vida real:** es como un plan de entrenamiento: poco y constante gana a mucho y de vez en cuando.
 
 > 🌎 **Otro ejemplo:** Es como ahorrar: un poco cada mes llega más lejos que un esfuerzo grande una vez.
+
+> 🧩 **Piezas para este ejercicio**
+> - La búsqueda reconoce el nombre que aparece entre `function` y el primer paréntesis. Cada nombre genera su propia pregunta. La pregunta sobre errores va al final una sola vez.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -37,6 +37,9 @@ Cada agente nuevo es una persona más en la cocina. Si las tareas **dependen** u
 
 > 🌎 **Otro ejemplo:** Es como armar un rompecabezas entre varios: funciona si cada uno arma una esquina; no funciona si todos quieren poner la misma pieza.
 
+> 🧩 **Piezas para este ejercicio**
+> - Dependencia y conflicto de archivos son comprobaciones separadas. Revisa las dependencias en ambas direcciones y busca archivos comunes.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -103,6 +106,9 @@ Otros archivos así: el `package-lock.json` (la lista de todas las librerías), 
 > 🌎 **En la vida real:** es como el inventario de una tienda: si dos empleados reciben mercadería al mismo tiempo y cada uno corrige el total en la misma hoja, el número final sale mal.
 
 > 🌎 **Otro ejemplo:** Es como la lista de invitados de una fiesta que llevan dos personas: si cada una agrega gente y cuenta los platos por su lado, el día de la fiesta faltan sillas.
+
+> 🧩 **Piezas para este ejercicio**
+> - Git tiene un área de preparación. `git add` pone allí los cambios, `git commit` los guarda en el historial y `git push` publica los commits. En el simulador, compara primero la lista cambiada con la lista propia.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -191,6 +197,9 @@ Las herramientas como Claude Code muestran las otras sesiones abiertas en tu com
 > 🌎 **Otro ejemplo más:** Es como un mecánico que encuentra un carro con el capó abierto y herramientas encima: no empieza a desarmarlo, pregunta de quién es el trabajo.
 
 > ⚠️ Esto también vale para ti, sin IA: si trabajas en la computadora y en el iPad, o en dos ventanas, revisa `git status` antes de empezar.
+
+> 🧩 **Piezas para este ejercicio**
+> - Las dos primeras columnas indican estados. Para la práctica, separa esas columnas del nombre y usa el tiempo como una señal para coordinar con quien pueda estar editando.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -307,6 +316,9 @@ git worktree remove ../_aprender-clase-paneles
 
 Borra la carpeta de la copia. La rama, si tenía commits, queda guardada en Git.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un worktree es otra carpeta de trabajo conectada al mismo repositorio. La copia contiene los archivos del commit. Una carpeta ignorada como `node_modules/` puede faltar y su prefijo cubre lo que cuelga de ella.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -376,6 +388,9 @@ Antes de darle una tarea a un agente, contesta:
 1. ¿Qué **archivos** va a tocar? Si otro agente toca los mismos, no van al mismo tiempo.
 2. ¿**Necesita** el resultado de otro agente? Si sí, espera.
 3. ¿Toca algo **fuera** de tu computadora (internet, Firebase, GitHub)? Si sí, va al final y con tu permiso.
+
+> 🧩 **Piezas para este ejercicio**
+> - Comprueba primero si la tarea afecta un servicio externo. Para las demás, la lista de prerrequisitos te dice si pueden empezar de inmediato.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -467,6 +482,9 @@ El primer vigilante terminó enseguida diciendo "**nada cambia hace 20 minutos**
 
 > 🎙️ **El profesor dice:** la lección es esta: **cuando algo termina, lee por qué terminó, antes de actuar.** Un aviso no es una prueba; es una pista que hay que comprobar.
 
+> 🧩 **Piezas para este ejercicio**
+> - Cada llamada a `mirar` cuenta como una vuelta. Puedes devolver en cuanto veas un resultado final. Si se agotan las vueltas, usa el estado reservado para ese caso.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -526,6 +544,9 @@ Cuando el agente 1 sube su trabajo, empieza la parte más delicada: **juntar**.
 Si algo sale mal, se puede deshacer **solo** lo que falló. Si los audios y la clase de los paneles van en el mismo commit, deshacer uno deshace el otro.
 
 > 🌎 **En la vida real:** es como guardar los tornillos de cada mueble en bolsitas separadas con su nombre: si un mueble viene mal, devuelves esa bolsa y no todas.
+
+> 🧩 **Piezas para este ejercicio**
+> - Compara las posiciones de los pasos. Si una comprobación busca una prueba posterior, revisa el tramo después de `juntar` para incluir una segunda ejecución de pruebas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -593,6 +614,9 @@ Un agente bien configurado te pregunta antes de esos pasos. Pero la responsabili
 > 🌎 **En la vida real:** es como el dueño de un restaurante con varios cocineros: los cocineros cocinan, pero el que decide qué se sirve y a qué hora abre la puerta es el dueño.
 
 > 🔁 **Repaso:** ¿conviene paralelo? → mira antes de tocar (`git status`, la hora, `git diff`) → copia aparte (worktree) y trae a mano lo privado → reparte por archivos, dependencias y lo que va afuera → espera con un vigilante que avisa los finales buenos y los malos, y lee por qué terminó → junta en orden, regenera una vez, prueba todo, Firebase antes de la página, un commit por cambio → tú decides el orden y lo que va afuera.
+
+> 🧩 **Piezas para este ejercicio**
+> - Comprueba todos los campos antes de armar el texto. Para una lista de archivos, `.join(', ')` da una sola línea legible.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -674,6 +698,9 @@ Antes de cerrar una sesión larga, pídele un **resumen para la próxima**: qué
 | `/clear` | Borra la mesa y empieza de cero, en la misma ventana | Terminaste una tarea y empiezas otra |
 | `/compact` | Resume la conversación para hacer lugar, sin empezar de cero | La tarea sigue, pero la sesión ya está muy larga |
 
+> 🧩 **Piezas para este ejercicio**
+> - Comprueba las tres señales del ejercicio por separado. Al pasar el contexto, escribe hechos, pendientes y decisiones en secciones que la próxima sesión pueda leer sin conocer toda la conversación.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -751,6 +778,9 @@ El archivo de reglas (`CLAUDE.md` o `AGENTS.md`, clase 32) se lee en **cada** se
 ### La caché
 
 Muchas herramientas guardan en una **caché** (una memoria rápida) la parte de la conversación que no cambia, y esa parte la cobran más barata en el mensaje siguiente. Ayuda, pero no hace gratis una sesión eterna: igual ocupa la mesa y cuenta para los límites.
+
+> 🧩 **Piezas para este ejercicio**
+> - Mantén dos números: los tokens acumulados hasta el mensaje actual y el total enviado. Al empezar otro bloque de la simulación, vuelve a cero solo el acumulado. El ejercicio usa un modelo simplificado del contexto.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -838,6 +868,9 @@ El agente principal puede mandar **varios** subagentes al mismo tiempo, cada uno
 
 > 🌎 **En la vida real:** es como mandar a tres personas a tres tiendas distintas a preguntar precios, en vez de ir tú a las tres una después de otra.
 
+> 🧩 **Piezas para este ejercicio**
+> - Calcula cuánto se lee una vez y cuánto se repite en cada mensaje posterior. El tamaño de la mesa del principal representa lo que conserva en su propio contexto.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -917,6 +950,9 @@ Ninguno de esos errores llegó a publicarse, porque se **revisó** antes: leer p
 
 > 🎙️ **El profesor dice:** {{alumno}}, la IA no te reemplaza: te da diez manos más. Pero manos sin cabeza no construyen una casa. La cabeza, el plano y la última palabra son tuyos.
 
+> 🧩 **Piezas para este ejercicio**
+> - La persona define el objetivo y aprueba las decisiones del ejemplo. El agente puede ejecutar tareas delegadas dentro de ese alcance. Clasifica primero las acciones conocidas.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -972,6 +1008,9 @@ Junta todo. Hay cuatro formas de trabajar, de la más simple a la más complicad
 5. **En todas, tú diriges:** decides, ordenas, explicas, revisas y apruebas lo que va afuera (Parte 12).
 
 > 🎙️ **El profesor dice:** {{alumno}}, más agentes no te hacen mejor programador. Lo que te hace mejor es saber **qué** pedir, **a quién**, **en qué orden**, y revisar lo que vuelve. Eso vale igual con un agente que con diez.
+
+> 🧩 **Piezas para este ejercicio**
+> - Evalúa los casos en el orden pedido. La función que traduce el número explica qué estrategia corresponde después de elegirla.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -1110,6 +1149,9 @@ say "Pasaron dos horas y no terminó"
 - Si lo dejaste corriendo en la terminal: **Control + C** lo detiene.
 - Si lo dejó la IA en segundo plano: pídele que lo pare ("para el vigilante").
 
+> 🧩 **Piezas para este ejercicio**
+> - La práctica arma texto con valores de ejemplo. En una herramienta real, pasa la URL y el mensaje como argumentos separados al proceso para evitar que el intérprete los lea como instrucciones.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -1202,6 +1244,9 @@ Quien construyó algo **defiende** su propio trabajo, aunque sea una IA: ya "sab
 Lo **verifico**: abro el archivo y la línea que dice, lo reproduzco (una prueba en rojo, una medición) y recién ahí decido. Si no lo puedo reproducir, es una duda o una falsa alarma, no un error.
 
 </details>
+
+> 🧩 **Piezas para este ejercicio**
+> - `null` representa evidencia que aún no se revisó. Distingue entre «no existe» y «todavía no sabemos» antes de asignar una categoría.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**.
 

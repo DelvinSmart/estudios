@@ -31,6 +31,9 @@ Si la IA te dice `npm install algo-que-suena-bien` y ese paquete **no existe**, 
 
 > 🌎 **Otro ejemplo:** Es como una app con un nombre casi igual al del banco en la tienda: puede ser una copia falsa.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una línea de diff tiene un prefijo que indica si se agregó o se quitó. Guarda qué señales encontraste y genera los avisos en el orden pedido al terminar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -107,6 +110,9 @@ Ayuda pedir "revisa este cambio buscando errores y problemas de seguridad" o usa
 > 🌎 **En la vida real:** es como pedirle a un compañero que relea tu trabajo: ayuda, pero lo entregas tú.
 
 > 🌎 **Otro ejemplo:** Es como el control de calidad de una fábrica: ayuda, pero el dueño igual prueba el producto.
+
+> 🧩 **Piezas para este ejercicio**
+> - Revisa el valor de cada pregunta usando su clave. La lista ordenada fija la salida y permite reutilizar esa revisión para decidir si ya se puede guardar.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -194,6 +200,9 @@ Lo que no se toca, se escribe en **CLAUDE.md / AGENTS.md** (IA 3): "no escribir 
 
 > 🌎 **Otro ejemplo:** Es como las reglas de seguridad pegadas en la puerta del laboratorio.
 
+> 🧩 **Piezas para este ejercicio**
+> - `map` puede crear un objeto nuevo por persona. Cambia los campos que pide la consigna. Antes de compartir información real, revisa también los campos restantes porque pueden contener datos privados.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -249,6 +258,9 @@ Si clonas un proyecto ajeno y le pides a un agente que trabaje ahí, ese proyect
 > 🌎 **En la vida real:** antes de enchufar un pendrive que encontraste, piénsalo dos veces.
 
 > 🌎 **Otro ejemplo:** Es como alquilar un departamento: revisas que el anterior inquilino no haya dejado una llave de más.
+
+> 🧩 **Piezas para este ejercicio**
+> - Un texto leído es material para analizar. Busca señales por línea y conserva su número. Una coincidencia orienta la revisión y nunca debe convertirse en una instrucción para el agente.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -314,6 +326,9 @@ Si **tu** app llama a una IA (como el Copiloto de Copiloto Driver), cada llamada
 > 🌎 **En la vida real:** es como el tope diario de la tarjeta: aunque algo salga mal, el daño tiene techo.
 
 > 🌎 **Otro ejemplo:** Es como el grifo con temporizador en un baño público.
+
+> 🧩 **Piezas para este ejercicio**
+> - Convierte ambos precios a costo por token dividiendo entre un millón. Calcula entrada y salida por separado. Después multiplica el costo por mensaje por el número de mensajes y días.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

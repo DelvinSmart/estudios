@@ -40,6 +40,9 @@ Si quieres un estilo, muéstralo: "escríbelo como esta otra función" o "los te
 
 > 🌎 **Otro ejemplo:** Es como enseñarle a alguien a hacer arepas haciendo una delante de él.
 
+> 🧩 **Piezas para este ejercicio**
+> - Un texto con solo espacios cuenta como vacío. `.trim()` permite distinguirlo. Recorre las cuatro piezas en el orden de la plantilla y comprueba el verbo después.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -115,6 +118,9 @@ En Claude Code, OpenCode o Codex no hace falta pegar el código: la herramienta 
 
 > 🌎 **Otro ejemplo:** Es como darle a alguien la página del libro y no solo el título.
 
+> 🧩 **Piezas para este ejercicio**
+> - Son dos señales distintas: el tipo de error y su ubicación. Revisa ambas antes de considerar completo el mensaje. Para armar el pedido, usa un valor de respaldo si falta lo que ya se probó.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -181,6 +187,9 @@ Si la respuesta no es lo que querías, di **qué está mal y por qué**: "el bot
 > 🌎 **En la vida real:** en la peluquería dices "un poco más corto atrás", no te vas y buscas otro peluquero.
 
 > 🌎 **Otro ejemplo:** Es como corregir a un GPS: "no, por la autopista no", y recalcula.
+
+> 🧩 **Piezas para este ejercicio**
+> - Compara los dos límites por separado. Para dividir los pasos, `.slice(inicio, inicio + maximo)` toma un tramo sin cambiar el orden de la lista.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -265,6 +274,9 @@ Terminado cuando: …    (cómo lo compruebo)
 > 🌎 **En la vida real:** es como el formulario del médico: siempre las mismas preguntas, así no se olvida ninguna.
 
 > 🌎 **Otro ejemplo:** Es como la lista del supermercado con secciones: no se te olvida nada.
+
+> 🧩 **Piezas para este ejercicio**
+> - Mantén dos versiones de cada etiqueta: la original para mostrar qué falta y la normalizada para buscar en `datos`. `normalize('NFD')` separa las tildes para poder quitarlas de la clave.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -385,6 +397,9 @@ Así **ahorras tokens**: cada pregunta de "cómo funciona" que haces en la conve
 > 🌎 **En la vida real:** al mecánico de confianza no le preguntas qué es un carburador: eso lo buscas en un libro o le preguntas a un amigo. Al mecánico le llevas el carro.
 
 > 🌎 **Otro ejemplo:** Es como pedir una segunda opinión médica: si los dos médicos coinciden, tranquilo; si no, se piden más exámenes.
+
+> 🧩 **Piezas para este ejercicio**
+> - Busca primero si el pedido pide cambiar el proyecto, porque una misma pregunta puede incluir una explicación y una edición. Para agregar una segunda línea, usa `\n`.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

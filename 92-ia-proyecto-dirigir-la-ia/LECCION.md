@@ -38,6 +38,9 @@ Con eso, cada pedido pudo ser corto: *"Lee PLAN.md y AGENTS.md. Haz el paso 1 de
 
 > 🌎 **Otro ejemplo:** el ejemplo con números del plan es como la foto del plato terminado en la receta: no dice "que quede rico", dice exactamente cómo tiene que verse.
 
+> 🧩 **Piezas para este ejercicio**
+> - La persona numera los pasos desde 1 y el índice de la lista empieza en 0. Comprueba que el paso exista antes de armar el pedido.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -86,6 +89,9 @@ En este proyecto la IA las respetó. Pero **revisar no es desconfiar por desconf
 > 🌎 **En la vida real:** el inspector de obra lleva su lista y mira lo mismo en cada visita: los cables, los caños, la altura de los enchufes. No es que piense que el obrero es malo: es que la lista no se cansa ni se olvida.
 
 > 🌎 **Otro ejemplo:** es como el control de la aduana: no revisan solo a los sospechosos, revisan con la misma lista a todos.
+
+> 🧩 **Piezas para este ejercicio**
+> - Las reglas miran cosas distintas: la ruta del archivo, su contenido y el conjunto completo de cambios. Reúne las señales y devuelve los avisos en el orden pedido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -161,6 +167,9 @@ Para cada una: un pedido de corrección, **primero la prueba en rojo**, después
 > 🧩 **Piezas nuevas para este ejercicio** (todavía no las habías visto):
 > - **`.padStart()`**: rellena un texto por la izquierda hasta que tenga el largo que pides: `'7'.padStart(2, '0')` → `'07'`. Sirve para fechas y códigos. `.padEnd()` rellena por la derecha.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una fecha puede quedar fuera del mes cuando cambias solo el mes. Calcula primero el mes de destino y el último día que tiene. Usa ese límite para conservar el día cuando sea posible.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -216,6 +225,9 @@ if (cadaKm !== null && ultimoKm === null) problemas.push('Escribe los km del úl
 > 🌎 **En la vida real:** dejar en blanco "último cambio de aceite" en la ficha del taller no quiere decir "a los 0 km": quiere decir "no sé". Un mecánico que lo lea como 0 te va a cambiar el aceite de un carro nuevo.
 
 > 🌎 **Otro ejemplo:** es la diferencia entre "no contestó" y "contestó cero" en una encuesta: los dos se ven vacíos en la planilla, pero dicen cosas opuestas.
+
+> 🧩 **Piezas para este ejercicio**
+> - `.trim()` detecta el campo vacío antes de convertirlo. Trátalo aparte porque `Number('')` produce 0. Para un valor escrito, comprueba que sea un número válido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -275,6 +287,9 @@ Y después, el **paso 4 del plan: mirar la app de verdad, en tamaño de celular*
 > 🌎 **En la vida real:** el ensayo general del teatro: los actores ya se saben la obra, pero recién con el vestuario y las luces se ve que un cartel tapa a un actor.
 
 > 🌎 **Otro ejemplo:** es como leer en voz alta un mensaje antes de mandarlo: la ortografía estaba bien, pero suena raro, y eso solo se nota al escucharlo.
+
+> 🧩 **Piezas para este ejercicio**
+> - El signo indica si faltan unidades o si el plazo ya pasó. Usa el valor absoluto para mostrar cuántas. El cero tiene su propio mensaje.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -340,6 +355,9 @@ Y después, el flujo de la clase 35: **un paso del plan por pedido, la prueba an
 > 🌎 **En la vida real:** el que aprende a dirigir una obra chica, con su plano, su reglamento y su cuaderno de obra, ya sabe dirigir una grande: cambia el tamaño, no el método.
 
 > 🌎 **Otro ejemplo:** el cuaderno de pedidos es como el libro de bitácora de un barco: si mañana llega otro capitán, lee qué pasó, qué se decidió y por qué, y sigue el viaje.
+
+> 🧩 **Piezas para este ejercicio**
+> - Revisa cada pedido en orden. Comprueba primero la revisión y después recorre sus correcciones. El prefijo de la descripción indica cuáles requieren pruebas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

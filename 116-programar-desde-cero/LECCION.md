@@ -72,7 +72,9 @@ console.log(total);                      // muestra lo que hay en total
 2. **Cambia:** en la línea 2 del recuadro de abajo, borra el `5` y escribe `6`.
    Puedes editar ese número porque estás preparando otra ejecución. Cuando toques **▶ probar**, el programa volverá a empezar y creará `precioPorLitro` con el valor que escribiste. Durante esa ejecución, `const` impide que el programa le asigne otro valor.
 3. **Prueba:** toca **▶ probar** y compara el resultado con lo que predijiste.
-4. **Juega:** pon otro precio y explica por qué cambió el total. La revisión automática seguirá esperando 60 y marcará error, pero debajo verás el resultado de tu experimento.
+4. **Juega:** prueba otro precio. Si escribes `7`, la consola muestra `70`, que es el cálculo correcto para ese precio. El «0 de 1 pruebas» indica que no se cumplió la consigna de esta práctica: la prueba espera `60` porque pide hacer la cuenta con `6`.
+
+> 💡 **Si vuelves a abrir la app:** el editor guarda lo que escribiste en este navegador o en esta instalación. Si ya habías puesto `6`, lo encontrarás ahí. Para volver a empezar con el `5` del ejemplo, toca **reiniciar** y confirma que quieres recuperar el código del comienzo.
 
 No necesitas una cuenta para hacer los ejercicios.
 

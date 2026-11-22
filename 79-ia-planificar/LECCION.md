@@ -29,6 +29,9 @@ Con la IA, construir es rápido y barato. Eso tiene una trampa: como hacer cosas
 
 > 🌎 **En la vida real:** la IA es como un albañil rapidísimo: si le dices "hazme una pared", te hace una pared perfecta en una hora. Pero si no le dijiste dónde, la puede hacer en medio de la sala.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una tabla permite asociar una etapa con su costo ficticio. El total suma el costo de cada cambio usando esa misma tabla.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -101,6 +104,9 @@ Antes de escribir una sola línea del panel de clases, la IA:
 
 Ese plan es lo que evitó que el panel rompiera los certificados.
 
+> 🧩 **Piezas para este ejercicio**
+> - Lee el encabezado principal y después abre una parte cada vez que llega un encabezado de segundo nivel. Guarda las líneas siguientes hasta abrir otra parte.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -169,6 +175,9 @@ Con esa hoja, el pedido a la IA deja de ser "hazme una app de gastos" y pasa a s
 > 🌎 **En la vida real:** la pieza 3 (lo que **no** va) es la que más se olvida y la que más ayuda. Es como decirle al arquitecto: "la piscina, no por ahora". Así no te diseña la casa entera alrededor de una piscina que todavía no puedes pagar.
 
 > 🌎 **Otro ejemplo:** La pieza 8 es como la lista de chequeo de un piloto antes de despegar: no es "me parece que está bien", es una lista de cosas que se comprueban una por una.
+
+> 🧩 **Piezas para este ejercicio**
+> - Distingue un campo ausente, un texto que solo tiene espacios y una lista vacía. Todos representan un plan incompleto en la práctica.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -248,6 +257,9 @@ No necesitas programas especiales. Un **bosquejo** se hace en una hoja de papel 
 
 > 🌎 **Otro ejemplo:** Es como armar un viaje en grupo: qué queremos conocer (requisitos), el mapa con los puntos marcados (bosquejo), quién maneja, quién reserva y quién lleva la plata (arquitectura), y el itinerario día por día (hoja de ruta).
 
+> 🧩 **Piezas para este ejercicio**
+> - Las categorías se distinguen por lo que ayuda a decidir el texto. Usa las palabras de la consigna y el orden dado para resolver coincidencias en el simulador.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -320,6 +332,9 @@ Eso trae tres ventajas:
 
 La IA propone; **tú** decides el problema, lo que no va, el orden y qué es "terminado". Es lo mismo que viste en la clase de los agentes: la IA agiliza, la persona dirige.
 
+> 🧩 **Piezas para este ejercicio**
+> - El título principal se escribe una vez. Cada elemento de `PIEZAS` da un encabezado numerado y su contenido. Convierte cada valor según sea lista, texto o falta.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -375,6 +390,9 @@ Ejemplo real: el plan del panel era "editar las clases". Al revisar, apareció a
 > 🌎 **Otro ejemplo:** Es como el GPS cuando una calle está cerrada: recalcula la ruta. No te deja manejando contra la pared, pero tampoco cambia el destino.
 
 > 🔁 **Repaso:** primero el plano, después los ladrillos → con la IA, más todavía, porque construye rápido lo que le dices → el mapa salió fácil porque la carpeta ya era su plano → las ocho piezas, incluida "lo que no va" y "cómo sé que funciona" → la IA te pregunta, te da opciones, planifica sin tocar nada y revisa tu plan, pero tú decides → el plan va en un archivo → si cambia, que sea una decisión.
+
+> 🧩 **Piezas para este ejercicio**
+> - Crea un objeto nuevo. Los corchetes de `[cambio.pieza]` usan el valor que contiene esa variable como nombre de propiedad y `...` permite copiar el historial antes de añadir la entrada.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -454,6 +472,9 @@ cómo se ve en el celular. Para cada uno, dime qué decidiste.
 
 Y al revisar, pregunta: "¿Qué pasa si…?". La IA es muy buena encontrando puertas que faltan **cuando se lo pides**.
 
+> 🧩 **Piezas para este ejercicio**
+> - Recorre todos los casos que debe cubrir el plan. Una cadena vacía o con espacios indica que todavía falta una decisión. Construye el pedido solo cuando haya casos que agregar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -522,6 +543,9 @@ La IA no es descuidada: trabaja **pedido por pedido**. Y cada pedido, si no hay 
 Este desorden acumulado tiene nombre: **deuda técnica**. Como una deuda de verdad: cada atajo de hoy se paga después, con intereses. El día que quieras agregar algo, te cuesta el triple.
 
 > 🌎 **En la vida real:** la deuda técnica es como no lavar los platos después de cada comida: un día no pasa nada; a la semana, para cocinar algo tienes que lavar primero una montaña.
+
+> 🧩 **Piezas para este ejercicio**
+> - Cuenta cada color bajo la misma forma en minúsculas. Conserva el primer orden en que aparecieron para los empates y filtra por el mínimo antes de devolver el resultado.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -624,6 +648,9 @@ Con pruebas, se puede **refactorizar**: ordenar el código por dentro sin cambia
 
 > 🌎 **En la vida real:** es como sacarle una foto al cuarto antes de reorganizar los muebles: al terminar comparas y sabes si se perdió algo.
 
+> 🧩 **Piezas para este ejercicio**
+> - El tamaño se mide por archivo. Para los ciclos, un archivo repetido en el camino activo es distinto de un archivo compartido que ya terminaste de revisar.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -689,6 +716,9 @@ La IA puede escribir código muy ordenado: **si se lo pides y le pones reglas**.
 > 🎙️ **El profesor dice:** {{alumno}}, la IA es como un equipo de obreros muy rápidos. Si les das un plano (Partes 1 a 6), una lista de puertas y ventanas (Parte 7) y un reglamento con inspector (Partes 9 y 10), te construyen una casa firme. Sin eso, te construyen rapidísimo una casa sin puertas, con los cables enredados. La diferencia no la pone la IA: la pones tú.
 
 > 🔁 **Repaso:** el plano antes de los ladrillos → las puertas y ventanas en el plan (vacío, cargando, error, sin internet, sin permiso, datos raros, dos veces, deshacer, celular, seguridad) → el espagueti nace de los parches → se evita con una fuente de verdad, piezas de una sola tarea, motores, candados y pruebas → a la IA se le piden reglas escritas, reutilizar, piezas chicas, pruebas y arreglar la causa, nunca saltarse el candado.
+
+> 🧩 **Piezas para este ejercicio**
+> - Evalúa las tres señales antes de aceptar el cambio. El orden de la consigna fija el motivo que aparece cuando coinciden varias.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

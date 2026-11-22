@@ -33,6 +33,9 @@ Los modelos **más grandes** razonan mejor pero son más lentos y caros; los **c
 
 > 🌎 **Otro ejemplo:** Es como los médicos: el general para casi todo, el especialista para lo difícil (y cuesta más).
 
+> 🧩 **Piezas para este ejercicio**
+> - Este ejercicio usa palabras completas como piezas. Recorre el texto de dos en dos posiciones vecinas: toma la palabra actual y mira cuál viene justo después. Si hay empate, conserva el orden de aparición.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -128,6 +131,9 @@ Cada modelo aprendió con datos hasta cierta fecha. Lo que salió después (una 
 
 > 🌎 **Otro ejemplo:** Es como un mapa impreso del año pasado: sirve, pero no tiene la calle nueva.
 
+> 🧩 **Piezas para este ejercicio**
+> - Compara los nombres propuestos con la lista real de funciones. La fecha de corte da una razón para consultar la documentación, incluso si el nombre suena convincente.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -195,6 +201,9 @@ Más contexto no siempre es mejor: es mejor el **correcto**. Dale el archivo que
 > 🌎 **En la vida real:** al médico le llevas los exámenes de ese problema, no todos los papeles de tu vida.
 
 > 🌎 **Otro ejemplo:** Es como pedir direcciones: "estoy en la esquina de la panadería" ayuda más que contarle tu día entero.
+
+> 🧩 **Piezas para este ejercicio**
+> - El cálculo de un token por cuatro caracteres es una aproximación de la práctica. Reserva primero espacio para el mensaje obligatorio. Selecciona los recientes y al final ordénalos como estaban en la conversación.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -277,6 +286,9 @@ ollama run llama3.2      # descarga el modelo la primera vez y abre un chat en l
 > 🌎 **En la vida real:** es como cocinar en casa en vez de pedir delivery: más privado y sin depender de nadie, pero tu cocina es más chica que la del restaurante.
 
 > 🌎 **Otro ejemplo:** Es como una enciclopedia en papel: no necesita internet, pero no tiene todo lo último.
+
+> 🧩 **Piezas para este ejercicio**
+> - Sustituye lo que reconoce cada patrón y verifica a mano el resultado antes de compartirlo. El filtro de ejemplo cubre esos formatos. Otros datos personales pueden aparecer dentro del mismo texto.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

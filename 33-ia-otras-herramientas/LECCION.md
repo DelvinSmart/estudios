@@ -34,6 +34,9 @@ En la web, **Gemini** te sirve para conversar, investigar y **preparar pedidos**
 
 > 🌎 **Otro ejemplo:** Es como un asistente que prepara la agenda de la reunión para que la reunión sea corta.
 
+> 🧩 **Piezas para este ejercicio**
+> - Normaliza el nombre antes de consultarlo. Para la lista de faltantes, comprueba tanto los que ya existen como los que ya agregaste al resultado.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -105,6 +108,9 @@ Para textos con datos que no pueden salir de tu computadora, para practicar sin 
 > 🌎 **En la vida real:** para hervir agua usas la cocina de casa; para un banquete de 100 personas, contratas un catering.
 
 > 🌎 **Otro ejemplo:** Es como arreglar un botón tú mismo y llevar el traje completo a la sastrería.
+
+> 🧩 **Piezas para este ejercicio**
+> - Ignora la fila de títulos antes de leer los datos. Separa las columnas por espacios y convierte a número el valor que acompaña a `GB`. La mitad de la memoria es un criterio del ejercicio.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
@@ -188,6 +194,9 @@ Dos agentes trabajando al mismo tiempo **en los mismos archivos** se pisan. Si u
 > 🌎 **En la vida real:** dos pintores en la misma pared, cada uno con un color, terminan en un desastre.
 
 > 🌎 **Otro ejemplo:** Es como dos personas editando el mismo documento sin avisarse: uno borra lo que el otro escribió.
+
+> 🧩 **Piezas para este ejercicio**
+> - El orden de la tabla resuelve el caso en que una tarea activa más de una condición. Para saber si dos cambios se pisan, busca qué archivos aparecen en ambas listas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

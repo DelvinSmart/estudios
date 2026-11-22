@@ -64,6 +64,9 @@ Convierte lo que hicimos hoy en una clase para mi mapa de estudios:
 con partes, ejemplos de la vida real y prácticas.
 ```
 
+> 🧩 **Piezas para este ejercicio**
+> - Divide por oraciones para limitar dónde buscas la explicación. Un mismo término puede aparecer en varias, así que revisa el contexto de cada aparición.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -134,6 +137,9 @@ sale mal, y explícame cómo usarlo y cómo funciona.
 
 Fíjate en el final: "explícame cómo funciona". Así la herramienta no es una caja negra: la entiendes y la puedes arreglar.
 
+> 🧩 **Piezas para este ejercicio**
+> - Primero calcula los minutos que se ahorran en una semana. Divide el costo de hacer la herramienta entre ese ahorro y redondea hacia arriba.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -195,6 +201,9 @@ Para tareas chicas y repetitivas, a veces conviene un **modelo local**: una IA q
 
 > 🌎 **En la vida real:** es como tener una cafetera en casa en vez de comprar café en la calle cada vez: para el café de todos los días, sale gratis.
 
+> 🧩 **Piezas para este ejercicio**
+> - Una línea puede traer más de una opción. Usa el siguiente marcador de número como límite de la tarea anterior y quita el espacio de los extremos.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -254,6 +263,9 @@ Además de aprender y automatizar, hay usos que ahorran mucho trabajo:
 
 > 🌎 **Otro ejemplo:** Es como un celular: puedes usarlo solo para llamar, o para el banco, el mapa, la cámara, el traductor y aprender idiomas. El aparato es el mismo; el provecho depende de ti.
 
+> 🧩 **Piezas para este ejercicio**
+> - El uso elige una plantilla. El detalle se inserta dentro de esa plantilla. El resultado de un uso desconocido es el valor de respaldo de la consigna.
+
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
@@ -305,6 +317,9 @@ Sacarle el máximo provecho **no** es pasarle todo. Hay cosas que son tuyas:
 > 🎙️ **El profesor dice:** {{alumno}}, todo lo que viste en este curso (una app publicada, dos sitios, sus paneles y este mapa) se construyó así: la IA puso las manos rápidas; la idea, la dirección y las ganas de entender cada cosa las puso una persona. Ese es el máximo provecho: que cada cosa que construyes te deje sabiendo más que antes.
 
 > 🔁 **Repaso:** aprender mientras construyes (explicar, guardar como clase, estudiar, simular la entrevista) → lo repetitivo se vuelve herramienta (la IA la escribe una vez, trabaja siempre sin tokens) → herramientas que funcionan sin la IA, y modelos locales gratis para lo chico → segunda opinión, explicar errores, comparar, documentar, traducir, estudiar → las decisiones, las claves, la revisión final y tus prácticas no se delegan.
+
+> 🧩 **Piezas para este ejercicio**
+> - Una tarea puede tener varias marcas. La alerta sobre publicar sin entender se registra además de la clasificación principal. Conserva el orden del recorrido.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
