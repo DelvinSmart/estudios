@@ -291,7 +291,7 @@ function costoDelTanque(litros, precioPorLitro) {
 
 Lee esta parte después de intentar el ejercicio de arriba, porque aquí se ve una forma de resolverlo.
 
-> 🌎 **En la vida real:** en Copiloto Driver, cuando echas gasolina, escribes los litros y el precio, y la app hace la cuenta. Hoy echas 20 litros, otro día 50. **Los datos cambian de una carga a otra**, pero cada carga conserva los suyos.
+> 🌎 **En la vida real:** en Copiloto Driver, cuando echas gasolina, escribes los litros y el **total que pagaste**, y la app calcula el precio por litro. Hoy echas 20 litros, otro día 50. **Los datos cambian de una carga a otra**, pero cada carga conserva los suyos. Aquí practicamos la cuenta inversa: con los litros y el precio, calculamos el total.
 
 En el código, cada carga es **un uso nuevo** de la función:
 
@@ -369,7 +369,7 @@ si no                 → cruza
 Dos ideas que te van a ahorrar muchos errores:
 
 1. **La condición tiene que ser completa y clara.** "Si viene un carro" está claro: o viene o no viene. La máquina necesita una pregunta que se pueda responder con **sí o no**, sin "más o menos".
-2. **Piensa siempre los dos caminos.** ¿Qué pasa si **sí**? ¿Y si **no**? Muchos errores de principiante son por olvidar el "si no": el programa funciona cuando todo va bien, pero no sabe qué hacer cuando algo falta.
+2. **Piensa siempre los dos caminos.** ¿Qué pasa si **sí**? ¿Y si **no**? Si la condición no se cumple y no hay `else`, la máquina **salta ese bloque y sigue con la línea siguiente**. El `else` no es obligatorio, pero **tú** tienes que decidir qué debe pasar en los dos casos. Muchos errores de principiante vienen de no pensar en el camino del "no": el programa funciona cuando todo va bien, pero hace algo equivocado cuando falta un dato.
 
 > 💡 **Idea:** cuando una decisión tiene **varios** casos (rojo, amarillo, verde), se encadenan: `si… si no, si… si no…`. Lo verás a fondo, con código de verdad, en [Decisiones y ciclos](../46-js-decisiones-y-ciclos/LECCION.md) (la clase 02 del curso de JavaScript).
 
@@ -440,6 +440,7 @@ for (const viaje of viajes) {
 Léelo así: "empieza con `total` en 0. **Por cada** `viaje` **de** la lista `viajes`, súmale ese viaje al total".
 
 - `let` es como `const`, pero la cajita **sí puede cambiar**. Aquí `total` cambia en cada vuelta: 0 → 12 → 20 → 35.
+- `viaje` puede usar `const` porque **cada vuelta crea un `viaje` nuevo**. En la primera vale 12. En la segunda es otra cajita que vale 8. Dentro de una misma vuelta, no recibe otro valor.
 - Lo que está entre `{ }` se repite una vez por cada elemento. A cada repetición se le dice **vuelta**.
 - `total = total + viaje` se lee: "el total nuevo es el total de antes, más este viaje".
 - Para comparar números: `>` (mayor que), `<` (menor que), `>=` (mayor o igual) y `===` (igual). Cada comparación responde **sí o no** (`true` o `false`), justo lo que necesita un `if`.

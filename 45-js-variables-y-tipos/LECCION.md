@@ -266,6 +266,15 @@ String(12)          // '12'
 Number.isNaN(Number('abc'))   // true → así revisas si salió mal
 ```
 
+> ⚠️ **Cuidado con la coma:** en Brasil escribimos `32,5`, pero `Number` espera un punto. Copiloto recibe números con coma, por eso la cambia por un punto antes de convertir:
+
+```js
+Number('32,5')                     // NaN
+Number('32,5'.replace(',', '.'))   // 32.5
+```
+
+Esto sirve para un número simple. Si trae miles, como `1.234,56`, primero hay que quitar el punto de los miles.
+
 > 🌎 **En la vida real:** es como cambiar dólares por reales en la casa de cambio, a propósito y sabiendo cuánto da.
 
 > 🌎 **Otro ejemplo:** Es como pasar una receta de tazas a gramos antes de pesar.
@@ -273,6 +282,7 @@ Number.isNaN(Number('abc'))   // true → así revisas si salió mal
 > 🧩 **Piezas para este ejercicio**
 > - `.trim()` quita los espacios de las puntas. Un texto como `'   '` se convierte en `''`.
 > - `Number('')` devuelve 0. Comprueba si el campo está vacío antes de convertir, porque el ejercicio distingue el campo vacío de un cero escrito por la persona.
+> - Los textos de este ejercicio usan punto para los decimales, así que no necesitas cambiar comas.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 

@@ -95,24 +95,48 @@ escribe :: ¿Por qué Copiloto, que es de React Native, tiene código en Swift? 
 
 ## Parte 2. let y var
 
-> 🌎 **En la vida real:** `let` es tu fecha de nacimiento: se escribe una vez y no cambia. `var` es el saldo de tu cuenta: cambia todos los días.
+> 🌎 **En la vida real:** `let` es el total escrito en el recibo de una carga de combustible. Ese recibo ya no recibe otro total. En la próxima carga hay **otro recibo**, con otro valor. `var` es el saldo del día: lo vas actualizando.
 
-> 🌎 **Otro ejemplo:** Es como la placa del carro (`let`) y el kilometraje (`var`).
+> 🌎 **Otro ejemplo:** Es como el kilometraje que anotaste al salir hoy (`let`) y el kilometraje que marca el carro ahora (`var`). Mañana anotas otro kilometraje de salida.
 
 ```swift
-let nombre = "Delvin"     // no cambia
-var ganancia = 0.0        // cambia
+let nombre = "Delvin"     // este nombre no recibe otro valor
+var ganancia = 0.0        // este nombre sí puede recibir otro valor
 ganancia = ganancia + 18.5
 ganancia += 12            // lo mismo, más corto
 ```
 
-Es exactamente el `val` y `var` de Kotlin, o el `const` y `let` de TypeScript, **con otros nombres**. Ojo con la trampa: en TypeScript `let` es el que **cambia**; en Swift, `let` es el que **no** cambia.
+`let` **no** significa «este dato será igual para siempre». Significa: **en este uso, el nombre no recibe otro valor**. Si la función se usa otra vez, crea su propio `let`:
 
-| No cambia | Cambia | Lenguaje |
+```swift
+func costoDeLaCarga(litros: Double, precio: Double) -> Double {
+    let total = litros * precio
+    return total
+}
+
+print(costoDeLaCarga(litros: 20, precio: 5))   // este total vale 100.0
+print(costoDeLaCarga(litros: 50, precio: 6))   // este es otro total: 300.0
+```
+
+Si editas el código y lo vuelves a ejecutar, el `let` también puede empezar con otro valor.
+
+Se parece al `val` de Kotlin y al `const` de TypeScript: ninguno deja darle otro valor al nombre. Ojo con la trampa: en TypeScript, `let` es el que **sí** se puede reasignar; en Swift, `let` es el que **no**. **Reasignar** es darle otro valor a un nombre que ya existe.
+
+| No se reasigna | Se reasigna | Lenguaje |
 |---|---|---|
 | `const` | `let` | TypeScript |
 | `val` | `var` | Kotlin |
 | `let` | `var` | Swift |
+
+Con las listas **no** son iguales. En TypeScript, una lista guardada en `const` todavía puede recibir elementos. En Swift, una lista guardada en `let` tampoco cambia por dentro:
+
+```swift
+var gastosDelDia = [40.0]
+gastosDelDia.append(25.0)   // ✅ ahora tiene 2 gastos
+
+let gastosCerrados = [40.0]
+gastosCerrados.append(25.0)   // ❌ error: 'gastosCerrados' is a 'let' constant
+```
 
 **Usa `let` siempre que puedas.** Si después necesitas cambiarlo, Swift te avisa con un error claro, y lo cambias a `var`. Al revés no avisa: un `var` que nunca cambia es un aviso amarillo ("variable was never mutated; consider changing to let"), porque Swift prefiere que digas que no va a cambiar.
 
@@ -184,15 +208,25 @@ let activo = true        // Bool: sí o no
 
 Si quieres, se escriben con dos puntos: `let viajes: Int = 12`. Hace falta cuando Swift no puede adivinar, por ejemplo una lista vacía: `var gastos: [Double] = []`.
 
-**Swift no mezcla tipos solo.** En JavaScript, `12 * 2.5` funciona; en Swift, un `Int` por un `Double` **no compila**. Hay que convertir a propósito:
+**Swift no mezcla tipos solo.** En JavaScript, enteros y decimales son `number`. En Swift, `Int` y `Double` son tipos distintos. Si un nombre ya guarda un `Int` y otro un `Double`, multiplicarlos **no compila**. Hay que convertir a propósito:
 
 ```swift
-let viajes = 12
-let porViaje = 9.75
-let total = Double(viajes) * porViaje   // 117.0: el Int se convierte a Double primero
+let viajes = 12          // Int
+let porViaje = 9.75      // Double
+// viajes * porViaje     // ❌ no compila: Int por Double
+let total = Double(viajes) * porViaje   // ✅ 117.0: el Int se convierte a Double primero
 ```
 
-Parece molesto, pero evita errores escondidos: así nunca se pierden decimales sin que te des cuenta.
+Ojo: si escribes los números directo, `12 * 2.5` **sí** compila y da `30.0`. Ahí Swift puede tratar ese `12` como `Double`, porque todavía no está guardado como `Int`.
+
+Parece molesto, pero te obliga a decidir la conversión. Eso no protege todas las cuentas: entre dos `Int`, la división **descarta los decimales**, sin error ni aviso:
+
+```swift
+let kilometros = 7
+let dias = 2
+print(kilometros / dias)                   // 3, no 3.5
+print(Double(kilometros) / Double(dias))   // 3.5
+```
 
 **Textos con valores** (interpolación), con `\( )`:
 
@@ -260,7 +294,7 @@ El botón Probar envía el código del ejercicio a Compiler Explorer. Si el serv
 
 ## Para la entrevista
 
-> 🎤 **Si te preguntan "¿qué sabes de Swift?":** "Es el lenguaje de Apple para iPhone, iPad, Mac y el reloj. Se parece mucho a Kotlin: `let` para lo que no cambia y `var` para lo que cambia, tipos que el compilador adivina, y no mezcla `Int` con `Double` sin que lo pidas. Lo más importante es que los valores que pueden faltar se marcan con `?`, y el compilador te obliga a revisarlos. Lo practiqué en Compiler Explorer y en Xcode, y entiendo cómo una app de React Native usa un módulo nativo en Swift para lo que solo el iPhone puede hacer."
+> 🎤 **Si te preguntan "¿qué sabes de Swift?":** "Es el lenguaje de Apple para iPhone, iPad, Mac y el reloj. Se parece mucho a Kotlin: `let` para un nombre que no se reasigna y `var` para uno que sí, tipos que el compilador adivina, y no mezcla `Int` con `Double` sin que lo pidas. Lo más importante es que los valores que pueden faltar se marcan con `?`, y el compilador te obliga a revisarlos. Lo practiqué en Compiler Explorer y en Xcode, y entiendo cómo una app de React Native usa un módulo nativo en Swift para lo que solo el iPhone puede hacer."
 
 > 🌎 **En la vida real:** es como contar que aprendiste a manejar un carro nuevo: qué se parece al que ya manejabas y qué cambia.
 

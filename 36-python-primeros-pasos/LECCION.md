@@ -131,7 +131,9 @@ let ganancia = 250.5;
 
 ### Nombres: snake_case
 
-En Python los nombres van en minúscula y con guion bajo: `ganancia_total`, `numero_de_viajes` (eso se llama **snake_case**). En JavaScript se usa `gananciaTotal` (camelCase). Las constantes, por costumbre, en MAYÚSCULAS: `IMPUESTO = 0.15`.
+En Python los nombres van en minúscula y con guion bajo: `ganancia_total`, `numero_de_viajes` (eso se llama **snake_case**). En JavaScript se usa `gananciaTotal` (camelCase).
+
+Python no tiene una palabra como `const`. Para un valor que el programa no debería reasignar, se escribe el nombre en MAYÚSCULAS: `IMPUESTO = 0.15`. Es un **acuerdo entre personas**. Python no lo impide: si después escribes `IMPUESTO = 0.20`, lo acepta sin avisar.
 
 > 🌎 **En la vida real:** es como las reglas de ortografía de cada idioma: el portugués y el español escriben distinto, aunque se entiendan.
 
@@ -158,7 +160,7 @@ total = 10  # también al final de una línea
 ```ejercicio
 titulo: Nombres en snake_case y una constante
 lenguaje: python
-pide: Escribe la constante `IMPUESTO = 0.15` (en MAYÚSCULAS, porque no cambia) y completa `ganancia_por_viaje(ganancia_total, numero_de_viajes)` y `con_impuesto(valor)`, que suma el impuesto y redondea a 2 decimales con `round(…, 2)`. Fíjate en los nombres: minúsculas y guion bajo.
+pide: Escribe la constante `IMPUESTO = 0.15` (en MAYÚSCULAS, para avisar que el programa no debería reasignarla) y completa `ganancia_por_viaje(ganancia_total, numero_de_viajes)` y `con_impuesto(valor)`, que suma el impuesto y redondea a 2 decimales con `round(…, 2)`. Fíjate en los nombres: minúsculas y guion bajo.
 --- código
 # tu constante aquí
 
@@ -329,11 +331,22 @@ litros = float(input("¿Cuántos litros cargaste? "))
 print(f"Rendimiento: {km / litros:.1f} km por litro")
 ```
 
+> ⚠️ **Cuidado con la coma:** en Brasil escribimos `32,5`, pero `float` espera un punto. `float("32,5")` detiene el programa con `ValueError`. Copiloto recibe números con coma, por eso la cambia por un punto antes de convertir:
+
+```python
+texto = "32,5"
+litros = float(texto.replace(",", "."))
+print(litros)   # 32.5
+```
+
+Esto sirve para un número simple. Si trae miles, como `1.234,56`, primero hay que quitar el punto de los miles.
+
 > 🌎 **En la vida real:** es como un formulario en papel: lo que escribes es texto hasta que alguien lo pasa a la calculadora.
 
 > 🌎 **Otro ejemplo:** Es como dictar un número por teléfono: el otro lo anota como palabras y después lo convierte en cifras.
 
 > 🧩 **Piezas para este ejercicio**
+> - Los textos de este ejercicio ya vienen con punto, así que no necesitas cambiar comas.
 > - Convierte ambos textos antes de dividir. En una cadena con prefijo `f`, `{resultado:.1f}` inserta el número con una cifra decimal.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.

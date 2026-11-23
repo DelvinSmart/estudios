@@ -144,7 +144,7 @@ escribe :: Explica con un ejemplo tuyo la diferencia entre una librería y un fr
 
 ### TypeScript: JavaScript con tipos
 
-**TypeScript** es JavaScript más **tipos**: le dices qué clase de dato va en cada lugar. Antes de correr, una herramienta lo **revisa** y lo **convierte en JavaScript** (el navegador no entiende TypeScript, y React Native en el teléfono tampoco: los dos ejecutan JavaScript). Si escribiste algo mal, te avisa **antes** de que lo vea un usuario.
+**TypeScript** es JavaScript más **tipos**: le dices qué clase de dato va en cada lugar. Para correr, se **convierte en JavaScript** (el navegador no entiende TypeScript, y React Native en el teléfono tampoco: los dos ejecutan JavaScript). Aparte, la **revisión de tipos** busca datos equivocados sin abrir la app. En Copiloto la hace una herramienta llamada `tsc`, dentro del CI (la revisión automática del proyecto). Así, un error se puede detectar **antes** de que lo vea un usuario.
 
 ```ts
 function gananciaNeta(bruto: number, gastos: number): number {
@@ -316,12 +316,12 @@ Una app nativa se escribe dos veces (una en Kotlin, otra en Swift), pero tiene a
 
 ### Kotlin y Swift dentro de Copiloto
 
-Copiloto hace algo muy especial: mientras manejas con Uber o 99, **lee la oferta del viaje en la pantalla** en tiempo real y **dibuja una burbuja con la evaluación encima de la otra app**. Para eso hace falta pedirle a Android permisos profundos: leer lo que muestran otras apps y dibujar sobre ellas. TypeScript, con React Native, **no puede hacer eso por sí solo**.
+Copiloto hace algo muy especial: mientras manejas con Uber o 99, **lee la oferta del viaje en la pantalla** en tiempo real y te muestra su evaluación. En Android, la **dibuja en una burbuja encima de la otra app**. Para eso hace falta pedirle a Android permisos profundos: leer lo que muestran otras apps y dibujar sobre ellas. TypeScript, con React Native, **no puede hacer eso por sí solo**.
 
 Por eso Copiloto tiene un **módulo nativo**, `modules/ride-overlay`:
 
 - **En Android, en Kotlin** (unos 20 archivos): `RideReaderService.kt` y `ScreenOcr.kt` leen la pantalla, `OfferParser.kt` entiende la oferta y `RideBubbleWindow.kt` dibuja la burbuja.
-- **En iPhone, en Swift**: lo mismo, con las reglas de Apple (`OfferParser.swift`, `ScreenCapture.swift`…).
+- **En iPhone, en Swift**: no dibuja una burbuja. La persona activa **compartir pantalla** (`ScreenCapture.swift`), `OfferParser.swift` entiende la oferta y `OfferNotifier.swift` la muestra en una **notificación**.
 
 Es la "pieza nativa especial" de la que habla la sección anterior: **todo lo demás de la app es TypeScript**.
 
@@ -360,7 +360,7 @@ El Python que quizás tengas en la cabeza es de **otro proyecto**: el Agente de 
 | El servidor y el asistente de IA (`functions/`) | TypeScript, en Firebase Cloud Functions |
 | El panel web de administración (`webapp/`) | TypeScript, con React |
 | El lector de ofertas y la burbuja, en Android | Kotlin |
-| El mismo lector, en iPhone | Swift |
+| El lector en iPhone, con pantalla compartida y notificación | Swift |
 
 **Más del 95 % del código de Copiloto es TypeScript.**
 
@@ -436,7 +436,7 @@ escribe :: Un amigo te pregunta qué usa Copiloto y por qué no Kotlin. ¿Qué l
 
 > 🎤 **Si te preguntan "¿cuál es la diferencia entre JavaScript, TypeScript, React y React Native?":** "JavaScript es el lenguaje que corre en el navegador y, con Node.js, fuera de él. TypeScript es JavaScript con tipos que se revisan antes de correr y se convierte en JavaScript. React es una librería para armar pantallas web con componentes. React Native usa React y TypeScript para hacer apps nativas de iPhone y Android con un solo código, y Expo es el framework que uso para correrla y publicarla. Kotlin y Swift son los lenguajes nativos de Android y iPhone."
 
-> 🎤 **Si te preguntan "¿en qué está hecho Copiloto?":** "Está hecho en TypeScript con React Native y Expo: un solo código para Android y iPhone. Donde necesité funciones nativas, como leer la oferta del viaje en la pantalla y dibujar una burbuja encima de otras apps, escribí un módulo nativo en Kotlin para Android y en Swift para iPhone, que se comunica con TypeScript por un puente. El servidor y el asistente de IA también son TypeScript, en Firebase Cloud Functions, y usan Gemini."
+> 🎤 **Si te preguntan "¿en qué está hecho Copiloto?":** "Está hecho en TypeScript con React Native y Expo: un solo código para Android y iPhone. Para leer la oferta del viaje en la pantalla escribí un módulo nativo, que se comunica con TypeScript por un puente. En Android, en Kotlin, muestra una burbuja encima de otras apps. En iPhone, en Swift, usa la pantalla compartida y muestra la oferta en una notificación. El servidor y el asistente de IA también son TypeScript, en Firebase Cloud Functions, y usan Gemini."
 
 > 🌎 **En la vida real:** es como explicar los roles de un equipo de obra: quién hace qué y cómo se juntan.
 
@@ -488,7 +488,7 @@ Porque lo hizo **una persona**, y tenía que llegar a conductores con iPhone **y
 - Cada arreglo llega a los dos teléfonos **a la vez**.
 - Ni siquiera hace falta una Mac para armar la del iPhone: **EAS Build** (clase 60) la arma en las Mac de Expo, en internet.
 
-**Pero no es 100 % un solo código.** Para leer la pantalla y mostrar la burbuja encima de otras apps, Copiloto necesitó **piezas nativas**: una en **Kotlin** para Android y otra en **Swift** para iPhone. TypeScript las llama por un **puente** (lo ves completo en la clase 113). Es el adaptador del enchufe: casi todo es un solo código, y lo que es propio de cada teléfono lo hace una pieza en su idioma.
+**Pero no es 100 % un solo código.** Para leer la oferta en la pantalla, Copiloto necesitó **piezas nativas**: una en **Kotlin** para Android, que muestra la burbuja encima de otras apps, y otra en **Swift** para iPhone, que usa la pantalla compartida y una notificación. TypeScript las llama por un **puente** (lo ves completo en la clase 113). Es el adaptador del enchufe: casi todo es un solo código, y lo que es propio de cada teléfono lo hace una pieza en su idioma.
 
 | ¿Qué necesitas? | Lo que se suele elegir |
 |---|---|

@@ -14,7 +14,7 @@ Antes de escribir código hay que saber leerlo. Casi todo el código del mundo s
 
 > 🌎 **Otro ejemplo:** Es como cargar combustible: JavaScript es la bomba que te deja meter diésel en un carro a gasolina; TypeScript es la boquilla que no entra en el tanque equivocado.
 
-La app Copiloto está escrita en **TypeScript**. Es JavaScript con **tipos**: a cada dato le dices qué clase de cosa es (texto, número, lista...). Si te equivocas, el programa avisa antes de llegar al teléfono.
+La app Copiloto está escrita en **TypeScript**. Es JavaScript con **tipos**: a cada dato le dices qué clase de cosa es (texto, número, lista...). Si te equivocas, la **revisión de tipos** lo marca sin tener que abrir la app. En Copiloto, esa revisión se hace con una herramienta llamada `tsc`.
 
 ```ts
 let nombre: string = 'Thermomac';   // texto
@@ -42,7 +42,7 @@ let activo: boolean = true;         // verdadero o falso
 
 | Pieza | Para qué | Cómo se ve |
 |---|---|---|
-| **Constante** | Guardar un valor con nombre que no cambia | `const MAX = 2;` |
+| **Constante** | Guardar un valor con nombre, que no recibe otro mientras el programa corre | `const MAX = 2;` |
 | **Función** | Una máquina: recibe algo y devuelve algo | `function sumar(a, b) { return a + b; }` |
 | **if** | Tomar una decisión | `if (litros > 0) { ... }` |
 | **Lista** (array) | Varios valores en orden | `['Uber', '99', 'inDrive']` |
@@ -81,7 +81,7 @@ export function normalizeMyCompanyName(text: string): string | null {
 - `export const MY_COMPANY_NAME_MAX_WORDS = 2;`
   - `const` crea una **constante**: aquí guarda el 2, el máximo de palabras.
   - `export` permite que otros archivos la usen; el recuadro de cambiar el nombre la usa.
-  - ¿Por qué no escribir `2` directo más abajo? Porque si mañana quieres 3 palabras, cambias **un solo lugar**.
+  - ¿Por qué no escribir `2` directo más abajo? Porque si mañana quieres 3 palabras, **editas esta línea** y publicas una versión nueva. Es un solo lugar. Mientras la app corre, vale 2 y ningún código le pone otro valor.
 - `function normalizeMyCompanyName(text: string): string | null {`
   - `function` crea una **función**. Entra el nombre que escribiste y sale el nombre limpio.
   - `(text: string)` es lo que **recibe**: un texto.
@@ -182,4 +182,4 @@ Una sola línea decide cómo se cuenta el dinero en toda la app. Por eso tiene p
 > Un bloque de código con nombre que recibe datos, hace un trabajo y devuelve un resultado. Por ejemplo, en mi app una función recibe el nombre de la empresa y devuelve el nombre limpio o `null` si es inválido.
 
 **¿Por qué TypeScript y no JavaScript?**
-> Porque los tipos detectan errores antes de ejecutar: si una función espera un texto y le paso un número, no compila.
+> Porque los tipos detectan errores antes de ejecutar: si una función espera un texto y le paso un número, la revisión con `tsc` lo marca. En Copiloto, esa revisión corre en el CI, la revisión automática del proyecto.

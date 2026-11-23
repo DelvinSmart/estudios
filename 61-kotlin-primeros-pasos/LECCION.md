@@ -71,23 +71,48 @@ escribe :: Escribe un programa de Kotlin que muestre tu nombre. :: fun main() { 
 
 ## Parte 2. val y var
 
-> 🌎 **En la vida real:** `val` es tu fecha de nacimiento; `var` es tu kilometraje.
+> 🌎 **En la vida real:** `val` es el total escrito en el recibo de una carga de combustible. En la próxima carga hay **otro recibo**. `var` es el kilometraje del carro: lo vas actualizando.
 
-> 🌎 **Otro ejemplo:** Es como una placa grabada frente a una pizarra.
+> 🌎 **Otro ejemplo:** Es como una etiqueta pegada a una caja (`val`) frente a una pizarra que borras y vuelves a escribir (`var`). La etiqueta no cambia de caja, pero lo que hay dentro de la caja sí podría cambiar.
 
 ### Como const y let
 
 ```kotlin
 val nombre = "Delvin"     // no se puede reasignar (como const)
-var viajes = 0            // sí cambia (como let)
+var viajes = 0            // sí se puede reasignar (como let)
 viajes += 1
 ```
 
-Igual que en JavaScript: **usa `val` siempre**, y `var` solo si el valor cambia. No hay `;` al final.
+**Reasignar** es darle otro valor a un nombre que ya existe. Empieza con `val`, y usa `var` solo si tienes que reasignar ese nombre. No hay `;` al final.
 
-> 🌎 **En la vida real:** es como guardar en la caja fuerte lo que no cambia y en el bolsillo lo que usas todo el día.
+### Qué es lo que `val` no deja cambiar
 
-> 🌎 **Otro ejemplo:** Es como un contrato firmado frente a una lista de compras.
+`val` no deja **reasignar el nombre**. No significa que el dato sea igual para siempre:
+
+- Si editas el código y lo ejecutas otra vez, puede empezar con otro valor.
+- Si una función se usa otra vez, crea sus propios `val`.
+- Si un `val` guarda una lista **mutable** (una lista que se puede modificar), la lista puede crecer.
+
+```kotlin
+val textos = ArrayList<String>()
+textos.add("R$ 18,50")      // ✅ la lista crece
+// textos = ArrayList()     // ❌ 'val' cannot be reassigned
+```
+
+Copiloto hace esto al leer una oferta en Android: `val texts = ArrayList<String>(64)`. El nombre `texts` sigue con la misma lista, y la lista se va llenando.
+
+**Los parámetros de una función también son de solo lectura.** Si necesitas un valor que vaya cambiando, créalo con `var`:
+
+```kotlin
+fun conPropina(valorDelViaje: Double, propina: Double): Double {
+    // valorDelViaje += propina   // ❌ 'val' cannot be reassigned
+    var total = valorDelViaje
+    total += propina
+    return total
+}
+```
+
+En el código de Android también vas a ver **`const val`**, como `const val FILE = "ride_overlay_prefs"`. Es un valor fijo que ya se conoce al compilar. Un `val` normal puede calcularse mientras el programa corre.
 
 ### Tipos: inferidos o escritos
 
@@ -105,12 +130,14 @@ Kotlin es **estáticamente tipado** como TypeScript, pero aquí los tipos se rev
 > 🌎 **Otro ejemplo:** Es como el control de seguridad de un aeropuerto: no hay forma de saltarlo.
 
 > 🧩 **Piezas para este ejercicio**
-> - `val` conserva el valor inicial y `var` permite asignar otro. El total necesita cambiar después de cada recorrido. En `for (r in recorridos)`, `r` recibe una distancia por vuelta.
+> - `val` no deja reasignar el nombre y `var` sí. El total necesita recibir otro valor después de cada recorrido.
+> - En `for (r in recorridos)`, cada vuelta tiene su propia `r` con una distancia. Dentro de esa vuelta, `r` es de solo lectura.
+> - `kmInicial` es un parámetro, así que tampoco se puede reasignar.
 
 ✍️ **Ahora escribes tú:** completa el código y toca **▶ probar**. Cada prueba se pone en verde cuando tu código hace lo que se pide.
 
 ```ejercicio
-titulo: val para lo que no cambia, var para lo que sí
+titulo: val para lo que no se reasigna, var para lo que sí
 lenguaje: kotlin
 pide: Completa `kmAlFinal(kmInicial, recorridos)`: empieza con el kilometraje del carro y le suma cada recorrido de la lista. Usa un `var` para el total que va cambiando (y `val` para todo lo demás). Pista: `for (r in recorridos) { … }`.
 --- código
