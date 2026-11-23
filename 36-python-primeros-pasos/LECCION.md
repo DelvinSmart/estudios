@@ -12,21 +12,23 @@
 
 ### Ver si ya lo tienes
 
-La Mac trae Python 3. En la terminal:
+Revisa si tu Mac ya tiene Python 3. En la terminal:
 
 ```bash
 python3 --version     # por ejemplo: Python 3.12.4
 ```
 
-Si no aparece, se instala desde python.org o con `brew install python`. En Windows se baja de python.org; en Linux casi siempre ya viene.
+Si la Mac te ofrece instalar las herramientas de desarrollo, puedes aceptar: son gratis. Si no aparece Python, se instala desde python.org o con `brew install python`. En Windows se baja de python.org; en Linux casi siempre ya viene.
 
 > 🌎 **En la vida real:** es como revisar si hay gas antes de cocinar.
 
 > 🌎 **Otro ejemplo:** Es como mirar si el celular tiene una app antes de buscarla en la tienda.
 
-### El intérprete: probar línea por línea
+### El modo interactivo: probar línea por línea
 
-Si escribes solo `python3`, se abre el **intérprete** (también llamado REPL): escribes una línea, la corre y te muestra el resultado. Sirve para probar cosas rápido. Para salir: `exit()` o **Ctrl + D**.
+Si escribes solo `python3`, se abre el **modo interactivo**, o **REPL**. Lee una línea, la ejecuta, muestra el resultado y vuelve a esperar. Sirve para probar cosas rápido. Para salir: `exit()` o **Ctrl + D**.
+
+El **intérprete** es el programa que ejecuta Python. Trabaja en el modo interactivo y también cuando corres un archivo.
 
 ```python
 >>> 2 + 3
@@ -54,7 +56,7 @@ python3 hola.py
 
 > 💡 **Idea:** en JavaScript corrías `node archivo.js`; en Python, `python3 archivo.py`. Misma idea.
 
-> 🌎 **En la vida real:** el intérprete es hablar en vivo; el archivo es dejar una carta escrita que se puede leer las veces que quieras.
+> 🌎 **En la vida real:** el modo interactivo es hablar en vivo; el archivo es dejar una carta escrita que se puede leer las veces que quieras.
 
 > 🌎 **Otro ejemplo:** Es como la diferencia entre improvisar una receta y tenerla escrita en un cuaderno.
 
@@ -74,7 +76,7 @@ python3 hola.py
 ```ejercicio
 titulo: Tu primer código en Python
 lenguaje: python
-pide: Completa dos funciones. `saludo(nombre)` devuelve `"¡Hola, Delvin!"` para `"Delvin"`. `repetir(texto, veces)` devuelve el texto repetido, como `"hola" * 3` en el intérprete. Cambia cada `pass` por tu código con `return`. Puedes usar `print()` para mirar valores: sale debajo de las pruebas.
+pide: Completa dos funciones. `saludo(nombre)` devuelve `"¡Hola, Delvin!"` para `"Delvin"`. `repetir(texto, veces)` devuelve el texto repetido, como `"hola" * 3` en el modo interactivo. Cambia cada `pass` por tu código con `return`. Puedes usar `print()` para mirar valores: sale debajo de las pruebas.
 --- código
 def saludo(nombre):
     pass  # tu código aquí
@@ -97,10 +99,10 @@ def repetir(texto, veces):
 
 ```practica
 vf :: En la Mac, Python 3 se corre con el comando python3
-vf :: El intérprete (REPL) sirve para guardar programas largos
-elige :: ¿Cómo sales del intérprete de Python? :: Con quit-all :: Con exit() o Ctrl + D :: Cerrando la Mac
+vf :: El modo interactivo (REPL) sirve para guardar programas largos
+elige :: ¿Cómo sales del modo interactivo de Python? :: Con quit-all :: Con exit() o Ctrl + D :: Cerrando la Mac
 elige :: ¿Qué termina el nombre de un archivo de Python? :: .js :: .py :: .txt
-escribe :: ¿Qué diferencia hay entre usar el intérprete y correr un archivo .py? :: El intérprete corre una línea a la vez y muestra el resultado al instante, para probar; el archivo .py guarda el programa completo y se corre con python3 archivo.py.
+escribe :: ¿Qué diferencia hay entre usar el modo interactivo y correr un archivo .py? :: El modo interactivo corre una línea a la vez y muestra el resultado al instante, para probar; el archivo .py guarda el programa completo y se corre con python3 archivo.py. En los dos casos trabaja el intérprete.
 ```
 
 ## Parte 2. Variables y comentarios
@@ -249,13 +251,15 @@ proximo_mantenimiento = None
 print(type(tiene_carro_propio))   # <class 'bool'>
 ```
 
-> 🌎 **En la vida real:** `bool` es un interruptor: prendido o apagado. `None` es una casilla del formulario que quedó en blanco.
+> 🌎 **En la vida real:** `bool` es un interruptor: prendido o apagado. `None` es una anotación que dice "aquí no hay dato".
 
 > 🌎 **Otro ejemplo:** Es como el semáforo de una sola luz: está o no está; y `None` es el semáforo apagado.
 
 ### Convertir de un tipo a otro
 
-`int("12")` convierte texto en entero, `float("9.75")` en decimal, `str(12)` número en texto. Si el texto no es un número, da error (Python 5).
+`int("12")` convierte texto en entero, `float("9.75")` en decimal, `str(12)` número en texto. Si el texto no sirve para ese tipo, da error (Python 5). Por ejemplo, `int("9.75")` da error porque ese texto no es un entero.
+
+Ojo: `int(9.75)` recibe un número, no un texto. Corta los decimales y da `9`, sin redondear.
 
 > 🌎 **En la vida real:** es como cambiar dólares por reales: el valor es el mismo, cambia la forma.
 
@@ -323,7 +327,7 @@ print(f"Ganancia por viaje: {117 / 12:.2f}")   # :.2f → dos decimales: 9.75
 
 ### input: pedir
 
-`input()` muestra una pregunta y espera que la persona escriba. **Siempre devuelve texto**, así que para hacer cuentas hay que convertirlo.
+`input()` muestra una pregunta y espera que la persona escriba. **Siempre devuelve texto**, así que para hacer cuentas hay que convertirlo. Si la persona aprieta Enter sin escribir, llega el texto vacío `""`, no `None`.
 
 ```python
 km = float(input("¿Cuántos km recorriste? "))
@@ -379,7 +383,7 @@ escribe :: Escribe un programa corto que pida lo que ganaste y lo que gastaste h
 
 ## Para la entrevista
 
-> 🎤 **Si te preguntan "¿qué diferencias ves entre Python y JavaScript?":** "Se parecen mucho en las ideas. Python no usa llaves ni punto y coma: usa sangría y dos puntos. Separa los números enteros (int) de los decimales (float), escribe True, False y None con mayúscula, usa f-strings para meter valores en un texto y snake_case para los nombres. Para correrlo uso python3 archivo.py, y el intérprete para probar cosas rápido."
+> 🎤 **Si te preguntan "¿qué diferencias ves entre Python y JavaScript?":** "Se parecen mucho en las ideas. Python no usa llaves ni punto y coma: usa sangría y dos puntos. Separa los números enteros (int) de los decimales (float), escribe True, False y None con mayúscula, usa f-strings para meter valores en un texto y snake_case para los nombres. Para correrlo uso python3 archivo.py, y el modo interactivo para probar cosas rápido."
 
 > 🌎 **En la vida real:** es como explicar la diferencia entre manejar en Brasil y en Venezuela: las mismas reglas de fondo, distintos detalles.
 

@@ -53,7 +53,7 @@ let activo: boolean = true;         // verdadero o falso
 > 🌎 **En la vida real:** es como el empleado de una imprenta que hace letreros para camionetas. Tú le dices el nombre y él:
 > 1. Quita los espacios de más ("  Thermomac  " → "Thermomac"), como quien sacude el polvo antes de empezar.
 > 2. Si no le dijiste nada, deja el letrero de siempre ("Mi empresa").
-> 3. Si el nombre tiene más de 24 letras, te dice "no cabe en el letrero" (eso es `null`).
+> 3. Si el nombre tiene más de 24 caracteres (letras, espacios y signos), te dice "no cabe en el letrero" (eso es `null`).
 > 4. Si tiene más de 2 palabras, también te dice "no cabe".
 > 5. Si pasó todo, imprime el nombre limpio (`return clean`).
 >
@@ -85,15 +85,16 @@ export function normalizeMyCompanyName(text: string): string | null {
 - `function normalizeMyCompanyName(text: string): string | null {`
   - `function` crea una **función**. Entra el nombre que escribiste y sale el nombre limpio.
   - `(text: string)` es lo que **recibe**: un texto.
-  - `: string | null` es lo que **devuelve**: un texto **o** `null`. La barra `|` se lee "o". Aquí `null` significa "nombre inválido".
+  - `: string | null` es lo que **devuelve**: un texto **o** `null`. La barra `|` se lee "o". En esta función, `''` significa **no escribió nombre** y `null` significa **lo que escribió no cabe**. `null` no significa siempre "inválido": aquí lo decidió quien programó.
 - `const clean = text.replace(/\s+/g, ' ').trim();`
   - `replace(/\s+/g, ' ')` cambia varios espacios seguidos por uno solo. Lo de entre barras es una **expresión regular**, un patrón para buscar texto; `\s+` quiere decir "uno o más espacios".
   - `.trim()` quita los espacios del principio y del final.
 - `if (!clean) return '';`
-  - `!` se lee "no". "Si no hay nada escrito, devuelve vacío" (la app vuelve a mostrar "Mi empresa").
+  - `!` se lee "no". JavaScript trata `''`, `0`, `null` y `undefined` como "no" dentro de un `if`. Por eso `!clean` se lee: "si `clean` está vacío, devuelve vacío" (la app vuelve a mostrar "Mi empresa").
+  - Ojo: `0` también cuenta como "no", y a veces 0 litros es un dato válido.
   - `return` termina la función y entrega el valor.
 - `if (clean.length > MY_COMPANY_NAME_MAX_LENGTH) return null;`
-  - `.length` es la cantidad de letras. Más de 24 es inválido.
+  - `.length` es la cantidad de **caracteres**: letras, espacios, comas y signos. Más de 24 es inválido.
 - `if (clean.split(' ').length > MY_COMPANY_NAME_MAX_WORDS) return null;`
   - `.split(' ')` corta el texto en cada espacio y forma una **lista**: `"Refrigeración Silva Ltda"` se vuelve `["Refrigeración", "Silva", "Ltda"]`, que son 3 palabras. Como pasa de 2, es inválido.
 - `return clean;` Si pasó todos los filtros, devuelve el nombre limpio.
@@ -120,6 +121,7 @@ export function isImmutableEarningPlatform(appId: string): boolean {
 - `===` compara si dos cosas son exactamente iguales.
 - `||` se lee "o". La función dice **sí** cuando es Extras, **o** Viajes particulares, **o** Mi empresa.
 - Si dice sí, cada registro se suma aparte. Si dice no, el registro es acumulativo, como Uber.
+- *Immutable* significa «inmutable». Aquí quiere decir que **cada registro es independiente y no representa el total del día**. No significa que no puedas corregirlo.
 
 Una sola línea decide cómo se cuenta el dinero en toda la app. Por eso tiene pruebas (Tema 02).
 

@@ -115,7 +115,7 @@ export const GLOSARIO = [
 
   // Palabras base de programación (JavaScript, clases 45-50)
   { termino: 'variable', alias: ['variables'], clase: '45',
-    definicion: 'Una cajita con un nombre donde guardas un dato para usarlo después, como `edad = 30`.' },
+    definicion: 'Una cajita con un nombre donde guardas un dato para usarlo después, como `const edad = 30`.' },
   { termino: 'constante', alias: ['const', 'constantes'], clase: '45',
     definicion: 'Una cajita que, ya creada, no recibe otro valor mientras el programa corre. En JavaScript se crea con `const`. Si el programa intenta darle otro valor, da error. Al ejecutar de nuevo, o en otro uso de una función, se puede crear con un valor distinto.' },
   { termino: 'tipo', alias: ['tipos', 'tipo de dato'], clase: '45',

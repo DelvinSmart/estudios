@@ -26,14 +26,14 @@ console.log('Hola, mundo')
 
 ### En tu computadora: Node.js
 
-Con **Node.js** corres archivos `.js` en la terminal (ya lo usaste en la clase 09):
+Con **Node.js** corres archivos `.js` en la terminal. Lo usarás a fondo en la clase 09:
 
 ```bash
 node --version
 node hola.js
 ```
 
-Y también tienes el **laboratorio de CRUD** de este sitio (`#/laboratorio`), que corre JavaScript sin instalar nada.
+Y también tienes el **laboratorio de CRUD** (crear, leer, actualizar y borrar datos) de este sitio (`#/laboratorio`), que corre JavaScript sin instalar nada.
 
 > 🌎 **En la vida real:** la consola es probar en vivo; el archivo es dejar la receta escrita para repetirla.
 
@@ -128,7 +128,7 @@ En JavaScript los nombres van en **camelCase**: `gananciaTotal`, `numeroDeViajes
 ```ejercicio
 titulo: const o let
 lenguaje: js
-pide: Este código se rompe con el error **"Assignment to constant variable"** (tócale **▶ probar** para verlo). Arréglalo cambiando **una sola palabra**: la variable que cambia no puede ser `const`.
+pide: Este código se rompe con el error **"Assignment to constant variable"** (tócale **▶ probar** para verlo). Arréglalo cambiando **una sola palabra**: un nombre que necesita recibir otro valor no puede ser `const`.
 --- código
 function contarViajes(veces) {
   const viajes = 0;
@@ -173,7 +173,7 @@ escribe :: Crea una variable para tu nombre y otra para los viajes del día que 
 | `string` | `'Uber'`, `"99"` | Texto, entre comillas |
 | `boolean` | `true`, `false` | Sí o no (en minúscula) |
 | `null` | `null` | "No hay valor", a propósito |
-| `undefined` | `undefined` | "Todavía no tiene valor" |
+| `undefined` | `undefined` | Ahí no se puso ningún valor: una variable sin asignar o una función sin `return` |
 
 ```js
 typeof 12          // 'number'
@@ -182,9 +182,16 @@ typeof 'hola'      // 'string'
 (0.1 + 0.2).toFixed(2)   // '0.30'
 ```
 
-> 💡 **Idea:** con plata, redondea al mostrar (`toFixed(2)`) o trabaja en centavos (enteros).
+> 💡 **Idea:** `toFixed(2)` sirve para **mostrar** y devuelve **texto**. Tampoco siempre redondea como esperas: `(1.005).toFixed(2)` da `'1.00'`. Para guardar y sumar dinero, lo más seguro es trabajar en **centavos**: R$ 18,50 se guarda como `1850`.
 
-> 🌎 **En la vida real:** `null` es una casilla marcada como "no aplica"; `undefined` es una casilla que nadie llenó todavía.
+```js
+const carrera = 1850;   // R$ 18,50 en centavos
+const propina = 250;    // R$ 2,50 en centavos
+const total = carrera + propina;   // 2100
+console.log((total / 100).toFixed(2));   // '21.00', solo para mostrarlo
+```
+
+> 🌎 **En la vida real:** `null` es una casilla marcada como "no aplica"; `undefined` es una casilla donde nadie puso nada.
 
 > 🌎 **Otro ejemplo:** Es como una silla reservada pero vacía (null) frente a una silla que nadie pidió (undefined).
 
@@ -231,7 +238,7 @@ vf :: En JavaScript, enteros y decimales son el mismo tipo number
 vf :: 0.1 + 0.2 da exactamente 0.3 en JavaScript
 elige :: ¿Qué devuelve typeof 'hola'? :: 'text' :: 'string' :: 'word'
 elige :: ¿Cómo se escribe un texto con una variable adentro? :: 'Hola ${nombre}' :: `Hola ${nombre}` (comillas invertidas) :: "Hola" + {nombre}
-escribe :: ¿Qué diferencia hay entre null y undefined? :: null es "no hay valor" puesto a propósito; undefined es "todavía no tiene valor", por ejemplo una variable creada sin asignar.
+escribe :: ¿Qué diferencia hay entre null y undefined? :: null es "no hay valor" puesto a propósito; undefined significa que ahí no se puso ningún valor, por ejemplo una variable sin asignar o una función sin return.
 ```
 
 ## Parte 4. Comparar bien: === y la conversión de tipos
@@ -250,6 +257,19 @@ escribe :: ¿Qué diferencia hay entre null y undefined? :: null es "no hay valo
 0 == ''      // true   😬
 0 === ''     // false  ✅
 ```
+
+`===` tiene dos casos que sorprenden:
+
+```js
+NaN === NaN;               // false: para revisar NaN usa Number.isNaN
+[1] === [1];               // false: son dos listas distintas
+
+const gastos = [1];
+const mismaLista = gastos;
+gastos === mismaLista;     // true: los dos nombres guardan la misma lista
+```
+
+Con listas y objetos, `===` pregunta si son **el mismo** objeto. No compara su contenido.
 
 > 🌎 **En la vida real:** `==` es un portero distraído que deja pasar a cualquiera "parecido"; `===` revisa el documento.
 
@@ -318,7 +338,7 @@ escribe :: Explica por qué '5' == 5 da true y qué usarías en su lugar. :: Por
 
 ## Para la entrevista
 
-> 🎤 **Si te preguntan "¿qué tipos de datos tiene JavaScript y cómo comparas?":** "number (enteros y decimales), string, boolean, null, undefined, además de objetos y arrays. Uso const por defecto y let solo si el valor cambia, nunca var. Comparo siempre con === para no tener conversiones sorpresa, y convierto a propósito lo que llega de un formulario con Number, revisando NaN."
+> 🎤 **Si te preguntan "¿qué tipos de datos tiene JavaScript y cómo comparas?":** "Los tipos más usados son number, string, boolean, null y undefined, además de los objetos. Los arrays son un tipo de objeto. Uso const por defecto y let solo si tengo que reasignar el nombre, nunca var. Comparo siempre con === para no tener conversiones sorpresa, y convierto a propósito lo que llega de un formulario con Number, revisando NaN."
 
 > 🌎 **En la vida real:** es como explicar las reglas básicas de un deporte antes de jugar.
 

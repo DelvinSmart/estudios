@@ -28,9 +28,9 @@ Imagina que vas a echar **10 litros** de combustible y cada litro cuesta **5**. 
 
 > 🌎 **En la vida real:** es como anotar el precio en una cajita y pegarle una etiqueta que diga «precio por litro». Cuando lo necesitas, no lo vuelves a preguntar: miras la cajita con ese nombre.
 
-> 📖 **Palabra nueva: variable.** Es esa cajita con nombre que guarda un dato. Aquí la variable se llama `precioPorLitro` y va a guardar el número `5`.
+> 📖 **Palabra nueva: variable.** Es el nombre general de esa cajita que guarda un dato. Aquí la cajita se llama `precioPorLitro` y va a guardar el número `5`.
 
-> 📖 **Palabra nueva: constante.** En esta cuenta, el precio por litro queda fijo mientras la computadora calcula. Cuando lee el nombre `precioPorLitro`, usa el `5` que pusiste en la instrucción.
+> 📖 **Palabra nueva: constante.** Es una variable que no puede recibir otro valor mientras el programa corre. Por eso, durante esta cuenta, `precioPorLitro` vale el `5` que pusiste en la instrucción. Más adelante verás `let`, que crea una variable que sí puede recibir otro valor.
 
 En JavaScript, la palabra `const` viene de «constante». Así se usa para crear `precioPorLitro` con el valor `5`:
 
@@ -48,7 +48,7 @@ Se ve raro, pero son solo cinco piezas:
 | `5` | El **dato** que se guarda. |
 | `;` | El **punto final** de la instrucción. |
 
-Léelo en español: **«Crea la variable precioPorLitro con el valor 5 para esta ejecución.»**
+Léelo en español: **«Crea la constante precioPorLitro con el valor 5 para esta ejecución.»**
 
 ### Las cuatro instrucciones juntas
 
@@ -64,7 +64,7 @@ console.log(total);                      // muestra lo que hay en total
 - **Línea 1:** guarda cuántos litros vas a echar.
 - **Línea 2:** guarda cuánto cuesta cada litro.
 - **Línea 3:** el asterisco `*` significa **multiplicar**, porque el teclado no tiene ×. La máquina busca lo que hay en las dos cajitas, hace 10 × 5 y guarda 50 en una cajita nueva llamada `total`.
-- **Línea 4:** `console.log` significa **«muestra esto en la pantalla»**. Lo que va dentro de los paréntesis es lo que se muestra. Sin esta línea, la máquina haría la cuenta, pero tú no verías el resultado.
+- **Línea 4:** `console.log` significa **«muestra esto en la consola»**. La **consola** es una zona para quien programa: aquí aparece debajo del ejercicio. La persona que usa una app no la ve; para mostrarle algo en su pantalla hace falta otra instrucción. Sin esta línea, la máquina haría la cuenta, pero tú no verías el resultado.
 
 ### Ahora tú: predice, cambia y prueba
 
@@ -97,7 +97,7 @@ const total = litros * precioPorLitro;
 console.log(total);
 ```
 
-> 🎙️ **El profesor dice:** {{alumno}}, acabas de cambiar un dato y la máquina rehízo toda la cuenta sin que se lo repitieras. Eso es programar: dejar las instrucciones bien escritas para que la máquina haga el trabajo.
+> 🎙️ **El profesor dice:** {{alumno}}, cambiaste un dato y **volviste a ejecutar**. La máquina siguió las mismas instrucciones con el precio nuevo, sin que reescribieras la cuenta. Eso es programar: dejar las instrucciones bien escritas para que la máquina haga el trabajo.
 
 ## Parte 2. Las primeras palabras (sin miedo)
 
@@ -112,7 +112,7 @@ Esta es la lista mínima para empezar. No la memorices de golpe: vuelve a ella c
 | **Lenguaje** | El idioma en que se escribe el código. Hay muchos (JavaScript, Python, Swift…), como hay español, inglés, portugués. |
 | **Ejecutar** / **correr** | Hacer que la máquina **siga** las instrucciones. "Corre el programa" = "hazlo funcionar". |
 | **Bug** (se dice "bag") | Un error en el código: algo que no hace lo que debía. |
-| **Variable** | Una cajita con un nombre donde se guarda un dato, como `edad = 30`. Lo verás a fondo pronto. |
+| **Variable** | Una cajita con un nombre donde se guarda un dato, como `const edad = 30`. Lo verás a fondo pronto. |
 | **Función** | Una instrucción con nombre que hace una tarea y la puedes volver a usar, como un botón. |
 
 > 📖 **Palabra nueva: "sintaxis".** Es la **ortografía** de un lenguaje: dónde van los paréntesis, las comas, las comillas. Si te falta una, la máquina no entiende y marca un error. No es que seas malo: es como una tilde mal puesta, se corrige y ya.
@@ -123,7 +123,7 @@ Esta es la lista mínima para empezar. No la memorices de golpe: vuelve a ella c
 
 > 🌎 **En la vida real:** la terminal es como pedir en un restaurante **hablando**, en vez de señalar el menú con el dedo. Al principio da cosa, pero es solo otra forma de pedir lo mismo, muchas veces más rápida.
 
-La **terminal** (también "consola") es esa pantalla de texto donde le escribes órdenes a la computadora, letra por letra, en vez de usar botones. Da miedo porque sale en las películas de hackers, pero es de lo más simple: escribes una orden, aprietas Enter, y la máquina te responde con texto.
+La **terminal** es esa pantalla de texto donde le escribes órdenes a la computadora, letra por letra, en vez de usar botones. Da miedo porque sale en las películas de hackers, pero es de lo más simple: escribes una orden, aprietas Enter, y la máquina te responde con texto.
 
 Por ejemplo, en este curso vas a escribir cosas como:
 
@@ -175,7 +175,7 @@ const litros = 40;
 litros = 50;   // ❌ error: Assignment to constant variable
 ```
 
-Ese mensaje en inglés quiere decir **«intentaste darle otro valor a una constante»**.
+Ese mensaje en inglés, el que muestra Chrome, quiere decir **«intentaste darle otro valor a una constante»**. En otro navegador el texto puede cambiar, pero significa lo mismo.
 
 > 💡 **Idea:** si mañana el litro cuesta 6, cambias **un solo número** (`precioPorLitro`) y **vuelves a ejecutar**. Como la cuenta usa el nombre, `total` se calcula otra vez con el 6. No se actualiza por su cuenta: `total` guarda el resultado del momento en que se hizo la multiplicación.
 
@@ -216,7 +216,7 @@ Mira lo que hace la máquina con `console.log(doble(4));`, paso a paso:
 3. Cambia `numero * 2` por `4 * 2`.
 4. Hace la cuenta: da **8**.
 5. `return` saca el 8 de la función, y ese 8 queda en el lugar donde estaba `doble(4)`.
-6. `console.log` muestra **8** en la pantalla.
+6. `console.log` muestra **8** en la consola.
 
 | Si escribes | `numero` vale | La cuenta | Resultado |
 |---|---|---|---|
@@ -233,6 +233,7 @@ Crear la función es como comprar la licuadora: todavía no hizo nada. Trabaja c
 Casi cualquiera. En vez de `doble` podrías escribir `duplicar`, y en vez de `numero` podrías escribir `cantidad`. Solo hay que cumplir estas reglas:
 
 - **Sin espacios:** `precioPorLitro` sí, `precio por litro` no.
+- **Sin guiones ni signos de operación:** `precioLitro` sí, `precio-litro` no. La máquina leería ese `-` como una resta.
 - **No puede empezar con un número:** `carga2` sí, `2carga` no.
 - **No puede ser una palabra reservada**, es decir, una que JavaScript ya usa para algo, como `function`, `const` o `return`.
 - **Mayúsculas y minúsculas cuentan:** `doble` y `Doble` son dos nombres distintos.
@@ -315,8 +316,8 @@ console.log(cargaDelViernes);   // muestra 300
 ¿Y si te equivocaste y el lunes fueron 25 litros? Entonces esa cuenta sí tiene que cambiar. Para una cajita que va a recibir otro valor se usa **`let`** en lugar de `const`:
 
 ```js
-let cargaDelLunes = costoDelTanque(20, 5);   // 100
-cargaDelLunes = costoDelTanque(25, 5);       // corregida: ahora guarda 125
+let cargaCorregida = costoDelTanque(20, 5);   // 100
+cargaCorregida = costoDelTanque(25, 5);       // corregida: ahora guarda 125
 ```
 
 Fíjate que el resultado no se arregló solo: hubo que **hacer la cuenta otra vez** con el dato correcto y guardarla.
@@ -371,7 +372,7 @@ Dos ideas que te van a ahorrar muchos errores:
 1. **La condición tiene que ser completa y clara.** "Si viene un carro" está claro: o viene o no viene. La máquina necesita una pregunta que se pueda responder con **sí o no**, sin "más o menos".
 2. **Piensa siempre los dos caminos.** ¿Qué pasa si **sí**? ¿Y si **no**? Si la condición no se cumple y no hay `else`, la máquina **salta ese bloque y sigue con la línea siguiente**. El `else` no es obligatorio, pero **tú** tienes que decidir qué debe pasar en los dos casos. Muchos errores de principiante vienen de no pensar en el camino del "no": el programa funciona cuando todo va bien, pero hace algo equivocado cuando falta un dato.
 
-> 💡 **Idea:** cuando una decisión tiene **varios** casos (rojo, amarillo, verde), se encadenan: `si… si no, si… si no…`. Lo verás a fondo, con código de verdad, en [Decisiones y ciclos](../46-js-decisiones-y-ciclos/LECCION.md) (la clase 02 del curso de JavaScript).
+> 💡 **Idea:** cuando una decisión tiene **varios** casos (rojo, amarillo, verde), se encadenan: `si… si no, si… si no…`. Lo verás a fondo, con código de verdad, en [Decisiones y ciclos](../46-js-decisiones-y-ciclos/LECCION.md) (clase 46).
 
 ### Cómo se escribe una decisión
 

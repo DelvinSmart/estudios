@@ -18,7 +18,7 @@ Los ejercicios de este curso corren **desde esta página**. Cuando tocas **▶ p
 print("Hola, conductor")
 ```
 
-En Swift, un archivo se corre **de arriba abajo**: no hace falta un `main` como en Kotlin. `print` es como `console.log` o `println`.
+En un ejercicio de esta página o en un Playground, el código corre **de arriba abajo**: no hace falta un `main` como en Kotlin. Una app de iPhone se organiza distinto: tiene un punto de entrada, que verás en la clase 102. `print` es como `console.log` o `println`.
 
 > 🌎 **En la vida real:** es como leer una carta: empiezas por la primera línea y sigues hasta la firma.
 
@@ -88,7 +88,7 @@ func presentacion(nombre: String, app: String) -> String {
 
 ```practica
 vf :: Los ejercicios de Swift de esta página corren en Compiler Explorer, con el mismo Swift que trae Xcode
-vf :: Para correr Swift hace falta escribir una función main, como en Kotlin
+vf :: En un ejercicio de esta página, Swift necesita una función main, como en Kotlin
 elige :: ¿Para qué sirve Xcode? :: Para correr los ejercicios de esta página :: Para hacer las apps del iPhone, con el simulador y los Playgrounds :: Para escribir Kotlin
 escribe :: ¿Por qué Copiloto, que es de React Native, tiene código en Swift? :: Porque algunas cosas solo las puede hacer el iPhone por dentro (leer la pantalla compartida, sacar texto de una imagen, notificaciones): para eso tiene un módulo nativo en Swift que TypeScript llama como una función más.
 ```
@@ -138,7 +138,7 @@ let gastosCerrados = [40.0]
 gastosCerrados.append(25.0)   // ❌ error: 'gastosCerrados' is a 'let' constant
 ```
 
-**Usa `let` siempre que puedas.** Si después necesitas cambiarlo, Swift te avisa con un error claro, y lo cambias a `var`. Al revés no avisa: un `var` que nunca cambia es un aviso amarillo ("variable was never mutated; consider changing to let"), porque Swift prefiere que digas que no va a cambiar.
+**Usa `let` siempre que puedas.** Si después necesitas reasignarlo, Swift te muestra un error claro, y lo cambias a `var`. Al revés no es un error: si una variable local con `var` nunca recibe otro valor, el programa compila, pero Swift muestra una advertencia amarilla para sugerirte `let` ("variable was never mutated; consider changing to 'let' constant").
 
 ```swift
 let placa = "ABC1D23"
@@ -283,7 +283,11 @@ escribe :: ¿Cuándo hace falta escribir el tipo, como en var gastos: [Double] =
 
 **Comprobación antes de seguir**
 
-Antes de ejecutar, usa código de práctica y comprueba qué ocurre con un error de sintaxis.
+Distingue entre un error del compilador y una prueba que recibió otro resultado. Hazlo en el último ejercicio:
+
+1. Quita una comilla de tu código y toca **▶ probar**. Eso es un **error del compilador**: el programa no llega a correr.
+2. Devuelve la comilla. Cambia tu `return` para que entregue un valor equivocado y toca **▶ probar**. El programa corre, pero **la prueba falla**.
+3. Deja tu código como estaba.
 
 <details>
 <summary>Necesito una pista</summary>

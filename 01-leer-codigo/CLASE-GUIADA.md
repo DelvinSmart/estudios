@@ -347,13 +347,13 @@ Las vamos a ver una por una, siempre con la misma pregunta: **¿para qué sirve?
 const MAX_PALABRAS = 2;
 ```
 
-Una **constante** es una caja con nombre **cuyo contenido no cambia nunca**. Se crea con `const`. La diferencia con `let`: lo que guardas con `let` lo puedes cambiar después; con `const`, no.
+Una **constante** es una caja con nombre que **no puede recibir otro valor mientras el programa corre**. Se crea con `const`. La diferencia con `let`: a una caja con `let` le puedes dar otro valor después; a una con `const`, no. Si mañana quieres otra regla, **editas esa línea y publicas una versión nueva**.
 
 Por costumbre, las constantes de "reglas" se escriben **EN_MAYÚSCULAS_CON_GUIONES**, para que se vean de lejos.
 
 > 🌎 **En la vida real:** la etiqueta del frasco que dice "Sal". El frasco siempre se llama igual, y lo encuentras por su nombre. No lo vas a cambiar por "Azúcar" a mitad de la receta.
 
-> 🌎 **Otro ejemplo:** El número de tu cédula: se da una vez y no cambia nunca. Todos los papeles lo usan por su nombre, "cédula", sin volver a preguntártelo.
+> 🌎 **Otro ejemplo:** El reglamento pegado en la pared de un taller: durante la jornada, todos siguen ese mismo número. Si el dueño cambia la regla, pone un cartel nuevo para el día siguiente.
 
 ### Pieza 2: la función
 
@@ -433,7 +433,7 @@ Un **objeto** guarda **varios datos de una misma cosa**, cada uno con su nombre.
 
 | Pieza | Para qué | Cómo se reconoce |
 |---|---|---|
-| **Constante** | Un valor con nombre que no cambia | `const` |
+| **Constante** | Un valor con nombre, que no recibe otro mientras el programa corre | `const` |
 | **Función** | Una máquina: recibe, trabaja, devuelve | `function` … `return` |
 | **if** | Tomar una decisión | `if ( pregunta ) { ... }` |
 | **Lista** | Varios valores en orden | Corchetes `[ ]` |
@@ -448,7 +448,7 @@ Un **objeto** guarda **varios datos de una misma cosa**, cada uno con su nombre.
 <details>
 <summary>Ver la respuesta</summary>
 
-1. Constante (`const`, en mayúsculas, no cambia).
+1. Constante (`const`, en mayúsculas: no recibe otro valor mientras el programa corre).
 2. Lista (corchetes, valores en orden).
 3. `if`: una decisión ("si la velocidad pasa de 80, avisa").
 4. Objeto (llaves, datos con nombre de un mismo viaje).
@@ -539,7 +539,7 @@ export function normalizeMyCompanyName(text: string): string | null {
 }
 ```
 
-> 🌎 **En la vida real:** el empleado de una imprenta que hace letreros para camionetas. Tú le dices el nombre, y él: sacude el polvo (quita espacios de más), revisa que entre en el letrero (máximo 24 letras y 2 palabras) y, si todo está bien, lo imprime. Si no entra, te dice "no cabe".
+> 🌎 **En la vida real:** el empleado de una imprenta que hace letreros para camionetas. Tú le dices el nombre, y él: sacude el polvo (quita espacios de más), revisa que entre en el letrero (máximo 24 caracteres y 2 palabras) y, si todo está bien, lo imprime. Si no entra, te dice "no cabe".
 
 > 🌎 **Otro ejemplo:** Como el cartel de un taxi con el nombre de la empresa: si escribes "Transportes Rodríguez e Hijos del Sur Limitada", no entra en la puerta del carro.
 
@@ -586,7 +586,7 @@ A esta primera línea se le llama **la firma**. Te dice todo lo importante sin l
 - **Recibe:** `(text: string)` → un texto, que adentro se llama `text`. Es lo que escribió el conductor.
 - **Devuelve:** `: string | null` → **un texto o nada**. Si devuelve texto, es el nombre limpio. Si devuelve `null`, significa **"este nombre no sirve"**.
 
-> 🔁 **Repaso:** la función limpia el nombre que el conductor escribe en "Mi empresa". Las dos constantes de arriba guardan las reglas (`MY_COMPANY_NAME_MAX_WORDS`, 2 palabras, y `MY_COMPANY_NAME_MAX_LENGTH`, 24 letras), el comentario explica para qué sirve, y la firma dice el nombre, qué recibe (un texto) y qué devuelve (el nombre limpio, o `null` si no sirve).
+> 🔁 **Repaso:** la función limpia el nombre que el conductor escribe en "Mi empresa". Las dos constantes de arriba guardan las reglas (`MY_COMPANY_NAME_MAX_WORDS`, 2 palabras, y `MY_COMPANY_NAME_MAX_LENGTH`, 24 caracteres), el comentario explica para qué sirve, y la firma dice el nombre, qué recibe (un texto) y qué devuelve (el nombre limpio, o `null` si no sirve).
 
 ## 6. El nombre de "Mi empresa", línea por línea
 
@@ -633,7 +633,7 @@ Veamos qué le pasa a un texto, paso a paso (uso `·` para mostrar cada espacio)
 if (!clean) return '';
 ```
 
-- `!` se lee **"no"**. `!clean` = "**no** hay nada en `clean`" (el texto quedó vacío).
+- `!` se lee **"no"**. JavaScript trata `''`, `0`, `null` y `undefined` como "no" dentro de un `if`. Por eso `!clean` = "**no** hay nada en `clean`" (el texto quedó vacío). Ojo: `0` también cuenta como "no", y a veces 0 litros es un dato válido.
 - Si quedó vacío, `return ''` → devuelve un **texto vacío** y **termina la función ahí mismo**. Las líneas de abajo ya no se leen.
 - ¿Qué hace la app con un texto vacío? Vuelve a mostrar el nombre por defecto, **"Mi empresa"**.
 
@@ -694,7 +694,7 @@ Piensa en la función como **un colador de tres filtros**. Cada `if` es un filtr
 lo que escribió ─► limpiar espacios ─► ¿vacío? ──sí──► ''   (volver a "Mi empresa")
                                           │ no
                                           ▼
-                                     ¿> 24 letras? ──sí──► null (no sirve)
+                                     ¿> 24 caracteres? ──sí──► null (no sirve)
                                           │ no
                                           ▼
                                      ¿> 2 palabras? ──sí──► null (no sirve)
@@ -710,7 +710,7 @@ lo que escribió ─► limpiar espacios ─► ¿vacío? ──sí──► '' 
 
 1. Limpiar: `'Thermomac'` (se van los espacios de los lados).
 2. ¿Vacío? No.
-3. ¿Más de 24 letras? No, tiene 9.
+3. ¿Más de 24 caracteres? No, tiene 9.
 4. ¿Más de 2 palabras? No, es 1.
 5. Devuelve **`'Thermomac'`**.
 
@@ -723,7 +723,7 @@ lo que escribió ─► limpiar espacios ─► ¿vacío? ──sí──► '' 
 
 1. Limpiar: queda igual.
 2. ¿Vacío? No.
-3. ¿Más de 24 letras? Cuenta: `Transportes Rodríguez del Sur` tiene 29 caracteres (con los espacios). **Sí** → devuelve **`null`**. Ni siquiera llega a contar las palabras (que también serían 4).
+3. ¿Más de 24 caracteres? Cuenta: `Transportes Rodríguez del Sur` tiene 29 caracteres (con los espacios). **Sí** → devuelve **`null`**. Ni siquiera llega a contar las palabras (que también serían 4).
 
 </details>
 
@@ -732,7 +732,7 @@ lo que escribió ─► limpiar espacios ─► ¿vacío? ──sí──► '' 
 ```ejercicio
 titulo: Escribe tú la regla de "Mi empresa"
 lenguaje: ts
-pide: Ya la leíste línea por línea. Ahora escríbela tú, **sin mirar**: `normalizarNombreEmpresa(texto)` limpia los espacios (uno solo entre palabras y ninguno en las puntas), devuelve `''` si queda vacío, y `null` si tiene más de 24 letras o más de 2 palabras. Es la misma función que está en el proyecto de práctica, en `src/datos/aplicaciones.ts`.
+pide: Ya la leíste línea por línea. Ahora escríbela tú, **sin mirar**: `normalizarNombreEmpresa(texto)` limpia los espacios (uno solo entre palabras y ninguno en las puntas), devuelve `''` si queda vacío, y `null` si tiene más de 24 caracteres o más de 2 palabras. Es la misma función que está en el proyecto de práctica, en `src/datos/aplicaciones.ts`.
 --- código
 const NOMBRE_EMPRESA_MAX_PALABRAS = 2;
 const NOMBRE_EMPRESA_MAX_LETRAS = 24;
@@ -747,7 +747,7 @@ prueba('un solo espacio entre palabras', () => igual(normalizarNombreEmpresa('Re
 prueba('vacío da vacío', () => igual(normalizarNombreEmpresa('    '), ''));
 prueba('2 palabras está bien', () => igual(normalizarNombreEmpresa('Taxi Bom'), 'Taxi Bom'));
 prueba('3 palabras es null', () => igual(normalizarNombreEmpresa('Taxi Bom Ltda'), null));
-prueba('más de 24 letras es null', () => igual(normalizarNombreEmpresa('Refrigeracionesdelnortebrasil'), null));
+prueba('más de 24 caracteres es null', () => igual(normalizarNombreEmpresa('Refrigeracionesdelnortebrasil'), null));
 --- solución
 const NOMBRE_EMPRESA_MAX_PALABRAS = 2;
 const NOMBRE_EMPRESA_MAX_LETRAS = 24;
@@ -762,7 +762,7 @@ function normalizarNombreEmpresa(texto: string): string | null {
 ```
 
 ```practica
-escribe :: Explica con tus palabras qué hace `normalizeMyCompanyName`, como si se lo contaras a otro conductor. :: Revisa y limpia el nombre que escribes para "Mi empresa": quita espacios de más; si quedó vacío usa "Mi empresa"; si pasa de 24 letras o de 2 palabras lo rechaza (`null`); si no, devuelve el nombre limpio.
+escribe :: Explica con tus palabras qué hace `normalizeMyCompanyName`, como si se lo contaras a otro conductor. :: Revisa y limpia el nombre que escribes para "Mi empresa": quita espacios de más; si quedó vacío usa "Mi empresa"; si pasa de 24 caracteres o de 2 palabras lo rechaza (`null`); si no, devuelve el nombre limpio.
 elige :: ¿Qué devuelve con `'  Uber Eats  '`? :: `null` :: `'Uber Eats'` :: `''`
 elige :: ¿Qué devuelve con `'Mi Empresa De Refrigeración'`? :: `'Mi Empresa'` :: `''` :: `null`
 elige :: ¿Qué devuelve con `''` (vacío)? :: `null` :: `''` :: `'Mi empresa'`
@@ -774,7 +774,7 @@ vf :: `export` permite que otros archivos usen la constante
 vf :: Si quiero permitir 3 palabras, tengo que cambiar el `2` en el `if`
 ```
 
-> 🔁 **Repaso:** la función recibe lo que escribió el conductor, deja los espacios en uno solo y quita los de los lados; si quedó vacío devuelve `''` (usa "Mi empresa"); si pasa de 24 letras o de 2 palabras devuelve `null` (no sirve); si no, devuelve el nombre limpio. Las reglas son constantes con nombre, en un solo lugar.
+> 🔁 **Repaso:** la función recibe lo que escribió el conductor, deja los espacios en uno solo y quita los de los lados; si quedó vacío devuelve `''` (usa "Mi empresa"); si pasa de 24 caracteres o de 2 palabras devuelve `null` (no sirve); si no, devuelve el nombre limpio. Las reglas son constantes con nombre, en un solo lugar.
 
 ## 7. Segundo ejemplo real: ¿un ingreso es acumulativo?
 
@@ -819,7 +819,7 @@ Dice, en portugués: *"Cada registro es independiente (nunca 'total del día'): 
 
 > 🌎 **Otro ejemplo:** Como el portero que solo responde "pasa" o "no pasa". No da explicaciones largas: devuelve un `boolean`.
 
-- **Nombre:** `isImmutableEarningPlatform` = "¿es una plataforma de ingresos *inmutables*?". *Inmutable* = que no cambia: cada registro queda tal cual, no se "pisa" con el total siguiente.
+- **Nombre:** `isImmutableEarningPlatform` = "¿es una plataforma de ingresos *inmutables*?". Aquí *inmutable* quiere decir que **cada registro es independiente y no representa el total del día**: no se "pisa" con el siguiente. No significa que no puedas corregirlo.
 - **Recibe:** `appId: string` → el **identificador** de la plataforma, un texto corto como `'uber'` o `'extras'`.
 - **Devuelve:** `boolean` → **sí o no** (`true` o `false`).
 
@@ -1118,7 +1118,7 @@ vf :: Hay que entender cada símbolo antes de seguir leyendo
 <details>
 <summary>Ver una buena respuesta</summary>
 
-"Porque los tipos detectan errores antes de ejecutar el programa. Si una función espera un texto y le paso un número, no compila. En una app que usan conductores en la calle, prefiero que el error aparezca en mi computadora y no en el teléfono de alguien."
+"Porque los tipos detectan errores antes de ejecutar el programa. Si una función espera un texto y le paso un número, la revisión con `tsc` lo marca. En Copiloto, esa revisión corre en el CI. En una app que usan conductores en la calle, prefiero que el error aparezca en mi computadora y no en el teléfono de alguien."
 
 </details>
 

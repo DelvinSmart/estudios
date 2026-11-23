@@ -65,7 +65,7 @@ fun presentacion(nombre: String, app: String): String = "Soy $nombre y manejo en
 vf :: El Kotlin Playground permite correr Kotlin en el navegador gratis
 vf :: Para hacer apps de Android con Kotlin hace falta pagar Android Studio
 elige :: ¿Qué es fun main() en Kotlin? :: Un comentario :: El punto de entrada: lo primero que corre :: Una variable
-elige :: ¿Qué es println en JavaScript? :: alert :: console.log :: return
+elige :: ¿Qué instrucción de JavaScript se parece a println de Kotlin? :: alert :: console.log :: return
 escribe :: Escribe un programa de Kotlin que muestre tu nombre. :: fun main() { println("Delvin") }
 ```
 
@@ -123,11 +123,16 @@ var app: String = "Uber"
 // app = 12                     ❌ Type mismatch
 ```
 
-Kotlin es **estáticamente tipado** como TypeScript, pero aquí los tipos se revisan **siempre** al compilar, no hay forma de "apagarlos".
+Kotlin es **estáticamente tipado** como TypeScript, pero aquí el compilador revisa los tipos **siempre**. Si fuerzas una conversión con `as`, el código puede compilar y el error aparece mientras corre:
 
-> 🌎 **En la vida real:** es como las etiquetas de los frascos, pero pegadas con pegamento: no se pueden despegar.
+```kotlin
+val dato: Any = "Uber"      // Any acepta cualquier tipo
+val numero = dato as Int    // compila, pero al correr da ClassCastException
+```
 
-> 🌎 **Otro ejemplo:** Es como el control de seguridad de un aeropuerto: no hay forma de saltarlo.
+> 🌎 **En la vida real:** es como las etiquetas de los frascos: alguien las revisa antes de guardarlos. Si le juras que un frasco es de sal, puede dejarlo pasar.
+
+> 🌎 **Otro ejemplo:** Es como el control de un aeropuerto: revisa a todos, pero un documento falso (`as`) puede causar el problema más adelante.
 
 > 🧩 **Piezas para este ejercicio**
 > - `val` no deja reasignar el nombre y `var` sí. El total necesita recibir otro valor después de cada recorrido.
@@ -240,7 +245,11 @@ escribe :: Escribe un println que muestre el rendimiento km/litros con un decima
 
 **Comprobación antes de seguir**
 
-Distingue entre un mensaje del compilador y una prueba que recibió otro resultado.
+Distingue entre un mensaje del compilador y una prueba que recibió otro resultado. Hazlo en el último ejercicio:
+
+1. Quita una comilla de tu código y toca **▶ probar**. Eso es un **error del compilador**: el programa no llega a correr.
+2. Devuelve la comilla. Cambia tu `return` para que entregue un número equivocado y toca **▶ probar**. El programa corre, pero **la prueba falla**.
+3. Deja tu código como estaba.
 
 <details>
 <summary>Necesito una pista</summary>
@@ -251,7 +260,7 @@ Si llega un resultado, el programa ya compiló. Compara el valor esperado con el
 
 ## Para la entrevista
 
-> 🎤 **Si te preguntan "¿qué diferencias ves entre Kotlin y TypeScript?":** "Se parecen mucho: val y var son como const y let, el tipo va después del nombre con dos puntos, y hay inferencia. Kotlin separa Int y Double, los String van con comillas dobles y las plantillas usan $. Y en Kotlin los tipos se revisan siempre al compilar, sin forma de apagarlos. Practico en el Kotlin Playground y para Android uso Android Studio."
+> 🎤 **Si te preguntan "¿qué diferencias ves entre Kotlin y TypeScript?":** "Se parecen mucho: val y var son como const y let, el tipo va después del nombre con dos puntos, y hay inferencia. Kotlin separa Int y Double, los String van con comillas dobles y las plantillas usan $. Y en Kotlin el compilador siempre revisa los tipos. Una conversión forzada con as todavía puede fallar al correr. Practico en el Kotlin Playground y para Android uso Android Studio."
 
 > 🌎 **En la vida real:** es como comparar dos idiomas primos: mismas raíces, distinta ortografía.
 

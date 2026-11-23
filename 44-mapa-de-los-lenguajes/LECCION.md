@@ -32,7 +32,7 @@
 const html = marked.parse('# Clase 01');   // → '<h1>Clase 01</h1>'
 ```
 
-Si mañana no quieres usarla, la sacas y nada más cambia: tu código sigue siendo tuyo.
+Si mañana no quieres usarla, cambias los lugares donde la llamabas. El resto de tu programa conserva su forma.
 
 **Con un framework, manda él.** Tú escribes las piezas y **el framework decide cuándo llamarlas**. Lo vas a ver en el curso de Node.js con **Express**, un framework para servidores:
 
@@ -217,7 +217,7 @@ escribe :: Explica la diferencia entre JavaScript y TypeScript en una frase. :: 
 
 ### React: pantallas hechas de componentes
 
-**React** es una librería de JavaScript (casi siempre con TypeScript) para armar pantallas con **componentes**: pedazos reutilizables como `<BotonGuardar />` o `<TarjetaDeGasto />`. Cuando cambian los datos, React actualiza la pantalla solo. La **web de Copiloto** está hecha con React.
+**React** es una librería de JavaScript (casi siempre con TypeScript) para armar pantallas con **componentes**: pedazos reutilizables como `<BotonGuardar />` o `<TarjetaDeGasto />`. Cuando cambias un dato que React está vigilando, llamado **estado**, React actualiza esa parte de la pantalla. Una variable común no le avisa a React. La **web de Copiloto** está hecha con React.
 
 > 🌎 **En la vida real:** es como armar una casa con módulos prefabricados: una ventana se usa en muchos cuartos.
 
@@ -225,7 +225,7 @@ escribe :: Explica la diferencia entre JavaScript y TypeScript en una frase. :: 
 
 ### React Native: React para el teléfono
 
-**React Native** usa React (y TypeScript) para hacer **apps de teléfono**. En vez de `<div>` y `<p>` de la web, usa `<View>` y `<Text>`, que se convierten en piezas **nativas** de iPhone y Android. Con **un solo código** tienes las dos apps. **Copiloto Driver** es React Native.
+**React Native** usa React (y TypeScript) para hacer **apps de teléfono**. En vez de `<div>` y `<p>` de la web, usa `<View>` y `<Text>`, que se convierten en piezas **nativas** de iPhone y Android. Con **la mayor parte del código compartida** tienes las dos apps. Lo propio de cada sistema va en piezas nativas. **Copiloto Driver** es React Native.
 
 > 🌎 **En la vida real:** es como un libro traducido al mismo tiempo al portugués y al inglés desde un solo original.
 
@@ -233,7 +233,7 @@ escribe :: Explica la diferencia entre JavaScript y TypeScript en una frase. :: 
 
 ### Expo: la caja de herramientas de React Native
 
-**Expo** es un framework y un conjunto de herramientas para React Native: correr la app en tu teléfono con **Expo Go**, acceder a la cámara o el GPS, y **compilar y publicar** las apps (EAS). Copiloto usa Expo.
+**Expo** es un framework y un conjunto de herramientas para React Native: correr proyectos sencillos en tu teléfono con **Expo Go**, acceder a la cámara o el GPS, y **compilar y publicar** las apps (EAS). Copiloto usa Expo, pero como tiene piezas nativas propias, se prueba con una **compilación propia** (`expo run:android`).
 
 > 🌎 **En la vida real:** es como un kit de cocina con todo listo: ollas, cuchillos y el horno ya instalado.
 
@@ -291,10 +291,10 @@ function aReactNative(etiqueta) {
 
 ```practica
 vf :: React Native usa div y p igual que la web
-vf :: Con React Native, un solo código sirve para iPhone y Android
+vf :: Con React Native, la mayor parte del código sirve para iPhone y Android
 elige :: ¿Qué es Expo? :: Un lenguaje :: Un framework y herramientas para correr, compilar y publicar apps de React Native :: Una base de datos
 elige :: ¿Qué es un componente en React? :: Un archivo de imagen :: Un pedazo reutilizable de pantalla, como un botón o una tarjeta :: Un servidor
-escribe :: Explica con los proyectos del curso la diferencia entre React y React Native. :: React arma pantallas web con componentes (como la web de Copiloto); React Native usa la misma forma de trabajar para hacer apps de teléfono con piezas nativas (como la app Copiloto Driver), con un solo código para iPhone y Android.
+escribe :: Explica con los proyectos del curso la diferencia entre React y React Native. :: React arma pantallas web con componentes (como la web de Copiloto); React Native usa la misma forma de trabajar para hacer apps de teléfono con piezas nativas (como la app Copiloto Driver), compartiendo la mayor parte del código entre iPhone y Android.
 ```
 
 ## Parte 4. Kotlin, Swift y cómo encaja todo
@@ -331,7 +331,7 @@ Es la "pieza nativa especial" de la que habla la sección anterior: **todo lo de
 
 ### ¿Cómo se hablan? El puente
 
-Los lenguajes **no se mezclan dentro del mismo archivo**. Cada uno vive en su pieza, y se hablan por un **puente**: `RideOverlayModule.kt` le ofrece funciones a la parte en TypeScript, y la app las llama como si fueran funciones normales. El módulo hace su trabajo escondido en el teléfono y le pasa la información limpia al resto de la app.
+Kotlin, Swift y TypeScript **no se mezclan en un mismo archivo**. Cada uno vive en su pieza, y se hablan por un **puente**: `RideOverlayModule.kt` le ofrece funciones a la parte en TypeScript, y la app las llama como si fueran funciones normales. El módulo hace su trabajo escondido en el teléfono y le pasa la información limpia al resto de la app.
 
 > 🌎 **En la vida real:** un cocinero que solo habla español (TypeScript) y un proveedor que solo habla alemán (Kotlin) no se entienden en la misma mesa. Usan un traductor en la puerta: "dile que traiga tomates", y el traductor vuelve con los tomates.
 
@@ -403,7 +403,7 @@ En **TypeScript**, con las piezas de React Native, dentro de Expo. Es una pantal
 ```ejercicio
 titulo: ¿Con qué hago esta app?
 lenguaje: js
-pide: Completa `recomendar(pedido)`: si necesita **iPhone y Android con un solo código** → `'React Native con Expo'`; si es **solo Android** → `'Kotlin'`; si es **solo iPhone** → `'Swift'`; si es **una página** → `'HTML, CSS y JavaScript'`.
+pide: Completa `recomendar(pedido)`: si necesita **iPhone y Android compartiendo casi todo el código** → `'React Native con Expo'`; si es **solo Android** → `'Kotlin'`; si es **solo iPhone** → `'Swift'`; si es **una página** → `'HTML, CSS y JavaScript'`.
 --- código
 function recomendar(pedido) {
   // pedido = { iphone, android, pagina }
@@ -429,14 +429,14 @@ vf :: Kotlin es el lenguaje oficial para apps Android
 vf :: Para tener una app en iPhone y Android con Kotlin y Swift basta con un solo código
 elige :: ¿Con qué está hecho este mapa de estudios? :: React Native :: HTML, CSS y JavaScript (con Firebase) :: Kotlin
 elige :: ¿Qué orden de cursos propone el mapa para hacer apps? :: Kotlin, después JavaScript :: JavaScript + TypeScript, después React Native, después Kotlin :: Solo Python
-escribe :: Un amigo te pregunta qué usa Copiloto y por qué no Kotlin. ¿Qué le dices? :: Usa React Native con TypeScript y Expo, que con un solo código da la app para iPhone y Android; Kotlin es el lenguaje nativo de Android y lo usaría para algo solo de Android o para una pieza nativa especial.
+escribe :: Un amigo te pregunta qué usa Copiloto y por qué no Kotlin. ¿Qué le dices? :: Usa React Native con TypeScript y Expo, que comparte la mayor parte del código entre iPhone y Android; Kotlin es el lenguaje nativo de Android y lo usaría para algo solo de Android o para una pieza nativa especial.
 ```
 
 ## Para la entrevista
 
-> 🎤 **Si te preguntan "¿cuál es la diferencia entre JavaScript, TypeScript, React y React Native?":** "JavaScript es el lenguaje que corre en el navegador y, con Node.js, fuera de él. TypeScript es JavaScript con tipos que se revisan antes de correr y se convierte en JavaScript. React es una librería para armar pantallas web con componentes. React Native usa React y TypeScript para hacer apps nativas de iPhone y Android con un solo código, y Expo es el framework que uso para correrla y publicarla. Kotlin y Swift son los lenguajes nativos de Android y iPhone."
+> 🎤 **Si te preguntan "¿cuál es la diferencia entre JavaScript, TypeScript, React y React Native?":** "JavaScript es el lenguaje que corre en el navegador y, con Node.js, fuera de él. TypeScript es JavaScript con tipos que se revisan antes de correr y se convierte en JavaScript. React es una librería para armar pantallas web con componentes. React Native usa React y TypeScript para hacer apps nativas de iPhone y Android compartiendo la mayor parte del código, y Expo es el framework que uso para correrla y publicarla. Kotlin y Swift son los lenguajes nativos de Android y iPhone."
 
-> 🎤 **Si te preguntan "¿en qué está hecho Copiloto?":** "Está hecho en TypeScript con React Native y Expo: un solo código para Android y iPhone. Para leer la oferta del viaje en la pantalla escribí un módulo nativo, que se comunica con TypeScript por un puente. En Android, en Kotlin, muestra una burbuja encima de otras apps. En iPhone, en Swift, usa la pantalla compartida y muestra la oferta en una notificación. El servidor y el asistente de IA también son TypeScript, en Firebase Cloud Functions, y usan Gemini."
+> 🎤 **Si te preguntan "¿en qué está hecho Copiloto?":** "Está hecho en TypeScript con React Native y Expo: la mayor parte del código se comparte entre Android y iPhone. Para leer la oferta del viaje en la pantalla escribí un módulo nativo, que se comunica con TypeScript por un puente. En Android, en Kotlin, muestra una burbuja encima de otras apps. En iPhone, en Swift, usa la pantalla compartida y muestra la oferta en una notificación. El servidor y el asistente de IA también son TypeScript, en Firebase Cloud Functions, y usan Gemini."
 
 > 🌎 **En la vida real:** es como explicar los roles de un equipo de obra: quién hace qué y cómo se juntan.
 
@@ -455,14 +455,14 @@ En el curso hay **la misma calculadora hecha tres veces**: en React Native (clas
 ### La calculadora de Swift no corre en Android. ¿Por qué?
 
 1. **Usa piezas que solo existen en Apple.** La pantalla está hecha con **SwiftUI**, y SwiftUI viene **dentro** de iOS. Android no la trae. Es como un mueble armado con tornillos especiales: en otra casa no hay ese destornillador.
-2. **El archivo final es otro.** Una app de iPhone se entrega como un archivo **.ipa**; Android instala archivos **.apk** o **.aab**. Cada teléfono solo sabe abrir el suyo.
+2. **El archivo final es otro.** Una app de iPhone se entrega como un archivo **.ipa**; Android instala archivos **.apk**. El **.aab** es el paquete que subes a Google Play, y Google Play prepara desde ahí la instalación para cada teléfono. Cada sistema solo sabe abrir lo suyo.
 3. **Para armarla y publicarla se necesitan cosas de Apple.** **Xcode**, el programa con que se arma, solo existe para Mac. Y la App Store solo acepta apps **firmadas** con una cuenta de desarrollador de Apple (cuesta US$ 99 al año). Una **firma** es un sello digital que prueba quién hizo la app y que nadie la cambió después.
 
 > 💡 **Idea:** el lenguaje Swift ya se puede llevar a Android de forma oficial, pero todavía en sus primeros pasos y **sin SwiftUI**. Te llevas la lógica (las cuentas), no la pantalla. Para una app de verdad hoy no es el camino.
 
 ### La calculadora de Kotlin no se publica para iPhone. ¿Por qué?
 
-1. **Usa piezas que solo existen en Android:** el **ViewModel** y el **DataStore** de la 96 son de Android, y la app corre sobre **ART**, el motor de Android. El iPhone no tiene ninguno de los dos.
+1. **Está armada como app Android:** la versión de la clase 96 usa **ViewModel** y **DataStore** para Android y corre sobre **ART**, el motor de Android, que el iPhone no tiene.
 2. **El archivo es .aab o .apk**, y la App Store no los acepta.
 3. **Google Play** acepta tu app con una cuenta que se paga **una vez** (US$ 25), pero eso solo te abre la tienda de Android.
 
@@ -528,9 +528,9 @@ function dondeCorre(app) {
 
 ```practica
 vf :: La calculadora hecha en Swift con SwiftUI se puede instalar en un teléfono Android
-elige :: ¿Por qué la app de Kotlin de la clase 96 no se puede subir a la App Store? :: Porque Kotlin es un lenguaje viejo :: Porque usa piezas de Android (ViewModel, DataStore, ART) y se entrega en un archivo que el iPhone no abre :: Porque Apple no deja usar calculadoras
+elige :: ¿Por qué la app de Kotlin de la clase 96 no se puede subir a la App Store? :: Porque Kotlin es un lenguaje viejo :: Porque está armada como app Android, corre sobre ART y se entrega en un archivo que el iPhone no abre :: Porque Apple no deja usar calculadoras
 vf :: iPhone y Android son dos lenguajes de programación
 elige :: Una empresa donde todos los empleados usan teléfonos Android necesita una app interna. ¿Qué tiene más sentido? :: Hacerla dos veces, en Swift y en Kotlin :: Hacerla solo para Android, por ejemplo en Kotlin :: Hacerla solo para iPhone
 vf :: Copiloto Driver es 100 % un solo código, sin nada de Kotlin ni de Swift
-escribe :: Un amigo te pregunta: "¿Por qué hiciste Copiloto en React Native y no en Swift?". ¿Qué le dices? :: Porque los conductores usan iPhone y Android, y yo solo: con React Native y Expo tengo un solo código y unas solas pruebas para los dos, y cada arreglo llega a los dos a la vez. Para lo que solo el teléfono sabe hacer, como leer la pantalla, escribí una pieza en Kotlin y otra en Swift. Swift lo elegiría para una app solo de iPhone que necesite lo último de Apple.
+escribe :: Un amigo te pregunta: "¿Por qué hiciste Copiloto en React Native y no en Swift?". ¿Qué le dices? :: Porque los conductores usan iPhone y Android, y yo solo: con React Native y Expo comparto la mayor parte del código y de las pruebas entre los dos, y cada arreglo llega a los dos a la vez. Para lo que solo el teléfono sabe hacer, como leer la pantalla, escribí una pieza en Kotlin y otra en Swift. Swift lo elegiría para una app solo de iPhone que necesite lo último de Apple.
 ```
