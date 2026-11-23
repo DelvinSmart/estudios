@@ -17,9 +17,21 @@ test('hashDeClase arma la forma bonita, con y sin parte', () => {
   assert.equal(hashDeClase('06', '0', '3'), `#/programacion/${n}/0/3`);
 });
 
+test('la dirección conserva la pestaña de CADA clase, y la primera no agrega /0', () => {
+  for (const [id, clase] of Object.entries(CLASES)) {
+    assert.equal(hashDeClase(id, '0'), hashDeClase(id), `la primera pestaña de ${id} cambió la dirección`);
+    assert.equal(hashDeClase(id, String(clase.docs.length)), hashDeClase(id), `una pestaña inexistente de ${id} quedó en la dirección`);
+    clase.docs.forEach((_, doc) => {
+      if (doc === 0) return;
+      const partes = hashDeClase(id, String(doc)).replace(/^#\/?/, '').split('/');
+      assert.deepEqual(normalizarRuta(partes), ['clase', id, String(doc)], `la pestaña ${doc} de ${id} se perdió`);
+    });
+  }
+});
+
 test('normalizarRuta entiende la forma bonita y deja igual las demás', () => {
   assert.deepEqual(normalizarRuta(['programacion', '1']), ['clase', '116']);
-  assert.deepEqual(normalizarRuta(['programacion', '2', '0', '3']), ['clase', '01', '0', '3']);
+  assert.deepEqual(normalizarRuta(['programacion', '2', '0', '3']), ['clase', '126', '0', '3']);
   assert.deepEqual(normalizarRuta(['clase', '06']), ['clase', '06']);     // la vieja no se toca
   assert.deepEqual(normalizarRuta(['progreso']), ['progreso']);
   assert.deepEqual(normalizarRuta(['curso', 'python']), ['curso', 'python']); // el home del curso no se toca

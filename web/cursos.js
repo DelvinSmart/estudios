@@ -10,6 +10,9 @@ const CON_ENTREVISTA = [
 
 export const CLASES = {
   '116': { carpeta: '116-programar-desde-cero', titulo: 'Programar desde cero', meta: 'Qué es programar, las primeras palabras sin miedo y cómo usar este curso', docs: [...LECCION, { archivo: 'PREPARA-TU-COMPUTADORA.md', titulo: 'Prepara tu computadora' }] },
+  '126': { carpeta: '126-por-dentro-unos-y-ceros', titulo: 'Por dentro: de los unos y ceros a tu programa', meta: 'Bits, bytes, binario, CPU, RAM, disco y cómo tu código llega a la máquina', docs: LECCION },
+  '127': { carpeta: '127-git-y-github-a-fondo', titulo: 'Git y GitHub a fondo', meta: 'Qué hay en .git, deshacer sin miedo, versiones, fork, issues y GitHub Actions por dentro', docs: LECCION },
+  '128': { carpeta: '128-node-docker', titulo: 'Docker: tu app en una caja', meta: 'Dockerfile, imágenes, contenedores, capas, aislamiento, puertos y volúmenes', docs: LECCION },
   '01': { carpeta: '01-leer-codigo', titulo: 'Leer código', meta: 'Leer una función de la app y decir qué hace', docs: LECCION },
   '02': { carpeta: '02-pruebas-automaticas', titulo: 'Pruebas automáticas', meta: 'Entender las más de 400 pruebas de la app y correrlas', docs: LECCION },
   '03': { carpeta: '03-tu-primera-prueba', titulo: 'Mi primera prueba', meta: 'Escribir una prueba yo solo', docs: LECCION },
@@ -145,7 +148,7 @@ export const CLASES = {
 
 // El dibujo de cada clase en el mapa de islas.
 const ICONOS = {
-  '116': '🌱',
+  '116': '🌱', '126': '🔌', '127': '🌳', '128': '📦',
   '01': '📖', '02': '🧪', '03': '✅', '04': '⚙️', '05': '✏️', '06': '🌿', '07': '🐞', '08': '🔥', '09': '🖥️', '10': '🏗️',
   '11': '🚗', '12': '📜', '13': '💻', '14': '🕊️', '15': '📄', '16': '🎨', '17': '⚡', '18': '🗺️', '19': '🤖', '20': '📦', '25': '🧩', '26': '🧭', '27': '📐', '28': '📊', '29': '🏁', '93': '🦾',
   '30': '🧠', '31': '💬', '32': '🛠️', '33': '🧰', '34': '🦺', '35': '🔄', '79': '🗒️', '78': '👥', '80': '🚀', '92': '🏁',
@@ -159,6 +162,7 @@ for (const [n, icono] of Object.entries(ICONOS)) if (CLASES[n]) CLASES[n].icono 
 
 // Los logos de las tecnologías de cada clase (ver web/logos.js). El primero va en la isla.
 const LOGOS_CLASE = {
+  '127': ['git', 'github'], '128': ['node'],
   '01': ['typescript'], '02': ['jest'], '03': ['jest', 'typescript'], '04': ['acciones', 'github'], '05': ['typescript', 'git'],
   '06': ['git', 'github'], '08': ['firebase'], '09': ['node', 'javascript'], '11': ['react', 'typescript', 'firebase'],
   '12': ['html', 'css', 'javascript'], '13': ['react', 'typescript', 'vite', 'tailwind', 'firebase'], '14': ['html', 'css', 'javascript'],
@@ -195,7 +199,7 @@ export const ETAPAS = [
   {
     id: 'fundamentos', icono: '🧱', titulo: 'Fundamentos', logos: ['typescript'],
     desc: 'Qué es programar, leer código de verdad y conocer los lenguajes. La base de todo.',
-    clases: ['116', '01', '44'],
+    clases: ['116', '126', '01', '44'],
   },
   // La web va antes que pruebas, CI y Git: quien empieza ve primero una página suya funcionando,
   // y después aprende a probarla, guardarla y corregirla. (Los bombillos se prenden en este orden.)
@@ -207,7 +211,7 @@ export const ETAPAS = [
   {
     id: 'oficio', icono: '🧰', titulo: 'El oficio: probar, guardar y corregir', logos: ['jest', 'git', 'github'],
     desc: 'Pruebas automáticas, CI, tu primer cambio, Git y leer errores: cómo se trabaja en un proyecto de verdad.',
-    clases: ['02', '03', '04', '05', '06', '07'],
+    clases: ['02', '03', '04', '05', '06', '127', '07'],
   },
   {
     id: 'backend', icono: '🔥', titulo: 'Backend y datos', logos: ['firebase', 'node'],
@@ -232,7 +236,7 @@ export const ETAPAS = [
   {
     id: 'node', curso: 'node', icono: '🟩', titulo: 'Node.js', logos: ['node', 'javascript', 'firebase'],
     desc: 'Un curso aparte, con su propio certificado: el backend con JavaScript, de los archivos a una API publicada.',
-    clases: ['68', '69', '70', '71', '72', '73', '74', '76', '87'],
+    clases: ['68', '69', '70', '71', '72', '73', '74', '128', '76', '87'],
   },
   {
     id: 'reactnative', curso: 'reactnative', icono: '📱', titulo: 'React Native', logos: ['react', 'typescript', 'expo', 'firebase'],
@@ -358,9 +362,9 @@ export const ANTES_CLASE = {
 
 // Itinerario recomendado sin alterar el orden interno de cada curso.
 export const RUTA_INICIAL = [
-  { clases: ['116'], titulo: 'Escribe tus primeras instrucciones' },
+  { clases: ['116', '126'], titulo: 'Escribe tus primeras instrucciones y mira qué pasa por dentro' },
   { clases: clasesDelCurso('javascript').slice(0, 4), titulo: 'Practica variables, decisiones, funciones y listas' },
-  { clases: clasesDelCurso('programacion').slice(1), titulo: 'Lee código real y construye tus primeras páginas' },
+  { clases: clasesDelCurso('programacion').slice(2), titulo: 'Lee código real y construye tus primeras páginas' },
   { clases: clasesDelCurso('javascript').slice(4), titulo: 'Publica tu web de gastos' },
 ];
 

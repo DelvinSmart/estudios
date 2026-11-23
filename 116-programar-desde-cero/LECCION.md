@@ -663,9 +663,9 @@ prueba('el aviso corresponde a los importes de la página', () => {
 
 > 🌎 **En la vida real:** para manejar, primero aprendes el volante, los pedales y los cambios en un estacionamiento vacío. Recién después sales a la calle, con tráfico y semáforos. Aquí es igual: primero las piezas básicas del código, después cómo se trabaja en una app de verdad.
 
-La clase que sigue a esta, **Leer código**, ya te pone a leer el código de una app real (Copiloto). Si nunca programaste, es mejor llegar ahí sabiendo lo básico: guardar datos, decidir, repetir y agrupar. Por eso este es el orden recomendado:
+La clase que sigue a esta te muestra **qué pasa por dentro** de la máquina. Después, **Leer código** ya te pone a leer el código de una app real (Copiloto). Si nunca programaste, es mejor llegar ahí sabiendo lo básico: guardar datos, decidir, repetir y agrupar. Por eso este es el orden recomendado:
 
-1. **Esta clase**, la primera del curso de Programación. Ya estás aquí.
+1. **Esta clase**, la primera del curso de Programación, y después [Por dentro: de los unos y ceros a tu programa](../126-por-dentro-unos-y-ceros/LECCION.md).
 2. **Lo básico del código**, clases 45 a 48, con ejercicios en la misma página:
    [Variables, tipos y la consola](../45-js-variables-y-tipos/LECCION.md) →
    [Decisiones y ciclos](../46-js-decisiones-y-ciclos/LECCION.md) →

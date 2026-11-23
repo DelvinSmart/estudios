@@ -44,7 +44,7 @@ test('ningún curso usa en sus ejercicios un lenguaje que no enseña ni pide ant
 
 test('la ruta inicial intercala los cursos sin saltarse sus requisitos de avance', () => {
   const ruta = RUTA_INICIAL.flatMap((paso) => paso.clases);
-  assert.deepEqual(ruta.slice(0, 6), ['116', '45', '46', '47', '48', '01']);
+  assert.deepEqual(ruta.slice(0, 7), ['116', '126', '45', '46', '47', '48', '01']);
   assert.equal(ruta.at(-1), '84');
   for (const curso of ['programacion', 'javascript']) {
     const orden = clasesDelCurso(curso);

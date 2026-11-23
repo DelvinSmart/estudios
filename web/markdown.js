@@ -5,6 +5,7 @@ import { CLASES } from './cursos.js';
 import { crearPractica } from './practica.js';
 import { crearEjercicio } from './ejercicio.js';
 import { crearSnack } from './snack.js';
+import { crearDibujo } from './dibujo.js';
 import { escapar } from './pantalla.js';
 import { enlazarReferencias } from './referencias.js';
 import { cursoDeClase } from './avance.js';
@@ -59,6 +60,11 @@ export function pintarMarkdown(md, carpeta, idBase = carpeta) {
     // Un bloque ```snack abre la app de React Native en Expo Snack, con una lista de lo que se tiene que ver.
     if (lenguaje === 'snack') {
       pre.replaceWith(crearSnack(code.textContent, `${idBase}:snack${++snacks}`));
+      return;
+    }
+    // Un bloque ```dibujo es un diagrama hecho con el motor de dibujos del curso.
+    if (lenguaje === 'dibujo') {
+      pre.replaceWith(crearDibujo(code.textContent));
       return;
     }
     if (window.hljs && lenguaje !== 'texto') {

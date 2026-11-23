@@ -40,6 +40,7 @@ export function textoParaVoz(md, cursoActual) {
   let t = conAlumno(md, '');
   t = t.replace(/```practica[\s\S]*?```/g, '\n\nAquí hay una práctica para responder en la página.\n\n');
   t = t.replace(/```ejercicio[\s\S]*?```/g, '\n\nAquí hay un ejercicio de código para escribir y probar en la página.\n\n');
+  t = t.replace(/```dibujo\s+titulo ([^\n]*)[\s\S]*?```/g, '\n\nAquí hay un dibujo en la página: $1.\n\n');
   t = t.replace(/```[\s\S]*?```/g, '\n\nAquí hay un ejemplo de código, en la página.\n\n');
   // "Tema 07" → el número del mapa, y el curso si es otro
   // (fuera del código en línea: `#/clase/15` es una ruta, no una referencia)

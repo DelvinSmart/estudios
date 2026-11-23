@@ -27,64 +27,66 @@ recomendada (lo básico en JavaScript 01 a 04, luego el resto de Programación y
 
 <!-- clases:inicio (generado por firebase/generar-reglas.mjs: no editar a mano) -->
 
-### 💻 Programación · 27 clases · certificado `ME-…`
+### 💻 Programación · 29 clases · certificado `ME-…`
 
 **🧱 Fundamentos**
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
 | 01 | [Programar desde cero](116-programar-desde-cero/LECCION.md) | Qué es programar, las primeras palabras sin miedo y cómo usar este curso | `116` |
-| 02 | [Leer código](01-leer-codigo/CLASE-GUIADA.md) | Leer una función de la app y decir qué hace | `01` |
-| 03 | [El mapa de los lenguajes](44-mapa-de-los-lenguajes/LECCION.md) | JavaScript, TypeScript, Node, React, React Native, Expo, Kotlin y Swift: qué es cada uno | `44` |
+| 02 | [Por dentro: de los unos y ceros a tu programa](126-por-dentro-unos-y-ceros/LECCION.md) | Bits, bytes, binario, CPU, RAM, disco y cómo tu código llega a la máquina | `126` |
+| 03 | [Leer código](01-leer-codigo/CLASE-GUIADA.md) | Leer una función de la app y decir qué hace | `01` |
+| 04 | [El mapa de los lenguajes](44-mapa-de-los-lenguajes/LECCION.md) | JavaScript, TypeScript, Node, React, React Native, Expo, Kotlin y Swift: qué es cada uno | `44` |
 
 **🌐 La web: HTML, CSS y JavaScript**
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
-| 04 | [HTML](15-html/CLASE-GUIADA.md) | Armar la estructura de una página | `15` |
-| 05 | [CSS](16-css/CLASE-GUIADA.md) | Darle colores, letras, espacios y forma | `16` |
-| 06 | [JavaScript en la página](17-javascript/CLASE-GUIADA.md) | Hacer que la página responda y cambie | `17` |
-| 07 | [¿Qué es un script y qué es una SPA?](75-script-y-spa/LECCION.md) | La casa, el guion y la página que cambia sin recargar: esta misma plataforma | `75` |
+| 05 | [HTML](15-html/CLASE-GUIADA.md) | Armar la estructura de una página | `15` |
+| 06 | [CSS](16-css/CLASE-GUIADA.md) | Darle colores, letras, espacios y forma | `16` |
+| 07 | [JavaScript en la página](17-javascript/CLASE-GUIADA.md) | Hacer que la página responda y cambie | `17` |
+| 08 | [¿Qué es un script y qué es una SPA?](75-script-y-spa/LECCION.md) | La casa, el guion y la página que cambia sin recargar: esta misma plataforma | `75` |
 
 **🧰 El oficio: probar, guardar y corregir**
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
-| 08 | [Pruebas automáticas](02-pruebas-automaticas/CLASE-GUIADA.md) | Entender las más de 400 pruebas de la app y correrlas | `02` |
-| 09 | [Mi primera prueba](03-tu-primera-prueba/CLASE-GUIADA.md) | Escribir una prueba yo solo | `03` |
-| 10 | [CI](04-ci/CLASE-GUIADA.md) | Explicar qué revisa la máquina en cada subida | `04` |
-| 11 | [Mi primer cambio](05-tu-primer-cambio/CLASE-GUIADA.md) | Cambiar algo en la app yo mismo | `05` |
-| 12 | [Git](06-git/CLASE-GUIADA.md) | Guardar y subir mis cambios sin el script | `06` |
-| 13 | [Leer errores](07-leer-errores/CLASE-GUIADA.md) | Encontrar la causa de un error leyendo el mensaje | `07` |
+| 09 | [Pruebas automáticas](02-pruebas-automaticas/CLASE-GUIADA.md) | Entender las más de 400 pruebas de la app y correrlas | `02` |
+| 10 | [Mi primera prueba](03-tu-primera-prueba/CLASE-GUIADA.md) | Escribir una prueba yo solo | `03` |
+| 11 | [CI](04-ci/CLASE-GUIADA.md) | Explicar qué revisa la máquina en cada subida | `04` |
+| 12 | [Mi primer cambio](05-tu-primer-cambio/CLASE-GUIADA.md) | Cambiar algo en la app yo mismo | `05` |
+| 13 | [Git](06-git/CLASE-GUIADA.md) | Guardar y subir mis cambios sin el script | `06` |
+| 14 | [Git y GitHub a fondo](127-git-y-github-a-fondo/LECCION.md) | Qué hay en .git, deshacer sin miedo, versiones, fork, issues y GitHub Actions por dentro | `127` |
+| 15 | [Leer errores](07-leer-errores/CLASE-GUIADA.md) | Encontrar la causa de un error leyendo el mensaje | `07` |
 
 **🔥 Backend y datos**
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
-| 14 | [Firebase por dentro](08-firebase/CLASE-GUIADA.md) | Dónde viven los datos y quién puede leerlos | `08` |
-| 15 | [CRUD en Node.js](09-crud-nodejs/CLASE-GUIADA.md) | Un servidor pequeño con sus pruebas | `09` |
+| 16 | [Firebase por dentro](08-firebase/CLASE-GUIADA.md) | Dónde viven los datos y quién puede leerlos | `08` |
+| 17 | [CRUD en Node.js](09-crud-nodejs/CLASE-GUIADA.md) | Un servidor pequeño con sus pruebas | `09` |
 
 **🏛️ Arquitectura**
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
-| 16 | [Arquitectura](10-arquitectura/CLASE-GUIADA.md) | Clean, hexagonal, MVC y MVVM, y cómo está armada mi app | `10` |
-| 17 | [Cómo arreglé Copiloto](11-como-arregle-copiloto/CLASE-GUIADA.md) | Velocidad, ciclos y motores de diseño | `11` |
+| 18 | [Arquitectura](10-arquitectura/CLASE-GUIADA.md) | Clean, hexagonal, MVC y MVVM, y cómo está armada mi app | `10` |
+| 19 | [Cómo arreglé Copiloto](11-como-arregle-copiloto/CLASE-GUIADA.md) | Velocidad, ciclos y motores de diseño | `11` |
 
 **🚀 Mis proyectos por dentro**
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
-| 18 | [Cómo hice Estudios Bíblicos](12-como-hice-estudios-biblicos/CLASE-GUIADA.md) | Un sitio en HTML, CSS y JavaScript, de punta a punta | `12` |
-| 19 | [Cómo hice la web de Copiloto](13-como-hice-la-web/CLASE-GUIADA.md) | React, TypeScript, Vite, Tailwind y Firebase | `13` |
-| 20 | [¿Qué dice la Biblia? por dentro](14-que-dice-la-biblia-por-dentro/CLASE-GUIADA.md) | Versículos sin copiarlos, el medidor, el griego y el motor de diseño | `14` |
-| 21 | [Cómo hice mi mapa de estudios](18-como-hice-mi-mapa/CLASE-GUIADA.md) | Esta misma página, explicada por dentro | `18` |
-| 22 | [Publicar e instalar](20-publicar-e-instalar/CLASE-GUIADA.md) | Publica tu web y empaquétala para Android, iPhone y iPad | `20` |
-| 23 | [El certificado verificable](21-certificado-verificable/LECCION.md) | Login con correo, Firebase y reglas que no se dejan engañar | `21` |
-| 24 | [Cómo hice los paneles](77-como-hice-los-paneles/LECCION.md) | La trastienda de mis tres proyectos: la llave, GitHub, Firebase y cómo viaja cada cambio | `77` |
-| 25 | [El recorrido de cada proyecto](85-recorrido-de-cada-proyecto/LECCION.md) | De punta a punta: Copiloto (app e IA), ¿Qué dice la Biblia? y este mapa, en 30 segundos y en detalle | `85` |
-| 26 | [La entrevista: RH y líder técnico](86-la-entrevista/LECCION.md) | Tu historia con tus palabras, cada término en dos versiones (glosario) y el simulacro | `86` |
-| 27 | [Mi portafolio en voz alta](117-portafolio-en-voz-alta/LECCION.md) | Una ficha por proyecto: los pitches de 30 s, 1 y 5 min, las decisiones con su alternativa, un bug con STAR y qué mejorarías | `117` |
+| 20 | [Cómo hice Estudios Bíblicos](12-como-hice-estudios-biblicos/CLASE-GUIADA.md) | Un sitio en HTML, CSS y JavaScript, de punta a punta | `12` |
+| 21 | [Cómo hice la web de Copiloto](13-como-hice-la-web/CLASE-GUIADA.md) | React, TypeScript, Vite, Tailwind y Firebase | `13` |
+| 22 | [¿Qué dice la Biblia? por dentro](14-que-dice-la-biblia-por-dentro/CLASE-GUIADA.md) | Versículos sin copiarlos, el medidor, el griego y el motor de diseño | `14` |
+| 23 | [Cómo hice mi mapa de estudios](18-como-hice-mi-mapa/CLASE-GUIADA.md) | Esta misma página, explicada por dentro | `18` |
+| 24 | [Publicar e instalar](20-publicar-e-instalar/CLASE-GUIADA.md) | Publica tu web y empaquétala para Android, iPhone y iPad | `20` |
+| 25 | [El certificado verificable](21-certificado-verificable/LECCION.md) | Login con correo, Firebase y reglas que no se dejan engañar | `21` |
+| 26 | [Cómo hice los paneles](77-como-hice-los-paneles/LECCION.md) | La trastienda de mis tres proyectos: la llave, GitHub, Firebase y cómo viaja cada cambio | `77` |
+| 27 | [El recorrido de cada proyecto](85-recorrido-de-cada-proyecto/LECCION.md) | De punta a punta: Copiloto (app e IA), ¿Qué dice la Biblia? y este mapa, en 30 segundos y en detalle | `85` |
+| 28 | [La entrevista: RH y líder técnico](86-la-entrevista/LECCION.md) | Tu historia con tus palabras, cada término en dos versiones (glosario) y el simulacro | `86` |
+| 29 | [Mi portafolio en voz alta](117-portafolio-en-voz-alta/LECCION.md) | Una ficha por proyecto: los pitches de 30 s, 1 y 5 min, las decisiones con su alternativa, un bug con STAR y qué mejorarías | `117` |
 
 ### 🟨 JavaScript + TypeScript · 13 clases · certificado `JS-…`
 
@@ -104,7 +106,7 @@ recomendada (lo básico en JavaScript 01 a 04, luego el resto de Programación y
 | 12 | [Un proyecto con pruebas](53-js-proyecto-con-pruebas/LECCION.md) | Gastos del carro en TypeScript, probado con Vitest | `53` |
 | 13 | [Proyecto final: la web de gastos](84-js-proyecto-web-de-gastos/LECCION.md) | De una carpeta vacía a publicada: motor de diseño, lógica con pruebas, pantalla, datos y GitHub Pages | `84` |
 
-### 🟩 Node.js · 9 clases · certificado `ND-…`
+### 🟩 Node.js · 10 clases · certificado `ND-…`
 
 | # | Clase | Qué voy a saber hacer al terminar | Carpeta |
 |---|---|---|---|
@@ -115,8 +117,9 @@ recomendada (lo básico en JavaScript 01 a 04, luego el resto de Programación y
 | 05 | [Una API REST completa](72-node-api-rest/LECCION.md) | CRUD, validación, campos permitidos y CORS | `72` |
 | 06 | [Base de datos y seguridad](73-node-datos-y-seguridad/LECCION.md) | SQLite, parámetros, .env, tokens, límites y helmet | `73` |
 | 07 | [Pruebas y publicar](74-node-pruebas-y-publicar/LECCION.md) | node:test, supertest y publicar gratis en Firebase | `74` |
-| 08 | [REST a fondo, BFF y microservicios](76-node-bff-y-microservicios/LECCION.md) | Idempotencia, códigos, versiones, un BFF en Express y cuándo partir en microservicios | `76` |
-| 09 | [Proyecto final: la API de gastos](87-node-proyecto-api-de-gastos/LECCION.md) | Express, validación, un almacén que no pierde datos, 32 pruebas y cómo publicarla | `87` |
+| 08 | [Docker: tu app en una caja](128-node-docker/LECCION.md) | Dockerfile, imágenes, contenedores, capas, aislamiento, puertos y volúmenes | `128` |
+| 09 | [REST a fondo, BFF y microservicios](76-node-bff-y-microservicios/LECCION.md) | Idempotencia, códigos, versiones, un BFF en Express y cuándo partir en microservicios | `76` |
+| 10 | [Proyecto final: la API de gastos](87-node-proyecto-api-de-gastos/LECCION.md) | Express, validación, un almacén que no pierde datos, 32 pruebas y cómo publicarla | `87` |
 
 ### 📱 React Native · 11 clases · certificado `RN-…`
 

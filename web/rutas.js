@@ -28,14 +28,17 @@ export function idDesdeCursoNumero(curso, numero) {
   return i >= 0 && i < orden.length ? orden[i] : null;
 }
 
-// La dirección bonita de una clase: #/curso/numero  (+ /doc/parte si se leen).
+// La dirección bonita de una clase: #/curso/numero  (+ /doc si es una pestaña secundaria,
+// + /doc/parte si se lee). La primera pestaña no necesita /0: es la que abre por defecto.
 // Si por lo que sea no se puede calcular, cae a la forma vieja #/clase/id, para no romper nunca.
 export function hashDeClase(id, doc, parte) {
+  if (!CLASES[id]) return `#/clase/${id}`;
+  const pestana = Number(doc);
+  let resto = '';
+  if (doc !== undefined && doc !== '' && parte !== undefined && parte !== '') resto = `/${doc}/${parte}`;
+  else if (Number.isInteger(pestana) && pestana > 0 && CLASES[id].docs[pestana]) resto = `/${pestana}`;
   const n = numeroDeClase(id);
-  if (!CLASES[id] || n < 1) return `#/clase/${id}`;
-  let h = `#/${cursoDeClase(id)}/${n}`;
-  if (doc !== undefined && doc !== '' && parte !== undefined && parte !== '') h += `/${doc}/${parte}`;
-  return h;
+  return n < 1 ? `#/clase/${id}${resto}` : `#/${cursoDeClase(id)}/${n}${resto}`;
 }
 
 // Qué dirección bonita hay que escribir al terminar de dibujar (null si ninguna).

@@ -306,6 +306,23 @@ a:hover { text-decoration: underline; }
   overflow-wrap: anywhere;
 }
 
+/* Los dibujos de las clases (web/dibujo.js): usan los colores del tema y se adaptan al ancho. */
+.dibujo { margin: var(--hueco) 0; padding: var(--relleno); border: 1px solid var(--borde); border-radius: 14px; background: var(--fondo-2); }
+.dibujo svg { display: block; width: 100%; max-width: 620px; height: auto; margin: 0 auto; }
+.dibujo figcaption { margin-top: 12px; text-align: center; color: var(--tenue); font-size: 0.86rem; line-height: 1.4; }
+.d-verde { --c: var(--acento); } .d-azul { --c: var(--acento-2); } .d-amarillo { --c: var(--amarillo); }
+.d-rojo { --c: var(--rojo); } .d-morado { --c: var(--morado); } .d-tenue { --c: var(--tenue); }
+.dibujo rect, .dibujo circle { fill: color-mix(in srgb, var(--c) 9%, var(--tarjeta)); stroke: var(--c); stroke-width: 1.5; }
+.d-llena rect { fill: color-mix(in srgb, var(--c) 32%, var(--tarjeta)); }
+.dibujo line { stroke: var(--c); stroke-width: 1.6; }
+.d-punteada line { stroke-dasharray: 4 4; }
+.dibujo polygon { fill: var(--c); }
+.d-letra { fill: var(--texto); font-family: var(--sans); font-size: 13px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+.d-texto .d-letra { fill: var(--c); }
+.d-segunda { fill: var(--tenue); font-size: 11.5px; font-weight: 400; }
+.d-etiqueta { fill: var(--c); font-family: var(--mono); font-size: 11px; font-weight: 500; }
+.d-izquierda { text-anchor: start; }
+
 /* El bloque de código parece una ventana de editor. */
 .codigo { margin: var(--hueco) 0; border-radius: 14px; overflow: hidden; border: 1px solid #263140; background: var(--codigo-fondo); box-shadow: var(--sombra); }
 .codigo-barra { display: flex; align-items: center; gap: 12px; padding: 9px 14px; background: #121922; border-bottom: 1px solid #263140; }
