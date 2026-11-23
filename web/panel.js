@@ -9,7 +9,7 @@
 
 import { CLASES, CURSOS, clasesDelCurso } from './cursos.js';
 import { conAlumno } from './lector.js';
-import { separar, unir, aTexto, aLineas, revisar, practicasDe } from './panel-reglas.js';
+import { separar, unir, aTexto, aLineas, revisar, practicasDe, cambiaronTitulos, indiceConTitulos } from './panel-reglas.js';
 import * as github from './panel-github.js';
 
 const app = document.getElementById('app');
@@ -221,7 +221,11 @@ async function guardar() {
   const partes = [...abierto.cambiadas].sort((a, b) => a - b).map((i) => (i === -1 ? 'introducción' : `parte ${i + 1}`));
   const mensaje = `Panel: ${c.titulo} (clase ${abierto.n}) · ${partes.join(', ') || 'texto'}`;
   try {
-    abierto.sha = await github.guardar(abierto.ruta, editado, abierto.sha, mensaje);
+    // Solo el primer documento de la clase está en el índice.
+    const tocaIndice = abierto.doc === 0 && cambiaronTitulos(abierto.original, editado);
+    abierto.sha = tocaIndice
+      ? await github.guardarConIndice(abierto.ruta, editado, abierto.sha, mensaje, (t) => indiceConTitulos(t, abierto.n, editado))
+      : await github.guardar(abierto.ruta, editado, abierto.sha, mensaje);
     abierto.original = editado;
     abierto.modelo = separar(editado);
     abierto.cambiadas.clear();

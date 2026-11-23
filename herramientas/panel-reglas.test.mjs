@@ -64,3 +64,15 @@ test('borrar una práctica se frena', () => {
 test('dejar la clase vacía se frena', () => {
   assert.equal(revisar('# x\n## a\n', '  ').length, 1);
 });
+
+test('cambiar un título actualiza solo esa clase en el índice', async () => {
+  const { cambiaronTitulos, indiceConTitulos } = await import('../web/panel-reglas.js');
+  const antes = '# C\n\n## Uno\ntexto\n\n## Dos\nmás';
+  const despues = antes.replace('## Dos', '## Dos, mejor');
+  assert.equal(cambiaronTitulos(antes, antes.replace('texto', 'otro')), false);
+  assert.equal(cambiaronTitulos(antes, despues), true);
+  const indice = JSON.stringify({ aviso: 'x', clases: { 1: { partes: 2, titulos: ['Uno', 'Dos'] }, 2: { partes: 1, titulos: ['Otra'] } } });
+  assert.deepEqual(JSON.parse(indiceConTitulos(indice, '1', despues)), {
+    aviso: 'x', clases: { 1: { partes: 2, titulos: ['Uno', 'Dos, mejor'] }, 2: { partes: 1, titulos: ['Otra'] } },
+  });
+});

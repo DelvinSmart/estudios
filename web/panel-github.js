@@ -72,6 +72,35 @@ export async function guardar(ruta, texto, sha, mensaje) {
   return r.content.sha;
 }
 
+// Cuando cambia un título, la clase y web/indice.json se guardan en UN solo commit: nunca quedan distintos.
+// "rehacerIndice" recibe el índice actual y devuelve el nuevo. Si la clase cambió desde que se abrió, responde 409
+// y no se pisa nada; si otro commit entra justo antes del último paso, GitHub lo rechaza con 422.
+export async function guardarConIndice(ruta, texto, sha, mensaje, rehacerIndice) {
+  const base = (await pedir(`/git/ref/heads/${RAMA}`)).object.sha;
+  const actual = await pedir(`/contents/${enRuta(ruta)}?ref=${base}`);
+  if (actual.sha !== sha) {
+    const error = new Error('La clase cambió en GitHub');
+    error.status = 409;
+    throw error;
+  }
+  const indice = await pedir(`/contents/web/indice.json?ref=${base}`);
+  const commitBase = await pedir(`/git/commits/${base}`);
+  const archivo = (path, content) => ({ path, mode: '100644', type: 'blob', content });
+  const arbol = await pedir('/git/trees', {
+    method: 'POST',
+    body: JSON.stringify({
+      base_tree: commitBase.tree.sha,
+      tree: [archivo(ruta, texto), archivo('web/indice.json', rehacerIndice(desdeBase64(indice.content)))],
+    }),
+  });
+  const nuevo = await pedir('/git/commits', {
+    method: 'POST',
+    body: JSON.stringify({ message: mensaje, tree: arbol.sha, parents: [base] }),
+  });
+  await pedir(`/git/refs/heads/${RAMA}`, { method: 'PATCH', body: JSON.stringify({ sha: nuevo.sha, force: false }) });
+  return (await pedir(`/contents/${enRuta(ruta)}?ref=${nuevo.sha}`)).sha;
+}
+
 // GitHub manda y recibe el contenido en base64; estas dos respetan los acentos (UTF-8).
 function aBase64(texto) {
   let binario = '';

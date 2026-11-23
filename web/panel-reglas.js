@@ -43,6 +43,20 @@ export const aLineas = (texto) => (texto === '' ? [] : texto.replace(/\r\n?/g, '
 const PRACTICA = /```practica\n[\s\S]*?```/g;
 export const practicasDe = (md) => md.replace(/\r/g, '').match(PRACTICA) || [];
 
+// web/indice.json guarda los títulos del primer documento de cada clase.
+export const titulosDe = (md) => partir(md).partes.map((p) => p.titulo);
+export const cambiaronTitulos = (original, editado) =>
+  JSON.stringify(titulosDe(original)) !== JSON.stringify(titulosDe(editado));
+
+// Devuelve el índice con los títulos nuevos de una clase, en el mismo formato que firebase/generar-reglas.mjs.
+export function indiceConTitulos(textoIndice, n, md) {
+  const indice = JSON.parse(textoIndice);
+  if (!indice.clases?.[n]) throw new Error(`La clase ${n} no está en el índice`);
+  const titulos = titulosDe(md);
+  indice.clases[n] = { partes: titulos.length, titulos };
+  return `${JSON.stringify(indice)}\n`;
+}
+
 // Compara el archivo de GitHub con el editado. Devuelve la lista de problemas (vacía = se puede guardar).
 export function revisar(original, editado) {
   const problemas = [];
