@@ -153,7 +153,7 @@ function contarViajes(veces) {
 
 ```practica
 vf :: Una variable con const se puede volver a asignar
-vf :: Conviene usar const siempre que el valor no vaya a cambiar
+vf :: Conviene usar const siempre que no necesites darle otro valor a ese nombre
 elige :: ¿Qué palabra no conviene usar hoy para crear variables? :: const :: let :: var
 elige :: ¿Cuál nombre sigue el estilo de JavaScript? :: ganancia_total :: gananciaTotal :: GANANCIA total
 escribe :: Crea una variable para tu nombre y otra para los viajes del día que empiece en 0 y suba en 1. :: const nombre = 'Delvin'; let viajes = 0; viajes += 1;

@@ -185,10 +185,10 @@ func promedio(_ viajes: [Double]) -> Double {
 ```
 
 ```practica
-vf :: En Swift, let es para lo que no cambia y var para lo que cambia
+vf :: En Swift, un nombre creado con let no puede recibir otro valor, y uno creado con var sí
 vf :: En Swift conviene usar var siempre, por si después hace falta cambiarlo
 elige :: ¿Qué pasa si intentas cambiar un let en Swift? :: Cambia sin problema :: No compila: "cannot assign to value: … is a 'let' constant" :: Se convierte en var
-escribe :: Una persona sabe TypeScript. ¿Qué le dirías sobre let en Swift? :: Que en Swift let es lo que en TypeScript es const: no cambia. Lo que cambia es var.
+escribe :: Una persona sabe TypeScript. ¿Qué le dirías sobre let en Swift? :: Que en Swift let se parece a const porque no deja reasignar el nombre, y el que se puede reasignar es var. Además, una lista guardada en let tampoco puede recibir elementos, mientras que en TypeScript una lista en const sí.
 ```
 
 ## Parte 3. Tipos y textos

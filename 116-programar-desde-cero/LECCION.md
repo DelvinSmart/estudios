@@ -560,9 +560,9 @@ console.log(sumarViajes([10, 5, 2], 6));
 ```
 
 ```practica
-elige :: ¿Por qué no basta con decirle a la máquina "si viene un carro, espera", sin el "si no"? :: Porque es muy corto :: Porque no sabría qué hacer cuando NO viene un carro: hay que pensar los dos caminos :: Porque el carro no importa
+elige :: ¿Por qué conviene pensar también en qué pasa cuando NO viene un carro? :: Porque el else es obligatorio en todo if :: Porque si no lo decides, el programa sigue con la línea siguiente y puede hacer algo equivocado :: Porque el carro no importa
 vf :: Una decisión (if) necesita una condición que se pueda responder con sí o no
-escribe :: Explica con el ejemplo de cruzar la calle qué son el "if" y el "else". :: El "if" (si) es la condición: "si viene un carro". El "else" (si no) es qué hacer en el otro caso: "si no viene, cruza". Hay que decir los dos para que la máquina sepa qué hacer siempre, no solo cuando se cumple la condición.
+escribe :: Explica con el ejemplo de cruzar la calle qué son el "if" y el "else". :: El "if" (si) es la condición: "si viene un carro, espera". El "else" (si no) dice qué hacer en el otro caso: "si no viene, cruza". El else no es obligatorio: sin él, la máquina salta el bloque y sigue con la línea siguiente. Por eso hay que pensar los dos caminos.
 ```
 
 ## Parte 6. Cómo está hecho este curso (y cómo estudiarlo)
