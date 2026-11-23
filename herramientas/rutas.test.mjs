@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { CLASES } from '../web/cursos.js';
-import { idDesdeCursoNumero, hashDeClase, numeroDeClase, normalizarRuta } from '../web/rutas.js';
+import { idDesdeCursoNumero, hashDeClase, hashBonitoPendiente, numeroDeClase, normalizarRuta } from '../web/rutas.js';
 
 test('la clase de introducción (116) es la número 1 de Programación', () => {
   assert.equal(idDesdeCursoNumero('programacion', 1), '116');
@@ -31,6 +31,13 @@ test('ida y vuelta: la URL bonita de CADA clase vuelve a su mismo id', () => {
     const partes = hash.replace(/^#\/?/, '').split('/');
     assert.deepEqual(normalizarRuta(partes), ['clase', id], `la URL ${hash} no volvió a la clase ${id}`);
   }
+});
+
+test('la dirección bonita no pisa una redirección hecha mientras se dibujaba', () => {
+  // Clase con prácticas: /todo redirige a la parte 1. Volver a /todo causaba un ciclo infinito.
+  assert.equal(hashBonitoPendiente('#/swift/1/0/todo', '#/clase/97/0/1', '#/swift/1/0/todo'), null);
+  assert.equal(hashBonitoPendiente('#/clase/97/0/1', '#/clase/97/0/1', '#/swift/1/0/1'), '#/swift/1/0/1');
+  assert.equal(hashBonitoPendiente('#/swift/1/0/1', '#/swift/1/0/1', '#/swift/1/0/1'), null);
 });
 
 test('un número que no existe en el curso da null (no manda a cualquier clase)', () => {

@@ -38,6 +38,13 @@ export function hashDeClase(id, doc, parte) {
   return h;
 }
 
+// Qué dirección bonita hay que escribir al terminar de dibujar (null si ninguna).
+// Si la dirección cambió mientras se dibujaba (una redirección o un clic), la nueva manda:
+// reescribirla con la vieja anularía esa navegación y podría dejar la página en un ciclo.
+export function hashBonitoPendiente(hashAlEmpezar, hashActual, bonito) {
+  return bonito && hashActual === hashAlEmpezar && hashActual !== bonito ? bonito : null;
+}
+
 // Convierte una ruta bonita (#/curso/numero/…) en la ruta interna (['clase', id, …]).
 // Si no es una ruta de clase bonita, la devuelve igual. Así el router entiende las dos formas.
 export function normalizarRuta(partes) {
