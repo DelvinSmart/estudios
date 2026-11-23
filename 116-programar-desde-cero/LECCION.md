@@ -241,19 +241,38 @@ Casi cualquiera. En vez de `doble` podrías escribir `duplicar`, y en vez de `nu
 
 > ⚠️ **Cuidado:** la máquina no entiende lo que el nombre significa. Si llamas `triple` a una función que multiplica por 2, seguirá multiplicando por 2. El nombre es para que las personas entiendan, por eso debe decir la verdad.
 
-En el próximo ejercicio vas a trabajar con **texto**. El texto va entre comillas, como `'Hola, '`, para que la máquina no lo confunda con el nombre de una cajita. El signo `+` sirve para **pegar** textos: `'Hola, ' + 'Ana'` da `'Hola, Ana'`.
+### Cómo armar una frase con el nombre que llega
 
-Cuando toques **▶ probar**, la máquina revisa tu código y te dice si pasó.
+«Hola mundo» es un primer ejemplo tradicional. Puedes empezar con cualquier mensaje. Imagina que al terminar un viaje quieres dar las gracias a cada pasajero por su nombre. Así se escribe en JavaScript:
 
-✍️ **Ahora escribes tú:**
+```js
+function agradecer(nombre) {
+  return 'Gracias, ' + nombre + '.';
+}
+```
+
+Lee primero lo que pasa en **un solo viaje**. Alguien usa la función escribiendo `agradecer('Luz')`. El texto `'Luz'` entra por los paréntesis. Dentro de las llaves, `nombre` vale `'Luz'`.
+
+1. `'Gracias, '` aporta las mismas letras en cada viaje. Fíjate en el espacio entre la coma y la comilla de cierre.
+2. `nombre` se escribe sin comillas para que la máquina busque el dato que llegó. Con comillas, `'nombre'` pondría literalmente la palabra «nombre» en la frase.
+3. El signo `+` une los textos. Para este viaje se juntan `'Gracias, '`, `'Luz'` y `'.'`. La línea empieza con `return` para entregar la frase completa y termina con `;` para cerrar la instrucción.
+
+¿Qué frase recibirías si el siguiente viaje fuera de Sol? Prueba a decirla en voz alta. Puedes comprobar tu idea siguiendo la misma línea con `nombre` igual a `'Sol'`: devuelve **Gracias, Sol.**
+
+### Escribe el saludo
+
+Ahora quieres que Luz reciba **Hola, Luz!** y que Sol reciba **Hola, Sol!**. Mira el ejemplo de agradecimiento. ¿Qué texto cambiarías al principio? ¿Qué signo cambiarías al final? La pieza del medio sigue siendo `nombre`.
+
+En la caja ya encontrarás la primera línea, `function saludar(nombre) {`, y la última llave, `}`. **Tu trabajo es escribir la línea que va en medio.** Borra la línea que empieza con `//`, incluidas las dos barras. Esas barras marcan un comentario y la máquina se salta todo lo que escribas después de ellas en esa línea.
 
 ```ejercicio
 titulo: Tu primer saludo
 lenguaje: js
-pide: Completa `saludar(nombre)` para que devuelva el texto `'Hola, '` seguido del nombre y un `'!'`. Por ejemplo, `saludar('Ana')` tiene que dar `'Hola, Ana!'`. Pista: para pegar textos se usa `+`.
+pide: Escribe una línea que devuelva el saludo. Empieza con `return` y une tres piezas con `+`: el texto `'Hola, '`, el nombre que llegó y el texto `'!'`. Toca **▶ probar**. La página se encarga de llamar a tu función con distintos nombres.
+pista: Si sale `Hola, nombre!`, revisa las comillas alrededor de `nombre`. Si sale `Hola,Ana!`, pon el espacio dentro de las comillas, justo después de la coma. Si solo se ve el saludo en la consola, usa `return` para entregarlo a la prueba.
 --- código
 function saludar(nombre) {
-  // escribe aquí tu respuesta, por ejemplo:  return 'Hola, ' + nombre + '!';
+  // Reemplaza esta línea por la instrucción que devuelve el saludo.
 }
 --- pruebas
 prueba('saluda a Ana', () => igual(saludar('Ana'), 'Hola, Ana!'));
@@ -265,17 +284,29 @@ function saludar(nombre) {
 }
 ```
 
-> 🎙️ **El profesor dice:** si te salió en verde, acabas de programar. Si te salió en rojo, lee el mensaje, arregla y vuelve a probar: **eso también es programar**, y es lo que hacemos todo el día.
+### Del saludo al costo de una carga
 
-✍️ **Ahora escribes tú:**
+En el saludo entraba un dato. Para calcular un costo hacen falta dos. Imagina que un estacionamiento cobra por hora. Si dejas el carro 3 horas y cada hora cuesta 4, el total es 3 × 4 = 12. Mira cómo se escribe esa cuenta:
+
+```js
+function costoDeEstacionar(horas, precioPorHora) {
+  const total = horas * precioPorHora;
+  return total;
+}
+```
+
+Cuando la página llama a `costoDeEstacionar(3, 4)`, el primer número llega a `horas` y el segundo a `precioPorHora`. En la primera línea dentro de las llaves, `*` multiplica esos dos números y `const total =` guarda el resultado con el nombre `total`. En la siguiente, `return total;` entrega el 12.
+
+**Ahora haz la cuenta del tanque.** En papel, ¿cuánto cuestan 10 litros a 6 por litro? Si pensaste en 60, ya tienes la operación. En la caja, la página te entrega los dos datos con estos nombres: `litros` y `precioPorLitro`. Usa esos nombres al multiplicar para que la misma cuenta sirva también para la siguiente carga.
 
 ```ejercicio
 titulo: ¿Cuánto cuesta llenar el tanque?
 lenguaje: js
-pide: Completa `costoDelTanque(litros, precioPorLitro)` para que devuelva cuánto cuesta cargar esos litros. Por ejemplo, 40 litros a 5 cuestan 200. Pista: guarda la cuenta en una variable y devuélvela con `return`.
+pide: Reemplaza la línea del comentario por dos instrucciones, como en el estacionamiento. En la primera, guarda el costo en `total`. En la segunda, devuelve ese total. Toca **▶ probar** para comprobarlo con varias cargas.
+pista: Vuelve a la multiplicación del estacionamiento. Donde usabas las horas, usa los litros. Donde usabas el precio por hora, usa el precio por litro. Si todas las cargas dan 60, revisa si dejaste el 10 o el 6 escritos en la cuenta.
 --- código
 function costoDelTanque(litros, precioPorLitro) {
-  // escribe aquí tu respuesta
+  // Escribe aquí las dos líneas que calculan y devuelven el costo.
 }
 --- pruebas
 prueba('40 litros a 5', () => igual(costoDelTanque(40, 5), 200));
