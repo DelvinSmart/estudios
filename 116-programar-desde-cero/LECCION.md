@@ -22,7 +22,7 @@ Tres ideas para toda la vida:
 
 ### Una primera mirada a un programa
 
-> 💡 **Idea:** aquí vas a ver cómo una instrucción escrita se convierte en una acción de la computadora. Lee el ejemplo con calma y prueba qué pasa al cambiar el precio. Si `const` todavía te resulta confuso, basta con entender qué hace en esta cuenta. En el Tema 45, en la parte **const y let**, vas a aprender con más ejemplos cuándo usar `const` y cuándo usar `let`.
+Vamos a empezar a leer **código** con una cuenta que ya sabes hacer a mano. Así podrás relacionar cada instrucción con algo concreto, como los litros, el precio y lo que pagas. Por ahora, intenta seguir la cuenta y predecir qué cambiará si sube el precio. En la parte 4 volverás a estas líneas para escribir las tuyas. En el Tema 45 practicarás con más detalle cuándo usar `const` y cuándo usar `let`.
 
 Imagina que vas a echar **10 litros** de combustible y cada litro cuesta **5**. A mano harías: 10 × 5 = 50. Ahora le vas a enseñar esa misma cuenta a la máquina. Como ella no recuerda nada por su cuenta, lo primero es **guardar el precio** en un lugar con nombre.
 
@@ -121,21 +121,41 @@ Esta es la lista mínima para empezar. No la memorices de golpe: vuelve a ella c
 
 ## Parte 3. La terminal: la pantalla negra que asusta (y no muerde)
 
-> 🌎 **En la vida real:** la terminal es como pedir en un restaurante **hablando**, en vez de señalar el menú con el dedo. Al principio da cosa, pero es solo otra forma de pedir lo mismo, muchas veces más rápida.
+Una **terminal** es una ventana en la que escribes una orden para pedirle a la computadora que haga una tarea. Esa orden se llama **comando**. Al pulsar **Enter**, se ejecuta el comando. Si produce un mensaje o un resultado, puedes leerlo en esa misma ventana.
 
-La **terminal** es esa pantalla de texto donde le escribes órdenes a la computadora, letra por letra, en vez de usar botones. Da miedo porque sale en las películas de hackers, pero es de lo más simple: escribes una orden, aprietas Enter, y la máquina te responde con texto.
+### ¿Qué puedo hacer desde ahí?
 
-Por ejemplo, en este curso vas a escribir cosas como:
+Imagina que quieres saber qué archivos hay en una carpeta llamada `viajes`. Puedes abrir la carpeta y mirar los iconos. También puedes pedir los nombres por escrito. Supón que la terminal de una Mac ya está situada en esa carpeta. Escribes estas dos letras y pulsas **Enter**:
+
+```text
+ls
+```
+
+`ls` sirve para listar el contenido de la carpeta en la que estás. Si allí hay dos archivos, la respuesta podría verse así:
+
+```text
+lunes.txt   martes.txt
+```
+
+Tú escribiste únicamente `ls`. Los nombres de los archivos son la respuesta. Si mañana guardas otro archivo en esa carpeta y repites la orden, su nombre también aparecerá.
+
+### ¿Por qué se usa al programar?
+
+Para mirar dos archivos, abrir la carpeta con el ratón es cómodo. La terminal resulta especialmente práctica cuando necesitas **repetir una tarea de la misma manera** o **leer los detalles de un fallo**.
+
+Imagina un programa que calcula el precio de un viaje. Quieres revisar veinte ejemplos cada vez que cambias la fórmula. Una **prueba automática** hace una de esas comprobaciones por ti. Le da al programa los datos de un viaje y compara el precio que calcula con el precio esperado.
+
+En un proyecto de JavaScript que tiene esas pruebas preparadas y la herramienta `npm` instalada, esta orden las pone en marcha desde la carpeta del proyecto:
 
 ```text
 npm test
 ```
 
-Eso quiere decir: "corre las pruebas de este proyecto". La máquina las corre y te dice si todo salió bien.
+`npm` es el nombre de la herramienta. `test` significa «prueba» y le indica qué tarea ejecutar. Si una prueba esperaba un precio de 20 y el programa calculó 18, puedes leer esa diferencia en la terminal. Corriges la fórmula en el código del programa y vuelves a escribir la misma orden para comprobar los veinte ejemplos.
 
-> 💡 **Idea:** no hay que aprenderse las órdenes de memoria. Se copian, se pegan y se van aprendiendo las pocas que usas seguido, como te aprendiste dos o tres comandos del control del televisor.
+### ¿Y cuándo voy a escribir código?
 
-> ⚠️ **Lo único importante al principio:** lee lo que la terminal te responde. Cuando algo sale mal, **ahí** está la pista. No es un castigo; es la máquina ayudándote.
+En la parte 4 vas a escribir en el editor de esta página. Un **editor** es el espacio donde escribes y cambias las instrucciones de un programa. Empezarás con una función pequeña para poder seguir qué dato recibe, qué hace con él y qué devuelve. El botón **▶ probar** te permitirá comprobarla desde la página. Más adelante practicarás cada pieza con otros ejemplos.
 
 ## Parte 4. Tu primera línea de código
 
