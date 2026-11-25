@@ -69,7 +69,7 @@ console.log(total);                      // muestra lo que hay en total
 ### Ahora tú: predice, cambia y prueba
 
 1. **Predice:** si cada litro cuesta 6, ¿cuánto pagarías por 10 litros? Piénsalo antes de tocar nada.
-2. **Cambia:** en la línea 2 del recuadro de abajo, borra el `5` y escribe `6`. Luego toca **▶ probar**.
+2. **Cambia:** en la línea 2 del recuadro de abajo, borra el `5` y escribe `6`.
 3. **Prueba:** toca **▶ probar** y compara el resultado con lo que predijiste.
 4. **Juega:** prueba otro precio. Si escribes `7`, la consola muestra `70`, que es el cálculo correcto para ese precio. Si el contador de pruebas dice «0 de 1», es normal: el ejercicio pide usar 6, así que la prueba espera 60.
 
