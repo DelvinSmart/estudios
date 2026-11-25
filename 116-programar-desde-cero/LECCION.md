@@ -5,7 +5,6 @@
 > 🎙️ **El profesor dice:** {{alumno}}, esta es la **primera** clase, antes que cualquier otra. No vas a instalar nada ni a tener miedo a nada. Solo vamos a entender qué es esto de programar, las pocas palabras que hay que saber para empezar, y cómo usar este curso para que de verdad aprendas. Si algo suena raro, está bien: aquí nada se da por sabido.
 
 ## Parte 1. ¿Qué es programar, de verdad?
-
 > 🌎 **En la vida real:** imagina que le explicas a alguien, por teléfono, cómo hacer un sándwich, pero esa persona **nunca vio comida** y hace todo al pie de la letra. Si dices "pon el jamón", lo pone sobre la mesa, no sobre el pan, porque no lo dijiste. Esa persona es la computadora.
 
 > 🌎 **Otro ejemplo:** es como las instrucciones de un mueble para armar: paso 1, paso 2, paso 3. Si cambias el orden, el mueble queda mal.
@@ -22,7 +21,7 @@ Tres ideas para toda la vida:
 
 ### Una primera mirada a un programa
 
-Vamos a empezar a leer **código** con una cuenta que ya sabes hacer a mano. Así podrás relacionar cada instrucción con algo concreto, como los litros, el precio y lo que pagas. Por ahora, intenta seguir la cuenta y predecir qué cambiará si sube el precio. En la parte 4 volverás a estas líneas para escribir las tuyas. En el Tema 45 practicarás con más detalle cuándo usar `const` y cuándo usar `let`.
+Vamos a empezar a leer **código** con una cuenta que ya sapas hacer a mano. Así podrás relacionar cada instrucción con algo concreto, como los litros del tanque de un carro, el precio y lo que pagas. Por ahora, intenta seguir la cuenta y predecir qué cambiará si sube el precio. En la parte 4 volverás a estas líneas para escribir las tuyas. En el Tema 45 practicarás con más detalle cuándo usar `const` y cuándo usar `let`.
 
 Imagina que vas a echar **10 litros** de combustible y cada litro cuesta **5**. A mano harías: 10 × 5 = 50. Ahora le vas a enseñar esa misma cuenta a la máquina. Como ella no recuerda nada por su cuenta, lo primero es **guardar el precio** en un lugar con nombre.
 
