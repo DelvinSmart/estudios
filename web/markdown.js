@@ -85,6 +85,16 @@ export function pintarMarkdown(md, carpeta, idBase = carpeta) {
     });
   });
 
+  caja.querySelectorAll('blockquote.aviso.profesor').forEach((bq) => {
+    if (!bq.innerHTML.includes('<!-- tras-ejercicio -->')) return;
+    bq.innerHTML = bq.innerHTML.replace('<!-- tras-ejercicio -->', '');
+    const ejercicio = bq.previousElementSibling;
+    if (!ejercicio?.classList.contains('ejercicio')) return;
+    const revisar = (resuelto) => { bq.hidden = !resuelto; };
+    revisar(ejercicio.classList.contains('resuelto'));
+    ejercicio.addEventListener('ejercicio-estado', (ev) => revisar(ev.detail?.resuelto === true));
+  });
+
   // Las tablas anchas se deslizan de lado en el celular.
   caja.querySelectorAll('table').forEach((t) => {
     const envoltura = document.createElement('div');

@@ -279,6 +279,9 @@ export function crearEjercicio(texto, id) {
   });
 
   let vista = null;
+  const avisarEstado = (resuelto) => {
+    caja.dispatchEvent(new CustomEvent('ejercicio-estado', { bubbles: true, detail: { id, resuelto } }));
+  };
   const probar = async () => {
     const boton = caja.querySelector('.ejercicio-probar');
     boton.disabled = true;
@@ -301,6 +304,7 @@ export function crearEjercicio(texto, id) {
     caja.querySelector('.ejercicio-estado').textContent = todo ? '✓ resuelto' : '';
     escribir(CLAVE_OK + id, todo ? '1' : null);
     ponerBotonVer();
+    avisarEstado(todo);
     resultado.innerHTML = `
       ${r.error ? `<p class="ejercicio-error">✗ ${esc(r.error)}</p>` : ''}
       ${total ? `<p class="ejercicio-cuenta mono ${todo ? 'bien' : ''}">${todo ? '✓ ¡Todas las pruebas pasan!' : `${bien} de ${total} pruebas pasan`}</p>` : ''}
@@ -312,6 +316,13 @@ export function crearEjercicio(texto, id) {
   caja.querySelector('.ejercicio-reiniciar').addEventListener('click', () => {
     if (editor.value !== ej.codigo && !confirm('¿Volver al código del comienzo? Se borra lo que escribiste en este ejercicio.')) return;
     editor.value = ej.codigo; escribir(CLAVE + id, null); ajustarAlto();
+    caja.classList.remove('resuelto');
+    caja.querySelector('.ejercicio-estado').textContent = '';
+    escribir(CLAVE_OK + id, null);
+    resultado.innerHTML = '';
+    vista?.remove(); vista = null;
+    ponerBotonVer();
+    avisarEstado(false);
   });
   botonVer?.addEventListener('click', () => {
     const sol = caja.querySelector('.ejercicio-solucion');

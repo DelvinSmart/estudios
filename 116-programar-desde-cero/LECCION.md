@@ -10,7 +10,7 @@
 
 > 🌎 **Otro ejemplo:** es como las instrucciones de un mueble para armar: paso 1, paso 2, paso 3. Si cambias el orden, el mueble queda mal.
 
-**Programar es escribir instrucciones para que una máquina las siga.** Nada más, y nada menos. La máquina es rapidísima y nunca se cansa, pero es **tonta**: hace lo que dice la instrucción, aunque sea un error. Por eso programar no es ser un genio de las matemáticas: es aprender a **pensar en pasos** y a ser **ordenado y claro**.
+**Programar es escribir instrucciones para que una máquina las siga.** Nada más, y nada menos. La máquina es rapidísima y nunca se cansa, pero es **literal**: hace lo que dice la instrucción, aunque sea un error. Por eso programar no es ser un genio de las matemáticas: es aprender a **pensar en pasos** y a ser **ordenado y claro**.
 
 Tres ideas para toda la vida:
 
@@ -69,10 +69,11 @@ console.log(total);                      // muestra lo que hay en total
 ### Ahora tú: predice, cambia y prueba
 
 1. **Predice:** si cada litro cuesta 6, ¿cuánto pagarías por 10 litros? Piénsalo antes de tocar nada.
-2. **Cambia:** en la línea 2 del recuadro de abajo, borra el `5` y escribe `6`.
-   Puedes editar ese número porque estás preparando otra ejecución. Cuando toques **▶ probar**, el programa volverá a empezar y creará `precioPorLitro` con el valor que escribiste. Durante esa ejecución, `const` impide que el programa le asigne otro valor.
+2. **Cambia:** en la línea 2 del recuadro de abajo, borra el `5` y escribe `6`. Luego toca **▶ probar**.
 3. **Prueba:** toca **▶ probar** y compara el resultado con lo que predijiste.
-4. **Juega:** prueba otro precio. Si escribes `7`, la consola muestra `70`, que es el cálculo correcto para ese precio. El «0 de 1 pruebas» indica que no se cumplió la consigna de esta práctica: la prueba espera `60` porque pide hacer la cuenta con `6`.
+4. **Juega:** prueba otro precio. Si escribes `7`, la consola muestra `70`, que es el cálculo correcto para ese precio. Si el contador de pruebas dice «0 de 1», es normal: el ejercicio pide usar 6, así que la prueba espera 60.
+
+> 📌 **Nota:** cada vez que tocas **▶ probar**, el programa empieza de nuevo y crea `precioPorLitro` con el valor que escribiste. Durante esa ejecución, `const` impide cambiarlo.
 
 > 💡 **Si vuelves a abrir la app:** el editor guarda lo que escribiste en este navegador o en esta instalación. Si ya habías puesto `6`, lo encontrarás ahí. Para volver a empezar con el `5` del ejemplo, toca **reiniciar** y confirma que quieres recuperar el código del comienzo.
 
@@ -97,7 +98,7 @@ const total = litros * precioPorLitro;
 console.log(total);
 ```
 
-> 🎙️ **El profesor dice:** {{alumno}}, cambiaste un dato y **volviste a ejecutar**. La máquina siguió las mismas instrucciones con el precio nuevo, sin que reescribieras la cuenta. Eso es programar: dejar las instrucciones bien escritas para que la máquina haga el trabajo.
+> 🎙️ **El profesor dice:** <!-- tras-ejercicio -->{{alumno}}, cambiaste un dato y **volviste a ejecutar**. La máquina siguió las mismas instrucciones con el precio nuevo, sin que reescribieras la cuenta. Eso es programar: dejar las instrucciones bien escritas para que la máquina haga el trabajo.
 
 ## Parte 2. Las primeras palabras (sin miedo)
 
@@ -736,7 +737,7 @@ elige :: ¿Qué es programar, en una frase? :: Ser muy bueno en matemáticas :: 
 vf :: Equivocarse mucho al programar es señal de que no sirves para esto
 vf :: La máquina hace lo que tú querías decir, aunque lo hayas escrito mal
 elige :: En este curso, ¿cuándo conviene marcar el bombillo de "entendido"? :: Siempre, para avanzar rápido :: Solo cuando de verdad entendiste ese pedazo :: Nunca
-escribe :: Con tus palabras: ¿por qué se dice que la computadora es "tonta pero rápida"? :: Porque hace exactamente lo que le escribo, sin pensar ni adivinar, pero lo hace muy rápido y sin cansarse. Si la instrucción tiene un error, lo repite igual; por eso tengo que ser claro y ordenado.
+escribe :: Con tus palabras: ¿por qué se dice que la computadora es "literal pero rápida"? :: Porque es literal: hace exactamente lo que le escribo, sin pensar ni adivinar, pero lo hace muy rápido y sin cansarse. Si la instrucción tiene un error, lo repite igual; por eso tengo que ser claro y ordenado.
 ```
 
 ## Para la entrevista
